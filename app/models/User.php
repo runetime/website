@@ -7,7 +7,6 @@ class User extends Eloquent implements UserInterface,RemindableInterface{
 	public static $logged=false;
 	/**
 	* Get the unique identifier for the user.
-	*
 	* @return mixed
 	*/
 	public function getAuthIdentifier(){
@@ -16,7 +15,6 @@ class User extends Eloquent implements UserInterface,RemindableInterface{
 
 	/**
 	* Get the password for the user.
-	*
 	* @return string
 	*/
 	public function getAuthPassword(){
@@ -33,21 +31,29 @@ class User extends Eloquent implements UserInterface,RemindableInterface{
 	}
 	/**
 	* Get the e-mail address where password reminders are sent.
-	*
 	* @return string
 	*/
 	public function getReminderEmail(){
 		return $this->email;
 	}
-
+	/**
+	 * Used by Laravel on login
+	 * @return string Token string
+	 */
 	public function getRememberToken(){
 		return $this->remember_token;
 	}
-
+	/**
+	 * Used by Laravel on login
+	 * @param string $value Token string to set to model User
+	 */
 	public function setRememberToken($value){
 		$this->remember_token=$value;
 	}
-
+	/**
+	 * Returns token name to be used for the session
+	 * @return string Token string for session
+	 */
 	public function getRememberTokenName(){
 		return 'remember_token';
 	}
