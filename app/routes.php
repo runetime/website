@@ -46,6 +46,16 @@ Route::group(['prefix'=>'calculators'],function(){
 });
 
 /**
+ * Databases
+ */
+Route::group(['prefix'=>'databases'],function(){
+	Route::get('/','DatabaseController@index');
+	Route::group(['prefix'=>'items'],function(){
+		Route::get('/','DatabaseController@itemsIndex');
+	});
+});
+
+/**
  * Guides
  */
 Route::group(['prefix'=>'guides'],function(){
@@ -55,7 +65,7 @@ Route::group(['prefix'=>'guides'],function(){
 	Route::group(['prefix'=>'quests'],function(){
 		Route::get('/','GuideController@questIndex');
 		Route::get('{id}/{name}','GuideController@questView');
-		Route::get('filter/{order}/{difficulty}/{length}/{membership}','questFilter');
+		Route::get('filter/{order}/{difficulty}/{length}/{membership}','GuideController@questFilter');
 	});
 });
 

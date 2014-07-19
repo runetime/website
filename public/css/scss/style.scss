@@ -1,0 +1,26 @@
+@import "sass";
+body{
+	color:$textColor;
+	margin:0;
+	padding:0;
+}
+.navbar{
+	color:$textColor !important;
+	.dropdown-menu{
+		background:#222;
+		color:#ababab !important;
+		li{
+			a{
+				background:inherit;
+				color:#777 !important;
+				&:hover{
+					background:#333 !important;
+				}
+			}
+		}
+		.divider{
+			background:#cacaca;
+			color:#ababab;
+		}
+	}
+}

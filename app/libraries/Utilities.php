@@ -7,7 +7,8 @@ class Utilities{
 	 */
 	public static function URL($url=""){
 		$str="/";
-		return $str.urlencode($url);
+		$url=str_replace(" ","-",$url);
+		return $str.$url;
 	}
 	/**
 	 * Returns a true or false boolean of whether or not the user agent is a mobile

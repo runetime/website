@@ -1,4 +1,52 @@
 <?php
+$navs=[
+	''        =>'Home',
+	'radio'   =>'Radio',
+	'forums'  =>'Forums',
+	'RuneTime'=>[
+		'news'      =>'News',
+		'awards'    =>'Awards',
+		'signatures'=>'Signature Generator',
+		'members'   =>'Members',
+		'staff'     =>'Staff List',
+		'about'     =>'About Us',
+		'tickets'   =>'Help'
+	],
+	'Runescape'=>[
+		'guides/quests'=>'Quest Guides',
+		'guides/locations'=>'Location Guides',
+		'databases/items/'=>'Item Database',
+		'databases/monsters/'=>'Monster Database',
+		'map'=>'World Map',
+		'calculators'=>'Calculators',
+		'play'=>'Play Runescape'
+	],
+	'Social'=>[
+		'calendar'=>'Event Calendar',
+		'livestream'=>'Livestream',
+		'media'=>'Social Media',
+		'members-map'=>'Members Map',
+		'clan'=>'Our Clan'
+	]
+];
+$navLogged=[
+	'out'=>[
+		'login'=>'Login',
+		'signup'=>'Sign Up'
+	],
+	'in'=>[
+		'Username'=>[
+			'#'=>'My Profile',
+			'#'=>'My Content',
+			'#'=>'my Settings',
+			'#'=>'Manage Friends',
+			'#'=>'Personal Messenger',
+			'#'=>'Content I Follow',
+			'#'=>'Manage Ignore Prefs'
+		],
+		'logout'=>'Logout'
+	]
+];
 $mobile=Utilities::mobile()?
 	"var MOBILE=1;":
 	"";
@@ -21,7 +69,8 @@ if(!empty($title))             $bc['#']=$title;
 		<meta name='keywords' content='' />
 		<meta name='robots' content='index,follow' />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
-		<link rel='apple-touch-icon' href='/css/favicon.png' />
+		<link rel="shortcut icon" href='/img/favicon.ico' />
+		<link rel='apple-touch-icon' href='/img/favicon.ico' />
 		<link rel='canonical' href='http://runetime.com/' />
 		<link rel='home' href='/' />
 		<link rel='index' href='/sitemap/' />
@@ -36,21 +85,68 @@ if(!empty($title))             $bc['#']=$title;
 		<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' role='navigation'>
 			<div class='container-fluid'>
 				<div class='navbar-header'>
-					<button class='navbar-toggle' type='button' data-toggle='collapse' data-target='#navbar-ul'>
+					<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>
 						<span class='sr-only'>
-							Toggle Navigation
+							Toggle navigation
 						</span>
 						<span>
 							Menu
 						</span>
 					</button>
-					{{HTML::link('','RuneTime',['class'=>'navbar-brand'])}} 
+					{{HTML::link(Utilities::URL(),'RuneTime',['class'=>'navbar-brand'])}} 
 				</div>
-				<div id='navbar-ul' class='collapse navbar-collapse'>
-					<ul class='nav navbar-nav navbar-left'>
-						<li class='active'>
-							Home
+				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+					<ul class='nav navbar-nav'>
+@foreach($navs as $url=>$name)
+	@if(is_array($name))
+						<li class='dropdown'>
+							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+								{{$url}} <span class='caret'></span>
+							</a>
+							<ul class='dropdown-menu' role='menu'>
+		@foreach($name as $url2=>$name2)
+								<li>
+									{{HTML::link(Utilities::URL($url2),$name2)}} 
+								</li>
+		@endforeach
+							</ul>
 						</li>
+	@else
+						<li>
+							{{HTML::link(Utilities::URL($url),$name)}} 
+						</li>
+	@endif
+@endforeach
+					</ul>
+					<ul class='nav navbar-nav navbar-right'>
+@if(User::$logged)
+	@foreach($navLogged['in'] as $url=>$name)
+		@if(is_array($name))
+						<li class='dropdown'>
+							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+								{{$url}} <span class='caret'></span>
+							</a>
+							<ul class='dropdown-menu' role='menu'>
+			@foreach($name as $url2=>$name2)
+								<li>
+									{{HTML::link(Utilities::URL($url2),$name2)}} 
+								</li>
+			@endforeach
+							</ul>
+						</li>
+		@else
+						<li>
+							{{HTML::link(Utilities::URL($url),$name)}} 
+						</li>
+		@endif
+	@endforeach
+@else
+	@foreach($navLogged['out'] as $url=>$name)
+						<li>
+							{{HTML::link(Utilities::URL($url),$name)}}
+						</li>
+	@endforeach
+@endif
 					</ul>
 				</div>
 			</div>
@@ -107,5 +203,7 @@ if(!empty($title))             $bc['#']=$title;
 			//Google Analytics
 			{{$mobile}} 
 		</script>
+		{{HTML::script('js/jquery.js')}}
+		{{HTML::script('js/bootstrap.js')}}
 	</body>
 </html>
