@@ -1,0 +1,12 @@
+#radio {
+  text-align: center; }
+  #radio img {
+    display: inline-block; }
+  #radio p.holo-box-dark span {
+    color: #5565EC;
+    margin-right: 1em; }
+  #radio div.row div a {
+    color: #33b5e5 !important;
+    display: block;
+    padding-top: 1em;
+    padding-bottom: 1em; }

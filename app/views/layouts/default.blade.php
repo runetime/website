@@ -13,25 +13,26 @@ $navs=[
 		'tickets'   =>'Help'
 	],
 	'Runescape'=>[
-		'guides/quests'=>'Quest Guides',
-		'guides/locations'=>'Location Guides',
-		'databases/items/'=>'Item Database',
+		'guides/quests'      =>'Quest Guides',
+		'guides/locations'   =>'Location Guides',
+		'databases/items/'   =>'Item Database',
 		'databases/monsters/'=>'Monster Database',
-		'map'=>'World Map',
-		'calculators'=>'Calculators',
-		'play'=>'Play Runescape'
+		'map'                =>'World Map',
+		'calculators'        =>'Calculators',
+		'play'               =>'Play Runescape',
+		'calculators/combat' =>'Combat Calculator'
 	],
 	'Social'=>[
-		'calendar'=>'Event Calendar',
-		'livestream'=>'Livestream',
-		'media'=>'Social Media',
+		'calendar'   =>'Event Calendar',
+		'livestream' =>'Livestream',
+		'media'      =>'Social Media',
 		'members-map'=>'Members Map',
-		'clan'=>'Our Clan'
+		'clan'       =>'Our Clan'
 	]
 ];
 $navLogged=[
 	'out'=>[
-		'login'=>'Login',
+		'login' =>'Login',
 		'signup'=>'Sign Up'
 	],
 	'in'=>[
@@ -50,9 +51,11 @@ $navLogged=[
 $mobile=Utilities::mobile()?
 	"var MOBILE=1;":
 	"";
+if(!isset($nav))               $nav="Home";
 if(!isset($bc))                $bc=[];
 if(!isset($displayPageHeader)) $displayPageHeader=true;
 if(!empty($title))             $bc['#']=$title;
+$current=$nav;
 ?>
 <!DOCTYPE html>
 <html class='no-js'>
@@ -93,108 +96,132 @@ if(!empty($title))             $bc['#']=$title;
 							Menu
 						</span>
 					</button>
-					{{HTML::link(Utilities::URL(),'RuneTime',['class'=>'navbar-brand'])}} 
+					<a href='{{Utilities::URL()}}' title='RuneTime Home' class='navbar-brand'>
+						{{HTML::image('img/header.png','RuneTime Header Image',['class'=>'img-responsive'])}}
+					</a>
 				</div>
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 					<ul class='nav navbar-nav'>
 @foreach($navs as $url=>$name)
-	@if(is_array($name))
+@if(is_array($name))
 						<li class='dropdown'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
 								{{$url}} <span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
-		@foreach($name as $url2=>$name2)
+@foreach($name as $url2=>$name2)
 								<li>
 									{{HTML::link(Utilities::URL($url2),$name2)}} 
 								</li>
-		@endforeach
+@endforeach
 							</ul>
 						</li>
-	@else
-						<li>
+@else
+						<li{{$name==$current?" class='active'":""}}>
 							{{HTML::link(Utilities::URL($url),$name)}} 
 						</li>
-	@endif
+@endif
 @endforeach
 					</ul>
 					<ul class='nav navbar-nav navbar-right'>
 @if(User::$logged)
-	@foreach($navLogged['in'] as $url=>$name)
-		@if(is_array($name))
+@foreach($navLogged['in'] as $url=>$name)
+@if(is_array($name))
 						<li class='dropdown'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
 								{{$url}} <span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
-			@foreach($name as $url2=>$name2)
+@foreach($name as $url2=>$name2)
 								<li>
 									{{HTML::link(Utilities::URL($url2),$name2)}} 
 								</li>
-			@endforeach
+@endforeach
 							</ul>
 						</li>
-		@else
+@else
 						<li>
 							{{HTML::link(Utilities::URL($url),$name)}} 
 						</li>
-		@endif
-	@endforeach
+@endif
+@endforeach
 @else
-	@foreach($navLogged['out'] as $url=>$name)
+@foreach($navLogged['out'] as $url=>$name)
 						<li>
-							{{HTML::link(Utilities::URL($url),$name)}}
+							{{HTML::link(Utilities::URL($url),$name)}} 
 						</li>
-	@endforeach
+@endforeach
 @endif
 					</ul>
 				</div>
 			</div>
 		</nav>
-		<div id='page'>
-			<div class='wrapper'>
-				<ol class='breadcrumb'>
-					<li>
-						<a href='{{Utilities::URL()}}' title='Home'>
-							Home
-						</a>
-					</li>
+@if($displayPageHeader&&!empty($title))
+		<div class='wrapper-none'>
+			<ol class='breadcrumb'>
+				<li>
+					<a href='{{Utilities::URL()}}' title='Home'>
+						Home
+					</a>
+				</li>
 @foreach($bc as $url=>$name)
 @if($url=="#")
-					<li class='active'>
-						{{$name}} 
-					</li>
+				<li class='active'>
+					{{$name}} 
+				</li>
 @else
-					<li>
-						{{HTML::link($url,$name)}} 
-					</li>
+				<li>
+					{{HTML::link($url,$name)}} 
+				</li>
 @endif
 @endforeach
-				</ol>
-@if($displayPageHeader&&!empty($title))
-				<div class='page-header'>
-					<h1>
-						{{$title}} @if(isset($titleSub))<small>{{$titleSub}}</small> @endif 
-					</h1>
-				</div>
+			</ol>
+		</div>
 @endif
-			</div>
-@yield('content') 
+		<div id='page'>
+@yield('content')
 		</div>
-		<div id='portfolio' class='wrapper-brown'>
-			<div class='title'>
-				<h2>
-					RuneTime
-				</h2>
-				<span class='byline'>
-					Motto here.
-				</span>
+		<div id='portfolio' class='row wrapper-holo'>
+			<div class='col-xs-12 col-md-6'>
+				<p class='holo-text holo-line-block'>
+					About Us
+				</p>
+				<div id='portfolio-about'>
+					<p>
+						{{HTML::image(Utilities::URL('img/supported_bronze.png'),'Bronze Supported Fansite',['class'=>'img-responsive pull-left'])}}
+						<p>
+							We are proud to be a Jagex Bronze Supported Fansite!
+						</p>
+						<p>
+							Copyright RuneTime &copy; 2014 &mdash; privacy &mdash; terms of use
+						</p>
+						<p>
+							Contact us: Officialrunetime@gmail.com
+						</p>
+						<p>
+							{{HTML::link('http://runescape.com/community','RuneScape')}}&reg; and {{HTML::link('http://jagex.com/','Jagex')}}&reg; are trademarks of Jagex Ltd &copy; 1999-2014
+						</p>
+						<p>
+							All Runescape images are property of Jagex Ltd.
+						</p>
+						<p>
+							RuneTime is in no way affiliated to Runescape.
+						</p>
+					</p>
+				</div>
 			</div>
-			<p>
-				Links here.
-			</p>
+			<div class='col-xs-12 col-md-6'>
+				<p class='holo-text holo-line-block'>
+					Follow Us
+				</p>
+				<div id='portfolio-social'>
+					<a href='https://www.facebook.com/RuneTimeOfficial' title='Follow RuneTime on Facebook'>{{HTML::image('img/fb.png','Facebook')}}</a>
+					<a href='https://twitter.com/Rune_Time' title='Follow RuneTime on Twitter'>{{HTML::image('img/tw.png','Twitter')}}</a>
+					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='Subscribe to RuneTime on YouTube'>{{HTML::image('img/yt.png','YouTube')}}</a>
+				</div>
+			</div>
 		</div>
-		<div id='copyright'>
+		<div id='copyright' class='wrapper-xs'>
 			<p>
 				&copy;{{date('Y')}} RuneTime
 			</p>
@@ -203,7 +230,10 @@ if(!empty($title))             $bc['#']=$title;
 			//Google Analytics
 			{{$mobile}} 
 		</script>
-		{{HTML::script('js/jquery.js')}}
-		{{HTML::script('js/bootstrap.js')}}
+		{{HTML::script('js/jquery.js')}} 
+		{{HTML::script('js/bootstrap.js')}} 
+@if(!empty($js))
+		{{HTML::script('js/'.$js.'.js')}} 
+@endif
 	</body>
 </html>
