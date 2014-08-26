@@ -124,7 +124,7 @@ $current=$nav;
 @endforeach
 					</ul>
 					<ul class='nav navbar-nav navbar-right'>
-@if(User::$logged)
+@if(Auth::check())
 @foreach($navLogged['in'] as $url=>$name)
 @if(is_array($name))
 						<li class='dropdown'>
@@ -179,7 +179,7 @@ $current=$nav;
 		</div>
 @endif
 		<div id='page'>
-@yield('content')
+			{{$contents}} 
 		</div>
 		<div id='portfolio' class='row wrapper-holo'>
 			<div class='col-xs-12 col-md-6'>

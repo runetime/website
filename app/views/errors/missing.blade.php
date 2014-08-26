@@ -1,5 +1,3 @@
-@extends('layouts.default')
-@section('content')
 			<div class='wrapper'>
 				<p class='lead text-danger'>
 					Uh oh, 404!
@@ -11,4 +9,3 @@
 					{{HTML::link(Utilities::URL(),'Back to Homepage',['class'=>'btn btn-info btn-lg','role'=>'button'])}} 
 				</p>
 			</div>
-@stop

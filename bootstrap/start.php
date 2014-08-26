@@ -26,8 +26,8 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead'),
-
+	'local'     =>['homestead','local','runetime','runetime-dev'],
+	'production'=>['runetime-prod','production','prod']
 ));
 
 /*

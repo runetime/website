@@ -13,8 +13,11 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/libraries"
-		]
+			"app/library"
+		],
+		"psr-0": {
+			"RuneTime": "app/library"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [

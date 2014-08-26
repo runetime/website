@@ -62,10 +62,9 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::down(function(){
-	$page=View::make('errors.down');
-	$page->with('title','We Are Currently Under Maintenance');
-	return Response::make($page,503);
+App::down(function()
+{
+	return Response::make("Be right back!", 503);
 });
 
 /*
@@ -80,17 +79,3 @@ App::down(function(){
 */
 
 require app_path().'/filters.php';
-
-require app_path().'/start/errors.php';
-User::login();
-
-App::after(function($request,$response){
-	$compress=false;
-	if(App::Environment()!='local'&&$compress){
-		if($response instanceof Illuminate\Http\Response){
-			$output=$response->getOriginalContent();
-			$output=trim(preg_replace('/\s+/',' ',$output));
-			$response->setContent($output);
-		}
-	}
-});
