@@ -7,13 +7,13 @@ class GuideController extends BaseController{
 	public function getIndex(){
 
 	}
-	public function getType(){
+	public function getViewGuides(){
 
 	}
-	public function getView(){
+	public function getViewGuide(){
 
 	}
 	public function getSearch(){
-		
+
 	}
 }

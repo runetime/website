@@ -59,8 +59,8 @@ Route::group(['prefix'=>'databases'],function(){
 Route::group(['prefix'=>'guides'],function(){
 	Route::get('/','GuideController@getIndex');
 	Route::group(['prefix'=>'{type}'],function(){
-		Route::get('/','GuideController@getType');
-		Route::get('{slug}','GuideController@getView');
+		Route::get('/','GuideController@getViewGuides');
+		Route::get('{slug}','GuideController@getViewGuide');
 		Route::get('search/{searchSlug}','GuideController@getSearch');
 	});
 });
