@@ -78,8 +78,6 @@ $current=$nav;
 		<link rel='home' href='/' />
 		<link rel='index' href='/sitemap/' />
 		{{HTML::style('css/style.css')}}
-		{{HTML::style('css/bootstrap.css')}}
-		{{HTML::style('css/bootstrap-theme.css')}}
 @if(!empty($css))
 		{{HTML::style('css/'.$css.'.css')}}
 @endif
@@ -111,14 +109,14 @@ $current=$nav;
 							<ul class='dropdown-menu' role='menu'>
 @foreach($name as $url2=>$name2)
 								<li>
-									{{HTML::link(Utilities::URL($url2),$name2)}} 
+									{{HTML::link(Utilities::URL($url2),$name2)}}
 								</li>
 @endforeach
 							</ul>
 						</li>
 @else
 						<li{{$name==$current?" class='active'":""}}>
-							{{HTML::link(Utilities::URL($url),$name)}} 
+							{{HTML::link(Utilities::URL($url),$name)}}
 						</li>
 @endif
 @endforeach
@@ -134,21 +132,21 @@ $current=$nav;
 							<ul class='dropdown-menu' role='menu'>
 @foreach($name as $url2=>$name2)
 								<li>
-									{{HTML::link(Utilities::URL($url2),$name2)}} 
+									{{HTML::link(Utilities::URL($url2),$name2)}}
 								</li>
 @endforeach
 							</ul>
 						</li>
 @else
 						<li>
-							{{HTML::link(Utilities::URL($url),$name)}} 
+							{{HTML::link(Utilities::URL($url),$name)}}
 						</li>
 @endif
 @endforeach
 @else
 @foreach($navLogged['out'] as $url=>$name)
 						<li>
-							{{HTML::link(Utilities::URL($url),$name)}} 
+							{{HTML::link(Utilities::URL($url),$name)}}
 						</li>
 @endforeach
 @endif
@@ -167,11 +165,11 @@ $current=$nav;
 @foreach($bc as $url=>$name)
 @if($url=="#")
 				<li class='active'>
-					{{$name}} 
+					{{$name}}
 				</li>
 @else
 				<li>
-					{{HTML::link($url,$name)}} 
+					{{HTML::link($url,$name)}}
 				</li>
 @endif
 @endforeach
@@ -179,7 +177,7 @@ $current=$nav;
 		</div>
 @endif
 		<div id='page'>
-			{{$contents}} 
+			{{$contents}}
 		</div>
 		<div id='portfolio' class='row wrapper-holo'>
 			<div class='col-xs-12 col-md-6'>
@@ -228,12 +226,12 @@ $current=$nav;
 		</div>
 		<script>
 			//Google Analytics
-			{{$mobile}} 
+			{{$mobile}}
 		</script>
-		{{HTML::script('js/jquery.js')}} 
-		{{HTML::script('js/bootstrap.js')}} 
+		{{HTML::script('js/jquery.js')}}
+		{{HTML::script('js/bootstrap.js')}}
 @if(!empty($js))
-		{{HTML::script('js/'.$js.'.js')}} 
+		{{HTML::script('js/'.$js.'.js')}}
 @endif
 	</body>
 </html>
