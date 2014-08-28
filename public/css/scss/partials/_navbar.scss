@@ -1,0 +1,47 @@
+.navbar{
+	$border:#2991B8;
+	color:$textColor !important;
+	li.active a{
+		border-bottom:1px solid #33B5E5;
+	}
+	.navbar-brand{
+		margin-top:-7px;
+	}
+	@media (min-width:$screen-xs){
+		.dropdown:hover .dropdown-menu{
+			display:block;
+		}
+	}
+	.dropdown-menu{
+		background:#222;
+		color:#ababab !important;
+		li{
+			a{
+				background:inherit;
+				border-left:1px solid transparent;
+				color:#777 !important;
+				padding:{
+					top:.6em;
+					bottom:.6em;
+				}
+				&:hover{
+					background:#333 !important;
+					border-left:1px solid $border;
+					color:#fff !important;
+				}
+			}
+		}
+		.divider{
+			background:#cacaca;
+			color:#ababab;
+		}
+	}
+	>div >div >ul >li{
+		>a{
+			border-bottom:1px solid transparent;
+			&:hover{
+				border-bottom:1px solid $border;
+			}
+		}
+	}
+}
