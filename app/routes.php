@@ -39,7 +39,7 @@ Route::group(['prefix'=>'calendar'],function(){
  */
 Route::group(['prefix'=>'clan'],function(){
 	Route::get('/','ClanController@getIndex');
-})
+});
 
 /**
  * Databases
