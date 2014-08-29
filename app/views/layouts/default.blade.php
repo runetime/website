@@ -177,7 +177,11 @@ $current=$nav;
 		</div>
 @endif
 		<div id='page'>
+@if(!empty($contents))
 			{{$contents}}
+@else
+			@yield('contents')
+@endif
 		</div>
 		<div id='portfolio' class='row wrapper-holo'>
 			<div class='col-xs-12 col-md-6'>
@@ -191,13 +195,13 @@ $current=$nav;
 							We are proud to be a Jagex Bronze Supported Fansite!
 						</p>
 						<p>
-							Copyright RuneTime &copy; 2014 &mdash; privacy &mdash; terms of use
+							Copyright RuneTime &copy; {{date('Y')}} &mdash; privacy &mdash; terms of use
 						</p>
 						<p>
 							Contact us: Officialrunetime@gmail.com
 						</p>
 						<p>
-							{{HTML::link('http://runescape.com/community','RuneScape')}}&reg; and {{HTML::link('http://jagex.com/','Jagex')}}&reg; are trademarks of Jagex Ltd &copy; 1999-2014
+							{{HTML::link('http://runescape.com/community','RuneScape')}}&reg; and {{HTML::link('http://jagex.com/','Jagex')}}&reg; are trademarks of Jagex Ltd &copy; 1999-{{date('Y')}}
 						</p>
 						<p>
 							All Runescape images are property of Jagex Ltd.
@@ -218,11 +222,6 @@ $current=$nav;
 					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='Subscribe to RuneTime on YouTube'>{{HTML::image('img/yt.png','YouTube')}}</a>
 				</div>
 			</div>
-		</div>
-		<div id='copyright' class='wrapper-xs'>
-			<p>
-				&copy;{{date('Y')}} RuneTime
-			</p>
 		</div>
 		<script>
 			//Google Analytics

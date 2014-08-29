@@ -9,9 +9,12 @@ class BaseController extends Controller{
 	 * @return void
 	 */
 	protected function setupLayout(){
-		if(!is_null($this->layout)){
+		if(!is_null($this->layout))
 			$this->layout=View::make($this->layout);
-		}
+	}
+	protected function title($newTitle){
+		if(!empty($newTitle))
+			$this->title=$newTitle;
 	}
 	protected function view($path,$data=[]){
 		$this->layout->title=$this->title;

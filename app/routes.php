@@ -1,14 +1,8 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Pages
 |--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
 */
 
 /**
@@ -96,6 +90,13 @@ Route::group(['prefix'=>'news'],function(){
 });
 
 /**
+ * Radio
+ */
+Route::group(['prefix'=>'radio'],function(){
+	Route::get('/','RadioController@getIndex');
+});
+
+/**
  * Signature Generator
  */
 Route::group(['prefix'=>'signatures'],function(){
@@ -126,3 +127,9 @@ Route::group(['prefix'=>'staff'],function(){
 	});
 	Route::get('list','StaffController@getList');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Script calls such as AJAX
+|--------------------------------------------------------------------------
+*/

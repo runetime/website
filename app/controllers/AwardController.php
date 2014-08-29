@@ -6,7 +6,8 @@ class AwardController extends BaseController{
 		$this->awards=$awards;
 	}
 	public function getIndex(){
-
+		$this->title('Awards');
+		$this->view('awards.index');
 	}
 	public function getView($slug){
 

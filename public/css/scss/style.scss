@@ -2,11 +2,10 @@
 @import "variables";
 @import "modules/all";
 @import "partials/all";
-/**
-  * Bootstrap
-  */
+/*
+-----------
+- Vendors -
+-----------
+*/
 @import "vendor/bootstrap";
-/**
-  * Bootstrap-Theme
-  */
-@import "vendor/bootstrap/theme";
+@import "vendor/font-awesome";
