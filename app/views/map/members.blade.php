@@ -1,3 +1,3 @@
 			<div class='wrapper'>
-				Maps
+				Map
 			</div>
