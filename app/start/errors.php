@@ -7,11 +7,11 @@ App::error(function($exception,$code){
 		case 404:
 			return Response::view('errors.missing',['title'=>'Page Not Found','nav'=>'Page Not Found'],404);
 			break;
-		// case 500:
-		// 	return Response::view('errors.internal',['title'=>'Internal Service Error','nav'=>'Internal Service Error'],500);
+//		 case 500:
+//		 	return Response::view('errors.internal',['title'=>'Internal Service Error','nav'=>'Internal Service Error'],500);
 //		    break;
-		 default:
-		 	return Response::view('errors.missing',['title'=>'Page Not Found','nav'=>'Page Not Found'],$code);
-			break;
+//		 default:
+//		 	return Response::view('errors.missing',['title'=>'Page Not Found','nav'=>'Page Not Found'],$code);
+//			break;
 	}
 });

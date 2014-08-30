@@ -11,7 +11,8 @@ class HomeController extends BaseController{
 	public function getIndex(){
 		$news=$this->news->getRecentNews(3);
 		$statuses=$this->statuses->getRecentStatuses(5);
-		$this->title='Home';
+		$this->bc(false);
+		$this->title('Home');
 		$this->view('home.index',compact('news','statuses'));
 	}
 }

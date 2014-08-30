@@ -6,6 +6,11 @@
 */
 
 /**
+ * About
+ */
+Route::get('about','AboutController@getIndex');
+
+/**
  * Awards
  */
 Route::group(['prefix'=>'awards'],function(){
@@ -76,8 +81,11 @@ Route::group(['prefix'=>'livestream'],function(){
  */
 Route::group(['prefix'=>'map'],function(){
 	Route::get('/','MapController@getIndex');
-	Route::get('{type}','MapController@getMap');
-	Route::get('{type}/{version}','MapController@getMap');
+	Route::get('members','MapController@getMembers');
+	Route::group(['prefix'=>'runescape'],function(){
+		Route::get('3','MapController@getRS3');
+		Route::get('old-school','MapController@getOS');
+	});
 });
 
 /**
@@ -88,6 +96,11 @@ Route::group(['prefix'=>'news'],function(){
 	Route::get('{slug}','NewsController@getView');
 	Route::get('search/{searchSlug}','NewsController@getSearch');
 });
+
+/**
+ * Play
+ */
+Route::get('play','PlayController@getIndex');
 
 /**
  * Radio
@@ -123,7 +136,7 @@ Route::group(['prefix'=>'staff'],function(){
 	 * Staff Only
 	 */
 	Route::group(['before'=>'auth.staff'],function(){
-
+		Route::get('/','StaffController@getIndex');
 	});
 	Route::get('list','StaffController@getList');
 });

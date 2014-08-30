@@ -1,0 +1,27 @@
+@if(!empty($staff[0]))
+				<table class='table'>
+					<thead>
+						<tr>
+							<td>
+								&nbsp;
+							</td>
+							<td>
+								Name
+							</td>
+							<td>
+								Title
+							</td>
+							<td>
+								Joined
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+@foreach($staff as $member)
+@if(!empty($member))
+@include('staff.list.row',['staff'=>$staff])
+@endif
+@endforeach
+					</tbody>
+				</table>
+@endif

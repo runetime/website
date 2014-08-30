@@ -6,10 +6,15 @@ class AwardController extends BaseController{
 		$this->awards=$awards;
 	}
 	public function getIndex(){
+		$awards=$this->awards->getAllAwards();
 		$this->title('Awards');
-		$this->view('awards.index');
+		$this->view('awards.index',compact('awards'));
 	}
 	public function getView($slug){
-
+		$award=$this->awards->getBySlug($slug);
+		$awardees=$this->awards->getAwardees($award->id);
+		$this->bc(['awards'=>'Awards']);
+		$this->title($award->name." Award");
+		$this->view('awards.view',compact('award','awardees'));
 	}
 }

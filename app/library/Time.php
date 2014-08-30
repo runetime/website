@@ -12,6 +12,7 @@ class Time{
 	 * @param integer $int     The integer timestamp to convert
 	 */
 	public static function short($i=0){
+		$i=self::getEpoch($i);
 		if(self::isDST()){
 			$i+=3600;
 		}
@@ -22,9 +23,19 @@ class Time{
 	 * @param integer $int     The integer timestamp to convert
 	 */
 	public static function long($i=0){
+		$i=self::getEpoch($i);
 		if(self::isDST()){
 			$i+=3600;
 		}
 		return date("jS \of F Y \- H:i:s",$i);
+	}
+	public static function getEpoch($str){
+		if(is_numeric($str)){
+			return $str;
+		}
+		if(is_string($str)){
+			return strtotime($str);
+		}
+		return strtotime($str);
 	}
 }

@@ -3,6 +3,17 @@ class BaseController extends Controller{
 	protected $layout='layouts.default';
 	protected $currentUser;
 	protected $title='';
+	protected function bc($breadcrumbs=[]){
+		if($breadcrumbs==false){
+			$this->layout->displayPageHeader=false;
+		}
+		else{
+			$this->layout->bc=$breadcrumbs;
+		}
+	}
+	protected function nav($nav){
+		$this->layout->nav=$nav;
+	}
 	/**
 	 * Setup the layout used by the controller.
 	 *

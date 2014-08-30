@@ -8,7 +8,7 @@ $navs=[
 		'awards'    =>'Awards',
 		'signatures'=>'Signature Generator',
 		'members'   =>'Members',
-		'staff'     =>'Staff List',
+		'staff/list'     =>'Staff List',
 		'about'     =>'About Us',
 		'tickets'   =>'Help'
 	],
@@ -26,7 +26,7 @@ $navs=[
 		'calendar'   =>'Event Calendar',
 		'livestream' =>'Livestream',
 		'media'      =>'Social Media',
-		'members-map'=>'Members Map',
+		'map/members'=>'Members Map',
 		'clan'       =>'Our Clan'
 	]
 ];
