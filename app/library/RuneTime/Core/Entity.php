@@ -19,6 +19,11 @@ abstract class Entity extends Eloquent{
 		}
 		return $this->validator->errors();
 	}
+	public function save(array $options=[]){
+		if(!$this->isValid())
+			return false;
+		return parent::save($options);
+	}
 	protected function getPreparedRules(){
 		return $this->replaceIdsIfExists($this->validationRules);
 	}

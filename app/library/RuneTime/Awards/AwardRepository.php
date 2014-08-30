@@ -1,15 +1,26 @@
 <?php
 namespace RT\Awards;
 use RT\Core\EloquentRepository;
+use RT\Accounts\User;
 class AwardRepository extends EloquentRepository{
 	public function __construct(Award $model){
 		$this->model=$model;
 	}
-	public function getRecentAwards($count=3){
+	public function getAllAwards(){
 		return $this->model->
-			where('status','=',Award::STATUS_AVAILABLE)->
-			orderBy('published_at','desc')->
-			take($count)->
+			orderBy('name','asc')->
+			get();
+	}
+	public function getBySlug($slug){
+		return $this->model->
+			where('id',explode("-",$slug)[0])->
+			first();
+	}
+	public function getAwardees($id){
+		return (new User())->
+			where('awards','LIKE','%,'.$id.',')->
+			orWhere('awards','LIKE',$id.',%')->
+			orWhere('awards','LIKE',$id)->
 			get();
 	}
 }

@@ -2,18 +2,29 @@
 namespace RT\Awards;
 use RT\Core\Entity;
 class Award extends Entity{
-	protected $table     ='news';
-	protected $with      =['author'];
-	protected $fillable  =['author_id','title','contents','status','published_at'];
-	protected $dates     =['published_at'];
+	protected $table     ='awards';
+	protected $with      =[];
+	protected $fillable  =['name','name_trim','description','given','last_awarded'];
+	protected $dates     =[];
 	protected $softDelete=true;
 	public $presenter='RT\Awards\AwardPresenter';
 	const STATUS_UNAVAILABLE=0;
 	const STATUS_AVAILABLE  =1;
 	protected $validationRules=[
-		'author_id'=>'required|exists:users,id',
-		'title'    =>'required',
-		'content'  =>'required',
-		'status'   =>'required'
+		'name'        =>'required',
+		'name_trim'   =>'required',
+		'description' =>'required',
+		'given'       =>'required',
+		'last_awarded'=>'required'
 	];
+	public static function makeSlug($id,$name=""){
+		if(empty($name)){
+			$name=$this->model->
+				where('id',$id)->
+				first()->name;
+		}
+		$name=strtolower($name);
+		$name=str_replace(" ","-",str_replace("_","-",$name));
+		return $id."-".$name;
+	}
 }
