@@ -89,6 +89,13 @@ Route::group(['prefix'=>'map'],function(){
 });
 
 /**
+ * Media
+ */
+Route::group(['prefix'=>'media'],function(){
+	Route::get('/','MediaController@getIndex');
+});
+
+/**
  * News
  */
 Route::group(['prefix'=>'news'],function(){
