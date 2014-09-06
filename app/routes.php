@@ -52,6 +52,10 @@ Route::group(['prefix'=>'databases'],function(){
 	});
 });
 
+Route::group(['prefix'=>'forums'],function(){
+	Route::get('/','ForumController@getIndex');
+});
+
 /**
  * Guides
  */
@@ -75,6 +79,18 @@ Route::get('/','HomeController@getIndex');
 Route::group(['prefix'=>'livestream'],function(){
 	Route::get('/','LivestreamController@getIndex');
 });
+
+/**
+ * Login
+ */
+Route::group(['prefix'=>'login'],function(){
+	Route::get('/','LoginController@getIndex');
+});
+
+/**
+ * Logout
+ */
+Route::get('logout','LogoutController@getLogout');
 
 /**
  * Map
@@ -114,6 +130,11 @@ Route::get('play','PlayController@getIndex');
  */
 Route::group(['prefix'=>'radio'],function(){
 	Route::get('/','RadioController@getIndex');
+	Route::get('request/history','RadioController@getHistory');
+	Route::get('request/song','RadioController@getSong');
+	Route::get('request/timetable','RadioController@getTimetable');
+	Route::get('requests/current','RadioController@getRequestsCurrent');
+	Route::get('send/request/{artist}/{name}','RadioController@getSendRequest');
 });
 
 /**
@@ -126,6 +147,14 @@ Route::group(['prefix'=>'signatures'],function(){
 		Route::get('{slug}','SignatureGenerator@getStyle');
 		Route::get('{slug}/{style}','SignatureGenerator@getFinal');
 	});
+});
+
+/**
+ * Sign Up
+ */
+Route::group(['prefix'=>'signup'],function(){
+	Route::get('/','SignupController@getForm');
+	Route::post('/','SignupController@postForm');
 });
 
 /**
