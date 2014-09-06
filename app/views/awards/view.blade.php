@@ -20,6 +20,7 @@
 						</tr>
 					</thead>
 					<tbody>
+@foreach($awardees as $awardee)
 						<tr>
 							<td>
 								{{HTML::image(Utilities::URL('img/forum/photos/'.$awardee->id.'.png'),'Photo',['class'=>'img-responsive photo-sm'])}} 
@@ -31,10 +32,9 @@
 								{{$awardee->title}} 
 							</td>
 							<td>
-								{{Time::short($awardee</td>
+							</td>
 						</tr>
+@endforeach
 					</tbody>
 				</table>
-			</div>@foreach($awardees as $awardee)
-{{var_dump($awardee)}}
-@endforeach
+			</div>

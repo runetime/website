@@ -1,4 +1,4 @@
-@if(!empty($staff[0]))
+@if($staff!==array_filter($staff))
 				<table class='table'>
 					<thead>
 						<tr>
@@ -19,7 +19,7 @@
 					<tbody>
 @foreach($staff as $member)
 @if(!empty($member))
-@include('staff.list.row',['staff'=>$staff])
+@include('staff.list.row',['staff'=>$member])
 @endif
 @endforeach
 					</tbody>

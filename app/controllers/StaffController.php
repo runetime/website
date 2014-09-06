@@ -9,12 +9,13 @@ class StaffController extends BaseController{
 		$this->users=$users;
 	}
 	public function getIndex(){
-		$this->nav('Staff');
+		$this->nav('Staff Panel');
 		$this->title('Staff Panel');
 		$this->view('staff.index');
 	}
 	public function getList(){
-		$admins=$this->roles->getUsersById(12);
+		$admins=(array)$this->roles->getUsersById(12);
+		$communityLeader=[];
 		$communityLeader[0]=$this->roles->getUsersById(13);
 		$communityMembers=(array)$this->roles->getUsersById(14);
 		$communityTeam=array_merge($communityLeader,$communityMembers);
