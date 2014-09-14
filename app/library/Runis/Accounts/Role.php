@@ -1,6 +1,6 @@
 <?php
-namespace RT\Accounts;
-use RT\Core\Entity;
+namespace Runis\Accounts;
+use Runis\Core\Entity;
 class Role extends Entity{
 	protected $table='roles';
 	protected $fillable=['name','name_trim','class'];

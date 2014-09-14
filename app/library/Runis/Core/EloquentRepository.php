@@ -1,7 +1,7 @@
 <?php
-namespace RT\Core;
+namespace Runis\Core;
 use Illuminate\Database\Eloquent\Model;
-use RT\Core\Exceptions\EntityNotFoundException;
+use Runis\Core\Exceptions\EntityNotFoundException;
 abstract class EloquentRepository{
 	protected $model;
 	public function __construct($mode=null){

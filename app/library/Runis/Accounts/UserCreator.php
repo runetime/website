@@ -1,5 +1,5 @@
 <?php
-namespace RT\Accounts;
+namespace Runis\Accounts;
 class UserCreator{
 	protected $users;
 	public function __construct(UserRepository $users){

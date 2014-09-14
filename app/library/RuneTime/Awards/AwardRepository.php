@@ -1,7 +1,7 @@
 <?php
 namespace RT\Awards;
-use RT\Core\EloquentRepository;
-use RT\Accounts\User;
+use Runis\Core\EloquentRepository;
+use Runis\Accounts\User;
 class AwardRepository extends EloquentRepository{
 	public function __construct(Award $model){
 		$this->model=$model;

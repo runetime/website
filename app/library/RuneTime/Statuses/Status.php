@@ -1,6 +1,6 @@
 <?php
 namespace RT\Statuses;
-use RT\Core\Entity;
+use Runis\Core\Entity;
 class Status extends Entity{
 	protected $table='statuses';
 	protected $fillable=['author_id','contents','comment_amount','published_at','status'];

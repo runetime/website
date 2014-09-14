@@ -1,6 +1,6 @@
 <?php
 namespace RT\News;
-use RT\Core\EloquentRepository;
+use Runis\Core\EloquentRepository;
 class NewsRepository extends EloquentRepository{
 	public function __construct(News $model){
 		$this->model=$model;

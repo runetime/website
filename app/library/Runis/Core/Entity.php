@@ -1,8 +1,8 @@
 <?php
-namespace RT\Core;
+namespace Runis\Core;
 use Validator,Eloquent;
-use RT\Core\Exceptions\NoValidationRulesFoundException;
-use RT\Core\Exceptions\NoValidatorInstantiatedException;
+use Runis\Core\Exceptions\NoValidationRulesFoundException;
+use Runis\Core\Exceptions\NoValidatorInstantiatedException;
 abstract class Entity extends Eloquent{
 	protected $validationRules=[];
 	protected $validator;

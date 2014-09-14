@@ -1,6 +1,6 @@
 <?php
 namespace RT\News;
-use RT\Core\Entity;
+use Runis\Core\Entity;
 class News extends Entity{
 	protected $table     ='news';
 	protected $with      =['author'];

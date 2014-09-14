@@ -1,6 +1,6 @@
 <?php
 namespace RT\Statuses;
-use RT\Core\EloquentRepository;
+use Runis\Core\EloquentRepository;
 class StatusRepository extends EloquentRepository{
 	public function __construct(Status $model){
 		$this->model=$model;

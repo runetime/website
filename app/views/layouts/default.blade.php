@@ -36,7 +36,7 @@ $navLogged=[
 		'signup'=>'Sign Up'
 	],
 	'in'=>[
-		'Username'=>[
+		'name'=>[
 			'#'=>'My Profile',
 			'#'=>'My Content',
 			'#'=>'my Settings',

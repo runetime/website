@@ -1,6 +1,6 @@
 <?php
-use RT\Accounts\RoleRepository;
-use RT\Accounts\UserRepository;
+use Runis\Accounts\RoleRepository;
+use Runis\Accounts\UserRepository;
 class StaffController extends BaseController{
 	private $roles;
 	private $users;

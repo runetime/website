@@ -10,13 +10,11 @@
 		"classmap": [
 			"app/commands",
 			"app/controllers",
-			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/library"
 		],
 		"psr-0": {
-			"RuneTime": "app/library"
 		}
 	},
 	"scripts": {

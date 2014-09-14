@@ -1,7 +1,7 @@
 <?php
-namespace RT\Accounts;
-use RT\Accounts\UserRepository;
-use RT\Core\EloquentRepository;
+namespace Runis\Accounts;
+use Runis\Accounts\UserRepository;
+use Runis\Core\EloquentRepository;
 class RoleRepository extends EloquentRepository{
 	public function __construct(Role $model){
 		$this->model=$model;

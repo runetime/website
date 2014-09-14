@@ -1,6 +1,6 @@
 <?php
 namespace RT\Awards;
-use RT\Core\Entity;
+use Runis\Core\Entity;
 class Award extends Entity{
 	protected $table     ='awards';
 	protected $with      =[];

@@ -1,4 +1,4 @@
 <?php
-namespace Lio\Core\Exceptions;
+namespace Runis\Core\Exceptions;
 class EntityNotFoundException extends \Exception{
 }
