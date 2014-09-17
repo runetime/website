@@ -16,4 +16,9 @@ class RoleRepository extends EloquentRepository{
 			where('role','=',$id)->
 			get();
 	}
+	public function getByName($roleName){
+		return $this->model->
+			where('name','=',$roleName)->
+			first();
+	}
 }

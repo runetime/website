@@ -28,4 +28,14 @@ class UserRepository extends EloquentRepository{
 			orderBy('id',$order)->
 			get();
 	}
+	public function getByUsername($username){
+		return $this->model->
+			where('username','=',$username)->
+			first();
+	}
+	public function getByDisplayName($displayName){
+		return $this->model->
+			where('display_name','=',$displayName)->
+			first();
+	}
 }

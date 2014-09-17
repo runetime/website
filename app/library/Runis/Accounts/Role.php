@@ -10,6 +10,6 @@ class Role extends Entity{
 		'class'    =>'required'
 	];
 	public function users(){
-		$this->belongsToMany('RT\Accounts\User');
+		$this->belongsToMany('Runis\Accounts\User','user_roles');
 	}
 }

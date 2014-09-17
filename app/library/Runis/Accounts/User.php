@@ -16,7 +16,7 @@ class User extends Entity implements UserInterface,RemindableInterface{
 	];
 	private $rolesCache;
 	public function roles(){
-		return $this->belongsToMany('RT\Accounts\Role');
+		return $this->belongsToMany('Runis\Accounts\Role','user_roles');
 	}
 	public function getRoles(){
 		if(!isset($this->rolesCache)){
@@ -25,10 +25,10 @@ class User extends Entity implements UserInterface,RemindableInterface{
 		return $this->rolesCache;
 	}
 	public function hasRole($roleName){
-		return $this->hasRoles($roleName);
+		return in_array($roleName,array_fetch($this->roles->toArray(),'name'));
 	}
 	public function hasRoles($roleNames=[]){
-		$roleList=\App::make('RT\Accounts\RoleRepository')->
+		$roleList=\App::make('Runis\Accounts\RoleRepository')->
 			getRoleList();
 		foreach((array)$roleNames as $allowedRole){
 			if(!in_array($allowedRole,$roleList)){
@@ -51,6 +51,14 @@ class User extends Entity implements UserInterface,RemindableInterface{
 			}
 		}
 		return false;
+	}
+	public function setRole($name){
+		$role=\App::make('Runis\Accounts\RoleRepository')->
+			getByName($name);
+		$assigned_roles=[];
+		if($role)
+			$assigned_roles[]=$role->id;
+		$this->roles()->attach($assigned_roles);
 	}
 	/**
 	 * UserInterface

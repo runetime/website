@@ -28,4 +28,13 @@ class Utilities{
 	public static function mobile(){
 		return preg_match('/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i',$_SERVER['HTTP_USER_AGENT']);
 	}
+	public static function CURL($url){
+		$ch=curl_init();
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_HEADER,0);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+		$output=curl_exec($ch);
+		curl_close($ch);
+		return $output;
+	}
 }

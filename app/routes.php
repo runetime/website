@@ -141,11 +141,12 @@ Route::group(['prefix'=>'radio'],function(){
  * Signature Generator
  */
 Route::group(['prefix'=>'signatures'],function(){
-	Route::get('/','SignatureGenerator@getIndex');
-	Route::group(['prefix'=>'{type}'],function(){
-		Route::get('/','SignatureGenerator@getType');
-		Route::get('{slug}','SignatureGenerator@getStyle');
-		Route::get('{slug}/{style}','SignatureGenerator@getFinal');
+	Route::get('/','SignatureController@getIndex');
+	Route::post('/','SignatureController@postUsername');
+	Route::group(['prefix'=>'username={username}/type={type}'],function(){
+		Route::get('/','SignatureController@getStyle');
+		Route::get('style={style}','SignatureController@getFinal');
+		Route::get('style={style}/display','SignatureController@getDisplay');
 	});
 });
 

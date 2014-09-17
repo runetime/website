@@ -30,13 +30,14 @@ $navs=[
 		'clan'       =>'Our Clan'
 	]
 ];
-$navLogged=[
-	'out'=>[
+if(!Auth::check())
+	$navLogged=[
 		'login' =>'Login',
 		'signup'=>'Sign Up'
-	],
-	'in'=>[
-		'name'=>[
+	];
+else
+	$navLogged=[
+		Auth::user()->display_name=>[
 			'#'=>'My Profile',
 			'#'=>'My Content',
 			'#'=>'my Settings',
@@ -46,8 +47,7 @@ $navLogged=[
 			'#'=>'Manage Ignore Prefs'
 		],
 		'logout'=>'Logout'
-	]
-];
+	];
 $mobile=Utilities::mobile()?
 	"var MOBILE=1;":
 	"";
@@ -123,7 +123,7 @@ $current=$nav;
 					</ul>
 					<ul class='nav navbar-nav navbar-right'>
 @if(Auth::check())
-@foreach($navLogged['in'] as $url=>$name)
+@foreach($navLogged as $url=>$name)
 @if(is_array($name))
 						<li class='dropdown'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
@@ -144,7 +144,7 @@ $current=$nav;
 @endif
 @endforeach
 @else
-@foreach($navLogged['out'] as $url=>$name)
+@foreach($navLogged as $url=>$name)
 						<li>
 							{{HTML::link(Utilities::URL($url),$name)}}
 						</li>

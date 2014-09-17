@@ -1,6 +1,6 @@
 @extend('layouts.default');
 @section('content');
-<div class='wrapper'>
+			<div class='wrapper'>
 				<p class='lead text-danger'>
 					You don't have access to this page.
 				</p>
