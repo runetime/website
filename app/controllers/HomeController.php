@@ -1,6 +1,8 @@
 <?php
 use RT\News\NewsRepository;
 use RT\Statuses\StatusRepository;
+use Runis\Accounts\RoleRepository;
+use Runis\Accounts\UserRepository;
 class HomeController extends BaseController{
 	private $news;
 	private $statuses;

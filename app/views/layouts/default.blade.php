@@ -17,7 +17,7 @@ $navs=[
 		'guides/locations'   =>'Location Guides',
 		'databases/items/'   =>'Item Database',
 		'databases/monsters/'=>'Monster Database',
-		'map'                =>'World Map',
+		'map/runescape'                =>'World Map',
 		'calculators'        =>'Calculators',
 		'play'               =>'Play Runescape',
 		'calculators/combat' =>'Combat Calculator'
@@ -38,13 +38,13 @@ if(!Auth::check())
 else
 	$navLogged=[
 		Auth::user()->display_name=>[
-			'#'=>'My Profile',
-			'#'=>'My Content',
-			'#'=>'my Settings',
-			'#'=>'Manage Friends',
-			'#'=>'Personal Messenger',
-			'#'=>'Content I Follow',
-			'#'=>'Manage Ignore Prefs'
+			'#!1'=>'My Profile',
+			'#!2'=>'My Content',
+			'#!3'=>'my Settings',
+			'#!4'=>'Manage Friends',
+			'#!5'=>'Personal Messenger',
+			'#!6'=>'Content I Follow',
+			'#!7'=>'Manage Ignore Prefs'
 		],
 		'logout'=>'Logout'
 	];
@@ -81,6 +81,13 @@ $current=$nav;
 @if(!empty($css))
 		{{HTML::style('css/'.$css.'.css')}}
 @endif
+		{{HTML::script('js/jquery.js')}}
+		{{HTML::script('js/jquery-ui.js')}}
+		{{HTML::script('js/bootstrap.js')}}
+@if(!empty($js))
+		{{HTML::script('js/'.$js.'.js')}}
+@endif
+		{{HTML::script('js/main.js')}}
 	</head>
 	<body>
 		<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' role='navigation'>
@@ -101,55 +108,47 @@ $current=$nav;
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 					<ul class='nav navbar-nav'>
 @foreach($navs as $url=>$name)
-@if(is_array($name))
-						<li class='dropdown'>
+	@if(is_array($name))
+						<li class='dropdown{{$url==$current?" active":""}}'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
 								{{$url}} <span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
-@foreach($name as $url2=>$name2)
+		@foreach($name as $url2=>$name2)
 								<li>
 									{{HTML::link(Utilities::URL($url2),$name2)}}
 								</li>
-@endforeach
+		@endforeach
 							</ul>
 						</li>
-@else
+	@else
 						<li{{$name==$current?" class='active'":""}}>
 							{{HTML::link(Utilities::URL($url),$name)}}
 						</li>
-@endif
+	@endif
 @endforeach
 					</ul>
 					<ul class='nav navbar-nav navbar-right'>
-@if(Auth::check())
 @foreach($navLogged as $url=>$name)
-@if(is_array($name))
-						<li class='dropdown'>
+	@if(is_array($name))
+						<li class='dropdown{{$url==$current?" active":""}}'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
 								{{$url}} <span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
-@foreach($name as $url2=>$name2)
+		@foreach($name as $url2=>$name2)
 								<li>
 									{{HTML::link(Utilities::URL($url2),$name2)}}
 								</li>
-@endforeach
+		@endforeach
 							</ul>
 						</li>
-@else
-						<li>
+	@else
+						<li{{$name==$current?" class='active'":""}}>
 							{{HTML::link(Utilities::URL($url),$name)}}
 						</li>
-@endif
+	@endif
 @endforeach
-@else
-@foreach($navLogged as $url=>$name)
-						<li>
-							{{HTML::link(Utilities::URL($url),$name)}}
-						</li>
-@endforeach
-@endif
 					</ul>
 				</div>
 			</div>
@@ -162,17 +161,17 @@ $current=$nav;
 						Home
 					</a>
 				</li>
-@foreach($bc as $url=>$name)
-@if($url=="#")
+	@foreach($bc as $url=>$name)
+		@if($url=="#")
 				<li class='active'>
 					{{$name}}
 				</li>
-@else
+		@else
 				<li>
 					{{HTML::link($url,$name)}}
 				</li>
-@endif
-@endforeach
+		@endif
+	@endforeach
 			</ol>
 		</div>
 @endif
@@ -227,10 +226,5 @@ $current=$nav;
 			//Google Analytics
 			{{$mobile}}
 		</script>
-		{{HTML::script('js/jquery.js')}}
-		{{HTML::script('js/bootstrap.js')}}
-@if(!empty($js))
-		{{HTML::script('js/'.$js.'.js')}}
-@endif
 	</body>
 </html>

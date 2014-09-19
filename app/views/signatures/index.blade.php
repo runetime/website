@@ -1,9 +1,9 @@
 			<div class='wrapper'>
 				{{Form::open(['class'=>'form-horizontal','role'=>'form'])}} 
 					<div class='form-group'>
-						{{Form::label('username','Username',['class'=>'col-lg-2 control-label'])}} 
+						{{Form::label('username','Runescape Username',['class'=>'col-lg-2 control-label'])}} 
 						<div class='col-lg-10'>
-							{{Form::text('username','Runescape Name',['class'=>'form-control','required'])}} 
+							{{Form::text('username','',['class'=>'form-control','required','placeholder'=>'Runescape Name'])}} 
 						</div>
 					</div>
 					<div class='form-group'>

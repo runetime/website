@@ -57,13 +57,24 @@ Route::group(['prefix'=>'forums'],function(){
 });
 
 /**
+ * Get
+ */
+Route::group(['prefix'=>'get'],function(){
+	Route::group(['prefix'=>'signup'],function(){
+		Route::post('email','GetSignupController@postEmail');
+		Route::post('username','GetSignupController@postUsername');
+	});
+});
+
+/**
  * Guides
  */
 Route::group(['prefix'=>'guides'],function(){
 	Route::get('/','GuideController@getIndex');
 	Route::group(['prefix'=>'{type}'],function(){
-		Route::get('/','GuideController@getViewGuides');
-		Route::get('{slug}','GuideController@getViewGuide');
+		Route::get('/','GuideController@getType');
+		Route::get('difficulty={searchDifficulty}/length={searchLength}/membership={searchMembership}','GuideController@getType');
+		Route::get('{id}-{name}','GuideController@getViewGuide');
 		Route::get('search/{searchSlug}','GuideController@getSearch');
 	});
 });
@@ -84,7 +95,8 @@ Route::group(['prefix'=>'livestream'],function(){
  * Login
  */
 Route::group(['prefix'=>'login'],function(){
-	Route::get('/','LoginController@getIndex');
+	Route::get('/','LoginController@getForm');
+	Route::post('/','LoginController@postForm');
 });
 
 /**
@@ -99,6 +111,7 @@ Route::group(['prefix'=>'map'],function(){
 	Route::get('/','MapController@getIndex');
 	Route::get('members','MapController@getMembers');
 	Route::group(['prefix'=>'runescape'],function(){
+		Route::get('/','MapController@getRunescape');
 		Route::get('3','MapController@getRS3');
 		Route::get('old-school','MapController@getOS');
 	});

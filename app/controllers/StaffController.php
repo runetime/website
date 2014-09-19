@@ -14,19 +14,15 @@ class StaffController extends BaseController{
 		$this->view('staff.index');
 	}
 	public function getList(){
-		$admins=(array)$this->roles->getUsersById(12);
-		$communityLeader=[];
-		$communityLeader[0]=$this->roles->getUsersById(13);
-		$communityMembers=(array)$this->roles->getUsersById(14);
-		$communityTeam=array_merge($communityLeader,$communityMembers);
-		$contentMembers=(array)$this->roles->getUsersById(15);
-		$webDevelopers=(array)$this->roles->getUsersById(16);
-		$contentTeam=array_merge($contentMembers,$webDevelopers);
-		$radioLeader[0]=$this->roles->getUsersById(17);
-		$radioMembers=(array)$this->roles->getUsersById(18);
-		$radioTeam=array_merge($radioLeader,$radioMembers);
+		$admins=(array)$this->roles->getUsersById(1);
+		$radio=$this->roles->getUsersById(2,3);
+		$media=$this->roles->getUsersById(4,5);
+		$webDev=$this->roles->getUsersById(6,7);
+		$content=$this->roles->getUsersById(8,9);
+		$community=$this->roles->getUsersById(10,11);
+		$events=$this->roles->getUsersById(12,13);
 		$this->nav('RuneTime');
 		$this->title('Staff Team');
-		$this->view('staff.list',compact('admins','communityTeam','contentTeam','radioTeam'));
+		$this->view('staff.list',compact('admins','radio','media','webDev','content','content','community','events'));
 	}
 }

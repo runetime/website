@@ -6,13 +6,16 @@
 				<h3>
 					Community Team
 				</h3>
-@include('staff.list.table',['staff'=>$communityTeam])
+@include('staff.list.table',['staff'=>$community])
+@include('staff.list.table',['staff'=>$events])
 				<h3>
 					Content Team
 				</h3>
-@include('staff.list.table',['staff'=>$contentTeam])
+@include('staff.list.table',['staff'=>$webDev])
+@include('staff.list.table',['staff'=>$content])
 				<h3>
-					Radio Team
+					Media Team
 				</h3>
-@include('staff.list.table',['staff'=>$radioTeam])
+@include('staff.list.table',['staff'=>$radio])
+@include('staff.list.table',['staff'=>$media])
 			</div>

@@ -16,7 +16,7 @@ class User extends Entity implements UserInterface,RemindableInterface{
 	];
 	private $rolesCache;
 	public function roles(){
-		return $this->belongsToMany('Runis\Accounts\Role','user_roles');
+		return $this->belongsToMany('Runis\Accounts\Role');
 	}
 	public function getRoles(){
 		if(!isset($this->rolesCache)){
@@ -39,6 +39,10 @@ class User extends Entity implements UserInterface,RemindableInterface{
 			}
 		}
 		return true;
+	}
+	public function importantRole(){
+		return $this->getRoles();
+//		return array_rand((array)$this->getRoles())[0];
 	}
 	private function roleCollectionHasRole($allowedRole){
 		$roles=$this->getRoles();

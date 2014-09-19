@@ -38,4 +38,9 @@ class UserRepository extends EloquentRepository{
 			where('display_name','=',$displayName)->
 			first();
 	}
+	public function getByEmail($email){
+		return $this->model->
+			where('email','=',$email)->
+			first();
+	}
 }

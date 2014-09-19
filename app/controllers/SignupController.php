@@ -8,10 +8,12 @@ class SignupController extends BaseController{
 	}
 	public function getForm(){
 		$this->js('signup');
+		$this->nav('Sign Up');
 		$this->title('Sign Up');
 		$this->view('signup.form');
 	}
 	public function postForm(){
+		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
 		if(Input::get('username')&&Input::get('email')&&Input::get('password')&&Input::get('password2')){
 			if(Input::get('password')==Input::get('password2')){

@@ -1,4 +1,8 @@
 <?php
+use Runis\Accounts\Role;
+use Runis\Accounts\RoleRepository;
+use Runis\Accounts\User;
+use Runis\Accounts\UserRepository;
 class Utilities{
 	/**
 	 * Outputs an encoded and parsed URL
@@ -11,15 +15,11 @@ class Utilities{
 		return $str.$url;
 	}
 	public static function linkName($userId){
-		$user=DB::table('users')->
-			select('display_name','role')->
-			where('id',$userId)->
-			first();
-		$role=DB::table('roles')->
-			select('class')->
-			where('id',$user->role)->
-			first();
-		return "<a href='".Utilities::URL('forum/members/'.$userId)."' title='".$user->display_name."&#39;s profile'>".$user->display_name."</a>";
+		$roles=new RoleRepository(new Role);
+		$users=new UserRepository(new User);
+		$user=$users->getById($userId);
+		$role=$user->importantRole();
+		return "<a href='".Utilities::URL('forum/members/'.$userId)."' class='user-".$role[0]->class_name."' title'='".$user->display_name."&#39;s profile'>".$user->display_name."</a>";
 	}
 	/**
 	 * Returns a true or false boolean of whether or not the user agent is a mobile
@@ -36,5 +36,21 @@ class Utilities{
 		$output=curl_exec($ch);
 		curl_close($ch);
 		return $output;
+	}
+	public static function slug(){
+		$args=func_get_args();
+		$slug="";
+		foreach($args as $x=>$arg){
+			$slug.=strtolower(str_replace(" ","-",$arg));
+			if($x<count($arg))
+				$slug.="-";
+		}
+		return $slug;
+	}
+	public static function memberPhoto($userId){
+		if(file_exists('./img/forum/photos/'.$userId.'.png'))
+			return 'img/forum/photos/'.$userId.'.png';
+		else
+			return 'img/forum/photos/no_photo.png';
 	}
 }

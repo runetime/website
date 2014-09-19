@@ -1,4 +1,4 @@
-@if($staff!==array_filter($staff))
+@if(!empty($staff))
 				<table class='table'>
 					<thead>
 						<tr>
@@ -17,11 +17,9 @@
 						</tr>
 					</thead>
 					<tbody>
-@foreach($staff as $member)
-@if(!empty($member))
-@include('staff.list.row',['staff'=>$member])
-@endif
-@endforeach
+	@foreach($staff as $member)
+		@include('staff.list.row',['member'=>json_decode($member)])
+	@endforeach
 					</tbody>
 				</table>
 @endif

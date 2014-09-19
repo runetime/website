@@ -1,14 +1,14 @@
 						<tr>
 							<td>
-								{{HTML::image(Utilities::URL('img/forum/photos/'.$staff->id.'.png'),'Photo',['class'=>'img-responsive photo-sm'])}} 
+								{{HTML::image(Utilities::URL(Utilities::memberPhoto($member->id)),'Photo',['class'=>'img-responsive photo-sm'])}} 
 							</td>
 							<td>
-								{{$staff->display_name}} 
+								{{$member->display_name}} 
 							</td>
 							<td>
-								{{$staff->title}} 
+								{{$member->title}} 
 							</td>
 							<td>
-								{{Time::short($staff->created_at)}} 
+								{{Time::short($member->created_at)}} 
 							</td>
 						</tr>
