@@ -3,3 +3,16 @@
 	height:3em;
 	width:3em;
 }
+.image-heading{
+	height:200px;
+	h3{
+		color:rgb(0,0,0);
+		font-size:3em;
+		position:relative;
+		text:{
+			align:center;
+			shadow:-1px 0 white,0 1px white,1px 0 white,0 -1px white;
+		}
+		margin-top:-100px;
+	}
+}

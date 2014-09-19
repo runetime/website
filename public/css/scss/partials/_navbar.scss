@@ -1,7 +1,7 @@
 .navbar{
 	$border:#2991B8;
 	color:$textColor !important;
-	li.active a{
+	li.active>a{
 		border-bottom:1px solid #33B5E5;
 	}
 	.navbar-brand{
