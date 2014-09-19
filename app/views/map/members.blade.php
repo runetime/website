@@ -1,3 +1,3 @@
 			<div class='wrapper'>
-				Map
+				{{--TBD, needs IP.B integ--}}
 			</div>
