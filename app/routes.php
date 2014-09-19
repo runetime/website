@@ -95,14 +95,14 @@ Route::group(['prefix'=>'livestream'],function(){
  * Login
  */
 Route::group(['prefix'=>'login'],function(){
-	Route::get('/','LoginController@getForm');
-	Route::post('/','LoginController@postForm');
+	Route::get('/','AuthController@getLoginForm');
+	Route::post('/','AuthController@postLoginForm');
 });
 
 /**
  * Logout
  */
-Route::get('logout','LogoutController@getLogout');
+Route::get('logout','AuthController@getLogout');
 
 /**
  * Map
@@ -167,8 +167,8 @@ Route::group(['prefix'=>'signatures'],function(){
  * Sign Up
  */
 Route::group(['prefix'=>'signup'],function(){
-	Route::get('/','SignupController@getForm');
-	Route::post('/','SignupController@postForm');
+	Route::get('/','AuthController@getSignupForm');
+	Route::post('/','AuthController@postSignupForm');
 });
 
 /**

@@ -1,18 +1,29 @@
 <?php
 use Runis\Accounts\User;
 use Runis\Accounts\UserRepository;
-class SignupController extends BaseController{
+class AuthController extends BaseController{
 	private $users;
 	public function __construct(UserRepository $users){
 		$this->users=$users;
 	}
-	public function getForm(){
+	public function getLoginForm(){
+		$this->nav('Login');
+		$this->title('Login');
+		$this->view('login.form');
+	}
+	public function postLoginForm(){
+		if(Input::get('email')&&Input::get('password'))
+			if(Auth::attempt(['email'=>Input::get('email'),'password'=>Input::get('password')],true))
+				return Redirect::action('HomeController@getIndex');
+		return Redirect::action('LoginController@getForm');
+	}
+	public function getSignupForm(){
 		$this->js('signup');
 		$this->nav('Sign Up');
 		$this->title('Sign Up');
 		$this->view('signup.form');
 	}
-	public function postForm(){
+	public function postSignupForm(){
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
 		if(Input::get('username')&&Input::get('email')&&Input::get('password')&&Input::get('password2')){
@@ -40,11 +51,8 @@ class SignupController extends BaseController{
 			$this->view('errors.signup.input');
 		}
 	}
-	public function userValidationError($errors){
-		return var_dump($errors);
-		return $this->redirectBack(['errors'=>$errors]);
-	}
-	public function userCreated($message){
-		return $this->redirectAction('AwardController@getIndex');
+	public function getLogout(){
+		Auth::logout();
+		return $this->redirectAction('HomeController@getIndex');
 	}
 }
