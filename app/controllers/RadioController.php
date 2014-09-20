@@ -6,10 +6,11 @@ class RadioController extends BaseController{
 			'artist'=>'Artist',
 			'name'=>'Name'
 		];
+		$isDJ=Auth::user()->hasRole('Radio DJ');
 		$this->js('radio');
 		$this->nav('Radio');
 		$this->title='RuneTime Radio';
-		$this->view('radio.index',compact('dj','song'));
+		$this->view('radio.index',compact('dj','song','isDJ'));
 	}
 	public function getHistory(){
 		return View::make('radio.request.history');

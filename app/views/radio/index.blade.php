@@ -73,6 +73,21 @@
 									DJ Timetable
 								</a>
 							</p>
+@if($isDJ)
+							<h3>
+								DJ Controls
+							</h3>
+							<p>
+								<a id='radio-dj-requests' title='View Requests'>
+									View Requests
+								</a>
+							</p>
+							<p>
+								<a id='radio-dj-requests' title='Edit Timetable'>
+									Edit Timetable
+								</a>
+							</p>
+@endif
 						</div>
 						<div id='shoutbox-holder-radio' class='col-xs-12'>
 						</div>

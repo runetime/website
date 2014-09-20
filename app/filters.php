@@ -54,6 +54,11 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('auth.staff',function(){
+	if(!Auth::user()->isStaff())
+		return 'a';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

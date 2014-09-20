@@ -129,7 +129,10 @@ Route::group(['prefix'=>'media'],function(){
  */
 Route::group(['prefix'=>'news'],function(){
 	Route::get('/','NewsController@getIndex');
-	Route::get('{slug}','NewsController@getView');
+	Route::group(['before'=>'auth.staff','prefix'=>'create'],function(){
+		Route::get('/','NewsController@getCreate');
+	});
+	Route::get('{id}-{slug}','NewsController@getView');
 	Route::get('search/{searchSlug}','NewsController@getSearch');
 });
 

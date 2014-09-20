@@ -40,6 +40,12 @@ class User extends Entity implements UserInterface,RemindableInterface{
 		}
 		return true;
 	}
+	public function hasOneOfRoles(){
+		foreach(func_get_args() as $role)
+			if(in_array($role,array_fetch($this->roles->toArray(),'id')))
+				return true;
+		return false;
+	}
 	public function importantRole(){
 		return $this->getRoles();
 //		return array_rand((array)$this->getRoles())[0];
@@ -63,6 +69,9 @@ class User extends Entity implements UserInterface,RemindableInterface{
 		if($role)
 			$assigned_roles[]=$role->id;
 		$this->roles()->attach($assigned_roles);
+	}
+	public function isStaff(){
+		return $this->hasOneOfRoles(1,2,4,6,8,10,12);
 	}
 	/**
 	 * UserInterface
