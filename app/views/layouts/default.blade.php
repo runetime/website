@@ -162,7 +162,7 @@ $current=$nav;
 					</a>
 				</li>
 	@foreach($bc as $url=>$name)
-		@if($url=="#")
+		@if(String::startsWith('#',$url))
 				<li class='active'>
 					{{$name}}
 				</li>

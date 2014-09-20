@@ -7,6 +7,7 @@ class AwardController extends BaseController{
 	}
 	public function getIndex(){
 		$awards=$this->awards->getAllAwards();
+		$this->nav('RuneTime');
 		$this->title('Awards');
 		$this->view('awards.index',compact('awards'));
 	}
@@ -14,6 +15,7 @@ class AwardController extends BaseController{
 		$award=$this->awards->getBySlug($slug);
 		$awardees=$this->awards->getAwardees($award->id);
 		$this->bc(['awards'=>'Awards']);
+		$this->nav('RuneTime');
 		$this->title($award->name." Award");
 		$this->view('awards.view',compact('award','awardees'));
 	}

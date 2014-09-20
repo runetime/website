@@ -1,12 +1,15 @@
 <?php
 class SignatureController extends BaseController{
 	public function getIndex(){
+		$this->nav('RuneTime');
 		$this->title('Signature Generator');
 		$this->view('signatures.index');
 	}
 	public function postUsername(){
 		$username=Input::get('username');
-		$this->title('Signature Generator - Type');
+		$this->bc(['signatures'=>'Signature Generator']);
+		$this->nav('RuneTime');
+		$this->title('Type of Signature');
 		$this->view('signatures.type',compact('username'));
 	}
 	public function getStyle($username,$type){
@@ -16,12 +19,16 @@ class SignatureController extends BaseController{
 		}
 		unset($imgs[0]);
 		unset($imgs[1]);
-		$this->title('Signature Generator - Style');
+		$this->bc(['signatures'=>'Signature Generator','#1'=>$username]);
+		$this->nav('RuneTime');
+		$this->title('Style of Signature');
 		$this->view('signatures.style',compact('username','type','imgs'));
 	}
 	public function getFinal($username,$type,$style){
 		$imgSrc="/signatures/username=".$username."/type=".$type."/style=".$style."/display";
-		$this->title('Signature Generator - Done');
+		$this->bc(['signatures'=>'Signature Generator','#1'=>$username,'signatures/username='.$username.'/type='.$type=>ucwords($type)]);
+		$this->nav('RuneTime');
+		$this->title('Finished Signature');
 		$this->view('signatures.final',compact('username','type','style','imgSrc'));
 	}
 	public function getDisplay($username,$type,$style){

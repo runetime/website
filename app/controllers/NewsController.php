@@ -7,9 +7,12 @@ class NewsController extends BaseController{
 	}
 	public function getIndex(){
 		$news=$this->news->getRecentNews(5);
-		$canAdd=Auth::user()->hasOneOfRoles(1,2,4,6,8,10,12);
-		$this->title='News';
-		$this->view('news.index',compact('news'));
+		$canAdd=false;
+		if(Auth::check())
+			$canAdd=Auth::user()->hasOneOfRoles(1,2,4,6,8,10,12);
+		$this->nav('RuneTime');
+		$this->title('News');
+		$this->view('news.index',compact('news','canAdd'));
 	}
 	public function getView(){
 		$news=$this->news->getById(1);
@@ -23,5 +26,16 @@ class NewsController extends BaseController{
 		$this->nav('RuneTime');
 		$this->title('Create Newspiece');
 		$this->view('news.create.form');
+	}
+	public function postCreate(){
+		if(Input::get('name')&&Input::get('image')&&Input::get('contents')){
+			$news=new News;
+			$news->author_id=Auth::user()->id;
+			$news->title=Input::get('name');
+			$news->contents=Input::get('contents');
+			$news->status=1;
+			$news->tags=json_encode(Input::get('tags'));
+			$news->comments=0;
+		}
 	}
 }

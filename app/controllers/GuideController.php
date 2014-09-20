@@ -25,8 +25,8 @@ class GuideController extends BaseController{
 		$guide->name='All Fired Up';
 		$guide->author_id=20;
 		$guide->editors=json_encode([21]);
-		$guide->difficulty=11;
-		$guide->length=15;
+		$guide->difficulty=7;
+		$guide->length=2;
 		$guide->qp=1;
 		$guide->membership=1;
 		$guide->completed=1;

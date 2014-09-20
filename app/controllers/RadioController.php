@@ -6,7 +6,9 @@ class RadioController extends BaseController{
 			'artist'=>'Artist',
 			'name'=>'Name'
 		];
-		$isDJ=Auth::user()->hasRole('Radio DJ');
+		$isDJ=false;
+		if(Auth::check())
+			$isDJ=Auth::user()->hasRole('Radio DJ');
 		$this->js('radio');
 		$this->nav('Radio');
 		$this->title='RuneTime Radio';

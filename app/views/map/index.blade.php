@@ -12,14 +12,14 @@
 					</div>
 					<div class='col-xs-12'>
 						<br />
-						<a href='/map/members' title='RuneTime Members Map'>
-							<div class='image-heading'>
+						<div class='image-heading'>
+							<a href='/map/members' title='RuneTime Members Map'>
 								<img src='/img/map/members.png' alt='RuneTime Members Map' class='center-block img-responsive img-rounded' />
 								<h3>
 									RuneTime Map
 								</h3>
-							</div>
-						</a>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

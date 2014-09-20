@@ -2,6 +2,7 @@
 				<h1>
 					News
 				</h1>
+@if($canAdd)
 				<ul class='list-inline'>
 					<li>
 						<a href='/news/create' title='Create News Piece'>
@@ -9,6 +10,7 @@
 						</a>
 					</li>
 				</ul>
+@endif
 @foreach($news as $newsPiece)
 				<div class='news'>
 					<h3>
