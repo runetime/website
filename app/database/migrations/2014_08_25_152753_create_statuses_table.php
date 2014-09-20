@@ -8,13 +8,15 @@ class CreateStatusesTable extends Migration{
 	 * @return void
 	 */
 	public function up(){
-		Schema::create('statuses',function(Blueprint $table){
-			$table->integer('id');
-			$table->primary('id');
-			$table->integer('author_id');
-			$table->string('contents');
-			$table->string('comment_amount');
-			$table->string('published_at');
+		Schema::create('statuses',function(Blueprint $t){
+			$t->integer('id');
+			$t->primary('id');
+			$t->integer('author_id');
+			$t->string('contents');
+			$t->string('comment_amount');
+			$t->integer('status');
+			$t->timestamps();
+			$t->softDeletes();
 		});
 	}
 	/**
@@ -23,7 +25,6 @@ class CreateStatusesTable extends Migration{
 	 * @return void
 	 */
 	public function down(){
-		Schema::table('statuses',function(Blueprint $table){
-		});
+		Schema::drop('statuses');
 	}
 }

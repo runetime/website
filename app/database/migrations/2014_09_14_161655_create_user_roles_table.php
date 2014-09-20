@@ -12,10 +12,10 @@ class CreateUserRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_roles', function(Blueprint $table)
+		Schema::create('user_roles', function(Blueprint $t)
 		{
-			$table->integer('user_id');
-			$table->integer('role_id');
+			$t->integer('user_id');
+			$t->integer('role_id');
 		});
 	}
 

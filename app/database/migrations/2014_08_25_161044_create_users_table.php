@@ -8,22 +8,24 @@ class CreateUsersTable extends Migration{
 	 * @return void
 	 */
 	public function up(){
-		Schema::create('users',function(Blueprint $table){
-			$table->increments('id');
-			$table->string('username');
-			$table->string('display_name');
-			$table->string('email');
-			$table->string('title');
-			$table->integer('referred_by');
-			$table->string('about');
-			$table->string('signature');
-			$table->integer('posts_active');
-			$table->integer('posts_total');
-			$table->integer('profile_views');
-			$table->integer('birthday');
-			$table->integer('gender');
-			$table->rememberToken();
-			$table->timestamps();
+		Schema::create('users',function(Blueprint $t){
+			$t->increments('id');
+			$t->string('display_name');
+			$t->string('email');
+			$t->string('password');
+			$t->string('title');
+			$t->integer('referred_by');
+			$t->string('about');
+			$t->string('signature');
+			$t->integer('posts_active');
+			$t->integer('posts_total');
+			$t->integer('profile_views');
+			$t->integer('birthday');
+			$t->integer('gender');
+			$t->mediumtext('awards');
+			$t->rememberToken();
+			$t->timestamps();
+			$t->softDeletes();
 		});
 	}
 	/**

@@ -12,27 +12,27 @@ class CreateQuestGuidesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('guides_quests', function(Blueprint $table)
+		Schema::create('guides_quests', function(Blueprint $t)
 		{
-			$table->increments('id');
-			$table->string('name');
-			$table->integer('author_id');
-			$table->string('editors');
-			$table->integer('difficulty');
-			$table->integer('length');
-			$table->integer('qp');
-			$table->boolean('membership');
-			$table->boolean('completed');
-			$table->string('description');
-			$table->mediumtext('quest_requirements');
-			$table->mediumtext('skill_requirements');
-			$table->mediumtext('items_required');
-			$table->mediumtext('items_recommended');
-			$table->mediumtext('rewards');
-			$table->mediumtext('starting_point');
-			$table->mediumtext('contents');
-			$table->timestamps();
-			$table->softDeletes();
+			$t->increments('id');
+			$t->string('name');
+			$t->integer('author_id');
+			$t->string('editors');
+			$t->integer('difficulty');
+			$t->integer('length');
+			$t->integer('qp');
+			$t->boolean('membership');
+			$t->boolean('completed');
+			$t->string('description');
+			$t->mediumtext('quest_requirements');
+			$t->mediumtext('skill_requirements');
+			$t->mediumtext('items_required');
+			$t->mediumtext('items_recommended');
+			$t->mediumtext('rewards');
+			$t->mediumtext('starting_point');
+			$t->mediumtext('contents');
+			$t->timestamps();
+			$t->softDeletes();
 		});
 	}
 

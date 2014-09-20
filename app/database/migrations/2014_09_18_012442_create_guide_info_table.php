@@ -12,13 +12,13 @@ class CreateGuideInfoTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('guide_info', function(Blueprint $table)
+		Schema::create('guide_info', function(Blueprint $t)
 		{
-			$table->increments('id');
-			$table->string('type');
-			$table->string('name');
-			$table->timestamps();
-			$table->softDeletes();
+			$t->increments('id');
+			$t->string('type');
+			$t->string('name');
+			$t->timestamps();
+			$t->softDeletes();
 		});
 	}
 

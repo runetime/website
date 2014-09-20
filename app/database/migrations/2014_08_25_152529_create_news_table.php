@@ -8,14 +8,15 @@ class CreateNewsTable extends Migration{
 	 * @return void
 	 */
 	public function up(){
-		Schema::create('news',function(Blueprint $table){
-			$table->increments('id');
-			$table->integer('author_id');
-			$table->string('title');
-			$table->string('contents');
-			$table->integer('status');
-			$table->string('tags');
-			$table->string('published_at');
+		Schema::create('news',function(Blueprint $t){
+			$t->increments('id');
+			$t->integer('author_id');
+			$t->string('title');
+			$t->string('contents');
+			$t->integer('status');
+			$t->string('comments');
+			$t->timestamps();
+			$t->softDeletes();
 		});
 	}
 	/**
@@ -24,7 +25,6 @@ class CreateNewsTable extends Migration{
 	 * @return void
 	 */
 	public function down(){
-		Schema::table('news', function(Blueprint $table){
-		});
+		Schema::drop('news');
 	}
 }

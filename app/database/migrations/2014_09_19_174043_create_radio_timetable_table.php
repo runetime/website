@@ -12,16 +12,16 @@ class CreateRadioTimetableTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('radio_timetable', function(Blueprint $table)
+		Schema::create('radio_timetable', function(Blueprint $t)
 		{
-			$table->increments('id');
-			$table->integer('year');
-			$table->integer('month');
-			$table->integer('day');
-			$table->integer('hour');
-			$table->integer('dj_id');
-			$table->timestamps();
-			$table->softDeletes();
+			$t->increments('id');
+			$t->integer('year');
+			$t->integer('month');
+			$t->integer('day');
+			$t->integer('hour');
+			$t->integer('dj_id');
+			$t->timestamps();
+			$t->softDeletes();
 		});
 	}
 

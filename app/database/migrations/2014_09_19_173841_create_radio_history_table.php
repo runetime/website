@@ -12,14 +12,14 @@ class CreateRadioHistoryTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('radio_history', function(Blueprint $table)
+		Schema::create('radio_history', function(Blueprint $t)
 		{
-			$table->increments('id');
-			$table->integer('user_id');
-			$table->string('artist');
-			$table->string('song');
-			$table->timestamps();
-			$table->softDeletes();
+			$t->increments('id');
+			$t->integer('user_id');
+			$t->string('artist');
+			$t->string('song');
+			$t->timestamps();
+			$t->softDeletes();
 		});
 	}
 

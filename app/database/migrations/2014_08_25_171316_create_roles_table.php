@@ -12,12 +12,12 @@ class CreateRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('roles', function(Blueprint $table)
+		Schema::create('roles', function(Blueprint $t)
 		{
-			$table->increments('id');
-			$table->string('name');
-			$table->string('name_trim');
-			$table->string('class_name');
+			$t->increments('id');
+			$t->string('name');
+			$t->string('name_trim');
+			$t->string('class_name');
 		});
 	}
 
