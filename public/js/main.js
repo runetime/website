@@ -45,7 +45,7 @@ function RuneTime() {
 		};
 	};
 	this.SignupForm = function SignupForm() {
-		this.username = 'username';
+		this.displayName = 'display_name';
 		this.email = 'email';
 		this.password = 'password';
 		this.password2 = 'password2';
@@ -59,13 +59,14 @@ function RuneTime() {
 				return false;
 			}
 			url = '/get/signup/' + field;
-			if (field === "username") {
-				available = $.parseJSON(RuneTime.Utilities.postAJAX(url, {username: val}));
+			if (field === "display_name") {
+				available = $.parseJSON(RuneTime.Utilities.postAJAX(url, {display_name: val}));
 			} else if (field === "email") {
 				available = $.parseJSON(RuneTime.Utilities.postAJAX(url, {email: val}));
 			}
 			console.log(available);
 			if (available.available === true) {
+				console.log('#signup-' + field);
 				$('#signup-' + field).
 					removeClass('has-error').
 					addClass('has-success').
@@ -147,16 +148,16 @@ function RuneTime() {
 			}
 		};
 		this.setup = function setup() {
-			var stoppedTypingUsername,
+			var stoppedTypingDisplayName,
 				stoppedTypingEmail,
 				stoppedTypingPassword,
 				timeout = 500;
-			$('#' + this.username).bind('input', function () {
-				if (stoppedTypingUsername) {
-					clearTimeout(stoppedTypingUsername);
+			$('#' + this.displayName).bind('input', function () {
+				if (stoppedTypingDisplayName) {
+					clearTimeout(stoppedTypingDisplayName);
 				}
-				stoppedTypingUsername = setTimeout(function () {
-					RuneTime.FormSignup.checkAvailability('username');
+				stoppedTypingDisplayName = setTimeout(function () {
+					RuneTime.FormSignup.checkAvailability('display_name');
 				}, timeout);
 			});
 			$('#' + this.email).bind('input', function () {

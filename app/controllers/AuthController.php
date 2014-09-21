@@ -9,7 +9,7 @@ class AuthController extends BaseController{
 	public function getLoginForm(){
 		$this->nav('Login');
 		$this->title('Login');
-		$this->view('login.form');
+		$this->view('auth.login');
 	}
 	public function postLoginForm(){
 		if(Input::get('email')&&Input::get('password'))
@@ -21,17 +21,16 @@ class AuthController extends BaseController{
 		$this->js('signup');
 		$this->nav('Sign Up');
 		$this->title('Sign Up');
-		$this->view('signup.form');
+		$this->view('auth.signup');
 	}
 	public function postSignupForm(){
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
-		if(Input::get('username')&&Input::get('email')&&Input::get('password')&&Input::get('password2')){
+		if(Input::get('display_name')&&Input::get('email')&&Input::get('password')&&Input::get('password2')){
 			if(Input::get('password')==Input::get('password2')){
-				if(!$this->users->getByUsername(Input::get('username'))&&!$this->users->getByDisplayName(Input::get('username'))){
+				if(!$this->users->getByDisplayName(Input::get('display_name'))){
 					$user=new User;
-					$user->username=Input::get('username');
-					$user->display_name=Input::get('username');
+					$user->display_name=Input::get('display_name');
 					$user->email=Input::get('email');
 					$user->password=Hash::make(Input::get('password'));
 					$user->save();

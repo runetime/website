@@ -11,9 +11,9 @@ class GetSignupController extends BaseController{
 			$available=false;
 		return json_encode(['available'=>$available]);
 	}
-	public function postUsername(){
+	public function postDisplayName(){
 		$available=true;
-		if($this->users->getByUsername(Input::get('username'))||$this->users->getByDisplayName(Input::get('username')))
+		if($this->users->getByDisplayName(Input::get('display_name'))||$this->users->getByDisplayName(Input::get('display_name')))
 			$available=false;
 		return json_encode(['available'=>$available]);
 	}

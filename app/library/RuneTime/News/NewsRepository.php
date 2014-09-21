@@ -8,7 +8,7 @@ class NewsRepository extends EloquentRepository{
 	public function getRecentNews($count=3){
 		return $this->model->
 			where('status','=',News::STATUS_PUBLISHED)->
-			orderBy('published_at','desc')->
+			orderBy('created_at','desc')->
 			take($count)->
 			get();
 	}

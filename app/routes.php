@@ -62,7 +62,7 @@ Route::group(['prefix'=>'forums'],function(){
 Route::group(['prefix'=>'get'],function(){
 	Route::group(['prefix'=>'signup'],function(){
 		Route::post('email','GetSignupController@postEmail');
-		Route::post('username','GetSignupController@postUsername');
+		Route::post('display_name','GetSignupController@postDisplayName');
 	});
 });
 
@@ -118,6 +118,14 @@ Route::group(['prefix'=>'map'],function(){
 });
 
 /**
+ * Members
+ */
+Route::group(['prefix'=>'members'],function(){
+	Route::get('/','MembersController@getPage');
+	Route::get('page={page}','MembersController@getPage');
+	Route::get('search/{slug}','MembersController@getSearch');
+});
+/**
  * Media
  */
 Route::group(['prefix'=>'media'],function(){
@@ -131,6 +139,7 @@ Route::group(['prefix'=>'news'],function(){
 	Route::get('/','NewsController@getIndex');
 	Route::group(['before'=>'auth.staff','prefix'=>'create'],function(){
 		Route::get('/','NewsController@getCreate');
+		Route::post('/','NewsController@postCreate');
 	});
 	Route::get('{id}-{slug}','NewsController@getView');
 	Route::get('search/{searchSlug}','NewsController@getSearch');

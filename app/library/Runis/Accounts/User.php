@@ -47,8 +47,8 @@ class User extends Entity implements UserInterface,RemindableInterface{
 		return false;
 	}
 	public function importantRole(){
-		return $this->getRoles();
-//		return array_rand((array)$this->getRoles())[0];
+		$roles=$this->getRoles();
+		return $roles[rand(0,count($roles)-1)];
 	}
 	private function roleCollectionHasRole($allowedRole){
 		$roles=$this->getRoles();

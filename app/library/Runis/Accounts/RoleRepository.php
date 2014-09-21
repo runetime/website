@@ -3,9 +3,10 @@ namespace Runis\Accounts;
 use Runis\Accounts\UserRepository;
 use Runis\Core\EloquentRepository;
 class RoleRepository extends EloquentRepository{
-	public function __construct(Role $model,UserRepository $users){
+	private $users;
+	public function __construct(Role $model){
 		$this->model=$model;
-		$this->users=$users;
+		$this->users=\App::make('Runis\Accounts\UserRepository');
 	}
 	public function getRoleList(){
 		return $this->model->

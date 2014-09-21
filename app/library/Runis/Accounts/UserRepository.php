@@ -6,6 +6,9 @@ class UserRepository extends EloquentRepository{
 	public function __construct(User $model){
 		$this->model=$model;
 	}
+	public function getTotal(){
+		return $this->model->count();
+	}
 	public function requireByName($name){
 		$model=$this->getByName($name);
 		if(!$model){
@@ -20,6 +23,12 @@ class UserRepository extends EloquentRepository{
 	public function getFirstX($count){
 		return $this->model->
 			take($count)->
+			get();
+	}
+	public function getX($from,$to){
+		return $this->model->
+			take($to)->
+			skip($from)->
 			get();
 	}
 	public function getByRole($id,$op='=',$order='desc'){
@@ -42,5 +51,11 @@ class UserRepository extends EloquentRepository{
 		return $this->model->
 			where('email','=',$email)->
 			first();
+	}
+	public function selectArray(array $selections){
+		$q=$this->model;
+		foreach($selections as $key=>$selection)
+			$q=$q->where($key,$selection['op'],$selection['val']);
+		return $q->get();
 	}
 }

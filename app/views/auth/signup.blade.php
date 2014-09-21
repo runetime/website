@@ -1,15 +1,15 @@
 			<div class='wrapper'>
 				<form class='form-horizontal' method='post' action='' role='form'>
-					<div id='signup-username' class='form-group has-feedback'>
-						<label class='col-lg-2 control-label' for='username'>
-							Username
+					<div id='signup-display_name' class='form-group has-feedback'>
+						<label class='col-lg-2 control-label' for='display_name'>
+							Display Name
 						</label>
 						<div class='col-lg-10'>
-							<input id='username' class='form-control' type='text' name='username' placeholder='Username' required='' />
+							<input id='display_name' class='form-control' type='text' name='display_name' placeholder='Display Name' required='' />
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 							<span class='help-block hidden text-danger'>
-								Either that username or display name is taken!
+								That display name is taken!
 							</span>
 						</div>
 					</div>

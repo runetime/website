@@ -8,7 +8,7 @@ class StatusRepository extends EloquentRepository{
 	public function getRecentStatuses($count=5){
 		return $this->model->
 			where('status','=',Status::STATUS_PUBLISHED)->
-			orderBy('published_at','desc')->
+			orderBy('created_at','desc')->
 			take($count)->
 			get();
 	}

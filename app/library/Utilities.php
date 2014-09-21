@@ -15,11 +15,24 @@ class Utilities{
 		return $str.$url;
 	}
 	public static function linkName($userId){
-		$roles=new RoleRepository(new Role);
 		$users=new UserRepository(new User);
 		$user=$users->getById($userId);
-		$role=$user->importantRole();
-		return "<a href='".Utilities::URL('forum/members/'.$userId)."' class='user-".$role[0]->class_name."' title'='".$user->display_name."&#39;s profile'>".$user->display_name."</a>";
+		if($user){
+			$role=$user->importantRole();
+			return "<a href='".Utilities::URL('forum/members/'.$userId)."' class='user-".$role->class_name."' title'='".$user->display_name."&#39;s profile'>".$user->display_name."</a>";
+		}
+		else{
+			Log::info('Utilities::linkName:: '.$userId.' does not exist.');
+			return "unknown";
+		}
+	}
+	public static function colorRole($roleId){
+		$roles=new RoleRepository(new Role);
+		$role=$roles->getById($roleId);
+		if($role)
+			return "<span class='members-".$role->class_name."' title='".$role->name."'>".$role->name."</a>";
+		else
+			return "unknown";
 	}
 	/**
 	 * Returns a true or false boolean of whether or not the user agent is a mobile
