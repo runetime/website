@@ -4,8 +4,9 @@
 /* jshint -W097 */
 function RuneTime() {
 	"use strict";
-	this.FormSignup = null;
 	this.Utilities = null;
+	this.ChatBox = null;
+	this.FormSignup = null;
 	this.Utilities = function Utilities() {
 		this.getAJAX = function getAJAX(path) {
 			return $.ajax({
@@ -24,8 +25,7 @@ function RuneTime() {
 			}).responseText;
 		};
 		this.timeAgo = function timeAgo(ts) {
-			var d = new Date(),
-				nowTs = Math.floor(d.getTime() / 1000),
+			var nowTs = Math.floor(Date.now() / 1000),
 				seconds = nowTs - ts;
 			if (seconds > 2 * 24 * 3600) {
 				return "a few days ago";
@@ -42,6 +42,65 @@ function RuneTime() {
 			if (seconds > 60) {
 				return Math.floor(seconds / 60) + " minutes ago";
 			}
+		};
+		this.currentTime = function currentTime() {
+			return Math.round(Date.now() / 1000);
+		};
+	};
+	this.ChatBox = function ChatBox() {
+		this.element = '#chatbox';
+		this.message = '#chatbox-message';
+		this.messages = '#chatbox-messages';
+		this.URL = {};
+		this.lastActivity = 0;
+		this.lastRefresh = 0;
+		this.getStart = function getStart() {
+			var messages = RuneTime.Utilities.getAJAX('chat/start');
+			messages = $.parseJSON(messages);
+			$.each(messages, function (index, value) {
+				RuneTime.ChatBox.addMessage(value);
+			});
+		};
+		this.addMessage = function addMessage(message) {
+			var html = "",
+				timeAgo = RuneTime.Utilities.currentTime() - message.created_at;
+			html += "<div class='msg'>";
+			html += "<time class='pull-right'>";
+			html += RuneTime.Utilities.timeAgo(timeAgo);
+			html += "</time>";
+			html += "<p>";
+			html += "<a>" + message.author_name + "</a>: " + message.contents_parsed;
+			html += "</p>";
+			html += "</div>";
+			$(this.messages).prepend(html);
+		};
+		this.submitMessage = function submitMessage() {
+			var contents = $(this.message).val(),
+				message,
+				response;
+			message = {contents: contents};
+			response = RuneTime.Utilities.postAJAX('/chat/post/message', message);
+			response = $.parseJSON(response);
+			if (response.sent === true) {
+				$(this.message).val('');
+			}
+		};
+		this.setup = function setup() {
+			this.URL.submitMessage = '/chat/post/message';
+			var contents = "";
+			contents += "<div id='chatbox-messages'></div>";
+			contents += "<div id='chatbox-actions'>";
+			contents += "<a id='chatbox-bbcode'>BBCode</a>";
+			contents += "<a id='chatbox-prefs'>My Prefs</a>";
+			contents += "</div>";
+			contents += "<input type='text' id='chatbox-message' />";
+			$(this.element).html(contents);
+			this.getStart();
+			$(this.message).keypress(function (e) {
+				if (e.which === 13) {
+					RuneTime.ChatBox.submitMessage();
+				}
+			});
 		};
 	};
 	this.SignupForm = function SignupForm() {
@@ -404,7 +463,7 @@ function RuneTime() {
 			var userRequests;
 			userRequests = $.parseJSON(RuneTime.Utilities.getAJAX('radio/requests/current'));
 			setTimeout(function () {
-				Radio.updateRequests();
+				RuneTime.Radio.updateRequests();
 			}, 30000);
 			$('#requests-user-current').html('');
 			$.each(userRequests, function (index, value) {

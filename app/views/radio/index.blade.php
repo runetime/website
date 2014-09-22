@@ -89,14 +89,14 @@
 							</p>
 @endif
 						</div>
-						<div id='shoutbox-holder-radio' class='col-xs-12'>
+						<div id='chatbox-holder-radio' class='col-xs-12'>
 						</div>
 					</div>
-					<div id='shoutbox-holder' class='col-xs-12 holo-box-dark'>
-						<div id='shoutbox'>
-							There's a bunch of
-							<br />
-							messages here
+					<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
+						<div id='chatbox'>
+							<noscript>
+								Sorry, but you have JavaScript disabled. ):
+							</noscript>
 						</div>
 					</div>
 				</div>

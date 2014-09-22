@@ -1,0 +1,36 @@
+#chatbox-holder{
+	padding:0em !important;
+}
+#chatbox{
+	width:100%;
+	#chatbox-messages{
+		height:20em;
+		width:100%;
+		.msg{
+			$padding:.5em;
+			padding:{
+				left:$padding;
+				right:$padding;
+			}
+			width:100%;
+			time{
+				color:#AA66CC;
+			}
+			p{
+				margin-bottom:0em;
+			}
+			&:nth-child(even){
+				background:#121212;
+			}
+			&:nth-child(odd){
+				background:#1b1b1b;
+			}
+		}
+	}
+	#chatbox-actions{
+		width:100%;
+	}
+	#chatbox-message{
+		width:100%;
+	}
+}

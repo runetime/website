@@ -1,11 +1,14 @@
-@import "vendor/bootstrap/variables";
-@import "variables";
-@import "modules/all";
-@import "partials/all";
 /*
 -----------
 - Vendors -
 -----------
 */
+@import "vendor/bootstrap/variables";
 @import "vendor/bootstrap";
 @import "vendor/font-awesome";
+
+
+
+@import "variables";
+@import "modules/all";
+@import "partials/all";
