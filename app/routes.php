@@ -34,6 +34,17 @@ Route::group(['prefix'=>'calendar'],function(){
 });
 
 /**
+ * Chat
+ */
+Route::group(['prefix'=>'chat'],function(){
+	Route::get('update/{since}','ChatController@getUpdate');
+	Route::get('start','ChatController@getStart');
+	Route::group(['before'=>'auth.logged','prefix'=>'post'],function(){
+		Route::post('message','ChatController@postMessage');
+		Route::post('status/change','ChatController@postStatusChange');
+	});
+});
+/**
  * Clan
  */
 Route::group(['prefix'=>'clan'],function(){
