@@ -1,15 +1,15 @@
 			<div class='wrapper'>
 				{{Form::open(['class'=>'form-horizontal','role'=>'form'])}} 
 					<div class='form-group'>
-						{{Form::label('username','Runescape Username',['class'=>'col-lg-2 control-label'])}} 
+						{{Form::label('username',Lang::get('signature.name.question1'),['class'=>'col-lg-2 control-label'])}} 
 						<div class='col-lg-10'>
-							{{Form::text('username','',['class'=>'form-control','required','placeholder'=>'Runescape Name'])}} 
+							{{Form::text('username','',['class'=>'form-control','required','placeholder'=>Lang::get('signature.name.question1')])}} 
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-lg-offset-2 col-lg-10'>
 							<button class='btn btn-primary' type='submit'>
-								Choose a Type
+								@lang('signature.name.continue')
 							</button>
 						</div>
 					</div>

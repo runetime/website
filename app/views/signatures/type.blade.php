@@ -1,5 +1,5 @@
 			<div class='wrapper'>
 				<a href='/signatures/username={{$username}}/type=stat'>
-					Stat Signatures
+					@lang('signature.type.stat')
 				</a>
 			</div>

@@ -9,7 +9,7 @@
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 							<span class='help-block hidden text-danger'>
-								That display name is taken!
+								@lang('signup.form.error.display_name') 
 							</span>
 						</div>
 					</div>
@@ -22,7 +22,7 @@
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 							<span class='help-block hidden text-danger'>
-								That Email address has already been used!
+								@lang('signup.form.error.email') 
 							</span>
 						</div>
 					</div>
@@ -45,7 +45,7 @@
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 							<span class='help-block hidden text-danger'>
-								Your passwords must match.
+								@lang('signup.form.error.password') 
 							</span>
 						</div>
 					</div>
@@ -56,17 +56,17 @@
 						<div class='col-lg-10'>
 							<input id='security' type='range' min='0' max='100' step='.1' value='50' />
 							<p class='help-block'>
-								Move the slider all the way to the left.
+								@lang('signup.form.security')
 							</p>
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-lg-offset-2 col-lg-10'>
 							<button class='btn btn-primary' type='submit' disabled>
-								Create Account
+								@lang('signup.form.token')
 							</button>
 							<p class='text-danger'>
-								Please fill out the Security Check.
+								@lang('signup.form.error.submit')
 							</p>
 						</div>
 					</div>

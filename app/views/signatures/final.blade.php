@@ -1,12 +1,12 @@
 			<div class='wrapper'>
 				<p class='text-success'>
-					Your signature has been made, {{$username}}.
+					@lang('signature.final.made',['name'=>$username])
 				</p>
 				<img src='{{$imgSrc}}' alt='RuneTime Signature for {{$username}}' />
 				<br />
 				<details>
 					<summary>
-						Direct Image Link:
+						@lang('signature.final.link.direct')
 					</summary>
 					<p>
 						<a href='{{$imgSrc}}'>

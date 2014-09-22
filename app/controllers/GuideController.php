@@ -23,8 +23,8 @@ class GuideController extends BaseController{
 		$guide=$this->quests->getById($id);
 		$guide=new stdClass;
 		$guide->name='All Fired Up';
-		$guide->author_id=20;
-		$guide->editors=json_encode([21]);
+		$guide->author_id=1;
+		$guide->editors=json_encode([2]);
 		$guide->difficulty=7;
 		$guide->length=2;
 		$guide->qp=1;
@@ -86,11 +86,17 @@ The king will ask you to help with the testing of the beacon network which has b
 		$guide->updated_at='2014-09-18 23:31:31';
 		$difficulty=$this->quests->getOptionById($guide->difficulty);
 		$length=$this->quests->getOptionById($guide->length);
+		$editList="";
+		foreach(json_decode($guide->editors) as $x=>$editor){
+			$editList.=Utilities::linkName($editor);
+			if($x<count(json_decode($guide->editors))-1)
+				$editList.=", ";
+		}
 		if($guide){
 			$this->bc(['guides'=>'Guides','guides/quests'=>'Quests']);
 			$this->nav('Runescape');
 			$this->title($guide->name);
-			$this->view('guides.quests.view',compact('guide','difficulty','length'));
+			$this->view('guides.quests.view',compact('guide','difficulty','length','editList'));
 		}
 		else{
 			return App::abort(404);

@@ -4,15 +4,15 @@
 				</h1>
 				<p>
 					<small>
-						Written by {{Utilities::linkName($guide->author_id)}} on {{$guide->created_at}} 
+						@lang('guides.written_by',['name'=>Utilities::linkName($guide->author_id),'date'=>$guide->created_at]) 
 					</small>
 					<br />
 					<small>
-						Last updated on {{Time::long($guide->updated_at)}} 
+						@lang('guides.last_updated',['date'=>Time::long($guide->updated_at)]) 
 					</small>
 					<br />
 					<small>
-						Edited by @foreach(json_decode($guide->editors) as $x=>$editor){{Utilities::linkName($editor)}}{{$x<count(json_decode($guide->editors))-1?", ":""}}@endforeach
+						@lang('guides.edited_by',['users'=>$editList]) 
 					</small>
 				</p>
 				<dl class='dl-horizontal'>

@@ -20,10 +20,10 @@ use RT\Awards\Award;
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<p>
-							Times Awarded: {{$award->given}} <a href='{{Utilities::URL('awards/'.Award::makeSlug($award->id,$award->name))}}' title='View Awardees'>View Awardees</a>
+							@lang('awards.times_awarded',['amount'=>$award->given]) <a href='{{Utilities::URL('awards/'.Award::makeSlug($award->id,$award->name))}}' title='View Awardees'>View Awardees</a>
 						</p>
 						<p>
-							Last Awarded: {{Time::long($award->last_awarded)}} 
+							@lang('awards.last_awarded',['time'=>Time::long($award->last_awarded)]) 
 						</p>
 					</div>
 				</div>

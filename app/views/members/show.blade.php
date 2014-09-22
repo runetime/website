@@ -21,7 +21,7 @@
 						<div class='pull-left'>
 							{{Utilities::linkName($member->id)}} 
 							<br />
-							Joined {{Time::long($member->created_at)}} 
+							@lang('members.joined',['date'=>Time::long($member->created_at)])
 							<br />
 							{{Utilities::colorRole($memberRoles[$member->id]->id)}} 
 						</div>
