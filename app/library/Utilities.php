@@ -34,13 +34,6 @@ class Utilities{
 		else
 			return "unknown";
 	}
-	/**
-	 * Returns a true or false boolean of whether or not the user agent is a mobile
-	 * @return boolean
-	 */
-	public static function mobile(){
-		return preg_match('/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i',$_SERVER['HTTP_USER_AGENT']);
-	}
 	public static function CURL($url){
 		$ch=curl_init();
 		curl_setopt($ch,CURLOPT_URL,$url);

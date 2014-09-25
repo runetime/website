@@ -1,4 +1,7 @@
 <?php
+#use Runis\Accounts\User;
+#use Runis\Accounts\UserRepository;
+#$users=new UserRepository(new User);
 $navs=[
 	''        =>'Home',
 	'radio'   =>'Radio',
@@ -10,26 +13,40 @@ $navs=[
 		'members'   =>'Members',
 		'staff/list'     =>'Staff List',
 		'about'     =>'About Us',
-		'tickets'   =>'Help'
+		'tickets'   =>'Help',
 	],
 	'Runescape'=>[
 		'guides/quests'      =>'Quest Guides',
 		'guides/locations'   =>'Location Guides',
 		'databases/items/'   =>'Item Database',
 		'databases/monsters/'=>'Monster Database',
-		'map/runescape'                =>'World Map',
+		'map/runescape'      =>'World Map',
 		'calculators'        =>'Calculators',
 		'play'               =>'Play Runescape',
-		'calculators/combat' =>'Combat Calculator'
+		'utility/name-check' =>'Name Checker',
+		'calculators/combat' =>'Combat Calculator',
 	],
 	'Social'=>[
 		'calendar'   =>'Event Calendar',
 		'livestream' =>'Livestream',
 		'media'      =>'Social Media',
 		'map/members'=>'Members Map',
-		'clan'       =>'Our Clan'
-	]
+		'clan'       =>'Our Clan',
+	],
 ];
+if(false){
+	$navs['Staff']=[
+		'staff'=>'Staff Center',
+		'staff/gallery','Gallery',
+		'tickets/manage'=>'Ticket System',
+		'staff/checkup'=>'Staff Checkup',
+	];
+#	if(Auth::user()->hasOneOfRoles(1,2,3,4,5)){
+#		$navs['Staff'].=[
+#			'staff/media'=>'Media Center',
+#		];
+#	}
+}
 if(!Auth::check())
 	$navLogged=[
 		'login' =>'Login',
@@ -48,9 +65,6 @@ else
 		],
 		'logout'=>'Logout'
 	];
-$mobile=Utilities::mobile()?
-	"var MOBILE=1;":
-	"";
 if(!isset($nav))               $nav="Home";
 if(!isset($bc))                $bc=[];
 if(!isset($displayPageHeader)) $displayPageHeader=true;
@@ -224,7 +238,6 @@ $current=$nav;
 		</div>
 		<script>
 			//Google Analytics
-			{{$mobile}}
 		</script>
 	</body>
 </html>
