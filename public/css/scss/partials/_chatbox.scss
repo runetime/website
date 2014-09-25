@@ -4,13 +4,17 @@
 #chatbox{
 	width:100%;
 	#chatbox-messages{
+		overflow-y:scroll;
 		height:20em;
 		width:100%;
 		.msg{
-			$padding:.5em;
+			$paddingW:.5em;
+			$paddingH:.25em;
 			padding:{
-				left:$padding;
-				right:$padding;
+				top:$paddingH;
+				left:$paddingW;
+				right:$paddingW;
+				bottom:$paddingH;
 			}
 			width:100%;
 			time{
@@ -26,11 +30,56 @@
 				background:#1b1b1b;
 			}
 		}
+		&::-webkit-scrollbar{
+			width:.75em;
+		}
+		&::-webkit-scrollbar-thumb{
+			border-radius:10px;
+			background:rgba(115,11,115,0.8);
+			box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
+			&:window-inactive{
+				background:rgba(115,11,115,0.8);
+			}
+		}
 	}
 	#chatbox-actions{
+		$actions-h:2.2em;
+		height:$actions-h;
 		width:100%;
+		#chatbox-popup-bbcode{
+		}
+		#chatbox-popup-prefs{
+			
+		}
+		>a{
+			$border:1px solid rgba(181,181,181,0.9);
+			color:#2991b8;
+			display:inline-block;
+			height:100%;
+			line-height:$actions-h;
+			text-align:center;
+			width:50%;
+			&:nth-child(even){
+				border-left:$border;
+			}
+			&:nth-child(odd){
+				border-right:$border;
+			}
+			&:hover{
+				background:#303030;
+			}
+		}
 	}
 	#chatbox-message{
 		width:100%;
+		height:2.2em;
+		&.message-sent{
+			border-color:#3c763d;
+			box-shadow:inset 1px 1px 1px rgba(60,118,61,0.775);
+		}
+		&.message-sent:focus{
+			border-color:#3c763d;
+			outline:none;
+		}
 	}
 }

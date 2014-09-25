@@ -10,7 +10,7 @@ class ChatController extends BaseController{
 		$this->actions=$actions;
 		$this->chat=$chat;
 	}
-	public function getStart(){
+	public function postStart(){
 //		$messages=$this->chat->getX(Chat::PER_PAGE);
 //		$messages=$this->chat->encode($messages);
 		$messages=[
@@ -22,6 +22,111 @@ class ChatController extends BaseController{
 				'created_at'=>1411361333,
 			],
 			2=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			3=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			4=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			5=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			6=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			7=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			8=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			9=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			10=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			11=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			12=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			13=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			14=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			15=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			16=>[
+				'author_name'=>'Runis',
+				'contents'=>'Testing',
+				'contents_parsed'=>'Testing',
+				'status'=>1,
+				'created_at'=>1411364153,
+			],
+			17=>[
 				'author_name'=>'Runis',
 				'contents'=>'Testing',
 				'contents_parsed'=>'Testing',
