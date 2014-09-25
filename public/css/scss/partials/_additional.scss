@@ -47,17 +47,6 @@ body{
 		bottom:0em !important;
 	}
 }
-ol.breadcrumb{
-	background:#454545;
-	box-shadow:inset 7px 0 9px -7px #33B5E5;
-	margin-bottom:0px;
-	li.active{
-		color:#aaa;
-	}
-	a{
-		color:$bcLinkColor;
-	}
-}
 #copyright{
 	background:#111;
 	box-shadow:inset 0 -10px 10px -10px rgba(41,145,184,.8);
