@@ -1,10 +1,14 @@
 <?php
-namespace Runis\Accounts;
 use Eloquent;
+use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Auth\UserTrait;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use McCool\LaravelAutoPresenter\PresenterInterface;
 use Runis\Core\Entity;
-class User extends Entity implements UserInterface,RemindableInterface{
+class User extends Entity implements UserInterface,RemindableInterface,PresenterInterface{
+	use UserTrait, RemindableTrait, SoftDeletingTrait;
 	const STATE_ACTIVE=1;
 	const STATE_BLOCKED=2;
 	protected $table='users';
@@ -96,5 +100,13 @@ class User extends Entity implements UserInterface,RemindableInterface{
 	}
 	public function getRememberTokenName(){
 		return 'remember_token';
+	}
+    /**
+	* Get the presenter class.
+	*
+	* @return string The class path to the presenter.
+	*/
+	public function getPresenter(){
+		return 'Runis\Accounts\UserPresenter';
 	}
 }

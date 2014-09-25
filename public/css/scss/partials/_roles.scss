@@ -1,0 +1,12 @@
+.members{
+}
+.members-staff{
+	@extends .members;
+}
+.members-administrator{
+	@extends .members-staff;
+	color:rgba(255,255,0,1);
+	&::before{
+		content:url($roles-administrator-image);
+	}
+}
