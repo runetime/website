@@ -7,7 +7,7 @@
 					<div id='radio-pull' class='col-xs-12 col-md-1 holo-box-dark invisible'>
 						<button id='pull-close' type='button' class='close'>
 							<span aria-hidden='true'>
-								Close &times;
+								@lang('radio.close') &times;
 							</span>
 						</button>
 						<div id='pull-contents'>
@@ -17,40 +17,39 @@
 					<div id='radio-options' class='col-xs-12 col-md-11 row holo-box-dark'>
 						<div class='col-xs-12 col-md-4 text-center'>
 							<h3 class='holo-text'>
-								Radio Player
+								@lang('radio.player.title')
 							</h3>
 							<h4>
-								<a id='radio-link' title='Click here'>Click here</a>
+								<a id='radio-link' title='Click here'>@lang('radio.player.click')</a>
 							</h4>
 							<p id='radio-message'>
-								to listen to RuneTime Radio!
+								@lang('radio.player.message')
 							</p>
 							<p>
-								Status: <span id='radio-status' class='text-danger'><i id='power-button' class='fa fa-power-off'></i>Off</span>
+								@lang('radio.player.status'): <span id='radio-status' class='text-danger'><i id='power-button' class='fa fa-power-off'></i>@lang('radio.player.off')</span>
 						</div>
 						<div class='col-xs-12 col-md-4 text-center'>
 							<h3 class='holo-text'>
-								Information
+								@lang('radio.info.title')
 							</h3>
 							<div class='row'>
 								<div class='col-xs-12 col-md-6'>
 									<h4>
-										Current DJ:
+										@lang('radio.info.dj.title')
 									</h4>
 									<p id='radio-dj' class='holo-text-secondary'>
-										{{$dj}} 
+										@lang('radio.info.dj.current',['name'=>$dj])
 									</p>
 									<h4>
-										Current Song
+										@lang('radio.info.song.title')
 									</h4>
 									<p>
-										<span id='radio-song-name' class='holo-text-secondary'>{{$song['name']}}</span>
-										by <span id='radio-song-artist' class='holo-text-secondary'>{{$song['artist']}}</span>
+										@lang('radio.info.song.current',['name'=>$song['name'],'artist'=>$song['artist']])
 									</p>
 								</div>
 								<div class='col-xs-12 col-md-6'>
 									<h4>
-										Requests
+										@lang('radio.info.requests.title')
 									</h4>
 									<div id='requests-user-current'>
 									</div>
@@ -59,18 +58,18 @@
 						</div>
 						<div class='col-xs-12 col-md-4'>
 							<p>
-								<a id='radio-history' title='View the Song History'>
-									Song History
+								<a id='radio-history' title='{{Lang::get('radio.options.song_history')}}'>
+									@lang('radio.options.song_history')
 								</a>
 							</p>
 							<p>
-								<a id='radio-request' title='Request a Song From the DJ'>
-									Request Song From DJ
+								<a id='radio-request' title='{{Lang::get('radio.options.request_song')}}'>
+									@lang('radio.options.request_song')
 								</a>
 							</p>
 							<p>
-								<a id='radio-timetable' title='View the DJ Timetable'>
-									DJ Timetable
+								<a id='radio-timetable' title='{{Lang::get('radio.options.view_timetable')}}'>
+									@lang('radio.options.dj_timetable')
 								</a>
 							</p>
 @if($isDJ)
@@ -78,13 +77,13 @@
 								DJ Controls
 							</h3>
 							<p>
-								<a id='radio-dj-requests' title='View Requests'>
-									View Requests
+								<a id='radio-dj-requests' title='{{Lang::get('radio.options.view_requests')}}'>
+									@lang('radio.options.view_requests')
 								</a>
 							</p>
 							<p>
-								<a id='radio-dj-requests' title='Edit Timetable'>
-									Edit Timetable
+								<a id='radio-dj-requests' title='{{Lang::get('radio.options.edit_timetable')}}'>
+									@lang('radio.options.edit_timetable')
 								</a>
 							</p>
 @endif
@@ -93,11 +92,7 @@
 						</div>
 					</div>
 					<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
-						<div id='chatbox'>
-							<noscript>
-								Sorry, but you have JavaScript disabled. ):
-							</noscript>
-						</div>
+@include('partials.chat')
 					</div>
 				</div>
 			</div>
