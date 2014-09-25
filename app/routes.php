@@ -1,8 +1,16 @@
 <?php
 /*
-|--------------------------------------------------------------------------
-| Pages
-|--------------------------------------------------------------------------
+|-----------|
+| Resources |
+|-----------|
+*/
+
+Route::resource('user', 'Runis\Accounts\User');
+
+/*
+|-------|
+| Pages |
+|-------|
 */
 
 /**
@@ -24,6 +32,7 @@ Route::group(['prefix'=>'awards'],function(){
 Route::group(['prefix'=>'calculators'],function(){
 	Route::get('/','CalculatorController@getIndex');
 	Route::get('{type}','CalculatorController@getView');
+	Route::post('load','CalculatorController@postLoad');
 });
 
 /**
@@ -37,8 +46,8 @@ Route::group(['prefix'=>'calendar'],function(){
  * Chat
  */
 Route::group(['prefix'=>'chat'],function(){
-	Route::get('update/{since}','ChatController@getUpdate');
-	Route::get('start','ChatController@getStart');
+	Route::post('update/{since}','ChatController@postUpdate');
+	Route::post('start','ChatController@postStart');
 	Route::group(['before'=>'auth.logged','prefix'=>'post'],function(){
 		Route::post('message','ChatController@postMessage');
 		Route::post('status/change','ChatController@postStatusChange');
@@ -63,6 +72,16 @@ Route::group(['prefix'=>'databases'],function(){
 	});
 });
 
+/**
+ * Donate
+ */
+Route::group(['prefix'=>'donate'],function(){
+	Route::get('/','DonateController@getIndex');
+});
+
+/**
+ * Forums
+ */
 Route::group(['prefix'=>'forums'],function(){
 	Route::get('/','ForumController@getIndex');
 });
@@ -71,6 +90,7 @@ Route::group(['prefix'=>'forums'],function(){
  * Get
  */
 Route::group(['prefix'=>'get'],function(){
+	Route::get('hiscore/{rsn}','GetController@getHiscore');
 	Route::group(['prefix'=>'signup'],function(){
 		Route::post('email','GetSignupController@postEmail');
 		Route::post('display_name','GetSignupController@postDisplayName');
@@ -94,6 +114,14 @@ Route::group(['prefix'=>'guides'],function(){
  * Home
  */
 Route::get('/','HomeController@getIndex');
+
+/**
+ * Legal Pages
+ */
+Route::group([],function(){
+	Route::get('privacy','LegalController@getPrivacy');
+	Route::get('terms','LegalController@getTerms');
+});
 
 /**
  * Livestream
@@ -159,7 +187,11 @@ Route::group(['prefix'=>'news'],function(){
 /**
  * Play
  */
-Route::get('play','PlayController@getIndex');
+Route::group(['prefix'=>'play'],function(){
+	Route::get('/','PlayController@getIndex');
+	Route::get('3','PlayController@get3');
+	Route::get('osrs','PlayController@getOSRS');
+});
 
 /**
  * Radio
@@ -214,8 +246,10 @@ Route::group(['prefix'=>'staff'],function(){
 	Route::get('list','StaffController@getList');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Script calls such as AJAX
-|--------------------------------------------------------------------------
-*/
+/**
+ * Utility single-pages
+ */
+Route::group(['prefix'=>'utility'],function(){
+	Route::get('name-check','UtilityController@getNameCheck');
+	Route::post('name-check','UtilityController@postNameCheck');
+});

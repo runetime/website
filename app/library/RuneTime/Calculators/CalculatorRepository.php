@@ -15,4 +15,9 @@ class CalculatorRepository extends EloquentRepository{
 			where('name','=',$name)->
 			first();
 	}
+	public function getByNameTrim($nameTrim){
+		return $this->model->
+			where('name_trim','=',$nameTrim)->
+			first();
+	}
 }

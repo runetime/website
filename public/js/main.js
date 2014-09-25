@@ -7,6 +7,7 @@ function RuneTime() {
 	this.Utilities = null;
 	this.ChatBox = null;
 	this.FormSignup = null;
+	this.Calculator = null;
 	this.Utilities = function Utilities() {
 		this.getAJAX = function getAJAX(path) {
 			return $.ajax({
@@ -16,7 +17,7 @@ function RuneTime() {
 				async   : false
 			}).responseText;
 		};
-		this.postAJAX = function getAJAX(path, data) {
+		this.postAJAX = function postAJAX(path, data) {
 			return $.ajax({
 				url: path,
 				type: 'post',
@@ -46,16 +47,18 @@ function RuneTime() {
 		this.currentTime = function currentTime() {
 			return Math.round(Date.now() / 1000);
 		};
+		this.JSONDecode = function JSONDecode(json) {
+			return $.parseJSON(json);
+		};
 	};
 	this.ChatBox = function ChatBox() {
-		this.element = '#chatbox';
-		this.message = '#chatbox-message';
-		this.messages = '#chatbox-messages';
+		this.elements = {};
 		this.URL = {};
-		this.lastActivity = 0;
-		this.lastRefresh = 0;
+		this.times = {};
+		this.Panels = null;
 		this.getStart = function getStart() {
-			var messages = RuneTime.Utilities.getAJAX('chat/start');
+			var time = {time: this.times.loadedAt},
+				messages = RuneTime.Utilities.postAJAX('chat/start', time);
 			messages = $.parseJSON(messages);
 			$.each(messages, function (index, value) {
 				RuneTime.ChatBox.addMessage(value);
@@ -69,37 +72,83 @@ function RuneTime() {
 			html += RuneTime.Utilities.timeAgo(timeAgo);
 			html += "</time>";
 			html += "<p>";
-			html += "<a>" + message.author_name + "</a>: " + message.contents_parsed;
+			html += "<a onclick='RuneTime.ChatBox.nameClick();'>" + message.author_name + "</a>: " + message.contents_parsed;
 			html += "</p>";
 			html += "</div>";
-			$(this.messages).prepend(html);
+			$(this.elements.messages).prepend(html);
+		};
+		this.nameClick = function nameClick() {
+			
 		};
 		this.submitMessage = function submitMessage() {
 			var contents = $(this.message).val(),
 				message,
 				response;
 			message = {contents: contents};
-			response = RuneTime.Utilities.postAJAX('/chat/post/message', message);
+			response = RuneTime.Utilities.postAJAX(this.URL.postMessage, message);
 			response = $.parseJSON(response);
 			if (response.sent === true) {
-				$(this.message).val('');
+				$(this.elements.message).val('');
+				$(this.elements.message).toggleClass('message-sent');
+				setTimeout(function () {
+					$(RuneTime.ChatBox.elements.message).toggleClass('message-sent');
+				}, 1500);
 			}
 		};
+		this.Panels = function Panels() {
+			this.chat = function chat() {
+				var contents = "";
+				contents += "<div id='chatbox-messages'></div>";
+				contents += "<div id='chatbox-actions'>";
+				contents += "<a id='chatbox-bbcode'>BBCode</a>";
+				contents += "<a id='chatbox-prefs'>My Prefs</a>";
+				contents += "</div>";
+				contents += "<input type='text' id='chatbox-message' />";
+				$(RuneTime.ChatBox.elements.chatbox).html(contents);
+			};
+			this.bbcode = function bbcode() {
+				var contents = "";
+				contents += "<div id='chatbox-popup-bbcode'>";
+				contents += "Contents here";
+				contents += "</div>";
+				$(RuneTime.ChatBox.elements.messages).html(contents);
+			};
+			this.prefs = function prefs() {
+				var contents = "";
+				contents += "<div id='chatbox-popup-prefs'>";
+				contents += "Contents here";
+				contents += "</div>";
+			};
+			this.close = function close() {
+				
+			};
+		};
 		this.setup = function setup() {
-			this.URL.submitMessage = '/chat/post/message';
-			var contents = "";
-			contents += "<div id='chatbox-messages'></div>";
-			contents += "<div id='chatbox-actions'>";
-			contents += "<a id='chatbox-bbcode'>BBCode</a>";
-			contents += "<a id='chatbox-prefs'>My Prefs</a>";
-			contents += "</div>";
-			contents += "<input type='text' id='chatbox-message' />";
-			$(this.element).html(contents);
+			this.Panels = new this.Panels();
+			this.elements.chatbox = '#chatbox';
+			this.elements.messages = '#chatbox-messages';
+			this.elements.actions = '#chatbox-actions';
+			this.elements.bbcode = '#chatbox-bbcode';
+			this.elements.prefs = '#chatbox-prefs';
+			this.elements.message = '#chatbox-message';
+			this.URL.postMessage = '/chat/post/message';
+			this.URL.getStart = '/chat/start';
+			this.URL.postStatusChange = '/chat/post/status/change';
+			this.times.lastActivity = RuneTime.Utilities.currentTime();
+			this.times.lastRefresh = RuneTime.Utilities.currentTime();
+			this.times.loadedAt = RuneTime.Utilities.currentTime();
+			this.Panels.chat();
 			this.getStart();
-			$(this.message).keypress(function (e) {
+			$(this.elements.message).keypress(function (e) {
 				if (e.which === 13) {
 					RuneTime.ChatBox.submitMessage();
 				}
+			});
+			$(this.elements.bbcode).bind('click', function (e) {
+				RuneTime.ChatBox.Panels.bbcode();
+			});
+			$(this.elements.prefs).bind('click', function (e) {
+				RuneTime.ChatBox.Panels.prefs();
 			});
 		};
 	};
@@ -526,6 +575,117 @@ function RuneTime() {
 				setTimeout(function () {
 					RuneTime.Radio.moveShoutbox('original');
 				}, 1100);
+			});
+		};
+	};
+	this.Calculator = function Calculators() {
+		this.calculator = null;
+		this.elements = {};
+		this.info = {};
+		this.URL = {};
+		this.getInfo = function getInfo() {
+			var name = null,
+				url = null,
+				data = null,
+				info = null,
+				relevant = null;
+			name = $(this.elements.displayName).val();
+			url = this.URL.getInfo + '/' + encodeURIComponent(name);
+			info = RuneTime.Utilities.getAJAX(url);
+			info = RuneTime.Utilities.JSONDecode(info);
+			info = info.split('\n');
+			relevant = info[13];
+			relevant = relevant.split(',');
+			this.info.levelCurrent = relevant[1];
+			this.info.XPCurrent = relevant[2];
+			$(this.elements.currentXP).val(this.info.XPCurrent);
+			if ($(this.elements.targetLevel).val().length === 0) {
+				$(this.elements.targetLevel).val(parseInt(this.info.levelCurrent, 10) + 1);
+			}
+			this.updateCalc();
+		};
+		this.setup = function setup(calc) {
+			this.elements.displayName = '#calculator-display-name';
+			this.elements.submit = '#calculator-submit';
+			this.elements.currentXP = '#calculator-current-xp';
+			this.elements.targetLevel = '#calculator-target-level';
+			this.elements.table = '#calculator-table tbody';
+			this.URL.getInfo = '/get/hiscore';
+			this.URL.getCalc = '/calculators/load';
+			this.info.XPCurrent = 0;
+			this.info.XPTarget = 0;
+			this.info.levelCurrent = 0;
+			this.info.levelTarget = 0;
+			this.calculator = calc;
+			$(this.elements.submit).bind('click', function () {
+				RuneTime.Calculator.getInfo();
+			});
+			this.loadCalc();
+		};
+		this.loadCalc = function loadCalc() {
+			var info = null,
+				data = null;
+			data = {id: this.calculator};
+			info = RuneTime.Utilities.postAJAX(this.URL.getCalc, data);
+			info = RuneTime.Utilities.JSONDecode(info);
+			this.info.items = RuneTime.Utilities.JSONDecode(info.items);
+			this.info.levelsRequired = RuneTime.Utilities.JSONDecode(info.levels_required);
+			this.info.xp = RuneTime.Utilities.JSONDecode(info.xp);
+			$.each(this.info.items, function (index, value) {
+				var html = "";
+				html += "<tr>";
+				html += "<td>" + RuneTime.Calculator.info.items[index] + "</td>";
+				html += "<td>" + RuneTime.Calculator.info.levelsRequired[index] + "</td>";
+				html += "<td>" + RuneTime.Calculator.info.xp[index] + "</td>";
+				html += "<td>&infin;</td>";
+				html += "</tr>";
+				$(RuneTime.Calculator.elements.table).append(html);
+			});
+		};
+		this.calculateXP = function calculateXP(level) {
+			var total = 0,
+				i = 0;
+			for (i = 1; i < level; i += 1) {
+				total += Math.floor(i + 300 * Math.pow(2, i / 7.0));
+			}
+			return Math.floor(total / 4);
+		};
+		this.calculateLevel = function calculateLevel(xp) {
+			var total = 0,
+				i = 0;
+			for (i = 1; i < 120; i += 1) {
+				total += Math.floor(i + 300 + Math.pow(2, i / 7));
+				if (Math.floor(total / 4) > xp) {
+					return i;
+				} else if (i >= 99) {
+					return 99;
+				}
+			}
+		};
+		this.updateCalc = function updateCalc() {
+			var levelCurrent = 0,
+				levelTarget = 0,
+				xpCurrent = 0,
+				xpTarget = 0,
+				difference = 0,
+				amount = 0;
+			if (this.info.XPCurrent > this.info.XPTarget) {
+				this.info.XPTarget = this.calculateXP(parseInt(this.info.levelCurrent, 10) + 1);
+			}
+			levelCurrent = this.info.levelCurrent;
+			levelTarget = this.info.targetLevel;
+			xpCurrent = this.info.XPCurrent;
+			xpTarget = this.info.XPTarget;
+			difference = xpTarget - xpCurrent;
+			$.each(this.info.items, function (index, value) {
+				amount = Math.ceil(difference / RuneTime.Calculator.info.xp[index]);
+				amount = amount < 0 ? 0 : amount;
+				$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ') td:nth-child(4)').html(amount);
+				if (RuneTime.Calculator.info.levelsRequired[index] > levelCurrent) {
+					$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ')').addClass('text-danger');
+				} else {
+					$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ')').addClass('text-success');
+				}
 			});
 		};
 	};
