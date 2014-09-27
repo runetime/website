@@ -1,4 +1,5 @@
 <?php
+namespace Runis\Accounts;
 use Eloquent;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\UserInterface;

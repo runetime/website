@@ -27,7 +27,7 @@
 						<input type='text' id='calculator-target-level' class='center-block' />
 					</div>
 				</div>
-				<table id='calculator-table' class='text-center' style='width:100%;'>
+				<table id='calculator-table' class='full-width text-center'>
 					<thead>
 						<tr>
 							<td>

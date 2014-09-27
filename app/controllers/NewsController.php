@@ -1,4 +1,5 @@
 <?php
+use RT\News\News;
 use RT\News\NewsRepository;
 class NewsController extends BaseController{
 	protected $news;
@@ -28,14 +29,20 @@ class NewsController extends BaseController{
 		$this->view('news.create.form');
 	}
 	public function postCreate(){
-		if(Input::get('name')&&Input::get('image')&&Input::get('contents')){
+		if(Input::get('name')&&Input::get('contents')){
 			$news=new News;
 			$news->author_id=Auth::user()->id;
 			$news->title=Input::get('name');
 			$news->contents=Input::get('contents');
-			$news->status=1;
-			$news->tags=json_encode(Input::get('tags'));
+			$news->status=News::STATUS_PUBLISHED;
 			$news->comments=0;
+			$news->save();
+			if(Input::file('image')&&Input::file('image')->isValid()){
+				Input::file('image')->move('./img/news/'.$news->id.'.png');
+			}
+		}
+		else{
+			return 1;
 		}
 	}
 }

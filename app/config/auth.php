@@ -1,7 +1,7 @@
 <?php
 return [
 	'driver'  =>'eloquent',
-	'model'   =>'\User',
+	'model'   =>'\Runis\Accounts\User',
 	'table'   =>'users',
 	'reminder'=>[
 		'email' => 'emails.auth.reminder',

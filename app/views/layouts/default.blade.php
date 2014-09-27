@@ -203,15 +203,15 @@ $current=$nav;
 				</p>
 				<div id='portfolio-about'>
 					<p>
-						{{HTML::image(Utilities::URL('img/supported_bronze.png'),'Bronze Supported Fansite',['class'=>'img-responsive pull-left'])}}
-						<p>
+						{{-- HTML::image(Utilities::URL('img/supported_bronze.png'),'Bronze Supported Fansite',['class'=>'img-responsive pull-left']) --}}
+						{{-- <p>
 							We are proud to be a Jagex Bronze Supported Fansite!
+						</p> --}}
+						<p>
+							Copyright RuneTime &copy; {{date('Y')}} &mdash; <a href='/privacy/' title='Privacy'>privacy</a> &mdash; <a href='/terms/' title='Terms of Use'>terms of use</a>
 						</p>
 						<p>
-							Copyright RuneTime &copy; {{date('Y')}} &mdash; privacy &mdash; terms of use
-						</p>
-						<p>
-							Contact us: Officialrunetime@gmail.com
+							<a href='/contact/' title='Contact us'>Contact us</a>
 						</p>
 						<p>
 							{{HTML::link('http://runescape.com/community','RuneScape')}}&reg; and {{HTML::link('http://jagex.com/','Jagex')}}&reg; are trademarks of Jagex Ltd &copy; 1999-{{date('Y')}}

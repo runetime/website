@@ -3,9 +3,9 @@ namespace RT\News;
 use Runis\Core\Entity;
 class News extends Entity{
 	protected $table     ='news';
-	protected $with      =['author'];
-	protected $fillable  =['author_id','title','contents','status','published_at'];
-	protected $dates     =['published_at'];
+	protected $with      =[];
+	protected $fillable  =['author_id','title','contents','status','comments'];
+	protected $dates     =[];
 	protected $softDelete=true;
 
 	public $presenter='RT\News\NewsPresenter';
