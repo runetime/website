@@ -24,11 +24,7 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-
-	'local'     =>['homestead','local','runetime','runetime-dev'],
-	'production'=>['runetime-prod','production','prod']
-));
+require __DIR__.'/environment.php';
 
 /*
 |--------------------------------------------------------------------------
