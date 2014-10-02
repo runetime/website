@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment
@@ -10,9 +9,7 @@
 | given environment, then we will automatically detect it for you.
 |
 */
-
-$env = $app->detectEnvironment([
-
-	'local' => ['homestead'],
-
+$env=$app->detectEnvironment([
+	'local'     =>['runetime-development','runetime'],
+	'production'=>['runetime-production'],
 ]);

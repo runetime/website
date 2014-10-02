@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('contents')
 		<div class='wrapper-flat'>
 				<h1>
 					Member List
@@ -20,11 +21,11 @@
 					</div>
 					<div class='col-xs-11'>
 						<div class='pull-left'>
-							{{Utilities::linkName($member->id)}} 
+							{!!Link::name($member->id)!!} 
 							<br />
 							@lang('members.joined',['date'=>Time::long($member->created_at)])
 							<br />
-							{{Utilities::colorRole($memberRoles[$member->id]->id)}} 
+							{!!Link::colorRole($memberRoles[$member->id]->id)!!} 
 						</div>
 						<div class='pull-right'>
 @if(Auth::check())
@@ -35,3 +36,4 @@
 @endforeach
 				</div>
 			</div>
+@stop

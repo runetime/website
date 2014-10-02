@@ -12,7 +12,7 @@
 					</summary>
 					<p>
 						<a href='{{$imgSrc}}'>
-							{{$imgSrc}}
+							http://runetime.com{{$imgSrc}}
 						</a>
 					</p>
 				</details>

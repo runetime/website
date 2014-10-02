@@ -76,7 +76,7 @@ Route::group(['prefix'=>'databases'],function(){
  * Donate
  */
 Route::group(['prefix'=>'donate'],function(){
-	get('/','aDonateController@getIndex');
+	get('/','DonateController@getIndex');
 });
 
 /**
@@ -133,6 +133,10 @@ Route::group(['prefix'=>'livestream'],function(){
 /**
  * Login
  */
+//Route::group(['prefix'=>'login'],function(){
+//	get('/','AuthController@getLoginForm');
+//	post('/','AuthController@postLoginForm');
+//});
 Route::group(['prefix'=>'login'],function(){
 	get('/','AuthController@getLoginForm');
 	post('/','AuthController@postLoginForm');
@@ -180,7 +184,7 @@ Route::group(['prefix'=>'news'],function(){
 		get('/','NewsController@getCreate');
 		post('/','NewsController@postCreate');
 	});
-	get('{id}-{slug}','NewsController@getView');
+	get('{slug}','NewsController@getView');
 	get('search/{searchSlug}','NewsController@getSearch');
 });
 

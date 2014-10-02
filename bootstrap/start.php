@@ -38,7 +38,6 @@ require __DIR__.'/environment.php';
 */
 
 $app->bindInstallPaths(require __DIR__.'/paths.php');
-
 /*
 |--------------------------------------------------------------------------
 | Load The Application

@@ -7,18 +7,9 @@ class News extends Entity{
 	protected $fillable  =['author_id','title','contents','status','comments'];
 	protected $dates     =[];
 	protected $softDelete=true;
-
 	public $presenter='RT\News\NewsPresenter';
-
 	const STATUS_HIDDEN   =0;
 	const STATUS_PUBLISHED=1;
-
-	protected $validationRules=[
-		'author_id'=>'required|exists:users,id',
-		'title'    =>'required',
-		'content'  =>'required',
-		'status'   =>'required'
-	];
 	public function author(){
 		return $this->belongsTo('RT\Accounts\User','author_id');
 	}

@@ -1,6 +1,7 @@
 <?php
 namespace App\Utilities;
-class ZurbPresenter extends Illuminate\Pagination\Presenter{
+use Illuminate\Pagination\Presenter;
+class ZurbPresenter extends Presenter{
 	private $baseURL;
 	public function url($url){
 		$this->baseURL=$url;

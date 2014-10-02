@@ -5,8 +5,99 @@
 }
 .members-administrator{
 	@extends .members-staff;
-	color:rgba(255,255,0,1);
+	color:$roles-administrator-color;
 	&::before{
 		content:url($roles-administrator-image);
+	}
+}
+.members-radio-team-leader{
+	@extends .members-staff;
+	color:$roles-radio-team-color;
+	&::before{
+		content:url($roles-radio-team-leader-image);
+	}
+}
+.members-radio-dj{
+	@extends .members-staff;
+	color:$roles-radio-team-color;
+	&::before{
+		content:url($roles-radio-team-image);
+	}
+}
+.members-media-team-leader{
+	@extends .members-staff;
+	color:$roles-radio-team-color;
+	&::before{
+		content:url($roles-media-team-leader-image);
+	}
+}
+.members-media-team{
+	@extends .members-staff;
+	color:$roles-radio-team-color;
+	&::before{
+		content:url($roles-media-team-image);
+	}
+}
+.members-web-developer-leader{
+	@extends .members-staff;
+	color:$roles-web-developer-color;
+	&::before{
+		content:url($roles-web-developer-leader-image);
+	}
+}
+.members-web-developer{
+	@extends .members-staff;
+	color:$roles-web-developer-color;
+	&::before{
+		content:url($roles-web-developer-image);
+	}
+}
+.members-content-team-leader{
+	@extends .members-staff;
+	color:$roles-content-team-color;
+	&::before{
+		content:url($roles-content-team-leader-image);
+	}
+}
+.members-content-team{
+	@extends .members-staff;
+	color:$roles-content-team-color;
+	&::before{
+		content:url($roles-content-team-image);
+	}
+}
+.members-community-leader{
+	@extends .members-staff;
+	color:$roles-community-team-color;
+	&::before{
+		content:url($roles-community-team-leader-image);
+	}
+}
+.members-community-team{
+	@extends .members-staff;
+	color:$roles-community-team-color;
+	&::before{
+		content:url($roles-community-team-image);
+	}
+}
+.members-events-team-leader{
+	@extends .members-staff;
+	color:$roles-events-team-color;
+	&::before{
+		content:url($roles-events-team-leader-image);
+	}
+}
+.members-events-team{
+	@extends .members-staff;
+	color:$roles-events-team-color;
+	&::before{
+		content:url($roles-events-team-image);
+	}
+}
+.members-donator{
+	@extends .members;
+	color:$roles-donator-color;
+	&::before{
+		content:url($roles-donator-image);
 	}
 }

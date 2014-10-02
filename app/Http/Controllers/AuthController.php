@@ -1,28 +1,22 @@
 <?php
 namespace App\Http\Controllers;
-use App\Runis\Accounts\User;
-use App\Runis\Accounts\UserRepository;
-use App\Http\Requests\LoginFormRequest;
-use App\Http\Requests\SignupFormRequest;
+use App\Http\Requests\LoginForm;
+use Illuminate\Contracts\Auth\Authenticator;
 class AuthController extends BaseController{
-	private $loginRequest;
-	private $signupRequest;
-	private $users;
-	public function __construct(LoginFormRequest $loginRequest,SignupFormRequest $signupRequest,UserRepository $users){
-		$this->loginRequest=$loginRequest;
-		$this->signupRequest=$signupRequest;
-		$this->users=$users;
+	public function __construct(Authenticator $auth){
+		$this->auth=$auth;
 	}
 	public function getLoginForm(){
-		$this->nav('Login');
-		$this->title('Login');
-		return $this->view('auth.login');
+		$nav='Login';
+		$title='Login';
+		$view=view('auth.login',compact('nav','title'));
+		return $view;
 	}
-	public function postLoginForm(){
-		if(Input::get('email')&&Input::get('password'))
-			if(Auth::attempt(['email'=>Input::get('email'),'password'=>Input::get('password')],true))
-				return Redirect::action('HomeController@getIndex');
-		return Redirect::action('LoginController@getForm');
+	public function postLoginForm(LoginForm $form){
+		if($form->input('email')&&$form->input('password'))
+			if($this->auth->attempt(['email'=>$form->input('email'),'password'=>$form->input('password')],true))
+				return redirect()->action('HomeController@getIndex');
+		return redirect()->action('LoginController@getLoginForm');
 	}
 	public function getSignupForm(){
 		$this->js('signup');
@@ -30,7 +24,7 @@ class AuthController extends BaseController{
 		$this->title('Sign Up');
 		return $this->view('auth.signup');
 	}
-	public function postSignupForm(){
+	public function postSignupForm(SignupForm $form){
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
 		if(Input::get('display_name')&&Input::get('email')&&Input::get('password')&&Input::get('password2')){
@@ -43,7 +37,7 @@ class AuthController extends BaseController{
 					$user->save();
 					$user->setRole('Members');
 					Auth::loginUsingId($user->id);
-					return $this->redirectAction('ForumSettingsController@getIndex');
+					return redirect()->action('ForumSettingsController@getIndex');
 				}
 				else{
 					return $this->view('errors.signup.taken');
@@ -58,7 +52,7 @@ class AuthController extends BaseController{
 		}
 	}
 	public function getLogout(){
-		Auth::logout();
-		return $this->redirectAction('HomeController@getIndex');
+		$this->auth->logout();
+		return redirect()->action('HomeController@getIndex');
 	}
 }

@@ -6,7 +6,7 @@
 				</h1>
 				<p>
 					<small>
-						@lang('guides.written_by',['name'=>Link::linkName($guide->author_id),'date'=>$guide->created_at]) 
+						@lang('guides.written_by',['name'=>Link::name($guide->author_id),'date'=>$guide->created_at]) 
 					</small>
 					<br />
 					<small>
@@ -55,7 +55,7 @@
 						<ul class='list-unstyled'>
 @foreach(json_decode($guide->quest_requirements) as $requirement)
 							<li>
-								<a href='/guides/quests/{{String::slug($requirement->id,$requirement->name)}}' title='{{$requirement->name}}'>
+								<a href='/guides/quests/{{String::slugEncode($requirement->id,$requirement->name)}}' title='{{$requirement->name}}'>
 									{{$requirement->name}} 
 								</a>
 							</li>

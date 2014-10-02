@@ -15,15 +15,15 @@ class Link{
 		$url=str_replace(" ","-",$url);
 		return $str.$url;
 	}
-	public static function linkName($userId){
+	public static function name($userId){
 		$users=new UserRepository(new User);
 		$user=$users->getById($userId);
 		if($user){
 			$role=$user->importantRole();
-			return "<a href='".Link::URL('forum/members/'.$userId)."' class='user-".$role->class_name."' title'='".$user->display_name."&#39;s profile'>".$user->display_name."</a>";
+			return "<a href='".Link::URL('forum/members/'.$userId)."' class='members-".$role->class_name."' title'='".$user->display_name."&#39;s profile'>".$user->display_name."</a>";
 		}
 		else{
-			Log::info('Utilities::linkName:: '.$userId.' does not exist.');
+			\Log::warning('Utilities\Link::color - '.$userId.' does not exist.');
 			return "unknown";
 		}
 	}
@@ -33,6 +33,19 @@ class Link{
 		if($role)
 			return "<span class='members-".$role->class_name."' title='".$role->name."'>".$role->name."</a>";
 		else
-			return "unknown";
+			\Log::warning('Utilities\Link::color - '.$roleId.' does not exist.');
+		return "unknown";
+	}
+	public static function color($str,$roleInfo){
+		$roles=new RoleRepository(new Role);
+		if(ctype_digit($roleInfo))
+			$role=$roles->getById($roleInfo);
+		else
+			$role=$roles->getByName($roleInfo);
+		if($role)
+			return "<span class='members-".$role->class_name."'>".$str."</a>";
+		else
+			\Log::warning('Utilities\Link::color - '.$roleInfo.' does not exist.');
+		return $str;
 	}
 }

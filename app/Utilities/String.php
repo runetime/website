@@ -28,7 +28,7 @@ class String{
 		curl_close($ch);
 		return $output;
 	}
-	public static function slug(){
+	public static function slugEncode(){
 		$args=func_get_args();
 		$slug="";
 		foreach($args as $x=>$arg){
@@ -37,5 +37,12 @@ class String{
 				$slug.="-";
 		}
 		return $slug;
+	}
+	public static function slugDecode($slug){
+		$slugArr=[];
+		$slug=explode("-",$slug,2);
+		$slugArr['id']=$slug[0];
+		$slugArr['name']=ucwords(str_replace("-"," ",$slug[1]));
+		return $slugArr;
 	}
 }

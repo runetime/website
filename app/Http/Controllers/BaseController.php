@@ -1,12 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Auth\Authenticator;
 class BaseController extends Controller{
+	protected $auth;
 	protected $bc;
 	protected $displayPageHeader=false;
 	protected $js;
 	protected $nav;
 	protected $title='';
+	public function __construct(Authenticator $auth){
+		$this->auth=$auth;
+	}
 	protected function bc($breadcrumbs=[]){
 		if($breadcrumbs==false){
 			$this->displayPageHeader=false;
@@ -41,25 +46,5 @@ class BaseController extends Controller{
 		$data['nav']=$this->nav;
 		$data['title']=$this->title;
 		return \View::make($path,$data);
-	}
-	protected function redirectTo($url,$statusCode=302){
-		return Redirect::to($url,$statusCode);
-	}
-	protected function redirectAction($action,$data=[]){
-		return Redirect::action($action,$data);
-	}
-	protected function redirectRoute($route,$data=[]){
-		return Redirect::route($route,$data);
-	}
-	protected function redirectBack($data=[]){
-		return Redirect::back()->
-			withInput()->
-			with($data);
-	}
-	protected function redirectIntended($default=null){
-		$intended=Session::get('auth.intended_redirect_url');
-		if($intended)
-			return $this->redirectTo($intended);
-		return Redirect::to($default);
 	}
 }

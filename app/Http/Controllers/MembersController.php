@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
+use App\Utilities\ZurbPresenter;
+use Illuminate\Pagination\Paginator;
 class MembersController extends BaseController{
 	private $perPage=20;
 	private $roles;
@@ -18,8 +20,7 @@ class MembersController extends BaseController{
 		$memberRoles=[];
 		foreach($members as $member)
 			$memberRoles[$member->id]=$this->roles->getById($member->importantRole()->id);
-		$paginator=new ZurbPresenter(
-			Paginator::make((array)$members,$this->users->getTotal(),$this->perPage));
+		$paginator=new ZurbPresenter($this->users->paginate($this->perPage));
 		$paginator->setCurrentPage($page);
 		$paginator->url('members');
 		$this->nav('RuneTime');

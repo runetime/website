@@ -55,4 +55,7 @@ abstract class EloquentRepository{
 		$model=$this->getNew($data);
 		return $this->storeEloquentModel($model);
 	}
+	public function paginate($number){
+		return $this->model->simplePaginate($number);
+	}
 }

@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers;
-use Auth;
+use Illuminate\Contracts\Auth\Authenticator;
 class RadioController extends BaseController{
+	public function __construct(Authenticator $auth){
+		$this->auth=$auth;
+	}
 	public function getIndex(){
 		$dj="Current DJ";
 		$song=[
@@ -9,8 +12,8 @@ class RadioController extends BaseController{
 			'name'=>'Name'
 		];
 		$isDJ=false;
-		if(Auth::check())
-			$isDJ=Auth::user()->hasRole('Radio DJ');
+		if($this->auth->check())
+			$isDJ=$this->auth->user()->hasRole('Radio DJ');
 		$this->js('radio');
 		$this->nav('Radio');
 		$this->title='RuneTime Radio';
@@ -35,8 +38,8 @@ class RadioController extends BaseController{
 		return View::make('radio.request.song');
 	}
 	public function getSendRequest($artist,$name){
-		if(Auth::check()){
-			$user=Auth::id();
+		if($this->auth->check()){
+			$user=$this->auth->id();
 		}
 		else{
 			$user=-1;
@@ -53,15 +56,15 @@ class RadioController extends BaseController{
 		return View::make('radio.send.song');
 	}
 	public function getRequestsCurrent(){
-		if(Auth::check())
-			$user=Auth::id();
+		if($this->auth->check())
+			$user=$this->auth->id();
 		else
 			$user=-1;
 		$currentRequests=\DB::table('radio_requests')->
 			where('requester',$user)->
 			where(function($q){
-				if(Auth::check()){
-					$q->where('requester',Auth::id())->
+				if($this->auth->check()){
+					$q->where('requester',$this->auth->id())->
 						where('time_sent','>',time()-600);
 				}
 				else{

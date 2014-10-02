@@ -23,6 +23,17 @@ class Time{
 	 * Converts an integer-based timestamp into a readable string with hours:minutes:seconds
 	 * @param integer $int     The integer timestamp to convert
 	 */
+	public static function shortTime($i=0){
+		$i=self::getEpoch($i);
+		if(self::isDST()){
+			$i+=3600;
+		}
+		return date("jS \of F Y H:i:s",$i);
+	}
+	/**
+	 * Converts an integer-based timestamp into a readable string with hours:minutes:seconds
+	 * @param integer $int     The integer timestamp to convert
+	 */
 	public static function long($i=0){
 		$i=self::getEpoch($i);
 		if(self::isDST()){

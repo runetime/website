@@ -12,9 +12,10 @@ class CreateNewsTable extends Migration{
 			$t->increments('id');
 			$t->integer('author_id');
 			$t->string('title');
-			$t->string('contents');
+			$t->mediumtext('contents');
+			$t->mediumtext('contents_parsed');
 			$t->integer('status');
-			$t->string('comments');
+			$t->integer('comments');
 			$t->timestamps();
 			$t->softDeletes();
 		});

@@ -11,22 +11,19 @@
 							<h3>
 								{{$newsPiece->title}} 
 							</h3>
-							<span class='text-muted'>{{Time::long($newsPiece->id)}}</span> by {{Utilities::linkName($newsPiece->author_id)}} in
-	@foreach(explode(",",$newsPiece->tags) as $tag)
-<a href='{{Utilities::URL('news/tags/'.$tag)}}' title='{{ucwords($tag)}}'>{{ucwords($tag)}}</a>
-	@endforeach
+							<span class='text-muted'>{{Time::long($newsPiece->id)}}</span> by {!!Link::Name($newsPiece->author_id)!!} in
 							</span>
 							<p>
 								{{$newsPiece->contents}}
 							</p>
 							<ul class='list-inline'>
 								<li>
-									<a href='{{Utilities::URL('news/'.$newsPiece->id)}}' title='{{$newsPiece->title}}'>
+									<a href='{{Link::URL('news/'.$newsPiece->id)}}' title='{{$newsPiece->title}}'>
 										Read More
 									</a>
 								</li>
 								<li>
-									<a href='{{Utilities::URL('news/'.$newsPiece->id.'#comments')}}' title='{{$newsPiece->comments}} comments'>
+									<a href='{{Link::URL('news/'.$newsPiece->id.'#comments')}}' title='{{$newsPiece->comments}} comments'>
 										{{$newsPiece->comments}} comments
 									</a>
 								</li>

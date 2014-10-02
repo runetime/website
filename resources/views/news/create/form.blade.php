@@ -7,7 +7,7 @@
 							Name
 						</label>
 						<div class='col-lg-10'>
-							<input id='name' class='form-control' type='text' name='name' placeholder='Name' required='' />
+							<input id='name' class='form-control' type='text' name='name' placeholder='Name' required />
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 						</div>
@@ -36,7 +36,7 @@
 							Tags
 						</label>
 						<div class='col-lg-10'>
-							<input id='tags' class='form-control' type='text' name='tags' placeholder='runetime, event' required='' />
+							<input id='tags' class='form-control' type='text' name='tags' placeholder='runetime, event' />
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 							<span class='help-block'>
@@ -53,3 +53,4 @@
 					</div>
 				</form>
 			</div>
+@stop

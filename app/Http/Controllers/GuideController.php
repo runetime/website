@@ -91,7 +91,7 @@ The king will ask you to help with the testing of the beacon network which has b
 		$length=$this->quests->getOptionById($guide->length);
 		$editList="";
 		foreach(json_decode($guide->editors) as $x=>$editor){
-			$editList.=\Link::linkName($editor);
+			$editList.=\Link::name($editor);
 			if($x<count(json_decode($guide->editors))-1)
 				$editList.=", ";
 		}

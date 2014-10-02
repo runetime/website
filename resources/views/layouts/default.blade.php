@@ -1,11 +1,8 @@
 <?php
-#use Runis\Accounts\User;
-#use Runis\Accounts\UserRepository;
-#$users=new UserRepository(new User);
 $navs=[
 	''        =>'Home',
-	'radio'   =>'Radio',
 	'forums'  =>'Forums',
+	'radio'   =>'Radio',
 	'RuneTime'=>[
 		'news'      =>'News',
 		'awards'    =>'Awards',
@@ -41,11 +38,6 @@ if(false){
 		'tickets/manage'=>'Ticket System',
 		'staff/checkup'=>'Staff Checkup',
 	];
-#	if(Auth::user()->hasOneOfRoles(1,2,3,4,5)){
-#		$navs['Staff'].=[
-#			'staff/media'=>'Media Center',
-#		];
-#	}
 }
 if(!Auth::check())
 	$navLogged=[
@@ -55,13 +47,10 @@ if(!Auth::check())
 else
 	$navLogged=[
 		Auth::user()->display_name=>[
-			'#!1'=>'My Profile',
-			'#!2'=>'My Content',
-			'#!3'=>'my Settings',
-			'#!4'=>'Manage Friends',
-			'#!5'=>'Personal Messenger',
-			'#!6'=>'Content I Follow',
-			'#!7'=>'Manage Ignore Prefs'
+			'forum/'.String::slugEncode(Auth::user()->id,Auth::user()->display_name)=>'My Profile',
+			'forum/settings'=>'My Settings',
+			'forum/messenger'=>'Messenger',
+			'forum/content'=>'Content I Follow',
 		],
 		'logout'=>'Logout'
 	];
@@ -138,7 +127,7 @@ $current=$nav;
 							</ul>
 						</li>
 	@else
-						<li{{$name==$current?" class='active'":""}}>
+						<li{{$name==$current?" class=active":""}}>
 							<a href='{{$url}}' title='{{$name}}'>
 								{{$name}} 
 							</a>
