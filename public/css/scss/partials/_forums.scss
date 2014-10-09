@@ -1,0 +1,18 @@
+.table-subforums{
+	tr{
+		td{
+			&:nth-child(1){
+				width:5%;
+			}
+			&:nth-child(2){
+				width:60%;
+			}
+			&:nth-child(3){
+				width:20%;
+			}
+			&:nth-child(4){
+				width:15%;
+			}
+		}
+	}
+}
