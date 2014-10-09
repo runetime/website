@@ -12,7 +12,26 @@ class ChatRepository extends EloquentRepository{
 	}
 	public function getX($amount){
 		return $this->model->
+			orderBy('id','desc')->
 			take($amount)->
 			get();
+	}
+	public function getByCreatedAt($time){
+		return $this->model->
+			where('created_at','>',$time)->
+			get();
+	}
+	public function getByChannel($channelId,$amount){
+		return $this->model->
+			where('channel','=',$channelId)->
+			orderBy('id','desc')->
+			take($amount)->
+			get();
+	}
+	public function getLatestByChannel($channelId){
+		return $this->model->
+			where('channel','=',$channelId)->
+			orderBy('id','desc')->
+			first();
 	}
 }
