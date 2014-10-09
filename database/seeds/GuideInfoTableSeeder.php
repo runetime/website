@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Database\Seeder;
 class GuideInfoTableSeeder extends Seeder{
 	public function run(){
 		DB::table('guide_info')->delete();
