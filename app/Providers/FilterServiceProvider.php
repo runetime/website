@@ -28,10 +28,11 @@ class FilterServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $filters = [
-		'auth' => 'App\Http\Filters\AuthFilter',
-		'auth.basic' => 'App\Http\Filters\BasicAuthFilter',
-		'csrf' => 'App\Http\Filters\CsrfFilter',
-		'guest' => 'App\Http\Filters\GuestFilter',
+		'auth'       =>'App\Http\Filters\AuthFilter',
+		'auth.basic' =>'App\Http\Filters\BasicAuthFilter',
+		'auth.logged'=>'App\Http\Filters\AuthLogged',
+		'csrf'       =>'App\Http\Filters\CsrfFilter',
+		'guest'      =>'App\Http\Filters\GuestFilter',
 	];
 
 }

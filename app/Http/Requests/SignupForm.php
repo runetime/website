@@ -9,7 +9,10 @@ class SignupForm extends FormRequest {
 	 */
 	public function rules(){
 		return [
-			//
+			'display_name'=>'required',
+			'email'       =>'required|email',
+			'password'    =>'required',
+			'password2'   =>'required',
 		];
 	}
 	/**

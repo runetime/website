@@ -5,7 +5,7 @@ use Illuminate\Contracts\Auth\Authenticator;
 class BaseController extends Controller{
 	protected $auth;
 	protected $bc;
-	protected $displayPageHeader=false;
+	protected $displayPageHeader=true;
 	protected $js;
 	protected $nav;
 	protected $title='';

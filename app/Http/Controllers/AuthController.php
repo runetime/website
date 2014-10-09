@@ -1,10 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Requests\LoginForm;
+use App\Http\Requests\SignupForm;
+use App\Runis\Accounts\User;
+use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\Authenticator;
 class AuthController extends BaseController{
-	public function __construct(Authenticator $auth){
+	public function __construct(Authenticator $auth,UserRepository $users){
 		$this->auth=$auth;
+		$this->users=$users;
 	}
 	public function getLoginForm(){
 		$nav='Login';
@@ -27,17 +31,17 @@ class AuthController extends BaseController{
 	public function postSignupForm(SignupForm $form){
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
-		if(Input::get('display_name')&&Input::get('email')&&Input::get('password')&&Input::get('password2')){
-			if(Input::get('password')==Input::get('password2')){
-				if(!$this->users->getByDisplayName(Input::get('display_name'))){
+		if($form->input('display_name')&&$form->input('email')&&$form->input('password')&&$form->input('password2')){
+			if($form->input('password')==$form->input('password2')){
+				if(!$this->users->getByDisplayName($form->input('display_name'))){
 					$user=new User;
-					$user->display_name=Input::get('display_name');
-					$user->email=Input::get('email');
-					$user->password=Hash::make(Input::get('password'));
+					$user->display_name=$form->input('display_name');
+					$user->email=$form->input('email');
+					$user->password=\Hash::make($form->input('password'));
 					$user->save();
 					$user->setRole('Members');
-					Auth::loginUsingId($user->id);
-					return redirect()->action('ForumSettingsController@getIndex');
+					$this->auth->loginUsingId($user->id);
+					return redirect()->action('ForumController@getIndex');
 				}
 				else{
 					return $this->view('errors.signup.taken');

@@ -54,7 +54,9 @@ class User extends Entity implements UserContract, RemindableContract{
 	}
 	public function importantRole(){
 		$roles=$this->getRoles();
-		return $roles[rand(0,count($roles)-1)];
+		if(!empty($roles))
+			return $roles[rand(0,count($roles)-1)];
+		return -1;
 	}
 	private function roleCollectionHasRole($allowedRole){
 		$roles=$this->getRoles();
