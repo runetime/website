@@ -15,15 +15,22 @@ class StaffController extends BaseController{
 		return $this->view('staff.index');
 	}
 	public function getList(){
-		$admins=(array)$this->roles->getUsersById(1);
+		$admins=$this->roles->getUsersById(1);
 		$radio=$this->roles->getUsersById(2,3);
 		$media=$this->roles->getUsersById(4,5);
 		$webDev=$this->roles->getUsersById(6,7);
 		$content=$this->roles->getUsersById(8,9);
 		$community=$this->roles->getUsersById(10,11);
 		$events=$this->roles->getUsersById(12,13);
+		$adminList = [];
+		$radioList = [];
+		$mediaList = [];
+		$webDevList = [];
+		$contentList = [];
+		$communityList = [];
+		$eventsList = [];
 		$this->nav('RuneTime');
 		$this->title('Staff Team');
-		return $this->view('staff.list',compact('admins','radio','media','webDev','content','content','community','events'));
+		return $this->view('staff.list',compact('admins','radio','media','webDev','content','community','events'));
 	}
 }
