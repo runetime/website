@@ -50,4 +50,7 @@ class Time{
 		}
 		return strtotime($str);
 	}
+	public static function formatTime($unix){
+		return date('Y-m-d H:i:s',$unix);
+	}
 }

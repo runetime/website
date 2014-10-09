@@ -1,5 +1,8 @@
 <?php
 namespace App\Utilities;
+use App\Runis\Accounts\Role;
+use App\Runis\Accounts\RoleRepository;
+use App\Runis\Accounts\User;
 class String{
 	/**
 	 * Determines whether a string begins with a substring
@@ -44,5 +47,32 @@ class String{
 		$slugArr['id']=$slug[0];
 		$slugArr['name']=ucwords(str_replace("-"," ",$slug[1]));
 		return $slugArr;
+	}
+	public static function encodeIP($ip=""){
+		if(empty($ip))
+			$ip = \Request::ip();
+		return ip2long($ip);
+	}
+	public static function decodeIP($ip){
+		return long2ip($ip);
+	}
+	public static function color($str,$roleInfo){
+		$roles=new RoleRepository(new Role);
+		if(ctype_digit($roleInfo))
+			$role=$roles->getById($roleInfo);
+		else
+			$role=$roles->getByName($roleInfo);
+		if($role)
+			return "<span class='members-".$role->class_name."'>".$str."</a>";
+		else
+			\Log::warning('Utilities\Link::color - '.$roleInfo.' does not exist.');
+		return $str;
+	}
+	public static function importantRole($id){
+		$user=User::find($id);
+		$roles=$user->getRoles();
+		if(!empty($roles))
+			return $roles[rand(0,count($roles)-1)];
+		return -1;
 	}
 }
