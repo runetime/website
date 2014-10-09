@@ -22,10 +22,14 @@
 					</li>
 				</ul>
 				<p>
-					{{HTML::link(Utilities::URL('signup'),'Back to Signup',['class'=>'btn btn-info btn-lg','role'=>'button'])}}
+					<a href='/signup' title='Back to Signup' class='btn btn-info btn-lg' role='button'>
+						Back to Signup
+					</a>
 				</p>
 				<p>
-					{{HTML::link(Utilities::URL(),'Back to Homepage',['class'=>'btn btn-info btn-lg','role'=>'button'])}}
+					<a href='/' title='Back to Homepage' class='btn btn-info btn-lg' role='button'>
+						Back to Homepage
+					</a>
 				</p>
 			</div>
 @stop
