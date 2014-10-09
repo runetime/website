@@ -30,35 +30,54 @@ function RuneTime() {
 				seconds = nowTs - ts;
 			if (seconds > 2 * 24 * 3600) {
 				return "a few days ago";
-			}
-			if (seconds > 24 * 3600) {
+			} else if (seconds > 24 * 3600) {
 				return "yesterday";
-			}
-			if (seconds > 3600) {
-				return "a few hours ago";
-			}
-			if (seconds > 1800) {
-				return "Half an hour ago";
-			}
-			if (seconds > 60) {
+			} else if (seconds > 7200) {
+				return Math.floor(seconds / 3600) + " hours ago";
+			} else if (seconds > 3600) {
+				return "an hour ago";
+			} else if (seconds >= 120) {
 				return Math.floor(seconds / 60) + " minutes ago";
+			} else if (seconds >= 60) {
+				return "1 minute ago";
+			} else if (seconds > 1) {
+				return seconds + " seconds ago";
+			} else {
+				return "1 second ago";
 			}
 		};
 		this.currentTime = function currentTime() {
-			return Math.round(Date.now() / 1000);
+			return Math.floor(Date.now() / 1000);
 		};
 		this.JSONDecode = function JSONDecode(json) {
 			return $.parseJSON(json);
 		};
+		this.guid = function guid() {
+			function s4() {
+				return Math.floor((1 + Math.random()) * 0x10000)
+					.toString(16)
+					.substring(1);
+			}
+			return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+		};
 	};
 	this.ChatBox = function ChatBox() {
+		this.channel = '#radio';
 		this.elements = {};
 		this.URL = {};
 		this.times = {};
 		this.Panels = null;
+		this.updateTimeout = null;
+		this.messages = [];
 		this.getStart = function getStart() {
-			var time = {time: this.times.loadedAt},
-				messages = RuneTime.Utilities.postAJAX('chat/start', time);
+			$(RuneTime.ChatBox.elements.messages).html('');
+			var data = null,
+				messages = null;
+			data = {
+				time: this.times.loadedAt,
+				channel: this.channel
+			};
+			messages = RuneTime.Utilities.postAJAX('chat/start', data);
 			messages = $.parseJSON(messages);
 			$.each(messages, function (index, value) {
 				RuneTime.ChatBox.addMessage(value);
@@ -67,26 +86,32 @@ function RuneTime() {
 		this.addMessage = function addMessage(message) {
 			var html = "",
 				timeAgo = RuneTime.Utilities.currentTime() - message.created_at;
-			html += "<div class='msg'>";
-			html += "<time class='pull-right'>";
-			html += RuneTime.Utilities.timeAgo(timeAgo);
+			this.messages.push(message);
+			html += "<div id='" + message.uuid + "' class='msg'>";
+			html += "<time class='pull-right' data-ts='" + message.created_at + "'>";
+			html += RuneTime.Utilities.timeAgo(message.created_at);
 			html += "</time>";
 			html += "<p>";
 			html += "<a onclick='RuneTime.ChatBox.nameClick();'>" + message.author_name + "</a>: " + message.contents_parsed;
 			html += "</p>";
 			html += "</div>";
 			$(this.elements.messages).prepend(html);
+			this.times.lastActivity = RuneTime.Utilities.currentTime();
 		};
 		this.nameClick = function nameClick() {
 			
 		};
 		this.submitMessage = function submitMessage() {
-			var contents = $(this.message).val(),
+			var contents = $(this.elements.message).val(),
 				message,
 				response;
-			message = {contents: contents};
+			message = {
+				contents: contents,
+				channel: this.channel
+			};
 			response = RuneTime.Utilities.postAJAX(this.URL.postMessage, message);
 			response = $.parseJSON(response);
+			this.update();
 			if (response.sent === true) {
 				$(this.elements.message).val('');
 				$(this.elements.message).toggleClass('message-sent');
@@ -95,43 +120,116 @@ function RuneTime() {
 				}, 1500);
 			}
 		};
+		this.update = function update() {
+			var delta = 0,
+				data = {},
+				response = null;
+			delta = RuneTime.Utilities.currentTime() - this.times.lastRefresh;
+			data = {
+				delta: delta,
+				channel: this.channel
+			};
+			response = RuneTime.Utilities.postAJAX(this.URL.getUpdate, data);
+			response = $.parseJSON(response);
+			this.times.lastRefresh = RuneTime.Utilities.currentTime();
+			$.each(response, function (index, value) {
+				RuneTime.ChatBox.addMessage(value);
+			});
+			clearTimeout(this.updateTimeout);
+			this.updateTimeout = setTimeout(function () {
+				RuneTime.ChatBox.update();
+			}, 5500);
+		};
+		this.updateTimeAgo = function updateTimeAgo() {
+			var messages;
+			messages = $(this.elements.messages).find('.msg');
+			$.each(messages, function (index, value) {
+				var timestamp;
+				timestamp = $(value).find('time').attr('data-ts');
+				$(value).find('time').html(RuneTime.Utilities.timeAgo(timestamp));
+			});
+			setTimeout(function () {
+				RuneTime.ChatBox.updateTimeAgo();
+			}, 1000);
+		};
+		this.switchChannel = function switchChannel(name) {
+			var data,
+				response;
+			data = {
+				channel: name
+			};
+			response = RuneTime.Utilities.postAJAX('/chat/channels/check', data);
+			response = $.parseJSON(response);
+			if (response.valid) {
+				this.channel = name;
+				this.getStart();
+			} else {
+				console.log('error');
+			}
+		};
 		this.Panels = function Panels() {
 			this.chat = function chat() {
 				var contents = "";
 				contents += "<div id='chatbox-messages'></div>";
 				contents += "<div id='chatbox-actions'>";
 				contents += "<a id='chatbox-bbcode'>BBCode</a>";
-				contents += "<a id='chatbox-prefs'>My Prefs</a>";
+				contents += "<a id='chatbox-channels'>Channels</a>";
 				contents += "</div>";
 				contents += "<input type='text' id='chatbox-message' />";
 				$(RuneTime.ChatBox.elements.chatbox).html(contents);
 			};
 			this.bbcode = function bbcode() {
-				var contents = "";
+				var contents = "",
+					response;
+				response = RuneTime.Utilities.getAJAX('/get/bbcode');
+				response = $.parseJSON(response);
 				contents += "<div id='chatbox-popup-bbcode'>";
-				contents += "Contents here";
+				contents += "<button type='button' class='close' onclick='RuneTime.ChatBox.Panels.close();'>Close <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>";
+				contents += "<h3>BBCode</h3>";
+				contents += "<table class='table'>";
+				contents += "<tbody>";
+				$.each(response, function (index, value) {
+					contents += "<tr>";
+					contents += "<td>" + value.name + "</td>";
+					contents += "<td>" + value.description + "</td>";
+					contents += "<td>" + value.example + "</td>";
+					contents += "<td>" + value.parsed + "</td>";
+				});
 				contents += "</div>";
 				$(RuneTime.ChatBox.elements.messages).html(contents);
 			};
-			this.prefs = function prefs() {
-				var contents = "";
-				contents += "<div id='chatbox-popup-prefs'>";
-				contents += "Contents here";
+			this.channels = function channels() {
+				var contents = "",
+					response;
+				response = RuneTime.Utilities.getAJAX('/chat/channels');
+				response = $.parseJSON(response);
+				contents += "<div id='chatbox-popup-channels'>";
+				contents += "<button type='button' class='close' onclick='RuneTime.ChatBox.Panels.close();'>Close <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>";
+				contents += "<h3>Channels</h3>";
+				contents += "<p class='holo-text'>Currently on <b>#" + RuneTime.ChatBox.channel + "</b></p>";
+				$.each(response, function (index, value) {
+					contents += "<a onclick=\"RuneTime.ChatBox.switchChannel('" + value.name + "');\">#" + value.name + "</a><br />";
+					contents += "<span class='holo-text-secondary'>" + value.messages + " messages</span><br />";
+					contents += "<span class='holo-text-secondary'>Last active " + RuneTime.Utilities.timeAgo(value.last_message) + "</span><br />";
+				});
 				contents += "</div>";
+				$(RuneTime.ChatBox.elements.messages).html(contents);
 			};
 			this.close = function close() {
-				
+				RuneTime.ChatBox.getStart();
 			};
 		};
-		this.setup = function setup() {
+		this.setup = function setup(channel) {
 			this.Panels = new this.Panels();
+			this.channel = channel;
 			this.elements.chatbox = '#chatbox';
 			this.elements.messages = '#chatbox-messages';
 			this.elements.actions = '#chatbox-actions';
 			this.elements.bbcode = '#chatbox-bbcode';
-			this.elements.prefs = '#chatbox-prefs';
+			this.elements.channels = '#chatbox-channels';
 			this.elements.message = '#chatbox-message';
 			this.URL.postMessage = '/chat/post/message';
+			this.URL.getUpdate = '/chat/update';
 			this.URL.getStart = '/chat/start';
 			this.URL.postStatusChange = '/chat/post/status/change';
 			this.times.lastActivity = RuneTime.Utilities.currentTime();
@@ -147,9 +245,15 @@ function RuneTime() {
 			$(this.elements.bbcode).bind('click', function (e) {
 				RuneTime.ChatBox.Panels.bbcode();
 			});
-			$(this.elements.prefs).bind('click', function (e) {
-				RuneTime.ChatBox.Panels.prefs();
+			$(this.elements.channels).bind('click', function (e) {
+				RuneTime.ChatBox.Panels.channels();
 			});
+			setTimeout(function () {
+				RuneTime.ChatBox.update();
+			}, 5000);
+			setTimeout(function () {
+				RuneTime.ChatBox.updateTimeAgo();
+			}, 1000);
 		};
 	};
 	this.SignupForm = function SignupForm() {
@@ -427,46 +531,58 @@ function RuneTime() {
 			this.updateRequests();
 		};
 		this.openPull = function openPull(contents) {
+			var delay = 0;
+			if (!$('#radio-pull').hasClass('invisible')) {
+				this.hidePull(0);
+				delay = 2100;
+			}
 			setTimeout(function () {
-				$('#radio-pull').animate({
+				$('#radio-pull').css({
+					width: '0%'
+				});
+				$('#radio-options').animate({
 					width: '50%'
 				}, 1000);
 				$('#pull-contents').html(contents);
-				$('#radio-pull').removeClass('invisible');
-				$('#radio-options').animate({
-					width: '50%'
-				}, 1000, function () {
-					$('#radio-options').
-						removeClass('col-md-11').
-						addClass('col-md-6');
-					$('#radio-pull').
-						removeClass('col-md-1').
-						addClass('col-md-6');
-					$('#radio-options').width('');
-					$('#radio-pull').width('');
+				setTimeout(function () {
+					$('#radio-pull').removeClass('invisible');
 					RuneTime.Radio.sizeEqual();
-				});
-			}, 0);
+					$('#radio-pull').animate({
+						width: '50%'
+					}, 1000, function () {
+						$('#radio-options').
+							removeClass('col-md-12').
+							addClass('col-md-6');
+						$('#radio-pull').
+							removeClass('col-md-0').
+							addClass('col-md-6');
+						$('#radio-options').width('');
+						$('#radio-pull').width('');
+					});
+				}, 1000);
+			}, delay);
 		};
 		this.hidePull = function hidePull(delay) {
 			setTimeout(function () {
 				$('#pull-contents').html('&nbsp;');
 				$('#radio-pull').animate({
-					width: '8.33%'
+					width: '0%'
 				}, 1000);
-				$('#radio-options').animate({
-					width: '91.66%'
-				}, 1000, function () {
-					$('#radio-options').
-						removeClass('col-md-6').
-						addClass('col-md-11');
-					$('#radio-pull').
-						removeClass('col-md-6').
-						addClass('col-md-1').
-						addClass('invisible');
-					$('#radio-options').width('');
-					$('#radio-pull').width('');
-				});
+				setTimeout(function () {
+					$('#radio-options').animate({
+						width: '100%'
+					}, 1000, function () {
+						$('#radio-options').
+							removeClass('col-md-6').
+							addClass('col-md-12');
+						$('#radio-pull').
+							removeClass('col-md-6').
+							addClass('col-md-0').
+							addClass('invisible');
+						$('#radio-options').width('');
+						$('#radio-pull').width('');
+					});
+				}, 1000);
 			}, delay);
 			this.moveShoutbox('original');
 		};

@@ -7,5 +7,5 @@ $(function () {
 	RuneTime.Radio = new RuneTime.Radio();
 	RuneTime.Radio.setup();
 	RuneTime.ChatBox = new RuneTime.ChatBox();
-	RuneTime.ChatBox.setup();
+	RuneTime.ChatBox.setup('radio');
 });
