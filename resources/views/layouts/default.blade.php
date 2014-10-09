@@ -1,58 +1,63 @@
 <?php
+$messages=3;
+$follow=6;
+$notifications=$messages + $follow;
 $navs=[
-	''        =>'Home',
-	'forums'  =>'Forums',
-	'radio'   =>'Radio',
-	'RuneTime'=>[
-		'news'      =>'News',
-		'awards'    =>'Awards',
-		'signatures'=>'Signature Generator',
-		'members'   =>'Members',
-		'staff/list'     =>'Staff List',
-		'about'     =>'About Us',
-		'tickets'   =>'Help',
+	''       => Lang::get('navbar.home'),
+	'forums' => Lang::get('navbar.forums'),
+	'radio'  => Lang::get('navbar.radio'),
+	Lang::get('navbar.runetime.runetime') => [
+		'news'       => Lang::get('navbar.runetime.news'),
+		'awards'     => Lang::get('navbar.runetime.awards'),
+		'signatures' => Lang::get('navbar.runetime.signatures'),
+		'members'    => Lang::get('navbar.runetime.members'),
+		'staff/list' => Lang::get('navbar.runetime.staff_list'),
+		'about'      => Lang::get('navbar.runetime.about_us'),
+		'tickets'    => Lang::get('navbar.runetime.help'),
 	],
-	'Runescape'=>[
-		'guides/quests'      =>'Quest Guides',
-		'guides/locations'   =>'Location Guides',
-		'databases/items/'   =>'Item Database',
-		'databases/monsters/'=>'Monster Database',
-		'map/runescape'      =>'World Map',
-		'calculators'        =>'Calculators',
-		'play'               =>'Play Runescape',
-		'utility/name-check' =>'Name Checker',
-		'calculators/combat' =>'Combat Calculator',
+	Lang::get('navbar.runescape.runescape') => [
+		'guides/quests'       => Lang::get('navbar.runescape.guides.quests'),
+		'guides/locations'    => Lang::get('navbar.runescape.guides.locations'),
+		'databases/items/'    => Lang::get('navbar.runescape.databases.items'),
+		'databases/monsters/' => Lang::get('navbar.runescape.databases.monsters'),
+		'map/runescape'       => Lang::get('navbar.runescape.world_map'),
+		'calculators'         => Lang::get('navbar.runescape.calculators'),
+		'play'                => Lang::get('navbar.runescape.play'),
+		'utility/name-check'  => Lang::get('navbar.runescape.name_checker'),
+		'calculators/combat'  => Lang::get('navbar.runescape.combat_calculator'),
 	],
-	'Social'=>[
-		'calendar'   =>'Event Calendar',
-		'livestream' =>'Livestream',
-		'media'      =>'Social Media',
-		'map/members'=>'Members Map',
-		'clan'       =>'Our Clan',
+	Lang::get('navbar.social.social') => [
+		'calendar'    => Lang::get('navbar.social.calendar'),
+		'livestream'  => Lang::get('navbar.social.livestream'),
+		'media'       => Lang::get('navbar.social.social_media'),
+		'map/members' => Lang::get('navbar.social.members_map'),
+		'clan'        => Lang::get('navbar.social.our_clan'),
 	],
 ];
-if(false){
-	$navs['Staff']=[
-		'staff'=>'Staff Center',
-		'staff/gallery','Gallery',
-		'tickets/manage'=>'Ticket System',
-		'staff/checkup'=>'Staff Checkup',
+if(\Auth::user()->isStaff()){
+	$navs['Staff'] = [
+		'staff'          => Lang::get('navbar.staff.staff'),
+		'staff/gallery'  => Lang::get('navbar.staff.gallery'),
+		'tickets/manage' => Lang::get('navbar.staff.ticket'),
+		'staff/checkup'  => Lang::get('navbar.staff.checkup'),
 	];
+	if(\Auth::user()->hasOneOfRoles(1))
+		$navs['Staff']['staff/admin'] = Lang::get('navbar.staff.admin');
 }
 if(!Auth::check())
-	$navLogged=[
-		'login' =>'Login',
-		'signup'=>'Sign Up'
+	$navLogged = [
+		'login'  => Lang::get('navbar.logged.out.login'),
+		'signup' => Lang::get('navbar.logged.out.signup'),
 	];
 else
-	$navLogged=[
-		Auth::user()->display_name=>[
-			'forum/'.String::slugEncode(Auth::user()->id,Auth::user()->display_name)=>'My Profile',
-			'forum/settings'=>'My Settings',
-			'forum/messenger'=>'Messenger',
-			'forum/content'=>'Content I Follow',
+	$navLogged = [
+		Auth::user()->display_name => [
+			'forums/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
+			'forums/settings'  => Lang::get('navbar.logged.in.my_settings'),
+			'forums/messenger' => Lang::get('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messages.'</span>',
+			'forums/content'   => Lang::get('navbar.logged.in.content').'<span class=\'badge badge-info pull-right\'>'.$follow.'</span>',
 		],
-		'logout'=>'Logout'
+		'logout' => Lang::get('navbar.logged.in.logout'),
 	];
 if(!isset($nav))               $nav="Home";
 if(!isset($bc))                $bc=[];
@@ -101,7 +106,7 @@ $current=$nav;
 							Toggle navigation
 						</span>
 						<span>
-							Menu
+							@lang('navbar.menu')
 						</span>
 					</button>
 					<a href='/' title='RuneTime Home' class='navbar-brand'>
@@ -140,13 +145,13 @@ $current=$nav;
 	@if(is_array($name))
 						<li class='dropdown{{$url==$current?" active":""}}'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-								{{$url}} <span class='caret'></span>
+								{{$url}} {!!$notifications>0?"<span class='badge badge-important'>".$notifications."</span>":""!!}<span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
 		@foreach($name as $url2=>$name2)
 								<li>
-									<a href='{{$url2}}' title='{{$name2}}'>
-										{{$name2}} 
+									<a href='{{$url2}}'>
+										{!!$name2!!} 
 									</a>
 								</li>
 		@endforeach
@@ -194,7 +199,7 @@ $current=$nav;
 		<div id='portfolio' class='row wrapper-holo'>
 			<div class='col-xs-12 col-md-6'>
 				<p class='holo-text holo-line-block'>
-					About Us
+					@lang('footer.about_us')
 				</p>
 				<div id='portfolio-about'>
 					<p>
@@ -222,7 +227,7 @@ $current=$nav;
 			</div>
 			<div class='col-xs-12 col-md-6'>
 				<p class='holo-text holo-line-block'>
-					Follow Us
+					@lang('footer.follow_us')
 				</p>
 				<div id='portfolio-social'>
 					<a href='https://www.facebook.com/RuneTimeOfficial' title='Follow RuneTime on Facebook'><img src='img/fb.png' alt='Facebook' /></a>

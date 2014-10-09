@@ -7,6 +7,8 @@
 
 Route::resource('user', 'Runis\Accounts\User');
 
+
+
 /*
 |-------|
 | Pages |
@@ -46,13 +48,16 @@ Route::group(['prefix'=>'calendar'],function(){
  * Chat
  */
 Route::group(['prefix'=>'chat'],function(){
-	post('update/{since}','ChatController@postUpdate');
+	get('channels','ChatController@getChannels');
+	post('channels/check','ChatController@postCheckChannel');
+	post('update','ChatController@postUpdate');
 	post('start','ChatController@postStart');
 	Route::group(['before'=>'auth.logged','prefix'=>'post'],function(){
 		post('message','ChatController@postMessage');
 		post('status/change','ChatController@postStatusChange');
 	});
 });
+
 /**
  * Clan
  */
@@ -80,21 +85,15 @@ Route::group(['prefix'=>'donate'],function(){
 });
 
 /**
- * Forums
- */
-Route::group(['prefix'=>'forums'],function(){
-	get('/','ForumController@getIndex');
-});
-
-/**
  * Get
  */
 Route::group(['prefix'=>'get'],function(){
 	get('hiscore/{rsn}','GetController@getHiscore');
 	Route::group(['prefix'=>'signup'],function(){
-		post('email','GetSignupController@postEmail');
-		post('display_name','GetSignupController@postDisplayName');
+		post('email','GetController@postEmail');
+		post('display_name','GetController@postDisplayName');
 	});
+	get('bbcode','GetController@getBBCode');
 });
 
 /**
@@ -133,10 +132,6 @@ Route::group(['prefix'=>'livestream'],function(){
 /**
  * Login
  */
-//Route::group(['prefix'=>'login'],function(){
-//	get('/','AuthController@getLoginForm');
-//	post('/','AuthController@postLoginForm');
-//});
 Route::group(['prefix'=>'login'],function(){
 	get('/','AuthController@getLoginForm');
 	post('/','AuthController@postLoginForm');
@@ -205,7 +200,7 @@ Route::group(['prefix'=>'radio'],function(){
 	get('request/history','RadioController@getHistory');
 	get('request/song','RadioController@getSong');
 	get('request/timetable','RadioController@getTimetable');
-	get('requests/current','RadioController@getRequestsCurrent');
+	get('update','RadioController@getUpdate');
 	get('send/request/{artist}/{name}','RadioController@getSendRequest');
 });
 
@@ -256,4 +251,70 @@ Route::group(['prefix'=>'staff'],function(){
 Route::group(['prefix'=>'utility'],function(){
 	get('name-check','UtilityController@getNameCheck');
 	post('name-check','UtilityController@postNameCheck');
+});
+
+
+
+/*
+|-------|
+| Forum |
+|-------|
+*/
+Route::group(['prefix'=>'forums'],function(){
+	get('/','ForumController@getIndex');
+	post('reply','ForumController@postReply');
+
+	/**
+	 * Viewing Subforum
+	 */
+	Route::group([],function(){
+		get('{id}-{slug}/page={page}','ForumController@getSubforum');
+		get('{id}-{slug}','ForumController@getSubforum');
+	});
+	
+	/**
+	 * Viewing Thread
+	 */
+	Route::group(['prefix'=>'thread'],function(){
+		get('{id}-{name}/page={page}','ForumController@getThread');
+		get('{id}-{name}','ForumController@getThread');
+	});
+	
+	/**
+	 * Create Thread
+	 */
+	Route::group(['before'=>'auth.logged','prefix'=>'create/{id}-{name}'],function(){
+		get('/','ForumController@getThreadCreate');
+		post('/','ForumController@postThreadCreate');
+	});
+	/**
+	 * Settings
+	 */
+	Route::group(['prefix'=>'settings'],function(){
+		get('/','ForumController@getSettingsIndex');
+	});
+	
+	/**
+	 * Messenger
+	 */
+	Route::group(['prefix'=>'messenger'],function(){
+		get('/','ForumController@getMessengerIndex');
+		get('create','ForumController@getMessengerCreate');
+		post('create','ForumController@postMessengerCreate');
+		get('{id}-{slug}','ForumController@getMessengerView');
+		post('reply','ForumController@postMessengerReply');
+	});
+
+	/**
+	 * Content
+	 */
+	Route::group(['prefix'=>'content'],function(){
+		get('/','ForumController@getContentIndex');
+	});
+	
+	/**
+	 * Statuses
+	 */
+	Route::group(['prefix'=>'statuses'],function(){
+	});
 });

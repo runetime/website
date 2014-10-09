@@ -58,4 +58,7 @@ abstract class EloquentRepository{
 	public function paginate($number){
 		return $this->model->simplePaginate($number);
 	}
+	public function getCount(){
+		return $this->model->count();
+	}
 }
