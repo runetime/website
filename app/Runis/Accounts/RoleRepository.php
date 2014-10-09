@@ -22,11 +22,13 @@ class RoleRepository extends EloquentRepository{
 			else
 				$q->orWhere('role_id','=',$role);
 		}
+		$q->orderBy('role_id','asc');
+		$q->orderBy('user_id','asc');
 		$q=$q->get();
-		$users=[];
-		foreach($q as $user)
-			$users[].=$this->users->getById($user->user_id);
-		return $users;
+		$list = [];
+		foreach($q as $item)
+			array_push($list, $item);
+		return $list;
 	}
 	public function getByName($roleName){
 		return $this->model->
