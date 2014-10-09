@@ -41,3 +41,74 @@
 .full-width{
 	width:100%;
 }
+.row-flat{
+	margin-left:0em !important;
+	margin-right:0em !important;
+}
+.panel-dark{
+	background:#292929;
+	border-color:#313131;
+	.panel-heading{
+		background-color:#585858;
+		border-color:#616161;
+	}
+}
+.padding-none{
+	padding:0em !important;
+}
+
+
+
+$cardHeight:200px;
+$cardWidth:200px;
+/* entire container, keeps perspective */
+.flip-container{
+	perspective:1000;
+	.flipper{
+		transform-style:preserve-3d;
+		transition:0.6s;
+		position:relative;
+		.front{
+			background:{
+				color:#232323;
+				size:$cardWidth $cardHeight !important;
+			}
+			transform:rotateY(0deg);
+			z-index:2;
+		}
+		.back{
+			transform:rotateY(180deg);
+			.back-logo{
+				background-size:($cardWidth/2) ($cardWidth/2);
+				height:($cardHeight/2);
+				width:($cardWidth/2);
+			}
+			.back-title{
+				left:0;
+				position:absolute;
+				right:0;
+				text-align:center;
+				top:80px;
+				width:100%;
+			}
+		}
+		>div{
+			background:#232323;
+			border-radius:1em;
+			backface-visibility:hidden;
+			left:0;
+			position:absolute;
+			top:0;
+		}
+	}
+	&:hover,
+	.hover{
+		.flipper{
+			transform:rotateY(180deg);
+		}
+	}
+}
+.flip-container, .front, .back{
+	height:$cardHeight;
+	width:$cardWidth;
+}

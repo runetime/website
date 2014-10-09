@@ -59,11 +59,15 @@
 			line-height:$actions-h;
 			text-align:center;
 			width:50%;
-			&:nth-child(even){
-				border-left:$border;
-			}
-			&:nth-child(odd){
+			&:nth-child(1){
 				border-right:$border;
+			}
+			&:nth-child(2){
+				border-left:$border;
+				border-right:$border;
+			}
+			&:nth-child(3){
+				border-left:$border;
 			}
 			&:hover{
 				background:#303030;
