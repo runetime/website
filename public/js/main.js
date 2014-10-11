@@ -808,3 +808,7 @@ function RuneTime() {
 }
 RuneTime = new RuneTime();
 RuneTime.Utilities = new RuneTime.Utilities();
+$(function () {
+	"use strict";
+	$('[data-toggle]').tooltip();
+});
