@@ -17,7 +17,6 @@ class CreateForumThreadsTable extends Migration {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->string('title');
-			$table->integer('op');
 			$table->integer('views');
 			$table->integer('posts');
 			$table->integer('last_post');
