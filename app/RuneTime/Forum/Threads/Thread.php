@@ -4,7 +4,7 @@ use App\Runis\Core\Entity;
 class Thread extends Entity {
 	protected $table      = 'forum_threads';
 	protected $with       = [];
-	protected $fillable   = ['author_id','title','op','views','posts','last_post','poll','status','tags','subforum'];
+	protected $fillable   = ['author_id','title','views','posts','last_post','poll','status','tags','subforum'];
 	protected $dates      = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
@@ -14,10 +14,18 @@ class Thread extends Entity {
 	const STATUS_INVISIBLE_LOCKED = 4;
 	const STATUS_VISIBLE_LOCKED = 5;
 	const POSTS_PER_PAGE  = 20;
-	public function addPost($postId){
+	public function addPost($postId) {
 		$this->posts()->attach($postId);
 	}
-	public function posts(){
+	public function posts() {
 		return $this->hasMany('Post');
+	}
+	public function incrementViews() {
+		$this->increment('views');
+		$this->save();
+	}
+	public function incrementPosts() {
+		$this->increment('posts');
+		$this->save();
 	}
 }
