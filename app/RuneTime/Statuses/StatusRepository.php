@@ -12,4 +12,11 @@ class StatusRepository extends EloquentRepository{
 			take($count)->
 			get();
 	}
+	public function getByAuthor($authorId, $amount = 1, $order = 'desc') {
+		return $this->model->
+			where('author_id', '=', $authorId)->
+			orderBy('id', $order)->
+			take($amount)->
+			get();
+	}
 }
