@@ -1,8 +1,9 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper'>
+			<div class='wrapper-flat'>
+				<br />
 				<div class='row row-flat'>
-					<div class='col-xs-12 col-md-10'>
+					<div class='col-xs-12 col-md-9'>
 @foreach($subforumList[-1] as $subforums)
 	@if(empty(json_decode($subforums->roles))||Auth::check()&&in_array(\Auth::user()->importantRole()->id,json_decode($subforums->roles)))
 						<div class='panel panel-dark'>
@@ -34,7 +35,17 @@
 												{{$subforum->posts}} posts
 											</td>
 											<td>
-												Recent Post Info
+			@if(!empty($subforum->last_post_info))
+												<a href='/forum/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}' title='{{$subforum->last_thread_title}}'>
+													{{$subforum->last_thread_info->title}} 
+												</a>
+												<br />
+												by {!!\Link::name($subforum->last_post_info->author_id)!!} 
+												<br />
+												<a href='/forum/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}/last-post' title='{{$subforum->last_thread_title}}'>
+													{!!\Time::shortReadable($subforum->last_post_info->created_at)!!} 
+												</a>
+			@endif
 											</td>
 										</tr>
 		@endforeach
@@ -45,10 +56,22 @@
 	@endif
 @endforeach
 					</div>
-					<div class='col-xs-12 col-md-2'>
+					<div class='col-xs-12 col-md-3'>
 						<h3>
 							Recent Threads
 						</h3>
+						<div class='holo-box-dark'>
+@foreach($recentThreads as $thread)
+							<div class='holo-box-in'>
+								{!!\Image::userPhoto($thread->author_id,['photo-sm','pull-left'])!!} 
+								<a href='/forums/thread/{{\String::slugEncode($thread->id, $thread->title)}}' title='{{$thread->title}}'>
+									{{$thread->title}} 
+								</a>
+								<br />
+								{!!\Link::name($thread->author_id)!!}, <span class='text-muted'>{{\Time::shortReadable($thread->created_at)}}</span>
+							</div>
+@endforeach
+						</div>
 						<h3>
 							Recent Posts
 						</h3>

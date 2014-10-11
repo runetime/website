@@ -34,7 +34,7 @@ $navs=[
 		'clan'        => Lang::get('navbar.social.our_clan'),
 	],
 ];
-if(\Auth::user()->isStaff()){
+if(\Auth::check()&&\Auth::user()->isStaff()){
 	$navs['Staff'] = [
 		'staff'          => Lang::get('navbar.staff.staff'),
 		'staff/gallery'  => Lang::get('navbar.staff.gallery'),
