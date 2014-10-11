@@ -5,18 +5,18 @@
 }
 .members-administrator{
 	@extends .members-staff;
-	color:$roles-administrator-color;
+	color:$roles-administrator-color !important;
 	&::before{
 		content:url($roles-administrator-image);
 	}
 }
 .members-administrator-no-img{
 	@extends .members-staff;
-	color:$roles-administrator-color;
+	color:$roles-administrator-color !important;
 }
 .members-radio-team-leader{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 	&::before{
 		content:url($roles-radio-team-leader-image);
 		top:8px;
@@ -24,139 +24,140 @@
 }
 .members-radio-team-leader-no-img{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 }
 .members-radio-dj{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 	&::before{
 		content:url($roles-radio-team-image);
 	}
 }
 .members-radio-dj-no-img{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 }
 .members-media-team-leader{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 	&::before{
 		content:url($roles-media-team-leader-image);
 	}
 }
 .members-media-team-leader-no-img{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 }
 .members-media-team{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 	&::before{
 		content:url($roles-media-team-image);
 	}
 }
 .members-media-team-no-img{
 	@extends .members-staff;
-	color:$roles-radio-team-color;
+	color:$roles-radio-team-color !important;
 }
 .members-web-developer-leader{
 	@extends .members-staff;
-	color:$roles-web-developer-color;
+	color:$roles-web-developer-color !important;
+	left:1px;
 	&::before{
 		content:url($roles-web-developer-leader-image);
 	}
 }
 .members-web-developer-leader-no-img{
 	@extends .members-staff;
-	color:$roles-web-developer-color;
+	color:$roles-web-developer-color !important;
 }
 .members-web-developer{
 	@extends .members-staff;
-	color:$roles-web-developer-color;
+	color:$roles-web-developer-color !important;
 	&::before{
 		content:url($roles-web-developer-image);
 	}
 }
 .members-web-developer-no-img{
 	@extends .members-staff;
-	color:$roles-web-developer-color;
+	color:$roles-web-developer-color !important;
 }
 .members-content-team-leader{
 	@extends .members-staff;
-	color:$roles-content-team-color;
+	color:$roles-content-team-color !important;
 	&::before{
 		content:url($roles-content-team-leader-image);
 	}
 }
 .members-content-team-leader-no-img{
 	@extends .members-staff;
-	color:$roles-content-team-color;
+	color:$roles-content-team-color !important;
 }
 .members-content-team{
 	@extends .members-staff;
-	color:$roles-content-team-color;
+	color:$roles-content-team-color !important;
 	&::before{
 		content:url($roles-content-team-image);
 	}
 }
 .members-content-team-no-img{
 	@extends .members-staff;
-	color:$roles-content-team-color;
+	color:$roles-content-team-color !important;
 }
 .members-community-team-leader{
 	@extends .members-staff;
-	color:$roles-community-team-color;
+	color:$roles-community-team-color !important;
 	&::before{
 		content:url($roles-community-team-leader-image);
 	}
 }
 .members-community-team-leader-no-img{
 	@extends .members-staff;
-	color:$roles-community-team-color;
+	color:$roles-community-team-color !important;
 }
 .members-community-team{
 	@extends .members-staff;
-	color:$roles-community-team-color;
+	color:$roles-community-team-color !important;
 	&::before{
 		content:url($roles-community-team-image);
 	}
 }
 .members-community-team-no-img{
 	@extends .members-staff;
-	color:$roles-community-team-color;
+	color:$roles-community-team-color !important;
 }
 .members-events-team-leader{
 	@extends .members-staff;
-	color:$roles-events-team-color;
+	color:$roles-events-team-color !important;
 	&::before{
 		content:url($roles-events-team-leader-image);
 	}
 }
 .members-events-team-leader-no-img{
 	@extends .members-staff;
-	color:$roles-events-team-color;
+	color:$roles-events-team-color !important;
 }
 .members-events-team{
 	@extends .members-staff;
-	color:$roles-events-team-color;
+	color:$roles-events-team-color !important;
 	&::before{
 		content:url($roles-events-team-image);
 	}
 }
 .members-events-team-no-img{
 	@extends .members-staff;
-	color:$roles-events-team-color;
+	color:$roles-events-team-color !important;
 }
 .members-donator{
 	@extends .members;
-	color:$roles-donator-color;
+	color:$roles-donator-color !important;
 	&::before{
 		content:url($roles-donator-image);
 	}
 }
 .members-donator-no-img{
 	@extends .members;
-	color:$roles-donator-color;
+	color:$roles-donator-color !important;
 }
 // Colors
 $barColor: darkgoldenrod;
@@ -168,8 +169,8 @@ $backColor: #2f3439;
 	width:52px;
 	height:52px;
 	border-radius:50%;
-	border:2px solid $backColor;
-	background-color:$barColor;
+	border:2px solid $backColor !important;
+	background-color:$barColor !important;
 	>div{
 		background:{
 			color:#373737 !important;

@@ -9,4 +9,9 @@
 .holo-box-dark{
 	@extend .holo-box;
 	background:#282828;
+	.holo-box-in{
+		background:#1a1a1a;
+		margin-bottom:1em;
+		padding:0.25em;
+	}
 }
