@@ -65,4 +65,10 @@ require $framework.'/Illuminate/Foundation/start.php';
 |
 */
 
+App::missing(function($exception)
+{
+	\Log::info('User found a 404');
+    return Response::view('errors.missing', array(), 404);
+});
+
 return $app;
