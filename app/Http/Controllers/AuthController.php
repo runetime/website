@@ -6,20 +6,19 @@ use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\Authenticator;
 class AuthController extends BaseController{
-	public function __construct(Authenticator $auth,UserRepository $users){
-		$this->auth=$auth;
-		$this->users=$users;
+	public function __construct(Authenticator $auth, UserRepository $users) {
+		$this->auth = $auth;
+		$this->users = $users;
 	}
 	public function getLoginForm(){
-		$nav='Login';
-		$title='Login';
-		$view=view('auth.login',compact('nav','title'));
+		$nav = 'Login';
+		$title = 'Login';
+		$view = view('auth.login', compact('nav', 'title'));
 		return $view;
 	}
 	public function postLoginForm(LoginForm $form){
-		if($form->input('email')&&$form->input('password'))
-			if($this->auth->attempt(['email'=>$form->input('email'),'password'=>$form->input('password')],true))
-				return redirect()->action('HomeController@getIndex');
+		if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
+			return redirect()->action('HomeController@getIndex');
 		return redirect()->action('LoginController@getLoginForm');
 	}
 	public function getSignupForm(){
@@ -31,29 +30,15 @@ class AuthController extends BaseController{
 	public function postSignupForm(SignupForm $form){
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
-		if($form->input('display_name')&&$form->input('email')&&$form->input('password')&&$form->input('password2')){
-			if($form->input('password')==$form->input('password2')){
-				if(!$this->users->getByDisplayName($form->input('display_name'))){
-					$user=new User;
-					$user->display_name=$form->input('display_name');
-					$user->email=$form->input('email');
-					$user->password=\Hash::make($form->input('password'));
-					$user->save();
-					$user->setRole('Members');
-					$this->auth->loginUsingId($user->id);
-					return redirect()->action('ForumController@getIndex');
-				}
-				else{
-					return $this->view('errors.signup.taken');
-				}
-			}
-			else{
-				return $this->view('errors.signup.passwords');
-			}
-		}
-		else{
-			return $this->view('errors.signup.input');
-		}
+		if(!$form->input('password') == $form->input('password2'))
+			return $this->view('errors.signup.passwords');
+		if($this->users->getByDisplayName($form->input('display_name')))
+			return $this->view('errors.signup.taken');
+		$user=new User;
+		$user = $user->saveNew($form->input('display_name'), $form->input('email'), \Hash::make($form->input('password')));
+		$user->setRole('Members');
+		$this->auth->loginUsingId($user->id);
+		return redirect()->action('ForumController@getIndex');
 	}
 	public function getLogout(){
 		$this->auth->logout();

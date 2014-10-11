@@ -75,4 +75,7 @@ class String{
 			return $roles[rand(0,count($roles)-1)];
 		return -1;
 	}
+	public static function tooltip($string, $placement='top') {
+		return "data-toggle='tooltip' data-placement='" . $placement . "' title='" . $string . "'";
+	}
 }
