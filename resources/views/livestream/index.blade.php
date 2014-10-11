@@ -12,7 +12,9 @@
 						</object>
 					</div>
 					<div class='col-xs-12 col-sm-4 col-md-3 col-lg-3'>
-						Chat
+						<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
+@include('partials.chat')
+						</div>
 					</div>
 				</div>
 			</div>
