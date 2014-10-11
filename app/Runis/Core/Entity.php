@@ -39,4 +39,7 @@ abstract class Entity extends Model{
 		}
 		return $newRules;
 	}
+	public function saveNew(){
+		return $this->create(array_combine($this->fillable, func_get_args()));
+	}
 }
