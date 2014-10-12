@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => 'jkwATEtReGCvIaBQDpGxTT1afwxCF3hN',
+	'key' => 'B0MeNLfGTHFVWiSyoJw6KFawFtHEJ4eA',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -101,7 +101,7 @@ return [
 		'App\Providers\AppServiceProvider',
 		'App\Providers\ArtisanServiceProvider',
 		'App\Providers\ErrorServiceProvider',
-		'App\Providers\FilterServiceProvider',
+		'App\Providers\EventServiceProvider',
 		'App\Providers\LogServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
@@ -128,7 +128,6 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
 
 	],
 
@@ -143,7 +142,7 @@ return [
 	|
 	*/
 
-	'manifest' => storage_path().'/meta',
+	'manifest' => storage_path().'/framework',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -193,6 +192,8 @@ return [
 		'Link'      => 'App\Utilities\Link',
 		'String'    => 'App\Utilities\String',
 		'Time'      => 'App\Utilities\Time',
+		'Carbon'    => 'Carbon\Carbon',
+
 	],
 
 ];

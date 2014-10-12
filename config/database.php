@@ -51,15 +51,16 @@ return [
 			'database' => storage_path().'/database.sqlite',
 			'prefix'   => '',
 		],
-		'mysql'=>[
-			'driver'   => 'mysql',
-			'host'     => 'localhost',
-			'database' => 'runetime',
-			'username' => 'root',
-			'password' => 'root',
-			'charset'  => 'utf8',
-			'collation'=> 'utf8_unicode_ci',
-			'prefix'   => '',
+
+		'mysql' => [
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'forge',
+			'username'  => 'forge',
+			'password'  => '',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
 		],
 
 		'pgsql' => [

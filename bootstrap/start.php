@@ -38,6 +38,7 @@ require __DIR__.'/environment.php';
 */
 
 $app->bindInstallPaths(require __DIR__.'/paths.php');
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application
@@ -64,11 +65,5 @@ require $framework.'/Illuminate/Foundation/start.php';
 | from the actual running of the application and sending responses.
 |
 */
-
-App::missing(function($exception)
-{
-	\Log::info('User found a 404');
-    return Response::view('errors.missing', array(), 404);
-});
 
 return $app;
