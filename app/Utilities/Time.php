@@ -58,4 +58,9 @@ class Time{
 		else               $str = date('Y-m-d');
 		return $str . " " . date('H:i', $time);
 	}
+	public static function DMY($time) {
+		if(!is_numeric($time))
+			$time = self::getEpoch($time);
+		return date('jS \of M y', $time);
+	}
 }

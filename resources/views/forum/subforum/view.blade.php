@@ -9,9 +9,7 @@
 				</p>
 				<div class='pull-left'>
 @if(!empty($paginator))
-					<ul class='pagination'>
-<?php echo $paginator->render(); ?>
-					</ul>
+					{!!$paginator->links()!!}
 @endif
 				</div>
 				<div class='pull-right'>
@@ -31,7 +29,7 @@
 @if(!empty($subforumList))
 				<table class='table table-hover'>
 					<tbody>
-	@foreach($subforumList as $subforumItem)
+	@foreach($paginator as $subforumItem)
 						<tr>
 							<td>
 								-
@@ -68,7 +66,7 @@
 				</table>
 @endif
 @if(!empty($threads))
-				<table class='table table-hover'>
+				<table class='table table-hover threads'>
 					<tbody>
 	@foreach($threads as $thread)
 						<tr>
@@ -81,6 +79,9 @@
 								</a> 
 								<br />
 								Started by {!!\Link::name($thread->author_id)!!}, {{\Time::shortReadable($thread->created_at)}} 
+		@foreach(json_decode($thread->tags) as $tag)
+								<a href='/forums/tag/{{$tag}}' class='label label-rt' title='{{$tag}}'>{{$tag}}</a> 
+		@endforeach
 							</td>
 							<td>
 								{{$thread->posts-1}} posts

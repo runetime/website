@@ -27,4 +27,18 @@ class ThreadRepository extends EloquentRepository{
 			take($amount)->
 			get();
 	}
+	public function getByPage($page = 1) {
+		$results = new \stdClass;
+		$results->page = $page;
+		$results->limit = Subforum::THREADS_PER_PAGE;
+		$results->totalItems = 0;
+		$results->items = array();
+
+		$users = $this->model->skip(Subforum::THREADS_PER_PAGE * ($page - 1))->take(Subforum::THREADS_PER_PAGE)->get();
+
+		$results->totalItems = $this->model->count();
+		$results->items = $users->all();
+
+		return $results;
+	}
 }

@@ -1,15 +1,5 @@
 <?php
 /*
-|-----------|
-| Resources |
-|-----------|
-*/
-
-Route::resource('user',  'Runis\Accounts\User');
-
-
-
-/*
 |-------|
 | Pages |
 |-------|
@@ -127,6 +117,7 @@ Route::group([], function() {
  */
 Route::group(['prefix' => 'livestream'], function() {
 	get('/', 'LivestreamController@getIndex');
+	get('reset', 'LiveStreamController@getIndex', ['reset' => true]);
 });
 
 /**
@@ -243,6 +234,33 @@ Route::group(['prefix' => 'staff'], function() {
 		get('/', 'StaffController@getIndex');
 	});
 	get('list', 'StaffController@getList');
+});
+
+/**
+ * Ticket System
+ */
+Route::group(['prefix' => 'tickets'], function() {
+	get('/', 'TicketController@getIndex');
+	/**
+	 * Viewing a ticket and changing its status
+	 */
+	Route::group(['prefix' => '{id}-{name}'], function() {
+		get('/', 'TicketController@getTicket');
+		get('open', 'TicketController@getTicketStatus', ['status' => 'open']);
+		get('closed', 'TicketController@getTicketStatus', ['status' => 'closed']);
+		post('reply', 'TicketController@postReply');
+	});
+	get('{id}-{name}', 'TicketController@getView');
+	/**
+	 * Create a Ticket
+	 */
+	Route::group(['prefix' => 'create'], function() {
+		get('/', 'TicketController@getCreate');
+		post('/', 'TicketController@postCreate');
+	});
+	get('staff', 'TicketController@getStaffIndex');
+	get('staff/open', 'TicketController@getStaffList', ['status' => 'open']);
+	get('staff/closed', 'TicketController@getStaffList', ['status' => 'closed']);
 });
 
 /**

@@ -52,7 +52,7 @@ if(!Auth::check())
 else
 	$navLogged = [
 		Auth::user()->display_name => [
-			'forums/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
+			'forums/members/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
 			'forums/settings'  => Lang::get('navbar.logged.in.my_settings'),
 			'forums/messenger' => Lang::get('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messages.'</span>',
 			'forums/content'   => Lang::get('navbar.logged.in.content').'<span class=\'badge badge-info pull-right\'>'.$follow.'</span>',

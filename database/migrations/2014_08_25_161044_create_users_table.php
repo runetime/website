@@ -25,9 +25,15 @@ class CreateUsersTable extends Migration{
 			$t->integer('gender');
 			$t->integer('referred_by');
 			$t->mediumtext('awards');
-			$t->string('rs');
-			$t->string('rsn');
-			$t->string('allegiance');
+			$t->string('social_twitter');
+			$t->string('social_facebook');
+			$t->string('social_youtube');
+			$t->string('social_website');
+			$t->string('social_skype');
+			$t->string('runescape_version');
+			$t->string('runescape_rsn');
+			$t->string('runescape_clan');
+			$t->string('runescape_allegiance');
 			$t->rememberToken();
 			$t->timestamps();
 			$t->softDeletes();

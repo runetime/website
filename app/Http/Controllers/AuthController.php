@@ -11,15 +11,15 @@ class AuthController extends BaseController{
 		$this->users = $users;
 	}
 	public function getLoginForm(){
-		$nav = 'Login';
-		$title = 'Login';
-		$view = view('auth.login', compact('nav', 'title'));
-		return $view;
+		$this->nav('Login');
+		$this->title('Login');
+		return $this->view('auth.login');
 	}
 	public function postLoginForm(LoginForm $form){
-		if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
-			return redirect()->action('HomeController@getIndex');
-		return redirect()->action('LoginController@getLoginForm');
+		if(!empty($this->users->getByEmail($form->input('email'))))
+			if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
+				return \redirect()->action('HomeController@getIndex');
+		return \redirect()->action('AuthController@getLoginForm');
 	}
 	public function getSignupForm(){
 		$this->js('signup');

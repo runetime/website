@@ -4,6 +4,8 @@ use App\Http\Requests\ForumThreadCreateForm;
 use App\Http\Requests\ThreadReplyForm;
 use App\RuneTime\Forum\Subforums\Subforum;
 use App\RuneTime\Forum\Subforums\SubforumRepository;
+use App\RuneTime\Forum\Tags\Tag;
+use App\RuneTime\Forum\Tags\TagRepository;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Thread;
@@ -16,12 +18,14 @@ class ForumController extends BaseController {
 	private $posts;
 	private $subforums;
 	private $statuses;
+	private $tags;
 	private $threads;
 	private $users;
-	public function __construct(PostRepository $posts, SubforumRepository $subforums, StatusRepository $statuses, ThreadRepository $threads, UserRepository $users){
+	public function __construct(PostRepository $posts, SubforumRepository $subforums, StatusRepository $statuses, TagRepository $tags, ThreadRepository $threads, UserRepository $users){
 		$this->posts = $posts;
 		$this->subforums = $subforums;
 		$this->statuses = $statuses;
+		$this->tags = $tags;
 		$this->threads = $threads;
 		$this->users = $users;
 	}
@@ -62,9 +66,8 @@ class ForumController extends BaseController {
 			array_push($threadList, $thread);
 		}
 		// Pagination
-		$paginator=new ZurbPresenter($this->subforums->paginate(Subforum::THREADS_PER_PAGE));
-		$paginator->setCurrentPage($page);
-		$paginator->url('forums/' . \String::slugEncode($subforum->id, $subforum->name));
+		$items = $this->threads->getByPage($page);
+		$paginator=\Paginator::make($items->items, $items->totalItems, 1);
 
 		// Breadcrumbs
 		$bc = [];
@@ -133,7 +136,7 @@ class ForumController extends BaseController {
 	}
 	public function postThreadCreate(ForumThreadCreateForm $form) {
 		$subforum = $this->subforums->getById($form->subforum);
-		if(!$subforum) return $this->view('errors.forum.subforum.missing');
+		if(empty($subforum)) return $this->view('errors.forum.subforum.missing');
 		$tags = json_encode(explode(",",str_replace(", ",",",$form->tags)));
 		$thread = new Thread;
 		$thread = $thread->saveNew(\Auth::user()->id, $form->title, 1, 1, 0, -1, Thread::STATUS_VISIBLE, $tags, $form->subforum);
@@ -143,6 +146,20 @@ class ForumController extends BaseController {
 		
 		$thread->last_post = $post->id;
 		$thread->save();
+		
+		// Tags
+		foreach(explode(",",str_replace(", ",",",$form->tags)) as $tagName) {
+			$tag = $this->tags->getByName($tagName);
+			if(empty($tag)) {
+				$tag = new Tag;
+				$tag = $tag->saveNew(\Auth::user()->id, $tagName);
+			} else {
+				$tag = $this->tags->getByName($tagName);
+			}
+			$this->tags->addTagThread(
+				$tag->id, 
+				$thread->id);
+		}
 		$this->subforums->updateLastPost($post->id, (int)$subforum->id);
 		$this->subforums->incrementThreads($subforum->id);
 		return \redirect()->action('ForumController@getThread', ['id' => $thread->id, 'name' => \String::slugEncode($thread->title)]);
@@ -167,7 +184,7 @@ class ForumController extends BaseController {
 		$this->bc($bc);
 		$this->nav('Forums');
 		$this->title($profile->display_name);
-		return $this->view('forum.profile.index', compact('profile'));
+		return $this->view('forum.profile.index', compact('profile', 'latestStatus'));
 	}
 	public function getProfileFeed() {
 		
@@ -176,6 +193,30 @@ class ForumController extends BaseController {
 		
 	}
 	public function getSettingsIndex() {
-		return $this->getIndex();
+
+	}
+	public function getSettingsInformation() {
+		
+	}
+	public function getSettingsNotifications() {
+		
+	}
+	public function getTagSearch($name) {
+		$tag = $this->tags->getByName($name);
+		if(empty($tag)) return \App::abort(404);
+		$threads = $tag->getThreads();
+		$threadList = [];
+		foreach($threads as $thread) {
+			$thread = $this->threads->getById($thread->thread_id);
+			$thread->last_post_info = $this->posts->getById($thread->last_post);
+			array_push($threadList, $thread);
+		}
+		
+		// Breadcrumbs
+		$bc = ['forums/' => 'Forums'];
+		$this->bc($bc);
+		$this->nav('Forums');
+		$this->title('Tag: ' . $tag->name);
+		return $this->view('forum.tags.view', compact('tag', 'threadList'));
 	}
 }

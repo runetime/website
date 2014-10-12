@@ -108,7 +108,9 @@ $cardWidth:200px;
 		}
 	}
 }
-.flip-container, .front, .back{
+.flip-container,
+.front,
+.back{
 	height:$cardHeight;
 	width:$cardWidth;
 }

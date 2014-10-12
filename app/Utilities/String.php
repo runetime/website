@@ -78,4 +78,10 @@ class String{
 	public static function tooltip($string, $placement='top') {
 		return "data-toggle='tooltip' data-placement='" . $placement . "' title='" . $string . "'";
 	}
+	public static function gender($genderId, $image = true) {
+		if($genderId == 0) $name = "Not Telling";
+		if($genderId == 1) $name = "Female";
+		if($genderId == 2) $name = "Male";
+		return "<img src='/img/forum/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
+	}
 }
