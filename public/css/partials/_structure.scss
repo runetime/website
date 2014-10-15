@@ -78,10 +78,9 @@ $cardWidth:200px;
 		}
 		.back{
 			transform:rotateY(180deg);
-			.back-logo{
-				background-size:($cardWidth/2) ($cardWidth/2);
-				height:($cardHeight/2);
-				width:($cardWidth/2);
+			.back-logo >img{
+				max-height:8em;
+				max-width:$cardWidth;
 			}
 			.back-title{
 				left:0;

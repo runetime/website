@@ -5,7 +5,6 @@ use App\Http\Requests\ChatUpdateForm;
 use App\Http\Requests\ChatStartForm;
 use App\Http\Requests\ChatCheckChannelForm;
 use App\RuneTime\BBCode\BBCodeRepository;
-use App\RuneTime\Chat\Action;
 use App\RuneTime\Chat\ActionRepository;
 use App\RuneTime\Chat\ChannelRepository;
 use App\RuneTime\Chat\Chat;
@@ -18,6 +17,14 @@ class ChatController extends BaseController{
 	private $channels;
 	private $chat;
 	private $users;
+
+	/**
+	 * @param ActionRepository  $actions
+	 * @param BBCodeRepository  $bbcode
+	 * @param ChannelRepository $channels
+	 * @param ChatRepository    $chat
+	 * @param UserRepository    $users
+	 */
 	public function __construct(ActionRepository $actions,BBCodeRepository $bbcode,ChannelRepository $channels,ChatRepository $chat,UserRepository $users){
 		$this->actions=$actions;
 		$this->bbcode=$bbcode;
@@ -25,6 +32,12 @@ class ChatController extends BaseController{
 		$this->chat=$chat;
 		$this->users=$users;
 	}
+
+	/**
+	 * @param ChatStartForm $form
+	 *
+	 * @return string
+	 */
 	public function postStart(ChatStartForm $form){
 		$channel=$this->channels->getByNameTrim($form->input('channel'));
 		$messages=$this->chat->getByChannel($channel->id,Chat::PER_PAGE);
@@ -44,6 +57,12 @@ class ChatController extends BaseController{
 		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
 	}
+
+	/**
+	 * @param ChatUpdateForm $form
+	 *
+	 * @return string
+	 */
 	public function postUpdate(ChatUpdateForm $form){
 		$delta=$form->input('delta');
 		$messages=$this->chat->getByCreatedAt(Time::formatTime(time()-$delta));
@@ -51,9 +70,8 @@ class ChatController extends BaseController{
 		$users=[];
 		foreach($messages as $message){
 			$messageCurrent=new \stdClass;
-			if(!isset($users[$message->author_id])){
+			if(!isset($users[$message->author_id]))
 				$users[$message->author_id]=$this->users->getById($message->author_id);
-			}
 			$messageCurrent->author_name=$users[$message->author_id]->display_name;
 			$messageCurrent->contents_parsed=$message->contents_parsed;
 			$messageCurrent->created_at=strtotime($message->created_at);
@@ -63,6 +81,12 @@ class ChatController extends BaseController{
 		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
 	}
+
+	/**
+	 * @param ChatMessageForm $form
+	 *
+	 * @return string
+	 */
 	public function postMessage(ChatMessageForm $form){
 		if(\Auth::check()){
 			$channel=$this->channels->getByNameTrim($form->input('channel'));
@@ -88,8 +112,16 @@ class ChatController extends BaseController{
 		header('Content-Type: application/json');
 		return json_encode($response);
 	}
+
+	/**
+	 *
+	 */
 	public function postStatusChange(){
 	}
+
+	/**
+	 * @return string
+	 */
 	public function getChannels(){
 		$channels=$this->channels->getAll();
 		$channelList=[];
@@ -105,15 +137,19 @@ class ChatController extends BaseController{
 		header('Content-Type: application/json');
 		return json_encode(array_reverse($channelList));
 	}
+
+	/**
+	 * @param ChatCheckChannelForm $form
+	 *
+	 * @return array
+	 */
 	public function postCheckChannel(ChatCheckChannelForm $form){
 		$channel=$this->channels->getByNameTrim($form->input('channel'));
 		$response=[];
-		if($channel){
+		if($channel)
 			$response['valid']=true;
-		}
-		else{
+		else
 			$response['valid']=false;
-		}
 		header('Content-Type: application/json');
 		return $response;
 	}

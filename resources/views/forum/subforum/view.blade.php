@@ -8,9 +8,6 @@
 					{!!$subforum->description!!}
 				</p>
 				<div class='pull-left'>
-@if(!empty($paginator))
-					{!!$paginator->links()!!}
-@endif
 				</div>
 				<div class='pull-right'>
 					<ul class='list-inline'>
@@ -29,7 +26,7 @@
 @if(!empty($subforumList))
 				<table class='table table-hover'>
 					<tbody>
-	@foreach($paginator as $subforumItem)
+	@foreach($subforumList as $subforumItem)
 						<tr>
 							<td>
 								-

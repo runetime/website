@@ -5,7 +5,7 @@
 				<div class='row row-flat'>
 					<div class='col-xs-12 col-md-9'>
 @foreach($subforumList[-1] as $subforums)
-	@if(empty(json_decode($subforums->roles))||Auth::check()&&in_array(\Auth::user()->importantRole()->id,json_decode($subforums->roles)))
+	@if(empty(json_decode($subforums->roles)) || Auth::check() && in_array(\Auth::user()->importantRole()->id,json_decode($subforums->roles)))
 						<div class='panel panel-dark'>
 							<div class='panel-heading'>
 								<h3 class='panel-title'>
@@ -18,6 +18,7 @@
 								<table class='table table-subforums'>
 									<tbody>
 		@foreach($subforumList[$subforums->id] as $subforum)
+			@if(empty(json_decode($subforum->roles)) || \Auth::check() && in_array(\Auth::user()->importantRole()->id,json_decode($subforum->roles)))
 										<tr>
 											<td>
 											</td>
@@ -35,7 +36,7 @@
 												{{$subforum->posts}} posts
 											</td>
 											<td>
-			@if(!empty($subforum->last_post_info))
+				@if(!empty($subforum->last_post_info))
 												<a href='/forum/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}' title='{{$subforum->last_thread_title}}'>
 													{{$subforum->last_thread_info->title}} 
 												</a>
@@ -45,9 +46,10 @@
 												<a href='/forum/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}/last-post' title='{{$subforum->last_thread_title}}'>
 													{!!\Time::shortReadable($subforum->last_post_info->created_at)!!} 
 												</a>
-			@endif
+				@endif
 											</td>
 										</tr>
+			@endif
 		@endforeach
 									</tbody>
 								</table>

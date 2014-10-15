@@ -12,7 +12,6 @@
 								{{$newsPiece->title}} 
 							</h3>
 							<span class='text-muted'>{{Time::long($newsPiece->id)}}</span> by {!!Link::Name($newsPiece->author_id)!!} in
-							</span>
 							<p>
 								{{$newsPiece->contents}}
 							</p>
@@ -33,13 +32,22 @@
 					</div>
 					<div class='col-xs-12 col-sm-4 col-md-3'>
 						<h3>
-							Statuses
+							Status Updates
 						</h3>
 						<div class='sidebar-box'>
 @foreach($statuses as $status)
 							<div class='status'>
-								{{var_dump($status)}} 
+								{{var_dump($status)}}
 							</div>
+@endforeach
+						</div>
+						<h3>
+							Recent Topics
+						</h3>
+						<div class='sidebar-box'>
+@foreach($threads as $thread)
+							{{$thread->title}}
+                            
 @endforeach
 						</div>
 					</div>

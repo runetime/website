@@ -1,21 +1,37 @@
 <?php
 namespace App\Http\Controllers;
 use App\RuneTime\Databases\DatabaseRepository;
-class DatabaseController extends BaseController{
+class DatabaseController extends BaseController {
 	private $databases;
-	public function __construct(DatabaseRepository $databases){
-		$this->databases=$databases;
-	}
-	public function getIndex(){
 
+	/**
+	 * @param DatabaseRepository $databases
+	 */
+	public function __construct(DatabaseRepository $databases) {
+		$this->databases = $databases;
 	}
-	public function getViewDatabase(){
 
+	/**
+	 *
+	 */
+	public function getIndex() {
 	}
-	public function getViewItem(){
 
+	/**
+	 *
+	 */
+	public function getViewDatabase() {
 	}
-	public function getSearch(){
 
+	/**
+	 *
+	 */
+	public function getViewItem() {
+	}
+
+	/**
+	 *
+	 */
+	public function getSearch() {
 	}
 }

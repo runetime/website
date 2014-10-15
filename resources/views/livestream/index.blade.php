@@ -2,6 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<div class='row'>
+@if($status)
 					<div class='col-xs-12 col-sm-8 col-md-9 col-lg-9 embed-responsive embed-responsive-16by9'>
 						<object class='embed-responsive-item' type='application/x-shockwave-flash' height='378' width='620' id='live_embed_player_flash' data='http://www.twitch.tv/widgets/live_embed_player.swf?channel=rune_time' bgcolor='#000000'>
 							<param name='allowFullScreen' value='true' />
@@ -16,6 +17,16 @@
 @include('partials.chat')
 						</div>
 					</div>
+@else
+					<div class='col-xs-12'>
+						<h2 class='text-danger text-center'>
+							RuneTime is currently not streaming
+						</h2>
+						<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
+@include('partials.chat')
+						</div>
+					</div>
+@endif
 				</div>
 			</div>
 @stop

@@ -9,7 +9,7 @@ $user=User::find($member->user_id);
 								<div class='back'>
 									<a href='/forums/members/{{\String::slugEncode($user->id,$user->display_name)}}' title="Visit {{$user->display_name}}'s profile">
 										<div class='back-logo center-block'>
-											<img src='/img/forum/photos/{{$user->id}}.png' class='img-rounded center-block' />
+											<img src='/img/forum/photos/{{$user->id}}.png' class='img-rounded center-block img-resposive' />
 										</div>
 										<h3 class='center-block text-center'>
 											{!!\String::color($user->display_name,$user->importantRole()->id)!!} 

@@ -1,55 +1,86 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Requests\SignatureFormRequest;
-class SignatureController extends BaseController{
+class SignatureController extends BaseController {
 	private $request;
-	public function __construct(SignatureFormRequest $request){
-		$this->request=$request;
+
+	/**
+	 * @param SignatureFormRequest $request
+	 */
+	public function __construct(SignatureFormRequest $request) {
+		$this->request = $request;
 	}
-	public function getIndex(){
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getIndex() {
 		$this->nav('RuneTime');
 		$this->title('Signature Generator');
 		return $this->view('signatures.index');
 	}
-	public function postUsername(){
-		$username=$this->request->input('username');
-		$this->bc(['signatures'=>'Signature Generator']);
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function postUsername() {
+		$username = $this->request->input('username');
+		$this->bc(['signatures' => 'Signature Generator']);
 		$this->nav('RuneTime');
 		$this->title('Type of Signature');
-		return $this->view('signatures.type',compact('username'));
+		return $this->view('signatures.type', compact('username'));
 	}
-	public function getStyle($username,$type){
-		$imgs=[];
-		foreach(scandir('./img/signatures/backgrounds') as $filename){
-			$imgs[]=$filename;
+
+	/**
+	 * @param $username
+	 * @param $type
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getStyle($username, $type) {
+		$imgs = [];
+		foreach(scandir('./img/signatures/backgrounds') as $filename) {
+			$imgs[] = $filename;
 		}
 		unset($imgs[0]);
 		unset($imgs[1]);
-		$this->bc(['signatures'=>'Signature Generator','#1'=>$username]);
+		$this->bc(['signatures' => 'Signature Generator', '#1' => $username]);
 		$this->nav('RuneTime');
 		$this->title('Style of Signature');
-		return $this->view('signatures.style',compact('username','type','imgs'));
+		return $this->view('signatures.style', compact('username', 'type', 'imgs'));
 	}
-	public function getFinal($username,$type,$style){
-		$imgSrc="/signatures/username=".$username."/type=".$type."/style=".$style."/display";
-		$this->bc(['signatures'=>'Signature Generator','#1'=>$username,'signatures/username='.$username.'/type='.$type=>ucwords($type)]);
+
+	/**
+	 * @param $username
+	 * @param $type
+	 * @param $style
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getFinal($username, $type, $style) {
+		$imgSrc = "/signatures/username=" . $username . "/type=" . $type . "/style=" . $style . "/display";
+		$this->bc(['signatures' => 'Signature Generator', '#1' => $username, 'signatures/username=' . $username . '/type=' . $type => ucwords($type)]);
 		$this->nav('RuneTime');
 		$this->title('Finished Signature');
-		return $this->view('signatures.final',compact('username','type','style','imgSrc'));
+		return $this->view('signatures.final', compact('username', 'type', 'style', 'imgSrc'));
 	}
-	public function getDisplay($username,$type,$style){
-//		header("Content-type: image/png");
-		$string="test";
-		$im=imagecreatefrompng('./img/signatures/backgrounds/'.$style.'.png');
 
+	/**
+	 * @param $username
+	 * @param $type
+	 * @param $style
+	 */
+	public function getDisplay($username, $type, $style) {
+//		header("Content-type: image/png");
+		$string = "test";
+		$im = imagecreatefrompng('./img/signatures/backgrounds/' . $style . '.png');
 		// Resize
-		list($width,$height)=getimagesize('./img/signatures/backgrounds/'.$style.'.png');
-		$img=imagecreatetruecolor(400,150);
-		imagecopyresized($img,$im,0,0,0,0,400,150,$width,$height);
-		
+		list($width, $height) = getimagesize('./img/signatures/backgrounds/' . $style . '.png');
+		$img = imagecreatetruecolor(400, 150);
+		imagecopyresized($img, $im, 0, 0, 0, 0, 400, 150, $width, $height);
 		// RSName
 //		$scorest=Utilities::CURL('http://hiscore.runescape.com/index_lite.ws?player='.$username);
-		$scores=<<<SCORES
+		$scores = <<<SCORES
 412417,1598,27881258
 524694,75,1237847
 663711,66,502352
@@ -100,15 +131,15 @@ class SignatureController extends BaseController{
 -1,-1
 -1,-1
 SCORES;
-		$scores=explode("\n",$scores);
-		$total=explode(",",$scores[0]);
-		$skills=[];
-		$minigames=[];
-		for($x=1;$x<27;$x++){
-			$skills[].=$scores[$x];
+		$scores = explode("\n", $scores);
+		$total = explode(",", $scores[0]);
+		$skills = [];
+		$minigames = [];
+		for($x = 1; $x < 27; $x++) {
+			$skills[] .= $scores[$x];
 		}
-		for($x=1;$x>=27;$x++){
-			$minigames[].=$scores[$x];
+		for($x = 1; $x >= 27; $x++) {
+			$minigames[] .= $scores[$x];
 		}
 //		imagepng($img);
 //		imagedestroy($img);

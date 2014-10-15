@@ -116,8 +116,8 @@ Route::group([], function() {
  * Livestream
  */
 Route::group(['prefix' => 'livestream'], function() {
+	get('reset', 'LiveStreamController@getReset', ['reset' => true]);
 	get('/', 'LivestreamController@getIndex');
-	get('reset', 'LiveStreamController@getIndex', ['reset' => true]);
 });
 
 /**

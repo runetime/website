@@ -1,6 +1,9 @@
 <?php
 use Illuminate\Database\Seeder;
 class ChatChannelsTableSeeder extends Seeder{
+	/**
+	 *
+	 */
 	public function run(){
 		DB::table('chat_channels')->delete();
 		DB::table('chat_channels')->
