@@ -12,6 +12,7 @@ class CalculatorController extends BaseController {
 	}
 
 	/**
+	 * @get("calculators")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -22,7 +23,7 @@ class CalculatorController extends BaseController {
 
 	/**
 	 * @param $type
-	 *
+	 * @get("calculators/{type}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($type) {
@@ -41,6 +42,7 @@ class CalculatorController extends BaseController {
 	}
 
 	/**
+	 * @post("calculators/load")
 	 * @return string
 	 */
 	public function postLoad() {

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 class PlayController extends BaseController {
 	/**
+	 * @get("play")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -11,6 +12,7 @@ class PlayController extends BaseController {
 	}
 
 	/**
+	 * @get("play/3")
 	 * @return \Illuminate\View\View
 	 */
 	public function get3() {
@@ -21,6 +23,7 @@ class PlayController extends BaseController {
 	}
 
 	/**
+	 * @get("play/osrs")
 	 * @return \Illuminate\View\View
 	 */
 	public function getOSRS() {

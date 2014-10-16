@@ -1,19 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Auth\Authenticator;
+use Illuminate\Contracts\Auth\Guard;
 class BaseController extends Controller {
-	protected $auth;
 	protected $bc;
 	protected $displayPageHeader = true;
 	protected $js;
 	protected $nav;
 	protected $title = '';
-
 	/**
-	 * @param Authenticator $auth
+	 * @var Guard
 	 */
-	public function __construct(Authenticator $auth) {
+	protected $auth;
+
+	public function __construct(Guard $auth) {
 		$this->auth = $auth;
 	}
 

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 class UtilityController extends BaseController {
 	/**
+	 * @get("utility/name-check")
 	 * @return \Illuminate\View\View
 	 */
 	public function getNameCheck() {
@@ -9,6 +10,7 @@ class UtilityController extends BaseController {
 	}
 
 	/**
+	 * @post("utility/name-check")
 	 * @return mixed
 	 */
 	public function postNameCheck() {

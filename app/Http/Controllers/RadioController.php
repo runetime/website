@@ -1,18 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 use App\RuneTime\Radio\RequestRepository;
-use Illuminate\Contracts\Auth\Authenticator;
+use Illuminate\Contracts\Auth\Guard;
 class RadioController extends BaseController {
 	/**
-	 * @param Authenticator     $auth
 	 * @param RequestRepository $requests
 	 */
-	public function __construct(Authenticator $auth, RequestRepository $requests) {
-		$this->auth = $auth;
+	public function __construct(Guard $auth, RequestRepository $requests) {
 		$this->requests = $requests;
+		$this->auth = $auth;
 	}
 
 	/**
+	 * @get("radio")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -28,6 +28,7 @@ class RadioController extends BaseController {
 	}
 
 	/**
+	 * @get("radio/request/history")
 	 * @return \Illuminate\View\View
 	 */
 	public function getHistory() {
@@ -35,6 +36,7 @@ class RadioController extends BaseController {
 	}
 
 	/**
+	 * @get("radio/request/timetable")
 	 * @return \Illuminate\View\View
 	 */
 	public function getTimetable() {
@@ -51,6 +53,7 @@ class RadioController extends BaseController {
 	}
 
 	/**
+	 * @get("radio/request/song")
 	 * @return \Illuminate\View\View
 	 */
 	public function getSong() {
@@ -60,7 +63,7 @@ class RadioController extends BaseController {
 	/**
 	 * @param $artist
 	 * @param $name
-	 *
+	 * @get("radio/send/request/{artist}/{name}")
 	 * @return mixed
 	 */
 	public function getSendRequest($artist, $name) {
@@ -74,6 +77,7 @@ class RadioController extends BaseController {
 	}
 
 	/**
+	 * @get("radio/update")
 	 * @return string
 	 */
 	public function getUpdate() {

@@ -12,6 +12,7 @@ class AwardController extends BaseController {
 	}
 
 	/**
+	 * @get("awards")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -23,7 +24,7 @@ class AwardController extends BaseController {
 
 	/**
 	 * @param $slug
-	 *
+	 * @get("awards/{slug}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($slug) {

@@ -3,7 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 
-class AuthLogged implements Middleware {
+class AuthModeration implements Middleware {
 
 	/**
 	 * Handle an incoming request.
@@ -15,8 +15,9 @@ class AuthLogged implements Middleware {
 	public function handle($request, Closure $next)
 	{
 		if(!\Auth::check())
-			return redirect()->action('AuthController@getLoginForm');
-		return next($request);
+			return \redirect()->to('/login');
+		if(!\Auth::hasOneOfRoles(1, 10, 11))
+			\App::abort(403);
 	}
 
 }

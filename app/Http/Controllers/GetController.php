@@ -18,7 +18,7 @@ class GetController extends BaseController {
 
 	/**
 	 * @param Request $form
-	 *
+	 * @post("get/signup/email")
 	 * @return string
 	 */
 	public function postEmail(Request $form) {
@@ -30,7 +30,7 @@ class GetController extends BaseController {
 
 	/**
 	 * @param Request $form
-	 *
+	 * @post("get/signup/display_name")
 	 * @return string
 	 */
 	public function postDisplayName(Request $form) {
@@ -42,7 +42,7 @@ class GetController extends BaseController {
 
 	/**
 	 * @param $rsn
-	 *
+	 * @get("get/hiscore/{rsn}")
 	 * @return string
 	 */
 	public function getHiscore($rsn) {
@@ -109,6 +109,7 @@ DOC;
 	}
 
 	/**
+	 * @get("get/bbcode")
 	 * @return string
 	 */
 	public function getBBCode() {

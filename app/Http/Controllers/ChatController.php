@@ -35,7 +35,7 @@ class ChatController extends BaseController{
 
 	/**
 	 * @param ChatStartForm $form
-	 *
+	 * @post("chat/start")
 	 * @return string
 	 */
 	public function postStart(ChatStartForm $form){
@@ -60,7 +60,7 @@ class ChatController extends BaseController{
 
 	/**
 	 * @param ChatUpdateForm $form
-	 *
+	 * @post("chat/update")
 	 * @return string
 	 */
 	public function postUpdate(ChatUpdateForm $form){
@@ -84,7 +84,7 @@ class ChatController extends BaseController{
 
 	/**
 	 * @param ChatMessageForm $form
-	 *
+	 * @post("chat/post/message")
 	 * @return string
 	 */
 	public function postMessage(ChatMessageForm $form){
@@ -114,12 +114,13 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 *
+	 * @post("chat/post/status/change")
 	 */
 	public function postStatusChange(){
 	}
 
 	/**
+	 * @get("chat/channels")
 	 * @return string
 	 */
 	public function getChannels(){
@@ -140,7 +141,7 @@ class ChatController extends BaseController{
 
 	/**
 	 * @param ChatCheckChannelForm $form
-	 *
+	 * @post("chat/channels/check")
 	 * @return array
 	 */
 	public function postCheckChannel(ChatCheckChannelForm $form){

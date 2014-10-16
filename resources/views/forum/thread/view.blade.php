@@ -63,33 +63,39 @@
 	@endif
 	@if(\Auth::check())
 							<ul class='list-inline'>
+	    @if(\Auth::user()->id != $post->author_id)
 								<li>
-									<a href='/forum/post/{{$post->id}}/report' title='Report This Post'>
+									<a href='/forums/post/{{$post->id}}/report' title='Report This Post'>
 										Report
 									</a>
 								</li>
-		@if(\Auth::user()->hasOneOfRoles(1,6,10,11))
+		@endif
+		@if(\Auth::user()->hasOneOfRoles(1, 10, 11) || \Auth::user()->id == $post->author_id)
 								<li>
-									<a href='/forum/post/{{$post->id}}/edit' title='Edit This Post'>
+									<a href='/forums/post/{{$post->id}}/edit' title='Edit This Post'>
 										Edit
 									</a>
 								</li>
+		@endif
+		@if(\Auth::user()->hasOneOfRoles(1, 10, 11))
 								<li>
-									<a href='/forum/post/{{$post->id}}/status=0' title='Hide This Post'>
+									<a href='/forums/post/{{$post->id}}/status=0' title='Hide This Post'>
 										Hide
 									</a>
 								</li>
 								<li>
-									<a href='/forum/post/{{$post->id}}/delete' title='Delete This Post'>
+									<a href='/forums/post/{{$post->id}}/delete' title='Delete This Post'>
 										Delete
 									</a>
 								</li>
 		@endif
+		@if(\Auth::check())
 								<li>
 									<a title='Quote This Post' onclick="RuneTime.Forum.Post.quote();">
 										Quote
 									</a>
 								</li>
+		@endif
 							</ul>
 	@endif
 						</div>
@@ -97,22 +103,7 @@
 @endforeach
 				</div>
 @if(\Auth::check())
-				<form action='/forums/reply' class='reply' method='post'>
-					<input type='hidden' name='thread' value='{{$thread->id}}' />
-					<div class='row'>
-						<div class='hidden-xs col-sm-3 col-md-2 col-lg-1'>
-							{!!\Image::userPhoto(\Auth::user()->id, ['img-rounded'])!!}
-						</div>
-						<div class='col-xs-12 col-sm-9 col-md-10 col-lg-11'>
-							<textarea name='contents' id='contents' rows='5'></textarea>
-							<p>
-								<button class='btn btn-primary' type='submit'>
-									Post
-								</button>
-							</p>
-						</div>
-					</div>
-				</form>
+@include('forum.post._edit', ['id' => $thread->id])
 @endif
 			</div>
 @stop

@@ -37,13 +37,13 @@
 											</td>
 											<td>
 				@if(!empty($subforum->last_post_info))
-												<a href='/forum/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}' title='{{$subforum->last_thread_title}}'>
+												<a href='/forums/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}' title='{{$subforum->last_thread_title}}'>
 													{{$subforum->last_thread_info->title}} 
 												</a>
 												<br />
 												by {!!\Link::name($subforum->last_post_info->author_id)!!} 
 												<br />
-												<a href='/forum/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}/last-post' title='{{$subforum->last_thread_title}}'>
+												<a href='/forums/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}/last-post' title='{{$subforum->last_thread_title}}'>
 													{!!\Time::shortReadable($subforum->last_post_info->created_at)!!} 
 												</a>
 				@endif

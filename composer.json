@@ -6,7 +6,6 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "~5.0",
-		"laravel/elixir": "~1.0",
 		"barryvdh/laravel-ide-helper": "*"
 	},
 	"require-dev": {
@@ -26,7 +25,6 @@
 			"php artisan clear-compiled",
 			"php artisan route:scan",
 			"php artisan event:scan",
-            "php artisan ide-helper:generate",
 			"php artisan optimize"
 		],
 		"post-update-cmd": [

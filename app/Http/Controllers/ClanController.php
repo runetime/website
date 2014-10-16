@@ -10,7 +10,7 @@ class ClanController extends BaseController {
 	}
 
 	/**
-	 *
+	 * @get("clan")
 	 */
 	public function getIndex() {
 	}

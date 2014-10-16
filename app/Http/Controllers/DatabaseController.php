@@ -12,7 +12,7 @@ class DatabaseController extends BaseController {
 	}
 
 	/**
-	 *
+	 * @get("database")
 	 */
 	public function getIndex() {
 	}

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 class DonateController extends BaseController{
 	/**
+	 * @get("donate")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex(){

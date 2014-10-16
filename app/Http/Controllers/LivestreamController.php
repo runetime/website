@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 class LivestreamController extends BaseController {
 	/**
+	 * @get("livestream")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -16,6 +17,7 @@ class LivestreamController extends BaseController {
 	}
 
 	/**
+	 * @get("livestream/reset")
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getReset() {

@@ -12,6 +12,7 @@ class SignatureController extends BaseController {
 	}
 
 	/**
+	 * @get("signatures")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -21,6 +22,7 @@ class SignatureController extends BaseController {
 	}
 
 	/**
+	 * @post("signatures")
 	 * @return \Illuminate\View\View
 	 */
 	public function postUsername() {
@@ -34,7 +36,7 @@ class SignatureController extends BaseController {
 	/**
 	 * @param $username
 	 * @param $type
-	 *
+	 * @get("signatures/username={username}/type={type}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getStyle($username, $type) {
@@ -54,7 +56,7 @@ class SignatureController extends BaseController {
 	 * @param $username
 	 * @param $type
 	 * @param $style
-	 *
+	 * @get("signatures/username={username}/type={type}/style={style}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getFinal($username, $type, $style) {
@@ -69,6 +71,7 @@ class SignatureController extends BaseController {
 	 * @param $username
 	 * @param $type
 	 * @param $style
+	 * @get("signatures/username={username}/type={type}/style={style}/display")
 	 */
 	public function getDisplay($username, $type, $style) {
 //		header("Content-type: image/png");

@@ -10,7 +10,7 @@ class HomeController extends BaseController {
 	/**
 	 * @param NewsRepository   $news
 	 * @param StatusRepository $statuses
-	 * @param ThreadRepositroy $threads
+	 * @param ThreadRepository $threads
 	 */
 	public function __construct(NewsRepository $news, StatusRepository $statuses, ThreadRepository $threads) {
 		$this->news = $news;
@@ -19,7 +19,7 @@ class HomeController extends BaseController {
 	}
 
 	/**
-	 * @return \Illuminate\View\View
+	 * @Get("/")
 	 */
 	public function getIndex() {
 		$news = $this->news->getRecentNews(3);

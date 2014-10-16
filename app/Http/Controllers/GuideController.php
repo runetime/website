@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 use App\RuneTime\Guides\QuestRepository;
-use Illuminate\Support\Facades\Paginator;
-use Utilities\ZurbPaginator;
 class GuideController extends BaseController {
 	private $quests;
 
@@ -14,7 +12,7 @@ class GuideController extends BaseController {
 	}
 
 	/**
-	 *
+	 * @get("guides")
 	 */
 	public function getIndex() {
 		$this->nav('Runescape');
@@ -25,7 +23,8 @@ class GuideController extends BaseController {
 	 * @param int $searchDifficulty
 	 * @param int $searchLength
 	 * @param int $searchMembership
-	 *
+	 * @get("guides/{type}")
+	 * @get("guides/{type}/difficulty={searchDifficulty}/length={searchLength}/membership={searchMembership}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getType($type, $searchDifficulty = 0, $searchLength = 0, $searchMembership = 0) {
@@ -33,7 +32,6 @@ class GuideController extends BaseController {
 		$lengths = $this->quests->getOptions('length');
 		$memberships = $this->quests->getOptions('membership');
 		$guides = $this->quests->getAll();
-		$paginate = Paginator::make((array)$guides, count($guides), 20);
 		$this->bc(['guides' => 'Guides']);
 		$this->nav('Runescape');
 		$this->title('Quest Guides');
@@ -44,7 +42,7 @@ class GuideController extends BaseController {
 	 * @param $type
 	 * @param $id
 	 * @param $name
-	 *
+	 * @get("guides/{type}/{id}-{name}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getViewGuide($type, $id, $name) {
@@ -83,12 +81,12 @@ The king will ask you to help with the testing of the beacon network which has b
 			$this->title($guide->name);
 			return $this->view('guides.quests.view', compact('guide', 'difficulty', 'length', 'editList'));
 		} else {
-			return App::abort(404);
+			\App::abort(404);
 		}
 	}
 
 	/**
-	 *
+	 * @get("guides/{type}/search/{searchSlug}")
 	 */
 	public function getSearch() {
 	}

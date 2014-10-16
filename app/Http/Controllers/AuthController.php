@@ -4,18 +4,24 @@ use App\Http\Requests\LoginForm;
 use App\Http\Requests\SignupForm;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
-use Illuminate\Contracts\Auth\Authenticator;
+use Illuminate\Contracts\Auth\Guard;
 class AuthController extends BaseController {
 	/**
-	 * @param Authenticator  $auth
+	 * @var UserRepository
+	 */
+	private $users;
+
+	/**
+	 * @param Guard          $auth
 	 * @param UserRepository $users
 	 */
-	public function __construct(Authenticator $auth, UserRepository $users) {
+	public function __construct(Guard $auth, UserRepository $users) {
 		$this->auth = $auth;
 		$this->users = $users;
 	}
 
 	/**
+	 * @get("login")
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm() {
@@ -26,7 +32,7 @@ class AuthController extends BaseController {
 
 	/**
 	 * @param LoginForm $form
-	 *
+	 * @post("login")
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postLoginForm(LoginForm $form) {
@@ -37,6 +43,7 @@ class AuthController extends BaseController {
 	}
 
 	/**
+	 * @get("signup")
 	 * @return \Illuminate\View\View
 	 */
 	public function getSignupForm() {
@@ -48,7 +55,7 @@ class AuthController extends BaseController {
 
 	/**
 	 * @param SignupForm $form
-	 *
+	 * @post("signup")
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postSignupForm(SignupForm $form) {
@@ -66,6 +73,7 @@ class AuthController extends BaseController {
 	}
 
 	/**
+	 * @get("logout")
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getLogout() {

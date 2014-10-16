@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ThreadReplyForm extends FormRequest {
+class ForumPostEditForm extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -12,8 +12,8 @@ class ThreadReplyForm extends FormRequest {
 	public function rules()
 	{
 		return [
+			'id'       => 'required',
 			'contents' => 'required',
-			'id'   => 'required',
 		];
 	}
 

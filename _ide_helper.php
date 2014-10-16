@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 5.0-dev on 2014-10-15.
+ * Generated for Laravel 5.0-dev on 2014-10-16.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -356,11 +356,11 @@ namespace {
          * Run the application and send the response.
          *
          * @param \Symfony\Component\HttpFoundation\Request $request
-         * @return void 
+         * @return \Symfony\Component\HttpFoundation\Response 
          * @static 
          */
         public static function run($request = null){
-            \Illuminate\Foundation\Application::run($request);
+            return \Illuminate\Foundation\Application::run($request);
         }
         
         /**
@@ -378,17 +378,6 @@ namespace {
          */
         public static function handle($request, $type = 1, $catch = true){
             return \Illuminate\Foundation\Application::handle($request, $type, $catch);
-        }
-        
-        /**
-         * Handle the given request and get the response.
-         *
-         * @param \Illuminate\Http\Request $request
-         * @return \Symfony\Component\HttpFoundation\Response 
-         * @static 
-         */
-        public static function dispatch($request){
-            return \Illuminate\Foundation\Application::dispatch($request);
         }
         
         /**
@@ -413,17 +402,6 @@ namespace {
          */
         public static function callFinishCallbacks($request, $response){
             \Illuminate\Foundation\Application::callFinishCallbacks($request, $response);
-        }
-        
-        /**
-         * Prepare the request by injecting any services.
-         *
-         * @param \Illuminate\Http\Request $request
-         * @return \Illuminate\Http\Request 
-         * @static 
-         */
-        public static function prepareRequest($request){
-            return \Illuminate\Foundation\Application::prepareRequest($request);
         }
         
         /**
@@ -6114,28 +6092,28 @@ namespace {
     class Password extends \Illuminate\Support\Facades\Password{
         
         /**
-         * Send a password reminder to a user.
+         * Send a password reset link to a user.
          *
          * @param array $credentials
          * @param \Closure $callback
          * @return string 
          * @static 
          */
-        public static function remind($credentials, $callback = null){
-            return \Illuminate\Auth\Reminders\PasswordBroker::remind($credentials, $callback);
+        public static function sendResetLink($credentials, $callback = null){
+            return \Illuminate\Auth\Passwords\PasswordBroker::sendResetLink($credentials, $callback);
         }
         
         /**
-         * Send the password reminder e-mail.
+         * Send the password reset link via e-mail.
          *
-         * @param \Illuminate\Contracts\Auth\Remindable $user
+         * @param \Illuminate\Contracts\Auth\CanResetPassword $user
          * @param string $token
          * @param \Closure $callback
          * @return int 
          * @static 
          */
-        public static function sendReminder($user, $token, $callback = null){
-            return \Illuminate\Auth\Reminders\PasswordBroker::sendReminder($user, $token, $callback);
+        public static function emailResetLink($user, $token, $callback = null){
+            return \Illuminate\Auth\Passwords\PasswordBroker::emailResetLink($user, $token, $callback);
         }
         
         /**
@@ -6147,7 +6125,7 @@ namespace {
          * @static 
          */
         public static function reset($credentials, $callback){
-            return \Illuminate\Auth\Reminders\PasswordBroker::reset($credentials, $callback);
+            return \Illuminate\Auth\Passwords\PasswordBroker::reset($credentials, $callback);
         }
         
         /**
@@ -6158,19 +6136,19 @@ namespace {
          * @static 
          */
         public static function validator($callback){
-            \Illuminate\Auth\Reminders\PasswordBroker::validator($callback);
+            \Illuminate\Auth\Passwords\PasswordBroker::validator($callback);
         }
         
         /**
          * Get the user for the given credentials.
          *
          * @param array $credentials
-         * @return \Illuminate\Contracts\Auth\Remindable 
+         * @return \Illuminate\Contracts\Auth\CanResetPassword 
          * @throws \UnexpectedValueException
          * @static 
          */
         public static function getUser($credentials){
-            return \Illuminate\Auth\Reminders\PasswordBroker::getUser($credentials);
+            return \Illuminate\Auth\Passwords\PasswordBroker::getUser($credentials);
         }
         
     }
@@ -8354,12 +8332,11 @@ namespace {
          * Dispatch the request to the application.
          *
          * @param \Illuminate\Http\Request $request
-         * @param bool $runMiddleware
          * @return \Illuminate\Http\Response 
          * @static 
          */
-        public static function dispatch($request, $runMiddleware = true){
-            return \Illuminate\Routing\Router::dispatch($request, $runMiddleware);
+        public static function dispatch($request){
+            return \Illuminate\Routing\Router::dispatch($request);
         }
         
         /**
@@ -8377,12 +8354,11 @@ namespace {
          * Dispatch the request to a route and return the response.
          *
          * @param \Illuminate\Http\Request $request
-         * @param bool $runMiddleware
          * @return mixed 
          * @static 
          */
-        public static function dispatchToRoute($request, $runMiddleware = true){
-            return \Illuminate\Routing\Router::dispatchToRoute($request, $runMiddleware);
+        public static function dispatchToRoute($request){
+            return \Illuminate\Routing\Router::dispatchToRoute($request);
         }
         
         /**

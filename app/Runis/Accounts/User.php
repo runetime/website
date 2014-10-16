@@ -1,23 +1,19 @@
 <?php
 namespace App\Runis\Accounts;
-use Eloquent;
 use Illuminate\Auth\UserTrait;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Contracts\Auth\User as UserContract;
-use Illuminate\Contracts\Auth\Remindable as RemindableContract;
+use Illuminate\Auth\Passwords\CanResetPasswordTrait;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
-use McCool\LaravelAutoPresenter\PresenterInterface;
 use App\Runis\Core\Entity;
-class User extends Entity implements UserContract, RemindableContract {
-	use UserTrait, RemindableTrait, SoftDeletingTrait;
+class User extends Entity implements UserContract, CanResetPasswordContract {
+	use UserTrait, CanResetPasswordTrait, SoftDeletingTrait;
 	const STATE_ACTIVE  = 1;
 	const STATE_BLOCKED = 2;
 	protected $table = 'users';
 	protected $hidden = [];
 	protected $fillable = ['display_name', 'email', 'password'];
 	protected $softDelete = true;
-	public $presenter = 'Runis\Accounts\UserPresenter';
 	private $rolesCache;
 	public function roles() {
 		return $this->belongsToMany('App\Runis\Accounts\Role');

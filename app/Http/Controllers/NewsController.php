@@ -18,6 +18,7 @@ class NewsController extends BaseController {
 	}
 
 	/**
+	 * @get("news")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -32,7 +33,7 @@ class NewsController extends BaseController {
 
 	/**
 	 * @param $slug
-	 *
+	 * @get("news/{slug}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($slug) {
@@ -46,12 +47,13 @@ class NewsController extends BaseController {
 	}
 
 	/**
-	 *
+	 * @get("news/search/{searchSlug}")
 	 */
 	public function getSearch() {
 	}
 
 	/**
+	 * @get("news/create")
 	 * @return \Illuminate\View\View
 	 */
 	public function getCreate() {
@@ -63,7 +65,7 @@ class NewsController extends BaseController {
 
 	/**
 	 * @param NewsForm $form
-	 *
+	 * @post("news/create")
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postCreate(NewsForm $form) {
