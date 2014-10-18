@@ -34,15 +34,19 @@ $navs=[
 		'clan'        => Lang::get('navbar.social.our_clan'),
 	],
 ];
-if(\Auth::check()&&\Auth::user()->isStaff()){
+if(\Auth::check() && \Auth::user()->isStaff()) {
 	$navs['Staff'] = [
 		'staff'          => Lang::get('navbar.staff.staff'),
-		'staff/gallery'  => Lang::get('navbar.staff.gallery'),
-		'tickets/manage' => Lang::get('navbar.staff.ticket'),
-		'staff/checkup'  => Lang::get('navbar.staff.checkup'),
 	];
 	if(\Auth::user()->hasOneOfRoles(1))
-		$navs['Staff']['staff/admin'] = Lang::get('navbar.staff.admin');
+		$navs['Staff']['staff/administrator'] = Lang::get('navbar.staff.administrator');
+	if(\Auth::user()->hasOneOfRoles(1, 2, 3))
+		$navs['Staff']['staff/radio'] = Lang::get('navbar.staff.radio');
+	if(\Auth::user()->hasOneOfRoles(1, 10, 11))
+		$navs['Staff']['staff/moderation'] = Lang::get('navbar.staff.moderation');
+    $navs['Staff']['staff/gallery']  = Lang::get('navbar.staff.gallery');
+    $navs['Staff']['tickets/manage'] = Lang::get('navbar.staff.ticket');
+    $navs['Staff']['staff/checkup']  = Lang::get('navbar.staff.checkup');
 }
 if(!Auth::check())
 	$navLogged = [
@@ -52,18 +56,18 @@ if(!Auth::check())
 else
 	$navLogged = [
 		Auth::user()->display_name => [
-			'forums/members/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
-			'forums/settings'  => Lang::get('navbar.logged.in.my_settings'),
-			'forums/messenger' => Lang::get('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messages.'</span>',
+			'profile/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
+			'settings'  => Lang::get('navbar.logged.in.my_settings'),
+			'messenger' => Lang::get('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messages.'</span>',
 			'forums/content'   => Lang::get('navbar.logged.in.content').'<span class=\'badge badge-info pull-right\'>'.$follow.'</span>',
 		],
 		'logout' => Lang::get('navbar.logged.in.logout'),
 	];
-if(!isset($nav))               $nav="Home";
-if(!isset($bc))                $bc=[];
-if(!isset($displayPageHeader)) $displayPageHeader=true;
-if(!empty($title))             $bc['#']=$title;
-$current=$nav;
+if(!isset($nav))               $nav = "Home";
+if(!isset($bc))                $bc = [];
+if(!isset($displayPageHeader)) $displayPageHeader = true;
+if(!empty($title))             $bc['#'] = $title;
+$current = $nav;
 ?>
 <!DOCTYPE html>
 <html class='no-js'>
@@ -110,7 +114,7 @@ $current=$nav;
 						</span>
 					</button>
 					<a href='/' title='RuneTime Home' class='navbar-brand'>
-						<img src='img/header.png' alt='RuneTime Header Image' class='img-responsive' />
+						<img src='/img/header.png' alt='RuneTime Header Image' class='img-responsive' />
 					</a>
 				</div>
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
@@ -148,7 +152,7 @@ $current=$nav;
 								{{$url}} {!!$notifications>0?"<span class='badge badge-important'>".$notifications."</span>":""!!}<span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
-		@foreach($name as $url2=>$name2)
+		@foreach($name as $url2 => $name2)
 								<li>
 									<a href='{{$url2}}'>
 										{!!$name2!!} 
@@ -158,7 +162,7 @@ $current=$nav;
 							</ul>
 						</li>
 	@else
-						<li{{$name==$current?" class='active'":""}}>
+						<li{{$name == $current?" class=active":""}}>
 							<a href='{{$url}}' title='{{$name}}'>
 								{{$name}} 
 							</a>
