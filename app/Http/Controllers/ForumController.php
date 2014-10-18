@@ -55,16 +55,23 @@ class ForumController extends BaseController {
 				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread);
 			array_push($subforumList[$subforum->parent], $subforum);
 		}
+		\Cache::forever('info.most_online', 92);
+		$forumInfo = new \stdClass;
+		$forumInfo->posts = $this->posts->getCount();
+		$forumInfo->members = $this->users->getCount();
+		$forumInfo->latest = $this->users->getLatest();
+		$forumInfo->mostOnline = \Cache::get('info.most_online');
 		$recentThreads = $this->threads->getX(5, 'desc');
 		$this->nav('Forums');
 		$this->title('Forums');
-		return $this->view('forum.index', compact('subforumList', 'recentThreads'));
+		return $this->view('forum.index', compact('subforumList', 'recentThreads', 'forumInfo'));
 	}
 
 	/**
 	 * @param     $id
 	 * @param int $page
 	 * @Get("forums/{id}-{name}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getSubforum($id, $page = 1) {
@@ -114,6 +121,7 @@ class ForumController extends BaseController {
 	 * @param int $page
 	 * @get("forums/thread/{id}-{name}/page={page}")
 	 * @get("forums/thread/{id}-{name}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getThread($id, $page = 1) {
@@ -122,7 +130,10 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$thread->incrementViews();
 		$subforum = $this->subforums->getbyId($thread->subforum);
-		$posts = $this->posts->getX($thread->id, Thread::POSTS_PER_PAGE, $page);
+		if(!\Auth::check() || (\Auth::check() && !\Auth::user()->hasOneOfRoles(1, 10, 11)))
+			$posts = $this->posts->getX($thread->id, Thread::POSTS_PER_PAGE, $page, Post::STATUS_VISIBLE);
+		else
+			$posts = $this->posts->getX($thread->id, Thread::POSTS_PER_PAGE, $page);
 		// Posts
 		$postList = [];
 		foreach($posts as $post) {
@@ -151,6 +162,7 @@ class ForumController extends BaseController {
 	/**
 	 * @param $id
 	 * @get("forums/create/{id}-{name}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getThreadCreate($id) {
@@ -173,6 +185,7 @@ class ForumController extends BaseController {
 	/**
 	 * @param ForumThreadCreateForm $form
 	 * @post("forums/create/{id}-{name}")
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postThreadCreate(ForumThreadCreateForm $form) {
@@ -205,6 +218,7 @@ class ForumController extends BaseController {
 	/**
 	 * @param ThreadReplyForm $form
 	 * @post("forums/reply")
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postReply(ThreadReplyForm $form) {
@@ -220,50 +234,9 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param $id
-	 * @get("forums/members/{id}-{name}")
-	 * @return \Illuminate\View\View
-	 */
-	public function getProfileIndex($id) {
-		$profile = $this->users->getById($id);
-		if(!$profile)
-			\App::abort(404);
-		$profile->incrementProfileViews();
-		$latestStatus = $this->statuses->getByAuthor($profile->id);
-		$bc = ['forums/' => 'Forums'];
-		$this->bc($bc);
-		$this->nav('Forums');
-		$this->title($profile->display_name);
-		return $this->view('forum.profile.index', compact('profile', 'latestStatus'));
-	}
-
-	/**
-	 * @get("forums/members/{id}-{name}/feed")
-	 */
-	public function getProfileFeed() {
-	}
-
-	/**
-	 * @get("forums/members/{id}-{name}/friends")
-	 */
-	public function getProfileFriends() {
-	}
-
-	/**
-	 * @get("forums/settings")
-	 */
-	public function getSettingsIndex() {
-	}
-
-	public function getSettingsInformation() {
-	}
-
-	public function getSettingsNotifications() {
-	}
-
-	/**
 	 * @param $name
 	 * @get("forums/tag/{name}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getTagSearch($name) {
@@ -288,11 +261,13 @@ class ForumController extends BaseController {
 	/**
 	 * @param $id
 	 * @get("forums/post/{id}/report")
+	 * @middleware("auth.logged")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getPostReport($id) {
 		$post = $this->posts->getById($id);
-		if(!$post)
+		if(empty($post))
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread);
 		$postee = $this->users->getById($post->author_id);
@@ -303,18 +278,24 @@ class ForumController extends BaseController {
 
 	/**
 	 * @param ForumPostReportForm $form
+	 * @middleware("auth.logged")
 	 * @post("forums/post/{id}/report")
+	 *
+	 * @return mixed
 	 */
 	public function postPostReport(ForumPostReportForm $form) {
 		$contents = $form->contents;
 		$contentsParsed = $contents;
 		$report = new Report;
 		$report->saveNew(\Auth::user()->id, $form->id, Report::TYPE_POST, Report::STATUS_OPEN, $contents, $contentsParsed);
+		return \redirect()->to('/forums/');
 	}
 
 	/**
 	 * @param $id
 	 * @get("forums/post/{id}/edit")
+	 * @middleware("auth.logged")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getPostEdit($id) {
@@ -329,7 +310,9 @@ class ForumController extends BaseController {
 
 	/**
 	 * @param ForumPostEditForm $form
+	 * @middleware("auth.logged")
 	 * @post("forums/post/{id}/edit")
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postPostEdit(ForumPostEditForm $form) {
@@ -339,6 +322,23 @@ class ForumController extends BaseController {
 		$thread = $this->threads->getById($post->thread);
 		$post->contents = $form->contents;
 		$post->contents_parsed = $form->contents;
+		$post->save();
+		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
+	}
+
+	/**
+	 * @get("forums/post/{id}/delete")
+	 * @middleware("auth.moderation")
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function getPostDelete($id) {
+		$post = $this->posts->getById($id);
+		if(!$post)
+			\App::abort(404);
+		$thread = $this->threads->getById($post->thread);
+		$post->status = Post::STATUS_INVISIBLE;
 		$post->save();
 		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
 	}

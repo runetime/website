@@ -58,4 +58,9 @@ class UserRepository extends EloquentRepository{
 			$q=$q->where($key,$selection['op'],$selection['val']);
 		return $q->get();
 	}
+	public function getLatest() {
+		return $this->model->
+			orderBy('id', 'desc')->
+			first();
+	}
 }

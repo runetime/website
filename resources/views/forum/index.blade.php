@@ -1,60 +1,49 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper-flat'>
+			<div class='wrapper wrapper-flat'>
 				<br />
 				<div class='row row-flat'>
 					<div class='col-xs-12 col-md-9'>
 @foreach($subforumList[-1] as $subforums)
 	@if(empty(json_decode($subforums->roles)) || Auth::check() && in_array(\Auth::user()->importantRole()->id,json_decode($subforums->roles)))
-						<div class='panel panel-dark'>
-							<div class='panel-heading'>
-								<h3 class='panel-title'>
-									<a href='/forums/{{\String::slugEncode($subforums->id,$subforums->name)}}' title='{{$subforums->name}}'>
-										{{$subforums->name}} 
-									</a>
-								</h3>
-							</div>
-							<div class='panel-body padding-none'>
-								<table class='table table-subforums'>
-									<tbody>
+						<h3 class='panel-title'>
+							<a href='/forums/{{\String::slugEncode($subforums->id,$subforums->name)}}' title='{{$subforums->name}}'>
+								{{$subforums->name}}
+							</a>
+						</h3>
 		@foreach($subforumList[$subforums->id] as $subforum)
 			@if(empty(json_decode($subforum->roles)) || \Auth::check() && in_array(\Auth::user()->importantRole()->id,json_decode($subforum->roles)))
-										<tr>
-											<td>
-											</td>
-											<td>
-												<h4>
-													<a href='/forums/{{\String::slugEncode($subforum->id,$subforum->name)}}' title='{{$subforum->name}}'>
-														{{$subforum->name}} 
-													</a>
-												</h4>
-												{{$subforum->description}} 
-											</td>
-											<td>
-												{{$subforum->threads}} threads
-												<br />
-												{{$subforum->posts}} posts
-											</td>
-											<td>
+						<div class='card card-read row'>
+							<div class='col-xs-12 col-sm-6 col-md-7'>
+								<h4>
+									<a href='/forums/{{\String::slugEncode($subforum->id,$subforum->name)}}' title='{{$subforum->name}}'>
+										{{$subforum->name}}
+									</a>
+								</h4>
+								{{$subforum->description}}
+							</div>
+							<div class='col-xs-12 col-sm-6 col-md-2'>
+								{{$subforum->threads}} threads
+								<br />
+								{{$subforum->posts}} posts
+							</div>
+							<div class='col-xs-12 col-sm-12 col-md-3'>
 				@if(!empty($subforum->last_post_info))
-												<a href='/forums/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}' title='{{$subforum->last_thread_title}}'>
-													{{$subforum->last_thread_info->title}} 
-												</a>
-												<br />
-												by {!!\Link::name($subforum->last_post_info->author_id)!!} 
-												<br />
-												<a href='/forums/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}/last-post' title='{{$subforum->last_thread_title}}'>
-													{!!\Time::shortReadable($subforum->last_post_info->created_at)!!} 
-												</a>
+								<a href='/forums/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}' title='{{$subforum->last_thread_title}}'>
+									{{$subforum->last_thread_info->title}}
+								</a>
+								<br />
+								by {!!\Link::name($subforum->last_post_info->author_id)!!}
+								<br />
+								<a href='/forums/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}/last-post' title='{{$subforum->last_thread_title}}'>
+									{!!\Time::shortReadable($subforum->last_post_info->created_at)!!}
+								</a>
 				@endif
-											</td>
-										</tr>
-			@endif
-		@endforeach
-									</tbody>
-								</table>
+
 							</div>
 						</div>
+			@endif
+		@endforeach
 	@endif
 @endforeach
 					</div>
@@ -77,6 +66,43 @@
 						<h3>
 							Recent Posts
 						</h3>
+					</div>
+					<div class='col-xs-12 text-center'>
+						<ul class='list-inline'>
+							<li>
+								<span class='label label-default'>{{$forumInfo->posts}}</span> total posts
+							</li>
+							<li>
+								<span class='label label-default'>{{$forumInfo->members}}</span> total members
+							</li>
+							<li>
+								<span class='label label-default'>{!!\Link::name($forumInfo->latest->id)!!}</span>
+							</li>
+                            <li>
+                                <span class='label label-default'>{{$forumInfo->mostOnline}}</span> most online
+                            </li>
+						</ul>
+                    </div>
+					<div class='col-xs-12'>
+						<div class='pull-right'>
+							<ul class='list-inline'>
+								<li>
+									<a href='/forums/posters/today' title="Today's top posters">
+										Today's top posters
+									</a>
+								</li>
+								<li>
+									<a href='/forums/posters/overall' title='Overall Top Posters'>
+										Overall Top Posters
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<h3>
+								{{1}} users are online <small>(in the past 15 minutes)</small>
+							</h3>
+						</div>
 					</div>
 				</div>
 			</div>

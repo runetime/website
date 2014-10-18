@@ -20,7 +20,7 @@ class Link {
 		$user = $users->getById($userId);
 		if($user){
 			$role = $user->importantRole();
-			return "<a href='/forums/members/" . \String::slugEncode($user->id, $user->display_name) . "' class='members-" . $role->class_name . "' title'='" . $user->display_name . "&#39;s profile'>" . $user->display_name . "</a>";
+			return "<a href='/profile/" . \String::slugEncode($user->id, $user->display_name) . "' class='members-" . $role->class_name . "' title'='" . $user->display_name . "&#39;s profile'>" . $user->display_name . "</a>";
 		}
 		\Log::warning('Utilities\Link::name - ' . $userId . ' does not exist.');
 		return "unknown";

@@ -22,6 +22,7 @@ class AuthController extends BaseController {
 
 	/**
 	 * @get("login")
+	 * @middleware("guest")
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm() {
@@ -32,6 +33,7 @@ class AuthController extends BaseController {
 
 	/**
 	 * @param LoginForm $form
+	 * @middleware("guest")
 	 * @post("login")
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -74,6 +76,7 @@ class AuthController extends BaseController {
 
 	/**
 	 * @get("logout")
+	 * @middleware("auth.logged")
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getLogout() {

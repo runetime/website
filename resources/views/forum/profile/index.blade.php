@@ -1,30 +1,13 @@
-@extends('layouts.default')
-@section('contents')
-			<div class='wrapper'>
-				<div class='row'>
-					<div class='col-xs-12 col-sm-3 col-md-2'>
-						{!!\Image::userPhoto($profile->id)!!} 
-						<ul class='list-group'>
-							<li class='list-group-item'>
-								Overview
-							</li>
-							<li class='list-group-item'>
-								Profile Feed
-							</li>
-							<li class='list-group-item'>
-								Friends
-							</li>
-						</ul>
-					</div>
-					<div class='col-xs-12 col-sm-9 col-md-10'>
+@extends('layouts.profile')
+@section('profile')
 						<div class='row row-flat'>
 							<div class='col-xs-6 col-sm-5 col-md-3'>
 								<h1>
 									{{$profile->display_name}} 
 								</h1>
-								Member since {{\Time::DMY($profile->created_at)}} 
+								@lang('profile.overview.member_since', ['date' => \Time::DMY($profile->created_at)])
 								<br />
-								<span class='label label-success'>online</span> Last Active
+								<span class='label label-success'>@lang('profile.status.online')</span> @lang('profile.overview.last_active')
 							</div>
 							<div class='col-xs-6 col-sm-7 col-md-9'>
 								Status
@@ -33,80 +16,80 @@
 						<br />
 						<div class='box'>
 							<h3>
-								About Me
+								@lang('profile.overview.about.name')
 							</h3>
 @if(!empty($profile->about_parsed))
 							{{$profile->about_parsed}} 
 @else
 							<em>
-								{{$profile->display_name}} has not written about themselves yet.
+								@lang('profile.overview.about.empty', ['name' => $profile->display_name])
 							</em>
 @endif
 						</div>
 						<div class='box'>
 							<h3>
-								Community Statistics
+								@lang('profile.overview.community_statistics.name')
 							</h3>
 							<dl class='dl-horizontal'>
 								<dt>
-									Group
+									@lang('profile.overview.community_statistics.group')
 								</dt>
 								<dd>
 									{!!\Link::colorRole($profile->importantRole()->id)!!} 
 								</dd>
 								<dt>
-									Active Posts
+									@lang('profile.overview.community_statistics.active_posts')
 								</dt>
 								<dd>
 									{{$profile->posts_active}} 
 								</dd>
 								<dt>
-									Profile Views
+									@lang('profile.overview.community_statistics.profile_views')
 								</dt>
 								<dd>
 									{{$profile->profile_views}} 
 								</dd>
 @if(!empty($profile->title))
 								<dt>
-									Title
+									@lang('profile.overview.community_statistics.title')
 								</dt>
 								<dd>
 									{!!$profile->title!!} 
 								</dd>
 @endif
 								<dt>
-									Age
+									@lang('profile.overview.community_statistics.age.name')
 								</dt>
 								<dd>
 @if($profile->birthday > 0)
 									{{$profile->birthday}} 
 @else
 									<em>
-										Age Unknown
+										@lang('profile.overview.community_statistics.age.unknown')
 									</em>
 @endif
 								</dd>
 								<dt>
-									Birthday
+									@lang('profile.overview.community_statistics.age.name')
 								</dt>
 								<dd>
 @if($profile->birthday > 0)
 									{{$profile->birthday}} 
 @else
 									<em>
-										Birthday Unknown
+										@lang('profile.overview.community_statistics.age.unknown')
 									</em>
 @endif
 								</dd>
 								<dt>
-									Gender
+									@lang('profile.overview.community_statistics.gender')
 								</dt>
 								<dd>
 									{!!\String::gender($profile->gender)!!}
 								</dd>
 @if(!empty($profile->referred_by))
 								<dt>
-									Referred By
+									@lang('profile.overview.community_statistics.referred_by')
 								</dt>
 								<dd>
 									{{$profile->referred_by}} 
@@ -122,12 +105,12 @@
 	|| !empty($profile->social_skype))
 						<div class='box'>
 							<h3>
-								Social Information
+								@lang('profile.overview.social.name')
 							</h3>
 							<dl class='dl-horizontal'>
 	@if(!empty($profile->social_twitter))
 								<dt>
-									Twitter
+									@lang('profile.overview.social.twitter')
 								</dt>
 								<dd>
 									<i class='fa fa-twitter'></i> {{$profile->social_twitter}} 
@@ -135,7 +118,7 @@
 	@endif
 	@if(!empty($profile->social_facebook))
 								<dt>
-									FaceBook
+									@lang('profile.overview.social.facebook')
 								</dt>
 								<dd>
 									{{$profile->social_facebook}} 
@@ -143,7 +126,7 @@
 	@endif
 	@if(!empty($profile->social_youtube))
 								<dt>
-									YouTube
+									@lang('profile.overview.social.youtube')
 								</dt>
 								<dd>
 									{{$profile->social_youtube}} 
@@ -151,7 +134,7 @@
 	@endif
 	@if(!empty($profile->social_website))
 								<dt>
-									Website
+									@lang('profile.overview.social.website')
 								</dt>
 								<dd>
 									{{$profile->social_website}} 
@@ -159,7 +142,7 @@
 	@endif
 	@if(!empty($profile->social_skype))
 								<dt>
-									Skype
+									@lang('profile.overview.social.skype')
 								</dt>
 								<dd>
 									<i class='fa fa-skype'></i> {{$profile->social_skype}} 
@@ -175,12 +158,12 @@
 	|| !empty($profile->runescape_rsn))
 						<div class='box'>
 							<h3>
-								RuneScape Information
+								@lang('profile.overview.runescape.name')
 							</h3>
 							<dl class='dl-horizontal'>
 	@if(!empty($profile->runescape_version))
 								<dt>
-									RuneScape Played
+									@lang('profile.overview.runescape.played')
 								</dt>
 								<dd>
 									{{$profile->runescape_version}} 
@@ -188,7 +171,7 @@
 	@endif
 	@if(!empty($profile->runescape_allegiance))
 								<dt>
-									Allegiance
+									@lang('profile.overview.runescape.allegiance')
 								</dt>
 								<dd>
 									{{$profile->runescape_allegiance}} 
@@ -196,7 +179,7 @@
 	@endif
 	@if(!empty($profile->runescape_clan))
 								<dt>
-									Clan
+									@lang('profile.overview.runescape.clan')
 								</dt>
 								<dd>
 									{{$profile->runescape_clan}} 
@@ -204,7 +187,7 @@
 	@endif
 	@if(!empty($profile->runescape_rsn))
 								<dt>
-									RuneScape Name
+									@lang('profile.overview.runescape.runescape_name')
 								</dt>
 								<dd>
 									{{$profile->runescape_rsn}} 
@@ -213,7 +196,4 @@
 							</dl>
 						</div>
 @endif
-					</div>
-				</div>
-			</div>
 @stop
