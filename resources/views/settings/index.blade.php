@@ -1,0 +1,41 @@
+@extends('layouts.settings')
+@section('settings')
+						<dl class='dl-horizontal'>
+							<dt>
+								@lang('settings.profile.timezone')
+							</dt>
+							<dd>
+								Select
+							</dd>
+							<dt>
+								@lang('settings.profile.comments_visitors')
+							</dt>
+							<dd>
+
+							</dd>
+							<dt>
+								@lang('settings.profile.friends')
+							</dt>
+							<dd>
+
+							</dd>
+							<dt>
+								@lang('settings.profile.birthday')
+							</dt>
+							<dd>
+								Select
+							</dd>
+							<dt>
+								@lang('settings.profile.gender')
+							</dt>
+							<dt>
+								@lang('settings.profile.location')
+							</dt>
+							<dt>
+								@lang('settings.profile.interests')
+							</dt>
+							<dt>
+								@lang('settings.profile.referred_by'):
+							</dt>
+						</dl>
+@stop
