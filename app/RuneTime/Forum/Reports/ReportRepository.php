@@ -10,4 +10,19 @@ class ReportRepository extends EloquentRepository {
 			where('status_id', '=', $statusId)->
 			get();
 	}
+	public function convertType($type) {
+		if(ctype_digit($type)) {
+			switch($type) {
+				case 0:
+					return 'post';
+					break;
+				case 1:
+					return 'thread';
+					break;
+				case 2:
+					return 'user';
+					break;
+			}
+		}
+	}
 }

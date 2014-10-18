@@ -12,4 +12,24 @@ class Report extends Entity {
 	const TYPE_POST = 0;
 	const TYPE_THREAD = 1;
 	const TYPE_USER = 2;
+
+	/**
+	 * @param $statusId
+	 *
+	 * @return string
+	 */
+	public function getStatus() {
+		switch($this->status_id) {
+			case 0:
+				return 'open';
+				break;
+			case 1:
+				return 'closed';
+				break;
+			default:
+				\Log::info('Report :: unknown status type ' . $this->status_id);
+				return 'unknown';
+				break;
+		}
+	}
 }

@@ -16,6 +16,7 @@ class CreateForumReportsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('author_id');
+			$table->integer('reported_id');
 			$table->integer('type_id');
 			$table->integer('status_id');
 			$table->mediumtext('contents');
