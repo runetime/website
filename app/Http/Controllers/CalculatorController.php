@@ -16,9 +16,10 @@ class CalculatorController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
+		$calculators = $this->calculators->getAll();
 		$this->nav('Runescape');
 		$this->title('Calculators');
-		return $this->view('calculators.index');
+		return $this->view('calculators.index', compact('calculators'));
 	}
 
 	/**
