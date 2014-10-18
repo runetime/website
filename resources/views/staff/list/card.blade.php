@@ -20,7 +20,7 @@ $user=User::find($member->user_id);
 										<br />
 @if(\Auth::check())
 										<a href='/forums/messenger/compose/to={{\String::slugEncode($user->id,$user->display_name)}}' class='holo-text-secondary' title='Message {{$user->display_name}}'>
-											<i class='fa fa-inbox'></i> Message
+											<i class='fa fa-inbox'></i> @lang('messenger.message')
 										</a>
 @endif
 									</p>

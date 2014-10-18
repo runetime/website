@@ -23,9 +23,9 @@
 								{{$subforum->description}}
 							</div>
 							<div class='col-xs-12 col-sm-6 col-md-2'>
-								{{$subforum->threads}} threads
+								@lang('forums.threads', ['amount' => $subforum->threads])
 								<br />
-								{{$subforum->posts}} posts
+								@lang('forums.posts', ['amount' => $subforum->posts])
 							</div>
 							<div class='col-xs-12 col-sm-12 col-md-3'>
 				@if(!empty($subforum->last_post_info))
@@ -33,7 +33,7 @@
 									{{$subforum->last_thread_info->title}}
 								</a>
 								<br />
-								by {!!\Link::name($subforum->last_post_info->author_id)!!}
+								@lang('forums.by') {!!\Link::name($subforum->last_post_info->author_id)!!}
 								<br />
 								<a href='/forums/thread/{{\String::slugEncode($subforum->last_thread_info->id, $subforum->last_thread_info->title)}}/last-post' title='{{$subforum->last_thread_title}}'>
 									{!!\Time::shortReadable($subforum->last_post_info->created_at)!!}
@@ -49,7 +49,7 @@
 					</div>
 					<div class='col-xs-12 col-md-3'>
 						<h3>
-							Recent Threads
+							@lang('forums.sidebar.recent_threads.name')
 						</h3>
 						<div class='holo-box-dark'>
 @foreach($recentThreads as $thread)
@@ -64,22 +64,22 @@
 @endforeach
 						</div>
 						<h3>
-							Recent Posts
+							@lang('forums.sidebar.recent_posts.name')
 						</h3>
 					</div>
 					<div class='col-xs-12 text-center'>
 						<ul class='list-inline'>
 							<li>
-								<span class='label label-default'>{{$forumInfo->posts}}</span> total posts
+								<span class='label label-default'>{{$forumInfo->posts}}</span> @lang('forums.bar.total_posts')
 							</li>
 							<li>
-								<span class='label label-default'>{{$forumInfo->members}}</span> total members
+								<span class='label label-default'>{{$forumInfo->members}}</span> @lang('forums.bar.total_members')
 							</li>
 							<li>
 								<span class='label label-default'>{!!\Link::name($forumInfo->latest->id)!!}</span>
 							</li>
                             <li>
-                                <span class='label label-default'>{{$forumInfo->mostOnline}}</span> most online
+                                <span class='label label-default'>{{$forumInfo->mostOnline}}</span> @lang('forums.bar.most_online')
                             </li>
 						</ul>
                     </div>
@@ -87,20 +87,20 @@
 						<div class='pull-right'>
 							<ul class='list-inline'>
 								<li>
-									<a href='/forums/posters/today' title="Today's top posters">
-										Today's top posters
+									<a href='/forums/posters/today' title="@lang('forums.top_posters.today')">
+										@lang('forums.top_posters.today')
 									</a>
 								</li>
 								<li>
-									<a href='/forums/posters/overall' title='Overall Top Posters'>
-										Overall Top Posters
+									<a href='/forums/posters/overall' title='@lang('forums.top_posters.overall')'>
+										@lang('forums.top_posters.overall')
 									</a>
 								</li>
 							</ul>
 						</div>
 						<div>
 							<h3>
-								{{1}} users are online <small>(in the past 15 minutes)</small>
+								@lang('forums.online.current', ['amount' => 1]) <small>(@lang('forums.online.in_time', ['amount' => 15]))</small>
 							</h3>
 						</div>
 					</div>

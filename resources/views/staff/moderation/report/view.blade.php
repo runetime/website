@@ -2,18 +2,18 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Viewing Report by {{$author->display_name}}
+					@lang('staff.moderation.reports.view.viewing', ['name' => \Link::name($author->id)])
 				</h1>
 				<p class='text-muted'>
-					Submitted on {{\Time::shortReadable($report->created_at)}}
+					@lang('staff.moderation.reports.view.submitted_on', ['date' => \Time::shortReadable($report->created_at)])
 				</p>
 @if($status == "open")
 				<p class='text-success'>
-					The report is currently <b>open</b>.
+					@lang('staff.moderation.reports.view.currently', ['status' => Lang::get('staff.moderation.reports.status.open')])
 				</p>
 @else
 				<p class='text-danger'>
-					The report is currently <b>closed</b>.
+					@lang('staff.moderation.reports.view.currently', ['status' => Lang::get('staff.moderation.reports.status.closed')])
 				</p>
 @endif
 				<div class='post'>

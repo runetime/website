@@ -2,12 +2,12 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Moderation Centre
+					@lang('staff.moderation.name')
 				</h1>
 				<div class='row'>
 					<div class='col-xs-12 col-sm-6 col-md-3'>
 						<h2>
-							Open Reports
+							@lang('staff.moderation.reports.open_reports')
 						</h2>
 @foreach($reportList as $report)
                         <div class='card card-bad card-link' onclick="window.location.href='/staff/moderation/report/{{$report->id}}';">
@@ -15,13 +15,13 @@
                                 {{$report->reportee->display_name}}
                             </h4>
                             <p>
-                                User reported the {{$report->type}} located in thread
+                                @lang('staff.moderation.reports.reported_desc')
                                 <a href='/forum/threads/{{\String::slugEncode($report->thread->id, $report->thread->title)}}' title='{{$report->thread->title}}'>
                                     {{$report->thread->title}}
                                 </a>
                             </p>
                             <p class='text-muted'>
-                                Reported at {{\Time::shortTime($report->created_at)}}
+                                @lang('staff.moderation.reports.reported_at', ['date' => \Time::shortTime($report->created_at)])
                             </p>
                         </div>
 @endforeach
