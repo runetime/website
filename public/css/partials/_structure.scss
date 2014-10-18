@@ -8,13 +8,14 @@
 
 .pagination{
 	li a{
-		background-color:#414141 !important;
-		border:1px solid #33B5E5 !important;
+		background-color:rgba(65, 65, 65, 1) !important;
+		border:1px solid rgba(51, 181, 229, 1) !important;
 	}
 }
 .breadcrumb{
-	background:#454545;
-	box-shadow:inset 7px 0 9px -7px #33B5E5;
+	background:rgba(69, 69, 69, 1);
+	border-radius:0em !important;
+	box-shadow:inset 7px 0 9px -7px rgba(51, 181, 229, 1);
 	margin-bottom:0px;
 	a{
 		color:$linkColor !important;
@@ -25,6 +26,7 @@
 }
 
 ::-webkit-scrollbar{
+	background:rgba(25, 25, 25, 1);
 	width:.75em;
 }
 ::-webkit-scrollbar-thumb{
@@ -46,11 +48,11 @@
 	margin-right:0em !important;
 }
 .panel-dark{
-	background:#292929;
-	border-color:#313131;
+	background:rgba(41, 41, 41, 1);
+	border-color:rgba(49, 49, 49, 1);
 	.panel-heading{
-		background-color:#585858;
-		border-color:#616161;
+		background-color:rgba(88, 88, 88, 1);
+		border-color:rgba(97, 97, 97, 1);
 	}
 }
 .padding-none{
@@ -70,7 +72,7 @@ $cardWidth:200px;
 		position:relative;
 		.front{
 			background:{
-				color:#232323;
+				color:rgba(23, 23, 23, 1);
 				size:$cardWidth $cardHeight !important;
 			}
 			transform:rotateY(0deg);
@@ -92,7 +94,7 @@ $cardWidth:200px;
 			}
 		}
 		>div{
-			background:#232323;
+			background:rgba(23, 23, 23, 1);
 			border-radius:1em;
 			backface-visibility:hidden;
 			left:0;
@@ -112,4 +114,56 @@ $cardWidth:200px;
 .back{
 	height:$cardHeight;
 	width:$cardWidth;
+}
+
+.card{
+	background:rgba(23, 23, 23, 1);
+	border-left:{
+		style:solid;
+		width:4px;
+		color:transparent;
+	}
+	padding:.5em .3em;
+	&:hover{
+		background:rgba(33, 33, 33, 1);
+	}
+}
+.card-bad {
+	border-left-color:rgba(153, 0, 0, 1);
+}
+.card-good {
+	border-left-color:rgba(0, 153, 0, 1);
+}
+.card-read {
+	border-left-color:rgba(25,25, 25, 1);
+}
+.card-unread {
+	border-left-color:rgba(170, 170, 170, 1);
+}
+.card-hidden {
+	border-left-color:rgba(25, 255, 255, 1);
+}
+.card-locked {
+	border-left-color:rgba(86, 0, 158, 1);
+}
+.card-sticky {
+	border-left-color:rgba(237, 119, 16, 1);
+}
+.card-poll {
+	border-left-color:rgba(237, 210, 16, 1);
+}
+.card-link {
+	&:hover {
+		cursor:pointer;
+	}
+}
+.list-group {
+	.list-group-item {
+		background: rgba(31, 31, 31, 1);
+		border:1px solid rgba(23, 23, 23, 0.7);
+		&:hover {
+			background: rgba(39, 39, 39, 1);
+			color:rgba(255, 255, 255, 1);
+		}
+	}
 }

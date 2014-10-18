@@ -16,6 +16,16 @@
 		}
 	}
 }
+.subforum-list {
+	a {
+		border-left:4px solid transparent;
+		display:block;
+		padding:.5em .25em;
+		&.active {
+			border-left:4px solid rgba(237, 119, 16, 1);
+		}
+	}
+}
 .post{
 	.post-info{
 		background:#111111;
@@ -25,4 +35,7 @@
 		background:#212121;
 		border-radius:1em;
 	}
+}
+.post-hidden{
+	background:rgba(47, 79, 79, 1) !important;
 }
