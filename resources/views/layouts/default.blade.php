@@ -107,7 +107,7 @@ $current = $nav;
 				<div class='navbar-header'>
 					<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>
 						<span class='sr-only'>
-							Toggle navigation
+							@lang('navbar.toggle_navigation')
 						</span>
 						<span>
 							@lang('navbar.menu')
@@ -178,7 +178,7 @@ $current = $nav;
 			<ol class='breadcrumb'>
 				<li>
 					<a href='/' title='Home'>
-						Home
+						@lang('navbar.home')
 					</a>
 				</li>
 	@foreach($bc as $url=>$name)
@@ -206,27 +206,21 @@ $current = $nav;
 					@lang('footer.about_us')
 				</p>
 				<div id='portfolio-about'>
-					<p>
-						{{-- <img src='/img/supported_bronze.png' alt='Bronze Supported Fansite' class='img-responsive pull-left' />
-						<p>
-							We are proud to be a Jagex Bronze Supported Fansite!
-						</p> --}}
-						<p>
-							Copyright RuneTime &copy; {{date('Y')}} &mdash; <a href='/privacy/' title='Privacy'>privacy</a> &mdash; <a href='/terms/' title='Terms of Use'>terms of use</a>
-						</p>
-						<p>
-							<a href='/contact/' title='Contact us'>Contact us</a>
-						</p>
-						<p>
-							<a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; and <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; are trademarks of Jagex Ltd &copy; 1999-{{date('Y')}}
-						</p>
-						<p>
-							All Runescape images are property of Jagex Ltd.
-						</p>
-						<p>
-							RuneTime is in no way affiliated to Runescape.
-						</p>
-					</p>
+                    <p>
+                        @lang('footer.copyright') &copy; {{date('Y')}} &mdash; <a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
+                    </p>
+                    <p>
+                        <a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
+                    </p>
+                    <p>
+                        <a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{date('Y')}}
+                    </p>
+                    <p>
+                        @lang('footer.images')
+                    </p>
+                    <p>
+                        @lang('footer.affiliated')
+                    </p>
 				</div>
 			</div>
 			<div class='col-xs-12 col-md-6'>
@@ -234,9 +228,9 @@ $current = $nav;
 					@lang('footer.follow_us')
 				</p>
 				<div id='portfolio-social'>
-					<a href='https://www.facebook.com/RuneTimeOfficial' title='Follow RuneTime on Facebook'><img src='img/fb.png' alt='Facebook' /></a>
-					<a href='https://twitter.com/Rune_Time' title='Follow RuneTime on Twitter'><img src='img/tw.png' alt='Twitter' /></a>
-					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='Subscribe to RuneTime on YouTube'><img src='img/yt.png' alt='YouTube' /></a>
+					<a href='https://www.facebook.com/RuneTimeOfficial' title='@lang('footer.facebook')'><img src='img/fb.png' alt='Facebook' /></a>
+					<a href='https://twitter.com/Rune_Time' title='@lang('footer.twitter')'><img src='img/tw.png' alt='Twitter' /></a>
+					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'><img src='img/yt.png' alt='YouTube' /></a>
 				</div>
 			</div>
 		</div>

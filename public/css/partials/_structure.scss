@@ -165,5 +165,13 @@ $cardWidth:200px;
 			background: rgba(39, 39, 39, 1);
 			color:rgba(255, 255, 255, 1);
 		}
+		&.active {
+			background: rgba(37, 37, 37, 1);
+			border:1px solid rgba(37, 37, 37, 1);
+			&:hover {
+				background:rgba(43, 43, 43, 1);
+				border:1px solid rgba(189, 189, 189, .5);
+			}
+		}
 	}
 }

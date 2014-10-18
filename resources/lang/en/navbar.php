@@ -62,4 +62,5 @@ return [
 			'signup' => 'Sign Up',
 		],
 	],
+	'toggle_navigation' => 'Toggle Navigation',
 ];

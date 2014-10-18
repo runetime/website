@@ -47,6 +47,11 @@
 	],
 	 'status' => [
 		 'offline' => 'Offline',
-		 'online' => 'Online',
+		 'online'  => 'Online',
+	 ],
+	 'gender' => [
+		 'not_telling' => 'Not Telling',
+		 'female'      => 'Female',
+		 'male'        => 'Male',
 	 ]
  ];
