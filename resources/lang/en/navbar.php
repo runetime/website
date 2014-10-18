@@ -44,7 +44,7 @@ return [
 		'ticket'        => 'Ticket System',
 		'checkup'       => 'Staff Checkup',
 		'administrator' => 'Administrator Panel',
-		'moderation'    => 'Moderator Panel',
+		'moderation'    => 'Moderation Panel',
 		'radio'         => 'Radio Panel',
 		'content'       => 'Content Panel',
 		'events'        => 'Events Panel',
