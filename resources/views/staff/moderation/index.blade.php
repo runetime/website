@@ -1,21 +1,22 @@
 @extends('layouts.default')
 @section('contents')
-            <div class='wrapper'>
-                <h1>
-                    Moderation Centre
-                </h1>
-                <div class='row'>
-                    <div class='col-xs-12 col-sm-6 col-md-3'>
-                        <h2>
-                            Open Reports
-                        </h2>
+			<div class='wrapper'>
+				<h1>
+					Moderation Centre
+				</h1>
+				<div class='row'>
+					<div class='col-xs-12 col-sm-6 col-md-3'>
+						<h2>
+							Open Reports
+						</h2>
 @foreach($reportList as $report)
-                        <div class='card card-bad'>
+                        <div class='card card-bad card-link' onclick="window.location.href='/staff/moderation/report/{{$report->id}}';">
                             <h4>
-                                {{$report->reportee->id}}
+                                {{$report->reportee->display_name}}
                             </h4>
                             <p>
-                                User reported the {{$type}} located in thread <a href='/forum/threads/{{\String::slugEncode($report->thread->id, $report->thread->title)}}' title='{{$report->thread->title}}'>
+                                User reported the {{$report->type}} located in thread
+                                <a href='/forum/threads/{{\String::slugEncode($report->thread->id, $report->thread->title)}}' title='{{$report->thread->title}}'>
                                     {{$report->thread->title}}
                                 </a>
                             </p>
@@ -24,7 +25,7 @@
                             </p>
                         </div>
 @endforeach
-                    </div>
-                </div>
-            </div>
+					</div>
+				</div>
+			</div>
 @stop

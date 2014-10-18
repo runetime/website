@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Reports\ReportRepository;
+use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
@@ -22,17 +23,24 @@ class StaffController extends BaseController {
 	 * @var ThreadRepository
 	 */
 	private $threads;
+	/**
+	 * @var PostRepository
+	 */
+	private $posts;
 
 	/**
+	 * @param PostRepository   $posts
 	 * @param ReportRepository $reports
 	 * @param RoleRepository   $roles
+	 * @param ThreadRepository $threads
 	 * @param UserRepository   $users
 	 */
-	public function __construct(ReportRepository $reports, RoleRepository $roles, ThreadRepository $threads,UserRepository $users) {
+	public function __construct(PostRepository $posts, ReportRepository $reports, RoleRepository $roles, ThreadRepository $threads,UserRepository $users) {
 		$this->reports = $reports;
 		$this->roles = $roles;
 		$this->users = $users;
 		$this->threads = $threads;
+		$this->posts = $posts;
 	}
 
 	/**
@@ -54,13 +62,34 @@ class StaffController extends BaseController {
 		$reports = $this->reports->getByStatus(Report::STATUS_OPEN);
 		$reportList = [];
 		foreach($reports as $report) {
+			$report->type=$this->reports->convertType($report->type);
+			$report->post = $this->posts->getByid($report->reported_id);
 			$report->reportee = $this->users->getById($report->author_id);
-			$report->thread = $this->threads->getById($report->thread_id);
+			$report->thread = $this->threads->getById($report->post->thread);
 			array_push($reportList, $report);
 		}
 		$this->nav('Staff');
 		$this->title('Moderation Centre');
 		return $this->view('staff.moderation.index', compact('reportList'));
+	}
+
+	/**
+	 * @get("staff/moderation/report/{id}")
+	 * @middleware("auth.moderation")
+	 * @param $id
+	 * @return \Illuminate\View\View
+	 */
+	public function getModerationReportView($id) {
+		$report = $this->reports->getById($id);
+		if(!$report)
+			\App::abort(404);
+		$author = $this->users->getByid($report->author_id);
+		$post = $this->posts->getById($report->reported_id);
+		$thread = $this->threads->getById($post->thread);
+		$status = $report->getStatus();
+		$this->nav('Staff');
+		$this->title('Viewing Report # ' . $report->id);
+		return $this->view('staff.moderation.report.view', compact('report', 'author', 'post', 'thread', 'status'));
 	}
 
 	/**
