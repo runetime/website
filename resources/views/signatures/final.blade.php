@@ -4,16 +4,47 @@
 				<p class='text-success'>
 					@lang('signature.final.made',['name'=>$username])
 				</p>
-				<img src='{{$imgSrc}}' alt='RuneTime Signature for {{$username}}' />
+				<img src='/signatures/h{{$hash}}' alt='RuneTime Signature for {{$username}}' />
 				<br />
-				<details>
-					<summary>
+				<dl class='dl-horizontal'>
+				    <dt>
 						@lang('signature.final.link.direct')
-					</summary>
-					<p>
-						<a href='{{$imgSrc}}'>
-							http://runetime.com{{$imgSrc}}
+				    </dt>
+				    <dd>
+						<a href='{{$location}}'>
+							{{$location}}
 						</a>
-					</p>
-				</details>
+				    </dd>
+				    <dt>
+				        @lang('signature.final.link.html')
+				    </dt>
+				    <dd>
+				        {{'<img src="' . $location . '" alt="My RuneTime Signature" />'}}
+				    </dd>
+				    <dt>
+                        @lang('signature.final.link.markdown')
+				    </dt>
+				    <dd>
+				        ![RuneTime Signature for {{$username}}]({{$location}}]
+				    </dd>
+				    <dt>
+				        @lang('signature.final.link.bbcode')
+                    </dt>
+                    <dd>
+				        [img={{$location}}]
+				    </dd>
+				    <dt>
+				        @lang('signature.final.link.alternative_bbcode')
+				    </dt>
+				    <dd>
+				        [img]{{$location}}[/img]
+				    </dd>
+				    <dt>
+				        @lang('signature.final.link.linked_bbcode')
+				    </dt>
+				    <dd>
+				        [a href=http://runetime.com][img={{$location}}][/a]
+				    </dd>
+				</dl>
 			</div>
+@stop
