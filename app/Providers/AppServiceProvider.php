@@ -14,6 +14,9 @@ class AppServiceProvider extends ServiceProvider {
 	protected $middleware = [
 		'auth' => 'App\Http\Middleware\AuthMiddleware',
 		'auth.basic' => 'App\Http\Middleware\BasicAuthMiddleware',
+		'auth.logged' => 'App\Http\Middleware\AuthLogged',
+		'auth.moderation' => 'App\Http\Middleware\AuthModeration',
+		'auth.staff' => 'App\Http\Middleware\AuthStaff',
 		'csrf' => 'App\Http\Middleware\CsrfMiddleware',
 		'guest' => 'App\Http\Middleware\GuestMiddleware',
 	];
