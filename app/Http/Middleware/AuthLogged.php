@@ -16,7 +16,7 @@ class AuthLogged implements Middleware {
 	{
 		if(!\Auth::check())
 			return redirect()->action('AuthController@getLoginForm');
-		return next($request);
+		return $next($request);
 	}
 
 }

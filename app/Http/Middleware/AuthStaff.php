@@ -18,7 +18,7 @@ class AuthStaff implements Middleware {
 			return \redirect::to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
 			\App::abort(403);
-		return next($request);
+		return $next($request);
 	}
 
 }
