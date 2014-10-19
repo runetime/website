@@ -145,3 +145,15 @@ blockquote.start{
 .label-rt{
 	background:#45006b !important;
 }
+.label-locked {
+	background: rgba(86, 0, 158, 1)
+}
+.label-poll {
+	background: rgba(89, 79, 6, 1);
+}
+.label-hidden {
+	background: rgba(7, 76, 76, 1)
+}
+.label-pinned {
+	background: rgba(127, 52, 0, 1);
+}
