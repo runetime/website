@@ -1,9 +1,9 @@
 <?php
 return [
-	'menu'    => 'Menu',
-	'home'    => 'Home',
-	'forums'  => 'Forums',
-	'radio'   => 'Radio',
+	'menu'     => 'Menu',
+	'home'     => 'Home',
+	'forums'   => 'Forums',
+	'radio'    => 'Radio',
 	'runetime' => [
 		'runetime'   => 'RuneTime',
 		'news'       => 'News',

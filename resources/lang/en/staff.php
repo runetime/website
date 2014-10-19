@@ -17,5 +17,14 @@ return [
 				'closed' => 'closed',
 			],
 		],
+		'subforum' => [
+			'edit_title' => 'Edit Title',
+			'pin'        => 'Pin',
+			'unpin'      => 'Unpin',
+			'lock'       => 'Lock',
+			'unlock'     => 'Unlock',
+			'hide'       => 'Hide',
+			'unhide'     => 'Unhide',
+		]
 	],
 ];

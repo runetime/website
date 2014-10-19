@@ -1,5 +1,15 @@
 <?php
-
+/**
+ *
+ *
+ *
+ *
+ * DO NOT TRANSLATE THIS, THIS IS FOR SERVER DEBUGGING AND DOES NOT NEED TO BE TRANSLATED
+ *
+ *
+ *
+ *
+ */
 return [
 
 	/*

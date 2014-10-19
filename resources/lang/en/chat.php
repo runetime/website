@@ -1,4 +1,4 @@
 <?php
 return [
-	'noscript'=>'Sorry, but you have JavaScript disabled. ):',
+	'noscript' => 'Sorry, but you have JavaScript disabled. ):',
 ];

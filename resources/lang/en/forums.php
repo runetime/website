@@ -1,10 +1,17 @@
 <?php
-return [
+return array(
 	'thread' => [
 		'create' => [
 			'name'  => 'Creating a New Thread in :subforum',
 			'title' => [
 				'name' => 'Title',
+			],
+			'poll' => [
+				'name'     => 'Poll',
+				'summary'  => 'Click here if you would like to create a poll.',
+				'title'    => 'Poll Title',
+				'question' => 'Question',
+				'answer'    => 'Answer',
 			],
 			'tags' => [
 				'name'        => 'Tags',
@@ -18,6 +25,23 @@ return [
 				'name' => 'Post Thread',
 			],
 		],
+	],
+	'post' => [
+		'show' => [
+			'ip' => 'IP: :ipAddress',
+			'bar' => [
+				'edit'   => 'Edit',
+				'hide'   => 'Hide',
+				'unhide' => 'Unhide',
+				'delete' => 'Delete',
+				'quote'  => 'Quote',
+			],
+		],
+		'create' => [
+			'submit' => 'Post',
+		],
+		'auth'   => 'You must be logged in to post.',
+		'locked' => 'This thread is locked.',
 	],
 	'sidebar' => [
 		'recent_threads' => [
@@ -43,4 +67,4 @@ return [
 	'posts'   => ':amount posts',
 	'threads' => ':amount threads',
 	'by'      => 'by', // 'Thread name' by 'author' for example
-];
+);

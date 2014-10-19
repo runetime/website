@@ -2,16 +2,16 @@
 return [
 	'name' => 'Settings',
 	'nav' => [
-		'profile_settings'   => 'Profile Settings',
-		'photo'              => 'Photo',
-		'password' => 'Password',
-		'about_me'           => 'About Me',
-		'signature'          => 'Signature',
-		'social'             => 'Social',
-		'runescape'          => 'RuneScape',
+		'profile_settings' => 'Profile Settings',
+		'photo'            => 'Photo',
+		'password'         => 'Password',
+		'about_me'         => 'About Me',
+		'signature'        => 'Signature',
+		'social'           => 'Social',
+		'runescape'        => 'RuneScape',
 	],
 	'profile' => [
-		'timezone' => [
+		'timezone'  => [
 			'name'  => 'Timezone',
 			'hours' => 'hours',
 			'dst'   => 'Automatically detect DST',
@@ -20,7 +20,7 @@ return [
 			'name' => 'Comments & Visitors',
 			'help' => 'Show last 5 visitors',
 		],
-		'friends' => [
+		'friends'  => [
 			'name' => 'Friends',
 			'help' => 'Show my friends in my profile',
 		],
@@ -42,10 +42,10 @@ return [
 			],
 			'note' => 'Entering your birthday is optional.',
 		],
-		'gender'            => 'Gender',
-		'location'          => 'Location',
-		'interests'         => 'Interests',
-		'referred_by'       => [
+		'gender'      => 'Gender',
+		'location'    => 'Location',
+		'interests'   => 'Interests',
+		'referred_by' => [
 			'name' => 'Referred By',
 			'note' => 'Did someone tell you about us?  Tell us who told you!',
 		],

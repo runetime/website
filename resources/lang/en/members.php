@@ -1,4 +1,4 @@
 <?php
 return [
-	'joined'=>'Joined :date'
+	'joined' => 'Joined :date'
 ];
