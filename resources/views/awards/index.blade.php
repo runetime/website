@@ -1,11 +1,8 @@
 @extends('layouts.default')
 @section('contents')
-<?php
-use App\RuneTime\Awards\Award;
-?>
 			<div class='wrapper'>
 				<h2>
-					RuneTime Awards
+					@lang('awards.name')
 				</h2>
 @foreach($awards as $award)
 				<div class='award-list row'>
@@ -22,7 +19,7 @@ use App\RuneTime\Awards\Award;
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<p>
-							@lang('awards.times_awarded',['amount'=>$award->given]) <a href='{{Link::URL('awards/'.Award::makeSlug($award->id,$award->name))}}' title='View Awardees'>View Awardees</a>
+							@lang('awards.times_awarded',['amount'=>$award->given]) <a href='{{Link::URL('awards/' . \String::slugEncode($award->id,$award->name))}}' title='@lang('awards.view_awardees')'>@lang('awards.view_awardees')</a>
 						</p>
 						<p>
 							@lang('awards.last_awarded',['time'=>Time::long($award->last_awarded)]) 

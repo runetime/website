@@ -23,7 +23,7 @@ $navs=[
 		'map/runescape'       => Lang::get('navbar.runescape.world_map'),
 		'calculators'         => Lang::get('navbar.runescape.calculators'),
 		'play'                => Lang::get('navbar.runescape.play'),
-		'utility/name-check'  => Lang::get('navbar.runescape.name_checker'),
+		'name/check'  => Lang::get('navbar.runescape.name_checker'),
 		'calculators/combat'  => Lang::get('navbar.runescape.combat_calculator'),
 	],
 	Lang::get('navbar.social.social') => [
