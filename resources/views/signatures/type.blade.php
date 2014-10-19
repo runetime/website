@@ -5,3 +5,4 @@
 					@lang('signature.type.stat')
 				</a>
 			</div>
+@stop
