@@ -19,7 +19,7 @@ $user=User::find($member->user_id);
 										{!!$user->title!!} 
 										<br />
 @if(\Auth::check())
-										<a href='/forums/messenger/compose/to={{\String::slugEncode($user->id,$user->display_name)}}' class='holo-text-secondary' title='Message {{$user->display_name}}'>
+										<a href='/messenger/compose/to={{\String::slugEncode($user->id,$user->display_name)}}' class='holo-text-secondary' title='@lang('messenger.message')'>
 											<i class='fa fa-inbox'></i> @lang('messenger.message')
 										</a>
 @endif
