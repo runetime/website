@@ -1,10 +1,22 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
 use App\Runis\Core\EloquentRepository;
-class PostRepository extends EloquentRepository{
-	public function __construct(Post $model){
+class PostRepository extends EloquentRepository {
+	/**
+	 * @param Post $model
+	 */
+	public function __construct(Post $model) {
 		$this->model=$model;
 	}
+
+	/**
+	 * @param     $thread
+	 * @param int $amount
+	 * @param int $page
+	 * @param int $status
+	 *
+	 * @return mixed
+	 */
 	public function getX($thread, $amount = Thread::POSTS_PER_PAGE, $page = 1, $status = -1) {
 		$res = $this->model->
 			where('thread', '=', $thread);

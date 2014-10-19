@@ -8,9 +8,11 @@ class Time{
 	public static function isDST() {
 		return date("I", time());
 	}
+
 	/**
-	 * Converts an integer-based timestamp into a readable string with hours:minutes:seconds
-	 * @param integer $int     The integer timestamp to convert
+	 * @param int $i
+	 *
+	 * @return bool|string
 	 */
 	public static function short($i=0) {
 		$i = self::getEpoch($i);
@@ -18,9 +20,11 @@ class Time{
 			$i += 3600;
 		return date("jS \of F Y", $i);
 	}
+
 	/**
-	 * Converts an integer-based timestamp into a readable string with hours:minutes:seconds
-	 * @param integer $int     The integer timestamp to convert
+	 * @param int $i
+	 *
+	 * @return bool|string
 	 */
 	public static function shortTime($i = 0) {
 		$i = self::getEpoch($i);
@@ -28,9 +32,11 @@ class Time{
 			$i += 3600;
 		return date("jS \of F Y H:i:s", $i);
 	}
+
 	/**
-	 * Converts an integer-based timestamp into a readable string with hours:minutes:seconds
-	 * @param integer $int     The integer timestamp to convert
+	 * @param int $i
+	 *
+	 * @return bool|string
 	 */
 	public static function long($i = 0) {
 		$i = self::getEpoch($i);
@@ -38,6 +44,12 @@ class Time{
 			$i += 3600;
 		return date("jS \of F Y \- H:i:s", $i);
 	}
+
+	/**
+	 * @param $str
+	 *
+	 * @return int
+	 */
 	public static function getEpoch($str) {
 		if(is_numeric($str))
 			return $str;
@@ -45,9 +57,21 @@ class Time{
 			return strtotime($str);
 		return strtotime($str);
 	}
+
+	/**
+	 * @param $unix
+	 *
+	 * @return bool|string
+	 */
 	public static function formatTime($unix) {
 		return date('Y-m-d H:i:s', $unix);
 	}
+
+	/**
+	 * @param $time
+	 *
+	 * @return string
+	 */
 	public static function shortReadable($time) {
 		if(!is_numeric($time))
 			$time = self::getEpoch($time);
@@ -58,6 +82,12 @@ class Time{
 		else               $str = date('Y-m-d');
 		return $str . " " . date('H:i', $time);
 	}
+
+	/**
+	 * @param $time
+	 *
+	 * @return bool|string
+	 */
 	public static function DMY($time) {
 		if(!is_numeric($time))
 			$time = self::getEpoch($time);

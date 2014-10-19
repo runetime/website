@@ -14,8 +14,6 @@ class Report extends Entity {
 	const TYPE_USER = 2;
 
 	/**
-	 * @param $statusId
-	 *
 	 * @return string
 	 */
 	public function getStatus() {

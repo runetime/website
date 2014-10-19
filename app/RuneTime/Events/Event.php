@@ -11,13 +11,4 @@ class Event extends Entity {
 	const STATUS_USER_VISIBLE = 1;
 	const STATUS_OFFICIAL_INVISIBLE = 2;
 	const STATUS_OFFICIAL_VISIBLE = 3;
-	protected $validationRules = [
-		'author_id'       => 'required|exists:users,id',
-		'contents'        => 'required',
-		'contents_parsed' => 'required',
-		'title'           => 'required',
-		'time_of'         => 'required',
-		'calendar'        => 'required',
-		'status'          => 'integer',
-	];
 }

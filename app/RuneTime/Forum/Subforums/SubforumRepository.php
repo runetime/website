@@ -1,20 +1,42 @@
 <?php
 namespace App\RuneTime\Forum\Subforums;
 use App\Runis\Core\EloquentRepository;
-class SubforumRepository extends EloquentRepository{
-	public function __construct(Subforum $model){
-		$this->model=$model;
+class SubforumRepository extends EloquentRepository {
+	/**
+	 * @param Subforum $model
+	 */
+	public function __construct(Subforum $model) {
+		$this->model = $model;
 	}
-	public function getByParent($id){
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function getByParent($id) {
 		return $this->model->
-			where('parent',$id)->
+			where('parent', $id)->
 			get();
 	}
-	public function getById($id){
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function getById($id) {
 		return $this->model->
-			where('id','=',$id)->
+			where('id', '=', $id)->
 			first();
 	}
+
+	/**
+	 * @param $postId
+	 * @param $subforumId
+	 *
+	 * @return bool
+	 */
 	public function updateLastPost($postId, $subforumId) {
 		$subforum = Subforum::find($subforumId);
 		while(true) {
@@ -32,6 +54,10 @@ class SubforumRepository extends EloquentRepository{
 		}
 		return true;
 	}
+
+	/**
+	 * @param $subforumId
+	 */
 	public function incrementPosts($subforumId) {
 		$subforum = Subforum::find($subforumId);
 		while(true){
@@ -44,6 +70,10 @@ class SubforumRepository extends EloquentRepository{
 				break;
 		}
 	}
+
+	/**
+	 * @param $subforumId
+	 */
 	public function incrementThreads($subforumId) {
 		$subforum = Subforum::find($subforumId);
 		while(true){

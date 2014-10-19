@@ -15,6 +15,12 @@ class Link {
 		$url = str_replace(" ", "-", $url);
 		return $str . $url;
 	}
+
+	/**
+	 * @param $userId
+	 *
+	 * @return string
+	 */
 	public static function name($userId){
 		$users = new UserRepository(new User);
 		$user = $users->getById($userId);
@@ -25,6 +31,12 @@ class Link {
 		\Log::warning('Utilities\Link::name - ' . $userId . ' does not exist.');
 		return "unknown";
 	}
+
+	/**
+	 * @param $roleId
+	 *
+	 * @return string
+	 */
 	public static function colorRole($roleId) {
 		$roles = new RoleRepository(new Role);
 		$role = $roles->getById($roleId);
@@ -33,6 +45,13 @@ class Link {
 		\Log::warning('Utilities\Link::colorRole - ' . $roleId . ' does not exist.');
 		return "unknown";
 	}
+
+	/**
+	 * @param $str
+	 * @param $roleInfo
+	 *
+	 * @return string
+	 */
 	public static function color($str,$roleInfo) {
 		$roles = new RoleRepository(new Role);
 		if(ctype_digit($roleInfo))

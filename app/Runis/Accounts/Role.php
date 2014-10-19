@@ -9,6 +9,10 @@ class Role extends Entity{
 		'name_trim'=>'required',
 		'class'    =>'required'
 	];
+
+	/**
+	 *
+	 */
 	public function users(){
 		$this->belongsToMany('Runis\Accounts\User');
 	}

@@ -8,8 +8,4 @@ class Calendar extends Entity {
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
 	const STATUS_VISIBLE = 1;
-	protected $validationRules = [
-		'title'  => 'required',
-		'status' => 'required',
-	];
 }

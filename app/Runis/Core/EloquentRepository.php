@@ -2,63 +2,132 @@
 namespace App\Runis\Core;
 use Illuminate\Database\Eloquent\Model;
 use App\Runis\Core\Exceptions\EntityNotFoundException;
-abstract class EloquentRepository{
+
+abstract class EloquentRepository {
 	protected $model;
-	public function __construct($mode=null){
-		$this->model=$model;
+
+	/**
+	 * @param null $mode
+	 */
+	public function __construct($mode=null) {
+		$this->model = $model;
 	}
-	public function getModel(){
+
+	/**
+	 * @return mixed
+	 */
+	public function getModel() {
 		return $this->model;
 	}
-	public function setModel($model){
-		$this->model=$model;
+
+	/**
+	 * @param $model
+	 */
+	public function setModel($model) {
+		$this->model = $model;
 	}
-	public function getAll(){
+
+	/**
+	 * @return mixed
+	 */
+	public function getAll() {
 		return $this->model->all();
 	}
-	public function getAllPaginated($count){
+
+	/**
+	 * @param $count
+	 *
+	 * @return mixed
+	 */
+	public function getAllPaginated($count) {
 		return $this->model->paginate($count);
 	}
-	public function getById($id){
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function getById($id) {
 		return $this->model->find($id);
 	}
-	public function requireById($id){
-		$model=$this->getById($id);
-		if(!$model){
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 * @throws EntityNotFoundException
+	 */
+	public function requireById($id) {
+		$model = $this->getById($id);
+		if(!$model)
 			throw new EntityNotFoundException;
-		}
 		return $model;
 	}
-	public function getNew($attributes=[]){
+
+	/**
+	 * @param array $attributes
+	 *
+	 * @return mixed
+	 */
+	public function getNew($attributes= [] ) {
 		return $this->model->newInstance($attributes);
 	}
-	public function save($data){
-		if($data instanceOf Model){
+
+	/**
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
+	public function save($data) {
+		if($data instanceOf Model)
 			return $this->storeEloquentModel($data);
-		}
-		elseif(is_array($data)){
+		elseif(is_array($data))
 			return $this->storeArray($data);
-		}
 	}
-	public function delete($model){
+
+	/**
+	 * @param $model
+	 *
+	 * @return mixed
+	 */
+	public function delete($model) {
 		return $model->delete();
 	}
-	protected function storeEloquentModel($model){
-		if($model->getDirty()){
+
+	/**
+	 * @param $model
+	 *
+	 * @return mixed
+	 */
+	protected function storeEloquentModel($model) {
+		if($model->getDirty())
 			return $model->save();
-		}
-		else{
-			return $model->touch();
-		}
+		return $model->touch();
 	}
-	protected function storeArray($data){
-		$model=$this->getNew($data);
-		return $this->storeEloquentModel($model);
+
+	/**
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
+	protected function storeArray($data) {
+		return $this->storeEloquentModel($this->getNew($data));
 	}
-	public function paginate($number){
+
+	/**
+	 * @param $number
+	 *
+	 * @return mixed
+	 */
+	public function paginate($number) {
 		return $this->model->simplePaginate($number);
 	}
-	public function getCount(){
+
+	/**
+	 * @return mixed
+	 */
+	public function getCount() {
 		return $this->model->count();
 	}
 }
