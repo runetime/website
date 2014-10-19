@@ -18,6 +18,8 @@ class LivestreamController extends BaseController {
 
 	/**
 	 * @get("livestream/reset")
+	 * @middleware("auth.logged")
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getReset() {

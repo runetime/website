@@ -23,18 +23,22 @@ class AuthController extends BaseController {
 	/**
 	 * @get("login")
 	 * @middleware("guest")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm() {
+		\App::setLocale('nl');
 		$this->nav('Login');
 		$this->title('Login');
 		return $this->view('auth.login');
 	}
 
 	/**
-	 * @param LoginForm $form
 	 * @middleware("guest")
 	 * @post("login")
+	 *
+	 * @param LoginForm $form
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postLoginForm(LoginForm $form) {
@@ -46,6 +50,8 @@ class AuthController extends BaseController {
 
 	/**
 	 * @get("signup")
+	 * @middleware("guest")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getSignupForm() {
@@ -56,8 +62,11 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @param SignupForm $form
+	 * @middleware("guest")
 	 * @post("signup")
+	 *
+	 * @param SignupForm $form
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postSignupForm(SignupForm $form) {
@@ -77,6 +86,7 @@ class AuthController extends BaseController {
 	/**
 	 * @get("logout")
 	 * @middleware("auth.logged")
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getLogout() {

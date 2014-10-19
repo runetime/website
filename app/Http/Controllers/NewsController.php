@@ -54,6 +54,8 @@ class NewsController extends BaseController {
 
 	/**
 	 * @get("news/create")
+	 * @middleware("auth.staff")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getCreate() {
@@ -64,8 +66,11 @@ class NewsController extends BaseController {
 	}
 
 	/**
-	 * @param NewsForm $form
+	 * @middleware("auth.staff")
 	 * @post("news/create")
+	 *
+	 * @param NewsForm $form
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postCreate(NewsForm $form) {

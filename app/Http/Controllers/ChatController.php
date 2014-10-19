@@ -34,8 +34,10 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @param ChatStartForm $form
 	 * @post("chat/start")
+	 *
+	 * @param ChatStartForm $form
+	 *
 	 * @return string
 	 */
 	public function postStart(ChatStartForm $form){
@@ -59,8 +61,10 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @param ChatUpdateForm $form
 	 * @post("chat/update")
+	 *
+	 * @param ChatUpdateForm $form
+	 *
 	 * @return string
 	 */
 	public function postUpdate(ChatUpdateForm $form){
@@ -83,8 +87,11 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @param ChatMessageForm $form
+	 * @middleware("auth.logged")
 	 * @post("chat/post/message")
+	 *
+	 * @param ChatMessageForm $form
+	 *
 	 * @return string
 	 */
 	public function postMessage(ChatMessageForm $form){
@@ -114,6 +121,7 @@ class ChatController extends BaseController{
 	}
 
 	/**
+	 * @middleware("auth.moderation")
 	 * @post("chat/post/status/change")
 	 */
 	public function postStatusChange(){
@@ -121,6 +129,7 @@ class ChatController extends BaseController{
 
 	/**
 	 * @get("chat/channels")
+	 *
 	 * @return string
 	 */
 	public function getChannels(){
@@ -140,8 +149,10 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @param ChatCheckChannelForm $form
 	 * @post("chat/channels/check")
+	 *
+	 * @param ChatCheckChannelForm $form
+	 *
 	 * @return array
 	 */
 	public function postCheckChannel(ChatCheckChannelForm $form){

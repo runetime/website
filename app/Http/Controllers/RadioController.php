@@ -13,6 +13,7 @@ class RadioController extends BaseController {
 
 	/**
 	 * @get("radio")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -29,6 +30,7 @@ class RadioController extends BaseController {
 
 	/**
 	 * @get("radio/request/history")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getHistory() {
@@ -37,6 +39,7 @@ class RadioController extends BaseController {
 
 	/**
 	 * @get("radio/request/timetable")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getTimetable() {
@@ -61,9 +64,12 @@ class RadioController extends BaseController {
 	}
 
 	/**
+	 * @get("radio/send/request/{artist}/{name}")
+	 * @middleware("auth.logged")
+	 *
 	 * @param $artist
 	 * @param $name
-	 * @get("radio/send/request/{artist}/{name}")
+	 *
 	 * @return mixed
 	 */
 	public function getSendRequest($artist, $name) {
@@ -78,6 +84,7 @@ class RadioController extends BaseController {
 
 	/**
 	 * @get("radio/update")
+	 *
 	 * @return string
 	 */
 	public function getUpdate() {
