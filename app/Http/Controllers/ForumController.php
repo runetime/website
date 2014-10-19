@@ -42,6 +42,7 @@ class ForumController extends BaseController {
 
 	/**
 	 * @Get("forums")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -55,7 +56,6 @@ class ForumController extends BaseController {
 				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread);
 			array_push($subforumList[$subforum->parent], $subforum);
 		}
-		\Cache::forever('info.most_online', 92);
 		$forumInfo = new \stdClass;
 		$forumInfo->posts = $this->posts->getCount();
 		$forumInfo->members = $this->users->getCount();
@@ -64,13 +64,14 @@ class ForumController extends BaseController {
 		$recentThreads = $this->threads->getX(5, 'desc');
 		$this->nav('Forums');
 		$this->title('Forums');
-		return $this->view('forum.index', compact('subforumList', 'recentThreads', 'forumInfo'));
+		return $this->view('forum.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
 	}
 
 	/**
+	 * @Get("forums/{id}-{name}")
+	 *
 	 * @param     $id
 	 * @param int $page
-	 * @Get("forums/{id}-{name}")
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -83,7 +84,7 @@ class ForumController extends BaseController {
 		if($page == 0)
 			$page = 1;
 		$subforums = $this->subforums->getByParent($id);
-		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', 'desc');
+		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
 		// Subforums
 		$subforumList = [];
 		foreach($subforums as $subforumItem) {
@@ -92,10 +93,32 @@ class ForumController extends BaseController {
 				$subforumItem->last_thread_info = $this->threads->getById($subforumItem->last_post_info->thread);
 			array_push($subforumList, $subforumItem);
 		}
+
+		$hasMod = \Auth::user()->hasOneOfRoles(1, 10, 11);
 		// Threads
+		$threadsPinned = $this->threads->getBySubforum($subforum->id, $page, 'last_post', true);
+		$threadListPrior = [];
+		foreach($threadsPinned as $thread)
+			array_push($threadListPrior, $thread);
+		foreach($threads as $thread)
+			array_push($threadListPrior, $thread);
 		$threadList = [];
-		foreach($threads as $thread) {
+		foreach($threadListPrior as $thread) {
 			$thread->last_post_info = $this->posts->getById($thread->last_post);
+			if($thread->isPoll())
+				$thread->cardSet = 'poll';
+			if(!$thread->isVisible())
+				$thread->cardSet = 'hidden';
+			if($thread->isLocked())
+				$thread->cardSet = 'locked';
+			if($thread->isPinned())
+				$thread->cardSet = 'pinned';
+			if($hasMod) {
+				$thread->modControls = new \stdClass;
+				$thread->modControls->pin = $thread->getStatusPinSwitch();
+				$thread->modControls->lock = $thread->getStatusLockSwitch();
+				$thread->modControls->hidden = $thread->getStatusHiddenSwitch();
+			}
 			array_push($threadList, $thread);
 		}
 		// Breadcrumbs
@@ -113,19 +136,23 @@ class ForumController extends BaseController {
 		$this->bc($bc);
 		$this->nav('Forums');
 		$this->title($subforum->name);
-		return $this->view('forum.subforum.view', compact('subforum', 'subforumList', 'threads'));
+		return $this->view('forum.subforum.view', compact('subforum', 'subforumList', 'threadList'));
 	}
 
 	/**
-	 * @param     $id
-	 * @param int $page
 	 * @get("forums/thread/{id}-{name}/page={page}")
 	 * @get("forums/thread/{id}-{name}")
+	 *
+	 * @param     $id
+	 * @param int $page
 	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getThread($id, $page = 1) {
 		$thread = $this->threads->getById($id);
+		$poll = ['test' => 1];
+		$thread->poll = json_encode($poll);
+		$thread->save();
 		if(!$thread)
 			\App::abort(404);
 		$thread->incrementViews();
@@ -160,8 +187,10 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param $id
 	 * @get("forums/create/{id}-{name}")
+	 * @middleware("auth.logged")
+	 *
+	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -183,8 +212,10 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param ForumThreadCreateForm $form
+	 * @middleware("auth.logged")
 	 * @post("forums/create/{id}-{name}")
+	 *
+	 * @param ForumThreadCreateForm $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -193,8 +224,9 @@ class ForumController extends BaseController {
 		if(empty($subforum))
 			return $this->view('errors.forum.subforum.missing');
 		$tags = json_encode(explode(",", str_replace(", ", ",", $form->tags)));
+		$poll = -1;
 		$thread = new Thread;
-		$thread = $thread->saveNew(\Auth::user()->id, $form->title, 1, 1, 0, -1, Thread::STATUS_VISIBLE, $tags, $form->subforum);
+		$thread = $thread->saveNew(\Auth::user()->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE, $tags, $form->subforum);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $thread->id, $form->contents, $form->contents);
 		$thread->last_post = $post->id;
@@ -216,8 +248,24 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param ThreadReplyForm $form
+	 * @get("forum/thread/{id}-{name}/edit")
+	 * @middleware("auth.logged")
+	 *
+	 * @param $id
+	 */
+	public function getThreadEdit($id) {
+		$thread = $this->threads->getById($id);
+		if(!$thread)
+			\App::abort(404);
+		if($thread->author_id != \Auth::user()->id)
+			\App::abort(403);
+	}
+
+	/**
+	 * @middleware("auth.logged")
 	 * @post("forums/reply")
+	 *
+	 * @param ThreadReplyForm $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -234,8 +282,9 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param $name
 	 * @get("forums/tag/{name}")
+	 *
+	 * @param $name
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -259,9 +308,10 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param $id
 	 * @get("forums/post/{id}/report")
 	 * @middleware("auth.logged")
+	 *
+	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -277,9 +327,10 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param ForumPostReportForm $form
 	 * @middleware("auth.logged")
 	 * @post("forums/post/{id}/report")
+	 *
+	 * @param ForumPostReportForm $form
 	 *
 	 * @return mixed
 	 */
@@ -292,9 +343,10 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param $id
 	 * @get("forums/post/{id}/edit")
 	 * @middleware("auth.logged")
+	 *
+	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -309,9 +361,10 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param ForumPostEditForm $form
 	 * @middleware("auth.logged")
 	 * @post("forums/post/{id}/edit")
+	 *
+	 * @param ForumPostEditForm $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -329,6 +382,7 @@ class ForumController extends BaseController {
 	/**
 	 * @get("forums/post/{id}/delete")
 	 * @middleware("auth.moderation")
+	 *
 	 * @param $id
 	 *
 	 * @return mixed
