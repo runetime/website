@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\StaffModerationThreadTitleForm;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Reports\ReportRepository;
 use App\RuneTime\Forum\Threads\PostRepository;
@@ -45,6 +46,8 @@ class StaffController extends BaseController {
 
 	/**
 	 * @get("staff")
+	 * @middleware("auth.staff")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -56,6 +59,7 @@ class StaffController extends BaseController {
 	/**
 	 * @get("staff/moderation")
 	 * @middleware("auth.moderation")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getModerationIndex() {
@@ -76,7 +80,9 @@ class StaffController extends BaseController {
 	/**
 	 * @get("staff/moderation/report/{id}")
 	 * @middleware("auth.moderation")
+	 *
 	 * @param $id
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getModerationReportView($id) {
@@ -93,7 +99,63 @@ class StaffController extends BaseController {
 	}
 
 	/**
+	 * @get("staff/moderation/thread/{id}-{name}/status={status}")
+	 * @middleware("auth.moderation")
+	 *
+	 * @param $id
+	 * @param $status
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function getModerationThreadStatus($id, $name, $status) {
+		$thread = $this->threads->getById($id);
+		if(!$thread)
+			\App::abort(404);
+		$thread->status = $status;
+		$thread->save();
+		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
+	}
+
+	/**
+	 * @get("staff/moderation/thread/{id}-{name}/title")
+	 * @middleware("auth.moderation")
+	 *
+	 * @param $id
+	 *
+	 * @internal param $name
+	 * @internal param $status
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getModerationThreadTitle($id) {
+		$thread = $this->threads->getById($id);
+		if(!$thread)
+			\App::abort(404);
+		$this->nav('Staff');
+		$this->title('Editing Thread Title');
+		return $this->view('staff.moderation.thread.title', compact('thread'));
+	}
+
+	/**
+	 * @post("staff/moderation/thread/{id}-{name}/title")
+	 * @middleware("auth.moderation")
+	 *
+	 * @param StaffModerationThreadTitleForm $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postModerationThreadTitle(StaffModerationThreadTitleForm $form) {
+		$thread = $this->threads->getById($form->id);
+		if(!$thread)
+			\App::abort(404);
+		$thread->title = $form->title;
+		$thread->save();
+		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
+	}
+
+	/**
 	 * @get("staff/list")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getList() {
