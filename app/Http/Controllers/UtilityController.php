@@ -1,24 +1,24 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\NameCheckForm;
 class UtilityController extends BaseController {
 	/**
-	 * @get("utility/name-check")
+	 * @get("name/check")
 	 * @return \Illuminate\View\View
 	 */
 	public function getNameCheck() {
-		return view('utility.namecheck');
+		$this->nav('Runescape');
+		$this->title('Name Checker');
+		return $this->view('utility.namecheck');
 	}
 
 	/**
-	 * @post("utility/name-check")
+	 * @post("name/check")
 	 * @return mixed
 	 */
-	public function postNameCheck() {
-		$url = 'http://services.runescape.com/m=hiscore/index_lite.ws?player=' . \Input::get('rsn');
-		$curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		$results = curl_exec($curl);
-		curl_close($curl);
-		return $results;
+	public function postNameCheck(NameCheckForm $form) {
+		$url = 'http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $form->input('rsn');
+		$response = \String::CURL($url);
+		return $response;
 	}
 }
