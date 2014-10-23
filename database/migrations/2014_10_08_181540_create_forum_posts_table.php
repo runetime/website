@@ -20,7 +20,6 @@ class CreateForumPostsTable extends Migration {
 			$table->integer('downs');
 			$table->integer('status');
 			$table->integer('ip');
-			$table->integer('thread');
 			$table->mediumtext('contents');
 			$table->mediumtext('contents_parsed');
 			$table->timestamps();

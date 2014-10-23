@@ -19,7 +19,7 @@ class PostRepository extends EloquentRepository {
 	 */
 	public function getX($thread, $amount = Thread::POSTS_PER_PAGE, $page = 1, $status = -1) {
 		$res = $this->model->
-			where('thread', '=', $thread);
+			where('thread_id', '=', $thread);
 		if($status > -1)
 			$res = $res->where('status', '=', $status);
 		return $res->

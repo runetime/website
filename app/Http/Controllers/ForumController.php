@@ -53,7 +53,7 @@ class ForumController extends BaseController {
 				$subforumList[$subforum->parent] = [];
 			$subforum->last_post_info = $this->posts->getById($subforum->last_post);
 			if(!empty($subforum->last_post_info))
-				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread);
+				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread_id);
 			array_push($subforumList[$subforum->parent], $subforum);
 		}
 		$forumInfo = new \stdClass;
@@ -85,16 +85,18 @@ class ForumController extends BaseController {
 			$page = 1;
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
+//		dd($threads);
 		// Subforums
 		$subforumList = [];
 		foreach($subforums as $subforumItem) {
 			$subforumItem->last_post_info = $this->posts->getById($subforumItem->last_post);
 			if(!empty($subforumItem->last_post_info))
-				$subforumItem->last_thread_info = $this->threads->getById($subforumItem->last_post_info->thread);
+				$subforumItem->last_thread_info = $this->threads->getById($subforumItem->last_post_info->thread_id);
 			array_push($subforumList, $subforumItem);
 		}
-
-		$hasMod = \Auth::user()->hasOneOfRoles(1, 10, 11);
+		$hasMod = false;
+		if(\Auth::check())
+			$hasMod = \Auth::user()->hasOneOfRoles(1, 10, 11);
 		// Threads
 		$threadsPinned = $this->threads->getBySubforum($subforum->id, $page, 'last_post', true);
 		$threadListPrior = [];
@@ -105,14 +107,6 @@ class ForumController extends BaseController {
 		$threadList = [];
 		foreach($threadListPrior as $thread) {
 			$thread->last_post_info = $this->posts->getById($thread->last_post);
-			if($thread->isPoll())
-				$thread->cardSet = 'poll';
-			if(!$thread->isVisible())
-				$thread->cardSet = 'hidden';
-			if($thread->isLocked())
-				$thread->cardSet = 'locked';
-			if($thread->isPinned())
-				$thread->cardSet = 'pinned';
 			if($hasMod) {
 				$thread->modControls = new \stdClass;
 				$thread->modControls->pin = $thread->getStatusPinSwitch();
@@ -228,9 +222,10 @@ class ForumController extends BaseController {
 		$thread = new Thread;
 		$thread = $thread->saveNew(\Auth::user()->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE, $tags, $form->subforum);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $thread->id, $form->contents, $form->contents);
+		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $form->contents);
 		$thread->last_post = $post->id;
 		$thread->save();
+		$thread->addPost($post);
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
 			$tag = $this->tags->getByName($tagName);

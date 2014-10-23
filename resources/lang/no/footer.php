@@ -13,4 +13,5 @@ return [
 	'facebook'   => 'Følg RuneTime på Facebook',
 	'twitter'    => 'Følg RuneTime på Twitter',
 	'youtube'    => 'Abonner RuneTime på YouTube',
+	'language'   => 'Klikk her for å sette ditt språk',
 ];

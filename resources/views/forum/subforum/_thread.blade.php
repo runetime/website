@@ -1,4 +1,14 @@
-<div class='card card-read{{!empty($thread->cardSet)?" card-" . $thread->cardSet:""}} row'>
+@if($thread->isPinned())
+<div class='card card-read card-pinned row'>
+@elseif($thread->isLocked())
+<div class='card card-read card-locked row'>
+@elseif(!$thread->isVisible())
+<div class='card card-read card-hidden row'>
+@elseif($thread->isPoll())
+<div class='card card-read card-poll row'>
+@else
+<div class='card card-read row'>
+@endif
 	<div class='col-xs-12 col-sm-6 col-md-8'>
 		<div class='pull-left'>
 @if($thread->isPinned())

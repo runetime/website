@@ -48,7 +48,10 @@
 								<span class='label label-default'>{{$forumInfo->members}}</span> @lang('forums.bar.total_members')
 							</li>
 							<li>
-								<span class='label label-default'>{!!\Link::name($forumInfo->latest->id)!!}</span>
+								<span class='label label-default'>
+@if(!empty($forumInfo->latest->id))
+									{!!\Link::name($forumInfo->latest->id)!!}</span>
+@endif
 							</li>
 							<li>
 								<span class='label label-default'>{{$forumInfo->mostOnline}}</span> @lang('forums.bar.most_online')

@@ -18,10 +18,12 @@ class Thread extends Entity {
 	const POSTS_PER_PAGE  = 20;
 
 	/**
-	 * @param $postId
+	 * @internal param $postId
+	 *
+	 * @param $post
 	 */
-	public function addPost($postId) {
-		$this->posts()->attach($postId);
+	public function addPost($post) {
+		$this->posts()->save($post);
 	}
 
 	/**

@@ -11,6 +11,17 @@ class ThreadRepository extends EloquentRepository {
 	}
 
 	/**
+	 * @param $threadId
+	 *
+	 * @return mixed
+	 */
+	public function getById($threadId) {
+		return $this->model->
+			where('id', '=', $threadId)->
+			first();
+	}
+
+	/**
 	 * @param        $subforumId
 	 * @param int    $page
 	 * @param string $orderBy
@@ -22,15 +33,19 @@ class ThreadRepository extends EloquentRepository {
 		$q = $this->model->
 			where('subforum', '=', $subforumId);
 		if($pinned)
-			$q = $q->where('status', '=', 2)->
+			$q = $q->where(function($query) {
+				$query->where('status', '=', 2)->
 				orWhere('status', '=', 3)->
 				orWhere('status', '=', 6)->
 				orWhere('status', '=', 7);
+			});
 		else
-			$q = $q->where('status', '=', 0)->
+			$q = $q->where(function($query) {
+				$query->where('status', '=', 0)->
 				orWhere('status', '=', 1)->
 				orWhere('status', '=', 4)->
 				orWhere('status', '=', 5);
+			});
 		$q = $q->
 			orderBy($orderBy, 'desc')->
 			skip(($page-1)*Subforum::THREADS_PER_PAGE)->

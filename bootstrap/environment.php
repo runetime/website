@@ -29,8 +29,8 @@ if (file_exists(__DIR__.'/../.env'))
 | assume we are using the "APP_ENV" variable for this environment.
 |
 */
-
-$env = $app->detectEnvironment(function()
-{
-	return getenv('APP_ENV') ?: 'production';
-});
+$env = $app->detectEnvironment([
+	'local'      => ['runetime', 'runetime-dev'],
+	'testing'    => ['runetime-test', 'runetime-testing'],
+	'production' => ['runetime-prod', 'runetime-production'],
+]);

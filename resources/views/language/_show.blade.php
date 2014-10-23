@@ -1,5 +1,9 @@
 <p>
-    <a href='/language/set/{{$initials}}' title='{{$name}}'>
-        {{$name}}
-    </a>
+@if(!empty($done))
+<a href='/language/set/{{$initials}}' title='{{$name}}'>
+@endif
+    {{$name}}
+@if(!empty($done))
+</a>
+@endif
 </p>
