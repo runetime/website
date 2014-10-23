@@ -27,8 +27,8 @@ class AuthController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm() {
-		$this->nav('Login');
-		$this->title('Login');
+		$this->nav('navbar.logged.out.login');
+		$this->title(trans('navbar.logged.out.login'));
 		return $this->view('auth.login');
 	}
 
