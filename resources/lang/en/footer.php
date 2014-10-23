@@ -13,4 +13,5 @@ return [
 	'facebook'   => 'Follow RuneTime on Facebook',
 	'twitter'    => 'Follow RuneTime on Twitter',
 	'youtube'    => 'Subscribe to RuneTime on YouTube',
+	'language'   => 'Click here to set your language',
 ];
