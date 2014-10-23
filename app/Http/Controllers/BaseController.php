@@ -12,7 +12,6 @@ class BaseController extends Controller {
 	 * @var Guard
 	 */
 	protected $auth;
-	private $cache;
 
 	/**
 	 * @param Guard $auth
@@ -41,7 +40,7 @@ class BaseController extends Controller {
 	 * @param $nav
 	 */
 	protected function nav($nav) {
-		$this->nav = $nav;
+		$this->nav = trans($nav);
 	}
 
 	/**
@@ -67,11 +66,6 @@ class BaseController extends Controller {
 	 * @return \Illuminate\View\View
 	 */
 	protected function view($path, $data = []) {
-		$language = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
-		if(!empty($language))
-			\App::setLocale($language);
-		else
-			\App::setLocale('en');
 		$data['bc'] = $this->bc;
 		$data['displayPageHeader'] = $this->displayPageHeader;
 		$data['js'] = $this->js;

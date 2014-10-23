@@ -4,6 +4,7 @@ use App\RuneTime\Radio\RequestRepository;
 use Illuminate\Contracts\Auth\Guard;
 class RadioController extends BaseController {
 	/**
+	 * @param Guard             $auth
 	 * @param RequestRepository $requests
 	 */
 	public function __construct(Guard $auth, RequestRepository $requests) {
@@ -23,8 +24,8 @@ class RadioController extends BaseController {
 		if($this->auth->check())
 			$isDJ = $this->auth->user()->hasRole('Radio DJ');
 		$this->js('radio');
-		$this->nav('Radio');
-		$this->title = 'RuneTime Radio';
+		$this->nav('navbar.radio');
+		$this->title('RuneTime ' . trans('navbar.radio'));
 		return $this->view('radio.index', compact('dj', 'song', 'isDJ'));
 	}
 
@@ -79,7 +80,7 @@ class RadioController extends BaseController {
 			$user = -1;
 		}
 		\DB::table('radio_requests')->insertGetId(['song_artist' => $artist, 'song_name' => $name, 'requester' => $user, 'time_sent' => time(), 'ip_address' => $_SERVER['REMOTE_ADDR'], 'status' => 0]);
-		return View::make('radio.send.song');
+		return \View::make('radio.send.song');
 	}
 
 	/**

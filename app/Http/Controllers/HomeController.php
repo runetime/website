@@ -26,7 +26,8 @@ class HomeController extends BaseController {
 		$statuses = $this->statuses->getRecentStatuses(5);
 		$threads = $this->threads->getX(5);
 		$this->bc(false);
-		$this->title('Home');
+		$this->nav('navbar.home');
+		$this->title(trans('navbar.home'));
 		return $this->view('home.index', compact('news', 'statuses', 'threads'));
 	}
 }
