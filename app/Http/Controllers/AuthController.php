@@ -55,8 +55,8 @@ class AuthController extends BaseController {
 	 */
 	public function getSignupForm() {
 		$this->js('signup');
-		$this->nav('Sign Up');
-		$this->title('Sign Up');
+		$this->nav('navbar.logged.out.signup');
+		$this->title(trans('navbar.logged.out.signup'));
 		return $this->view('auth.signup');
 	}
 

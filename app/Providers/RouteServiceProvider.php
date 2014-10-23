@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider {
 		'App\Http\Controllers\GetController',
 		'App\Http\Controllers\GuideController',
 		'App\Http\Controllers\HomeController',
+		'App\Http\Controllers\LanguageController',
 		'App\Http\Controllers\LegalController',
 		'App\Http\Controllers\LivestreamController',
 		'App\Http\Controllers\MapController',
@@ -59,7 +60,13 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function before(Router $router)
 	{
-		//
+		$language = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
+		if(!empty($language)) {
+			\App::setLocale($language);
+		} else {
+			\App::setLocale('en');
+			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', 'en');
+		}
 	}
 
 	/**
