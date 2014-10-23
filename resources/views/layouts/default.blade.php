@@ -44,9 +44,9 @@ if(\Auth::check() && \Auth::user()->isStaff()) {
 		$navs['Staff']['staff/radio'] = Lang::get('navbar.staff.radio');
 	if(\Auth::user()->hasOneOfRoles(1, 10, 11))
 		$navs['Staff']['staff/moderation'] = Lang::get('navbar.staff.moderation');
-    $navs['Staff']['staff/gallery']  = Lang::get('navbar.staff.gallery');
-    $navs['Staff']['tickets/manage'] = Lang::get('navbar.staff.ticket');
-    $navs['Staff']['staff/checkup']  = Lang::get('navbar.staff.checkup');
+	$navs['Staff']['staff/gallery']  = Lang::get('navbar.staff.gallery');
+	$navs['Staff']['tickets/manage'] = Lang::get('navbar.staff.ticket');
+	$navs['Staff']['staff/checkup']  = Lang::get('navbar.staff.checkup');
 }
 if(!Auth::check())
 	$navLogged = [
@@ -206,21 +206,21 @@ $current = $nav;
 					@lang('footer.about_us')
 				</p>
 				<div id='portfolio-about'>
-                    <p>
-                        @lang('footer.copyright') &copy; {{date('Y')}} &mdash; <a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
-                    </p>
-                    <p>
-                        <a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
-                    </p>
-                    <p>
-                        <a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{date('Y')}}
-                    </p>
-                    <p>
-                        @lang('footer.images')
-                    </p>
-                    <p>
-                        @lang('footer.affiliated')
-                    </p>
+					<p>
+						@lang('footer.copyright') &copy; {{date('Y')}} &mdash; <a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
+					</p>
+					<p>
+						<a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
+					</p>
+					<p>
+						<a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{date('Y')}}
+					</p>
+					<p>
+						@lang('footer.images')
+					</p>
+					<p>
+						@lang('footer.affiliated')
+					</p>
 				</div>
 			</div>
 			<div class='col-xs-12 col-md-6'>
@@ -233,9 +233,11 @@ $current = $nav;
 					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'><img src='img/yt.png' alt='YouTube' /></a>
 				</div>
 			</div>
+			<p class='pull-right'>
+				<a href='/language/set' title='@lang('footer.language')'>
+					@lang('footer.language')
+				</a>
+			</p>
 		</div>
-		<script>
-			//Google Analytics
-		</script>
 	</body>
 </html>
