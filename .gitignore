@@ -1,4 +1,8 @@
-vendor
-.git
-_ide_helper.php
+/.idea
+/vendor
+/node_modules
+.env
+.DS_Store
+Thumbs.db
 composer.lock
+composer.phar
