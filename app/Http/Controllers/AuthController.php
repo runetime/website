@@ -27,7 +27,6 @@ class AuthController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm() {
-		\App::setLocale('nl');
 		$this->nav('Login');
 		$this->title('Login');
 		return $this->view('auth.login');

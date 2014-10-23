@@ -12,7 +12,11 @@ class BaseController extends Controller {
 	 * @var Guard
 	 */
 	protected $auth;
+	private $cache;
 
+	/**
+	 * @param Guard $auth
+	 */
 	public function __construct(Guard $auth) {
 		$this->auth = $auth;
 	}
@@ -45,7 +49,7 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout() {
 		if(!is_null($this->layout))
-			$this->layout = View::make($this->layout);
+			$this->layout = \View::make($this->layout);
 	}
 
 	/**
@@ -63,6 +67,11 @@ class BaseController extends Controller {
 	 * @return \Illuminate\View\View
 	 */
 	protected function view($path, $data = []) {
+		$language = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
+		if(!empty($language))
+			\App::setLocale($language);
+		else
+			\App::setLocale('en');
 		$data['bc'] = $this->bc;
 		$data['displayPageHeader'] = $this->displayPageHeader;
 		$data['js'] = $this->js;
