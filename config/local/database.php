@@ -1,5 +1,7 @@
 <?php
+
 return [
+
 	/*
 	|--------------------------------------------------------------------------
 	| Database Connections
@@ -15,7 +17,9 @@ return [
 	| choice installed on your machine before you begin development.
 	|
 	*/
+
 	'connections' => [
+
 		'mysql' => [
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
@@ -26,5 +30,7 @@ return [
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		],
+
 	],
+
 ];
