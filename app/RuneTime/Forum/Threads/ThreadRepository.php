@@ -31,7 +31,7 @@ class ThreadRepository extends EloquentRepository {
 	 */
 	public function getBySubforum($subforumId, $page=1, $orderBy = 'last_post', $pinned = false) {
 		$q = $this->model->
-			where('subforum', '=', $subforumId);
+			where('subforum_id', '=', $subforumId);
 		if($pinned)
 			$q = $q->where(function($query) {
 				$query->where('status', '=', 2)->

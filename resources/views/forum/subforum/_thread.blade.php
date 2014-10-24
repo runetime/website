@@ -68,9 +68,9 @@
 		<div class='clearfix'></div>
 	</div>
 	<div class='col-xs-12 col-sm-6 col-md-1'>
-		{{$thread->posts-1}} posts
+		{{$thread->posts_count-1}} posts
 		<br />
-		{{$thread->views}} views
+		{{$thread->views_count}} views
 	</div>
 	<div class='col-xs-12 col-sm-10 col-md-3'>
 @if($thread->last_post > 0)

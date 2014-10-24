@@ -16,6 +16,7 @@ class CreateForumPostsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('author_id');
+			$table->integer('thread_id');
 			$table->integer('ups');
 			$table->integer('downs');
 			$table->integer('status');

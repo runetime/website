@@ -174,12 +174,8 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	public function getRememberTokenName() {
 		return 'remember_token';
 	}
-    /**
-	* Get the presenter class.
-	*
-	* @return string The class path to the presenter.
-	*/
-	public function getPresenter() {
-		return 'Runis\Accounts\UserPresenter';
+
+	public function threads() {
+		return $this->hasMany('App\RuneTime\Forum\Threads\Thread', 'author_id');
 	}
 }

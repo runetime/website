@@ -17,13 +17,13 @@ class CreateForumThreadsTable extends Migration {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->string('title');
-			$table->integer('views');
-			$table->integer('posts');
+			$table->integer('views_count');
+			$table->integer('posts_count');
 			$table->integer('last_post');
 			$table->integer('poll');
 			$table->integer('status');
 			$table->mediumtext('tags');
-			$table->integer('subforum');
+			$table->integer('subforum_id');
 			$table->timestamps();
 			$table->softDeletes();
 		});

@@ -10,4 +10,8 @@ class Subforum extends Entity{
 	const STATUS_HIDDEN = 0;
 	const STATUS_PUBLISHED = 1;
 	const THREADS_PER_PAGE = 20;
+
+	public function threads() {
+		return $this->hasMany('App\RuneTime\Forum\Threads\Thread', 'subforum_id');
+	}
 }

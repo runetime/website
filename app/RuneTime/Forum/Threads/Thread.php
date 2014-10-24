@@ -4,7 +4,7 @@ use App\Runis\Core\Entity;
 class Thread extends Entity {
 	protected $table = 'forum_threads';
 	protected $with = [];
-	protected $fillable = ['author_id', 'title', 'views', 'posts', 'last_post', 'poll', 'status', 'tags', 'subforum'];
+	protected $fillable = ['author_id', 'title', 'views_count', 'posts_count', 'last_post', 'poll', 'status', 'tags', 'subforum_id'];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
@@ -18,19 +18,21 @@ class Thread extends Entity {
 	const POSTS_PER_PAGE  = 20;
 
 	/**
-	 * @internal param $postId
-	 *
-	 * @param $post
-	 */
-	public function addPost($post) {
-		$this->posts()->save($post);
-	}
-
-	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function posts() {
-		return $this->hasMany('Post');
+		return $this->hasMany('App\RuneTime\Forum\Threads\Post', 'thread_id', 'id');
+	}
+
+	public function subforum() {
+		return $this->belongsTo('App\RuneTime\Forum\Subforums\Subforum', 'subforum_id');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user() {
+		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
 	/**
@@ -44,7 +46,7 @@ class Thread extends Entity {
 	 *
 	 */
 	public function incrementViews() {
-		$this->increment('views');
+		$this->increment('views_count');
 		$this->save();
 	}
 
@@ -52,7 +54,7 @@ class Thread extends Entity {
 	 *
 	 */
 	public function incrementPosts() {
-		$this->increment('posts');
+		$this->increment('posts_count');
 		$this->save();
 	}
 

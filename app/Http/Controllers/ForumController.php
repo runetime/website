@@ -14,6 +14,7 @@ use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Statuses\StatusRepository;
+use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 class ForumController extends BaseController {
 	private $posts;
@@ -85,7 +86,6 @@ class ForumController extends BaseController {
 			$page = 1;
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
-//		dd($threads);
 		// Subforums
 		$subforumList = [];
 		foreach($subforums as $subforumItem) {
@@ -144,17 +144,14 @@ class ForumController extends BaseController {
 	 */
 	public function getThread($id, $page = 1) {
 		$thread = $this->threads->getById($id);
-		$poll = ['test' => 1];
-		$thread->poll = json_encode($poll);
-		$thread->save();
 		if(!$thread)
 			\App::abort(404);
 		$thread->incrementViews();
-		$subforum = $this->subforums->getbyId($thread->subforum);
+		$subforum = $this->subforums->getbyId($thread->subforum_id);
 		if(!\Auth::check() || (\Auth::check() && !\Auth::user()->hasOneOfRoles(1, 10, 11)))
-			$posts = $this->posts->getX($thread->id, Thread::POSTS_PER_PAGE, $page, Post::STATUS_VISIBLE);
+			$posts = $thread->posts;
 		else
-			$posts = $this->posts->getX($thread->id, Thread::POSTS_PER_PAGE, $page);
+			$posts = $thread->posts;
 		// Posts
 		$postList = [];
 		foreach($posts as $post) {
@@ -222,10 +219,11 @@ class ForumController extends BaseController {
 		$thread = new Thread;
 		$thread = $thread->saveNew(\Auth::user()->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE, $tags, $form->subforum);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $form->contents);
+		$post = $post->saveNew(\Auth::user()->id, $thread->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $form->contents);
 		$thread->last_post = $post->id;
 		$thread->save();
-		$thread->addPost($post);
+		$post->thread()->associate($post);
+		$post->save();
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
 			$tag = $this->tags->getByName($tagName);
@@ -265,11 +263,12 @@ class ForumController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postReply(ThreadReplyForm $form) {
-		$thread = $this->threads->getById($form->id);
+		$thread = Thread::find($form->input('id'));
 		if(empty($thread))
 			\App::abort(404);
 		$post = new Post;
-		$post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $thread->id, $form->contents, $form->contents);
+		$post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $form->contents);
+		$thread->posts()->save($post);
 		$thread->incrementPosts();
 		$this->subforums->incrementPosts($thread->subforum);
 		\Auth::user()->incrementPostActive();
