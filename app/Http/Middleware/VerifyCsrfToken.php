@@ -4,7 +4,7 @@ use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Session\TokenMismatchException;
 
-class CsrfMiddleware implements Middleware {
+class VerifyCsrfToken implements Middleware {
 
 	/**
 	 * Handle an incoming request.
@@ -17,10 +17,10 @@ class CsrfMiddleware implements Middleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-//		if ($request->method() == 'GET' || $this->tokensMatch($request))
-//		{
+		if ($request->method() == 'GET' || $this->tokensMatch($request))
+		{
 			return $next($request);
-//		}
+		}
 
 		throw new TokenMismatchException;
 	}

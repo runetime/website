@@ -6,13 +6,6 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class RouteServiceProvider extends ServiceProvider {
 
 	/**
-	 * The root namespace to assume when generating URLs to actions.
-	 *
-	 * @var string
-	 */
-	protected $rootUrlNamespace = 'App\Http\Controllers';
-
-	/**
 	 * The controllers to scan for route annotations.
 	 *
 	 * @var array
@@ -51,27 +44,34 @@ class RouteServiceProvider extends ServiceProvider {
 	];
 
 	/**
+	 * All of the application's route middleware keys.
+	 *
+	 * @var array
+	 */
+	protected $middleware = [
+		'auth' => 'App\Http\Middleware\Authenticated',
+		'auth.basic' => 'App\Http\Middleware\AuthenticatedWithBasicAuth',
+		'csrf' => 'App\Http\Middleware\CsrfTokenIsValid',
+		'guest' => 'App\Http\Middleware\IsGuest',
+	];
+
+	/**
 	 * Called before routes are registered.
 	 *
 	 * Register any model bindings or pattern based filters.
 	 *
-	 * @param  Router  $router
+	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
 	public function before(Router $router)
 	{
-		$language = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
-		if(!empty($language)) {
-			\App::setLocale($language);
-		} else {
-			\App::setLocale('en');
-			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', 'en');
-		}
+		//
 	}
 
 	/**
 	 * Define the routes for the application.
 	 *
+	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
 	public function map(Router $router)

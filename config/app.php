@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => 'DKSBwYoxyO248m0z5XzpLyzJpb6CwCCW',
+	'key' => 'ObdH8oywVutN4vtE8wo2t5X0d1DWgUYS',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -98,11 +98,7 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\ArtisanServiceProvider',
-		'App\Providers\ErrorServiceProvider',
 		'App\Providers\EventServiceProvider',
-		'App\Providers\LogServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
 		/*
@@ -192,8 +188,6 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-		'Form'      => 'Illuminate\Html\FormFacade',
-		'HTML'      => 'Illuminate\Html\HtmlFacade',
 		'Image'     => 'App\Utilities\Image',
 		'Link'      => 'App\Utilities\Link',
 		'String'    => 'App\Utilities\String',
