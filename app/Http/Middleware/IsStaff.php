@@ -2,7 +2,10 @@
 
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
-
+/**
+ * Class AuthStaff
+ * @package App\Http\Middleware
+ */
 class AuthStaff implements Middleware {
 
 	/**

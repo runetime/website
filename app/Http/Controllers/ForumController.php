@@ -17,8 +17,11 @@ use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Statuses\StatusRepository;
-use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
+/**
+ * Class ForumController
+ * @package App\Http\Controllers
+ */
 class ForumController extends BaseController {
 	private $posts;
 	private $subforums;
@@ -318,6 +321,12 @@ class ForumController extends BaseController {
 		$this->title('Reporting a Post');
 		return $this->view('forum.post.report', compact('post', 'thread', 'postee'));
 	}
+
+	/**
+	 * @param PostReportRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function postPostReport(PostReportRequest $form) {
 		$contents = $form->contents;
 		$contentsParsed = $contents;

@@ -1,6 +1,10 @@
 <?php
 namespace App\RuneTime\Chat;
 use App\Runis\Core\EloquentRepository;
+/**
+ * Class ChatRepository
+ * @package App\RuneTime\Chat
+ */
 class ChatRepository extends EloquentRepository {
 	/**
 	 * @param Chat $model
