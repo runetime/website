@@ -44,7 +44,6 @@ if(\Auth::check() && \Auth::user()->isStaff()) {
 		$navs['Staff']['staff/radio'] = Lang::get('navbar.staff.radio');
 	if(\Auth::user()->hasOneOfRoles(1, 10, 11))
 		$navs['Staff']['staff/moderation'] = Lang::get('navbar.staff.moderation');
-	$navs['Staff']['staff/gallery']  = Lang::get('navbar.staff.gallery');
 	$navs['Staff']['tickets/manage'] = Lang::get('navbar.staff.ticket');
 	$navs['Staff']['staff/checkup']  = Lang::get('navbar.staff.checkup');
 }
