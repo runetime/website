@@ -4,24 +4,6 @@
 				<h1>
 					Staff Checkup
 				</h1>
-@if($isAdmin)
-				<h3>
-					Checkups
-				</h3>
-	@foreach($checkups as $checkup)
-				<div class='well well-sm'>
-					<p>
-						{!!\Link::name($checkup->author()->first()->id)!!}
-					</p>
-					<p>
-						Submitted at {{\Time::long($checkup->created_at)}}
-					</p>
-					<a href='/staff/checkup/{{$checkup->id}}'>
-						Click to view Checkup
-					</a>
-				</div>
-	@endforeach
-@endif
 				<form class='form-horizontal' method='post' action='' role='form'>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='username'>

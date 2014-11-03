@@ -73,15 +73,11 @@ class StaffController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getCheckup() {
-		$isAdmin = \Auth::user()->hasOneOfRoles(1);
-		$checkups = [];
-		if($isAdmin)
-			$checkups = $this->checkups->getX(30);
 		$date = \Time::long(time());
 		$this->bc(['staff' => 'Staff']);
 		$this->nav('Staff');
 		$this->title('Staff Checkup');
-		return $this->view('staff.checkup.form', compact('isAdmin', 'checkups', 'date'));
+		return $this->view('staff.checkup.form', compact('date'));
 	}
 
 	/**
@@ -95,6 +91,17 @@ class StaffController extends BaseController {
 		$checkup = $checkup->saveNew($form->active, $hoursActive, $form->team);
 		$checkup->addAuthor(\Auth::user());
 		return \redirect()->to('staff');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getCheckupList() {
+		$checkups = $this->checkups->getX(30);
+		$this->bc(['staff' => 'Staff', 'staff/checkup' => 'Checkup']);
+		$this->nav('Staff');
+		$this->title('Staff Checkup');
+		return $this->view('staff.checkup.list', compact('checkups'));
 	}
 
 	/**

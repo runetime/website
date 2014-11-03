@@ -260,7 +260,7 @@ Route::group(['prefix' => 'play'], function() {
 /**
  * Profile
  */
-Route::group(['prefix' => '{id}-{name}'], function() {
+Route::group(['prefix' => 'profile/{id}-{name}'], function() {
 	get('/', 'ProfileController@getProfileIndex');
 	get('feed', 'ProfileController@getProfileFeed');
 	get('friends', 'ProfileController@getProfileFriends');
@@ -323,7 +323,8 @@ Route::group(['prefix' => 'staff'], function() {
 		get('/', 'StaffController@getIndex');
 		get('checkup', 'StaffController@getCheckup');
 		post('checkup', 'StaffController@postCheckup');
-		get('checkup/{id}', 'StaffController@getCheckupView');
+		get('checkup/view/{id}', 'StaffController@getCheckupView');
+		get('checkup/list', 'StaffController@getCheckupList');
 		/**
 		 * Moderation Panel
 		 */
