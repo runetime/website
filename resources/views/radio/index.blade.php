@@ -41,7 +41,7 @@
 											@lang('radio.info.dj.title')
 										</h4>
 										<p id='radio-dj' class='holo-text-secondary'>
-											@lang('radio.info.dj.current',['name'=>$dj])
+											Auto DJ
 										</p>
 										<h4>
 											@lang('radio.info.song.title')
