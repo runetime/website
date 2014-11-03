@@ -90,6 +90,6 @@ class AuthController extends BaseController {
 	 */
 	public function getLogout() {
 		$this->auth->logout();
-		return redirect()->action('HomeController@getIndex');
+		return redirect()->to('/');
 	}
 }
