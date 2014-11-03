@@ -9,7 +9,6 @@ use App\Http\Requests\MessengerCreateForm;
  */
 class MessengerController extends BaseController {
 	/**
-	 * @get("messenger")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -20,7 +19,7 @@ class MessengerController extends BaseController {
 	}
 
 	/**
-	 * @get("messenger/{id}-{name}")
+	 * @return \Illuminate\View\View
 	 */
 	public function getView() {
 		$this->nav('Forums');
@@ -29,15 +28,13 @@ class MessengerController extends BaseController {
 	}
 
 	/**
-	 * @get("messenger/compose")
+	 *
 	 */
 	public function getCreate() {
 
 	}
 
 	/**
-	 * @post("messenger/compose")
-	 *
 	 * @param MessengerCreateForm $form
 	 */
 	public function postCreate(MessengerCreateForm $form) {

@@ -27,7 +27,7 @@ class GuideController extends BaseController {
 	 * @get("guides/{type}/difficulty={searchDifficulty}/length={searchLength}/membership={searchMembership}")
 	 * @return \Illuminate\View\View
 	 */
-	public function getType($type, $searchDifficulty = 0, $searchLength = 0, $searchMembership = 0) {
+	public function getQuests($searchDifficulty = 0, $searchLength = 0, $searchMembership = 0) {
 		$difficulties = $this->quests->getOptions('difficulty');
 		$lengths = $this->quests->getOptions('length');
 		$memberships = $this->quests->getOptions('membership');
@@ -45,7 +45,7 @@ class GuideController extends BaseController {
 	 * @get("guides/{type}/{id}-{name}")
 	 * @return \Illuminate\View\View
 	 */
-	public function getViewGuide($type, $id, $name) {
+	public function getQuestView($type, $id) {
 		$guide = $this->quests->getById($id);
 		$guide = new \stdClass;
 		$guide->name = 'All Fired Up';
@@ -80,9 +80,9 @@ The king will ask you to help with the testing of the beacon network which has b
 			$this->nav('Runescape');
 			$this->title($guide->name);
 			return $this->view('guides.quests.view', compact('guide', 'difficulty', 'length', 'editList'));
-		} else {
-			\App::abort(404);
 		}
+		\App::abort(404);
+		return 1;
 	}
 
 	/**
