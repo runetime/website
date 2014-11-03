@@ -9,7 +9,7 @@ Route::group([], function() {
 	/**
 	 * Logged in
 	 */
-	Route::group(['before' => 'Authenticated'], function() {
+	Route::group(['before' => 'auth'], function() {
 		get('logout', 'AuthController@getLogout');
 	});
 
@@ -42,9 +42,9 @@ Route::group(['prefix' => 'calculators'], function() {
 });
 
 /**
- * Calendars
+ * Calendar
  */
-Route::group(['prefix' => 'calendars'], function() {
+Route::group(['prefix' => 'calendar'], function() {
 	get('/', 'CalendarController@getIndex');
 });
 
@@ -59,7 +59,7 @@ Route::group(['prefix' => 'chat'], function() {
 	/**
 	 * Only logged in can perform
 	 */
-	Route::group(['before' => 'Authenticated'], function() {
+	Route::group(['before' => 'auth'], function() {
 		post('post/message', 'ChatController@postMessage');
 	});
 	/**
@@ -68,6 +68,13 @@ Route::group(['prefix' => 'chat'], function() {
 	Route::group(['before' => 'IsModerator'], function() {
 		post('post/status/change', 'ChatController@postStatusChange');
 	});
+});
+
+/**
+ * Clan
+ */
+Route::group(['prefix' => 'clan'], function() {
+	get('/', 'ClanController@getIndex');
 });
 
 # Donate
@@ -85,7 +92,7 @@ Route::group(['prefix' => 'forums'], function() {
 	Route::group(['prefix' => 'thread/{id}-{name}'], function() {
 		get('/', 'ForumController@getThread');
 		get('{page}', 'ForumController@getThread');
-		Route::group(['before' => 'Authenticated'], function() {
+		Route::group(['before' => 'auth'], function() {
 			get('edit', 'ForumController@getThreadEdit');
 		});
 	});
@@ -101,7 +108,7 @@ Route::group(['prefix' => 'forums'], function() {
 	/**
 	 * Posts
 	 */
-	Route::group(['before' => 'Authenticated', 'prefix' => 'post/{id}'], function() {
+	Route::group(['before' => 'auth', 'prefix' => 'post/{id}'], function() {
 		/**
 		 * Reporting a post
 		 */
@@ -117,6 +124,31 @@ Route::group(['prefix' => 'forums'], function() {
 			post('/', 'ForumController@postPostEdit');
 		});
 		get('delete', 'ForumController@getPostDelete');
+	});
+});
+
+/**
+ * Get
+ */
+Route::group(['prefix' => 'get'], function() {
+	post('signup/email', 'GetController@postEmail');
+	post('signup/display_name', 'GetController@postDisplayName');
+	get('hiscore/{rsn}', 'GetController@getHiscore');
+	get('bbcode', 'GetController@getBBCode');
+});
+
+/**
+ * Guides
+ */
+Route::group(['prefix' => 'guides'], function() {
+	get('/', 'GuideController@getIndex');
+	/**
+	 * Quests
+	 */
+	Route::group(['prefix' => 'quests'], function() {
+		get('/', 'GuideController@getQuests');
+		get('difficulty={searchDifficulty}/length={searchLength}/membership={searchMembership}', 'GuideController@getQuests');
+		get('{id}-{name}', 'GuideController@getQuestView');
 	});
 });
 
@@ -170,6 +202,24 @@ Route::group(['prefix' => 'map'], function() {
 get('media', 'MediaController@getIndex');
 
 /**
+ * Members
+ */
+Route::group(['prefix' => 'members'], function() {
+	get('/', 'MembersController@getPage', ['page' => 1]);
+	get('search/{slug}', 'MembersController@getSearch');
+});
+
+/**
+ * Messenger
+ */
+Route::group(['middleware' => 'auth', 'prefix' => 'messenger'], function() {
+	get('/', 'MessengerController@getIndex');
+	get('{id}-{name}', 'MessengerController@getView');
+	get('compose', 'MessengerController@getCreate');
+	post('compose', 'MessengerController@postCreate');
+});
+
+/**
  * Name Checker
  */
 Route::group(['prefix' => 'name/check'], function() {
@@ -177,10 +227,43 @@ Route::group(['prefix' => 'name/check'], function() {
 	post('/', 'UtilityController@postNameCheck');
 });
 
+/**
+ * News
+ */
+Route::group(['prefix' => 'news'], function() {
+	get('/', 'NewsController@getIndex');
+	get('{slug}', 'NewsController@getView');
+	get('search/{searchSlug}', 'NewsController@getSearch');
+	/**
+	 * Staff only
+	 */
+	Route::group(['middleware' => 'staff'], function() {
+		/**
+		 * Create newspiece
+		 */
+		Route::group(['prefix' => 'create'], function() {
+			get('/', 'NewsController@getCreate');
+			post('/', 'Newscontroller@postCreate');
+		});
+	});
+});
+
+/**
+ * Play
+ */
 Route::group(['prefix' => 'play'], function() {
 	get('/', 'PlayController@getIndex');
 	get('3', 'PlayController@get3');
 	get('osrs', 'PlayController@getOSRS');
+});
+
+/**
+ * Profile
+ */
+Route::group(['prefix' => '{id}-{name}'], function() {
+	get('/', 'ProfileController@getProfileIndex');
+	get('feed', 'ProfileController@getProfileFeed');
+	get('friends', 'ProfileController@getProfileFriends');
 });
 
 /**
@@ -193,21 +276,46 @@ Route::group(['prefix' => 'radio'], function() {
 	get('request/song', 'RadioController@getSong');
 	get('update', 'RadioController@getUpdate');
 	get('requests/current','RadioController@getRequestsCurrent');
-	Route::group(['before' => 'Authenticated'], function() {
+	Route::group(['before' => 'auth'], function() {
 		get('send/request/{artist}/{name}', 'RadioController@getSendRequest');
 	});
+});
+/**
+ * Settings
+ */
+Route::group(['middleware' => 'auth', 'prefix' => 'settings'], function() {
+	get('/', 'SettingsController@getIndex');
+	post('/', 'SettingsController@postIndex');
+	get('about/me', 'SettingsController@getAbout');
+	post('about/me', 'SettingsController@postAbout');
+	get('password', 'SettingsController@getPassword');
+	post('password', 'SettingsController@postPassword');
+	get('photo', 'SettingsController@getPhoto');
+	post('photo', 'SettingsController@postPhoto');
+	get('runescape', 'SettingsController@getRunescape');
+	post('runescape', 'SettingsController@postRunescape');
+	get('signature', 'SettingsController@getSignature');
+	post('signature', 'SettingsCOntroller@postSignature');
+	get('social', 'SettingsController@getSocial');
+	post('social', 'SettingsController@postSocial');
+});
+
+/**
+ * Signatures
+ */
+Route::group(['prefix' => 'signatures'], function() {
+	get('/', 'SignatureController@getIndex');
+	post('/', 'SignatureController@postUsername');
+	get('username={username}/type={type}', 'SignatureController@getStyle');
+	get('username={username}/type={type}/style={style}', 'SignatureController@getFinal');
+	get('h{slug}', 'SignatureController@getDisplay');
 });
 
 /**
  * Staff
  */
 Route::group(['prefix' => 'staff'], function() {
-	/**
-	 * Anyone can access
-	 */
-	Route::group([], function() {
-		get('list', 'StaffController@getList');
-	});
+	get('list', 'StaffController@getList');
 	/**
 	 * Only staff can access
 	 */
