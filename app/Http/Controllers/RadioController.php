@@ -1,15 +1,27 @@
 <?php
 namespace App\Http\Controllers;
+use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\RequestRepository;
 use Illuminate\Contracts\Auth\Guard;
+/**
+ * Class RadioController
+ * @package App\Http\Controllers
+ */
 class RadioController extends BaseController {
 	/**
+	 * @var HistoryRepository
+	 */
+	private $history;
+
+	/**
 	 * @param Guard             $auth
+	 * @param HistoryRepository $history
 	 * @param RequestRepository $requests
 	 */
-	public function __construct(Guard $auth, RequestRepository $requests) {
+	public function __construct(Guard $auth, HistoryRepository $history, RequestRepository $requests) {
 		$this->requests = $requests;
 		$this->auth = $auth;
+		$this->history = $history;
 	}
 
 	/**
@@ -18,8 +30,9 @@ class RadioController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$dj = "Current DJ";
-		$song = ['artist' => 'Artist', 'name' => 'Name'];
+		$dj = "Auto DJ";
+		$latestSong = $this->history->getLatest();
+		$song = ['artist' => $latestSong->artist, 'name' => $latestSong->song];
 		$isDJ = false;
 		if($this->auth->check())
 			$isDJ = $this->auth->user()->hasRole('Radio DJ');
