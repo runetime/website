@@ -9,14 +9,14 @@ Route::group([], function() {
 	/**
 	 * Logged in
 	 */
-	Route::group(['before' => 'auth'], function() {
+	Route::group(['middleware' => 'auth'], function() {
 		get('logout', 'AuthController@getLogout');
 	});
 
 	/**
 	 * Not logged in
 	 */
-	Route::group(['before' => 'IsGuest'], function() {
+	Route::group(['middleware' => 'guest'], function() {
 		get('login', 'AuthController@getLoginForm');
 		post('login', 'AuthController@postLoginForm');
 		get('signup', 'AuthController@getSignupForm');
@@ -59,13 +59,13 @@ Route::group(['prefix' => 'chat'], function() {
 	/**
 	 * Only logged in can perform
 	 */
-	Route::group(['before' => 'auth'], function() {
+	Route::group(['middleware' => 'auth'], function() {
 		post('post/message', 'ChatController@postMessage');
 	});
 	/**
 	 * Only moderators can perform
 	 */
-	Route::group(['before' => 'IsModerator'], function() {
+	Route::group(['middleware' => 'staff.moderator'], function() {
 		post('post/status/change', 'ChatController@postStatusChange');
 	});
 });
@@ -92,7 +92,7 @@ Route::group(['prefix' => 'forums'], function() {
 	Route::group(['prefix' => 'thread/{id}-{name}'], function() {
 		get('/', 'ForumController@getThread');
 		get('{page}', 'ForumController@getThread');
-		Route::group(['before' => 'auth'], function() {
+		Route::group(['middleware' => 'auth'], function() {
 			get('edit', 'ForumController@getThreadEdit');
 		});
 	});
@@ -108,7 +108,7 @@ Route::group(['prefix' => 'forums'], function() {
 	/**
 	 * Posts
 	 */
-	Route::group(['before' => 'auth', 'prefix' => 'post/{id}'], function() {
+	Route::group(['middleware' => 'auth', 'prefix' => 'post/{id}'], function() {
 		/**
 		 * Reporting a post
 		 */
@@ -276,7 +276,7 @@ Route::group(['prefix' => 'radio'], function() {
 	get('request/song', 'RadioController@getSong');
 	get('update', 'RadioController@getUpdate');
 	get('requests/current','RadioController@getRequestsCurrent');
-	Route::group(['before' => 'auth'], function() {
+	Route::group(['middleware' => 'auth'], function() {
 		get('send/request/{artist}/{name}', 'RadioController@getSendRequest');
 	});
 });
@@ -319,8 +319,11 @@ Route::group(['prefix' => 'staff'], function() {
 	/**
 	 * Only staff can access
 	 */
-	Route::group(['before' => 'IsStaff'], function() {
+	Route::group([], function() {
 		get('/', 'StaffController@getIndex');
+		get('checkup', 'StaffController@getCheckup');
+		post('checkup', 'StaffController@postCheckup');
+		get('checkup/{id}', 'StaffController@getCheckupView');
 		/**
 		 * Moderation Panel
 		 */
@@ -335,6 +338,20 @@ Route::group(['prefix' => 'staff'], function() {
 				get('title', 'StaffController@getModerationThreadTitle');
 				post('title', 'StaffController@postModerationThreadTitle');
 			});
+		});
+
+		/**
+		 * Radio Panel
+		 */
+		Route::group(['middleware' => 'staff.radio', 'prefix' => 'radio'], function() {
+			get('/', 'StaffController@getRadioIndex');
+		});
+
+		/**
+		 * Administrator Panel
+		 */
+		Route::group(['middleware' => 'staff.admin', 'prefix' => 'administrator'], function() {
+			get('/', 'StaffController@getAdministratorPanel');
 		});
 	});
 });
