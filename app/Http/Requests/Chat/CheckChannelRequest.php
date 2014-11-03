@@ -1,8 +1,8 @@
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\Chat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChatCheckChannelForm extends FormRequest {
+class CheckChannelRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.

@@ -1,8 +1,8 @@
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\Forums;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ForumThreadCreateForm extends FormRequest {
+class ThreadCreateRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.

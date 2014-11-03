@@ -1,8 +1,8 @@
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\NameCheck;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NameCheckForm extends FormRequest {
+class CheckRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.

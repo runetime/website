@@ -1,6 +1,6 @@
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\Forums;
 use Illuminate\Foundation\Http\FormRequest;
-class ForumPostReportForm extends FormRequest {
+class PostReportRequest extends FormRequest {
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
@@ -9,7 +9,7 @@ class ForumPostReportForm extends FormRequest {
 	public function rules() {
 		return [
 			'contents' => 'required',
-			'id'     => 'required',
+			'id'       => 'required',
 		];
 	}
 

@@ -1,8 +1,8 @@
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\Staff;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StaffModerationThreadTitleForm extends FormRequest {
+class ModerationThreadTitleRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.

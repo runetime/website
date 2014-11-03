@@ -40,7 +40,7 @@ class AuthController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postLoginForm(LoginForm $form) {
+	public function postLoginForm(LoginRequest $form) {
 		if(!empty($this->users->getByEmail($form->input('email'))))
 			if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
 				return \redirect()->to('/');
@@ -68,7 +68,7 @@ class AuthController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postSignupForm(SignupForm $form) {
+	public function postSignupForm(SignupRequest $form) {
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
 		if(!$form->input('password') == $form->input('password2'))

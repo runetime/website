@@ -1,8 +1,6 @@
-<?php namespace App\Http\Requests;
-
+<?php namespace App\Http\Requests\Forums;
 use Illuminate\Foundation\Http\FormRequest;
-
-class ForumPostEditForm extends FormRequest {
+class PostEditRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.
