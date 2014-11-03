@@ -192,6 +192,7 @@ Route::group(['prefix' => 'radio'], function() {
 	get('request/timetable', 'RadioController@getTimetable');
 	get('request/song', 'RadioController@getSong');
 	get('update', 'RadioController@getUpdate');
+	get('requests/current','RadioController@getRequestsCurrent');
 	Route::group(['before' => 'Authenticated'], function() {
 		get('send/request/{artist}/{name}', 'RadioController@getSendRequest');
 	});

@@ -94,4 +94,35 @@ class RadioController extends BaseController {
 			$requests = $this->requests->getBySession(\Request::getClientIp());
 		return json_encode($currentRequests);
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getRequestsCurrent(){
+		if($this->auth->check())
+			$user=$this->auth->id();
+		else
+			$user=-1;
+		$currentRequests=\DB::table('radio_requests')->
+		where('requester',$user)->
+		where(function($q){
+				if($this->auth->check()){
+					$q->where('requester',$this->auth->id())->
+					where('time_sent','>',time()-600);
+				}
+				else{
+					$q->where('requester','-1')->
+					where('ip_address',$_SERVER['REMOTE_ADDR'])->
+					where('status','=',0)->
+					orWhere(function($query){
+							$query->where('requester','-1')->
+							where('ip_address',$_SERVER['REMOTE_ADDR'])->
+							where('status','>',0)->
+							where('time_sent','>',time()-600);
+						});
+				}
+			})->
+		get();
+		return json_encode($currentRequests);
+	}
 }
