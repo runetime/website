@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\Messenger\CreateRequest;
 use App\Http\Requests\MessengerCreateForm;
 /**
  * Class AboutController
@@ -35,9 +36,9 @@ class MessengerController extends BaseController {
 	}
 
 	/**
-	 * @param MessengerCreateForm $form
+	 * @param CreateRequest $form
 	 */
-	public function postCreate(MessengerCreateForm $form) {
+	public function postCreate(CreateRequest $form) {
 
 	}
 }

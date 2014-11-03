@@ -2,7 +2,10 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\ForumPostEditForm;
 use App\Http\Requests\ForumPostReportForm;
+use App\Http\Requests\Forums\PostReportRequest;
+use App\Http\Requests\Forums\ReplyRequest;
 use App\Http\Requests\ForumThreadCreateForm;
+use App\Http\Requests\ThreadCreateRequest;
 use App\Http\Requests\ThreadReplyForm;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Subforums\Subforum;
@@ -203,14 +206,11 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @middleware("auth.logged")
-	 * @post("forums/create/{id}-{name}")
-	 *
-	 * @param ForumThreadCreateForm $form
+	 * @param ThreadCreateRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postThreadCreate(ForumThreadCreateForm $form) {
+	public function postThreadCreate(ThreadCreateRequest $form) {
 		$subforum = $this->subforums->getById($form->subforum);
 		if(empty($subforum))
 			return $this->view('errors.forum.subforum.missing');
@@ -255,14 +255,11 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @middleware("auth.logged")
-	 * @post("forums/reply")
-	 *
-	 * @param ThreadReplyForm $form
+	 * @param ReplyRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postReply(ThreadReplyForm $form) {
+	public function postReply(ReplyRequest $form) {
 		$thread = Thread::find($form->input('id'));
 		if(empty($thread))
 			\App::abort(404);
@@ -321,16 +318,7 @@ class ForumController extends BaseController {
 		$this->title('Reporting a Post');
 		return $this->view('forum.post.report', compact('post', 'thread', 'postee'));
 	}
-
-	/**
-	 * @middleware("auth.logged")
-	 * @post("forums/post/{id}/report")
-	 *
-	 * @param ForumPostReportForm $form
-	 *
-	 * @return mixed
-	 */
-	public function postPostReport(ForumPostReportForm $form) {
+	public function postPostReport(PostReportRequest $form) {
 		$contents = $form->contents;
 		$contentsParsed = $contents;
 		$report = new Report;
@@ -357,14 +345,11 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @middleware("auth.logged")
-	 * @post("forums/post/{id}/edit")
-	 *
-	 * @param ForumPostEditForm $form
+	 * @param PostEditRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPostEdit(ForumPostEditForm $form) {
+	public function postPostEdit(PostEditRequest $form) {
 		$post = $this->posts->getById($form->id);
 		if(!$post)
 			\App::abort(404);

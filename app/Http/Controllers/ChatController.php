@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\ChatMessageForm;
-use App\Http\Requests\ChatUpdateForm;
-use App\Http\Requests\ChatStartForm;
-use App\Http\Requests\ChatCheckChannelForm;
+use App\Http\Requests\Chat\CheckChannelRequest;
+use App\Http\Requests\Chat\MessageRequest;
+use App\Http\Requests\Chat\StartRequest;
+use App\Http\Requests\Chat\UpdateRequest;
 use App\RuneTime\BBCode\BBCodeRepository;
 use App\RuneTime\Chat\ActionRepository;
 use App\RuneTime\Chat\ChannelRepository;
@@ -34,13 +34,11 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @post("chat/start")
-	 *
-	 * @param ChatStartForm $form
+	 * @param StartRequest $form
 	 *
 	 * @return string
 	 */
-	public function postStart(ChatStartForm $form){
+	public function postStart(StartRequest $form){
 		$channel=$this->channels->getByNameTrim($form->input('channel'));
 		$messages=$this->chat->getByChannel($channel->id,Chat::PER_PAGE);
 		$messageList=[];
@@ -61,13 +59,11 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @post("chat/update")
-	 *
-	 * @param ChatUpdateForm $form
+	 * @param UpdateRequest $form
 	 *
 	 * @return string
 	 */
-	public function postUpdate(ChatUpdateForm $form){
+	public function postUpdate(UpdateRequest $form){
 		$delta=$form->input('delta');
 		$messages=$this->chat->getByCreatedAt(Time::formatTime(time()-$delta));
 		$messageList=[];
@@ -87,14 +83,11 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @middleware("auth.logged")
-	 * @post("chat/post/message")
-	 *
-	 * @param ChatMessageForm $form
+	 * @param MessageRequest $form
 	 *
 	 * @return string
 	 */
-	public function postMessage(ChatMessageForm $form){
+	public function postMessage(MessageRequest $form){
 		if(\Auth::check()){
 			$channel = $this->channels->getByNameTrim($form->input('channel'));
 			$chat = new Chat;
@@ -120,15 +113,12 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @middleware("auth.moderation")
-	 * @post("chat/post/status/change")
+	 *
 	 */
 	public function postStatusChange() {
 	}
 
 	/**
-	 * @get("chat/channels")
-	 *
 	 * @return string
 	 */
 	public function getChannels(){
@@ -148,13 +138,11 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @post("chat/channels/check")
-	 *
-	 * @param ChatCheckChannelForm $form
+	 * @param CheckChannelRequest $form
 	 *
 	 * @return array
 	 */
-	public function postCheckChannel(ChatCheckChannelForm $form){
+	public function postCheckChannel(CheckChannelRequest $form){
 		$channel=$this->channels->getByNameTrim($form->input('channel'));
 		$response=[];
 		if($channel)

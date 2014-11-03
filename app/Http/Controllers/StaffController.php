@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\StaffModerationThreadTitleForm;
+use App\Http\Requests\Staff\ModerationThreadTitleRequest;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Reports\ReportRepository;
 use App\RuneTime\Forum\Threads\PostRepository;
@@ -137,14 +137,11 @@ class StaffController extends BaseController {
 	}
 
 	/**
-	 * @post("staff/moderation/thread/{id}-{name}/title")
-	 * @middleware("auth.moderation")
-	 *
-	 * @param StaffModerationThreadTitleForm $form
+	 * @param ModerationThreadTitleRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postModerationThreadTitle(StaffModerationThreadTitleForm $form) {
+	public function postModerationThreadTitle(ModerationThreadTitleRequest $form) {
 		$thread = $this->threads->getById($form->id);
 		if(!$thread)
 			\App::abort(404);

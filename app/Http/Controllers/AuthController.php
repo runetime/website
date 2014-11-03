@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\LoginForm;
-use App\Http\Requests\SignupForm;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\SignupRequest;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\Guard;
@@ -21,9 +21,6 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @get("login")
-	 * @middleware("guest")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm() {
@@ -33,10 +30,7 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @middleware("guest")
-	 * @post("login")
-	 *
-	 * @param LoginForm $form
+	 * @param LoginRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -48,9 +42,6 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @get("signup")
-	 * @middleware("guest")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getSignupForm() {
@@ -61,10 +52,7 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @middleware("guest")
-	 * @post("signup")
-	 *
-	 * @param SignupForm $form
+	 * @param SignupRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -83,9 +71,6 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @get("logout")
-	 * @middleware("auth.logged")
-	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getLogout() {
