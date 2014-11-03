@@ -1,8 +1,14 @@
 v1.0.1 (2014-xx-xx)
 ================================================================================
 
+- __FIX__: broken values returned by `Predis\Collection\Iterator\SortedSetKey`
+  when iterating sorted set containing integer members (ISSUE #216).
+
 - __FIX__: applied a minor workaround for a bug in old versions of PHP < 5.3.9
   affecting inheritance.
+
+- __FIX__: prevent E_NOTICE warnings when using INFO [section] returns an empty
+  response due to an unsupported specific set of information requested to Redis.
 
 
 v1.0.0 (2014-08-01)

@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => 'DKSBwYoxyO248m0z5XzpLyzJpb6CwCCW',
+	'key' => 'ne0DcLhzkConSDOrsuSNcSGLS8meyCGo',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -98,11 +98,7 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\ArtisanServiceProvider',
-		'App\Providers\ErrorServiceProvider',
 		'App\Providers\EventServiceProvider',
-		'App\Providers\LogServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
 		/*
@@ -134,6 +130,7 @@ return [
 		 * Extras
 		 */
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+
 
 	],
 
@@ -199,6 +196,7 @@ return [
 		'String'    => 'App\Utilities\String',
 		'Time'      => 'App\Utilities\Time',
 		'Carbon'    => 'Carbon\Carbon',
+		'Parsedown' => 'App\Utilities\Parsedown',
 
 	],
 

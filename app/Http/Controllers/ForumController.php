@@ -219,10 +219,10 @@ class ForumController extends BaseController {
 		$thread = new Thread;
 		$thread = $thread->saveNew(\Auth::user()->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE, $tags, $form->subforum);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, $thread->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $form->contents);
+		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
 		$thread->last_post = $post->id;
 		$thread->save();
-		$post->thread()->associate($post);
+		$thread->addPost($post);
 		$post->save();
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
@@ -237,7 +237,7 @@ class ForumController extends BaseController {
 		}
 		$this->subforums->updateLastPost($post->id, (int)$subforum->id);
 		$this->subforums->incrementThreads($subforum->id);
-		return \redirect()->action('ForumController@getThread', ['id' => $thread->id, 'name' => \String::slugEncode($thread->title)]);
+		return \redirect()->to('forums/thread/' . \String::slugEncode($thread->id, $thread->title));
 	}
 
 	/**
@@ -266,9 +266,11 @@ class ForumController extends BaseController {
 		$thread = Thread::find($form->input('id'));
 		if(empty($thread))
 			\App::abort(404);
+		$parsedContents = new \Parsedown();
+		$parsedContents = $parsedContents->text($form->contents);
 		$post = new Post;
-		$post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $form->contents);
-		$thread->posts()->save($post);
+		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
+		$thread->addPost($post);
 		$thread->incrementPosts();
 		$this->subforums->incrementPosts($thread->subforum);
 		\Auth::user()->incrementPostActive();

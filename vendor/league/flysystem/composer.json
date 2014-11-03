@@ -1,9 +1,10 @@
 {
     "name": "league/flysystem",
-    "description": "Filesystem abstraction, but easy.",
+    "description": "Many filesystems, one API.",
     "keywords": [
         "filesystem", "files", "storage", "dropbox", "aws",
-        "s3", "ftp", "sftp", "remote", "webdav", "file systems"
+        "s3", "ftp", "sftp", "remote", "webdav", "file systems", "cloud",
+        "cloud files", "rackspace", "copy.com"
     ],
     "license": "MIT",
     "authors": [
@@ -16,6 +17,7 @@
         "php": ">=5.4.0"
     },
     "require-dev": {
+        "ext-fileinfo": "*",
         "league/event": "~1.0",
         "phpunit/phpunit": "~4.0",
         "mockery/mockery": "~0.9",
@@ -42,6 +44,7 @@
         }
     },
     "suggest": {
+        "ext-fileinfo": "Required for MimeType",
         "league/event": "Required for EventableFilesystem",
         "aws/aws-sdk-php": "Allows you to use AWS S3 storage",
         "predis/predis": "Allows you to use Predis for caching",

@@ -96,24 +96,23 @@ class ChatController extends BaseController{
 	 */
 	public function postMessage(ChatMessageForm $form){
 		if(\Auth::check()){
-			$channel=$this->channels->getByNameTrim($form->input('channel'));
-			$chat=new Chat;
-			$chat->author_id=\Auth::user()->id;
-			$chat->contents=$form->input('contents');
-			$chat->contents_parsed=$this->bbcode->parse($form->input('contents'));
-			$chat->status=Chat::STATUS_USER_PUBLISHED;
-			$chat->channel=$channel->id;
+			$channel = $this->channels->getByNameTrim($form->input('channel'));
+			$chat = new Chat;
+			$chat->author_id = \Auth::user()->id;
+			$chat->contents = $form->input('contents');
+			$chat->contents_parsed = $this->bbcode->parse($form->input('contents'));
+			$chat->status = Chat::STATUS_USER_PUBLISHED;
+			$chat->channel = $channel->id;
 			$chat->save();
-			$channel=$this->channels->getByNameTrim($form->input('channel'));
-			$channel->messages=$channel->messages+1;
+			$channel = $this->channels->getByNameTrim($form->input('channel'));
+			$channel->messages = $channel->messages+1;
 			$channel->save();
-			$response=[
-				'sent'=>true,
+			$response = [
+				'sent' => true,
 			];
-		}
-		else{
-			$response=[
-				'sent'=>false,
+		} else {
+			$response = [
+				'sent' => false,
 			];
 		}
 		header('Content-Type: application/json');
@@ -124,7 +123,7 @@ class ChatController extends BaseController{
 	 * @middleware("auth.moderation")
 	 * @post("chat/post/status/change")
 	 */
-	public function postStatusChange(){
+	public function postStatusChange() {
 	}
 
 	/**

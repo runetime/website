@@ -13,7 +13,7 @@
 						{{$subforumItem->posts}} posts
 					</div>
 					<div class='col-xs-12 col-sm-12 col-md-3'>
-		@if(!empty($subforumItem->last_post_info))
+		@if(!empty($subforumItem->last_post_info) && !empty($subforumItem->last_thread_info))
 						<a href='/forum/thread/{{\String::slugEncode($subforumItem->last_thread_info->id, $subforumItem->last_thread_info->title)}}' title='{{$subforumItem->last_thread_title}}'>
 							{{$subforumItem->last_thread_info->title}}
 						</a>

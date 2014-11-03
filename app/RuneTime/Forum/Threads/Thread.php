@@ -18,10 +18,17 @@ class Thread extends Entity {
 	const POSTS_PER_PAGE  = 20;
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function posts() {
-		return $this->hasMany('App\RuneTime\Forum\Threads\Post', 'thread_id', 'id');
+		return $this->belongsTomany('App\RuneTime\Forum\Threads\Post');
+	}
+
+	/**
+	 * @param Post $post
+	 */
+	public function addPost(Post $post) {
+		$this->posts()->attach([$post->id]);
 	}
 
 	public function subforum() {

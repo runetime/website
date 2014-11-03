@@ -1,17 +1,9 @@
 <?php namespace Illuminate\Foundation\Support\Providers;
 
-use Closure;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Annotations\Scanner;
 
 class RouteServiceProvider extends ServiceProvider {
-
-	/**
-	 * The root namespace to assume when generating URLs to actions.
-	 *
-	 * @var string
-	 */
-	protected $rootUrlNamespace = null;
 
 	/**
 	 * The controllers to scan for route annotations.
@@ -25,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $scanWhenLocal = true;
+	protected $scanWhenLocal = false;
 
 	/**
 	 * Register the service provider.
@@ -34,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->app['url']->setRootControllerNamespace($this->rootUrlNamespace);
+		$this->addMiddleware();
 
 		$this->app->call([$this, 'before']);
 
@@ -45,6 +37,21 @@ class RouteServiceProvider extends ServiceProvider {
 		else
 		{
 			$this->loadRoutes();
+		}
+	}
+
+	/**
+	 * Add the short-hand middleware names to the router.
+	 *
+	 * @return void
+	 */
+	protected function addMiddleware()
+	{
+		$router = $this->app['router'];
+
+		foreach ($this->middleware as $key => $value)
+		{
+			$router->middleware($key, $value);
 		}
 	}
 

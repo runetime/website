@@ -43,7 +43,7 @@ class AuthController extends BaseController {
 	public function postLoginForm(LoginForm $form) {
 		if(!empty($this->users->getByEmail($form->input('email'))))
 			if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
-				return \redirect()->action('HomeController@getIndex');
+				return \redirect()->to('/');
 		return \redirect()->action('AuthController@getLoginForm');
 	}
 
@@ -79,7 +79,7 @@ class AuthController extends BaseController {
 		$user = $user->saveNew($form->input('display_name'), $form->input('email'), \Hash::make($form->input('password')));
 		$user->setRole('Members');
 		$this->auth->loginUsingId($user->id);
-		return redirect()->action('ForumController@getIndex');
+		return \redirect()->to('/');
 	}
 
 	/**

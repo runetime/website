@@ -24,11 +24,6 @@
 	@endforeach
 					</ul>
 @endif
-@if(\Auth::user()->id == $thread->author_id)
-					<a href='/forum/thread/{{\String::slugEncode($thread->id, $thread->title)}}/edit'>
-						Edit Thread
-					</a>
-@endif
 @foreach($postList as $post)
 	@include('forum.post._show')
 @endforeach

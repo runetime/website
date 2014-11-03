@@ -51,39 +51,39 @@ class ErrorHandler
     const TYPE_DEPRECATION = -100;
 
     private $levels = array(
-        E_DEPRECATED        => 'Deprecated',
-        E_USER_DEPRECATED   => 'User Deprecated',
-        E_NOTICE            => 'Notice',
-        E_USER_NOTICE       => 'User Notice',
-        E_STRICT            => 'Runtime Notice',
-        E_WARNING           => 'Warning',
-        E_USER_WARNING      => 'User Warning',
-        E_COMPILE_WARNING   => 'Compile Warning',
-        E_CORE_WARNING      => 'Core Warning',
-        E_USER_ERROR        => 'User Error',
+        E_DEPRECATED => 'Deprecated',
+        E_USER_DEPRECATED => 'User Deprecated',
+        E_NOTICE => 'Notice',
+        E_USER_NOTICE => 'User Notice',
+        E_STRICT => 'Runtime Notice',
+        E_WARNING => 'Warning',
+        E_USER_WARNING => 'User Warning',
+        E_COMPILE_WARNING => 'Compile Warning',
+        E_CORE_WARNING => 'Core Warning',
+        E_USER_ERROR => 'User Error',
         E_RECOVERABLE_ERROR => 'Catchable Fatal Error',
-        E_COMPILE_ERROR     => 'Compile Error',
-        E_PARSE             => 'Parse Error',
-        E_ERROR             => 'Error',
-        E_CORE_ERROR        => 'Core Error',
+        E_COMPILE_ERROR => 'Compile Error',
+        E_PARSE => 'Parse Error',
+        E_ERROR => 'Error',
+        E_CORE_ERROR => 'Core Error',
     );
 
     private $loggers = array(
-        E_DEPRECATED        => array(null, LogLevel::INFO),
-        E_USER_DEPRECATED   => array(null, LogLevel::INFO),
-        E_NOTICE            => array(null, LogLevel::NOTICE),
-        E_USER_NOTICE       => array(null, LogLevel::NOTICE),
-        E_STRICT            => array(null, LogLevel::NOTICE),
-        E_WARNING           => array(null, LogLevel::WARNING),
-        E_USER_WARNING      => array(null, LogLevel::WARNING),
-        E_COMPILE_WARNING   => array(null, LogLevel::WARNING),
-        E_CORE_WARNING      => array(null, LogLevel::WARNING),
-        E_USER_ERROR        => array(null, LogLevel::ERROR),
+        E_DEPRECATED => array(null, LogLevel::INFO),
+        E_USER_DEPRECATED => array(null, LogLevel::INFO),
+        E_NOTICE => array(null, LogLevel::NOTICE),
+        E_USER_NOTICE => array(null, LogLevel::NOTICE),
+        E_STRICT => array(null, LogLevel::NOTICE),
+        E_WARNING => array(null, LogLevel::WARNING),
+        E_USER_WARNING => array(null, LogLevel::WARNING),
+        E_COMPILE_WARNING => array(null, LogLevel::WARNING),
+        E_CORE_WARNING => array(null, LogLevel::WARNING),
+        E_USER_ERROR => array(null, LogLevel::ERROR),
         E_RECOVERABLE_ERROR => array(null, LogLevel::ERROR),
-        E_COMPILE_ERROR     => array(null, LogLevel::EMERGENCY),
-        E_PARSE             => array(null, LogLevel::EMERGENCY),
-        E_ERROR             => array(null, LogLevel::EMERGENCY),
-        E_CORE_ERROR        => array(null, LogLevel::EMERGENCY),
+        E_COMPILE_ERROR => array(null, LogLevel::EMERGENCY),
+        E_PARSE => array(null, LogLevel::EMERGENCY),
+        E_ERROR => array(null, LogLevel::EMERGENCY),
+        E_CORE_ERROR => array(null, LogLevel::EMERGENCY),
     );
 
     private $thrownErrors = 0x1FFF; // E_ALL - E_DEPRECATED - E_USER_DEPRECATED
@@ -110,29 +110,42 @@ class ErrorHandler
     /**
      * Registers the error handler.
      *
-     * @param int  $levels Levels to register to for throwing, 0 for none
-     * @param bool $throw  @deprecated argument, same as setting $levels to 0
+     * @param self|null|int $handler The handler to register, or @deprecated (since 2.6, to be removed in 3.0) bit field of thrown levels
+     * @param bool          $replace Whether to replace or not any existing handler
      *
-     * @return ErrorHandler The registered error handler
+     * @return self The registered error handler
      */
-    public static function register($levels = -1, $throw = true)
+    public static function register($handler = null, $replace = true)
     {
         if (null === self::$reservedMemory) {
             self::$reservedMemory = str_repeat('x', 10240);
             register_shutdown_function(__CLASS__.'::handleFatalError');
         }
 
-        $handler = new static();
-        $levels &= $handler->thrownErrors;
-        $prev = set_error_handler(array($handler, 'handleError'), $levels);
-        $prev = is_array($prev) ? $prev[0] : null;
-        if ($prev instanceof self) {
-            restore_error_handler();
-            $handler = $prev;
-        } else {
-            $handler->setExceptionHandler(set_exception_handler(array($handler, 'handleException')));
+        $levels = -1;
+
+        if ($handlerIsNew = !$handler instanceof self) {
+            // @deprecated polymorphism, to be removed in 3.0
+            if (null !== $handler) {
+                $levels = $replace ? $handler : 0;
+                $replace = true;
+            }
+            $handler = new static();
         }
-        $handler->throwAt($throw ? $levels : 0, true);
+
+        $prev = set_error_handler(array($handler, 'handleError'), $handler->thrownErrors | $handler->loggedErrors);
+
+        if ($handlerIsNew && is_array($prev) && $prev[0] instanceof self) {
+            $handler = $prev[0];
+            $replace = false;
+        }
+        if ($replace || !$prev) {
+            $handler->setExceptionHandler(set_exception_handler(array($handler, 'handleException')));
+        } else {
+            restore_error_handler();
+        }
+
+        $handler->throwAt($levels & $handler->thrownErrors, true);
 
         return $handler;
     }

@@ -18,7 +18,7 @@ class AwsS3 extends AbstractAdapter
      * @var  array  $resultMap
      */
     protected static $resultMap = array(
-        'Body'          => 'contents',
+        'Body'          => 'raw_contents',
         'ContentLength' => 'size',
         'ContentType'   => 'mimetype',
         'Size'          => 'size',
@@ -28,7 +28,7 @@ class AwsS3 extends AbstractAdapter
      * @var  array  $metaOptions
      */
     protected static $metaOptions = array(
-        'Cache-Control',
+        'CacheControl',
         'Expires',
         'StorageClass',
         'ServerSideEncryption',
@@ -185,7 +185,9 @@ class AwsS3 extends AbstractAdapter
             return false;
         }
 
-        if (is_resource($options['Body'])) unset($options['Body']);
+        if ( ! is_string($options['Body'])) {
+            unset($options['Body']);
+        }
 
         return $this->normalizeObject($options);
     }
@@ -225,7 +227,7 @@ class AwsS3 extends AbstractAdapter
     public function read($path)
     {
         $result = $this->readObject($path);
-        $result['contents'] = (string) $result['contents'];
+        $result['contents'] = (string) $result['raw_contents'];
 
         return $result;
     }
@@ -239,7 +241,9 @@ class AwsS3 extends AbstractAdapter
     public function readStream($path)
     {
         $result = $this->readObject($path);
-        $result['stream'] = $result['contents']->getStream();
+        $result['stream'] = $result['raw_contents']->getStream();
+        // Ensure the EntityBody object destruction doesn't close the stream
+        $result['raw_contents']->detachStream();
 
         return $result;
     }
@@ -270,6 +274,7 @@ class AwsS3 extends AbstractAdapter
         $options = $this->getOptions($newpath, array(
             'Bucket' => $this->bucket,
             'CopySource' => $this->bucket.'/'.$this->applyPathPrefix($path),
+            'ACL' => $this->getObjectACL($path),
         ));
 
         $result = $this->client->copyObject($options)->getAll();
@@ -291,6 +296,7 @@ class AwsS3 extends AbstractAdapter
         $options = $this->getOptions($newpath, array(
             'Bucket' => $this->bucket,
             'CopySource' => $this->bucket.'/'.$this->applyPathPrefix($path),
+            'ACL' => $this->getObjectACL($path),
         ));
 
         $result = $this->client->copyObject($options)->getAll();
@@ -410,6 +416,19 @@ class AwsS3 extends AbstractAdapter
         }
 
         return compact('visibility');
+    }
+
+    /**
+     * Get the ACL based on the visibility
+     *
+     * @param $path
+     * @return string
+     */
+    protected function getObjectACL($path)
+    {
+        $metadata = $this->getVisibility($path);
+
+        return $metadata['visibility'] === AdapterInterface::VISIBILITY_PUBLIC ? 'public-read' : 'private';
     }
 
     /**

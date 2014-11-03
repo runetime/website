@@ -134,6 +134,7 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	public function incrementProfileViews() {
 		return $this->increment('profile_views');
 	}
+
 	/**
 	 * UserInterface
 	 */
@@ -147,6 +148,7 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	public function getAuthPassword() {
 		return $this->password;
 	}
+
 	/**
 	 * RemindableInterface
 	 */

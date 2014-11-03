@@ -37,7 +37,7 @@
 	@endif
 						</div>
 						<div class='col-xs-12 col-sm-9 col-md-10'>
-							{{$post->contents_parsed}}
+							{!!$post->contents_parsed!!}
 	@if(!empty($post->author_info->signature_parsed))
 							<hr />
 							{{$post->author_info->signature_parsed}}

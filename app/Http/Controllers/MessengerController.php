@@ -13,9 +13,10 @@ class MessengerController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
+		$messages = $this->messages->getByUser(\Auth::user()->id);
 		$this->nav('Forums');
 		$this->title('Messenger');
-		return $this->view('messenger.index');
+		return $this->view('messenger.index', compact('messages'));
 	}
 
 	/**

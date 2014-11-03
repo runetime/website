@@ -1,13 +1,28 @@
 # Changelog
 
-## 0.5.8 - unreleased
-
-No changed yet.
+## 0.5.10 - unreleased
 
 ### Fixed
 
-* Path prefixing done twice when retrieving meta-data in the Rackspace adapter.
-* Finfo is only used to determine mime-type when available.
+* [AwsS3] Contents supplied during AwsS3::write is now cached like all the other adapters. (Very minor chance of this happening)
+* [AwsS#] Detached stream from guzzle response to prevent it from closing on EntityBody destruction.
+* [Util] Paths with directory names or file names with double dots are now allowed.
+* [Cache:Noop] Added missing readStream method.
+
+## 0.5.9 - 2014-10-18
+
+### Fixed
+
+* [AwsS3] CacheControl write option is now correctly mapped.
+* [AwsS3] writeStream now properly detects Body type which resulted in cache corruption: c7246e3341135baad16180760ece3967da7a44f3
+
+## 0.5.8 - 2014-10-17
+
+### Fixed
+
+* [Rackspace] Path prefixing done twice when retrieving meta-data.
+* [Core] Finfo is only used to determine mime-type when available.
+* [AwsS3] Previously set ACL is now respected in rename and copy.
 
 ### Added
 

@@ -1,15 +1,5 @@
 <?php
-/**
- *
- *
- *
- *
- * DO NOT TRANSLATE THIS, THIS IS FOR SERVER DEBUGGING AND DOES NOT NEED TO BE TRANSLATED
- *
- *
- *
- *
- */
+
 return [
 
 	/*
@@ -37,6 +27,7 @@ return [
 		"string"  => "The :attribute must be between :min and :max characters.",
 		"array"   => "The :attribute must have between :min and :max items.",
 	],
+	"boolean"              => "The :attribute field must be true or false",
 	"confirmed"            => "The :attribute confirmation does not match.",
 	"date"                 => "The :attribute is not a valid date.",
 	"date_format"          => "The :attribute does not match the format :format.",
@@ -44,6 +35,7 @@ return [
 	"digits"               => "The :attribute must be :digits digits.",
 	"digits_between"       => "The :attribute must be between :min and :max digits.",
 	"email"                => "The :attribute must be a valid email address.",
+	"filled"               => "The :attribute field is required.",
 	"exists"               => "The selected :attribute is invalid.",
 	"image"                => "The :attribute must be an image.",
 	"in"                   => "The selected :attribute is invalid.",
@@ -80,6 +72,7 @@ return [
 	],
 	"unique"               => "The :attribute has already been taken.",
 	"url"                  => "The :attribute format is invalid.",
+	"timezone"             => "The :attribute must be a valid zone.",
 
 	/*
 	|--------------------------------------------------------------------------

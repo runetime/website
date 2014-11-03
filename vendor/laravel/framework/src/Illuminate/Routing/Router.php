@@ -6,14 +6,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Contracts\Routing\RoutableInterface;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Illuminate\Contracts\Routing\Registrar as RegistrarContract;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Router implements HttpKernelInterface, RegistrarContract {
+class Router implements RegistrarContract {
 
 	/**
 	 * The event dispatcher instance.
@@ -210,6 +207,92 @@ class Router implements HttpKernelInterface, RegistrarContract {
 	public function match($methods, $uri, $action)
 	{
 		return $this->addRoute(array_map('strtoupper', (array) $methods), $uri, $action);
+	}
+
+	/**
+	 * Register an array of controllers with wildcard routing.
+	 *
+	 * @param  array  $controllers
+	 * @return void
+	 */
+	public function controllers(array $controllers)
+	{
+		foreach ($controllers as $uri => $name)
+		{
+			$this->controller($uri, $name);
+		}
+	}
+
+	/**
+	 * Route a controller to a URI with wildcard routing.
+	 *
+	 * @param  string  $uri
+	 * @param  string  $controller
+	 * @param  array   $names
+	 * @return void
+	 */
+	public function controller($uri, $controller, $names = array())
+	{
+		$prepended = $controller;
+
+		// First, we will check to see if a controller prefix has been registered in
+		// the route group. If it has, we will need to prefix it before trying to
+		// reflect into the class instance and pull out the method for routing.
+		if ( ! empty($this->groupStack))
+		{
+			$prepended = $this->prependGroupUses($controller);
+		}
+
+		$routable = (new ControllerInspector)
+		                    ->getRoutable($prepended, $uri);
+
+		// When a controller is routed using this method, we use Reflection to parse
+		// out all of the routable methods for the controller, then register each
+		// route explicitly for the developers, so reverse routing is possible.
+		foreach ($routable as $method => $routes)
+		{
+			foreach ($routes as $route)
+			{
+				$this->registerInspected($route, $controller, $method, $names);
+			}
+		}
+
+		$this->addFallthroughRoute($controller, $uri);
+	}
+
+	/**
+	 * Register an inspected controller route.
+	 *
+	 * @param  array   $route
+	 * @param  string  $controller
+	 * @param  string  $method
+	 * @param  array   $names
+	 * @return void
+	 */
+	protected function registerInspected($route, $controller, $method, &$names)
+	{
+		$action = array('uses' => $controller.'@'.$method);
+
+		// If a given controller method has been named, we will assign the name to the
+		// controller action array, which provides for a short-cut to method naming
+		// so you don't have to define an individual route for these controllers.
+		$action['as'] = array_get($names, $method);
+
+		$this->{$route['verb']}($route['uri'], $action);
+	}
+
+	/**
+	 * Add a fallthrough route for a controller.
+	 *
+	 * @param  string  $controller
+	 * @param  string  $uri
+	 * @return void
+	 */
+	protected function addFallthroughRoute($controller, $uri)
+	{
+		$missing = $this->any($uri.'/{_missing}', $controller.'@missingMethod');
+
+		$missing->where('_missing', '(.*)');
 	}
 
 	/**
@@ -529,17 +612,6 @@ class Router implements HttpKernelInterface, RegistrarContract {
 	}
 
 	/**
-	 * Dispatch the request to the application. Do not run any middleware.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function dispatchWithoutMiddleware(Request $request)
-	{
-		return $this->dispatch($request, false);
-	}
-
-	/**
 	 * Dispatch the request to a route and return the response.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -592,11 +664,13 @@ class Router implements HttpKernelInterface, RegistrarContract {
 	{
 		$middleware = $this->gatherRouteMiddlewares($route);
 
-		return (new Stack\Stack(function($request) use ($route)
-		{
-			return $route->run($request);
-
-		}, $middleware))->setContainer($this->container)->run($request);
+		return (new Stack($this->container))
+		                ->send($request)
+		                ->through($middleware)
+		                ->then(function($request) use ($route)
+						{
+							return $route->run($request);
+						});
 	}
 
 	/**
@@ -802,7 +876,7 @@ class Router implements HttpKernelInterface, RegistrarContract {
 	{
 		$this->bind($key, function($value) use ($class, $callback)
 		{
-			if (is_null($value)) return null;
+			if (is_null($value)) return;
 
 			// For model binders, we will attempt to retrieve the models using the first
 			// method on the model instance. If we cannot retrieve the models we'll
@@ -1290,19 +1364,6 @@ class Router implements HttpKernelInterface, RegistrarContract {
 	public function getPatterns()
 	{
 		return $this->patterns;
-	}
-
-	/**
-	 * Get the response for a given request.
-	 *
-	 * @param  \Symfony\Component\HttpFoundation\Request  $request
-	 * @param  int   $type
-	 * @param  bool  $catch
-	 * @return \Illuminate\Http\Response
-	 */
-	public function handle(SymfonyRequest $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
-	{
-		return $this->dispatch(Request::createFromBase($request));
 	}
 
 }
