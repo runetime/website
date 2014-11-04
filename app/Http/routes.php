@@ -37,6 +37,8 @@ Route::group([], function() {
 		Route::group(['prefix' => 'password/reset'], function() {
 			get('/', 'AuthController@getPasswordEmail');
 			post('/', 'AuthController@postPasswordEmail');
+			get('{token}', 'AuthController@getPasswordReset');
+			post('{token}', 'AuthController@postPasswordReset');
 		});
 	});
 });

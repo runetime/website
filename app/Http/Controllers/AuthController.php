@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
 use App\Http\Requests\Auth\PasswordEmailRequest;
+use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\Guard;
@@ -50,7 +51,7 @@ class AuthController extends BaseController {
 		if(!empty($this->users->getByEmail($form->input('email'))))
 			if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
 				return \redirect()->to('/');
-		return \redirect()->action('AuthController@getLoginForm');
+		return \redirect()->to('login');
 	}
 
 	/**
@@ -112,6 +113,34 @@ class AuthController extends BaseController {
 
 			case PasswordBroker::RESET_LINK_SENT:
 				return redirect()->back()->with('status', trans($response));
+		}
+		return 1;
+	}
+
+	/**
+	 * @param $token
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getPasswordReset($token) {
+		$this->nav('navbar.runetime.runetime');
+		$this->title('Password Reset');
+		return $this->view('auth.password.reset', compact('token'));
+	}
+
+	/**
+	 * @param PasswordResetRequest $form
+	 *
+	 * @return mixed
+	 */
+	public function postPasswordReset(PasswordResetRequest $form) {
+		$user = $this->users->getByEmail($form->email);
+		if($user) {
+			$user->password = \Hash::make($form->password);
+			$user->save();
+			$this->auth->logout();
+			$this->auth->loginUsingId($user->id);
+			return \redirect()->to('/');
 		}
 		return 1;
 	}
