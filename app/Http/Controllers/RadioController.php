@@ -32,7 +32,9 @@ class RadioController extends BaseController {
 	public function getIndex() {
 		$dj = "Auto DJ";
 		$latestSong = $this->history->getLatest();
-		$song = ['artist' => $latestSong->artist, 'name' => $latestSong->song];
+		$song = ['artist' => 'N/A', 'name' => 'N/A'];
+		if(!empty($latestSong))
+			$song = ['artist' => $latestSong->artist, 'name' => $latestSong->song];
 		$isDJ = false;
 		if($this->auth->check())
 			$isDJ = $this->auth->user()->hasRole('Radio DJ');
