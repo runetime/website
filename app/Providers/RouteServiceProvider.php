@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider {
 		'staff.moderator' => 'App\Http\Middleware\IsModerator',
 		'staff.admin'     => 'App\Http\Middleware\StaffAdministrator',
 		'staff.radio'     => 'App\Http\Middleware\StaffRadio',
+		'staff.content'   => 'App\Http\Middleware\StaffContent',
 	];
 
 	/**

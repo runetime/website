@@ -3,10 +3,10 @@
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 /**
- * Class StaffRadio
+ * Class StaffContent
  * @package App\Http\Middleware
  */
-class StaffRadio implements Middleware {
+class StaffContent implements Middleware {
 
 	/**
 	 * Handle an incoming request.
@@ -19,7 +19,7 @@ class StaffRadio implements Middleware {
 	{
 		if(!\Auth::check())
 			return \redirect::to('/login');
-		if(!\Auth::user()->hasOneOfRoles(1, 2, 3))
+		if(!\Auth::user()->hasOneOfRoles(1, 8, 9))
 			\App::abort(403);
 		return $next($request);
 	}
