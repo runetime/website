@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\Messenger\CreateRequest;
 use App\Http\Requests\MessengerCreateForm;
+use App\RuneTime\Messenger\MessageRepository;
 /**
  * Class AboutController
  * @package App\Http\Controllers
@@ -10,10 +11,21 @@ use App\Http\Requests\MessengerCreateForm;
  */
 class MessengerController extends BaseController {
 	/**
+	 * @var MessageRepository
+	 */
+	private $messages;
+
+	/**
+	 * @param MessageRepository $messages
+	 */
+	public function __construct(MessageRepository $messages) {
+		$this->messages = $messages;
+	}
+	/**
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$messages = $this->messages->getByUser(\Auth::user()->id);
+		$messages = \Auth::user()->messages();
 		$this->nav('Forums');
 		$this->title('Messenger');
 		return $this->view('messenger.index', compact('messages'));
@@ -32,7 +44,10 @@ class MessengerController extends BaseController {
 	 *
 	 */
 	public function getCreate() {
-
+		$this->bc(['messenger' => 'Messenger']);
+		$this->nav('Forums');
+		$this->title('Compose a Message');
+		return $this->view('messenger.compose.index');
 	}
 
 	/**

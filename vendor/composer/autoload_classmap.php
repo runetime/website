@@ -32,7 +32,7 @@ return array(
     'CreateMessagePostTable' => $baseDir . '/database/migrations/2014_10_23_063132_create_message_post_table.php',
     'CreateMessagesTable' => $baseDir . '/database/migrations/2014_10_22_220737_create_messages_table.php',
     'CreateNewsTable' => $baseDir . '/database/migrations/2014_08_25_152529_create_news_table.php',
-    'CreatePasswordRemindersTable' => $baseDir . '/database/migrations/2014_09_14_160730_create_password_reminders_table.php',
+    'CreatePasswordRemindersTable' => $baseDir . '/database/migrations/2014_11_04_002719_create_password_reminders_table.php',
     'CreatePostThreadTable' => $baseDir . '/database/migrations/2014_10_22_222223_create_post_thread_table.php',
     'CreateQuestGuidesTable' => $baseDir . '/database/migrations/2014_09_18_012718_create_quest_guides_table.php',
     'CreateRadioHistoryTable' => $baseDir . '/database/migrations/2014_09_19_173841_create_radio_history_table.php',
@@ -456,5 +456,6 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'SubforumsTableSeeder' => $baseDir . '/database/seeds/SubforumsTableSeeder.php',
+    'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
 );

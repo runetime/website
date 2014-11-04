@@ -2,22 +2,34 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
+use App\Http\Requests\Auth\PasswordEmailRequest;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\PasswordBroker;
+/**
+ * Class AuthController
+ * @package App\Http\Controllers
+ */
 class AuthController extends BaseController {
 	/**
 	 * @var UserRepository
 	 */
 	private $users;
+	/**
+	 * @var PasswordBroker
+	 */
+	private $passwords;
 
 	/**
 	 * @param Guard          $auth
+	 * @param PasswordBroker $passwords
 	 * @param UserRepository $users
 	 */
-	public function __construct(Guard $auth, UserRepository $users) {
+	public function __construct(Guard $auth, PasswordBroker $passwords, UserRepository $users) {
 		$this->auth = $auth;
 		$this->users = $users;
+		$this->passwords = $passwords;
 	}
 
 	/**
@@ -76,5 +88,31 @@ class AuthController extends BaseController {
 	public function getLogout() {
 		$this->auth->logout();
 		return redirect()->to('/');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getPasswordEmail() {
+		$this->nav('navbar.login');
+		$this->title('Password Reset');
+		return $this->view('auth.password.email');
+	}
+
+	/**
+	 * @param PasswordEmailRequest $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|int
+	 */
+	public function postPasswordEmail(PasswordEmailRequest $request) {
+		switch ($response = $this->passwords->sendResetLink($request->only('email')))
+		{
+			case PasswordBroker::INVALID_USER:
+				return redirect()->back()->with('error', trans($response));
+
+			case PasswordBroker::RESET_LINK_SENT:
+				return redirect()->back()->with('status', trans($response));
+		}
+		return 1;
 	}
 }

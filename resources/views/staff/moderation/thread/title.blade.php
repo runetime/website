@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('.........layouts.default')
 @section('contents')
 			<div class='wrapper'>
 				<h1>

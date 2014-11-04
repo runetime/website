@@ -1,4 +1,4 @@
-@extends('layouts.settings')
+@extends('...layouts.settings')
 @section('settings')
 						<form action='' class='form-horizontal' method='post' role='form'>
 							<div class='form-group'>

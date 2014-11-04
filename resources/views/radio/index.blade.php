@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('...layouts.default')
 @section('contents')
 			<div id='radio' class='wrapper'>
 				<div class='row'>
@@ -96,7 +96,7 @@
 						</div>
 					</div>
 					<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
-@include('partials.chat')
+@include('...partials.chat')
 					</div>
 				</div>
 			</div>

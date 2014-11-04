@@ -17,7 +17,6 @@ class VerifyCsrfToken implements Middleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		return $next($request);
 		if ($request->method() == 'GET' || $this->tokensMatch($request))
 		{
 			return $next($request);

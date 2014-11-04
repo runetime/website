@@ -17,10 +17,27 @@ Route::group([], function() {
 	 * Not logged in
 	 */
 	Route::group(['middleware' => 'guest'], function() {
-		get('login', 'AuthController@getLoginForm');
-		post('login', 'AuthController@postLoginForm');
-		get('signup', 'AuthController@getSignupForm');
-		post('signup', 'AuthController@postSignupForm');
+		/**
+		 * Login
+		 */
+		Route::group(['prefix' => 'login'], function() {
+			get('/', 'AuthController@getLoginForm');
+			post('/', 'AuthController@postLoginForm');
+		});
+		/**
+		 * Signup
+		 */
+		Route::group(['prefix' => 'signup'], function() {
+			get('/', 'AuthController@getSignupForm');
+			post('/', 'AuthController@postSignupForm');
+		});
+		/**
+		 * Password Reset
+		 */
+		Route::group(['prefix' => 'password/reset'], function() {
+			get('/', 'AuthController@getPasswordEmail');
+			post('/', 'AuthController@postPasswordEmail');
+		});
 	});
 });
 
@@ -355,4 +372,12 @@ Route::group(['prefix' => 'staff'], function() {
 			get('/', 'StaffController@getAdministratorPanel');
 		});
 	});
+});
+
+/**
+ * Transparency
+ */
+Route::group(['prefix' => 'transparency'], function() {
+	get('/', 'TransparencyController@getIndex');
+	get('markdown', 'TransparencyController@getMarkdown');
 });

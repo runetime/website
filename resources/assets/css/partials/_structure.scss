@@ -202,3 +202,32 @@ $cardWidth:200px;
 		}
 	}
 }
+pre {
+	background: #2a2a2a;
+	border: 1px solid #1f1f1f;
+	color:#9a9a9a;
+}
+
+.blocks {
+	width: 100%;
+	>div {
+		background:#474747;
+		width: 300px;
+		height: 300px;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		>a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 3em !important;
+			height:100%;
+			width:100%;
+		}
+		&:hover {
+			background:#515151;
+		}
+	}
+}

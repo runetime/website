@@ -194,4 +194,11 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	public function checkups() {
 		return $this->belongsToMany('App\RuneTime\Checkup\Checkup');
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function messages() {
+		return $this->belongsToMany('App\RuneTime\Messenger\Message');
+	}
 }

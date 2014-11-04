@@ -17,4 +17,11 @@ class HistoryRepository extends EloquentRepository {
 			orderBy('id', 'desc')->
 			first();
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getCurrent() {
+		return $this->getLatest();
+	}
 }

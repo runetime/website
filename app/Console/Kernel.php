@@ -12,7 +12,10 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'App\Console\Commands\InspireCommand',
-		'App\Console\Commands\RadioUpdate',
+		'App\Console\Commands\Radio\Update',
+		'App\Console\Commands\Radio\Song',
+		'App\Console\Commands\Radio\Artist',
+		'App\Console\Commands\Radio\DJ',
 	];
 
 	/**
@@ -30,7 +33,9 @@ class Kernel extends ConsoleKernel {
 		}
 		catch (Exception $e)
 		{
-			$output->writeln((string) $e);
+			$this->reportException($e);
+
+			$this->renderException($output, $e);
 
 			return 1;
 		}

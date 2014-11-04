@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('...layouts.default')
 @section('contents')
 			<div class='wrapper'>
 				<a href='/signatures/username={{$username}}/type=stat'>

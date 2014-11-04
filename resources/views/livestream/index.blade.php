@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('...layouts.default')
 @section('contents')
 			<div class='wrapper'>
 				<div class='row'>
@@ -14,7 +14,7 @@
 					</div>
 					<div class='col-xs-12 col-sm-4 col-md-3 col-lg-3'>
 						<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
-@include('partials.chat')
+@include('...partials.chat')
 						</div>
 					</div>
 @else
@@ -23,7 +23,7 @@
 							RuneTime is currently not streaming
 						</h2>
 						<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
-@include('partials.chat')
+@include('...partials.chat')
 						</div>
 					</div>
 @endif

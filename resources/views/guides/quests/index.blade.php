@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('......layouts.default')
 @section('contents')
 			<div class='wrapper-dark row row-margin'>
 				<div class='col-xs-12 col-sm-4 text-center'>

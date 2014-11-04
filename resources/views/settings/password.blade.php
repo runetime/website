@@ -1,4 +1,4 @@
-@extends('layouts.settings')
+@extends('...layouts.settings')
 @section('settings')
 						<h3>
 							@lang('settings.password.note')

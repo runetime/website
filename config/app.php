@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,9 +78,24 @@ return [
 	|
 	*/
 
-	'key' => 'ne0DcLhzkConSDOrsuSNcSGLS8meyCGo',
+	'key' => 'j3j5FTJbl9MWCcj4JBGuKf6cVwFG94RF',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
+
+	/*
+	|--------------------------------------------------------------------------
+	| Logging Configuration
+	|--------------------------------------------------------------------------
+	|
+	| Here you may configure the log settings for your application. Out of
+	| the box, Laravel uses the Monolog PHP logging library. This gives
+	| you a variety of powerful log handlers / formatters to utilize.
+	|
+	| Available Settings: "single", "daily", "syslog"
+	|
+	*/
+
+	'log' => 'daily',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -115,7 +130,6 @@ return [
 		'Illuminate\Filesystem\FilesystemServiceProvider',
 		'Illuminate\Foundation\Providers\FoundationServiceProvider',
 		'Illuminate\Hashing\HashServiceProvider',
-		'Illuminate\Log\LogServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
 		'Illuminate\Queue\QueueServiceProvider',
@@ -130,7 +144,6 @@ return [
 		 * Extras
 		 */
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-
 
 	],
 

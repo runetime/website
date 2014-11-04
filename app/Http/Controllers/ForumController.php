@@ -4,8 +4,8 @@ use App\Http\Requests\ForumPostEditForm;
 use App\Http\Requests\ForumPostReportForm;
 use App\Http\Requests\Forums\PostReportRequest;
 use App\Http\Requests\Forums\ReplyRequest;
-use App\Http\Requests\ForumThreadCreateForm;
-use App\Http\Requests\ThreadCreateRequest;
+use App\Http\Requests\Forums\ThreadCreateForm;
+use App\Http\Requests\Forums\ThreadCreateRequest;
 use App\Http\Requests\ThreadReplyForm;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Subforums\Subforum;
@@ -69,9 +69,9 @@ class ForumController extends BaseController {
 		$forumInfo->latest = $this->users->getLatest();
 		$forumInfo->mostOnline = \Cache::get('info.most_online');
 		$recentThreads = $this->threads->getX(5, 'desc');
-		$this->nav('Forums');
-		$this->title('Forums');
-		return $this->view('forum.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
+		$this->nav('navbar.forums');
+		$this->title(trans('forums.name'));
+		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
 	}
 
 	/**
@@ -134,9 +134,9 @@ class ForumController extends BaseController {
 		$bc['forums'] = 'Forums';
 		$bc = array_reverse($bc);
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title($subforum->name);
-		return $this->view('forum.subforum.view', compact('subforum', 'subforumList', 'threadList'));
+		return $this->view('forums.subforum.view', compact('subforum', 'subforumList', 'threadList'));
 	}
 
 	/**
@@ -178,9 +178,9 @@ class ForumController extends BaseController {
 		$bc['forums/'] = 'Forums';
 		$bc = array_reverse($bc);
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title($thread->title);
-		return $this->view('forum.thread.view', compact('thread', 'postList'));
+		return $this->view('forums.thread.view', compact('thread', 'postList'));
 	}
 
 	/**
@@ -203,9 +203,9 @@ class ForumController extends BaseController {
 		}
 		$bc['forums/' . \String::slugEncode($subforum->id, $subforum->name)] = $subforum->name;
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Creating a New Thread');
-		return $this->view('forum.thread.create', compact('subforum'));
+		return $this->view('forums.thread.create', compact('subforum'));
 	}
 
 	/**
@@ -216,7 +216,7 @@ class ForumController extends BaseController {
 	public function postThreadCreate(ThreadCreateRequest $form) {
 		$subforum = $this->subforums->getById($form->subforum);
 		if(empty($subforum))
-			return $this->view('errors.forum.subforum.missing');
+			return $this->view('errors.forums.subforum.missing');
 		$tags = json_encode(explode(",", str_replace(", ", ",", $form->tags)));
 		$poll = -1;
 		$thread = new Thread;
@@ -244,7 +244,7 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @get("forum/thread/{id}-{name}/edit")
+	 * @get("forums/thread/{id}-{name}/edit")
 	 * @middleware("auth.logged")
 	 *
 	 * @param $id
@@ -298,9 +298,9 @@ class ForumController extends BaseController {
 		// Breadcrumbs
 		$bc = ['forums/' => 'Forums'];
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Tag: ' . $tag->name);
-		return $this->view('forum.tags.view', compact('tag', 'threadList'));
+		return $this->view('forums.tags.view', compact('tag', 'threadList'));
 	}
 
 	/**
@@ -317,9 +317,9 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread);
 		$postee = $this->users->getById($post->author_id);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Reporting a Post');
-		return $this->view('forum.post.report', compact('post', 'thread', 'postee'));
+		return $this->view('forums.post.report', compact('post', 'thread', 'postee'));
 	}
 
 	/**
@@ -348,9 +348,9 @@ class ForumController extends BaseController {
 		if(!$post)
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Editing Post in ' . $thread->title);
-		return $this->view('forum.post.edit', compact('post', 'thread'));
+		return $this->view('forums.post.edit', compact('post', 'thread'));
 	}
 
 	/**

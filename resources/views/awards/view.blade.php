@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('...layouts.default')
 @section('contents')
 			<div class='wrapper'>
 				<h1>
@@ -25,7 +25,7 @@
 @foreach($awardees as $awardee)
 						<tr>
 							<td>
-								{{HTML::image(Utilities::URL('img/forum/photos/'.$awardee->id.'.png'),'Photo',['class'=>'img-responsive photo-sm'])}} 
+								{{HTML::image(Utilities::URL(forums.$awardee->id.'.png'),'Photo',['class'=>'img-responsive photo-sm'])}}
 							</td>
 							<td>
 								{{$awardee->name}} 
