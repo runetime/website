@@ -10,8 +10,20 @@
 	<p class='text-info'>
 		RuneTime uses a Markdown renderer called <a href='http://parsedown.com'>Parsedown</a>.  These Markdown templates are from their <a href='https://github.com/erusev/parsedown'>Github repository</a> and rendered by their Markdown parser on pageload.  Their Markdown parser is under MIT license.
 	</p>
+	<h3>
+		Table of Contents
+	</h3>
+	<ul>
+@foreach($files as $name => $markdown)
+		<li>
+			<a onclick="$('html, body').animate({scrollTop: $('#markdown-set-{{str_replace(" ", "-", $name)}}').offset().top-50}, 1000);">
+				{{$name}}
+			</a>
+		</li>
+@endforeach
+	</ul>
 	@foreach($files as $name => $markdown)
-	<div class='well'>
+	<div id='markdown-set-{{str_replace(" ", "-", $name)}}' class='well'>
 		<h3 class='text-center'>
 			{{$name}}
 		</h3>
