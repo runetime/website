@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Guides\LocationCreateRequest;
 use App\Http\Requests\Guides\QuestCreateRequest;
 use App\RuneTime\Guides\LocationRepository;
+use App\RuneTime\Guides\Quest;
 use App\RuneTime\Guides\QuestRepository;
 /**
  * Class GuideController
@@ -113,9 +114,23 @@ The king will ask you to help with the testing of the beacon network which has b
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postQuestCreate(QuestCreateRequest $form) {
-
 		dd(1);
-		return \redirect()->to('guides/quests');
+		$parsedown = new \Parsedown;
+		$editors = json_encode([]);
+		$membership = $form->membership == 1 ? true : false;
+		$completed = $form->completed == 1 ? true : false;
+		$description = $parsedown->text($form->description);
+		$questRequirements = $parsedown->text($form->quest_requirements);
+		$skillRequirements = $parsedown->text($form->skill_requirements);
+		$itemsRequired = $parsedown->text($form->items_required);
+		$itemsRecommended = $parsedown->text($form->items_recommended);
+		$rewards = $parsedown->text($form->rewards);
+		$startingPoint = $parsedown->text($form->starting_point);
+		$contents = $form->contents;
+		$contentsParsed = $parsedown->text($form->contents);
+		$quest = new Quest;
+		$quest = $quest->saveNew($form->name, \Auth::user()->id, $editors, $form->difficulty, $form->length, $form->qp, $membership, $completed, $description, $questRequirements, $skillRequirements, $itemsRequired, $itemsRecommended, $rewards, $startingPoint, $contents, $contentsParsed);
+		return \redirect()->to('guides/quests/' . \String::slugEncode($quest->id, $quest->name));
 	}
 
 	/**
