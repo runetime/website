@@ -1,4 +1,4 @@
-@extends('...layouts.default')
+@extends('layouts.default')
 @section('contents')
 			<div class='wrapper-flat'>
 				<div class='embed-responsive embed-responsive-16by9'>

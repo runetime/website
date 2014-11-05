@@ -1,4 +1,4 @@
-@extends('......layouts.profile')
+@extends('layouts.profile')
 @section('profile')
 						<div class='row row-flat'>
 							<div class='col-xs-6 col-sm-5 col-md-3'>

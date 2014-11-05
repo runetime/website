@@ -1,4 +1,4 @@
-@extends('...layouts.default')
+@extends('layouts.default')
 @section('contents')
 			<h1>
 				@lang('play.index.play_runescape')

@@ -1,4 +1,4 @@
-@extends('......layouts.default')
+@extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
 				<form class='form-horizontal' enctype='multipart/form-data' method='post' action='' role='form'>
