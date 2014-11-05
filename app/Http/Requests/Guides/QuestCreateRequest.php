@@ -28,7 +28,7 @@ class QuestCreateRequest extends Request {
 			'items_recommended'  => 'required',
 			'reward'             => 'required',
 			'starting_point'     => 'required',
-			'guide'              => 'required',
+			'contents'           => 'required',
 		];
 	}
 

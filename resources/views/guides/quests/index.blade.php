@@ -94,50 +94,30 @@
 						</tr>
 					</thead>
 					<tbody>
+@foreach($guides as $guide)
 						<tr>
 							<td>
-								<a href='/guides/quests/1-all-fired-up' title='All Fired Up'>
-									All Fired Up
+								<a href='/guides/quests/{{\String::slugEncode($guide->id, $guide->name)}}' title='{{$guide->name}}'>
+									{{$guide->name}}
 								</a>
 							</td>
 							<td>
-								Intermediate
+								{{$guide->getDifficulty()}}
 							</td>
 							<td>
-								Short
+								{{$guide->getLength()}}
 							</td>
 							<td>
-								1
+								{{$guide->qp}}
 							</td>
 							<td>
-								Yes
+								{{$guide->getMembership()}}
 							</td>
 							<td>
-								No
+								{{$guide->completed == 1 ? "Yes" : "No"}}
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<a href='/guides/quests/1-all-fired-up' title='All Fired Up'>
-									Animal Magnetism
-								</a>
-							</td>
-							<td>
-								Intermediate
-							</td>
-							<td>
-								Medium
-							</td>
-							<td>
-								1
-							</td>
-							<td>
-								Yes
-							</td>
-							<td>
-								No
-							</td>
-						</tr>
+@endforeach
 					</tbody>
 				</table>
 			</div>

@@ -19,4 +19,37 @@ class Quest extends Entity {
 	public function author() {
 		return $this->belongsTo('RT\Accounts\User', 'author_id');
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getDifficulty() {
+		return $this->getOption($this->difficulty);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getLength() {
+		return $this->getOption($this->length);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getMembership() {
+		return $this->getOption($this->membership);
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	private function getOption($id) {
+		$option = \DB::table('guide_info')->
+			where('id', '=', $id)->
+			first();
+		return $option->name;
+	}
 }
