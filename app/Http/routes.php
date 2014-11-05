@@ -255,8 +255,14 @@ Route::group(['prefix' => 'members'], function() {
 Route::group(['middleware' => 'auth', 'prefix' => 'messenger'], function() {
 	get('/', 'MessengerController@getIndex');
 	get('{id}-{name}', 'MessengerController@getView');
-	get('compose', 'MessengerController@getCreate');
-	post('compose', 'MessengerController@postCreate');
+	/**
+	 * Compose
+	 */
+	Route::group(['prefix' => 'compose'], function() {
+		get('/', 'MessengerController@getCreate');
+		get('to={id}-{name}', 'MessengerController@getCreate');
+		post('/', 'MessengerController@postCreate');
+	});
 });
 
 /**

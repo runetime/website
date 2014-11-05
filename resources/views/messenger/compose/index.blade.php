@@ -1,4 +1,4 @@
-@extends('......layouts.default')
+@extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
 				<h1>
@@ -10,7 +10,7 @@
 							Participants
 						</label>
 						<div class='col-lg-10'>
-							<input type='text' id='participants' name='participants' class='form-control' required />
+							<input type='text' id='participants' name='participants' class='form-control' required {{!empty($to) ? "value=" . $to->display_name : ""}} />
 							<span class='help-block'>
 								Names are case-sensitive.  Separate names by commas.
 							</span>
