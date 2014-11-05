@@ -234,7 +234,7 @@ $current = $nav;
 			</div>
 			<p class='pull-right'>
 				<a href='/language/set' title='@lang('footer.language')'>
-					@lang('footer.language')
+					<i class='text-info fa fa-language'></i>
 				</a>
 			</p>
 		</div>
