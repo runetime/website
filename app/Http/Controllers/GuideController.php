@@ -1,14 +1,30 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\Guides\LocationCreateRequest;
+use App\Http\Requests\Guides\QuestCreateRequest;
+use App\RuneTime\Guides\LocationRepository;
 use App\RuneTime\Guides\QuestRepository;
+/**
+ * Class GuideController
+ * @package App\Http\Controllers
+ */
 class GuideController extends BaseController {
+	/**
+	 * @var QuestRepository
+	 */
 	private $quests;
+	/**
+	 * @var LocationRepository
+	 */
+	private $locations;
 
 	/**
-	 * @param QuestRepository $quests
+	 * @param LocationRepository $locations
+	 * @param QuestRepository    $quests
 	 */
-	public function __construct(QuestRepository $quests) {
+	public function __construct(LocationRepository $locations, QuestRepository $quests) {
 		$this->quests = $quests;
+		$this->locations = $locations;
 	}
 
 	/**
@@ -19,12 +35,10 @@ class GuideController extends BaseController {
 	}
 
 	/**
-	 * @param     $type
 	 * @param int $searchDifficulty
 	 * @param int $searchLength
 	 * @param int $searchMembership
-	 * @get("guides/{type}")
-	 * @get("guides/{type}/difficulty={searchDifficulty}/length={searchLength}/membership={searchMembership}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getQuests($searchDifficulty = 0, $searchLength = 0, $searchMembership = 0) {
@@ -39,13 +53,11 @@ class GuideController extends BaseController {
 	}
 
 	/**
-	 * @param $type
 	 * @param $id
-	 * @param $name
-	 * @get("guides/{type}/{id}-{name}")
-	 * @return \Illuminate\View\View
+	 *
+	 * @return \Illuminate\View\View|int
 	 */
-	public function getQuestView($type, $id) {
+	public function getQuestView($id) {
 		$guide = $this->quests->getById($id);
 		$guide = new \stdClass;
 		$guide->name = 'All Fired Up';
@@ -86,8 +98,44 @@ The king will ask you to help with the testing of the beacon network which has b
 	}
 
 	/**
-	 * @get("guides/{type}/search/{searchSlug}")
+	 * @return \Illuminate\View\View
 	 */
-	public function getSearch() {
+	public function getQuestCreate() {
+		$this->bc(['guides' => 'Guides', 'guides/quests' => 'Quests']);
+		$this->nav('navbar.runescape.runescape');
+		$this->title('Creating a Quest Guide');
+		return $this->view('guides.quests.create');
+	}
+
+	/**
+	 * @param QuestCreateRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postQuestCreate(QuestCreateRequest $form) {
+
+		dd(1);
+		return \redirect()->to('guides/quests');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getLocations() {
+		$guides = $this->locations->getAll();
+		$this->bc(['guides' => 'Guides']);
+		$this->nav('Runescape');
+		$this->title('Location Guides');
+		return $this->view('guides.quests.index', compact('guides'));
+	}
+	public function getLocationCreate() {
+
+	}
+
+	/**
+	 * @param LocationCreateRequest $form
+	 */
+	public function postLocationCreate(LocationCreateRequest $form) {
+
 	}
 }

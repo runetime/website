@@ -7,7 +7,7 @@
 							@lang('login.email_address')
 						</label>
 						<div class='col-lg-10'>
-							<input id='email' class='form-control' type='text' name='email' placeholder='john@example.com' required='' />
+							<input id='email' class='form-control' type='text' name='email' placeholder='john@example.com' required />
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 						</div>
@@ -17,7 +17,7 @@
 							@lang('login.password')
 						</label>
 						<div class='col-lg-10'>
-							<input id='password' class='form-control' type='password' name='password' placeholder='Password' required='' />
+							<input id='password' class='form-control' type='password' name='password' required />
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 						</div>

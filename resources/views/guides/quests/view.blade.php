@@ -1,4 +1,4 @@
-@extends('......layouts.default')
+@extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
 				<h1>
@@ -17,6 +17,8 @@
 						@lang('guides.edited_by',['users'=>$editList]) 
 					</small>
 				</p>
+			</div>
+			<div class='wrapper-dark'>
 				<dl class='dl-horizontal'>
 					<dt>
 						Description
@@ -129,6 +131,8 @@
 						{{$guide->starting_point}} 
 					</dd>
 				</dl>
+			</div>
+			<div class='wrapper'>
 @foreach($guide->contents as $x=>$step)
 				<h3>
 					Step {{$x}} 

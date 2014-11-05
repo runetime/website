@@ -231,3 +231,29 @@ pre {
 		}
 	}
 }
+
+// Markdown
+table {
+	border: {
+		color: #bbb;
+		spacing: 0;
+		style: solid;
+		width: 1px 0 0 1px;
+	}
+	td,
+	th {
+		padding: 10px;
+		border: {
+			color: #bbb;
+			style: solid;
+			width: 1px 0 0 1px;
+		}
+	}
+	&.no-border {
+		border: none !important;
+		td,
+		th {
+			border: none !important;
+		}
+	}
+}

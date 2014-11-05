@@ -1,4 +1,4 @@
-@extends('......layouts.default')
+@extends('layouts.default')
 @section('contents')
 			<div class='wrapper-dark row row-margin'>
 				<div class='col-xs-12 col-sm-4 text-center'>
@@ -63,7 +63,14 @@
 				</div>
 			</div>
 			<div class='wrapper'>
-				<table class='table table-hover table-striped table-responsive'>
+				<ul class='list-inline pull-right'>
+					<li>
+						<a href='/guides/quests/create' class='btn btn-sm btn-success'>
+							Create Guide
+						</a>
+					</li>
+				</ul>
+				<table class='table table-hover table-striped table-responsive no-border'>
 					<thead>
 						<tr>
 							<td>

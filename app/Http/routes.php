@@ -168,6 +168,27 @@ Route::group(['prefix' => 'guides'], function() {
 		get('/', 'GuideController@getQuests');
 		get('difficulty={searchDifficulty}/length={searchLength}/membership={searchMembership}', 'GuideController@getQuests');
 		get('{id}-{name}', 'GuideController@getQuestView');
+		/**
+		 * Create Quest Guide
+		 */
+		Route::group(['prefix' => 'create'], function() {
+			get('/', 'GuideController@getQuestCreate');
+			post('/', 'GuideController@postQuestCreate');
+		});
+	});
+	/**
+	 * Locations
+	 */
+	Route::group(['prefix' => 'locations'], function() {
+		get('/', 'GuideController@getLocations');
+		get('{id}-{name}', 'GuideController@getLocationView');
+		/**
+		 * Create Location Guide
+		 */
+		Route::group(['prefix' => 'create'], function() {
+			get('/', 'GuideController@getLocationCreate');
+			post('/', 'GuideController@postLocationCreate');
+		});
 	});
 });
 
