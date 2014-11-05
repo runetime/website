@@ -238,5 +238,10 @@ $current = $nav;
 				</a>
 			</p>
 		</div>
+		<div id='top'>
+			<a title='Back to Top'>
+				<i class='fa fa-chevron-up'></i>
+			</a>
+		</div>
 	</body>
 </html>

@@ -871,5 +871,24 @@ RuneTime.Utilities = new RuneTime.Utilities();
 $(function () {
 	"use strict";
 	$('[data-toggle]').tooltip();
-	$('.dropdown-toggle').dropdown()
+	$('.dropdown-toggle').dropdown();
+	$('#top').click(function () {
+		$('html, body').animate({ scrollTop: 0 }, 1000);
+	});
+	$(window).scroll(function () {
+		var height = $('body').height(),
+			scroll = $(window).scrollTop(),
+			top = $('#top');
+		if(scroll > height/10) {
+			if(!$(top).hasClass('set-vis')) {
+				$(top).fadeIn(200);
+				$(top).toggleClass('set-vis');
+			}
+		} else {
+			if($(top).hasClass('set-vis')) {
+				$(top).fadeOut(200);
+				$(top).toggleClass('set-vis');
+			}
+		}
+	});
 });
