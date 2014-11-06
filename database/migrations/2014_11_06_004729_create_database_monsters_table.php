@@ -19,6 +19,7 @@ class CreateDatabaseMonstersTable extends Migration {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->mediumText('editors');
+			$table->string('name');
 			$table->mediumText('examine');
 			$table->mediumText('examine_parsed');
 			$table->mediumText('stats');
