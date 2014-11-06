@@ -7343,6 +7343,7 @@ button.close {
 body {
   background: #373737 !important;
   color: #b8b8b8 !important;
+  cursor: default;
   font-family: "Proxima Nova Regular","Segoe UI",Roboto,"Droid Sans","Helvetica Neue",Arial,sans-serif;
   font-style: normal;
   font-size: 1.5em !important;
@@ -7988,12 +7989,26 @@ body {
 .breadcrumb {
   background: #454545;
   border-radius: 0em !important;
-  box-shadow: inset 7px 0 9px -7px #33b5e5;
-  margin-bottom: 0px; }
-  .breadcrumb a {
-    color: white !important; }
-  .breadcrumb li.active {
-    color: #aaa; }
+  height: 37px;
+  margin-bottom: 0px;
+  padding: 0em !important; }
+  .breadcrumb li {
+    color: white !important;
+    height: 37px; }
+    .breadcrumb li.active {
+      color: #707070 !important; }
+    .breadcrumb li::before {
+      content: none !important;
+      padding: 0em 0em; }
+    .breadcrumb li:not(.active):hover {
+      background: #3d3d3d; }
+    .breadcrumb li a,
+    .breadcrumb li span {
+      align-items: center;
+      display: flex;
+      height: 37px;
+      justify-content: center;
+      padding: 0em 1em !important; }
 
 ::-webkit-scrollbar {
   background: #191919;

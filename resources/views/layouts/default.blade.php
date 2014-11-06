@@ -183,7 +183,9 @@ $current = $nav;
 	@foreach($bc as $url=>$name)
 		@if(String::startsWith('#',$url))
 				<li class='active'>
-					{{$name}}
+					<span>
+						{{ $name }}
+					</span>
 				</li>
 		@else
 				<li>
