@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\Guides\LocationCreateRequest;
 use App\Http\Requests\Guides\QuestCreateRequest;
+use App\RuneTime\Guides\Location;
 use App\RuneTime\Guides\LocationRepository;
 use App\RuneTime\Guides\Quest;
 use App\RuneTime\Guides\QuestRepository;
@@ -60,24 +61,19 @@ class GuideController extends BaseController {
 	 */
 	public function getQuestView($id) {
 		$guide = $this->quests->getById($id);
+		$guide->editors = json_decode($guide->editors);
+		if(!$guide)
+			\App::abort(404);
 		$difficulty = $this->quests->getOptionById($guide->difficulty);
 		$length = $this->quests->getOptionById($guide->length);
 		$editList = "";
-		if(!empty(json_decode($guide->editors))) {
-			foreach(json_decode($guide->editors) as $x => $editor) {
-				$editList .= \Link::name($editor);
-				if($x < count(json_decode($guide->editors)) - 1)
-					$editList .= ", ";
-			}
-		}
-		if($guide) {
-			$this->bc(['guides' => 'Guides', 'guides/quests' => 'Quests']);
-			$this->nav('Runescape');
-			$this->title($guide->name);
-			return $this->view('guides.quests.view', compact('guide', 'difficulty', 'length', 'editList'));
-		}
-		\App::abort(404);
-		return 1;
+		if(!empty($guide->editors))
+			foreach($guide->editors as $x => $editor)
+				$editList .= \Link::name($editor) . ($x < count(json_decode($guide->editors)) -1 ? ", " : "");
+		$this->bc(['guides' => 'Guides', 'guides/quests' => 'Quests']);
+		$this->nav('navbar.runescape.runescape');
+		$this->title($guide->name);
+		return $this->view('guides.quests.view', compact('guide', 'difficulty', 'length', 'editList'));
 	}
 
 	/**
@@ -98,7 +94,7 @@ class GuideController extends BaseController {
 	public function postQuestCreate(QuestCreateRequest $form) {
 		$parsedown = new \Parsedown;
 		$editors = json_encode([]);
-		$membership = $form->membership == 11 ? true : false;
+		$membership = $form->membership == 11 ? 11 : 10;
 		$completed = $form->completed == 1 ? true : false;
 		$description = $parsedown->text($form->description);
 		$questRequirements = $parsedown->text($form->quest_requirements);
@@ -120,18 +116,53 @@ class GuideController extends BaseController {
 	public function getLocations() {
 		$guides = $this->locations->getAll();
 		$this->bc(['guides' => 'Guides']);
-		$this->nav('Runescape');
+		$this->nav(trans('navbar.runescape.runescape'));
 		$this->title('Location Guides');
-		return $this->view('guides.quests.index', compact('guides'));
+		return $this->view('guides.locations.index', compact('guides'));
 	}
-	public function getLocationCreate() {
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\View\View|int
+	 */
+	public function getLocationView($id) {
+		$guide = $this->locations->getById($id);
+		$guide->editors = json_decode($guide->editors);
+		if(!$guide)
+			\App::abort(404);
+		$editList = "";
+		if(!empty($guide->editors))
+			foreach($guide->editors as $x => $editor)
+				$editList .= \Link::name($editor) . ($x < count($guide->editors) -1 ? ", " : "");
+		$this->bc(['guides' => 'Guides', 'guides/locations' => 'Locations']);
+		$this->nav('navbar.runescape.runescape');
+		$this->title($guide->name);
+		return $this->view('guides.locations.view', compact('guide', 'editList'));
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getLocationCreate() {
+		$this->bc(['guides' => 'Guides', 'guides/locations' => 'Locations']);
+		$this->nav('navbar.runescape.runescape');
+		$this->title('Creating a Location Guide');
+		return $this->view('guides.locations.create');
 	}
 
 	/**
 	 * @param LocationCreateRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postLocationCreate(LocationCreateRequest $form) {
-
+		$parsedown = new \Parsedown;
+		$editors = json_encode([]);
+		$contents = $form->contents;
+		$contentsParsed = $parsedown->text($contents);
+		$location = new Location;
+		$location = $location->saveNew($form->name, \Auth::user()->id, $editors, $contents, $contentsParsed);
+		return \redirect()->to('guides/locations/' . \String::slugEncode($location->id, $location->name));
 	}
 }

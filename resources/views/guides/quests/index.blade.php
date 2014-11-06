@@ -94,7 +94,8 @@
 						</tr>
 					</thead>
 					<tbody>
-@foreach($guides as $guide)
+@if(!empty($guides))
+	@foreach($guides as $guide)
 						<tr>
 							<td>
 								<a href='/guides/quests/{{\String::slugEncode($guide->id, $guide->name)}}' title='{{$guide->name}}'>
@@ -117,7 +118,8 @@
 								{{$guide->completed == 1 ? "Yes" : "No"}}
 							</td>
 						</tr>
-@endforeach
+	@endforeach
+@endif
 					</tbody>
 				</table>
 			</div>
