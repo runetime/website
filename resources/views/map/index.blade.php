@@ -12,17 +12,6 @@
 							<img src='/img/map/osrs.png' alt='Old School Runescape' class='center-block img-responsive img-rounded' />
 						</a>
 					</div>
-					<div class='col-xs-12'>
-						<br />
-						<div class='image-heading'>
-							<a href='/map/members' title='RuneTime Members Map'>
-								<img src='/img/map/members.png' alt='RuneTime Members Map' class='center-block img-responsive img-rounded' />
-								<h3>
-									RuneTime Map
-								</h3>
-							</a>
-						</div>
-					</div>
 				</div>
 			</div>
 @stop
