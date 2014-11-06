@@ -30,7 +30,7 @@
 							@lang('forums.thread.create.poll.name')
 						</label>
 						<div class='col-lg-10'>
-@include('_poll')
+@include('forums.thread._poll')
 						</div>
 					</div>
 					<div class='form-group'>
