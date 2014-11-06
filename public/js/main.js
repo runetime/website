@@ -891,4 +891,14 @@ $(function () {
 			}
 		}
 	});
+	/**
+	 * Create base height of page if no scrollbar
+	 */
+	var windowHeight = $(window).height(),
+		bodyHeight = $('body').height(),
+		pageHeight = $('#page').height(),
+		minusPage = bodyHeight - pageHeight,
+		newPageHeight = windowHeight - minusPage - 50;
+	if(bodyHeight < windowHeight)
+		$('#page').height(newPageHeight);
 });
