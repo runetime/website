@@ -12,4 +12,16 @@ class Monster extends Entity{
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
 	const STATUS_PUBLISHED = 1;
+
+	/**
+	 * @return string
+	 */
+	public function getEditors() {
+		$editList = "";
+		$editors = json_decode($this->editors);
+		if(!empty($editors))
+			foreach($editors as $x => $editor)
+				$editList .= \Link::name($editor) . ($x < count($editors) -1 ? ", " : "");
+		return $editList;
+	}
 }
