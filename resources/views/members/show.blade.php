@@ -82,9 +82,15 @@
 							{!! \Link::colorRole($member->importantRole()->id) !!}
 						</div>
 						<div class='pull-right'>
+							<ul class='list-inline'>
 @if(Auth::check())
-							STUFF HERE
+								<li>
+									<a href='/messenger/compose/to={{ \String::slugEncode($member->id, $member->display_name) }}' title='Message {{ $member->display_name }}'>
+										<i class='text-primary fa fa-inbox fa-3x'></i>
+									</a>
+								</li>
 @endif
+							</ul>
 						</div>
 					</div>
 @endforeach
