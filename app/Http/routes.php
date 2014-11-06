@@ -96,6 +96,44 @@ Route::group(['prefix' => 'clan'], function() {
 	get('/', 'ClanController@getIndex');
 });
 
+/**
+ * Databases
+ */
+Route::group(['prefix' => 'databases'], function() {
+	get('/', 'DatabaseController@getIndex');
+	/**
+	 * Items
+	 */
+	Route::group(['prefix' => 'items'], function() {
+		get('/', 'DatabaseController@getItemsIndex');
+		get('membership={searchMembership}/tradable={searchTradable}/questItem={searchItem}', 'DatabaseController@getItemsIndex');
+		get('{id}-{name}', 'DatabaseController@getItemsView');
+		/**
+		 * Create
+		 */
+		Route::group(['prefix' => 'create'], function() {
+			get('/', 'DatabaseController@getItemsCreate');
+			post('/', 'DatabaseController@postItemsCreate');
+		});
+	});
+
+	/**
+	 * Monsters
+	 */
+	Route::group(['prefix' => 'monsters'], function() {
+		get('/', 'DatabaseController@getMonstersIndex');
+		get('membership={searchMembership}', 'DatabaseController@getMonstersIndex');
+		get('{id}-{name}', 'DatabaseController@getMonstersView');
+		/**
+		 * Create
+		 */
+		Route::group(['prefix' => 'create'], function() {
+			get('/', 'DatabaseController@getMonstersCreate');
+			post('/', 'DatabaseController@postMonstersCreate');
+		});
+	});
+});
+
 # Donate
 get('donate', 'DonateController@getIndex');
 
