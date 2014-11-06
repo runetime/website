@@ -30,10 +30,12 @@ class GuideController extends BaseController {
 	}
 
 	/**
-	 * @get("guides")
+	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->nav('Runescape');
+		$this->nav('navbar.runescape.runescape');
+		$this->title('Guides');
+		return $this->view('guides.index');
 	}
 
 	/**
