@@ -175,22 +175,22 @@ $current = $nav;
 @if($displayPageHeader&&!empty($title))
 		<div class='wrapper-none'>
 			<ol class='breadcrumb'>
-				<li>
+				<li data-toggle='tooltip' data-placement='bottom' title='Home'>
 					<a href='/' title='Home'>
 						@lang('navbar.home')
 					</a>
 				</li>
-	@foreach($bc as $url=>$name)
-		@if(String::startsWith('#',$url))
-				<li class='active'>
+	@foreach($bc as $url => $name)
+		@if(String::startsWith('#', $url))
+				<li class='active' data-toggle='tooltip' data-placement='bottom' title='{{ $name }}'>
 					<span>
 						{{ $name }}
 					</span>
 				</li>
 		@else
 				<li>
-					<a href='{{$url}}' title='{{$name}}'>
-						{{$name}} 
+					<a href='{{ $url }}' data-toggle='tooltip' data-placement='bottom' title='{{ $name }}'>
+						{{ $name }}
 					</a>
 				</li>
 		@endif
