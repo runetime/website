@@ -1,18 +1,12 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\SignatureFormRequest;
+use App\Http\Requests\Signatures\RSNRequest;
+/**
+ * Class SignatureController
+ * @package App\Http\Controllers
+ */
 class SignatureController extends BaseController {
-	private $request;
-
 	/**
-	 * @param SignatureFormRequest $request
-	 */
-	public function __construct(SignatureFormRequest $request) {
-		$this->request = $request;
-	}
-
-	/**
-	 * @get("signatures")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -22,11 +16,12 @@ class SignatureController extends BaseController {
 	}
 
 	/**
-	 * @post("signatures")
+	 * @param RSNRequest $form
+	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function postUsername() {
-		$username = $this->request->input('username');
+	public function postUsername(RSNRequest $form) {
+		$username = $form->username;
 		$this->bc(['signatures' => 'Signature Generator']);
 		$this->nav('RuneTime');
 		$this->title('Type of Signature');
@@ -36,7 +31,7 @@ class SignatureController extends BaseController {
 	/**
 	 * @param $username
 	 * @param $type
-	 * @get("signatures/username={username}/type={type}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getStyle($username, $type) {
@@ -56,7 +51,7 @@ class SignatureController extends BaseController {
 	 * @param $username
 	 * @param $type
 	 * @param $style
-	 * @get("signatures/username={username}/type={type}/style={style}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getFinal($username, $type, $style) {
@@ -74,8 +69,6 @@ class SignatureController extends BaseController {
 	}
 
 	/**
-	 *
-	 * @get("signatures/h{slug}")
 	 * @param $slug
 	 */
 	public function getDisplay($slug) {
