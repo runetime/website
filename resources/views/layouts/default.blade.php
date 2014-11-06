@@ -233,13 +233,13 @@ $current = $nav;
 				</div>
 			</div>
 			<p class='pull-right'>
-				<a href='/language/set' title='@lang('footer.language')'>
+				<a href='/language/set' data-toggle='tooltip' data-placement='top' title='@lang('footer.language')'>
 					<i class='text-info fa fa-language'></i>
 				</a>
 			</p>
 		</div>
 		<div id='top'>
-			<a title='Back to Top'>
+			<a data-toggle='tooltip' data-placement='top' title='Back to Top'>
 				<i class='fa fa-chevron-up'></i>
 			</a>
 		</div>
