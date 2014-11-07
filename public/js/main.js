@@ -187,31 +187,11 @@ function RuneTime() {
 				var contents = "";
 				contents += "<div id='chatbox-messages'></div>";
 				contents += "<div id='chatbox-actions'>";
-				contents += "<a id='chatbox-bbcode'>BBCode</a>";
+				contents += "<a href='/transparency/markdown' target='_blank' id='chatbox-markdown'>Markdown</a>";
 				contents += "<a id='chatbox-channels'>Channels</a>";
 				contents += "</div>";
 				contents += "<input type='text' id='chatbox-message' />";
 				$(RuneTime.ChatBox.elements.chatbox).html(contents);
-			};
-			this.bbcode = function bbcode() {
-				var contents = "",
-					response;
-				response = RuneTime.Utilities.getAJAX('/get/bbcode');
-				response = $.parseJSON(response);
-				contents += "<div id='chatbox-popup-bbcode'>";
-				contents += "<button type='button' class='close' onclick='RuneTime.ChatBox.Panels.close();'>Close <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>";
-				contents += "<h3>BBCode</h3>";
-				contents += "<table class='table'>";
-				contents += "<tbody>";
-				$.each(response, function (index, value) {
-					contents += "<tr>";
-					contents += "<td>" + value.name + "</td>";
-					contents += "<td>" + value.description + "</td>";
-					contents += "<td>" + value.example + "</td>";
-					contents += "<td>" + value.parsed + "</td>";
-				});
-				contents += "</div>";
-				$(RuneTime.ChatBox.elements.messages).html(contents);
 			};
 			this.channels = function channels() {
 				var contents = "",
@@ -240,7 +220,6 @@ function RuneTime() {
 			this.elements.chatbox = '#chatbox';
 			this.elements.messages = '#chatbox-messages';
 			this.elements.actions = '#chatbox-actions';
-			this.elements.bbcode = '#chatbox-bbcode';
 			this.elements.channels = '#chatbox-channels';
 			this.elements.message = '#chatbox-message';
 			this.URL.postMessage = '/chat/post/message';
@@ -256,9 +235,6 @@ function RuneTime() {
 				if (e.which === 13) {
 					RuneTime.ChatBox.submitMessage();
 				}
-			});
-			$(this.elements.bbcode).bind('click', function (e) {
-				RuneTime.ChatBox.Panels.bbcode();
 			});
 			$(this.elements.channels).bind('click', function (e) {
 				RuneTime.ChatBox.Panels.channels();
