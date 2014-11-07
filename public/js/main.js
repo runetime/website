@@ -16,7 +16,7 @@ function RuneTime() {
 				type    : 'get',
 				dataType: 'html',
 				async   : false
-			}).responseText;
+			});
 		};
 		this.postAJAX = function postAJAX(path, data) {
 			return $.ajax({
@@ -592,17 +592,19 @@ function RuneTime() {
 			name = $(this.elements.displayName).val();
 			url = this.URL.getInfo + '/' + encodeURIComponent(name);
 			info = RuneTime.Utilities.getAJAX(url);
-			info = RuneTime.Utilities.JSONDecode(info);
-			info = info.split('\n');
-			relevant = info[13];
-			relevant = relevant.split(',');
-			this.info.levelCurrent = relevant[1];
-			this.info.XPCurrent = relevant[2];
-			$(this.elements.currentXP).val(this.info.XPCurrent);
-			if ($(this.elements.targetLevel).val().length === 0) {
-				$(this.elements.targetLevel).val(parseInt(this.info.levelCurrent, 10) + 1);
-			}
-			this.updateCalc();
+			info.done(function(info) {
+				info = RuneTime.Utilities.JSONDecode(info);
+				info = info.split('\n');
+				relevant = info[13];
+				relevant = relevant.split(',');
+				RuneTime.Calculator.info.levelCurrent = relevant[1];
+				RuneTime.Calculator.info.XPCurrent = relevant[2];
+				$(RuneTime.Calculator.elements.currentXP).val(RuneTime.Calculator.info.XPCurrent);
+				if ($(RuneTime.Calculator.elements.targetLevel).val().length === 0) {
+					$(RuneTime.Calculator.elements.targetLevel).val(parseInt(RuneTime.Calculator.info.levelCurrent, 10) + 1);
+				}
+				RuneTime.Calculator.updateCalc();
+			});
 		};
 		this.setup = function setup(calc) {
 			this.elements.displayName = '#calculator-display-name';
@@ -627,19 +629,21 @@ function RuneTime() {
 				data = null;
 			data = {id: this.calculator};
 			info = RuneTime.Utilities.postAJAX(this.URL.getCalc, data);
-			info = RuneTime.Utilities.JSONDecode(info);
-			this.info.items = RuneTime.Utilities.JSONDecode(info.items);
-			this.info.levelsRequired = RuneTime.Utilities.JSONDecode(info.levels_required);
-			this.info.xp = RuneTime.Utilities.JSONDecode(info.xp);
-			$.each(this.info.items, function (index, value) {
-				var html = "";
-				html += "<tr>";
-				html += "<td>" + RuneTime.Calculator.info.items[index] + "</td>";
-				html += "<td>" + RuneTime.Calculator.info.levelsRequired[index] + "</td>";
-				html += "<td>" + RuneTime.Calculator.info.xp[index] + "</td>";
-				html += "<td>&infin;</td>";
-				html += "</tr>";
-				$(RuneTime.Calculator.elements.table).append(html);
+			info.done(function(info) {
+				info = RuneTime.Utilities.JSONDecode(info);
+				RuneTime.Calculator.info.items = RuneTime.Utilities.JSONDecode(info.items);
+				RuneTime.Calculator.info.levelsRequired = RuneTime.Utilities.JSONDecode(info.levels_required);
+				RuneTime.Calculator.info.xp = RuneTime.Utilities.JSONDecode(info.xp);
+				$.each(RuneTime.Calculator.info.items, function (index, value) {
+					var html = "";
+					html += "<tr>";
+					html += "<td>" + RuneTime.Calculator.info.items[index] + "</td>";
+					html += "<td>" + RuneTime.Calculator.info.levelsRequired[index] + "</td>";
+					html += "<td>" + RuneTime.Calculator.info.xp[index] + "</td>";
+					html += "<td>&infin;</td>";
+					html += "</tr>";
+					$(RuneTime.Calculator.elements.table).append(html);
+				});
 			});
 		};
 		this.calculateXP = function calculateXP(level) {
