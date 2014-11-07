@@ -118,6 +118,55 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isAdmin() {
+		return $this->hasOneOfRoles(1);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isRadio() {
+		return $this->hasOneOfRoles(1, 2, 3);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMedia() {
+		return $this->hasOneOfRoles(1, 4, 5);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeveloper() {
+		return $this->hasOneOfRoles(1, 6, 7);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isContent() {
+		return $this->hasOneOfRoles(1, 8, 9);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isCommunity() {
+		return $this->hasOneOfRoles(1, 10, 11);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEvents() {
+		return $this->hasOneOfRoles(1, 12, 13);
+	}
+
+	/**
 	 * @return int
 	 */
 	public function incrementPostTotal() {
