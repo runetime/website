@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper-dark row row-margin'>
-				<div class='col-xs-12 col-sm-4 text-center'>
+			<div class='wrapper-dark row row-margin text-center'>
+				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
 						Difficulty
 					</h3>
@@ -21,7 +21,7 @@
 @endforeach
 					</ul>
 				</div>
-				<div class='col-xs-12 col-sm-4 text-center'>
+				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
 						Length
 					</h3>
@@ -41,7 +41,7 @@
 @endforeach
 					</ul>
 				</div>
-				<div class='col-xs-12 col-sm-4 text-center'>
+				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
 						Membership
 					</h3>
@@ -61,6 +61,11 @@
 @endforeach
 					</ul>
 				</div>
+                <div class='col-xs-12'>
+                    <a href='/guides/quests' class='text-muted'>
+                        Clear Search
+                    </a>
+                </div>
 			</div>
 			<div class='wrapper'>
 				<ul class='list-inline pull-right'>
