@@ -267,7 +267,6 @@ function RuneTime() {
 			} else if (field === "email") {
 				available = $.parseJSON(RuneTime.Utilities.postAJAX(url, {email: val}));
 			}
-			console.log(available);
 			if (available.available === true) {
 				console.log('#signup-' + field);
 				$('#signup-' + field).
@@ -435,14 +434,8 @@ function RuneTime() {
 		this.statusClosed = '';
 		this.statusOpen = '';
 		this.URL = '';
-		this.varHistory = '';
 		this.varMessage = '';
-		this.varPull = '';
-		this.varRequest = '';
-		this.varSongArtist = '';
-		this.varSongName = '';
 		this.varStatus = '';
-		this.varTimetable = '';
 		this.popup = null;
 		this.closeRadio = function closeRadio() {
 			this.popup.close();
@@ -490,102 +483,30 @@ function RuneTime() {
 			name = document.getElementById('request-name').value;
 			contents = RuneTime.Utilities.getAJAX('radio/send/request/' + artist + '/' + name);
 			$('#pull-contents').html(contents);
-			this.hidePull(2000);
+			this.hidePull();
 			this.updateRequests();
 		};
 		this.openPull = function openPull(contents) {
-			var delay = 0;
-			if (!$('#radio-pull').hasClass('invisible')) {
-				this.hidePull(0);
-				delay = 2100;
-			}
-			setTimeout(function () {
-				$('#radio-pull').css({
-					width: '0%'
-				});
-				$('#radio-options').animate({
+			$('#pull-contents').html(contents);
+			$('#radio-pull').removeClass('hidden').
+				css({
 					width: '50%'
-				}, 1000);
-				$('#pull-contents').html(contents);
-				setTimeout(function () {
-					$('#radio-pull').removeClass('invisible');
-					RuneTime.Radio.sizeEqual();
-					$('#radio-pull').animate({
-						width: '50%'
-					}, 1000, function () {
-						$('#radio-options').
-							removeClass('col-md-12').
-							addClass('col-md-6');
-						$('#radio-pull').
-							removeClass('col-md-0').
-							addClass('col-md-6');
-						$('#radio-options').width('');
-						$('#radio-pull').width('');
-					});
-				}, 1000);
-			}, delay);
+				});
+			$('#radio-options').css({
+				width: '50%'
+			});
 		};
-		this.hidePull = function hidePull(delay) {
-			setTimeout(function () {
-				$('#pull-contents').html('&nbsp;');
-				$('#radio-pull').animate({
+		this.hidePull = function hidePull() {
+			$('#pull-contents').html('&nbsp;');
+			$('#radio-pull').width('').
+				addClass('hidden').
+				css({
 					width: '0%'
-				}, 1000);
-				setTimeout(function () {
-					$('#radio-options').animate({
-						width: '100%'
-					}, 1000, function () {
-						$('#radio-options').
-							removeClass('col-md-6').
-							addClass('col-md-12');
-						$('#radio-pull').
-							removeClass('col-md-6').
-							addClass('col-md-0').
-							addClass('invisible');
-						$('#radio-options').width('');
-						$('#radio-pull').width('');
-					});
-				}, 1000);
-			}, delay);
-			this.moveShoutbox('original');
-		};
-		this.sizeEqual = function sizeEqual() {
-			var hPull,
-				hOptions;
-			hPull = $('#radio-pull').height();
-			hOptions = $('#radio-options').height();
-			console.log(hPull);
-			console.log(hOptions);
-			if (hPull < hOptions) {
-				$('#radio-pull').height(hOptions);
-				this.moveShoutbox('original');
-			} else {
-				$('#radio-pull').css({
-					height: ''
 				});
-				this.moveShoutbox('options');
-			}
-		};
-		this.moveShoutbox = function moveShoutbox(to) {
-			if (to === "options") {
-				var contents;
-				$('#shoutbox-holder-radio').css({
-					display: 'block'
+			$('#radio-options').width('').
+				css({
+					width: '100%'
 				});
-				contents = $('#shoutbox-holder').html();
-				$('#shoutbox-holder-radio').html(contents);
-				$('#shoutbox-holder').css({
-					display: 'none'
-				});
-			}
-			if (to === "original") {
-				$('#shoutbox-holder-radio').css({
-					display: 'none'
-				});
-				$('#shoutbox-holder').css({
-					display: 'block'
-				});
-			}
 		};
 		this.updateRequests = function updateRequests() {
 			var userRequests;
@@ -649,7 +570,7 @@ function RuneTime() {
 			$('#request-button').click(function () {
 			});
 			$('#pull-close').click(function () {
-				RuneTime.Radio.hidePull(0);
+				RuneTime.Radio.hidePull();
 				RuneTime.Radio.sizeEqual();
 				setTimeout(function () {
 					RuneTime.Radio.moveShoutbox('original');
@@ -853,14 +774,14 @@ $(function () {
 			}
 		}
 	});
-	/**
-	 * Create base height of page if no scrollbar
-	 */
-	var windowHeight = $(window).height(),
-		bodyHeight = $('body').height(),
-		pageHeight = $('#page').height(),
-		minusPage = bodyHeight - pageHeight,
-		newPageHeight = windowHeight - minusPage - 50;
-	if(bodyHeight < windowHeight)
-		$('#page').height(newPageHeight);
+	///**
+	// * Create base height of page if no scrollbar
+	// */
+	//var windowHeight = $(window).height(),
+	//	bodyHeight = $('body').height(),
+	//	pageHeight = $('#page').height(),
+	//	minusPage = bodyHeight - pageHeight,
+	//	newPageHeight = windowHeight - minusPage - 50;
+	//if(bodyHeight < windowHeight)
+	//	$('#page').height(newPageHeight);
 });
