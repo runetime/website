@@ -66,11 +66,13 @@
 			</div>
 			<div class='wrapper'>
 				<ul class='list-inline pull-right'>
+@if(\Auth::check() && \Auth::user()->isContent())
 					<li>
 						<a href='/databases/items/create' class='btn btn-sm btn-success'>
 							Create Item
 						</a>
 					</li>
+@endif
 				</ul>
 				<table class='table table-hover table-striped table-responsive no-border'>
 					<thead>

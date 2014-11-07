@@ -2,11 +2,13 @@
 @section('contents')
 			<div class='wrapper'>
 				<ul class='list-inline pull-right'>
+@if(\Auth::check() && \Auth::user()->isContent())
 					<li>
 						<a href='/guides/locations/create' class='btn btn-sm btn-success'>
-							Create Guide
+							Create Location
 						</a>
 					</li>
+@endif
 				</ul>
 				<table class='table table-hover table-striped table-responsive no-border'>
 					<tbody>
