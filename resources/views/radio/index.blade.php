@@ -1,10 +1,10 @@
 @extends('layouts.default')
 @section('contents')
-			<div id='radio' class='wrapper'>
+			<div class='wrapper'>
 				<img src='/img/radio/header.png' alt='RuneTime Radio' class='img-responsive center-block' />
 			</div>
 			<div id='radio' class='wrapper-dark wrapper-none-res row row-flat'>
-                <div id='radio-pull' class='col-xs-12 col-md-0 holo-box-dark invisible'>
+                <div id='radio-pull' class='col-xs-12 col-md-0 hidden'>
                     <button id='pull-close' type='button' class='close'>
                         <span aria-hidden='true'>
                             @lang('radio.close') &times;
@@ -14,85 +14,68 @@
                         &nbsp;
                     </div>
                 </div>
-                <div id='radio-options' class='col-xs-12 col-md-12 holo-box-dark'>
-                    <div class='row'>
-                        <div class='col-xs-12 col-md-4 text-center'>
-                            <h3 class='holo-text'>
-                                @lang('radio.player.title')
-                            </h3>
-                            <h4>
-                                <a id='radio-link' title='Click here'>@lang('radio.player.click')</a>
-                            </h4>
-                            <p id='radio-message'>
-                                @lang('radio.player.message')
-                            </p>
-                            <p>
-                                @lang('radio.player.status'): <span id='radio-status' class='text-danger'><i id='power-button' class='fa fa-power-off'></i>@lang('radio.player.off')</span>
-                        </div>
-                        <div class='col-xs-12 col-md-4 text-center'>
-                            <h3 class='holo-text'>
-                                @lang('radio.info.title')
-                            </h3>
-                            <div class='row'>
-                                <div class='col-xs-12 col-md-6'>
-                                    <h4>
-                                        @lang('radio.info.dj.title')
-                                    </h4>
-                                    <p id='radio-dj' class='holo-text-secondary'>
-                                        Auto DJ
-                                    </p>
-                                    <h4>
-                                        @lang('radio.info.song.title')
-                                    </h4>
-                                    <p>
-                                        @lang('radio.info.song.current',['name'=>$song['name'],'artist'=>$song['artist']])
-                                    </p>
-                                </div>
-                                <div class='col-xs-12 col-md-6'>
-                                    <h4>
-                                        @lang('radio.info.requests.title')
-                                    </h4>
-                                    <div id='requests-user-current'>
-                                    </div>
+                <div id='radio-options' class='col-xs-12 col-md-12 row text-center'>
+                    <div class='col-xs-12 col-md-4'>
+                        <h3 class='holo-text'>
+                            @lang('radio.player.title')
+                        </h3>
+                        <h4>
+                            <a id='radio-link' title='Click here'>@lang('radio.player.click')</a>
+                        </h4>
+                        <p id='radio-message'>
+                            @lang('radio.player.message')
+                        </p>
+                        <p>
+                            @lang('radio.player.status'): <span id='radio-status' class='text-danger'><i id='power-button' class='fa fa-power-off'></i>@lang('radio.player.off')</span>
+                    </div>
+                    <div class='col-xs-12 col-md-4'>
+                        <h3 class='holo-text'>
+                            @lang('radio.info.title')
+                        </h3>
+                        <div class='row'>
+                            <div class='col-xs-12 col-md-6'>
+                                <h4>
+                                    @lang('radio.info.dj.title')
+                                </h4>
+                                <p id='radio-dj' class='holo-text-secondary'>
+                                    Auto DJ
+                                </p>
+                                <h4>
+                                    @lang('radio.info.song.title')
+                                </h4>
+                                <p>
+                                    @lang('radio.info.song.current',['name'=>$song['name'],'artist'=>$song['artist']])
+                                </p>
+                            </div>
+                            <div class='col-xs-12 col-md-6'>
+                                <h4>
+                                    @lang('radio.info.requests.title')
+                                </h4>
+                                <div id='requests-user-current'>
                                 </div>
                             </div>
                         </div>
-                        <div class='col-xs-12 col-md-4'>
-                            <p>
-                                <a id='radio-history' title='@lang('radio.options.song_history')'>
-                                    @lang('radio.options.song_history')
-                                </a>
-                            </p>
-                            <p>
-                                <a id='radio-request' title='@lang('radio.options.request_song')'>
-                                    @lang('radio.options.request_song')
-                                </a>
-                            </p>
-                            <p>
-                                <a id='radio-timetable' title='@lang('radio.options.view_timetable')'>
-                                    @lang('radio.options.dj_timetable')
-                                </a>
-                            </p>
-@if($isDJ)
-                            <h3>
-                                DJ Controls
-                            </h3>
-                            <p>
-                                <a id='radio-dj-requests' title='@lang('radio.options.view_requests')'>
-                                    @lang('radio.options.view_requests')
-                                </a>
-                            </p>
-                            <p>
-                                <a id='radio-dj-requests' title='@lang('radio.options.edit_timetable')'>
-                                    @lang('radio.options.edit_timetable')
-                                </a>
-                            </p>
-@endif
-                        </div>
+                    </div>
+                    <div class='col-xs-12 col-md-4'>
+                        <p>
+                            <a id='radio-history' title='@lang('radio.options.song_history')'>
+                                @lang('radio.options.song_history')
+                            </a>
+                        </p>
+                        <p>
+                            <a id='radio-request' title='@lang('radio.options.request_song')'>
+                                @lang('radio.options.request_song')
+                            </a>
+                        </p>
+                        <p>
+                            <a id='radio-timetable' title='@lang('radio.options.view_timetable')'>
+                                @lang('radio.options.dj_timetable')
+                            </a>
+                        </p>
                     </div>
                 </div>
 			</div>
-			<div class='wrapper-none'>
+			<div class='wrapper-none-res wrapper-dark'>
                 <div id='chatbox-holder' class='holo-box-dark'>
 @include('partials.chat')
                 </div>
