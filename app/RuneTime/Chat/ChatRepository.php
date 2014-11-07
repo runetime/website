@@ -72,4 +72,14 @@ class ChatRepository extends EloquentRepository {
 			orderBy('id', 'desc')->
 			first();
 	}
+
+	public function getAfterId($id) {
+		$message = $this->model->
+			where('id', '=', $id)->
+			first();
+		return $this->model->
+			where('id', '>', $id)->
+			where('channel', '=', $message->channel)->
+			get();
+	}
 }

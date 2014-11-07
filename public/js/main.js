@@ -23,8 +23,8 @@ function RuneTime() {
 				url: path,
 				type: 'post',
 				data: data,
-				async: false
-			}).responseText;
+				async: true
+			});
 		};
 		this.timeAgo = function timeAgo(ts) {
 			var nowTs = Math.floor(Date.now() / 1000),
@@ -70,6 +70,7 @@ function RuneTime() {
 		this.Panels = null;
 		this.updateTimeout = null;
 		this.messages = [];
+		this.lastId = 0;
 		this.getStart = function getStart() {
 			$(RuneTime.ChatBox.elements.messages).html('');
 			var data = null,
@@ -79,28 +80,37 @@ function RuneTime() {
 				channel: this.channel
 			};
 			messages = RuneTime.Utilities.postAJAX('chat/start', data);
-			messages = $.parseJSON(messages);
-			$.each(messages, function (index, value) {
-				RuneTime.ChatBox.addMessage(value);
+			messages.done(function(messages) {
+				messages = $.parseJSON(messages);
+				$.each(messages, function (index, value) {
+					RuneTime.ChatBox.addMessage(value);
+				});
 			});
 		};
 		this.addMessage = function addMessage(message) {
 			var html = "",
 				timeAgo = RuneTime.Utilities.currentTime() - message.created_at;
+			this.lastId = message.id;
 			this.messages.push(message);
-			html += "<div id='" + message.uuid + "' class='msg'>";
-			html += "<time class='pull-right' data-ts='" + message.created_at + "'>";
-			html += RuneTime.Utilities.timeAgo(message.created_at);
-			html += "</time>";
-			html += "<p>";
-			html += "<a onclick='RuneTime.ChatBox.nameClick();'>" + message.author_name + "</a>: " + message.contents_parsed;
-			html += "</p>";
-			html += "</div>";
-			$(this.elements.messages).prepend(html);
 			this.times.lastActivity = RuneTime.Utilities.currentTime();
+			this.displayMessages();
 		};
-		this.nameClick = function nameClick() {
-			
+		this.displayMessages = function displayMessages() {
+			var startingPoint = $(this.messages).size()-20;
+			var messages = $(this.messages).slice(startingPoint);
+			$(this.elements.messages).html('');
+			$.each(messages, function(index, message) {
+				var html ="";
+				html += "<div id='" + message.uuid + "' class='msg'>";
+				html += "<time class='pull-right' data-ts='" + message.created_at + "'>";
+				html += RuneTime.Utilities.timeAgo(message.created_at);
+				html += "</time>";
+				html += "<p>";
+				html += "<a onclick='RuneTime.ChatBox.nameClick();'>" + message.author_name + "</a>: " + message.contents_parsed;
+				html += "</p>";
+				html += "</div>";
+				$(RuneTime.ChatBox.elements.messages).prepend(html);
+			});
 		};
 		this.submitMessage = function submitMessage() {
 			var contents = $(this.elements.message).val(),
@@ -111,15 +121,17 @@ function RuneTime() {
 				channel: this.channel
 			};
 			response = RuneTime.Utilities.postAJAX(this.URL.postMessage, message);
-			response = $.parseJSON(response);
-			this.update();
-			if (response.sent === true) {
-				$(this.elements.message).val('');
-				$(this.elements.message).toggleClass('message-sent');
-				setTimeout(function () {
+			response.done(function(response) {
+				response = $.parseJSON(response);
+				RuneTime.ChatBox.update();
+				if (response.sent === true) {
+					$(RuneTime.ChatBox.elements.message).val('');
 					$(RuneTime.ChatBox.elements.message).toggleClass('message-sent');
-				}, 1500);
-			}
+					setTimeout(function () {
+						$(RuneTime.ChatBox.elements.message).toggleClass('message-sent');
+					}, 1500);
+				}
+			});
 		};
 		this.update = function update() {
 			var delta = 0,
@@ -127,19 +139,21 @@ function RuneTime() {
 				response = null;
 			delta = RuneTime.Utilities.currentTime() - this.times.lastRefresh;
 			data = {
-				delta: delta,
+				id: this.lastId,
 				channel: this.channel
 			};
 			response = RuneTime.Utilities.postAJAX(this.URL.getUpdate, data);
-			response = $.parseJSON(response);
-			this.times.lastRefresh = RuneTime.Utilities.currentTime();
-			$.each(response, function (index, value) {
-				RuneTime.ChatBox.addMessage(value);
+			response.done(function(response) {
+				response = $.parseJSON(response);
+				RuneTime.ChatBox.times.lastRefresh = RuneTime.Utilities.currentTime();
+				$.each(response, function (index, value) {
+					RuneTime.ChatBox.addMessage(value);
+				});
+				clearTimeout(RuneTime.ChatBox.updateTimeout);
+				RuneTime.ChatBox.updateTimeout = setTimeout(function () {
+					RuneTime.ChatBox.update();
+				}, 5500);
 			});
-			clearTimeout(this.updateTimeout);
-			this.updateTimeout = setTimeout(function () {
-				RuneTime.ChatBox.update();
-			}, 5500);
 		};
 		this.updateTimeAgo = function updateTimeAgo() {
 			var messages;

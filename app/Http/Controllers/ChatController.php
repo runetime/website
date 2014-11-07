@@ -48,6 +48,7 @@ class ChatController extends BaseController{
 			if(!isset($users[$message->author_id])){
 				$users[$message->author_id]=$this->users->getById($message->author_id);
 			}
+			$messageCurrent->id = $message->id;
 			$messageCurrent->author_name=$users[$message->author_id]->display_name;
 			$messageCurrent->contents_parsed=$message->contents_parsed;
 			$messageCurrent->created_at=strtotime($message->created_at);
@@ -64,19 +65,20 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function postUpdate(UpdateRequest $form){
-		$delta=$form->input('delta');
-		$messages=$this->chat->getByCreatedAt(Time::formatTime(time()-$delta));
-		$messageList=[];
-		$users=[];
+		$id = $form->id;
+		$messages = $this->chat->getAfterId($id);
+		$messageList = [];
+		$users = [];
 		foreach($messages as $message){
-			$messageCurrent=new \stdClass;
+			$messageCurrent = new \stdClass;
 			if(!isset($users[$message->author_id]))
-				$users[$message->author_id]=$this->users->getById($message->author_id);
-			$messageCurrent->author_name=$users[$message->author_id]->display_name;
-			$messageCurrent->contents_parsed=$message->contents_parsed;
-			$messageCurrent->created_at=strtotime($message->created_at);
-			$messageCurrent->uuid=uniqid('',true);
-			array_push($messageList,$messageCurrent);
+				$users[$message->author_id] = $this->users->getById($message->author_id);
+			$messageCurrent->id = $message->id;
+			$messageCurrent->author_name = $users[$message->author_id]->display_name;
+			$messageCurrent->contents_parsed = $message->contents_parsed;
+			$messageCurrent->created_at = strtotime($message->created_at);
+			$messageCurrent->uuid = uniqid('', true);
+			array_push($messageList, $messageCurrent);
 		}
 		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
