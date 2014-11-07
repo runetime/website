@@ -1,10 +1,9 @@
 @extends('layouts.default')
 @section('contents')
 			<div id='radio' class='wrapper'>
-				<div class='row'>
-					<img src='img/radio/header.png' alt='RuneTime Radio' class='img-responsive center-block' />
-				</div>
-				<br />
+				<img src='img/radio/header.png' alt='RuneTime Radio' class='img-responsive center-block' />
+			</div>
+			<div id='radio' class='wrapper-dark'>
 				<div class='row'>
 					<div id='radio-pull' class='col-xs-12 col-md-0 holo-box-dark invisible'>
 						<button id='pull-close' type='button' class='close'>
@@ -91,13 +90,13 @@
 								</p>
 @endif
 							</div>
-							<div id='chatbox-holder-radio' class='col-xs-12'>
-							</div>
 						</div>
 					</div>
-					<div id='chatbox-holder' class='col-xs-12 holo-box-dark'>
-@include('...partials.chat')
-					</div>
 				</div>
+			</div>
+			<div class='wrapper-none'>
+                <div id='chatbox-holder' class='holo-box-dark'>
+@include('partials.chat')
+                </div>
 			</div>
 @stop
