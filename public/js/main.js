@@ -431,25 +431,9 @@ function RuneTime() {
 		};
 	};
 	this.Radio = function Radio() {
-		/**
-		 * Whether the radio is currently opened or not
-		 * @type {Boolean}
-		 */
 		this.status = false;
-		/**
-		 * The message to display when the radio is closed
-		 * @type {String}
-		 */
 		this.statusClosed = '';
-		/**
-		 * The message to display when the radio is open
-		 * @type {String}
-		 */
 		this.statusOpen = '';
-		/**
-		 * The string URL of where the player is.  We legally have to open a popup to it.
-		 * @type {String}
-		 */
 		this.URL = '';
 		this.varHistory = '';
 		this.varMessage = '';
@@ -459,15 +443,7 @@ function RuneTime() {
 		this.varSongName = '';
 		this.varStatus = '';
 		this.varTimetable = '';
-		/**
-		 * The object of the popup so we can poll it to detect whether it is still open or not
-		 * @type {Object}
-		 */
 		this.popup = null;
-		/**
-		 * Closes the palyer and sets its status to closed on the variable 'status'
-		 * @return {void} 
-		 */
 		this.closeRadio = function closeRadio() {
 			this.popup.close();
 			$(this.varMessage).html(this.statusClosed);
@@ -477,10 +453,6 @@ function RuneTime() {
 				addClass('text-danger').
 				html("<i id='power-button' class='fa fa-power-off'></i>Off");
 		};
-		/**
-		 * Opens the player and sets its status to opened on the variable 'status'
-		 * @return {void} 
-		 */
 		this.openRadio = function openRadio() {
 			this.popup = window.open(this.URL, 'RuneTime Radio', 'width=389,height=359');
 			this.status = true;

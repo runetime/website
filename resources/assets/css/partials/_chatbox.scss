@@ -20,8 +20,9 @@
 			time{
 				color:#AA66CC;
 			}
-			p{
-				margin-bottom:0em;
+			p {
+				display: inline;
+				margin-bottom: 0em;
 			}
 			&:nth-child(even){
 				background:#121212;

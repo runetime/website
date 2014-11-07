@@ -7420,6 +7420,7 @@ body {
       #chatbox #chatbox-messages .msg time {
         color: #AA66CC; }
       #chatbox #chatbox-messages .msg p {
+        display: inline;
         margin-bottom: 0em; }
       #chatbox #chatbox-messages .msg:nth-child(even) {
         background: #121212; }
@@ -7562,6 +7563,12 @@ body {
   padding-bottom: .1em; }
 
 .wrapper-none {
+  padding-top: .1em;
+  padding-left: 0em;
+  padding-right: 0em;
+  padding-bottom: 0em; }
+
+.wrapper-none-res {
   padding-top: .1em;
   padding-left: 0em;
   padding-right: 0em;

@@ -10,7 +10,11 @@ use App\RuneTime\Chat\ChannelRepository;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
 use App\Runis\Accounts\UserRepository;
-use App\Utilities\Time;
+use Illuminate\Http\Response;
+/**
+ * Class ChatController
+ * @package App\Http\Controllers
+ */
 class ChatController extends BaseController{
 	private $actions;
 	private $bbcode;
@@ -66,7 +70,7 @@ class ChatController extends BaseController{
 	 */
 	public function postUpdate(UpdateRequest $form){
 		$id = $form->id;
-		$messages = $this->chat->getAfterId($id);
+		$messages = $this->chat->getAfterId($id, $form->channel);
 		$messageList = [];
 		$users = [];
 		foreach($messages as $message){
@@ -90,25 +94,15 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function postMessage(MessageRequest $form){
+		$response = ['sent' => false];
 		if(\Auth::check()){
-			$channel = $this->channels->getByNameTrim($form->input('channel'));
-			$chat = new Chat;
-			$chat->author_id = \Auth::user()->id;
-			$chat->contents = $form->input('contents');
-			$chat->contents_parsed = $this->bbcode->parse($form->input('contents'));
-			$chat->status = Chat::STATUS_USER_PUBLISHED;
-			$chat->channel = $channel->id;
-			$chat->save();
-			$channel = $this->channels->getByNameTrim($form->input('channel'));
+			$parsedown = new \Parsedown;
+			$contentsParsed = $parsedown->text($form->contents);
+			with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_USER_PUBLISHED, $this->channels->getByNameTrim($form->channel)->id);
+			$channel = $this->channels->getByNameTrim($form->channel);
 			$channel->messages = $channel->messages+1;
 			$channel->save();
-			$response = [
-				'sent' => true,
-			];
-		} else {
-			$response = [
-				'sent' => false,
-			];
+			$response = ['sent' => true];
 		}
 		header('Content-Type: application/json');
 		return json_encode($response);
@@ -124,16 +118,15 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function getChannels(){
-		$channels=$this->channels->getAll();
-		$channelList=[];
-		foreach($channels as $channel){
-			$message=$this->chat->getLatestByChannel($channel->id);
-			$channelCurrent=new \stdClass;
-			$channelCurrent->name=$channel->name_trim;
-			$channelCurrent->messages=$channel->messages;
-			$channelCurrent->last_message=strtotime(
-				$message['created_at']);
-			array_push($channelList,$channelCurrent);
+		$channels = $this->channels->getAll();
+		$channelList = [];
+		foreach($channels as $channel) {
+			$message = $this->chat->getLatestByChannel($channel->id);
+			$channelCurrent = new \stdClass;
+			$channelCurrent->name = $channel->name_trim;
+			$channelCurrent->messages = $channel->messages;
+			$channelCurrent->last_message = strtotime($message['created_at']);
+			array_push($channelList, $channelCurrent);
 		}
 		header('Content-Type: application/json');
 		return json_encode(array_reverse($channelList));
@@ -145,13 +138,11 @@ class ChatController extends BaseController{
 	 * @return array
 	 */
 	public function postCheckChannel(CheckChannelRequest $form){
-		$channel=$this->channels->getByNameTrim($form->input('channel'));
-		$response=[];
+		$channel=$this->channels->getByNameTrim($form->channel);
+		$response=['valid' => false];
 		if($channel)
-			$response['valid']=true;
-		else
-			$response['valid']=false;
+			$response['valid'] = true;
 		header('Content-Type: application/json');
-		return $response;
+		return json_encode($response);
 	}
 }
