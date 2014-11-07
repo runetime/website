@@ -87,17 +87,18 @@ $current = $nav;
 		<link rel='canonical' href='http://runetime.com/' />
 		<link rel='home' href='/' />
 		<link rel='index' href='/sitemap/' />
-		<link rel='stylesheet' href='css/style.css' />
+		<link rel='stylesheet' href='/css/style.css' />
 @if(!empty($css))
-		<link rel='stylesheet' href='css/{{$css}}.css'>
+		<link rel='stylesheet' href='/css/{{$css}}.css'>
 @endif
-		<script src='js/jquery.js'></script>
-		<script src='js/jquery-ui.js'></script>
-		<script src='js/bootstrap.js'></script>
+		<script src='/js/vendor/jquery.js'></script>
+		<script src='/js/vendor/jquery-ui.js'></script>
+		<script src='/js/vendor/bootstrap.js'></script>
+		<script src='/js/vendor/jasny-bootstrap.js'></script>
 @if(!empty($js))
 		<script src='js/{{$js}}.js'></script>
 @endif
-		<script src='js/main.js'></script>
+		<script src='/js/main.js'></script>
 	</head>
 	<body>
 		<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' role='navigation'>

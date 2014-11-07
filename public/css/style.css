@@ -1,3 +1,4 @@
+@import url(vendor/jasny-bootstrap.min.css);
 /*
 -----------
 - Vendors -
@@ -8200,6 +8201,9 @@ table {
     table.no-border td,
     table.no-border th {
       border: none !important; }
+
+tbody.rowlink tr:hover {
+  cursor: pointer; }
 
 a {
   cursor: pointer; }

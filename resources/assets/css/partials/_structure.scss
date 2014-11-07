@@ -275,3 +275,10 @@ table {
 		}
 	}
 }
+
+//Jasney
+tbody.rowlink tr {
+	&:hover {
+		cursor: pointer;
+	}
+}

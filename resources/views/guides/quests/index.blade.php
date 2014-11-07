@@ -100,7 +100,7 @@
 							</td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody data-link='row' class='rowlink'>
 @if(!empty($guides))
 	@foreach($guides as $guide)
 						<tr>
