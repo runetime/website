@@ -30,7 +30,6 @@ $navs=[
 		'calendar'    => Lang::get('navbar.social.calendar'),
 		'livestream'  => Lang::get('navbar.social.livestream'),
 		'media'       => Lang::get('navbar.social.social_media'),
-		'map/members' => Lang::get('navbar.social.members_map'),
 		'clan'        => Lang::get('navbar.social.our_clan'),
 	],
 ];
