@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\Calculators\PostRequest;
 use App\RuneTime\Calculators\CalculatorRepository;
 /**
  * Class CalculatorController
@@ -19,7 +20,6 @@ class CalculatorController extends BaseController {
 	}
 
 	/**
-	 * @get("calculators")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -27,6 +27,15 @@ class CalculatorController extends BaseController {
 		$this->nav('Runescape');
 		$this->title('Calculators');
 		return $this->view('calculators.index', compact('calculators'));
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getCombat() {
+		$this->nav('navbar.runescape.runescape');
+		$this->title('Combat Calculator');
+		return $this->view('calculators.combat');
 	}
 
 	/**
@@ -50,8 +59,8 @@ class CalculatorController extends BaseController {
 	/**
 	 * @return string
 	 */
-	public function postLoad() {
+	public function postLoad(PostRequest $form) {
 		header('Content-Type: application/json');
-		return json_encode($this->calculators->getById(\Input::get('id')));
+		return json_encode($this->calculators->getById($form->id));
 	}
 }
