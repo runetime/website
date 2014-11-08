@@ -83,6 +83,30 @@ class Time{
 		return $str . " " . date('H:i', $time);
 	}
 
+	public static function timeAgo($time) {
+		if(!is_numeric($time))
+			$time = self::getEpoch($time);
+		$nowTs = time();
+		$seconds = $nowTs - $time;
+		if($seconds > 2 * 24 * 3600) {
+			return "a few days ago";
+		} else if($seconds > 24 * 3600) {
+			return "yesterday";
+		} else if($seconds > 7200) {
+			return floor($seconds / 3600) . " hours ago";
+		} else if($seconds > 3600) {
+			return "an hour ago";
+		} else if($seconds >= 120) {
+			return floor($seconds / 60) . " minutes ago";
+		} else if($seconds >= 60) {
+			return "1 minute ago";
+		} else if($seconds > 1) {
+			return $seconds . " seconds ago";
+		} else {
+			return "1 second ago";
+		}
+	}
+
 	/**
 	 * @param $time
 	 *
