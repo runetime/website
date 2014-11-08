@@ -63,7 +63,7 @@ class Update extends Command {
 			if(empty($currentDJ))
 				$currentDJ = -1;
 			$currentHistory = $this->history->getCurrent();
-			if($currentHistory->song != $song && $currentHistory->artist != $artist) {
+			if(empty($currentHistory) || ($currentHistory->song != $song && $currentHistory->artist != $artist)) {
 				$history->saveNew($currentDJ, $artist, $song);
 				\Cache::forever('radio.artisan.lastUpdated', time());
 				$this->info("Updated radio to be playing " . $song . " by " . $artist);
