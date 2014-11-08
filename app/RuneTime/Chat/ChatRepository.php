@@ -73,6 +73,11 @@ class ChatRepository extends EloquentRepository {
 			first();
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function getAfterId($id) {
 		$message = $this->model->
 			where('id', '=', $id)->

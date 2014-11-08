@@ -69,8 +69,10 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function postUpdate(UpdateRequest $form){
-		$id = $form->id;
-		$messages = $this->chat->getAfterId($id, $form->channel);
+		header('Content-Type: application/json');
+		if($form->id <= 0)
+			return json_encode([]);
+		$messages = $this->chat->getAfterId($form->id, $form->channel);
 		$messageList = [];
 		$users = [];
 		foreach($messages as $message){
@@ -81,10 +83,9 @@ class ChatController extends BaseController{
 			$messageCurrent->author_name = $users[$message->author_id]->display_name;
 			$messageCurrent->contents_parsed = $message->contents_parsed;
 			$messageCurrent->created_at = strtotime($message->created_at);
-			$messageCurrent->uuid = uniqid('', true);
+			$messageCurrent->uuid = uniqid(md5(microtime(true)), true);
 			array_push($messageList, $messageCurrent);
 		}
-		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
 	}
 
