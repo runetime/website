@@ -56,6 +56,7 @@ Route::group(['prefix' => 'awards'], function() {
  */
 Route::group(['prefix' => 'calculators'], function() {
 	get('/', 'CalculatorController@getIndex');
+	get('combat', 'CalculatorController@getCombat');
 	get('{type}', 'CalculatorController@getView');
 	post('load', 'CalculatorController@postLoad');
 });
@@ -355,13 +356,12 @@ Route::group(['prefix' => 'profile/{id}-{name}'], function() {
  */
 Route::group(['prefix' => 'radio'], function() {
 	get('/', 'RadioController@getIndex');
-	get('request/history', 'RadioController@getHistory');
-	get('request/timetable', 'RadioController@getTimetable');
-	get('request/song', 'RadioController@getSong');
+	get('history', 'RadioController@getHistory');
+	get('timetable', 'RadioController@getTimetable');
+	get('request/song', 'RadioController@getRequest');
 	get('update', 'RadioController@getUpdate');
-	get('requests/current','RadioController@getRequestsCurrent');
 	Route::group(['middleware' => 'auth'], function() {
-		get('send/request/{artist}/{name}', 'RadioController@getSendRequest');
+		post('request/song', 'RadioController@postRequest');
 	});
 });
 /**
