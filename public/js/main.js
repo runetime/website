@@ -495,17 +495,17 @@ function RuneTime() {
 			});
 			setTimeout(function () {
 				$('#request-button').click(function () {
-					Radio.sendRequest();
+					RuneTime.Radio.sendRequest();
 				});
 			}, 3000);
 		};
 		this.sendRequest = function sendRequest() {
-			var artist,
-				name,
+			var data = {
+					'artist': document.getElementById('request-artist').value,
+					'name': document.getElementById('request-name').value
+				},
 				contents;
-			artist = document.getElementById('request-artist').value;
-			name = document.getElementById('request-name').value;
-			contents = RuneTime.Utilities.getAJAX('radio/request/song' + artist + '/' + name);
+			contents = RuneTime.Utilities.postAJAX('radio/request/song', data);
 			contents.done(function(contents) {
 				contents = $.parseJSON(contents);
 				var html = "";
@@ -517,7 +517,7 @@ function RuneTime() {
 				$('#pull-contents').html(html);
 			});
 			this.hidePull();
-			this.updateRequests();
+			this.update();
 		};
 		this.openPull = function openPull(contents) {
 			$('#pull-contents').html(contents);
@@ -541,67 +541,63 @@ function RuneTime() {
 					width: '100%'
 				});
 		};
-		this.updateRequests = function updateRequests() {
+		this.update = function update() {
 			$('#requests-user-current').html('');
-			var userRequests;
-			userRequests = RuneTime.Utilities.getAJAX('radio/requests/current');
-			userRequests.done(function(userRequests) {
-				userRequests = $.parseJSON(userRequests);
-				$.each(userRequests, function (index, value) {
-					var status;
-					if(value.status === 1) {
-						status = "text-success";
-					} else if(value.status === 2) {
-						status = "text-danger";
+			var update = RuneTime.Utilities.getAJAX('radio/update');
+			update.done(function(update) {
+				update = $.parseJSON(update);
+				var requestsHTML = "";
+				$('#radio-song-name').html(update['song']['name']);
+				$('#radio-song-artist').html(update['song']['artist']);
+				if(update['dj'] !== null) {
+					$('#radio-dj').html("DJ " + update['dj']);
+				} else {
+					$('#radio-dj').html("Auto DJ");
+				}
+				for(var x = 0, y = update['requests'].length; x < y; x++) {
+					var request = update['requests'][x];
+					if(request.status == 0) {
+						requestsHTML += "<p>";
+					} else if(request.status == 1) {
+						requestsHTML += "<p class='text-success'>";
+					} else if(request.status == 2) {
+						requestsHTML += "<p class='text-warning'>";
 					}
-					console.log(value);
-					$('#requests-user-current').
-						append("<p class='" + status + "'>" + value.song_artist + " - " + value.song_name + "</p><p class='" + status + "'><small>" + RuneTime.Utilities.timeAgo(value.time_sent) + "</small></p>");
-				});
+					requestsHTML += request.song_name + " by " + request.song_artist;
+					requestsHTML += "</p>";
+				}
+				$('#requests-user-current').html(requestsHTML);
+				setTimeout(function() {
+					RuneTime.Radio.update();
+				}, 30000);
 			});
-			setTimeout(function () {
-				RuneTime.Radio.updateRequests();
-			}, 30000);
 		};
 		this.setup = function setup() {
-			var hPull,
-				hOptions;
 			this.URL = 'http://apps.streamlicensing.com/player-popup.php?sid=2579&stream_id=4386';
 			this.statusClosed = 'to listen to RuneTime Radio!';
 			this.statusOpen = 'to close RuneTime Radio';
-			this.varHistory = '#radio-history';
 			this.varMessage = '#radio-message';
-			this.varPull = '#radio-pull';
-			this.varRequest = '#radio-request';
-			this.varSongArtist = '#radio-song-artist';
-			this.varSongName = '#radio-song-name';
 			this.varStatus = '#radio-status';
-			this.varTimetable = '#radio-timetable';
-			hPull = $('#pull-height').height();
-			hOptions = $('#pull-options').height();
-			if(hPull < hOptions) {
-				$('#pull-height').height(hOptions);
-			}
-			RuneTime.Radio.updateRequests();
-			$('#radio-link').click(function () {
+			RuneTime.Radio.update();
+			$('#radio-link').click(function() {
 				if(!RuneTime.Radio.status) {
 					RuneTime.Radio.openRadio();
 				} else {
 					RuneTime.Radio.closeRadio();
 				}
 			});
-			$('#radio-history').click(function () {
+			$('#radio-history').click(function() {
 				RuneTime.Radio.openHistory();
 			});
-			$('#radio-request').click(function () {
+			$('#radio-request').click(function() {
 				RuneTime.Radio.openRequest();
 			});
-			$('#radio-timetable').click(function () {
+			$('#radio-timetable').click(function() {
 				RuneTime.Radio.openTimetable();
 			});
-			$('#request-button').click(function () {
+			$('#request-button').click(function() {
 			});
-			$('#pull-close').click(function () {
+			$('#pull-close').click(function() {
 				RuneTime.Radio.hidePull();
 			});
 		};

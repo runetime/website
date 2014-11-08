@@ -11,12 +11,10 @@ return [
 	'info' => [
 		'title' => 'Information',
 		'dj' => [
-			'title'   => 'Current DJ:',
-			'current' => 'DJ :name',
+			'title' => 'Current DJ:',
 		],
 		'song' => [
-			'title'   => 'Current Song',
-			'current' => "<span id='radio-song-name' class='holo-text-secondary'>:name</span> by <span id='radio-song-artist' class='holo-text-secondary'>:artist</span>",
+			'title' => 'Current Song',
 		],
 		'requests'  => [
 			'title' => 'Requests',

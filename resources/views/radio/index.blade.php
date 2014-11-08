@@ -38,13 +38,13 @@
 									@lang('radio.info.dj.title')
 								</h4>
 								<p id='radio-dj' class='holo-text-secondary'>
-									Auto DJ
+									N/A
 								</p>
 								<h4>
 									@lang('radio.info.song.title')
 								</h4>
 								<p>
-									@lang('radio.info.song.current',['name'=>$song['name'],'artist'=>$song['artist']])
+									<span id='radio-song-name' class='holo-text-secondary'>N/A</span> by <span id='radio-song-artist' class='holo-text-secondary'>N/A</span>
 								</p>
 							</div>
 							<div class='col-xs-12 col-md-6'>

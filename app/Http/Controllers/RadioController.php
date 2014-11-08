@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\Radio\RequestSong;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Request;
 use App\RuneTime\Radio\RequestRepository;
@@ -30,18 +31,10 @@ class RadioController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$dj = "Auto DJ";
-		$latestSong = $this->history->getLatest();
-		$song = ['artist' => 'N/A', 'name' => 'N/A'];
-		if(!empty($latestSong))
-			$song = ['artist' => $latestSong->artist, 'name' => $latestSong->song];
-		$isDJ = false;
-		if(\Auth::check())
-			$isDJ = \Auth::user()->hasRole('Radio DJ');
 		$this->js('radio');
 		$this->nav('navbar.radio');
 		$this->title('RuneTime ' . trans('navbar.radio'));
-		return $this->view('radio.index', compact('dj', 'song', 'isDJ'));
+		return $this->view('radio.index');
 	}
 
 	/**
@@ -94,10 +87,14 @@ class RadioController extends BaseController {
 	 * @return string
 	 */
 	public function getUpdate() {
-		$update = ['request' => [], 'song' => ['name' => '', 'artist'], 'dj' => ''];
+		$song = $this->history->getLatest();
+		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => []], 'dj' => ''];
+		$update['song']['name'] = $song->song;
+		$update['song']['artist'] = $song->artist;
+		$update['dj'] = \Cache::get('radio.dj.current');
 		if(\Auth::check())
-			$update['requests'] = $this->requests->getBySession(\Auth::user()->id);
+			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
 		header('Content-Type: application/json');
-		return json_encode([]);
+		return json_encode($update);
 	}
 }
