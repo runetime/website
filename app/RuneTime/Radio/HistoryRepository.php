@@ -24,4 +24,16 @@ class HistoryRepository extends EloquentRepository {
 	public function getCurrent() {
 		return $this->getLatest();
 	}
+
+	/**
+	 * @param int $amount
+	 *
+	 * @return mixed
+	 */
+	public function getRecentX($amount = History::DEFAULT_AMOUNT) {
+		return $this->model->
+			orderBy('id', 'desc')->
+			take($amount)->
+			get();
+	}
 }

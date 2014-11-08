@@ -11,4 +11,5 @@ class History extends Entity{
 	protected $fillable = ['user_id', 'artist', 'song'];
 	protected $dates = [];
 	protected $softDelete = true;
+	const DEFAULT_AMOUNT = 20;
 }
