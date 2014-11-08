@@ -2,7 +2,10 @@
 
 use Exception;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+/**
+ * Class Kernel
+ * @package App\Console
+ */
 class Kernel extends ConsoleKernel {
 
 	/**
@@ -16,6 +19,7 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\Radio\Song',
 		'App\Console\Commands\Radio\Artist',
 		'App\Console\Commands\Radio\DJ',
+		'App\Console\Commands\Radio\Timetable',
 	];
 
 	/**
