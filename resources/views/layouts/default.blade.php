@@ -201,7 +201,7 @@ $current = $nav;
 		<div id='page'>
 @yield('contents')
 		</div>
-		<div id='portfolio' class='row wrapper-holo'>
+		<div id='portfolio' class='row wrapper-dark'>
 			<div class='col-xs-12 col-md-6'>
 				<p class='holo-text holo-line-block'>
 					@lang('footer.about_us')
