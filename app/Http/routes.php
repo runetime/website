@@ -145,22 +145,6 @@ Route::group(['prefix' => 'map'], function() {
 get('media', 'MediaController@getIndex');
 
 /**
- * Messenger
- */
-Route::group(['middleware' => 'auth', 'prefix' => 'messenger'], function() {
-	get('/', 'MessengerController@getIndex');
-	get('{id}-{name}', 'MessengerController@getView');
-	/**
-	 * Compose
-	 */
-	Route::group(['prefix' => 'compose'], function() {
-		get('/', 'MessengerController@getCreate');
-		get('to={id}-{name}', 'MessengerController@getCreate');
-		post('/', 'MessengerController@postCreate');
-	});
-});
-
-/**
  * Name Checker
  */
 Route::group(['prefix' => 'name/check'], function() {

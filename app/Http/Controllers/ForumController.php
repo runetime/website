@@ -61,7 +61,7 @@ class ForumController extends BaseController {
 		$forumInfo->latest = $this->users->getLatest();
 		$forumInfo->mostOnline = \Cache::get('info.most_online');
 		$recentThreads = $this->threads->getX(5, 'desc');
-		$this->nav('navbar.forums');
+		$this->nav('Forums');
 		$this->title('Forums');
 		return $this->view('forum.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
 	}
@@ -124,7 +124,7 @@ class ForumController extends BaseController {
 		$bc['forums'] = 'Forums';
 		$bc = array_reverse($bc);
 		$this->bc($bc);
-		$this->nav('navbar.forums');
+		$this->nav('Forums');
 		$this->title($subforum->name);
 		return $this->view('forum.subforum.view', compact('subforum', 'subforumList', 'threadList'));
 	}
@@ -165,7 +165,7 @@ class ForumController extends BaseController {
 		$bc['forums/'] = 'Forums';
 		$bc = array_reverse($bc);
 		$this->bc($bc);
-		$this->nav('navbar.forums');
+		$this->nav('Forums');
 		$this->title($thread->title);
 		return $this->view('forum.thread.view', compact('thread', 'postList'));
 	}
@@ -187,7 +187,7 @@ class ForumController extends BaseController {
 		}
 		$bc['forums/' . \String::slugEncode($subforum->id, $subforum->name)] = $subforum->name;
 		$this->bc($bc);
-		$this->nav('navbar.forums');
+		$this->nav('Forums');
 		$this->title('Creating a New Thread');
 		return $this->view('forum.thread.create', compact('subforum'));
 	}
@@ -277,7 +277,7 @@ class ForumController extends BaseController {
 		// Breadcrumbs
 		$bc = ['forums/' => 'Forums'];
 		$this->bc($bc);
-		$this->nav('navbar.forums');
+		$this->nav('Forums');
 		$this->title('Tag: ' . $tag->name);
 		return $this->view('forum.tags.view', compact('tag', 'threadList'));
 	}
@@ -293,7 +293,7 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread);
 		$postee = $this->users->getById($post->author_id);
-		$this->nav('navbar.forums');
+		$this->nav('Forums');
 		$this->title('Reporting a Post');
 		return $this->view('forum.post.report', compact('post', 'thread', 'postee'));
 	}
@@ -321,7 +321,7 @@ class ForumController extends BaseController {
 		if(!$post)
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread);
-		$this->nav('navbar.forums');
+		$this->nav('Forums');
 		$this->title('Editing Post in ' . $thread->title);
 		return $this->view('forum.post.edit', compact('post', 'thread'));
 	}
