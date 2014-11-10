@@ -440,6 +440,26 @@ Route::group(['prefix' => 'staff'], function() {
 		});
 	});
 });
+/**
+ * Tickets
+ */
+Route::group(['prefix' => 'tickets'], function() {
+	get('/', 'TicketController@getIndex');
+	get('{id}-{name}', 'TicketController@getView');
+	/**
+	 * Create
+	 */
+	Route::group(['prefix' => 'create'], function() {
+		get('/', 'TicketController@getCreate');
+		post('/', 'TicketController@postCreate');
+	});
+	/**
+	 * Manage: staff only
+	 */
+	Route::group(['prefix' => 'manage'], function() {
+		get('/', 'TicketController@getManageIndex');
+	});
+});
 
 /**
  * Transparency
