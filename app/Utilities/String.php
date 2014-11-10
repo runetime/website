@@ -136,6 +136,6 @@ class String{
 		if($genderId == 0) $name = "Not Telling";
 		if($genderId == 1) $name = "Female";
 		if($genderId == 2) $name = "Male";
-		return "<img src='/img/forums/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
+		return "<img src='/img/forum/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
 	}
 }

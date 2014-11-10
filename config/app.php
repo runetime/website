@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => 'j3j5FTJbl9MWCcj4JBGuKf6cVwFG94RF',
+	'key' => 'adsfdfstgtryyi87r5564wwetgv4536a',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -113,6 +113,7 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
+		'App\Providers\AppServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
@@ -202,6 +203,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'HTML'      => 'Illuminate\Html\HtmlFacade',
 		'Image'     => 'App\Utilities\Image',

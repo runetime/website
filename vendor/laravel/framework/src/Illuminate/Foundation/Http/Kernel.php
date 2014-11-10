@@ -4,6 +4,7 @@ use Exception;
 use Illuminate\Routing\Stack;
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\TerminableMiddleware;
 use Illuminate\Contracts\Http\Kernel as KernelContract;
 
 class Kernel implements KernelContract {
@@ -75,6 +76,26 @@ class Kernel implements KernelContract {
 	}
 
 	/**
+	 * Call the terminate method on any terminable middleware.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Illuminate\Http\Response  $response
+	 * @return void
+	 */
+	public function terminate($request, $response)
+	{
+		foreach ($this->middleware as $middleware)
+		{
+			$instance = $this->app->make($middleware);
+
+			if ($instance instanceof TerminableMiddleware)
+			{
+				$instance->terminate($request, $response);
+			}
+		}
+	}
+
+	/**
 	 * Bootstrap the application for HTTP requests.
 	 *
 	 * @return void
@@ -83,7 +104,7 @@ class Kernel implements KernelContract {
 	{
 		if ( ! $this->app->hasBeenBootstrapped())
 		{
-			$this->app->bootstrapWith($this->bootstrappers);
+			$this->app->bootstrapWith($this->bootstrappers());
 		}
 	}
 
@@ -100,6 +121,16 @@ class Kernel implements KernelContract {
 
 			return $this->router->dispatch($request);
 		};
+	}
+
+	/**
+	 * Get the bootstrap classes for the application.
+	 *
+	 * @return array
+	 */
+	protected function bootstrappers()
+	{
+		return $this->bootstrappers;
 	}
 
 	/**

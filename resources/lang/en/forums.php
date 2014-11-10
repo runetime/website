@@ -1,6 +1,5 @@
 <?php
-return [
-	'name' => 'Forums',
+return array(
 	'thread' => [
 		'create' => [
 			'name'  => 'Creating a New Thread in :subforum',
@@ -68,4 +67,4 @@ return [
 	'posts'   => ':amount posts',
 	'threads' => ':amount threads',
 	'by'      => 'by', // 'Thread name' by 'author' for example
-];
+);

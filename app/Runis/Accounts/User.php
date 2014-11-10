@@ -1,17 +1,17 @@
 <?php
 namespace App\Runis\Accounts;
-use Illuminate\Auth\UserTrait;
-use Illuminate\Contracts\Auth\User as UserContract;
-use Illuminate\Auth\Passwords\CanResetPasswordTrait;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use App\Runis\Core\Entity;
 /**
  * Class User
  * @package App\Runis\Accounts
  */
-class User extends Entity implements UserContract, CanResetPasswordContract {
-	use UserTrait, CanResetPasswordTrait, SoftDeletingTrait;
+class User extends Entity implements AuthenticatableContract, CanResetPasswordContract {
+	use Authenticatable, CanResetPassword;
 	const STATE_ACTIVE  = 1;
 	const STATE_BLOCKED = 2;
 	protected $table = 'users';
@@ -118,55 +118,6 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function isAdmin() {
-		return $this->hasOneOfRoles(1);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isRadio() {
-		return $this->hasOneOfRoles(1, 2, 3);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isMedia() {
-		return $this->hasOneOfRoles(1, 4, 5);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isDeveloper() {
-		return $this->hasOneOfRoles(1, 6, 7);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isContent() {
-		return $this->hasOneOfRoles(1, 8, 9);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isCommunity() {
-		return $this->hasOneOfRoles(1, 10, 11);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isEvents() {
-		return $this->hasOneOfRoles(1, 12, 13);
-	}
-
-	/**
 	 * @return int
 	 */
 	public function incrementPostTotal() {
@@ -238,16 +189,11 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 * Get the e-mail address where password reset links are sent.
+	 *
+	 * @return string
 	 */
-	public function checkups() {
-		return $this->belongsToMany('App\RuneTime\Checkup\Checkup');
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function messages() {
-		return $this->belongsToMany('App\RuneTime\Messenger\Message');
+	public function getEmailForPasswordReset() {
+		// TODO: Implement getEmailForPasswordReset() method.
 	}
 }

@@ -2,24 +2,18 @@
 namespace App\Runis\Accounts;
 use App\Runis\Core\EloquentRepository;
 use App\Runis\Core\Exceptions\EntityNotFoundException;
-/**
- * Class UserRepository
- * @package App\Runis\Accounts
- */
 class UserRepository extends EloquentRepository{
-
 	/**
-	 * @param RoleRepository $roles
-	 * @param User           $model
+	 * @param User $model
 	 */
-	public function __construct(User $model) {
-		$this->model = $model;
+	public function __construct(User $model){
+		$this->model=$model;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getTotal() {
+	public function getTotal(){
 		return $this->model->count();
 	}
 
@@ -80,8 +74,8 @@ class UserRepository extends EloquentRepository{
 	 */
 	public function getByRole($id,$op='=',$order='desc'){
 		return $this->model->
-			where('role', $op, $id)->
-			orderBy('id', $order)->
+			where('role',$op,$id)->
+			orderBy('id',$order)->
 			get();
 	}
 
@@ -137,39 +131,5 @@ class UserRepository extends EloquentRepository{
 		return $this->model->
 			orderBy('id', 'desc')->
 			first();
-	}
-
-	/**
-	 * @param $role
-	 * @param $prefix
-	 * @param $order
-	 *
-	 * @return mixed
-	 */
-	public function getByOptions($role, $prefix, $order) {
-		if($role == 'none')   $role='';
-		if($prefix == 'none') $prefix = '';
-		if($order == 'none')  $order = '';
-		$query = $this->model->where('display_name', '!=', '-1asda');
-		if(!empty($prefix))
-			$query = $query->
-				where(function($q) use($prefix) {
-					$q->where('display_name', 'LIKE', '%' . strtolower($prefix) . '%')
-						->orWhere('display_name', 'LIKE', '%' . strtoupper($prefix) . '%');
-				});
-		if(!empty($order))
-			$query = $query->
-				orderBy('display_name', $order == 'descending' ? 'desc' : 'asc');
-		if(!empty($role)) {
-			$roles = new RoleRepository(new Role);
-			$role = $roles->getByName($role);
-			$users = $query->get();
-			$usersReturn = [];
-			foreach($users as $user)
-				if($user->importantRole()->id == $role->id)
-					array_push($usersReturn, $user);
-			return $usersReturn;
-		}
-		return $query->get();
 	}
 }

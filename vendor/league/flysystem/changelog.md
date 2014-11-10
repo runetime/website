@@ -1,6 +1,19 @@
 # Changelog
 
-## 0.5.10 - unreleased
+## 0.5.12 - 2014-11-05
+
+### Fixed
+
+* [Cache] Cache contents is now in control over what's cached instead of the implicit controle the adapters had.
+
+## 0.5.11 - 2014-11-05
+
+### Fixed
+
+* [AwsS3] Removed raw response from response array
+* [Cache] Ensure cache response is JSON formatted and has the correct entries.
+
+## 0.5.10 - 2014-10-28
 
 ### Fixed
 

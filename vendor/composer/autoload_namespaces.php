@@ -21,7 +21,6 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Symfony\\Component\\ClassLoader\\' => array($vendorDir . '/symfony/class-loader'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
-    'Prophecy\\PhpUnit\\' => array($vendorDir . '/phpspec/prophecy-phpunit'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Patchwork' => array($vendorDir . '/patchwork/utf8/class'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),

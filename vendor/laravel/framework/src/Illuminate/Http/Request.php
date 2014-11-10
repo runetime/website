@@ -641,7 +641,14 @@ class Request extends SymfonyRequest {
 	 */
 	public function route()
 	{
-		return call_user_func($this->getRouteResolver());
+		if (func_num_args() == 1)
+		{
+			return $this->route()->parameter(func_get_arg(0));
+		}
+		else
+		{
+			return call_user_func($this->getRouteResolver());
+		}
 	}
 
 	/**
@@ -688,6 +695,25 @@ class Request extends SymfonyRequest {
 		$this->routeResolver = $callback;
 
 		return $this;
+	}
+
+	/**
+	 * Get an input element from the request.
+	 *
+	 * @return mixed
+	 */
+	public function __get($key)
+	{
+		$input = $this->input();
+
+		if (array_key_exists($key, $input))
+		{
+			return $this->input($key);
+		}
+		elseif ( ! is_null($this->route()))
+		{
+			return $this->route()->parameter($key);
+		}
 	}
 
 }

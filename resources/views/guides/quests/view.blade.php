@@ -17,14 +17,12 @@
 						@lang('guides.edited_by',['users'=>$editList]) 
 					</small>
 				</p>
-			</div>
-			<div class='wrapper-dark'>
 				<dl class='dl-horizontal'>
 					<dt>
 						Description
 					</dt>
 					<dd>
-						{!!$guide->description!!}
+						{{$guide->description}} 
 					</dd>
 					<dt>
 						Difficulty
@@ -48,47 +46,96 @@
 						Membership
 					</dt>
 					<dd>
-						{{$guide->membership == 1 ? "Yes" : "No"}}
+						{{$guide->membership==1?"Yes":"No"}} 
 					</dd>
 					<dt>
 						Quest Requirements
 					</dt>
 					<dd>
-						{!!$guide->quest_requirements!!}
+						<ul class='list-unstyled'>
+@foreach(json_decode($guide->quest_requirements) as $requirement)
+							<li>
+								<a href='/guides/quests/{{String::slugEncode($requirement->id,$requirement->name)}}' title='{{$requirement->name}}'>
+									{{$requirement->name}} 
+								</a>
+							</li>
+@endforeach
+						</ul>
 					</dd>
 					<dt>
 						Skill Requirements
 					</dt>
 					<dd>
-						{!!$guide->skill_requirements!!}
+						<ul class='list-unstyled'>
+@foreach(json_decode($guide->skill_requirements) as $name=>$level)
+							<li>
+								<img src='/img/skills/{{strtolower($name)}}.png' alt='{{$name}} Image' />{{$level}} {{$name}} 
+							</li>
+@endforeach
+						</ul>
 					</dd>
 					<dt>
 						Items Required
 					</dt>
 					<dd>
-						{!!$guide->items_required!!}
+						<ul class='list-unstyled'>
+@foreach(json_decode($guide->items_required) as $item)
+							<li>
+	@if($item->id>0)
+								?
+	@else
+								{{$item->amount}} {{$item->description}} 
+	@endif
+							</li>
+@endforeach
+						</ul>
 					</dd>
 					<dt>
 						Items Recommended
 					</dt>
 					<dd>
-						{!!$guide->items_recommended!!}
+						<ul class='list-unstyled'>
+@foreach(json_decode($guide->items_recommended) as $item)
+							<li>
+	@if($item->id>0)
+								?
+	@else
+								{{$item->amount}} {{$item->description}} 
+	@endif
+							</li>
+@endforeach
+						</ul>
 					</dd>
 					<dt>
 						Rewards
 					</dt>
 					<dd>
-						{!!$guide->rewards!!}
+						<ul class='list-unstyled'>
+@foreach(json_decode($guide->rewards) as $reward)
+							<li>
+	@if($reward->id>0)
+								?
+	@else
+								{{$reward->amount>0?number_format($reward->amount)." ":""}}{{$reward->description}} 
+	@endif
+							</li>
+@endforeach
+						</ul>
 					</dd>
 					<dt>
 						Starting Point
 					</dt>
 					<dd>
-						{!!$guide->starting_point!!}
+						{{$guide->starting_point}} 
 					</dd>
 				</dl>
-			</div>
-			<div class='wrapper'>
-				{!!$guide->contents_parsed!!}
+@foreach($guide->contents as $x=>$step)
+				<h3>
+					Step {{$x}} 
+				</h3>
+				<p>
+					{{$step}} 
+				</p>
+@endforeach
 			</div>
 @stop

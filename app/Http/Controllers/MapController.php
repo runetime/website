@@ -1,9 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-/**
- * Class MapController
- * @package App\Http\Controllers
- */
 class MapController extends BaseController {
 	/**
 	 * @get("map")
@@ -15,6 +11,7 @@ class MapController extends BaseController {
 	}
 
 	/**
+	 * @get("map/members")
 	 * @return \Illuminate\View\View
 	 */
 	public function getMembers() {
@@ -25,6 +22,7 @@ class MapController extends BaseController {
 	}
 
 	/**
+	 * @get("map/runescape")
 	 * @return \Illuminate\View\View
 	 */
 	public function getRunescape() {
@@ -35,6 +33,7 @@ class MapController extends BaseController {
 	}
 
 	/**
+	 * @get("map/runescape/3")
 	 * @return \Illuminate\View\View
 	 */
 	public function getRS3() {
@@ -45,6 +44,7 @@ class MapController extends BaseController {
 	}
 
 	/**
+	 * @get("map/runescape/old-school")
 	 * @return \Illuminate\View\View
 	 */
 	public function getOS() {

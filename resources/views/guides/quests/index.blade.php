@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper-dark row row-margin text-center'>
-				<div class='col-xs-12 col-sm-4'>
+			<div class='wrapper-dark row row-margin'>
+				<div class='col-xs-12 col-sm-4 text-center'>
 					<h3 class='holo-text'>
 						Difficulty
 					</h3>
@@ -21,7 +21,7 @@
 @endforeach
 					</ul>
 				</div>
-				<div class='col-xs-12 col-sm-4'>
+				<div class='col-xs-12 col-sm-4 text-center'>
 					<h3 class='holo-text'>
 						Length
 					</h3>
@@ -41,7 +41,7 @@
 @endforeach
 					</ul>
 				</div>
-				<div class='col-xs-12 col-sm-4'>
+				<div class='col-xs-12 col-sm-4 text-center'>
 					<h3 class='holo-text'>
 						Membership
 					</h3>
@@ -61,23 +61,9 @@
 @endforeach
 					</ul>
 				</div>
-                <div class='col-xs-12'>
-                    <a href='/guides/quests' class='text-muted'>
-                        Clear Search
-                    </a>
-                </div>
 			</div>
 			<div class='wrapper'>
-				<ul class='list-inline pull-right'>
-@if(\Auth::check() && \Auth::user()->isContent())
-					<li>
-						<a href='/guides/quests/create' class='btn btn-sm btn-success'>
-							Create Quest
-						</a>
-					</li>
-@endif
-				</ul>
-				<table class='table table-hover table-striped table-responsive no-border'>
+				<table class='table table-hover table-striped table-responsive'>
 					<thead>
 						<tr>
 							<td>
@@ -100,33 +86,51 @@
 							</td>
 						</tr>
 					</thead>
-					<tbody data-link='row' class='rowlink'>
-@if(!empty($guides))
-	@foreach($guides as $guide)
+					<tbody>
 						<tr>
 							<td>
-								<a href='/guides/quests/{{\String::slugEncode($guide->id, $guide->name)}}' title='{{$guide->name}}'>
-									{{$guide->name}}
+								<a href='/guides/quests/1-all-fired-up' title='All Fired Up'>
+									All Fired Up
 								</a>
 							</td>
 							<td>
-								{{$guide->getDifficulty()}}
+								Intermediate
 							</td>
 							<td>
-								{{$guide->getLength()}}
+								Short
 							</td>
 							<td>
-								{{$guide->qp}}
+								1
 							</td>
 							<td>
-								{{$guide->getMembership()}}
+								Yes
 							</td>
 							<td>
-								{{$guide->completed == 1 ? "Yes" : "No"}}
+								No
 							</td>
 						</tr>
-	@endforeach
-@endif
+						<tr>
+							<td>
+								<a href='/guides/quests/1-all-fired-up' title='All Fired Up'>
+									Animal Magnetism
+								</a>
+							</td>
+							<td>
+								Intermediate
+							</td>
+							<td>
+								Medium
+							</td>
+							<td>
+								1
+							</td>
+							<td>
+								Yes
+							</td>
+							<td>
+								No
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
