@@ -61,9 +61,6 @@ class Route implements \Serializable
      */
     private $compiled;
 
-    /**
-     * @var string
-     */
     private $condition;
 
     /**
@@ -102,9 +99,6 @@ class Route implements \Serializable
         $this->setCondition($condition);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function serialize()
     {
         return serialize(array(
@@ -116,16 +110,12 @@ class Route implements \Serializable
             'schemes' => $this->schemes,
             'methods' => $this->methods,
             'condition' => $this->condition,
-            'compiled' => $this->compiled,
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
+    public function unserialize($data)
     {
-        $data = unserialize($serialized);
+        $data = unserialize($data);
         $this->path = $data['path'];
         $this->host = $data['host'];
         $this->defaults = $data['defaults'];
@@ -133,13 +123,7 @@ class Route implements \Serializable
         $this->options = $data['options'];
         $this->schemes = $data['schemes'];
         $this->methods = $data['methods'];
-
-        if (isset($data['condition'])) {
-            $this->condition = $data['condition'];
-        }
-        if (isset($data['compiled'])) {
-            $this->compiled = $data['compiled'];
-        }
+        $this->condition = $data['condition'];
     }
 
     /**

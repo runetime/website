@@ -50,9 +50,9 @@ class BBCodeTableSeeder extends Seeder{
 				[
 					'name'      =>'Topic',
 					'example'   =>'Check out [thread=1]this thread![/thread]',
-					'parsed'    =>"Check out <a href='/forums/thread/1-from-chatbox'>this thread!</a>",
+					'parsed'    =>"Check out <a href='/forum/thread/1-from-chatbox'>this thread!</a>",
 					'parse_from'=>'/\[thread=(.*?)\](.*?)\[\/thread\]/',
-					'parse_to'  =>"<a href='/forums/topic/$1-from-chatbox'>$2</a>",
+					'parse_to'  =>"<a href='/forum/topic/$1-from-chatbox'>$2</a>",
 				],
 				[
 					'name'      =>'URL',

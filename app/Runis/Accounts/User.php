@@ -6,10 +6,6 @@ use Illuminate\Auth\Passwords\CanResetPasswordTrait;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use App\Runis\Core\Entity;
-/**
- * Class User
- * @package App\Runis\Accounts
- */
 class User extends Entity implements UserContract, CanResetPasswordContract {
 	use UserTrait, CanResetPasswordTrait, SoftDeletingTrait;
 	const STATE_ACTIVE  = 1;
@@ -118,55 +114,6 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function isAdmin() {
-		return $this->hasOneOfRoles(1);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isRadio() {
-		return $this->hasOneOfRoles(1, 2, 3);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isMedia() {
-		return $this->hasOneOfRoles(1, 4, 5);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isDeveloper() {
-		return $this->hasOneOfRoles(1, 6, 7);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isContent() {
-		return $this->hasOneOfRoles(1, 8, 9);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isCommunity() {
-		return $this->hasOneOfRoles(1, 10, 11);
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isEvents() {
-		return $this->hasOneOfRoles(1, 12, 13);
-	}
-
-	/**
 	 * @return int
 	 */
 	public function incrementPostTotal() {
@@ -230,24 +177,7 @@ class User extends Entity implements UserContract, CanResetPasswordContract {
 		return 'remember_token';
 	}
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
 	public function threads() {
 		return $this->hasMany('App\RuneTime\Forum\Threads\Thread', 'author_id');
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function checkups() {
-		return $this->belongsToMany('App\RuneTime\Checkup\Checkup');
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function messages() {
-		return $this->belongsToMany('App\RuneTime\Messenger\Message');
 	}
 }

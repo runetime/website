@@ -36,7 +36,7 @@ class ProfileController extends BaseController {
 		$this->bc($bc);
 		$this->nav('Forums');
 		$this->title($profile->display_name);
-		return $this->view('forums.profile.index', compact('profile', 'latestStatus'));
+		return $this->view('forum.profile.index', compact('profile', 'latestStatus'));
 	}
 
 	/**

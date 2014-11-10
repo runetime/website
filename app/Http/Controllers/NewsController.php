@@ -3,16 +3,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NewsForm;
 use App\RuneTime\News\News;
 use App\RuneTime\News\NewsRepository;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Authenticator;
 class NewsController extends BaseController {
 	protected $auth;
 	protected $news;
 
 	/**
-	 * @param Guard          $auth
+	 * @param Authenticator  $auth
 	 * @param NewsRepository $news
 	 */
-	public function __construct(Guard $auth, NewsRepository $news) {
+	public function __construct(Authenticator $auth, NewsRepository $news) {
 		$this->auth = $auth;
 		$this->news = $news;
 	}
@@ -24,8 +24,8 @@ class NewsController extends BaseController {
 	public function getIndex() {
 		$news = $this->news->getRecentNews(5);
 		$canAdd = false;
-		if(\Auth::check())
-			$canAdd = \Auth::user()->hasOneOfRoles(1, 2, 4, 6, 8, 10, 12);
+		if($this->auth->check())
+			$canAdd = $this->auth->user()->hasOneOfRoles(1, 2, 4, 6, 8, 10, 12);
 		$this->nav('RuneTime');
 		$this->title('News');
 		return $this->view('news.index', compact('news', 'canAdd'));
@@ -75,7 +75,7 @@ class NewsController extends BaseController {
 	 */
 	public function postCreate(NewsForm $form) {
 		$news = new News;
-		$news->author_id = \Auth::user()->id;
+		$news->author_id = $this->auth->user()->id;
 		$news->title = $form->input('name');
 		$news->contents = $form->input('contents');
 		$news->status = News::STATUS_PUBLISHED;

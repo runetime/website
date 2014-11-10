@@ -2,10 +2,7 @@
 
 use Exception;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-/**
- * Class Kernel
- * @package App\Console
- */
+
 class Kernel extends ConsoleKernel {
 
 	/**
@@ -15,11 +12,6 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'App\Console\Commands\InspireCommand',
-		'App\Console\Commands\Radio\Update',
-		'App\Console\Commands\Radio\Song',
-		'App\Console\Commands\Radio\Artist',
-		'App\Console\Commands\Radio\DJ',
-		'App\Console\Commands\Radio\Timetable',
 	];
 
 	/**
@@ -37,9 +29,7 @@ class Kernel extends ConsoleKernel {
 		}
 		catch (Exception $e)
 		{
-			$this->reportException($e);
-
-			$this->renderException($output, $e);
+			$output->writeln((string) $e);
 
 			return 1;
 		}

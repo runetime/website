@@ -44,28 +44,3 @@
 		bottom:0em;
 	}
 }
-.wrapper-none-res {
-	padding:{
-		top:.1em;
-		left:0em;
-		right:0em;
-		bottom:0em;
-	}
-}
-
-#top {
-	bottom: 15px;
-	display: none;
-	position: fixed;
-	right: 25px;
-	z-index: 9999;
-	a {
-		i {
-			background: rgba(18, 18, 18, 0.7);
-			border-radius: 3px;
-			color: #fff;
-			font-size: 14px;
-			padding: 8px 9px 5px;
-		}
-	}
-}

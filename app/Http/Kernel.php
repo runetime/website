@@ -34,9 +34,7 @@ class Kernel extends HttpKernel {
 		}
 		catch (Exception $e)
 		{
-			$this->reportException($e);
-
-			return $this->renderException($request, $e);
+			throw $e;
 		}
 	}
 

@@ -30,6 +30,7 @@ $navs=[
 		'calendar'    => Lang::get('navbar.social.calendar'),
 		'livestream'  => Lang::get('navbar.social.livestream'),
 		'media'       => Lang::get('navbar.social.social_media'),
+		'map/members' => Lang::get('navbar.social.members_map'),
 		'clan'        => Lang::get('navbar.social.our_clan'),
 	],
 ];
@@ -43,6 +44,7 @@ if(\Auth::check() && \Auth::user()->isStaff()) {
 		$navs['Staff']['staff/radio'] = Lang::get('navbar.staff.radio');
 	if(\Auth::user()->hasOneOfRoles(1, 10, 11))
 		$navs['Staff']['staff/moderation'] = Lang::get('navbar.staff.moderation');
+	$navs['Staff']['staff/gallery']  = Lang::get('navbar.staff.gallery');
 	$navs['Staff']['tickets/manage'] = Lang::get('navbar.staff.ticket');
 	$navs['Staff']['staff/checkup']  = Lang::get('navbar.staff.checkup');
 }
@@ -87,18 +89,17 @@ $current = $nav;
 		<link rel='canonical' href='http://runetime.com/' />
 		<link rel='home' href='/' />
 		<link rel='index' href='/sitemap/' />
-		<link rel='stylesheet' href='/css/style.css' />
+		<link rel='stylesheet' href='css/style.css' />
 @if(!empty($css))
-		<link rel='stylesheet' href='/css/{{$css}}.css'>
+		<link rel='stylesheet' href='css/{{$css}}.css'>
 @endif
-		<script src='/js/vendor/jquery.js'></script>
-		<script src='/js/vendor/jquery-ui.js'></script>
-		<script src='/js/vendor/bootstrap.js'></script>
-		<script src='/js/vendor/jasny-bootstrap.js'></script>
+		<script src='js/jquery.js'></script>
+		<script src='js/jquery-ui.js'></script>
+		<script src='js/bootstrap.js'></script>
 @if(!empty($js))
 		<script src='js/{{$js}}.js'></script>
 @endif
-		<script src='/js/main.js'></script>
+		<script src='js/main.js'></script>
 	</head>
 	<body>
 		<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' role='navigation'>
@@ -175,22 +176,20 @@ $current = $nav;
 @if($displayPageHeader&&!empty($title))
 		<div class='wrapper-none'>
 			<ol class='breadcrumb'>
-				<li data-toggle='tooltip' data-placement='bottom' title='Home'>
+				<li>
 					<a href='/' title='Home'>
 						@lang('navbar.home')
 					</a>
 				</li>
-	@foreach($bc as $url => $name)
-		@if(String::startsWith('#', $url))
-				<li class='active' data-toggle='tooltip' data-placement='bottom' title='{{ $name }}'>
-					<span>
-						{{ $name }}
-					</span>
+	@foreach($bc as $url=>$name)
+		@if(String::startsWith('#',$url))
+				<li class='active'>
+					{{$name}}
 				</li>
 		@else
 				<li>
-					<a href='{{ $url }}' data-toggle='tooltip' data-placement='bottom' title='{{ $name }}'>
-						{{ $name }}
+					<a href='{{$url}}' title='{{$name}}'>
+						{{$name}} 
 					</a>
 				</li>
 		@endif
@@ -201,7 +200,7 @@ $current = $nav;
 		<div id='page'>
 @yield('contents')
 		</div>
-		<div id='portfolio' class='row wrapper-dark'>
+		<div id='portfolio' class='row wrapper-holo'>
 			<div class='col-xs-12 col-md-6'>
 				<p class='holo-text holo-line-block'>
 					@lang('footer.about_us')
@@ -235,15 +234,10 @@ $current = $nav;
 				</div>
 			</div>
 			<p class='pull-right'>
-				<a href='/language/set' data-toggle='tooltip' data-placement='top' title='@lang('footer.language')'>
-					<i class='text-info fa fa-language'></i>
+				<a href='/language/set' title='@lang('footer.language')'>
+					@lang('footer.language')
 				</a>
 			</p>
-		</div>
-		<div id='top'>
-			<a data-toggle='tooltip' data-placement='top' title='Back to Top'>
-				<i class='fa fa-chevron-up'></i>
-			</a>
 		</div>
 	</body>
 </html>

@@ -2,10 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-/**
- * Class RouteServiceProvider
- * @package App\Providers
- */
+
 class RouteServiceProvider extends ServiceProvider {
 
 	/**
@@ -14,15 +11,10 @@ class RouteServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $middleware = [
-		'auth'            => 'App\Http\Middleware\Authenticated',
-		'auth.basic'      => 'App\Http\Middleware\AuthenticatedWithBasicAuth',
-		'csrf'            => 'App\Http\Middleware\CsrfTokenIsValid',
-		'guest'           => 'App\Http\Middleware\IsGuest',
-		'staff'           => 'App\Http\Middleware\IsStaff',
-		'staff.moderator' => 'App\Http\Middleware\IsModerator',
-		'staff.admin'     => 'App\Http\Middleware\StaffAdministrator',
-		'staff.radio'     => 'App\Http\Middleware\StaffRadio',
-		'staff.content'   => 'App\Http\Middleware\StaffContent',
+		'auth' => 'App\Http\Middleware\Authenticated',
+		'auth.basic' => 'App\Http\Middleware\AuthenticatedWithBasicAuth',
+		'csrf' => 'App\Http\Middleware\CsrfTokenIsValid',
+		'guest' => 'App\Http\Middleware\IsGuest',
 	];
 
 	/**

@@ -1,100 +1,97 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\Radio\RequestSong;
-use App\RuneTime\Radio\HistoryRepository;
-use App\RuneTime\Radio\Request;
 use App\RuneTime\Radio\RequestRepository;
-/**
- * Class RadioController
- * @package App\Http\Controllers
- */
+use Illuminate\Contracts\Auth\Guard;
 class RadioController extends BaseController {
 	/**
-	 * @var HistoryRepository
-	 */
-	private $history;
-	/**
-	 * @var RequestRepository
-	 */
-	private $requests;
-
-	/**
-	 * @param HistoryRepository $history
+	 * @param Guard             $auth
 	 * @param RequestRepository $requests
 	 */
-	public function __construct(HistoryRepository $history, RequestRepository $requests) {
-		$this->history = $history;
+	public function __construct(Guard $auth, RequestRepository $requests) {
 		$this->requests = $requests;
+		$this->auth = $auth;
 	}
 
 	/**
+	 * @get("radio")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
+		$dj = "Current DJ";
+		$song = ['artist' => 'Artist', 'name' => 'Name'];
+		$isDJ = false;
+		if($this->auth->check())
+			$isDJ = $this->auth->user()->hasRole('Radio DJ');
 		$this->js('radio');
 		$this->nav('navbar.radio');
 		$this->title('RuneTime ' . trans('navbar.radio'));
-		return $this->view('radio.index');
+		return $this->view('radio.index', compact('dj', 'song', 'isDJ'));
 	}
 
 	/**
-	 * @return mixed
+	 * @get("radio/request/history")
+	 *
+	 * @return \Illuminate\View\View
 	 */
 	public function getHistory() {
-		$history = $this->history->getRecentX()->toArray();
-		foreach($history as $key => $value)
-			$history[$key]['created_at'] = \Time::getEpoch($value['created_at']);
-		header('Content-Type: application/json');
-		return json_encode($history);
+		return \View::make('radio.request.history');
 	}
 
 	/**
-	 * @return mixed
+	 * @get("radio/request/timetable")
+	 *
+	 * @return \Illuminate\View\View
 	 */
 	public function getTimetable() {
+		$hrs = range('0', '23');
 		$filled[4][17] = 'Obama';
 		$filled[4][18] = 'Obama';
 		$filled[4][19] = 'Obama';
 		$filled[2][15] = 'Woofy';
 		$filled[2][16] = 'Woofy';
-		header('Content-Type: application/json');
-		return json_encode($filled);
+		$page = \View::make('radio.request.timetable');
+		$page->with('hrs', $hrs);
+		$page->with('filled', $filled);
+		return $page;
 	}
 
 	/**
+	 * @get("radio/request/song")
+	 * @return \Illuminate\View\View
+	 */
+	public function getSong() {
+		return \View::make('radio.request.song');
+	}
+
+	/**
+	 * @get("radio/send/request/{artist}/{name}")
+	 * @middleware("auth.logged")
+	 *
+	 * @param $artist
+	 * @param $name
+	 *
 	 * @return mixed
 	 */
-	public function getRequest() {
-		header('Content-Type: application/json');
-		if(\Auth::check())
-			return json_encode(['response' => true]);
-		return json_encode(['response' => false]);
+	public function getSendRequest($artist, $name) {
+		if($this->auth->check()) {
+			$user = $this->auth->id();
+		} else {
+			$user = -1;
+		}
+		\DB::table('radio_requests')->insertGetId(['song_artist' => $artist, 'song_name' => $name, 'requester' => $user, 'time_sent' => time(), 'ip_address' => $_SERVER['REMOTE_ADDR'], 'status' => 0]);
+		return \View::make('radio.send.song');
 	}
 
 	/**
-	 * @param RequestSong $form
+	 * @get("radio/update")
 	 *
 	 * @return string
 	 */
-	public function postRequest(RequestSong $form) {
-		$request = new Request;
-		$request->saveNew(\Auth::user()->id, $form->artist, $form->name, \Request::getClientIp(true), Request::STATUS_NEUTRAL);
-		header('Content-Type: application/json');
-		return json_encode(['sent' => true]);
-	}
-
-	/**
-	 * @return string
-	 */
 	public function getUpdate() {
-		$song = $this->history->getLatest();
-		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => []], 'dj' => ''];
-		$update['song']['name'] = $song->song;
-		$update['song']['artist'] = $song->artist;
-		$update['dj'] = \Cache::get('radio.dj.current');
-		if(\Auth::check())
-			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
-		header('Content-Type: application/json');
-		return json_encode($update);
+		if($this->auth->check())
+			$requests = $this->requests->getBySession($this->auth->user()->id); else
+			$requests = $this->requests->getBySession(\Request::getClientIp());
+		return json_encode($currentRequests);
 	}
 }

@@ -7424,7 +7424,6 @@ button.close {
 body {
   background: #373737 !important;
   color: #b8b8b8 !important;
-  cursor: default;
   font-family: "Proxima Nova Regular","Segoe UI",Roboto,"Droid Sans","Helvetica Neue",Arial,sans-serif;
   font-style: normal;
   font-size: 1.5em !important;
@@ -7501,7 +7500,6 @@ body {
       #chatbox #chatbox-messages .msg time {
         color: #AA66CC; }
       #chatbox #chatbox-messages .msg p {
-        display: inline;
         margin-bottom: 0em; }
       #chatbox #chatbox-messages .msg:nth-child(even) {
         background: #121212; }
@@ -7648,25 +7646,6 @@ body {
   padding-left: 0em;
   padding-right: 0em;
   padding-bottom: 0em; }
-
-.wrapper-none-res {
-  padding-top: .1em;
-  padding-left: 0em;
-  padding-right: 0em;
-  padding-bottom: 0em; }
-
-#top {
-  bottom: 15px;
-  display: none;
-  position: fixed;
-  right: 25px;
-  z-index: 9999; }
-  #top a i {
-    background: rgba(18, 18, 18, 0.7);
-    border-radius: 3px;
-    color: #fff;
-    font-size: 14px;
-    padding: 8px 9px 5px; }
 
 .members-staff {
   @extends .members; }
@@ -8077,26 +8056,12 @@ body {
 .breadcrumb {
   background: #454545;
   border-radius: 0em !important;
-  height: 37px;
-  margin-bottom: 0px;
-  padding: 0em !important; }
-  .breadcrumb li {
-    color: white !important;
-    height: 37px; }
-    .breadcrumb li.active {
-      color: #707070 !important; }
-    .breadcrumb li::before {
-      content: none !important;
-      padding: 0em 0em; }
-    .breadcrumb li:not(.active):hover {
-      background: #3d3d3d; }
-    .breadcrumb li a,
-    .breadcrumb li span {
-      align-items: center;
-      display: flex;
-      height: 37px;
-      justify-content: center;
-      padding: 0em 1em !important; }
+  box-shadow: inset 7px 0 9px -7px #33b5e5;
+  margin-bottom: 0px; }
+  .breadcrumb a {
+    color: white !important; }
+  .breadcrumb li.active {
+    color: #aaa; }
 
 ::-webkit-scrollbar {
   background: #191919;
@@ -8239,51 +8204,6 @@ body {
       color: whitesmoke !important; }
       .btn-group-dark > ul li a:hover {
         background: #232323; }
-
-pre {
-  background: #2a2a2a;
-  border: 1px solid #1f1f1f;
-  color: #9a9a9a; }
-
-.blocks {
-  width: 100%; }
-  .blocks > div {
-    background: #474747;
-    width: 300px;
-    height: 300px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-    .blocks > div > a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 3em !important;
-      height: 100%;
-      width: 100%; }
-    .blocks > div:hover {
-      background: #515151; }
-
-table {
-  border-color: #bbb;
-  border-spacing: 0;
-  border-style: solid;
-  border-width: 1px 0 0 1px; }
-  table td,
-  table th {
-    padding: 10px;
-    border-color: #bbb;
-    border-style: solid;
-    border-width: 1px 0 0 1px; }
-  table.no-border {
-    border: none !important; }
-    table.no-border td,
-    table.no-border th {
-      border: none !important; }
-
-tbody.rowlink tr:hover {
-  cursor: pointer; }
 
 a {
   cursor: pointer; }
@@ -8450,6 +8370,3 @@ blockquote.start {
 
 .label-pinned {
   background: #7f3400; }
-
-.text-muted {
-  color: #777777 !important; }

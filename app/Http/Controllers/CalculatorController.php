@@ -1,15 +1,7 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\Calculators\PostRequest;
 use App\RuneTime\Calculators\CalculatorRepository;
-/**
- * Class CalculatorController
- * @package App\Http\Controllers
- */
 class CalculatorController extends BaseController {
-	/**
-	 * @var CalculatorRepository
-	 */
 	private $calculators;
 
 	/**
@@ -20,6 +12,7 @@ class CalculatorController extends BaseController {
 	}
 
 	/**
+	 * @get("calculators")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -30,37 +23,30 @@ class CalculatorController extends BaseController {
 	}
 
 	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getCombat() {
-		$this->nav('navbar.runescape.runescape');
-		$this->title('Combat Calculator');
-		return $this->view('calculators.combat');
-	}
-
-	/**
 	 * @param $type
+	 * @get("calculators/{type}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($type) {
 		$calculator = $this->calculators->getByNameTrim($type);
-		if(!$calculator)
-			\App::abort(404);
-		$items = json_decode($calculator->items);
-		$levelsRequired = json_decode($calculator->levels_required);
-		$xp = json_decode($calculator->xp);
-		$this->bc(['calculators' => 'Calculators']);
-		$this->js('calculator');
-		$this->nav('Runescape');
-		$this->title($calculator->name . ' Calculator');
-		return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
+		if($calculator) {
+			$items = json_decode($calculator->items);
+			$levelsRequired = json_decode($calculator->levels_required);
+			$xp = json_decode($calculator->xp);
+			$this->bc(['calculators' => 'Calculators']);
+			$this->js('calculator');
+			$this->nav('Runescape');
+			$this->title($calculator->name . ' Calculator');
+			return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
+		}
+		\App::abort(404);
 	}
 
 	/**
+	 * @post("calculators/load")
 	 * @return string
 	 */
-	public function postLoad(PostRequest $form) {
-		header('Content-Type: application/json');
-		return json_encode($this->calculators->getById($form->id));
+	public function postLoad() {
+		return json_encode($this->calculators->getById(\Input::get('id')));
 	}
 }

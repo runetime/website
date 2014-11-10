@@ -31,7 +31,6 @@ class CreateQuestGuidesTable extends Migration {
 			$t->mediumtext('rewards');
 			$t->mediumtext('starting_point');
 			$t->mediumtext('contents');
-			$t->mediumtext('contents_parsed');
 			$t->timestamps();
 			$t->softDeletes();
 		});

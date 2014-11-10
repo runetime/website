@@ -36,11 +36,6 @@ $app->singleton(
 	'App\Console\Kernel'
 );
 
-$app->singleton(
-	'Illuminate\Contracts\Debug\ExceptionHandler',
-	'App\Infrastructure\ExceptionHandler'
-);
-
 /*
 |--------------------------------------------------------------------------
 | Return The Application
