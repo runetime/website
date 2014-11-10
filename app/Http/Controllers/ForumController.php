@@ -48,8 +48,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @Get("forums")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -75,8 +73,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @Get("forums/{id}-{name}")
-	 *
 	 * @param     $id
 	 * @param int $page
 	 *
@@ -140,9 +136,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @get("forums/thread/{id}-{name}/page={page}")
-	 * @get("forums/thread/{id}-{name}")
-	 *
 	 * @param     $id
 	 * @param int $page
 	 *
@@ -159,11 +152,6 @@ class ForumController extends BaseController {
 		else
 			$posts = $thread->posts;
 		// Posts
-		$postList = [];
-		foreach($posts as $post) {
-			$post->author_info = $this->users->getById($post->author_id);
-			array_push($postList, $post);
-		}
 		// Breadcrumbs
 		$bc = [];
 		$subforumParent = $subforum;
@@ -180,13 +168,10 @@ class ForumController extends BaseController {
 		$this->bc($bc);
 		$this->nav('navbar.forums');
 		$this->title($thread->title);
-		return $this->view('forums.thread.view', compact('thread', 'postList'));
+		return $this->view('forums.thread.view', compact('thread', 'posts'));
 	}
 
 	/**
-	 * @get("forums/create/{id}-{name}")
-	 * @middleware("auth.logged")
-	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -244,9 +229,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @get("forums/thread/{id}-{name}/edit")
-	 * @middleware("auth.logged")
-	 *
 	 * @param $id
 	 */
 	public function getThreadEdit($id) {
@@ -278,8 +260,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @get("forums/tag/{name}")
-	 *
 	 * @param $name
 	 *
 	 * @return \Illuminate\View\View
@@ -304,9 +284,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @get("forums/post/{id}/report")
-	 * @middleware("auth.logged")
-	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -336,9 +313,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @get("forums/post/{id}/edit")
-	 * @middleware("auth.logged")
-	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -370,9 +344,6 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @get("forums/post/{id}/delete")
-	 * @middleware("auth.moderation")
-	 *
 	 * @param $id
 	 *
 	 * @return mixed
