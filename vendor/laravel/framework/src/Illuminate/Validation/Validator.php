@@ -5,7 +5,7 @@ use DateTime;
 use DateTimeZone;
 use Illuminate\Support\Fluent;
 use Illuminate\Support\MessageBag;
-use Illuminate\Contracts\Container\Container;
+use Illuminate\Container\Container;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,13 +26,6 @@ class Validator implements ValidatorContract {
 	 * @var \Illuminate\Validation\PresenceVerifierInterface
 	 */
 	protected $presenceVerifier;
-
-	/**
-	 * The container instance.
-	 *
-	 * @var \Illuminate\Contracts\Container\Container
-	 */
-	protected $container;
 
 	/**
 	 * The failed validation rules.
@@ -2441,7 +2434,7 @@ class Validator implements ValidatorContract {
 	/**
 	 * Set the IoC container instance.
 	 *
-	 * @param  \Illuminate\Contracts\Container\Container  $container
+	 * @param  \Illuminate\Container\Container  $container
 	 * @return void
 	 */
 	public function setContainer(Container $container)

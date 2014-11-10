@@ -61,16 +61,12 @@ class HandleExceptions {
 	/**
 	 * Handle an uncaught exception from the application.
 	 *
-	 * Note: Most exceptions can be handled via the try / catch block in
-	 * the HTTP and Console kernels. But, fatal error exceptions must
-	 * be handled differently since they are not normal exceptions.
-	 *
 	 * @param  \Exception  $e
 	 * @return void
 	 */
 	public function handleException($e)
 	{
-		$this->getExceptionHandler()->report($e);
+		$this->app['Illuminate\Contracts\Debug\ExceptionHandler']->report($e);
 
 		if ($this->app->runningInConsole())
 		{

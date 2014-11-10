@@ -20,8 +20,10 @@ class QueueEntityResolver implements EntityResolverContract {
 		{
 			return $instance;
 		}
-
-		throw new EntityNotFoundException($type, $id);
+		else
+		{
+			throw new EntityNotFoundException($type, $id);
+		}
 	}
 
 }

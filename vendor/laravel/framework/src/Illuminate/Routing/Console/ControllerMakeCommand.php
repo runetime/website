@@ -37,8 +37,10 @@ class ControllerMakeCommand extends GeneratorCommand {
 		{
 			return __DIR__.'/stubs/controller.plain.stub';
 		}
-
-		return __DIR__.'/stubs/controller.stub';
+		else
+		{
+			return __DIR__.'/stubs/controller.stub';
+		}
 	}
 
 	/**

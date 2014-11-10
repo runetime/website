@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\NameCheckForm;
+use App\Http\Requests\NameCheck\CheckRequest;
 class UtilityController extends BaseController {
 	/**
 	 * @get("name/check")
@@ -13,10 +13,11 @@ class UtilityController extends BaseController {
 	}
 
 	/**
-	 * @post("name/check")
+	 * @param CheckRequest $form
+	 *
 	 * @return mixed
 	 */
-	public function postNameCheck(NameCheckForm $form) {
+	public function postNameCheck(CheckRequest $form) {
 		$url = 'http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $form->input('rsn');
 		$response = \String::CURL($url);
 		return $response;

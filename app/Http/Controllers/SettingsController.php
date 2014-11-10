@@ -1,11 +1,11 @@
 <?php namespace App\Http\Controllers;
-use App\Http\Requests\SettingsAboutForm;
-use App\Http\Requests\SettingsPasswordForm;
-use App\Http\Requests\SettingsPhotoForm;
-use App\Http\Requests\SettingsProfileForm;
-use App\Http\Requests\SettingsRuneScapeForm;
-use App\Http\Requests\SettingsSignatureForm;
-use App\Http\Requests\SettingsSocialForm;
+use App\Http\Requests\Settings\AboutRequest;
+use App\Http\Requests\Settings\PasswordRequest;
+use App\Http\Requests\Settings\PhotoRequest;
+use App\Http\Requests\Settings\ProfileRequest;
+use App\Http\Requests\Settings\RuneScapeRequest;
+use App\Http\Requests\Settings\SignatureRequest;
+use App\Http\Requests\Settings\SocialRequest;
 use App\Runis\Accounts\UserRepository;
 /**
  * Class SettingsController
@@ -81,12 +81,11 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @post("settings")
-	 * @param SettingsProfileForm $form
+	 * @param ProfileRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postIndex(SettingsProfileForm $form) {
+	public function postIndex(ProfileRequest $form) {
 		return \redirect()->to('/settings/profile');
 	}
 
@@ -100,12 +99,11 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @post("settings/photo")
-	 * @param SettingsPhotoForm $form
+	 * @param PhotoRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPhoto(SettingsPhotoForm $form) {
+	public function postPhoto(PhotoRequest $form) {
 		return \redirect()->to('/settings/photo');
 	}
 
@@ -119,13 +117,11 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @post("settings/password")
-	 *
-	 * @param SettingsPasswordForm $form
+	 * @param PasswordRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPassword(SettingsPasswordForm $form) {
+	public function postPassword(PasswordRequest $form) {
 		return \redirect()->to('/settings/password');
 	}
 
@@ -139,12 +135,11 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @post("settings/about/me")
-	 * @param SettingsAboutForm $form
+	 * @param AboutRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postAbout(SettingsAboutForm $form) {
+	public function postAbout(AboutRequest $form) {
 		return \redirect()->to('/settings/about');
 	}
 
@@ -158,12 +153,11 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @post("settings/signature")
-	 * @param SettingsSignatureForm $form
+	 * @param SignatureRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postSignature(SettingsSignatureForm $form) {
+	public function postSignature(SignatureRequest $form) {
 		return \redirect()->to('/settings/signature');
 	}
 
@@ -177,12 +171,11 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @post("settings/social")
-	 * @param SettingsSocialForm $form
+	 * @param SocialRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postSocial(SettingsSocialForm $form) {
+	public function postSocial(SocialRequest $form) {
 		return \redirect()->to('/settings/social');
 	}
 
@@ -196,11 +189,11 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @post("settings/runescape")
-	 * @param SettingsRuneScapeForm $form
+	 * @param RuneScapeRequest $form
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postRuneScape(SettingsRuneScapeForm $form) {
+	public function postRuneScape(RuneScapeRequest $form) {
 		return \redirect()->to('/settings/runescape');
 	}
 }

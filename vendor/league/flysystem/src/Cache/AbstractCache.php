@@ -230,9 +230,8 @@ abstract class AbstractCache implements CacheInterface
     /**
      * Copy an object
      *
-     * @param  string $path
-     * @param  string $newpath
-     * @return bool|array
+     * @param  string  $path
+     * @param  string  $newpath
      */
     public function copy($path, $newpath)
     {
@@ -401,14 +400,9 @@ abstract class AbstractCache implements CacheInterface
      */
     public function cleanContents(array $contents)
     {
-        $cachedProperties = array_flip([
-            'path', 'dirname', 'basename', 'extension', 'filename',
-            'size', 'mimetype', 'visibility', 'timestamp',
-        ]);
-
         foreach ($contents as $path => $object) {
-            if (is_array($object)) {
-                $contents[$path] = array_intersect_key($object, $cachedProperties);
+            if (isset($object['contents'])) {
+                unset($contents[$path]['contents']);
             }
         }
 
@@ -455,11 +449,8 @@ abstract class AbstractCache implements CacheInterface
     public function setFromStorage($json)
     {
         list ($cache, $complete) = json_decode($json, true);
-
-        if (json_last_error() === JSON_ERROR_NONE && is_array($cache) && is_array($complete)) {
-            $this->cache = $cache;
-            $this->complete = $complete;
-        }
+        $this->cache = $cache;
+        $this->complete = $complete;
     }
 
     /**

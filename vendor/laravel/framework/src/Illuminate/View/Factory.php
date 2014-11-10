@@ -349,7 +349,7 @@ class Factory implements FactoryContract {
 
 		foreach ($composers as $callback => $views)
 		{
-			$registered = array_merge($registered, $this->composer($views, $callback));
+			$registered += $this->composer($views, $callback);
 		}
 
 		return $registered;

@@ -946,15 +946,4 @@ class Route {
 		unset($this->compiled);
 	}
 
-	/**
-	 * Dynamically access route parameters.
-	 *
-	 * @param  string  $key
-	 * @return mixed
-	 */
-	public function __get($key)
-	{
-		return $this->parameter($key);
-	}
-
 }

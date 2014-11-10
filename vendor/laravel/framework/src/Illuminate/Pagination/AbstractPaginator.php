@@ -339,7 +339,7 @@ abstract class AbstractPaginator {
 	 */
 	public function isEmpty()
 	{
-		return $this->items->isEmpty();
+		return empty($this->items);
 	}
 
 	/**
@@ -349,7 +349,7 @@ abstract class AbstractPaginator {
 	 */
 	public function count()
 	{
-		return $this->items->count();
+		return count($this->items);
 	}
 
 	/**

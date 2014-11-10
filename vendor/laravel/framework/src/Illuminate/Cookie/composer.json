@@ -1,6 +1,5 @@
 {
     "name": "illuminate/cookie",
-    "description": "The Illuminate Cookie package.",
     "license": "MIT",
     "authors": [
         {

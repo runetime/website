@@ -30,6 +30,13 @@ class FormRequest extends Request implements ValidatesWhenResolved {
 	protected $redirector;
 
 	/**
+	 * The route instance the request is dispatched to.
+	 *
+	 * @var \Illuminate\Routing\Route
+	 */
+	public $route;
+
+	/**
 	 * The URI to redirect to if validation fails.
 	 *
 	 * @var string
@@ -70,10 +77,12 @@ class FormRequest extends Request implements ValidatesWhenResolved {
 		{
 			return $this->container->call([$this, 'validator'], compact('factory'));
 		}
-
-		return $factory->make(
-			$this->formatInput(), $this->container->call([$this, 'rules']), $this->messages()
-		);
+		else
+		{
+			return $factory->make(
+				$this->formatInput(), $this->container->call([$this, 'rules']), $this->messages()
+			);
+		}
 	}
 
 	/**
@@ -136,10 +145,12 @@ class FormRequest extends Request implements ValidatesWhenResolved {
 		{
 			return new JsonResponse($errors, 422);
 		}
-
-		return $this->redirector->to($this->getRedirectUrl())
-                                        ->withInput($this->except($this->dontFlash))
-                                        ->withErrors($errors);
+		else
+		{
+			return $this->redirector->to($this->getRedirectUrl())
+                                            ->withInput($this->except($this->dontFlash))
+                                            ->withErrors($errors);
+		}
 	}
 
 	/**
@@ -184,8 +195,23 @@ class FormRequest extends Request implements ValidatesWhenResolved {
 		{
 			return $url->action($this->redirectAction);
 		}
+		else
+		{
+			return $url->previous();
+		}
+	}
 
-		return $url->previous();
+	/**
+	 * Set the route handling the request.
+	 *
+	 * @param  \Illuminate\Routing\Route  $route
+	 * @return \Illuminate\Foundation\Http\FormRequest
+	 */
+	public function setRoute(Route $route)
+	{
+		$this->route = $route;
+
+		return $this;
 	}
 
 	/**
@@ -212,6 +238,16 @@ class FormRequest extends Request implements ValidatesWhenResolved {
 		$this->container = $container;
 
 		return $this;
+	}
+
+	/**
+	 * Get an input element from the request.
+	 *
+	 * @return mixed
+	 */
+	public function __get($key)
+	{
+		return $this->input($key);
 	}
 
 	/**

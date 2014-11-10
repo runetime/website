@@ -1,6 +1,5 @@
 {
     "name": "illuminate/pagination",
-    "description": "The Illuminate Pagination package.",
     "license": "MIT",
     "authors": [
         {

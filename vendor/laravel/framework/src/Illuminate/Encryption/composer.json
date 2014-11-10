@@ -1,6 +1,5 @@
 {
     "name": "illuminate/encryption",
-    "description": "The Illuminate Encryption package.",
     "license": "MIT",
     "authors": [
         {

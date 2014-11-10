@@ -1,6 +1,9 @@
 <?php
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+/**
+ * Class CreateRadioRequestsTable
+ */
 class CreateRadioRequestsTable extends Migration{
 	/**
 	 * Run the migrations.
@@ -10,10 +13,9 @@ class CreateRadioRequestsTable extends Migration{
 	public function up(){
 		Schema::create('radio_requests',function(Blueprint $t){
 			$t->increments('id');
+			$t->integer('author_id');
 			$t->string('song_artist');
 			$t->string('song_name');
-			$t->integer('requester');
-			$t->integer('time_sent');
 			$t->string('ip_address');
 			$t->integer('status');
 			$t->timestamps();

@@ -148,8 +148,10 @@ if ( ! function_exists('cookie'))
 		{
 			return $cookie;
 		}
-
-		return $cookie->make($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
+		else
+		{
+			return $cookie->make($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
+		}
 	}
 }
 
@@ -170,8 +172,10 @@ if ( ! function_exists('csrf_token'))
 		{
 			return $session->getToken();
 		}
-
-		throw new RuntimeException("Application session store not set.");
+		else
+		{
+			throw new RuntimeException("Application session store not set.");
+		}
 	}
 }
 
@@ -492,7 +496,7 @@ if ( ! function_exists('view'))
 
 if ( ! function_exists('elixir'))
 {
-	/**
+       /**
 	* Get the path to a versioned Elixir file.
 	*
 	* @param  string  $file

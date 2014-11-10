@@ -566,8 +566,10 @@ class Container implements ArrayAccess, ContainerContract {
 		{
 			return new ReflectionMethod($callback[0], $callback[1]);
 		}
-
-		return new ReflectionFunction($callback);
+		else
+		{
+			return new ReflectionFunction($callback);
+		}
 	}
 
 	/**
@@ -706,9 +708,9 @@ class Container implements ArrayAccess, ContainerContract {
 	 */
 	protected function getContextualConcrete($abstract)
 	{
-		if (isset($this->contextual[end($this->buildStack)][$abstract]))
+		if (isset($this->contextual[last($this->buildStack)][$abstract]))
 		{
-			return $this->contextual[end($this->buildStack)][$abstract];
+			return $this->contextual[last($this->buildStack)][$abstract];
 		}
 	}
 

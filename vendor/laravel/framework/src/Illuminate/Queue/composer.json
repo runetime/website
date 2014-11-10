@@ -1,6 +1,5 @@
 {
     "name": "illuminate/queue",
-    "description": "The Illuminate Queue package.",
     "license": "MIT",
     "authors": [
         {

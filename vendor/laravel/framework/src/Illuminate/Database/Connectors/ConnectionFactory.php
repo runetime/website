@@ -1,25 +1,25 @@
 <?php namespace Illuminate\Database\Connectors;
 
 use PDO;
+use Illuminate\Container\Container;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\SqlServerConnection;
-use Illuminate\Contracts\Container\Container;
 
 class ConnectionFactory {
 
 	/**
 	 * The IoC container instance.
 	 *
-	 * @var \Illuminate\Contracts\Container\Container
+	 * @var \Illuminate\Container\Container
 	 */
 	protected $container;
 
 	/**
 	 * Create a new connection factory instance.
 	 *
-	 * @param  \Illuminate\Contracts\Container\Container  $container
+	 * @param  \Illuminate\Container\Container  $container
 	 * @return void
 	 */
 	public function __construct(Container $container)

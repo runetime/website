@@ -39,10 +39,12 @@ trait ValidatesRequests {
 		{
 			return new JsonResponse($errors, 422);
 		}
-
-		return redirect()->to($this->getRedirectUrl())
-                        ->withInput($request->input())
-                        ->withErrors($errors);
+		else
+		{
+			return redirect()->to($this->getRedirectUrl())
+                            ->withInput($request->input())
+                            ->withErrors($errors);
+		}
 	}
 
 	/**

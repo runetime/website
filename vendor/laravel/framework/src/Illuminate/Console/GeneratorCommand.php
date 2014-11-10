@@ -89,8 +89,10 @@ abstract class GeneratorCommand extends Command {
 		{
 			return $name;
 		}
-
-		return $this->parseName($this->getDefaultNamespace(trim($rootNamespace, '\\')).'\\'.$name);
+		else
+		{
+			return $this->parseName($this->getDefaultNamespace(trim($rootNamespace, '\\')).'\\'.$name);
+		}
 	}
 
 	/**

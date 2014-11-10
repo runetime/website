@@ -1,6 +1,10 @@
 <?php
 namespace App\RuneTime\Chat;
 use App\Runis\Core\EloquentRepository;
+/**
+ * Class ChatRepository
+ * @package App\RuneTime\Chat
+ */
 class ChatRepository extends EloquentRepository {
 	/**
 	 * @param Chat $model
@@ -67,5 +71,20 @@ class ChatRepository extends EloquentRepository {
 			where('channel', '=', $channelId)->
 			orderBy('id', 'desc')->
 			first();
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function getAfterId($id) {
+		$message = $this->model->
+			where('id', '=', $id)->
+			first();
+		return $this->model->
+			where('id', '>', $id)->
+			where('channel', '=', $message->channel)->
+			get();
 	}
 }

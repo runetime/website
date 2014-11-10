@@ -1,6 +1,5 @@
 {
     "name": "illuminate/hashing",
-    "description": "The Illuminate Hashing package.",
     "license": "MIT",
     "authors": [
         {

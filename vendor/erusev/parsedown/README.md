@@ -1,6 +1,6 @@
 ## Parsedown
 
-Parser for [Markdown](http://en.wikipedia.org/wiki/Markdown) in PHP.
+Better [Markdown](http://en.wikipedia.org/wiki/Markdown) parser for PHP.
 
 [[ demo ]](http://parsedown.org/demo)
 

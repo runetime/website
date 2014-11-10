@@ -1,6 +1,5 @@
 {
     "name": "illuminate/view",
-    "description": "The Illuminate View package.",
     "license": "MIT",
     "authors": [
         {
