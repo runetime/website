@@ -1,9 +1,13 @@
 <?php
 namespace App\RuneTime\Chat;
 use App\Runis\Core\Entity;
+/**
+ * Class Chat
+ * @package App\RuneTime\Chat
+ */
 class Chat extends Entity{
 	protected $table = 'chat_messages';
-	protected $fillable = ['author_id', 'contents', 'contents_parsed', 'status'];
+	protected $fillable = ['author_id', 'contents', 'contents_parsed', 'status', 'channel'];
 	protected $dates = [];
 	protected $softDelete = true;
 	const PER_PAGE = 20;

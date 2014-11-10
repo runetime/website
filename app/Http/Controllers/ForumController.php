@@ -2,7 +2,10 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\ForumPostEditForm;
 use App\Http\Requests\ForumPostReportForm;
-use App\Http\Requests\ForumThreadCreateForm;
+use App\Http\Requests\Forums\PostReportRequest;
+use App\Http\Requests\Forums\ReplyRequest;
+use App\Http\Requests\Forums\ThreadCreateForm;
+use App\Http\Requests\Forums\ThreadCreateRequest;
 use App\Http\Requests\ThreadReplyForm;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Subforums\Subforum;
@@ -14,8 +17,11 @@ use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Statuses\StatusRepository;
-use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
+/**
+ * Class ForumController
+ * @package App\Http\Controllers
+ */
 class ForumController extends BaseController {
 	private $posts;
 	private $subforums;
@@ -42,6 +48,8 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @Get("forums")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -61,12 +69,14 @@ class ForumController extends BaseController {
 		$forumInfo->latest = $this->users->getLatest();
 		$forumInfo->mostOnline = \Cache::get('info.most_online');
 		$recentThreads = $this->threads->getX(5, 'desc');
-		$this->nav('Forums');
-		$this->title('Forums');
-		return $this->view('forum.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
+		$this->nav('navbar.forums');
+		$this->title(trans('forums.name'));
+		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
 	}
 
 	/**
+	 * @Get("forums/{id}-{name}")
+	 *
 	 * @param     $id
 	 * @param int $page
 	 *
@@ -124,12 +134,15 @@ class ForumController extends BaseController {
 		$bc['forums'] = 'Forums';
 		$bc = array_reverse($bc);
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title($subforum->name);
-		return $this->view('forum.subforum.view', compact('subforum', 'subforumList', 'threadList'));
+		return $this->view('forums.subforum.view', compact('subforum', 'subforumList', 'threadList'));
 	}
 
 	/**
+	 * @get("forums/thread/{id}-{name}/page={page}")
+	 * @get("forums/thread/{id}-{name}")
+	 *
 	 * @param     $id
 	 * @param int $page
 	 *
@@ -165,12 +178,15 @@ class ForumController extends BaseController {
 		$bc['forums/'] = 'Forums';
 		$bc = array_reverse($bc);
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title($thread->title);
-		return $this->view('forum.thread.view', compact('thread', 'postList'));
+		return $this->view('forums.thread.view', compact('thread', 'postList'));
 	}
 
 	/**
+	 * @get("forums/create/{id}-{name}")
+	 * @middleware("auth.logged")
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -187,20 +203,20 @@ class ForumController extends BaseController {
 		}
 		$bc['forums/' . \String::slugEncode($subforum->id, $subforum->name)] = $subforum->name;
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Creating a New Thread');
-		return $this->view('forum.thread.create', compact('subforum'));
+		return $this->view('forums.thread.create', compact('subforum'));
 	}
 
 	/**
-	 * @param ForumThreadCreateForm $form
+	 * @param ThreadCreateRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postThreadCreate(ForumThreadCreateForm $form) {
+	public function postThreadCreate(ThreadCreateRequest $form) {
 		$subforum = $this->subforums->getById($form->subforum);
 		if(empty($subforum))
-			return $this->view('errors.forum.subforum.missing');
+			return $this->view('errors.forums.subforum.missing');
 		$tags = json_encode(explode(",", str_replace(", ", ",", $form->tags)));
 		$poll = -1;
 		$thread = new Thread;
@@ -224,10 +240,13 @@ class ForumController extends BaseController {
 		}
 		$this->subforums->updateLastPost($post->id, (int)$subforum->id);
 		$this->subforums->incrementThreads($subforum->id);
-		return \redirect()->action('ForumController@getThread', ['id' => $thread->id, 'name' => \String::slugEncode($thread->title)]);
+		return \redirect()->to('forums/thread/' . \String::slugEncode($thread->id, $thread->title));
 	}
 
 	/**
+	 * @get("forums/thread/{id}-{name}/edit")
+	 * @middleware("auth.logged")
+	 *
 	 * @param $id
 	 */
 	public function getThreadEdit($id) {
@@ -239,11 +258,11 @@ class ForumController extends BaseController {
 	}
 
 	/**
-	 * @param ThreadReplyForm $form
+	 * @param ReplyRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postReply(ThreadReplyForm $form) {
+	public function postReply(ReplyRequest $form) {
 		$thread = Thread::find($form->input('id'));
 		if(empty($thread))
 			\App::abort(404);
@@ -259,6 +278,8 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @get("forums/tag/{name}")
+	 *
 	 * @param $name
 	 *
 	 * @return \Illuminate\View\View
@@ -277,12 +298,15 @@ class ForumController extends BaseController {
 		// Breadcrumbs
 		$bc = ['forums/' => 'Forums'];
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Tag: ' . $tag->name);
-		return $this->view('forum.tags.view', compact('tag', 'threadList'));
+		return $this->view('forums.tags.view', compact('tag', 'threadList'));
 	}
 
 	/**
+	 * @get("forums/post/{id}/report")
+	 * @middleware("auth.logged")
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -293,17 +317,17 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread);
 		$postee = $this->users->getById($post->author_id);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Reporting a Post');
-		return $this->view('forum.post.report', compact('post', 'thread', 'postee'));
+		return $this->view('forums.post.report', compact('post', 'thread', 'postee'));
 	}
 
 	/**
-	 * @param ForumPostReportForm $form
+	 * @param PostReportRequest $form
 	 *
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPostReport(ForumPostReportForm $form) {
+	public function postPostReport(PostReportRequest $form) {
 		$contents = $form->contents;
 		$contentsParsed = $contents;
 		$report = new Report;
@@ -312,6 +336,9 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @get("forums/post/{id}/edit")
+	 * @middleware("auth.logged")
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -321,17 +348,17 @@ class ForumController extends BaseController {
 		if(!$post)
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title('Editing Post in ' . $thread->title);
-		return $this->view('forum.post.edit', compact('post', 'thread'));
+		return $this->view('forums.post.edit', compact('post', 'thread'));
 	}
 
 	/**
-	 * @param ForumPostEditForm $form
+	 * @param PostEditRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPostEdit(ForumPostEditForm $form) {
+	public function postPostEdit(PostEditRequest $form) {
 		$post = $this->posts->getById($form->id);
 		if(!$post)
 			\App::abort(404);
@@ -343,6 +370,9 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @get("forums/post/{id}/delete")
+	 * @middleware("auth.moderation")
+	 *
 	 * @param $id
 	 *
 	 * @return mixed

@@ -1,29 +1,39 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\LoginForm;
-use App\Http\Requests\SignupForm;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\SignupRequest;
+use App\Http\Requests\Auth\PasswordEmailRequest;
+use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\PasswordBroker;
+/**
+ * Class AuthController
+ * @package App\Http\Controllers
+ */
 class AuthController extends BaseController {
 	/**
 	 * @var UserRepository
 	 */
 	private $users;
+	/**
+	 * @var PasswordBroker
+	 */
+	private $passwords;
 
 	/**
 	 * @param Guard          $auth
+	 * @param PasswordBroker $passwords
 	 * @param UserRepository $users
 	 */
-	public function __construct(Guard $auth, UserRepository $users) {
+	public function __construct(Guard $auth, PasswordBroker $passwords, UserRepository $users) {
 		$this->auth = $auth;
 		$this->users = $users;
+		$this->passwords = $passwords;
 	}
 
 	/**
-	 * @get("login")
-	 * @middleware("guest")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm() {
@@ -33,24 +43,18 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @middleware("guest")
-	 * @post("login")
-	 *
-	 * @param LoginForm $form
+	 * @param LoginRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postLoginForm(LoginForm $form) {
+	public function postLoginForm(LoginRequest $form) {
 		if(!empty($this->users->getByEmail($form->input('email'))))
 			if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
 				return \redirect()->to('/');
-		return \redirect()->action('AuthController@getLoginForm');
+		return \redirect()->to('login');
 	}
 
 	/**
-	 * @get("signup")
-	 * @middleware("guest")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getSignupForm() {
@@ -61,14 +65,11 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @middleware("guest")
-	 * @post("signup")
-	 *
-	 * @param SignupForm $form
+	 * @param SignupRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postSignupForm(SignupForm $form) {
+	public function postSignupForm(SignupRequest $form) {
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
 		if(!$form->input('password') == $form->input('password2'))
@@ -83,13 +84,64 @@ class AuthController extends BaseController {
 	}
 
 	/**
-	 * @get("logout")
-	 * @middleware("auth.logged")
-	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getLogout() {
 		$this->auth->logout();
-		return redirect()->action('HomeController@getIndex');
+		return redirect()->to('/');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getPasswordEmail() {
+		$this->nav('navbar.login');
+		$this->title('Password Reset');
+		return $this->view('auth.password.email');
+	}
+
+	/**
+	 * @param PasswordEmailRequest $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|int
+	 */
+	public function postPasswordEmail(PasswordEmailRequest $request) {
+		switch ($response = $this->passwords->sendResetLink($request->only('email')))
+		{
+			case PasswordBroker::INVALID_USER:
+				return redirect()->back()->with('error', trans($response));
+
+			case PasswordBroker::RESET_LINK_SENT:
+				return redirect()->back()->with('status', trans($response));
+		}
+		return 1;
+	}
+
+	/**
+	 * @param $token
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getPasswordReset($token) {
+		$this->nav('navbar.runetime.runetime');
+		$this->title('Password Reset');
+		return $this->view('auth.password.reset', compact('token'));
+	}
+
+	/**
+	 * @param PasswordResetRequest $form
+	 *
+	 * @return mixed
+	 */
+	public function postPasswordReset(PasswordResetRequest $form) {
+		$user = $this->users->getByEmail($form->email);
+		if($user) {
+			$user->password = \Hash::make($form->password);
+			$user->save();
+			$this->auth->logout();
+			$this->auth->loginUsingId($user->id);
+			return \redirect()->to('/');
+		}
+		return 1;
 	}
 }
