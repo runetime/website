@@ -352,8 +352,6 @@
     <include name="**/*.php" />
    </fileset>
   </copy>
-
-  <copy file="${basedir}/vendor/phpspec/prophecy-phpunit/Prophecy/PhpUnit/ProphecyTestCase.php" todir="${basedir}/build/phar/phpspec-prophecy"/>
  </target>
 
  <target name="phar-build">

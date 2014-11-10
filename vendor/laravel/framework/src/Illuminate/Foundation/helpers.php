@@ -148,10 +148,8 @@ if ( ! function_exists('cookie'))
 		{
 			return $cookie;
 		}
-		else
-		{
-			return $cookie->make($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
-		}
+
+		return $cookie->make($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
 	}
 }
 
@@ -172,10 +170,8 @@ if ( ! function_exists('csrf_token'))
 		{
 			return $session->getToken();
 		}
-		else
-		{
-			throw new RuntimeException("Application session store not set.");
-		}
+
+		throw new RuntimeException("Application session store not set.");
 	}
 }
 
@@ -496,7 +492,7 @@ if ( ! function_exists('view'))
 
 if ( ! function_exists('elixir'))
 {
-       /**
+	/**
 	* Get the path to a versioned Elixir file.
 	*
 	* @param  string  $file
@@ -508,12 +504,12 @@ if ( ! function_exists('elixir'))
 
 		if (is_null($manifest))
 		{
-		    $manifest = json_decode(file_get_contents(public_path().'/build/rev-manifest.json'), true);
+			$manifest = json_decode(file_get_contents(public_path().'/build/rev-manifest.json'), true);
 		}
 
 		if (isset($manifest[$file]))
 		{
-		    return '/build/'.$manifest[$file];
+			return '/build/'.$manifest[$file];
 		}
 
 		throw new InvalidArgumentException("File {$file} not defined in asset manifest.");
