@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "~5.0",
+		"laravel/framework": "dev-master#e02e3456ed68d46361a1098c73f4aabee9b2aacd",
 		"barryvdh/laravel-ide-helper": "~1.11@dev",
 		"doctrine/dbal": "2.4.3",
 		"erusev/parsedown": "dev-master",
