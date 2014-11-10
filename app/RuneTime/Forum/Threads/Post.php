@@ -14,6 +14,10 @@ class Post extends Entity {
 	}
 
 	public function user() {
+		return $this->author();
+	}
+
+	public function author() {
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 }
