@@ -1,31 +1,6 @@
 <?php
 namespace App\Utilities;
-#
-#
-# Parsedown
-# http://parsedown.org
-#
-# (c) Emanuil Rusev
-# http://erusev.com
-#
-# For the full license information, view the LICENSE file that was distributed
-# with this source code.
-#
-#
-
-class Parsedown
-{
-    #
-    # Philosophy
-
-    # Parsedown recognises that the Markdown syntax is optimised for humans so
-    # it tries to read like one. It goes through text line by line. It looks at
-    # how lines start to identify blocks. It looks for special characters to
-    # identify inline elements.
-
-    #
-    # ~
-
+class Parsedown {
     function text($text)
     {
         # make sure no definitions are set
@@ -66,7 +41,7 @@ class Parsedown
         return $this;
     }
 
-    private $markupEscaped;
+    private $markupEscaped = true;
 
     function setMarkupEscaped($markupEscaped)
     {
