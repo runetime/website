@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\ForumPostEditForm;
 use App\Http\Requests\ForumPostReportForm;
+use App\Http\Requests\Forums\PostEditRequest;
 use App\Http\Requests\Forums\PostReportRequest;
 use App\Http\Requests\Forums\ReplyRequest;
 use App\Http\Requests\Forums\ThreadCreateForm;
