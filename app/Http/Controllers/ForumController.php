@@ -59,7 +59,7 @@ class ForumController extends BaseController {
 				$subforumList[$subforum->parent] = [];
 			$subforum->last_post_info = $this->posts->getById($subforum->last_post);
 			if(!empty($subforum->last_post_info))
-				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread_id);
+				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread[0]->id);
 			array_push($subforumList[$subforum->parent], $subforum);
 		}
 		$forumInfo = new \stdClass;
@@ -94,7 +94,7 @@ class ForumController extends BaseController {
 		foreach($subforums as $subforumItem) {
 			$subforumItem->last_post_info = $this->posts->getById($subforumItem->last_post);
 			if(!empty($subforumItem->last_post_info))
-				$subforumItem->last_thread_info = $this->threads->getById($subforumItem->last_post_info->thread_id);
+				$subforumItem->last_thread_info = $this->threads->getById($subforumItem->last_post_info->thread[0]->id);
 			array_push($subforumList, $subforumItem);
 		}
 		$hasMod = false;
