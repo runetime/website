@@ -3,48 +3,48 @@ $messages=3;
 $follow=6;
 $notifications=$messages + $follow;
 $navs=[
-	''       => Lang::get('navbar.home'),
-	'forums' => Lang::get('navbar.forums'),
-	'radio'  => Lang::get('navbar.radio'),
-	Lang::get('navbar.runetime.runetime') => [
-		'news'       => Lang::get('navbar.runetime.news'),
-		'awards'     => Lang::get('navbar.runetime.awards'),
-		'signatures' => Lang::get('navbar.runetime.signatures'),
-		'members'    => Lang::get('navbar.runetime.members'),
-		'staff/list' => Lang::get('navbar.runetime.staff_list'),
-		'about'      => Lang::get('navbar.runetime.about_us'),
-		'tickets'    => Lang::get('navbar.runetime.tickets'),
+	''       => trans('navbar.home'),
+	'forums' => trans('navbar.forums'),
+	'radio'  => trans('navbar.radio'),
+	trans('navbar.runetime.runetime') => [
+		'news'       => trans('navbar.runetime.news'),
+		'awards'     => trans('navbar.runetime.awards'),
+		'signatures' => trans('navbar.runetime.signatures'),
+		'members'    => trans('navbar.runetime.members'),
+		'staff/list' => trans('navbar.runetime.staff_list'),
+		'about'      => trans('navbar.runetime.about_us'),
+		'tickets'    => trans('navbar.runetime.tickets'),
 	],
-	Lang::get('navbar.runescape.runescape') => [
-		'guides/quests'       => Lang::get('navbar.runescape.guides.quests'),
-		'guides/locations'    => Lang::get('navbar.runescape.guides.locations'),
-		'databases/items/'    => Lang::get('navbar.runescape.databases.items'),
-		'databases/monsters/' => Lang::get('navbar.runescape.databases.monsters'),
-		'map/runescape'       => Lang::get('navbar.runescape.world_map'),
-		'calculators'         => Lang::get('navbar.runescape.calculators'),
-		'play'                => Lang::get('navbar.runescape.play'),
-		'name/check'  => Lang::get('navbar.runescape.name_checker'),
-		'calculators/combat'  => Lang::get('navbar.runescape.combat_calculator'),
+	trans('navbar.runescape.runescape') => [
+		'guides/quests'       => trans('navbar.runescape.guides.quests'),
+		'guides/locations'    => trans('navbar.runescape.guides.locations'),
+		'databases/items/'    => trans('navbar.runescape.databases.items'),
+		'databases/monsters/' => trans('navbar.runescape.databases.monsters'),
+		'map/runescape'       => trans('navbar.runescape.world_map'),
+		'calculators'         => trans('navbar.runescape.calculators'),
+		'play'                => trans('navbar.runescape.play'),
+		'name/check'  => trans('navbar.runescape.name_checker'),
+		'calculators/combat'  => trans('navbar.runescape.combat_calculator'),
 	],
-	Lang::get('navbar.social.social') => [
-		'calendar'    => Lang::get('navbar.social.calendar'),
-		'livestream'  => Lang::get('navbar.social.livestream'),
-		'media'       => Lang::get('navbar.social.social_media'),
-		'clan'        => Lang::get('navbar.social.our_clan'),
+	trans('navbar.social.social') => [
+		'calendar'    => trans('navbar.social.calendar'),
+		'livestream'  => trans('navbar.social.livestream'),
+		'media'       => trans('navbar.social.social_media'),
+		'clan'        => trans('navbar.social.our_clan'),
 	],
 ];
 if(\Auth::check() && \Auth::user()->isStaff()) {
-	$navs['Staff'] = [
-		'staff'          => Lang::get('navbar.staff.staff'),
+	$navs[trans('navbar.staff.staff')] = [
+		'staff'          => trans('navbar.staff.staff'),
 	];
 	if(\Auth::user()->hasOneOfRoles(1))
-		$navs['Staff']['staff/administrator'] = Lang::get('navbar.staff.administrator');
+		$navs[trans('navbar.staff.staff')]['staff/administrator'] = Lang::get('navbar.staff.administrator');
 	if(\Auth::user()->hasOneOfRoles(1, 2, 3))
-		$navs['Staff']['staff/radio'] = Lang::get('navbar.staff.radio');
+		$navs[trans('navbar.staff.staff')]['staff/radio'] = Lang::get('navbar.staff.radio');
 	if(\Auth::user()->hasOneOfRoles(1, 10, 11))
-		$navs['Staff']['staff/moderation'] = Lang::get('navbar.staff.moderation');
-	$navs['Staff']['tickets/manage'] = Lang::get('navbar.staff.ticket');
-	$navs['Staff']['staff/checkup']  = Lang::get('navbar.staff.checkup');
+		$navs[trans('navbar.staff.staff')]['staff/moderation'] = Lang::get('navbar.staff.moderation');
+	$navs[trans('navbar.staff.staff')]['tickets/manage'] = Lang::get('navbar.staff.ticket');
+	$navs[trans('navbar.staff.staff')]['staff/checkup']  = Lang::get('navbar.staff.checkup');
 }
 if(!Auth::check())
 	$navLogged = [
