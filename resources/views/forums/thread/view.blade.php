@@ -24,13 +24,13 @@
 	@endforeach
 					</ul>
 @endif
-@foreach($postList as $post)
+@foreach($posts as $post)
 	@include('forums.post._show')
 @endforeach
 				</div>
 @if(\Auth::check())
 	@if(!$thread->isLocked())
-		@include('forums.post._edit', ['id' => $thread->id])
+		@include('forums.post._edit', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title) . '/reply'])
 	@else
 		@include('forums.post._locked')
 	@endif
