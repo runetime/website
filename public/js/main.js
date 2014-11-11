@@ -1,21 +1,22 @@
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
 /*jslint devel: true */
-/* jshint -W097 */
+/*jshint -W097*/
 function RuneTime() {
 	"use strict";
-	this.Utilities = null;
+	this.Calculator = null;
 	this.ChatBox = null;
 	this.FormSignup = null;
-	this.Calculator = null;
+	this.Forums = null;
 	this.NameChecker = null;
+	this.Utilities = null;
 	this.Utilities = function Utilities() {
 		this.getAJAX = function getAJAX(path) {
 			return $.ajax({
 				url     : path,
 				type    : 'get',
 				dataType: 'html',
-				async   : false
+				async   : true
 			});
 		};
 		this.postAJAX = function postAJAX(path, data) {
@@ -53,6 +54,40 @@ function RuneTime() {
 		this.JSONDecode = function JSONDecode(json) {
 			return $.parseJSON(json);
 		};
+		this.scrollTo = function scrollTo(element, time) {
+			$('html, body').animate({
+				scrollTop: $(element).offset().top
+			}, time);
+		}
+	};
+	this.Forums = function Forums() {
+		this.elements = {};
+		this.Post = null;
+		this.Post = function Post() {
+			/**
+			 * Sets a quote to be at affixed to the open post editor
+			 * @param id
+			 */
+			this.quote = function quote(id) {
+				var source = $("[rt-data='post#" + id +":source']").html(),
+					postContents = $(RuneTime.Forums.elements.postEditor).val();
+				source = source.replace(/\n/g, '\n>');
+				source = source.replace(/&lt;/g, '<');
+				source = source.replace(/&gt;/g, '>');
+				source = ">" + source;
+				if(postContents.length > 0)
+					postContents += "\n";
+				$(RuneTime.Forums.elements.postEditor).val(postContents + source + "\n");
+				RuneTime.Utilities.scrollTo($(RuneTime.Forums.elements.postEditor), 1000);
+				$(RuneTime.Forums.elements.postEditor).focus();
+			}
+		};
+		this.setup = function setup() {
+			this.elements = {
+				'postEditor': "[rt-data='post.edit']"
+			};
+			this.Post = new this.Post();
+		}
 	};
 	this.ChatBox = function ChatBox() {
 		this.channel = '#radio';
@@ -779,6 +814,8 @@ function RuneTime() {
 }
 RuneTime = new RuneTime();
 RuneTime.Utilities = new RuneTime.Utilities();
+RuneTime.Forums = new RuneTime.Forums();
+RuneTime.Forums.setup();
 $(function () {
 	"use strict";
 	$('[data-toggle]').tooltip();

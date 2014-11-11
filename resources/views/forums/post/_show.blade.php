@@ -1,4 +1,4 @@
-					<div class='post row{{$post->status == 0 ? " post-hidden" : ""}}'>
+					<div class='post row{{$post->status == 0 ? " post-hidden" : ""}}' rt-data='post#{{ $post->id }}'>
 						<div class='post-info'>
 							<div class='pull-left'>
 								{!!\Link::name($post->author->id)!!}
@@ -37,14 +37,17 @@
 	@endif
 						</div>
 						<div class='col-xs-12 col-sm-9 col-md-10'>
-							{!!$post->contents_parsed!!}
+							<div class='post-contents' rt-data='post#{{ $post->id }}:contents'>
+								{!!$post->contents_parsed!!}
+								<div class='hidden' rt-data='post#{{ $post->id }}:source'>{!! $post->contents !!}</div>
+							</div>
 	@if(!empty($post->author_info->signature_parsed))
 							<hr />
 							{{$post->author_info->signature_parsed}}
 	@endif
 	@if(\Auth::check())
 							<ul class='list-inline'>
-	    @if(\Auth::user()->id != $post->author_id)
+		@if(\Auth::user()->id != $post->author_id)
 								<li>
 									<a href='/forums/post/{{$post->id}}/report' title='Report This Post'>
 										Report
@@ -72,7 +75,7 @@
 		@endif
 		@if(\Auth::check())
 								<li>
-									<a title='Quote This Post' onclick="RuneTime.Forum.Post.quote();">
+									<a title='Quote This Post' onclick="RuneTime.Forums.Post.quote({{ $post->id }});">
 										Quote
 									</a>
 								</li>
