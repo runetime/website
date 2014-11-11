@@ -251,6 +251,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		return $this->belongsToMany('App\RuneTime\Messenger\Message');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function tickets() {
 		return $this->belongsToMany('App\RuneTime\Tickets\Ticket');
 	}
