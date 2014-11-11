@@ -2,8 +2,6 @@
 namespace App\Http\Controllers;
 class LanguageController extends BaseController {
 	/**
-	 * @get("language/set")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getSet() {
@@ -21,8 +19,6 @@ class LanguageController extends BaseController {
 	}
 
 	/**
-	 * @get("language/set/{initials}")
-	 *
 	 * @param $initials
 	 *
 	 * @return \Illuminate\Http\RedirectResponse

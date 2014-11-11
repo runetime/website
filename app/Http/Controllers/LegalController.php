@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 class LegalController extends BaseController {
 	/**
-	 * @get("privacy")
 	 * @return \Illuminate\View\View
 	 */
 	public function getPrivacy() {
@@ -12,7 +11,6 @@ class LegalController extends BaseController {
 	}
 
 	/**
-	 * @get("terms")
 	 * @return \Illuminate\View\View
 	 */
 	public function getTerms() {

@@ -4,8 +4,18 @@ use App\RuneTime\News\NewsRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 class HomeController extends BaseController {
+	/**
+	 * @var NewsRepository
+	 */
 	private $news;
+	/**
+	 * @var StatusRepository
+	 */
 	private $statuses;
+	/**
+	 * @var ThreadRepository
+	 */
+	private $threads;
 
 	/**
 	 * @param NewsRepository   $news
@@ -19,7 +29,7 @@ class HomeController extends BaseController {
 	}
 
 	/**
-	 * @Get("/")
+	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
 		$news = $this->news->getRecentNews(3);

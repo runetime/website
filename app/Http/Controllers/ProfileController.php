@@ -22,7 +22,6 @@ class ProfileController extends BaseController {
 
 	/**
 	 * @param $id
-	 * @get("profile/{id}-{name}")
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -34,20 +33,24 @@ class ProfileController extends BaseController {
 		$latestStatus = $this->statuses->getByAuthor($profile->id);
 		$bc = ['forums/' => 'Forums'];
 		$this->bc($bc);
-		$this->nav('Forums');
+		$this->nav('navbar.forums');
 		$this->title($profile->display_name);
 		return $this->view('forums.profile.index', compact('profile', 'latestStatus'));
 	}
 
 	/**
-	 * @get("profile/{id}-{name}/feed")
+	 * @return \Illuminate\View\View
 	 */
 	public function getProfileFeed() {
+		$this->nav('navbar.forums');
+		return $this->view('forums.profile.index', compact('profile', 'latestStatus'));
 	}
 
 	/**
-	 * @get("profile/{id}-{name}/friends")
+	 * @return \Illuminate\View\View
 	 */
 	public function getProfileFriends() {
+		$this->nav('navbar.forums');
+		return $this->view('forums.profile.index', compact('profile', 'latestStatus'));
 	}
 }

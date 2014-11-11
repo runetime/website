@@ -58,9 +58,6 @@ class StaffController extends BaseController {
 	}
 
 	/**
-	 * @get("staff")
-	 * @middleware("auth.staff")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -120,9 +117,6 @@ class StaffController extends BaseController {
 	}
 
 	/**
-	 * @get("staff/moderation")
-	 * @middleware("auth.moderation")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getModerationIndex() {
@@ -141,9 +135,6 @@ class StaffController extends BaseController {
 	}
 
 	/**
-	 * @get("staff/moderation/report/{id}")
-	 * @middleware("auth.moderation")
-	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -162,9 +153,6 @@ class StaffController extends BaseController {
 	}
 
 	/**
-	 * @get("staff/moderation/thread/{id}-{name}/status={status}")
-	 * @middleware("auth.moderation")
-	 *
 	 * @param $id
 	 * @param $status
 	 *
@@ -180,9 +168,6 @@ class StaffController extends BaseController {
 	}
 
 	/**
-	 * @get("staff/moderation/thread/{id}-{name}/title")
-	 * @middleware("auth.moderation")
-	 *
 	 * @param $id
 	 *
 	 * @internal param $name
@@ -214,8 +199,6 @@ class StaffController extends BaseController {
 	}
 
 	/**
-	 * @get("staff/list")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getList() {

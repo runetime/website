@@ -2,13 +2,11 @@
 namespace App\Http\Controllers;
 class LivestreamController extends BaseController {
 	/**
-	 * @get("livestream")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		if(!\Cache::has('livestream.status')) {
+		if(!\Cache::has('livestream.status'))
 			$this->getReset();
-		}
 		$status = \Cache::get('livestream.status');
 		$this->js('livestream');
 		$this->nav('Social');
@@ -17,16 +15,14 @@ class LivestreamController extends BaseController {
 	}
 
 	/**
-	 * @get("livestream/reset")
-	 * @middleware("auth.logged")
-	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getReset() {
 		$stream = json_decode(\String::CURL('https://api.twitch.tv/kraken/streams/runetime'));
 		if(!empty($stream->stream->game))
-			\Cache::put('livestream.status', true, \Carbon::now()->addMinutes(10)); else
+			\Cache::put('livestream.status', true, \Carbon::now()->addMinutes(10));
+		else
 			\Cache::put('livestream.status', false, \Carbon::now()->addMinutes(10));
-		return \redirect()->to('/livestream/');
+		return \redirect()->to('/livestream');
 	}
 }

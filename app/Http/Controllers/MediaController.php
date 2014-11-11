@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 class MediaController extends BaseController {
 	/**
-	 * @get("media")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {

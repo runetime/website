@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\NewsForm;
+use App\Http\Requests\CreateNewsRequest;
 use App\RuneTime\News\News;
 use App\RuneTime\News\NewsRepository;
 use Illuminate\Contracts\Auth\Guard;
@@ -18,7 +18,6 @@ class NewsController extends BaseController {
 	}
 
 	/**
-	 * @get("news")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -33,7 +32,7 @@ class NewsController extends BaseController {
 
 	/**
 	 * @param $slug
-	 * @get("news/{slug}")
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($slug) {
@@ -47,15 +46,12 @@ class NewsController extends BaseController {
 	}
 
 	/**
-	 * @get("news/search/{searchSlug}")
+	 *
 	 */
 	public function getSearch() {
 	}
 
 	/**
-	 * @get("news/create")
-	 * @middleware("auth.staff")
-	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getCreate() {
@@ -66,24 +62,20 @@ class NewsController extends BaseController {
 	}
 
 	/**
-	 * @middleware("auth.staff")
-	 * @post("news/create")
-	 *
-	 * @param NewsForm $form
+	 * @param CreateNewsRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postCreate(NewsForm $form) {
+	public function postCreate(CreateNewsRequest $form) {
 		$news = new News;
 		$news->author_id = \Auth::user()->id;
-		$news->title = $form->input('name');
-		$news->contents = $form->input('contents');
+		$news->title = $form->name;
+		$news->contents = $form->contents;
 		$news->status = News::STATUS_PUBLISHED;
 		$news->comments = 0;
 		$news->save();
-		if($form->hasFile('image') && $form->file('image')->isValid()) {
+		if($form->hasFile('image') && $form->file('image')->isValid())
 			$form->file('image')->move('./img/news/' . $news->id . '.png');
-		}
 		return redirect()->action('NewsController@getView', ['slug' => \String::slugEncode($news->id, $news->title)]);
 	}
 }

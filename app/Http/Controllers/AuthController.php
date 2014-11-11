@@ -6,7 +6,6 @@ use App\Http\Requests\Auth\PasswordEmailRequest;
 use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 /**
  * Class AuthController
@@ -23,12 +22,10 @@ class AuthController extends BaseController {
 	private $passwords;
 
 	/**
-	 * @param Guard          $auth
 	 * @param PasswordBroker $passwords
 	 * @param UserRepository $users
 	 */
-	public function __construct(Guard $auth, PasswordBroker $passwords, UserRepository $users) {
-		$this->auth = $auth;
+	public function __construct(PasswordBroker $passwords, UserRepository $users) {
 		$this->users = $users;
 		$this->passwords = $passwords;
 	}
@@ -48,8 +45,9 @@ class AuthController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postLoginForm(LoginRequest $form) {
-		if(!empty($this->users->getByEmail($form->input('email'))))
-			if($this->auth->attempt(['email' => $form->input('email'), 'password' => $form->input('password')], true))
+		$user = $this->users->getByEmail($form->email);
+		if($user)
+			if(\Auth::attempt(['email' => $form->email, 'password' => $form->password], true))
 				return \redirect()->to('/');
 		return \redirect()->to('login');
 	}
@@ -72,14 +70,14 @@ class AuthController extends BaseController {
 	public function postSignupForm(SignupRequest $form) {
 		$this->nav('Sign Up');
 		$this->title('Error Signing Up');
-		if(!$form->input('password') == $form->input('password2'))
+		if(!$form->password == $form->password2)
 			return $this->view('errors.signup.passwords');
-		if($this->users->getByDisplayName($form->input('display_name')))
+		if($this->users->getByDisplayName($form->display_name))
 			return $this->view('errors.signup.taken');
 		$user = new User;
-		$user = $user->saveNew($form->input('display_name'), $form->input('email'), \Hash::make($form->input('password')));
+		$user = $user->saveNew($form->display_name, $form->email, \Hash::make($form->password));
 		$user->setRole('Members');
-		$this->auth->loginUsingId($user->id);
+		\Auth::loginUsingId($user->id);
 		return \redirect()->to('/');
 	}
 
@@ -87,7 +85,7 @@ class AuthController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getLogout() {
-		$this->auth->logout();
+		\Auth::logout();
 		return redirect()->to('/');
 	}
 
@@ -138,8 +136,8 @@ class AuthController extends BaseController {
 		if($user) {
 			$user->password = \Hash::make($form->password);
 			$user->save();
-			$this->auth->logout();
-			$this->auth->loginUsingId($user->id);
+			\Auth::logout();
+			\Auth::loginUsingId($user->id);
 			return \redirect()->to('/');
 		}
 		return 1;

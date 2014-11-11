@@ -10,8 +10,6 @@ use App\Runis\Accounts\UserRepository;
 /**
  * Class SettingsController
  * @package App\Http\Controllers
- *
- * @middleware("auth.logged")
  */
 class SettingsController extends BaseController {
 	/**
@@ -27,7 +25,6 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @get("settings")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
@@ -90,7 +87,6 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @get("settings/photo")
 	 * @return \Illuminate\View\View
 	 */
 	public function getPhoto() {
@@ -108,7 +104,6 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @get("settings/password")
 	 * @return \Illuminate\View\View
 	 */
 	public function getPassword() {
@@ -126,7 +121,6 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @get("settings/about/me")
 	 * @return \Illuminate\View\View
 	 */
 	public function getAbout() {
@@ -144,7 +138,6 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @get("settings/signature")
 	 * @return \Illuminate\View\View
 	 */
 	public function getSignature() {
@@ -162,7 +155,6 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @get("settings/social")
 	 * @return \Illuminate\View\View
 	 */
 	public function getSocial() {
@@ -180,7 +172,6 @@ class SettingsController extends BaseController {
 	}
 
 	/**
-	 * @get("settings/runescape")
 	 * @return \Illuminate\View\View
 	 */
 	public function getRuneScape() {

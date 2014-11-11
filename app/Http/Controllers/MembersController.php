@@ -8,7 +8,13 @@ use App\Runis\Accounts\UserRepository;
  * @package App\Http\Controllers
  */
 class MembersController extends BaseController {
+	/**
+	 * @var RoleRepository
+	 */
 	private $roles;
+	/**
+	 * @var UserRepository
+	 */
 	private $users;
 
 	/**

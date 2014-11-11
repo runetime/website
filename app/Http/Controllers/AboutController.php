@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 class AboutController extends BaseController {
 	/**
-	 * @get("about")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {

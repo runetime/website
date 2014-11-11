@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
  */
 class MapController extends BaseController {
 	/**
-	 * @get("map")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {

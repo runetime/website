@@ -16,10 +16,25 @@ use Illuminate\Http\Response;
  * @package App\Http\Controllers
  */
 class ChatController extends BaseController{
+	/**
+	 * @var ActionRepository
+	 */
 	private $actions;
+	/**
+	 * @var BBCodeRepository
+	 */
 	private $bbcode;
+	/**
+	 * @var ChannelRepository
+	 */
 	private $channels;
+	/**
+	 * @var ChatRepository
+	 */
 	private $chat;
+	/**
+	 * @var UserRepository
+	 */
 	private $users;
 
 	/**
@@ -29,12 +44,12 @@ class ChatController extends BaseController{
 	 * @param ChatRepository    $chat
 	 * @param UserRepository    $users
 	 */
-	public function __construct(ActionRepository $actions,BBCodeRepository $bbcode,ChannelRepository $channels,ChatRepository $chat,UserRepository $users){
-		$this->actions=$actions;
-		$this->bbcode=$bbcode;
-		$this->channels=$channels;
-		$this->chat=$chat;
-		$this->users=$users;
+	public function __construct(ActionRepository $actions, BBCodeRepository $bbcode, ChannelRepository $channels, ChatRepository $chat, UserRepository $users){
+		$this->actions = $actions;
+		$this->bbcode = $bbcode;
+		$this->channels = $channels;
+		$this->chat = $chat;
+		$this->users = $users;
 	}
 
 	/**
@@ -43,21 +58,20 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function postStart(StartRequest $form){
-		$channel=$this->channels->getByNameTrim($form->input('channel'));
-		$messages=$this->chat->getByChannel($channel->id,Chat::PER_PAGE);
-		$messageList=[];
-		$users=[];
+		$channel = $this->channels->getByNameTrim($form->channel);
+		$messages = $this->chat->getByChannel($channel->id, Chat::PER_PAGE);
+		$messageList = [];
+		$users = [];
 		foreach($messages as $message){
-			$messageCurrent=new \stdClass;
-			if(!isset($users[$message->author_id])){
+			$messageCurrent = new \stdClass;
+			if(!isset($users[$message->author_id]))
 				$users[$message->author_id]=$this->users->getById($message->author_id);
-			}
 			$messageCurrent->id = $message->id;
-			$messageCurrent->author_name=$users[$message->author_id]->display_name;
-			$messageCurrent->contents_parsed=$message->contents_parsed;
-			$messageCurrent->created_at=strtotime($message->created_at);
-			$messageCurrent->uuid=uniqid('',true);
-			array_push($messageList,$messageCurrent);
+			$messageCurrent->author_name = $users[$message->author_id]->display_name;
+			$messageCurrent->contents_parsed = $message->contents_parsed;
+			$messageCurrent->created_at = strtotime($message->created_at);
+			$messageCurrent->uuid = uniqid('', true);
+			array_push($messageList, $messageCurrent);
 		}
 		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
@@ -97,8 +111,7 @@ class ChatController extends BaseController{
 	public function postMessage(MessageRequest $form){
 		$response = ['sent' => false];
 		if(\Auth::check()){
-			$parsedown = new \Parsedown;
-			$contentsParsed = $parsedown->text($form->contents);
+			$contentsParsed = with(new \Parsedown)->text($form->contents);
 			with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_USER_PUBLISHED, $this->channels->getByNameTrim($form->channel)->id);
 			$channel = $this->channels->getByNameTrim($form->channel);
 			$channel->messages = $channel->messages+1;
@@ -107,12 +120,6 @@ class ChatController extends BaseController{
 		}
 		header('Content-Type: application/json');
 		return json_encode($response);
-	}
-
-	/**
-	 *
-	 */
-	public function postStatusChange() {
 	}
 
 	/**

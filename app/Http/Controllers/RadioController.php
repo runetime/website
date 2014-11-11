@@ -52,11 +52,6 @@ class RadioController extends BaseController {
 	 * @return mixed
 	 */
 	public function getTimetable() {
-		$filled[4][17] = 'Obama';
-		$filled[4][18] = 'Obama';
-		$filled[4][19] = 'Obama';
-		$filled[2][15] = 'Woofy';
-		$filled[2][16] = 'Woofy';
 		header('Content-Type: application/json');
 		return json_encode($filled);
 	}

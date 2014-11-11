@@ -74,58 +74,7 @@ class SignatureController extends BaseController {
 	public function getDisplay($slug) {
 		$info = explode(";", $slug);
 		header("Content-type: image/png");
-//		$scorest=Utilities::CURL('http://hiscore.runescape.com/index_lite.ws?player='.$username);
-		$scores = <<<SCORES
-412417,1598,27881258
-524694,75,1237847
-663711,66,502352
-792251,64,414028
-698139,69,713063
-747710,54,154546
-501058,55,178534
-644601,65,467900
-558870,66,537428
-138087,99,13095060
-249730,84,3042572
-292747,79,1850771
-393916,73,1041914
-374181,63,388488
-213783,74,1098606
-508561,63,400159
-388685,54,153138
-376153,59,260494
-366738,58,231525
-538759,47,77064
-429247,42,47959
-556012,47,82234
-402324,57,203344
-150269,76,1353903
-359703,59,249606
-442014,49,98723
--1,1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
-SCORES;
+		$scores = \String::CURL('http://hiscore.runescape.com/index_lite.ws?player='.$username);
 		$scores = explode("\n", $scores);
 		foreach($scores as $key=>$text)
 			$scores[$key] = explode(",", $text);

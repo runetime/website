@@ -8,24 +8,14 @@ class BaseController extends Controller {
 	protected $js;
 	protected $nav;
 	protected $title = '';
-	/**
-	 * @var Guard
-	 */
-	protected $auth;
-
-	/**
-	 * @param Guard $auth
-	 */
-	public function __construct(Guard $auth) {
-		$this->auth = $auth;
-	}
 
 	/**
 	 * @param array $breadcrumbs
 	 */
 	protected function bc($breadcrumbs = []) {
 		if($breadcrumbs == false)
-			$this->displayPageHeader = false; else
+			$this->displayPageHeader = false;
+		else
 			$this->bc = $breadcrumbs;
 	}
 
