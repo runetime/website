@@ -13,7 +13,7 @@ $navs=[
 		'members'    => Lang::get('navbar.runetime.members'),
 		'staff/list' => Lang::get('navbar.runetime.staff_list'),
 		'about'      => Lang::get('navbar.runetime.about_us'),
-		'tickets'    => Lang::get('navbar.runetime.help'),
+		'tickets'    => Lang::get('navbar.runetime.tickets'),
 	],
 	Lang::get('navbar.runescape.runescape') => [
 		'guides/quests'       => Lang::get('navbar.runescape.guides.quests'),
