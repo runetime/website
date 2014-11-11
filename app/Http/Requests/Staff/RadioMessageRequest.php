@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class RadioTimetableRequest extends Request {
+class RadioMessageRequest extends Request {
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -12,7 +12,7 @@ class RadioTimetableRequest extends Request {
 	public function rules()
 	{
 		return [
-			'data' => 'true',
+			'contents' => 'required',
 		];
 	}
 
