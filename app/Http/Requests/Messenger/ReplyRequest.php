@@ -1,8 +1,8 @@
 <?php namespace App\Http\Requests\Messenger;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class CreateRequest extends FormRequest {
+class ReplyRequest extends Request {
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -12,7 +12,6 @@ class CreateRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'title'    => 'required',
 			'contents' => 'required',
 		];
 	}

@@ -9,29 +9,28 @@
 						Compose
 					</a>
 				</div>
+				<div class='clearfix'></div>
 @foreach($messages as $message)
-				<div class='well well-sm'>
+				<div class='well well-sm clearfix'>
 					<div class='pull-left'>
 						<p>
-							<a href='/messenger/view/{{$message->id}}'>
+							<a href='/messenger/{{ \String::slugEncode($message->id, $message->title) }}'>
 								{{$message->title}}
 							</a>
 						</p>
 						<p class='text-muted'>
-							Started by {{\Link::name($message->author_id)}}, {{$message->reply_count}} replies
+							Started by {!! \Link::name($message->author_id) !!}, {{$message->replies}} replies
 						</p>
 					</div>
 					<div class='pull-right'>
-						<p>
-							Participants:
-							<ul class='list-inline'>
-	@foreach(json_decode($messages->participants) as $participant)
-								<li>
-									{{\Link::name($message->author_id)}}
-								</li>
+                        Participants:
+                        <ul class='list-inline'>
+	@foreach($message->users as $user)
+                            <li>
+                                {!! \Link::name($user->id) !!}
+                            </li>
 	@endforeach
-							</ul>
-						</p>
+                        </ul>
 					</div>
 				</div>
 @endforeach

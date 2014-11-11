@@ -1,18 +1,36 @@
 <?php
 namespace App\RuneTime\Messenger;
 use App\Runis\Core\Entity;
+use App\RuneTime\Forum\Threads\Post;
+use App\Runis\Accounts\User;
 /**
  * Class Message
  * @package App\RuneTime\Messenger
  */
 class Message extends Entity {
-	protected $table = 'messenger_messages';
+	protected $table = 'messages';
 	protected $with = [];
-	protected $fillable = ['author_id', 'title', 'participants', 'view_count', 'reply_count'];
+	protected $fillable = ['author_id', 'title', 'views', 'replies'];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
 	const STATUS_VISIBLE = 1;
+
+	/**
+	 *
+	 */
+	public function incrementReplies() {
+		$this->increment('replies');
+		$this->save();
+	}
+
+	/**
+	 *
+	 */
+	public function incrementViews() {
+		$this->increment('views');
+		$this->save();
+	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -26,6 +44,7 @@ class Message extends Entity {
 	 */
 	public function addPost(Post $post) {
 		$this->posts()->attach([$post->id]);
+		$this->incrementReplies();
 	}
 
 	/**
@@ -39,6 +58,13 @@ class Message extends Entity {
 	 * @return mixed
 	 */
 	public function users() {
-		return $this->belonsgToMany('App\Runis\Accounts\User');
+		return $this->belongsToMany('App\Runis\Accounts\User');
+	}
+
+	/**
+	 * @param User $user
+	 */
+	public function addUser(User $user) {
+		$this->users()->attach([$user->id]);
 	}
 }

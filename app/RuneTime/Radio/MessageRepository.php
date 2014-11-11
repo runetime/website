@@ -12,4 +12,10 @@ class MessageRepository extends EloquentRepository {
 	public function __construct(Message $model) {
 		$this->model = $model;
 	}
+
+	public function getByUser($id) {
+		return $this->model->
+			where('author_id', '=', $id)->
+			get();
+	}
 }

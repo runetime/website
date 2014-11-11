@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMessagesTable extends Migration {
+class MessageUser extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,11 @@ class CreateMessagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('messages', function(Blueprint $table)
+		Schema::create('message_user', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('author_id');
-			$table->string('title');
-			$table->integer('views');
-			$table->integer('replies');
-			$table->timestamps();
-			$table->softDeletes();
+			$table->integer('message_id');
+			$table->integer('user_id');
 		});
 	}
 
@@ -31,7 +27,7 @@ class CreateMessagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('messages');
+		Schema::drop('message_user');
 	}
 
 }
