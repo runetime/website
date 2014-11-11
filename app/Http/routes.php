@@ -430,6 +430,13 @@ Route::group(['prefix' => 'staff'], function() {
 		 */
 		Route::group(['middleware' => 'staff.radio', 'prefix' => 'radio'], function() {
 			get('/', 'StaffController@getRadioIndex');
+			get('live', 'StaffController@getRadioLive');
+			post('live', 'StaffController@postRadioLive');
+			get('live/stop', 'StaffController@getRadioLiveStop');
+			get('messages', 'StaffController@getRadioMessages');
+			post('messages', 'StaffController@postRadioMessages');
+			get('timetable', 'StaffController@getRadioTimetable');
+			post('timetable', 'StaffController@postRadioTimetable');
 		});
 
 		/**
