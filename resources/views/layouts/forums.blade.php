@@ -11,9 +11,11 @@ $layoutSubforumList = $layoutSubforumRepository->getByParent(-1);
 					<div class='col-xs-12 col-md-3 col-lg-2'>
 						<div class='subforum-list'>
 @foreach($layoutSubforumList as $layoutSubforum)
+	@if(empty(json_decode($layoutSubforum->roles)) || \Auth::check() && in_array(\Auth::user()->importantRole()->id,json_decode($layoutSubforum->roles)))
 							<a href='/forums/{{\String::slugEncode($layoutSubforum->id, $layoutSubforum->name)}}'{!!$layoutSubforum->id == $subforum->id || $layoutSubforum->id == $subforum->parent?" class='active'":""!!}>
 								{{$layoutSubforum->name}}
 							</a>
+	@endif
 @endforeach
 						</div>
 					</div>
