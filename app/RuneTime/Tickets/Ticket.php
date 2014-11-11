@@ -1,6 +1,7 @@
 <?php
 namespace App\RuneTime\Tickets;
 use App\RuneTime\Forum\Threads\Post;
+use App\RuneTime\Forum\Threads\PostRepository;
 use App\Runis\Core\Entity;
 class Ticket extends Entity {
 	protected $table = 'tickets';
@@ -27,5 +28,10 @@ class Ticket extends Entity {
 	 */
 	public function addPost(Post $post) {
 		$this->posts()->attach([$post->id]);
+	}
+
+	public function lastPost() {
+		$posts = new PostRepository(new Post);
+		return $posts->getById($this->last_post);
 	}
 }
