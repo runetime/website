@@ -450,7 +450,7 @@ Route::group(['prefix' => 'staff'], function() {
 /**
  * Tickets
  */
-Route::group(['prefix' => 'tickets'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 	get('/', 'TicketController@getIndex');
 	/**
 	 * Viewing and dealing with ticket
