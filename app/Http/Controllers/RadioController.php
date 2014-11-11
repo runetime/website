@@ -52,6 +52,7 @@ class RadioController extends BaseController {
 	 * @return mixed
 	 */
 	public function getTimetable() {
+		$filled = [];
 		header('Content-Type: application/json');
 		return json_encode($filled);
 	}
@@ -84,8 +85,10 @@ class RadioController extends BaseController {
 	public function getUpdate() {
 		$song = $this->history->getLatest();
 		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => []], 'dj' => ''];
-		$update['song']['name'] = $song->song;
-		$update['song']['artist'] = $song->artist;
+		if(!empty($song)) {
+			$update['song']['name'] = $song->song;
+			$update['song']['artist'] = $song->artist;
+		}
 		$update['dj'] = \Cache::get('radio.dj.current');
 		if(\Auth::check())
 			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
