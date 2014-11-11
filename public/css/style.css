@@ -7675,7 +7675,7 @@ body {
   @extends .members-staff;
   color: yellow !important; }
   .members-administrator::before {
-    content: url("/img/forum/roles/1.png"); }
+    content: url("/img/forums/roles/1.png"); }
 
 .members-administrator-no-img {
   @extends .members-staff;
@@ -7685,7 +7685,7 @@ body {
   @extends .members-staff;
   color: purple !important; }
   .members-radio-team-leader::before {
-    content: url("/img/forum/roles/2.png");
+    content: url("/img/forums/roles/2.png");
     top: 8px; }
 
 .members-radio-team-leader-no-img {
@@ -7696,7 +7696,7 @@ body {
   @extends .members-staff;
   color: purple !important; }
   .members-radio-dj::before {
-    content: url("/img/forum/roles/3.png"); }
+    content: url("/img/forums/roles/3.png"); }
 
 .members-radio-dj-no-img {
   @extends .members-staff;
@@ -7706,7 +7706,7 @@ body {
   @extends .members-staff;
   color: purple !important; }
   .members-media-team-leader::before {
-    content: url("/img/forum/roles/4.png"); }
+    content: url("/img/forums/roles/4.png"); }
 
 .members-media-team-leader-no-img {
   @extends .members-staff;
@@ -7716,7 +7716,7 @@ body {
   @extends .members-staff;
   color: purple !important; }
   .members-media-team::before {
-    content: url("/img/forum/roles/5.png"); }
+    content: url("/img/forums/roles/5.png"); }
 
 .members-media-team-no-img {
   @extends .members-staff;
@@ -7727,7 +7727,7 @@ body {
   color: green !important;
   left: 1px; }
   .members-web-developer-leader::before {
-    content: url("/img/forum/roles/6.png"); }
+    content: url("/img/forums/roles/6.png"); }
 
 .members-web-developer-leader-no-img {
   @extends .members-staff;
@@ -7737,7 +7737,7 @@ body {
   @extends .members-staff;
   color: green !important; }
   .members-web-developer::before {
-    content: url("/img/forum/roles/7.png"); }
+    content: url("/img/forums/roles/7.png"); }
 
 .members-web-developer-no-img {
   @extends .members-staff;
@@ -7747,7 +7747,7 @@ body {
   @extends .members-staff;
   color: green !important; }
   .members-content-team-leader::before {
-    content: url("/img/forum/roles/8.png"); }
+    content: url("/img/forums/roles/8.png"); }
 
 .members-content-team-leader-no-img {
   @extends .members-staff;
@@ -7757,7 +7757,7 @@ body {
   @extends .members-staff;
   color: green !important; }
   .members-content-team::before {
-    content: url("/img/forum/roles/9.png"); }
+    content: url("/img/forums/roles/9.png"); }
 
 .members-content-team-no-img {
   @extends .members-staff;
@@ -7767,7 +7767,7 @@ body {
   @extends .members-staff;
   color: teal !important; }
   .members-community-team-leader::before {
-    content: url("/img/forum/roles/10.png"); }
+    content: url("/img/forums/roles/10.png"); }
 
 .members-community-team-leader-no-img {
   @extends .members-staff;
@@ -7777,7 +7777,7 @@ body {
   @extends .members-staff;
   color: teal !important; }
   .members-community-team::before {
-    content: url("/img/forum/roles/11.png"); }
+    content: url("/img/forums/roles/11.png"); }
 
 .members-community-team-no-img {
   @extends .members-staff;
@@ -7787,7 +7787,7 @@ body {
   @extends .members-staff;
   color: teal !important; }
   .members-events-team-leader::before {
-    content: url("/img/forum/roles/12.png"); }
+    content: url("/img/forums/roles/12.png"); }
 
 .members-events-team-leader-no-img {
   @extends .members-staff;
@@ -7797,7 +7797,7 @@ body {
   @extends .members-staff;
   color: teal !important; }
   .members-events-team::before {
-    content: url("/img/forum/roles/13.png"); }
+    content: url("/img/forums/roles/13.png"); }
 
 .members-events-team-no-img {
   @extends .members-staff;
@@ -7807,7 +7807,7 @@ body {
   @extends .members;
   color: #23cee2 !important; }
   .members-donator::before {
-    content: url("/img/forum/roles/14.png"); }
+    content: url("/img/forums/roles/14.png"); }
 
 .members-donator-no-img {
   @extends .members;
@@ -8370,65 +8370,20 @@ textarea {
   .holo-text-secondary a:visited {
     color: #aa66cc !important; }
 
-blockquote.start {
-  border-left: 5px solid cyan !important;
-  margin-bottom: 0px;
-  padding-top: 0em;
-  padding-left: 3px; }
-  blockquote.start > blockquote {
-    border-left: 5px solid limegreen !important;
-    margin-left: -0px;
-    margin-bottom: 0px;
-    padding-top: 0em;
-    padding-left: 3px; }
-    blockquote.start > blockquote > blockquote {
-      border-left: 5px solid limegreen !important;
-      margin-left: -0px;
-      margin-bottom: 0px;
-      padding-top: 0em;
-      padding-left: 3px; }
-      blockquote.start > blockquote > blockquote > blockquote {
-        border-left: 5px solid red !important;
-        margin-left: -0px;
-        margin-bottom: 0px;
-        padding-top: 0em;
-        padding-left: 3px; }
-        blockquote.start > blockquote > blockquote > blockquote > blockquote {
-          border-left: 5px solid purple !important;
-          margin-left: -0px;
-          margin-bottom: 0px;
-          padding-top: 0em;
-          padding-left: 3px; }
-          blockquote.start > blockquote > blockquote > blockquote > blockquote > blockquote {
-            border-left: 5px solid cyan !important;
-            margin-left: -0px;
-            margin-bottom: 0px;
-            padding-top: 0em;
-            padding-left: 3px; }
-            blockquote.start > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
-              border-left: 5px solid limegreen !important;
-              margin-left: -0px;
-              margin-bottom: 0px;
-              padding-top: 0em;
-              padding-left: 3px; }
-              blockquote.start > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
-                border-left: 5px solid limegreen !important;
-                margin-left: -0px;
-                margin-bottom: 0px;
-                padding-top: 0em;
-                padding-left: 3px; }
-                blockquote.start > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
-                  border-left: 5px solid red !important;
-                  margin-left: -0px;
-                  margin-bottom: 0px;
-                  padding-top: 0em;
-                  padding-left: 3px; }
-                  blockquote.start > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
-                    border-left: 5px solid purple !important;
-                    margin-left: -0px;
-                    margin-bottom: 0px;
-                    padding-top: 0em;
-                    padding-left: 3px; }
+blockquote {
+  border-left: 0.5em solid #cccccc;
+  margin: 1.5em 0.25em;
+  padding: 0.25em 0.5em;
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+  blockquote:before {
+    color: #cccccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.1em;
+    vertical-align: -0.4em; }
+  blockquote p {
+    display: inline; }
 
 .badge-important {
   background-color: #820000 !important; }
