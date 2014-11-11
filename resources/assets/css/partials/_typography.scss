@@ -89,18 +89,9 @@ textarea{
 	}
 }
 blockquote {
-	border-left: 0.5em solid rgba(204, 204, 204, 1);
+	border-left: 0.25em solid rgba(204, 204, 204, 1);
 	margin: 1.5em 0.25em;
-	padding: 0.25em 0.5em;
-	quotes: "\201C""\201D""\2018""\2019";
-	&:before {
-		color: rgba(204, 204, 204, 1);
-		content: open-quote;
-		font-size: 4em;
-		line-height: 0.1em;
-		margin-right: 0.1em;
-		vertical-align: -0.4em;
-	}
+	padding: 0.1em 0.15em;
 	p {
 		display: inline;
 	}

@@ -8371,17 +8371,9 @@ textarea {
     color: #aa66cc !important; }
 
 blockquote {
-  border-left: 0.5em solid #cccccc;
+  border-left: 0.25em solid #cccccc;
   margin: 1.5em 0.25em;
-  padding: 0.25em 0.5em;
-  quotes: "\201C" "\201D" "\2018" "\2019"; }
-  blockquote:before {
-    color: #cccccc;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.1em;
-    vertical-align: -0.4em; }
+  padding: 0.1em 0.15em; }
   blockquote p {
     display: inline; }
 
