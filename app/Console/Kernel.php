@@ -12,6 +12,11 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'App\Console\Commands\InspireCommand',
+		'App\Console\Commands\Radio\Artist',
+		'App\Console\Commands\Radio\DJ',
+		'App\Console\Commands\Radio\Song',
+		'App\Console\Commands\Radio\Timetable',
+		'App\Console\Commands\Radio\Update',
 	];
 
 	/**
