@@ -39,10 +39,12 @@ class TicketController extends BaseController {
 		$ticket = $this->tickets->getById($id);
 		if(!$ticket)
 			\App::abort(404);
+		if($ticket->author->id !== \Auth::user()->id || !\Auth::user()->isStaff())
+			\App::abort(403);
 		$posts = $ticket->posts;
 		$this->bc(['tickets' => 'Tickets']);
 		$this->nav('navbar.runetime.runetime');
-		$this->title('Viewing Ticket ' . $ticket->name);
+		$this->title($ticket->name);
 		return $this->view('tickets.view', compact('ticket', 'posts'));
 	}
 
@@ -83,6 +85,8 @@ class TicketController extends BaseController {
 		$ticket = $this->tickets->getById($id);
 		if(!$ticket)
 			\App::abort(404);
+		if($ticket->author->id !== \Auth::user()->id || !\Auth::user()->isStaff())
+			\App::abort(403);
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
@@ -97,7 +101,7 @@ class TicketController extends BaseController {
 		$ticketsOpen = $this->tickets->getAllByStatus(Ticket::STATUS_OPEN);
 		$ticketsClosed = $this->tickets->getXByStatus(Ticket::PER_PAGE, Ticket::STATUS_CLOSED);
 		$this->bc(['tickets' => 'Tickets']);
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.staff.staff');
 		$this->title('Manage Tickets');
 		return $this->view('tickets.manage.index', compact('ticketsOpen', 'ticketsClosed'));
 	}
@@ -111,8 +115,7 @@ class TicketController extends BaseController {
 		$ticket = $this->tickets->getById($id);
 		if(!$ticket)
 			\App::abort(404);
-		$ticket->status = $ticket->status == Ticket::STATUS_CLOSED ? Ticket::STATUS_OPEN : Ticket::STATUS_CLOSED;
-		$ticket->save();
+		$ticket->statusSwitch();
 		return \redirect()->to('/tickets/manage');
 	}
 }
