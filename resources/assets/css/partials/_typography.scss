@@ -88,52 +88,21 @@ textarea{
 		color:$c;
 	}
 }
-@mixin blockquote($color,$margin:true){
-	border-left:5px solid $color !important;
-	@if($margin==true){
-		margin-left:-0px;
+blockquote {
+	border-left: 0.5em solid rgba(204, 204, 204, 1);
+	margin: 1.5em 0.25em;
+	padding: 0.25em 0.5em;
+	quotes: "\201C""\201D""\2018""\2019";
+	&:before {
+		color: rgba(204, 204, 204, 1);
+		content: open-quote;
+		font-size: 4em;
+		line-height: 0.1em;
+		margin-right: 0.1em;
+		vertical-align: -0.4em;
 	}
-	margin:{
-		bottom:0px;
-	}
-	padding:{
-		top:0em;
-		left:3px;
-	}
-}
-blockquote.start{
-	$s1:cyan;
-	$s2:limegreen;
-	$s3:darkorange;
-	$s4:red;
-	$s5:purple;
-	@include blockquote($s1,false);
-	>blockquote{
-		@include blockquote($s2);
-		>blockquote{
-			@include blockquote($s2);
-			>blockquote{
-				@include blockquote($s4);
-				>blockquote{
-					@include blockquote($s5);
-					>blockquote{
-						@include blockquote($s1);
-						>blockquote{
-							@include blockquote($s2);
-							>blockquote{
-								@include blockquote($s2);
-								>blockquote{
-									@include blockquote($s4);
-									>blockquote{
-										@include blockquote($s5);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+	p {
+		display: inline;
 	}
 }
 .badge-important{
