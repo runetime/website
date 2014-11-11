@@ -152,6 +152,7 @@ Route::group(['prefix' => 'forums'], function() {
 		get('{page}', 'ForumController@getThread');
 		Route::group(['middleware' => 'auth'], function() {
 			get('edit', 'ForumController@getThreadEdit');
+			post('reply', 'ForumController@postReply');
 		});
 	});
 	/**
@@ -161,7 +162,6 @@ Route::group(['prefix' => 'forums'], function() {
 		get('/', 'ForumController@getThreadCreate');
 		post('/', 'ForumController@postThreadCreate');
 	});
-	post('reply', 'ForumController@postReply');
 	get('tag/{name}', 'ForumController@getTagSearch');
 	/**
 	 * Posts

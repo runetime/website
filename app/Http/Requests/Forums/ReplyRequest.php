@@ -13,7 +13,6 @@ class ReplyRequest extends FormRequest {
 	{
 		return [
 			'contents' => 'required',
-			'id'   => 'required',
 		];
 	}
 

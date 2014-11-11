@@ -244,12 +244,11 @@ class ForumController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postReply(ReplyRequest $form) {
-		$thread = Thread::find($form->input('id'));
+	public function postReply($id, ReplyRequest $form) {
+		$thread = Thread::find($id);
 		if(empty($thread))
 			\App::abort(404);
-		$parsedContents = new \Parsedown();
-		$parsedContents = $parsedContents->text($form->contents);
+		$parsedContents = with(new \Parsedown)->text($form->contents);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$thread->addPost($post);
