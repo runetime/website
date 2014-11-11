@@ -445,7 +445,26 @@ Route::group(['prefix' => 'staff'], function() {
  */
 Route::group(['prefix' => 'tickets'], function() {
 	get('/', 'TicketController@getIndex');
-	get('{id}-{name}', 'TicketController@getView');
+	/**
+	 * Viewing and dealing with ticket
+	 */
+	Route::group(['prefix' => '{id}-{name}'], function() {
+		get('/', 'TicketController@getView');
+
+		/**
+		 * Must be logged in
+		 */
+		Route::group(['middleware' => 'auth'], function() {
+			post('reply', 'TicketCOntroller@postReply');
+		});
+
+		/**
+		 * Must be a staff member
+		 */
+		Route::group(['middleware' => 'staff'], function() {
+			get('status/switch', 'TicketController@getStatusSwitch');
+		});
+	});
 	/**
 	 * Create
 	 */
