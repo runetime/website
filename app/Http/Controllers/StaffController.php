@@ -1,13 +1,18 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\Staff\RadioMessageRequest;
+use App\Http\Requests\Staff\RadioTimetableRequest;
 use App\Http\Requests\Staff\CheckupRequest;
 use App\Http\Requests\Staff\ModerationThreadTitleRequest;
+use App\Http\Requests\Staff\RadioLiveRequest;
 use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Reports\ReportRepository;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Checkup\Checkup;
+use App\RuneTime\Radio\Message;
+use App\RuneTime\Radio\MessageRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 /**
@@ -39,22 +44,28 @@ class StaffController extends BaseController {
 	 * @var CheckupRepository
 	 */
 	private $checkups;
+	/**
+	 * @var MessageRepository
+	 */
+	private $messages;
 
 	/**
 	 * @param CheckupRepository $checkups
+	 * @param MessageRepository $messages
 	 * @param PostRepository    $posts
 	 * @param ReportRepository  $reports
 	 * @param RoleRepository    $roles
 	 * @param ThreadRepository  $threads
 	 * @param UserRepository    $users
 	 */
-	public function __construct(CheckupRepository $checkups, PostRepository $posts, ReportRepository $reports, RoleRepository $roles, ThreadRepository $threads,UserRepository $users) {
+	public function __construct(CheckupRepository $checkups, MessageRepository $messages, PostRepository $posts, ReportRepository $reports, RoleRepository $roles, ThreadRepository $threads,UserRepository $users) {
 		$this->reports = $reports;
 		$this->roles = $roles;
 		$this->users = $users;
 		$this->threads = $threads;
 		$this->posts = $posts;
 		$this->checkups = $checkups;
+		$this->messages = $messages;
 	}
 
 	/**
@@ -154,6 +165,7 @@ class StaffController extends BaseController {
 
 	/**
 	 * @param $id
+	 * @param $name
 	 * @param $status
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -196,6 +208,91 @@ class StaffController extends BaseController {
 		$thread->title = $form->title;
 		$thread->save();
 		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getRadioIndex() {
+		$live = \Cache::get('radio.dj.current');
+		if($live)
+			$live = $this->users->getById($live);
+		$messages = $this->messages->getByUser(\Auth::user()->id);
+		$this->bc(['staff' => 'Staff']);
+		$this->nav('navbar.staff.staff');
+		$this->title('Radio Panel');
+		return $this->view('staff.radio.index', compact('live', 'messages'));
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getRadioLive() {
+		$this->bc(['staff' => 'Staff', 'staff/radio' => 'Radio Panel']);
+		$this->nav('navbar.staff.staff');
+		$this->title('Radio Center');
+		return $this->view('staff.radio.live');
+	}
+
+	public function postRadioLive(RadioLiveRequest $form) {
+		if($form->live !== "go")
+			return \App::abort(404);
+		$live = \Cache::get('radio.dj.current');
+		if(!$live)
+			\Cache::forever('radio.dj.current', \Auth::user()->id);
+		return \redirect()->to('/staff/radio/live');
+	}
+
+	public function getRadioLiveStop() {
+		$live = \Cache::get('radio.dj.current');
+		if($live)
+			if($live === \Auth::user()->id)
+				\Cache::forever('radio.dj.current', null);
+		return \redirect()->to('/staff/radio');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getRadioMessages() {
+		$messages = $this->messages->getByUser(\Auth::user()->id);
+		$this->bc(['staff' => 'Staff', 'staff/radio' => 'Radio Panel']);
+		$this->nav('navbar.staff.staff');
+		$this->title('Radio Messages');
+		return $this->view('staff.radio.messages', compact('messages'));
+	}
+
+	/**
+	 * @param RadioMessageRequest $form
+	 *
+	 * @return string
+	 */
+	public function postRadioMessages(RadioMessageRequest $form) {
+		$contentsParsed = with(new \Parsedown)->text($form->contents);
+		$message = new Message;
+		$message->saveNew(\Auth::user()->id, $form->contents, $contentsParsed);
+		return \redirect()->to('/staff/radio/messages');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getRadioTimetable() {
+		$this->bc(['staff' => 'Staff', 'staff/radio' => 'Radio Panel']);
+		$this->nav('navbar.staff.staff');
+		$this->title('Radio Timetable');
+		return $this->view('staff.radio.timetable');
+	}
+
+	/**
+	 * @param RadioTimetableRequest $form
+	 *
+	 * @return string
+	 */
+	public function postRadioTimetable(RadioTimetableRequest $form) {
+		header('Content-Type: application/json');
+		$response = ['valid' => true];
+		return json_encode($response);
 	}
 
 	/**

@@ -20,7 +20,7 @@ class StaffContent implements Middleware {
 		if(!\Auth::check())
 			return \redirect::to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1, 8, 9))
-			\App::abort(403);
+			return response('Unauthorized.', 401);
 		return $next($request);
 	}
 

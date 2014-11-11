@@ -17,7 +17,7 @@ class AuthModeration implements Middleware {
 		if(!\Auth::check())
 			return \redirect()->to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1, 10, 11))
-			\App::abort(403);
+			return response('Unauthorized.', 401);
 		return $next($request);
 	}
 

@@ -17,7 +17,7 @@ class StaffAdministrator implements Middleware {
 		if(!\Auth::check())
 			return \redirect::to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1))
-			\App::abort(403);
+			return response('Unauthorized.', 401);
 		return $next($request);
 	}
 

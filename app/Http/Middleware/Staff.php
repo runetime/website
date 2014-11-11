@@ -3,10 +3,10 @@
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 /**
- * Class AuthStaff
+ * Class Staff
  * @package App\Http\Middleware
  */
-class AuthStaff implements Middleware {
+class Staff implements Middleware {
 
 	/**
 	 * Handle an incoming request.
@@ -20,7 +20,7 @@ class AuthStaff implements Middleware {
 		if(!\Auth::check())
 			return \redirect::to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
-			\App::abort(403);
+			return response('Unauthorized.', 401);
 		return $next($request);
 	}
 

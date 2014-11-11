@@ -41,7 +41,7 @@ class Authenticated implements Middleware {
 			}
 			else
 			{
-				return redirect()->guest('auth/login');
+				return redirect()->guest('login');
 			}
 		}
 

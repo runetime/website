@@ -12,8 +12,12 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	protected $middleware = [
 		'auth' => 'App\Http\Middleware\Authenticated',
-		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticatedWithBasicAuth',
 		'guest' => 'App\Http\Middleware\IsGuest',
+		'staff' => 'App\Http\Middleware\Staff',
+		'staff.admin' => 'App\Http\Middleware\StaffAdministrator',
+		'staff.content' => 'App\Http\Middleware\StaffContent',
+		'staff.moderator' => 'App\Http\Middleware\StaffModerator',
+		'staff.radio' => 'App\Http\Middleware\StaffRadio',
 	];
 
 	/**
