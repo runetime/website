@@ -18,8 +18,8 @@ class Image {
 	 * @returns String The img of the user along with classes specified in [, array $classes]
 	 */
 	public static function userPhoto($userId, array $classes=[]) {
-		$str = "<img src='/img/forum/photos/";
-		if(file_exists('./img/forum/photos/' . $userId . '.png'))
+		$str = "<img src='/img/forums/photos/";
+		if(file_exists('./img/forums/photos/' . $userId . '.png'))
 			$str .= $userId;
 		else
 			$str .= 'no_photo';
