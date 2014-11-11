@@ -12,7 +12,7 @@ return [
 		'members'    => 'Members',
 		'staff_list' => 'Staff List',
 		'about_us'   => 'About Us',
-		'help'       => 'Help',
+		'tickets'    => 'Tickets',
 	],
 	'runescape' => [
 		'runescape' => 'Runescape',

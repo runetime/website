@@ -1,7 +1,7 @@
 					<div class='post row{{$post->status == 0 ? " post-hidden" : ""}}'>
 						<div class='post-info'>
 							<div class='pull-left'>
-								{!!\Link::name($post->author_info->id)!!}
+								{!!\Link::name($post->author->id)!!}
 							</div>
 							<div class='pull-right'>
 								{{\Auth::check()&&\Auth::user()->hasOneOfRoles(1, 10, 11)?"(IP: " . \String::decodeIP($post->ip) . ") ":""}}#{{$post->id}}
@@ -10,13 +10,13 @@
 							</div>
 						</div>
 						<div class='col-xs-12 col-sm-3 col-md-2 text-center'>
-							{!!$post->author_info->title!!}
+							{!!$post->author->title!!}
 							<br />
-							{!!\Image::userPhoto($post->author_id)!!}
+							{!!\Image::userPhoto($post->author->id)!!}
 							<br />
-							{!!\Link::colorRole($post->author_info->importantRole()->id)!!}
+							{!!\Link::colorRole($post->author->importantRole()->id)!!}
 							<br />
-							{{$post->author_info->posts_active}} posts
+							{{$post->author->posts_active}} posts
 	@if(!empty($post->author_info->location))
 							<br />
 							<span class='text-muted'>:</span> {{$post->author_info->location}}
@@ -29,7 +29,7 @@
 							<br />
 							<span class='text-muted'>:</span> {{$post->author_info->allegiance}}
 	@endif
-	@if(!empty(json_decode($post->author_info->awards)))
+	@if(!empty(json_decode($post->author->awards)))
 							<div class='post-awards'>
 								<a href='/awards/user/{{\String::slugEncode($post->author_info->id, $post->author_info->display_name)}}' title="View {{$post->author_info->display_name}}'s awards">
 									Awards
