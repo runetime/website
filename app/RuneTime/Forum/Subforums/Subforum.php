@@ -32,11 +32,14 @@ class Subforum extends Entity{
 		if(\Auth::check()) {
 			$lastRead = \Cache::get('user' . \Auth::user()->id . '.subforum#' . $this->id . '.read');
 			$lastPost = $this->lastPost();
-			if(!empty($lastPost) && $lastRead > \Time::getEpoch($this->lastPost()->created_at))
-				return true;
+			if(!empty($lastPost))
+				if($lastRead > \Time::getEpoch($this->lastPost()->created_at))
+					return true;
+				else
+					return false;
 			elseif(empty($lastPost))
 				return true;
 		}
-		return false;
+		return true;
 	}
 }
