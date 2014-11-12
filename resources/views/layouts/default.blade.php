@@ -128,7 +128,7 @@ $current = $nav;
 		@foreach($name as $url2=>$name2)
 								<li>
 									<a href='{{$url2}}' title='{{$name2}}'>
-										{{$name2}} 
+										{!! $name2 !!}
 									</a>
 								</li>
 		@endforeach
@@ -137,7 +137,7 @@ $current = $nav;
 	@else
 						<li{{$name==$current?" class=active":""}}>
 							<a href='{{$url}}' title='{{$name}}'>
-								{{$name}} 
+								{!! $name !!}
 							</a>
 						</li>
 	@endif
@@ -154,7 +154,7 @@ $current = $nav;
 		@foreach($name as $url2 => $name2)
 								<li>
 									<a href='{{$url2}}'>
-										{!!$name2!!} 
+										{!! $name2 !!}
 									</a>
 								</li>
 		@endforeach
@@ -162,8 +162,8 @@ $current = $nav;
 						</li>
 	@else
 						<li{{$name == $current?" class=active":""}}>
-							<a href='{{$url}}' title='{{$name}}'>
-								{{$name}} 
+							<a href='{{ $url }}' title='{{ $name }}'>
+								{!! $name !!}
 							</a>
 						</li>
 	@endif
