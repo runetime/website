@@ -35,7 +35,7 @@ class Ticket extends Entity {
 		return $posts->getById($this->last_post);
 	}
 
-	public function switchStatus() {
+	public function statusSwitch() {
 		$this->status = $this->status == Ticket::STATUS_CLOSED ? Ticket::STATUS_OPEN : Ticket::STATUS_CLOSED;
 		$this->save();
 	}
