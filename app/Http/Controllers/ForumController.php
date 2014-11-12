@@ -87,7 +87,8 @@ class ForumController extends BaseController {
 			$page = 1;
 		if($page == 0)
 			$page = 1;
-		\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time()+1);
+		if(\Auth::check())
+			\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time()+1);
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
 		// Subforums
@@ -147,7 +148,8 @@ class ForumController extends BaseController {
 		$thread = $this->threads->getById($id);
 		if(!$thread)
 			\App::abort(404);
-		\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time()+1);
+		if(\Auth::check())
+			\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time()+1);
 		$thread->incrementViews();
 		$subforum = $this->subforums->getbyId($thread->subforum_id);
 		if(!\Auth::check() || (\Auth::check() && !\Auth::user()->hasOneOfRoles(1, 10, 11)))
