@@ -60,7 +60,28 @@ class CalculatorController extends BaseController {
 	 * @return string
 	 */
 	public function postLoad(PostRequest $form) {
+		$calculator = $this->calculators->getById($form->id);
+		if(!$calculator)
+			return json_encode([]);
+		$itemList = [];
+		$items = json_decode($calculator->items);
+		$levelsRequired = json_decode($calculator->levels_required);
+		$xp = json_decode($calculator->xp);
+		foreach($levelsRequired as $x => $level) {
+			if(!isset($itemList[$level]))
+				$itemList[$level] = [];
+			$itemList[$level][count($itemList[$level])] = [
+				'name'  => $items[$x],
+				'level' => $levelsRequired[$x],
+				'xp'    => $xp[$x],
+			];
+		}
+		$itemListNumbered = [];
+		for($x = 0; $x <= 99; $x++)
+			if(!empty($itemList[$x][0]))
+				foreach($itemList[$x] as $item)
+					array_push($itemListNumbered, $item);
 		header('Content-Type: application/json');
-		return json_encode($this->calculators->getById($form->id));
+		return json_encode($itemListNumbered);
 	}
 }

@@ -157,15 +157,12 @@ function RuneTime() {
 			});
 		};
 		this.update = function update() {
-			var delta = 0,
-				data = {},
-				response = null;
-			delta = RuneTime.Utilities.currentTime() - this.times.lastRefresh;
-			data = {
+			var delta = RuneTime.Utilities.currentTime() - this.times.lastRefresh;
+			var data = {
 				id: this.lastId,
 				channel: this.channel
 			};
-			response = RuneTime.Utilities.postAJAX(this.URL.getUpdate, data);
+			var response = RuneTime.Utilities.postAJAX(this.URL.getUpdate, data);
 			response.done(function(response) {
 				response = $.parseJSON(response);
 				RuneTime.ChatBox.times.lastRefresh = RuneTime.Utilities.currentTime();
@@ -259,7 +256,7 @@ function RuneTime() {
 				if(e.which === 13)
 					RuneTime.ChatBox.submitMessage();
 			});
-			$(this.elements.channels).bind('click', function (e) {
+			$(this.elements.channels).bind('click', function () {
 				RuneTime.ChatBox.Panels.channels();
 			});
 			setTimeout(function () {
@@ -483,7 +480,7 @@ function RuneTime() {
 			var history = RuneTime.Utilities.getAJAX('radio/history');
 			history.done(function(history) {
 				history = $.parseJSON(history);
-				var music,
+				var music = null,
 					html = "<table class='table'><thead><tr><td>Time</td><td>Artist</td><td>Name</td></tr></thead><tbody>";
 				for(var x = 0, y = history.length; x < y; x++) {
 					music = history[x];
@@ -498,7 +495,7 @@ function RuneTime() {
 			timetable.done(function(timetable) {
 				timetable = $.parseJSON(timetable);
 				var html = "<table class='table'><thead><tr><td>&nbsp;</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr></thead><tbody>";
-				for(var x = 0, y = 23; x <= 23; x++) {
+				for(var x = 0, y = 23; x <= y; x++) {
 					html += "<tr><td>" + x + "</td>";
 					for(var i = 0, j = 6; i <= j; i++) {
 						html += "<td>";
@@ -642,6 +639,7 @@ function RuneTime() {
 		this.elements = {};
 		this.info = {};
 		this.URL = {};
+		this.items = {};
 		this.getInfo = function getInfo() {
 			var name = null,
 				url = null,
@@ -682,23 +680,24 @@ function RuneTime() {
 				RuneTime.Calculator.getInfo();
 			});
 			this.loadCalc();
+			$('#calculator-target-level').keyup(function() {
+				setTimeout(function() {
+					RuneTime.Calculator.updateCalc();
+				}, 25);
+			});
 		};
 		this.loadCalc = function loadCalc() {
-			var info = null,
-				data = null;
-			data = {id: this.calculator};
-			info = RuneTime.Utilities.postAJAX(this.URL.getCalc, data);
+			var data = {id: this.calculator};
+			var info = RuneTime.Utilities.postAJAX(this.URL.getCalc, data);
 			info.done(function(info) {
 				info = RuneTime.Utilities.JSONDecode(info);
-				RuneTime.Calculator.info.items = RuneTime.Utilities.JSONDecode(info.items);
-				RuneTime.Calculator.info.levelsRequired = RuneTime.Utilities.JSONDecode(info.levels_required);
-				RuneTime.Calculator.info.xp = RuneTime.Utilities.JSONDecode(info.xp);
-				$.each(RuneTime.Calculator.info.items, function (index, value) {
+				RuneTime.Calculator.items = info;
+				$.each(RuneTime.Calculator.items, function (index, value) {
 					var html = "";
 					html += "<tr>";
-					html += "<td>" + RuneTime.Calculator.info.items[index] + "</td>";
-					html += "<td>" + RuneTime.Calculator.info.levelsRequired[index] + "</td>";
-					html += "<td>" + RuneTime.Calculator.info.xp[index] + "</td>";
+					html += "<td>" + RuneTime.Calculator.items[index].name + "</td>";
+					html += "<td>" + RuneTime.Calculator.items[index].level + "</td>";
+					html += "<td>" + RuneTime.Calculator.items[index].xp + "</td>";
 					html += "<td>&infin;</td>";
 					html += "</tr>";
 					$(RuneTime.Calculator.elements.table).append(html);
@@ -718,11 +717,10 @@ function RuneTime() {
 				i = 0;
 			for (i = 1; i < 120; i += 1) {
 				total += Math.floor(i + 300 + Math.pow(2, i / 7));
-				if(Math.floor(total / 4) > xp) {
+				if(Math.floor(total / 4) > xp)
 					return i;
-				} else if(i >= 99) {
+				else if(i >= 99)
 					return 99;
-				}
 			}
 		};
 		this.updateCalc = function updateCalc() {
@@ -732,22 +730,35 @@ function RuneTime() {
 				xpTarget = 0,
 				difference = 0,
 				amount = 0;
-			if(this.info.XPCurrent > this.info.XPTarget) {
+			this.info.levelTarget = parseInt($('#calculator-target-level').val());
+			console.log(this.info.levelTarget);
+			this.info.XPTarget = this.calculateXP(this.info.levelTarget);
+			if(this.info.XPCurrent > this.info.XPTarget)
 				this.info.XPTarget = this.calculateXP(parseInt(this.info.levelCurrent, 10) + 1);
-			}
 			levelCurrent = this.info.levelCurrent;
-			levelTarget = this.info.targetLevel;
+			levelTarget = this.info.levelTarget;
 			xpCurrent = this.info.XPCurrent;
 			xpTarget = this.info.XPTarget;
 			difference = xpTarget - xpCurrent;
-			$.each(this.info.items, function (index, value) {
-				amount = Math.ceil(difference / RuneTime.Calculator.info.xp[index]);
+			$.each(this.items, function (index, value) {
+				amount = Math.ceil(difference / RuneTime.Calculator.items[index].xp);
 				amount = amount < 0 ? 0 : amount;
 				$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ') td:nth-child(4)').html(amount);
-				if(RuneTime.Calculator.info.levelsRequired[index] > levelCurrent) {
-					$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ')').addClass('text-danger');
+
+				console.log(RuneTime.Calculator.items[index].name);
+				console.log(RuneTime.Calculator.items[index].level);
+				console.log(levelCurrent);
+				console.log(levelTarget);
+				console.log(RuneTime.Calculator.items[index].level);
+				console.log("\n\n\n\n\n");
+
+
+				if(RuneTime.Calculator.items[index].level <= levelCurrent) {
+					$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ')').attr('class', 'text-success');
+				} else if(RuneTime.Calculator.items[index].level > levelCurrent && levelTarget >= RuneTime.Calculator.items[index].level) {
+					$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ')').attr('class', 'text-warning');
 				} else {
-					$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ')').addClass('text-success');
+					$(RuneTime.Calculator.elements.table + ' tr:nth-child(' + (index + 1) + ')').attr('class', 'text-danger');
 				}
 			});
 		};
