@@ -91,7 +91,7 @@ class RadioController extends BaseController {
 	 */
 	public function getUpdate() {
 		$song = $this->history->getLatest();
-		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => []], 'dj' => ''];
+		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => ''], 'dj' => ''];
 		if(!empty($song)) {
 			$update['song']['name'] = $song->song;
 			$update['song']['artist'] = $song->artist;
