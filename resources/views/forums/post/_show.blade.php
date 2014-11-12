@@ -4,7 +4,7 @@
 								{!!\Link::name($post->author->id)!!}
 							</div>
 							<div class='pull-right'>
-								{{\Auth::check()&&\Auth::user()->hasOneOfRoles(1, 10, 11)?"(IP: " . \String::decodeIP($post->ip) . ") ":""}}<a href='/forums/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/page={{ $page }}#post{{ $post->id }}'>#{{ $post->id }}</a>
+								{{ \Auth::check() && \Auth::user()->isCommunity() ? "(IP: " . \String::decodeIP($post->ip) . ") " : "" }}<a href='{{ $url }}#post{{ $post->id }}'>#{{ $post->id }}</a>
 							</div>
 							<div class='clearfix'>
 							</div>

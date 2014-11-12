@@ -61,6 +61,7 @@ class BaseController extends Controller {
 		$data['js'] = $this->js;
 		$data['nav'] = $this->nav;
 		$data['title'] = $this->title;
+		$data['url'] = \Request::getPathInfo();
 		$this->updateCache();
 		return \View::make($path, $data);
 	}
