@@ -1,4 +1,4 @@
-					<div class='post row{{$post->status == 0 ? " post-hidden" : ""}}' rt-data='post#{{ $post->id }}'>
+					<div id='post{{ $post->id }}' class='post row{{$post->status == 0 ? " post-hidden" : ""}}' rt-data='post#{{ $post->id }}'>
 						<div class='post-info'>
 							<div class='pull-left'>
 								{!!\Link::name($post->author->id)!!}

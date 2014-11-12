@@ -144,7 +144,8 @@ class ForumController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getThread($id, $page = 1) {
+	public function getThread($id, $name, $page = 1) {
+		$page = (int) $page;
 		$thread = $this->threads->getById($id);
 		if(!$thread)
 			\App::abort(404);
@@ -152,8 +153,8 @@ class ForumController extends BaseController {
 			\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time()+1);
 		$thread->incrementViews();
 		$subforum = $this->subforums->getbyId($thread->subforum_id);
-		if(!\Auth::check() || (\Auth::check() && !\Auth::user()->hasOneOfRoles(1, 10, 11)))
-			$posts = $thread->posts;
+		if(\Auth::check() && \Auth::user()->isCommunity())
+			$posts = $thread->posts()->skip(($page - 1) * Thread::POSTS_PER_PAGE)->take(Thread::POSTS_PER_PAGE)->get();
 		else
 			$posts = $thread->posts;
 		// Posts
@@ -170,10 +171,20 @@ class ForumController extends BaseController {
 		}
 		$bc['forums/'] = 'Forums';
 		$bc = array_reverse($bc);
+		$pages = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
 		$this->bc($bc);
 		$this->nav('navbar.forums');
 		$this->title($thread->title);
-		return $this->view('forums.thread.view', compact('thread', 'posts'));
+		return $this->view('forums.thread.view', compact('thread', 'posts', 'page', 'pages'));
+	}
+
+	public function getThreadLastPost($id) {
+		$thread = $this->threads->getByid($id);
+		if(!$thread)
+			return \App::abort(404);
+		$page = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
+		$post = $thread->lastPost();
+		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title) . '/page=' . $page . '/#post' . $post->id);
 	}
 
 	/**
@@ -245,6 +256,7 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @param              $id
 	 * @param ReplyRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -257,11 +269,12 @@ class ForumController extends BaseController {
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$thread->addPost($post);
+		$thread->updateLastPost($post);
 		$thread->incrementPosts();
 		$this->subforums->updateLastPost($post->id, $thread->subforum->id);
 		$this->subforums->incrementPosts($thread->subforum);
 		\Auth::user()->incrementPostActive();
-		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
+		return $this->getThreadLastPost($thread->id);
 	}
 
 	/**
