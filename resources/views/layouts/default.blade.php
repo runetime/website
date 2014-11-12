@@ -38,11 +38,11 @@ if(\Auth::check() && \Auth::user()->isStaff()) {
 		'staff'          => trans('navbar.staff.staff'),
 	];
 	if(\Auth::user()->hasOneOfRoles(1))
-		$navs[trans('navbar.staff.staff')]['staff/administrator'] = Lang::get('navbar.staff.administrator');
+		$navs[trans('navbar.staff.staff')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . Lang::get('navbar.staff.administrator') . "</span>";
 	if(\Auth::user()->hasOneOfRoles(1, 2, 3))
-		$navs[trans('navbar.staff.staff')]['staff/radio'] = Lang::get('navbar.staff.radio');
+		$navs[trans('navbar.staff.staff')]['staff/radio'] = "<span class='members-radio-dj-no-img'>" . Lang::get('navbar.staff.radio') . "</span>";
 	if(\Auth::user()->hasOneOfRoles(1, 10, 11))
-		$navs[trans('navbar.staff.staff')]['staff/moderation'] = Lang::get('navbar.staff.moderation');
+		$navs[trans('navbar.staff.staff')]['staff/moderation'] = "<span class='members-community-team-no-img'>" . Lang::get('navbar.staff.moderation') . "</span>";
 	$navs[trans('navbar.staff.staff')]['tickets/manage'] = Lang::get('navbar.staff.ticket');
 	$navs[trans('navbar.staff.staff')]['staff/checkup']  = Lang::get('navbar.staff.checkup');
 }
