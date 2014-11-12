@@ -4,7 +4,7 @@
 								{!!\Link::name($post->author->id)!!}
 							</div>
 							<div class='pull-right'>
-								{{\Auth::check()&&\Auth::user()->hasOneOfRoles(1, 10, 11)?"(IP: " . \String::decodeIP($post->ip) . ") ":""}}#{{$post->id}}
+								{{\Auth::check()&&\Auth::user()->hasOneOfRoles(1, 10, 11)?"(IP: " . \String::decodeIP($post->ip) . ") ":""}}<a href='/forums/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/page={{ $page }}#post{{ $post->id }}'>#{{ $post->id }}</a>
 							</div>
 							<div class='clearfix'>
 							</div>
