@@ -4,6 +4,7 @@ use App\Http\Requests\Radio\RequestSong;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Request;
 use App\RuneTime\Radio\RequestRepository;
+use App\Runis\Accounts\UserRepository;
 /**
  * Class RadioController
  * @package App\Http\Controllers
@@ -17,14 +18,20 @@ class RadioController extends BaseController {
 	 * @var RequestRepository
 	 */
 	private $requests;
+	/**
+	 * @var UserRepository
+	 */
+	private $users;
 
 	/**
 	 * @param HistoryRepository $history
 	 * @param RequestRepository $requests
+	 * @param UserRepository    $users
 	 */
-	public function __construct(HistoryRepository $history, RequestRepository $requests) {
+	public function __construct(HistoryRepository $history, RequestRepository $requests, UserRepository $users) {
 		$this->history = $history;
 		$this->requests = $requests;
+		$this->users = $users;
 	}
 
 	/**
@@ -89,7 +96,8 @@ class RadioController extends BaseController {
 			$update['song']['name'] = $song->song;
 			$update['song']['artist'] = $song->artist;
 		}
-		$update['dj'] = \Cache::get('radio.dj.current');
+		if(\Cache::get('radio.dj.current') !== null)
+			$update['dj'] = $this->users->getById(\Cache::get('radio.dj.current'))->display_name;
 		if(\Auth::check())
 			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
 		header('Content-Type: application/json');
