@@ -149,7 +149,8 @@ Route::group(['prefix' => 'forums'], function() {
 	 */
 	Route::group(['prefix' => 'thread/{id}-{name}'], function() {
 		get('/', 'ForumController@getThread');
-		get('{page}', 'ForumController@getThread');
+		get('last-post', 'ForumController@getThreadLastPost');
+		get('page={page}', 'ForumController@getThread');
 		Route::group(['middleware' => 'auth'], function() {
 			get('edit', 'ForumController@getThreadEdit');
 			post('reply', 'ForumController@postReply');
