@@ -57,6 +57,8 @@ class CalculatorController extends BaseController {
 	}
 
 	/**
+	 * @param PostRequest $form
+	 *
 	 * @return string
 	 */
 	public function postLoad(PostRequest $form) {
