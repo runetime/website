@@ -584,7 +584,7 @@ function RuneTime() {
 				var requestsHTML = "";
 				$('#radio-song-name').html(update['song']['name']);
 				$('#radio-song-artist').html(update['song']['artist']);
-				if(update['dj'] !== null) {
+				if(update['dj'] !== null && update['dj'] !== '') {
 					$('#radio-dj').html("DJ " + update['dj']);
 				} else {
 					$('#radio-dj').html("Auto DJ");

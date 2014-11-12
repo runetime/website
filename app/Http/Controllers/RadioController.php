@@ -96,8 +96,11 @@ class RadioController extends BaseController {
 			$update['song']['name'] = $song->song;
 			$update['song']['artist'] = $song->artist;
 		}
-		if(\Cache::get('radio.dj.current') !== null)
-			$update['dj'] = $this->users->getById(\Cache::get('radio.dj.current'))->display_name;
+		if(\Cache::get('radio.dj.current') !== null) {
+			$user = $this->users->getById(\Cache::get('radio.dj.current'));
+			if($user)
+				$update['dj'] = $user->display_name;
+		}
 		if(\Auth::check())
 			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
 		header('Content-Type: application/json');
