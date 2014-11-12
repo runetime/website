@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('RolesTableSeeder');
 		$this->call('BBCodeTableSeeder');
 		$this->call('SubforumsTableSeeder');
+		$this->call('RadioTimetablesTableSeeder');
 	}
 
 }
