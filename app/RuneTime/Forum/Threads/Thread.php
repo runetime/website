@@ -135,7 +135,9 @@ class Thread extends Entity {
 			$lastRead = \Cache::get('user' . \Auth::user()->id . '.thread#' . $this->id . '.read');
 			if($lastRead > \Time::getEpoch($this->lastPost()->created_at))
 				return true;
+			else
+				return false;
 		}
-		return false;
+		return true;
 	}
 }
