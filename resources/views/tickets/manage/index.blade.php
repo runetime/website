@@ -7,7 +7,7 @@
 				<h3 class='text-success'>
 					Open Tickets
 				</h3>
-@if(!empty($ticketsOpen))
+@if(count($ticketsOpen) > 0)
 	@foreach($ticketsOpen as $ticket)
 		@include('tickets._card', ['ticket' => $ticket])
 	@endforeach
@@ -21,7 +21,7 @@
 				<h3 class='text-danger'>
 					Closed Tickets
 				</h3>
-@if(!empty($ticketsClosed))
+@if(count($ticketsClosed) > 0)
 	@foreach($ticketsClosed as $ticket)
 		@include('tickets._card', ['ticket' => $ticket])
 	@endforeach
