@@ -105,8 +105,7 @@ class Thread extends Entity {
 	public function getStatusLockSwitch() {
 		if($this->status < 4)
 			return $this->status + 4;
-		if($this->status >= 4)
-			return $this->status - 4;
+		return $this->status - 4;
 	}
 	public function getStatusPinSwitch() {
 		if($this->status == 2 || $this->status == 3 || $this->status == 6 || $this->status == 7)
@@ -118,5 +117,25 @@ class Thread extends Entity {
 		if($this->status % 2 == 1)
 			return $this->status - 1;
 		return $this->status + 1;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function lastPost() {
+		$posts = new PostRepository(new Post);
+		return $posts->getById($this->last_post);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isRead() {
+		if(\Auth::check()) {
+			$lastRead = \Cache::get('user' . \Auth::user()->id . '.thread#' . $this->id . '.read');
+			if($lastRead > \Time::getEpoch($this->lastPost()->created_at))
+				return true;
+		}
+		return false;
 	}
 }

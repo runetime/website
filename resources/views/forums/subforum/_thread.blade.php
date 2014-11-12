@@ -1,13 +1,17 @@
-@if($thread->isPinned())
+@if($thread->isRead())
+	@if($thread->isPinned())
 <div class='card card-read card-pinned row'>
-@elseif($thread->isLocked())
+	@elseif($thread->isLocked())
 <div class='card card-read card-locked row'>
-@elseif(!$thread->isVisible())
+	@elseif(!$thread->isVisible())
 <div class='card card-read card-hidden row'>
-@elseif($thread->isPoll())
+	@elseif($thread->isPoll())
 <div class='card card-read card-poll row'>
-@else
+	@else
 <div class='card card-read row'>
+	@endif
+@else
+<div class='card card-unread row'>
 @endif
 	<div class='col-xs-12 col-sm-6 col-md-8'>
 		<div class='pull-left'>

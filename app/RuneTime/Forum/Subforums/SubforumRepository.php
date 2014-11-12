@@ -38,7 +38,9 @@ class SubforumRepository extends EloquentRepository {
 	 * @return bool
 	 */
 	public function updateLastPost($postId, $subforumId) {
-		$subforum = Subforum::find($subforumId);
+		$subforum = $this->model->
+			where('id', '=', $subforumId)->
+			first();
 		while(true) {
 			if(!empty($subforum)) {
 				$subforum->last_post = $postId;
@@ -59,12 +61,16 @@ class SubforumRepository extends EloquentRepository {
 	 * @param $subforumId
 	 */
 	public function incrementPosts($subforumId) {
-		$subforum = Subforum::find($subforumId);
+		$subforum = $this->model->
+			where('id', '=', $subforumId)->
+			first();
 		while(true){
 			if(!empty($subforum)){
 				$subforum->increment('posts');
 				$subforum->save();
-				$subforum = Subforum::find($subforum->parent);
+				$subforum = $this->model->
+					where('id', '=', $subforum->parent)->
+					first();
 			}
 			else
 				break;
@@ -75,7 +81,9 @@ class SubforumRepository extends EloquentRepository {
 	 * @param $subforumId
 	 */
 	public function incrementThreads($subforumId) {
-		$subforum = Subforum::find($subforumId);
+		$subforum = $this->model->
+			where('id', '=', $subforumId)->
+			first();
 		while(true){
 			if(!empty($subforum)){
 				$subforum->increment('threads');
