@@ -18,7 +18,7 @@ class StaffRadio implements Middleware {
 	public function handle($request, Closure $next)
 	{
 		if(!\Auth::check())
-			return \redirect::to('/login');
+			return \redirect()->to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1, 2, 3))
 			return response('Unauthorized.', 401);
 		return $next($request);
