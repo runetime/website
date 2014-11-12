@@ -10,7 +10,7 @@
 							Username
 						</label>
 						<div class='col-lg-10'>
-							<input id='username' name='username' class='form-control' placeholder='{{\Auth::user()->display_name}}' required readonly />
+							<input type='text' id='username' name='username' class='form-control' placeholder='{{\Auth::user()->display_name}}' required readonly />
 						</div>
 					</div>
 					<div class='form-group'>
@@ -18,7 +18,7 @@
 							Date
 						</label>
 						<div class='col-lg-10'>
-							<input id='date' name='date' class='form-control' placeholder='{{$date}}' required readonly />
+							<input type='text' id='date' name='date' class='form-control' placeholder='{{$date}}' required readonly />
 						</div>
 					</div>
 					<div class='form-group'>
