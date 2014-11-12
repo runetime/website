@@ -72,7 +72,7 @@ class Parsedown {
         ':' => array('Table'),
         '<' => array('Comment', 'Markup'),
         '=' => array('Setext'),
-        '>' => array('Quote'),
+        '>' => array('Quote', 'Spoiler'),
         '_' => array('Rule'),
         '`' => array('FencedCode'),
         '|' => array('Table'),
@@ -530,6 +530,17 @@ class Parsedown {
 
     protected function identifyQuote($Line)
     {
+	    if (preg_match('/^>![ ]?(.*)/', $Line['text'], $matches))
+	    {
+		    $Block = array(
+			    'element' => array(
+				    'name' => 'blockquote class=\'spoiler\'',
+				    'handler' => 'lines',
+				    'text' => (array) $matches[1],
+			    )
+		    );
+		    return $Block;
+	    }
         if (preg_match('/^>[ ]?(.*)/', $Line['text'], $matches))
         {
             $Block = array(

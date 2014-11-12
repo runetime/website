@@ -8371,11 +8371,18 @@ textarea {
     color: #aa66cc !important; }
 
 blockquote {
+  background: transparent;
   border-left: 0.25em solid #cccccc;
   margin: 1.5em 0.25em;
   padding: 0.1em 0.15em; }
-  blockquote p {
-    display: inline; }
+  blockquote.spoiler > * {
+    opacity: 0;
+    transition: opacity 0.5s ease-in; }
+  blockquote.spoiler:before {
+    content: "(This is a spoiler.  Hover to show it.)";
+    font-size: 0.5em; }
+  blockquote.spoiler:hover > * {
+    opacity: 1; }
 
 .badge-important {
   background-color: #820000 !important; }
