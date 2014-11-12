@@ -24,7 +24,7 @@
 	@endforeach
 					</ul>
 @endif
-@include('partials._paginator', ['page' => $page, 'pages' => $pages, 'url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title)])
+@include('partials._paginator', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title)])
 @foreach($posts as $post)
 	@include('forums.post._show')
 @endforeach
@@ -38,5 +38,6 @@
 @else
 	@include('forums.post._auth')
 @endif
+@include('partials._paginator', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title)])
 			</div>
 @stop
