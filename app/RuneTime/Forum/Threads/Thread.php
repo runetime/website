@@ -49,6 +49,11 @@ class Thread extends Entity {
 		return $this->hasMany('Tag');
 	}
 
+	public function updateLastPost(Post $post) {
+		$this->last_post = $post->id;
+		$this->save();
+	}
+
 	/**
 	 *
 	 */
