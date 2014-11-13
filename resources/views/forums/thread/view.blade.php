@@ -13,17 +13,15 @@
 							by {!!\Link::name($thread->author_id)!!}, {{\Time::shortReadable($thread->created_at)}}
 						</div>
 					</div>
-@if(strlen(json_decode($thread->tags)[0]) > 0)
 					<ul class='list-inline'>
-	@foreach(json_decode($thread->tags) as $tag)
+	@foreach($thread->tags()->get() as $tag)
 						<li>
-							<a href='/forums/tag/{{$tag}}' class='label label-rt' title='{{$tag}}'>
-								{{$tag}}
+							<a href='/forums/tag/{{ $tag->name }}' class='label label-rt' title='{{ $tag->name }}'>
+								{{ $tag->name }}
 							</a>
 						</li>
 	@endforeach
 					</ul>
-@endif
 @include('partials._paginator', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title)])
 @foreach($posts as $post)
 	@include('forums.post._show')

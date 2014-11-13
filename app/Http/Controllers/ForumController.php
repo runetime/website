@@ -220,10 +220,9 @@ class ForumController extends BaseController {
 		$subforum = $this->subforums->getById($form->subforum);
 		if(empty($subforum))
 			return $this->view('errors.forums.subforum.missing');
-		$tags = json_encode(explode(",", str_replace(", ", ",", $form->tags)));
 		$poll = -1;
 		$thread = new Thread;
-		$thread = $thread->saveNew(\Auth::user()->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE, $tags, $form->subforum);
+		$thread = $thread->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
 		$thread->last_post = $post->id;
@@ -239,7 +238,7 @@ class ForumController extends BaseController {
 			} else {
 				$tag = $this->tags->getByName($tagName);
 			}
-			$this->tags->addTagThread($tag->id, $thread->id);
+			$thread->addTag($tag);
 		}
 		$this->subforums->incrementPosts($subforum->id);
 		$this->subforums->updateLastPost($post->id, (int)$subforum->id);

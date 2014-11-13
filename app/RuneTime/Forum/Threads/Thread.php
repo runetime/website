@@ -4,7 +4,7 @@ use App\Runis\Core\Entity;
 class Thread extends Entity {
 	protected $table = 'forum_threads';
 	protected $with = [];
-	protected $fillable = ['author_id', 'title', 'views_count', 'posts_count', 'last_post', 'poll', 'status', 'tags', 'subforum_id'];
+	protected $fillable = ['author_id', 'subforum_id', 'title', 'views_count', 'posts_count', 'last_post', 'poll', 'status'];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
@@ -21,7 +21,7 @@ class Thread extends Entity {
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function posts() {
-		return $this->belongsTomany('App\RuneTime\Forum\Threads\Post');
+		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
 	}
 
 	/**
@@ -43,10 +43,14 @@ class Thread extends Entity {
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function tags() {
-		return $this->hasMany('Tag');
+		return $this->belongsToMany('App\RuneTime\Forum\Tags\Tag');
+	}
+
+	public function addTag($tag) {
+		$this->tags()->attach([$tag->id]);
 	}
 
 	public function updateLastPost(Post $post) {

@@ -19,18 +19,4 @@ class TagRepository extends EloquentRepository {
 			where('name', '=', $name)->
 			first();
 	}
-
-	/**
-	 * @param $tagId
-	 * @param $threadId
-	 *
-	 * @return bool
-	 */
-	public function addTagThread($tagId, $threadId) {
-		return \DB::table('tag_thread')->
-			insert([
-				'tag_id'    => $tagId,
-				'thread_id' => $threadId,
-			]);
-	}
 }
