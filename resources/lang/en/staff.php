@@ -1,7 +1,7 @@
 <?php
 return [
 	'moderation' => [
-		'name'    => 'Moderation Centre',
+		'name'    => 'Moderation Panel',
 		'reports' => [
 			'open_reports'   => 'Open Reports',
 			'closed_reports' => 'Closed Reports',

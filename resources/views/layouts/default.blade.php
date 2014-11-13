@@ -35,7 +35,7 @@ $navs=[
 ];
 if(\Auth::check() && \Auth::user()->isStaff()) {
 	$navs[trans('navbar.staff.staff')] = [
-		'staff'          => trans('navbar.staff.staff'),
+		'staff'          => trans('navbar.staff.staff_panel'),
 	];
 	if(\Auth::user()->hasOneOfRoles(1))
 		$navs[trans('navbar.staff.staff')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . Lang::get('navbar.staff.administrator') . "</span>";

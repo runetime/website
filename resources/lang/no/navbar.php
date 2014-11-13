@@ -42,7 +42,7 @@ return [
 		'staff'         => 'Personal Senter',
 		'gallery'       => 'Galleri',
 		'ticket'        => 'Billett System',
-		'checkup'       => 'Staff Checkup ?????',
+		'checkup'       => 'Staff Checkup',
 		'administrator' => 'Administrator Panel',
 		'moderation'    => 'Moderator Panel',
 		'radio'         => 'Radio Panel',

@@ -39,7 +39,8 @@ return [
 		'our_clan'     => 'Our Clan',
 	],
 	'staff' => [
-		'staff'         => 'Staff Center',
+		'staff'         => 'Staff',
+		'staff_panel'   => 'Staff Panel',
 		'gallery'       => 'Gallery',
 		'ticket'        => 'Ticket System',
 		'checkup'       => 'Staff Checkup',
