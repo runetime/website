@@ -287,6 +287,7 @@ get('media', 'MediaController@getIndex');
 Route::group(['prefix' => 'members'], function() {
 	get('/', 'MembersController@getPage', ['page' => 1]);
 	get('role={searchRole}/prefix={searchPrefix}/order={searchOrder}', 'MembersController@getPage');
+	get('role={searchRole}/prefix={searchPrefix}/order={searchOrder}/page={page}', 'MembersController@getPage');
 });
 
 /**
