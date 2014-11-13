@@ -150,12 +150,12 @@ class ForumController extends BaseController {
 		if(!$thread)
 			\App::abort(404);
 		if(\Auth::check())
-			\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time()+1);
+			\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time() + 1);
 		$thread->incrementViews();
 		$subforum = $this->subforums->getbyId($thread->subforum_id);
 		$posts = $thread->posts();
 		if(!\Auth::check() || !\Auth::user()->isCommunity())
-			$posts = $posts->where('status', '=', Post::STATUS_INVISIBLE);
+			$posts = $posts->where('status', '=', Post::STATUS_VISIBLE);
 		$posts = $posts->skip(($page - 1) * Thread::POSTS_PER_PAGE)->take(Thread::POSTS_PER_PAGE)->get();
 		// Posts
 		// Breadcrumbs
