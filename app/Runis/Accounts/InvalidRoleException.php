@@ -1,4 +1,4 @@
 <?php
 namespace App\Runis\Accounts;
-class InvalidRoleException extends \Exception{
+class InvalidRoleException extends \Exception {
 }
