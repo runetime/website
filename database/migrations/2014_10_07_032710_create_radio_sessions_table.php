@@ -16,7 +16,7 @@ class CreateRadioSessionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('dj_id');
-			$table->string('title');
+			$table->integer('message_id');
 			$table->integer('status');
 			$table->timestamps();
 		});
