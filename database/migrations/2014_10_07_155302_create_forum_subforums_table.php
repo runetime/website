@@ -19,6 +19,7 @@ class CreateForumSubforumsTable extends Migration {
 			$table->mediumtext('description');
 			$table->mediumtext('roles');
 			$table->boolean('posts_enabled');
+			$table->boolean('posts_active');
 			$table->integer('thread_count');
 			$table->integer('post_count');
 			$table->integer('last_post');
