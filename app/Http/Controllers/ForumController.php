@@ -288,19 +288,14 @@ class ForumController extends BaseController {
 		$tag = $this->tags->getByName($name);
 		if(empty($tag))
 			\App::abort(404);
-		$threads = $tag->getThreads();
-		$threadList = [];
-		foreach($threads as $thread) {
-			$thread = $this->threads->getById($thread->thread_id);
-			$thread->last_post_info = $this->posts->getById($thread->last_post);
-			array_push($threadList, $thread);
-		}
+		$news = $tag->news;
+		$threads = $tag->threads;
 		// Breadcrumbs
 		$bc = ['forums/' => 'Forums'];
 		$this->bc($bc);
 		$this->nav('navbar.forums');
 		$this->title('Tag: ' . $tag->name);
-		return $this->view('forums.tags.view', compact('tag', 'threadList'));
+		return $this->view('forums.tags.view', compact('tag', 'threads'));
 	}
 
 	/**

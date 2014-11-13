@@ -16,6 +16,10 @@ class Tag extends Entity {
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Thread');
 	}
 
+	public function news() {
+		return $this->belongsToMany('App\RuneTime\News\News');
+	}
+
 	/**
 	 * @return array|static[]
 	 */

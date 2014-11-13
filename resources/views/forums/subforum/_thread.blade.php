@@ -27,13 +27,13 @@
 @if($thread->isPoll())
 			<span class='label label-poll'>poll</span>
 @endif
-			<a href='/forums/thread/{{\String::slugEncode($thread->id, $thread->title)}}' title='{{$thread->title}}'>
-				{{$thread->title}}
+			<a href='/forums/thread/{{ \String::slugEncode($thread->id, $thread->title) }}' title='{{ $thread->title }}'>
+				{{ $thread->title }}
 			</a>
 			<br />
-			Started by {!!\Link::name($thread->author_id)!!}, {{\Time::shortReadable($thread->created_at)}}
-@foreach(json_decode($thread->tags) as $tag)
-			<a href='/forums/tag/{{$tag}}' class='label label-rt' title='{{$tag}}'>{{$tag}}</a>
+			Started by {!! \Link::name($thread->author_id) !!}, {{ \Time::shortReadable($thread->created_at) }}
+@foreach($thread->tags as $tag)
+			<a href='/forums/tag/{{$tag}}' class='label label-rt' title='{{ $tag->name }}'>{{ $tag->name }}</a>
 @endforeach
 		</div>
 		<div class='pull-right'>
@@ -46,22 +46,22 @@
 				</button>
 				<ul class='dropdown-menu' role='menu'>
 					<li>
-						<a href='/staff/moderation/thread/{{\String::slugEncode($thread->id, $thread->title)}}/title'>
+						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/title'>
 							Edit Title
 						</a>
 					</li>
 					<li>
-						<a href='/staff/moderation/thread/{{\String::slugEncode($thread->id, $thread->title)}}/status={{$thread->modControls->pin}}'>
+						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->modControls->pin }}'>
 							Switch Pin
 						</a>
 					</li>
 					<li>
-						<a href='/staff/moderation/thread/{{\String::slugEncode($thread->id, $thread->title)}}/status={{$thread->modControls->lock}}'>
+						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->modControls->lock }}'>
 							Switch Lock
 						</a>
 					</li>
 					<li>
-						<a href='/staff/moderation/thread/{{\String::slugEncode($thread->id, $thread->title)}}/status={{$thread->modControls->hidden}}'>
+						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->modControls->hidden }}'>
 							Switch Visibility
 						</a>
 					</li>
@@ -72,15 +72,15 @@
 		<div class='clearfix'></div>
 	</div>
 	<div class='col-xs-12 col-sm-6 col-md-1'>
-		{{$thread->posts_count}} posts
+		{{ $thread->posts_count }} posts
 		<br />
-		{{$thread->views_count}} views
+		{{ $thread->views_count }} views
 	</div>
 	<div class='col-xs-12 col-sm-10 col-md-3'>
 @if($thread->last_post > 0)
-		{!!\Link::name($thread->last_post_info->author_id)!!}
+		{!! \Link::name($thread->lastPost()->author_id) !!}
 		<br />
-		{{\Time::shortReadable($thread->last_post_info->created_at)}}
+		{{ \Time::shortReadable($thread->lastPost()->created_at) }}
 @endif
 	</div>
 </div>
