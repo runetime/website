@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 use App\Runis\Accounts\RoleRepository;
+use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 /**
  * Class MembersController
@@ -35,13 +36,14 @@ class MembersController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getPage($searchRole = 'none', $searchPrefix = 'none', $searchOrder = 'none') {
-		$members = $this->users->getByOptions($searchRole, $searchPrefix, $searchOrder);
+	public function getPage($searchRole = 'none', $searchPrefix = 'none', $searchOrder = 'none', $page = 1) {
+		$members = $this->users->getByOptions($searchRole, $searchPrefix, $searchOrder, $page);
 		$roles = $this->roles->getAll();
 		$prefixes = range('a', 'z');
 		$orders = ['ascending', 'descending'];
 		$this->nav('RuneTime');
 		$this->title('Members List');
-		return $this->view('members.show', compact('members', 'roles', 'prefixes', 'orders', 'memberRoles', 'searchRole', 'searchPrefix', 'searchOrder'));
+		$pages = ceil($this->users->getAmount() / User::PER_MEMBERS_PAGE);
+		return $this->view('members.show', compact('members', 'roles', 'prefixes', 'orders', 'memberRoles', 'searchRole', 'searchPrefix', 'searchOrder', 'page', 'pages'));
 	}
 }

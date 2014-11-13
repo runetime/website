@@ -143,10 +143,11 @@ class UserRepository extends EloquentRepository{
 	 * @param $role
 	 * @param $prefix
 	 * @param $order
+	 * @param $page
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	public function getByOptions($role, $prefix, $order) {
+	public function getByOptions($role, $prefix, $order, $page) {
 		if($role == 'none')   $role='';
 		if($prefix == 'none') $prefix = '';
 		if($order == 'none')  $order = '';
@@ -170,6 +171,16 @@ class UserRepository extends EloquentRepository{
 					array_push($usersReturn, $user);
 			return $usersReturn;
 		}
-		return $query->get();
+		return $query->skip(($page - 1) * User::PER_MEMBERS_PAGE)->
+			take(User::PER_MEMBERS_PAGE)->
+			get();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAmount() {
+		return $this->model->
+			count();
 	}
 }

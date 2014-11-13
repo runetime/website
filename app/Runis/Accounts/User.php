@@ -19,6 +19,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	protected $fillable = ['display_name', 'email', 'password'];
 	protected $softDelete = true;
 	private $rolesCache;
+	const PER_MEMBERS_PAGE = 20;
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
