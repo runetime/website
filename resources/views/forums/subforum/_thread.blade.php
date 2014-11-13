@@ -33,7 +33,7 @@
 			<br />
 			Started by {!! \Link::name($thread->author_id) !!}, {{ \Time::shortReadable($thread->created_at) }}
 @foreach($thread->tags as $tag)
-			<a href='/forums/tag/{{$tag}}' class='label label-rt' title='{{ $tag->name }}'>{{ $tag->name }}</a>
+			<a href='/forums/tag/{{ $tag->name }}' class='label label-rt' title='{{ $tag->name }}'>{{ $tag->name }}</a>
 @endforeach
 		</div>
 		<div class='pull-right'>

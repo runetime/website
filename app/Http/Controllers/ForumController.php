@@ -295,7 +295,7 @@ class ForumController extends BaseController {
 		$this->bc($bc);
 		$this->nav('navbar.forums');
 		$this->title('Tag: ' . $tag->name);
-		return $this->view('forums.tags.view', compact('tag', 'threads'));
+		return $this->view('forums.tags.view', compact('tag', 'news', 'threads'));
 	}
 
 	/**
