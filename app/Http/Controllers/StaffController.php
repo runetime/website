@@ -13,6 +13,7 @@ use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Radio\Message;
 use App\RuneTime\Radio\MessageRepository;
+use App\RuneTime\Radio\TimetableRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 /**
@@ -48,17 +49,22 @@ class StaffController extends BaseController {
 	 * @var MessageRepository
 	 */
 	private $messages;
+	/**
+	 * @var TimetableRepository
+	 */
+	private $timetable;
 
 	/**
-	 * @param CheckupRepository $checkups
-	 * @param MessageRepository $messages
-	 * @param PostRepository    $posts
-	 * @param ReportRepository  $reports
-	 * @param RoleRepository    $roles
-	 * @param ThreadRepository  $threads
-	 * @param UserRepository    $users
+	 * @param CheckupRepository   $checkups
+	 * @param MessageRepository   $messages
+	 * @param PostRepository      $posts
+	 * @param ReportRepository    $reports
+	 * @param RoleRepository      $roles
+	 * @param ThreadRepository    $threads
+	 * @param TimetableRepository $timetable
+	 * @param UserRepository      $users
 	 */
-	public function __construct(CheckupRepository $checkups, MessageRepository $messages, PostRepository $posts, ReportRepository $reports, RoleRepository $roles, ThreadRepository $threads,UserRepository $users) {
+	public function __construct(CheckupRepository $checkups, MessageRepository $messages, PostRepository $posts, ReportRepository $reports, RoleRepository $roles, ThreadRepository $threads, TimetableRepository $timetable, UserRepository $users) {
 		$this->reports = $reports;
 		$this->roles = $roles;
 		$this->users = $users;
@@ -66,6 +72,7 @@ class StaffController extends BaseController {
 		$this->posts = $posts;
 		$this->checkups = $checkups;
 		$this->messages = $messages;
+		$this->timetable = $timetable;
 	}
 
 	/**
@@ -278,10 +285,11 @@ class StaffController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getRadioTimetable() {
+		$timetable = $this->timetable->getThisWeek();
 		$this->bc(['staff' => 'Staff', 'staff/radio' => 'Radio Panel']);
 		$this->nav('navbar.staff.staff');
 		$this->title('Radio Timetable');
-		return $this->view('staff.radio.timetable');
+		return $this->view('staff.radio.timetable', compact('timetable'));
 	}
 
 	/**
