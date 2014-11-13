@@ -196,6 +196,8 @@ class ForumController extends BaseController {
 		$subforum = $this->subforums->getById($id);
 		if(!$subforum)
 			\App::abort(404);
+		if($subforum->posts_enabled == false)
+			return \redirect()->to('/forums');
 		$bc = [];
 		$bc['forums'] = 'Forums';
 		if($subforum->parent != -1) {
@@ -239,6 +241,7 @@ class ForumController extends BaseController {
 			}
 			$this->tags->addTagThread($tag->id, $thread->id);
 		}
+		$this->subforums->incrementPosts($subforum->id);
 		$this->subforums->updateLastPost($post->id, (int)$subforum->id);
 		$this->subforums->incrementThreads($subforum->id);
 		return \redirect()->to('forums/thread/' . \String::slugEncode($thread->id, $thread->title));
@@ -310,11 +313,10 @@ class ForumController extends BaseController {
 		$post = $this->posts->getById($id);
 		if(empty($post))
 			\App::abort(404);
-		$thread = $this->threads->getById($post->thread);
-		$postee = $this->users->getById($post->author_id);
+		$thread = $this->threads->getById($post->thread[0]->id);
 		$this->nav('navbar.forums');
 		$this->title('Reporting a Post');
-		return $this->view('forums.post.report', compact('post', 'thread', 'postee'));
+		return $this->view('forums.post.report', compact('post', 'thread'));
 	}
 
 	/**

@@ -9,7 +9,6 @@ class PostReportRequest extends FormRequest {
 	public function rules() {
 		return [
 			'contents' => 'required',
-			'id'       => 'required',
 		];
 	}
 

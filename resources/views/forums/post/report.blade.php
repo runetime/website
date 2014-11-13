@@ -2,8 +2,8 @@
 @section('contents')
             <div class='wrapper'>
                 <h1>
-                    Reporting a Post by {{$postee->display_name}} in thread {{$thread->title}}
+                    Reporting a Post by {{ $post->author->id }} in thread {{ $thread->title }}
                 </h1>
-@include('_edit', ['url' => '/forums/post/' . $post->id . '/report', 'id' => $post->id, 'button' => 'Report'])
+@include('forums.post._edit', ['url' => '/forums/post/' . $post->id . '/report', 'id' => $post->id, 'button' => 'Report'])
             </div>
 @stop
