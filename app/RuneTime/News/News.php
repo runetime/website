@@ -4,10 +4,9 @@ use App\Runis\Core\Entity;
 class News extends Entity{
 	protected $table = 'news';
 	protected $with = [];
-	protected $fillable = ['author_id', 'title', 'contents', 'status', 'comments'];
+	protected $fillable = ['author_id', 'title', 'contents', 'contents_parsed', 'post_count', 'status'];
 	protected $dates = [];
 	protected $softDelete = true;
-	public $presenter = 'RT\News\NewsPresenter';
 	const STATUS_HIDDEN = 0;
 	const STATUS_PUBLISHED = 1;
 
@@ -19,16 +18,32 @@ class News extends Entity{
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function tags() {
-		return $this->belongsToMany('RT\Tags\Tag', 'article_tag', 'article_id', 'tag_id');
+		return $this->belongsToMany('App\RuneTime\Forum\Tags\Tag');
+	}
+
+	public function addTag($tag) {
+		$this->tags()->attach([$tag->id]);
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function comments() {
-		return $this->morphMany('RT\Comments\Comment', 'owner');
+	public function posts() {
+		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
+	}
+
+	/**
+	 * @param $post
+	 */
+	public function addPost($post) {
+		$this->posts()->attach([$post->id]);
+	}
+
+	public function incrementPosts() {
+		$this->increment('post_count');
+		$this->save();
 	}
 }

@@ -320,7 +320,8 @@ Route::group(['prefix' => 'name/check'], function() {
  */
 Route::group(['prefix' => 'news'], function() {
 	get('/', 'NewsController@getIndex');
-	get('{slug}', 'NewsController@getView');
+	get('{id}-{name}', 'NewsController@getView');
+	post('{id}-{name}/reply', 'NewsController@postReply');
 	get('search/{searchSlug}', 'NewsController@getSearch');
 	/**
 	 * Staff only

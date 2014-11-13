@@ -8,16 +8,16 @@ class CreateNewsTable extends Migration{
 	 * @return void
 	 */
 	public function up(){
-		Schema::create('news',function(Blueprint $t){
-			$t->increments('id');
-			$t->integer('author_id');
-			$t->string('title');
-			$t->mediumtext('contents');
-			$t->mediumtext('contents_parsed');
-			$t->integer('status');
-			$t->integer('comments');
-			$t->timestamps();
-			$t->softDeletes();
+		Schema::create('news',function(Blueprint $table){
+			$table->increments('id');
+			$table->integer('author_id');
+			$table->string('title');
+			$table->mediumtext('contents');
+			$table->mediumtext('contents_parsed');
+			$table->integer('post_count');
+			$table->integer('status');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 	/**

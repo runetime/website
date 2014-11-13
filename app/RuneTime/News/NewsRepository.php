@@ -5,7 +5,7 @@ class NewsRepository extends EloquentRepository{
 	public function __construct(News $model) {
 		$this->model = $model;
 	}
-	public function getRecentNews($count = 3) {
+	public function getRecentNews($count = 5) {
 		return $this->model->
 			where('status', '=', News::STATUS_PUBLISHED)->
 			orderBy('created_at', 'desc')->

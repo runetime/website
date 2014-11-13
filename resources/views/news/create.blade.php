@@ -1,7 +1,7 @@
-@extends('layouts.default')
+@extends('...layouts.default')
 @section('contents')
 			<div class='wrapper'>
-				<form class='form-horizontal' enctype='multipart/form-data' method='post' action='' role='form'>
+				<form class='form-horizontal' method='post' action='' role='form'>
 					<div id='signup-username' class='form-group has-feedback'>
 						<label class='col-lg-2 control-label' for='name'>
 							Name
