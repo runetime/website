@@ -12,12 +12,12 @@
 @foreach($reportList as $report)
                         <div class='card card-bad card-link' onclick="window.location.href='/staff/moderation/report/{{$report->id}}';">
                             <h4>
-                                {{$report->reportee->display_name}}
+                                {{$report->author->display_name}}
                             </h4>
                             <p>
                                 @lang('staff.moderation.reports.reported_desc')
-                                <a href='/forum/threads/{{\String::slugEncode($report->thread->id, $report->thread->title)}}' title='{{$report->thread->title}}'>
-                                    {{$report->thread->title}}
+                                <a href='/forum/threads/{{\String::slugEncode($report->post->thread[0]->id, $report->post->thread[0]->title)}}' title='{{$report->post->thread[0]->title}}'>
+                                    {{ $report->post->thread[0]->title }}
                                 </a>
                             </p>
                             <p class='text-muted'>

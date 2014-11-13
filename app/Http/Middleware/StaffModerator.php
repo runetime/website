@@ -3,7 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 
-class AuthModeration implements Middleware {
+class StaffModerator implements Middleware {
 
 	/**
 	 * Handle an incoming request.

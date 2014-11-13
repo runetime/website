@@ -90,7 +90,7 @@ class StaffController extends BaseController {
 	public function getCheckup() {
 		$date = \Time::long(time());
 		$this->bc(['staff' => 'Staff']);
-		$this->nav('Staff');
+		$this->nav('navbar.staff.staff');
 		$this->title('Staff Checkup');
 		return $this->view('staff.checkup.form', compact('date'));
 	}
@@ -114,7 +114,7 @@ class StaffController extends BaseController {
 	public function getCheckupList() {
 		$checkups = $this->checkups->getX(30);
 		$this->bc(['staff' => 'Staff', 'staff/checkup' => 'Checkup']);
-		$this->nav('Staff');
+		$this->nav('navbar.staff.staff');
 		$this->title('Staff Checkup');
 		return $this->view('staff.checkup.list', compact('checkups'));
 	}
@@ -129,7 +129,7 @@ class StaffController extends BaseController {
 		$displayName = $this->users->getById($checkup->author()->first()->id);
 		$displayName = $displayName->display_name;
 		$this->bc(['staff' => 'Staff', 'staff/checkup' => 'Checkups']);
-		$this->nav('Staff');
+		$this->nav('navbar.staff.staff');
 		$this->title('Checkup by ' . $displayName);
 		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
 	}
@@ -147,8 +147,9 @@ class StaffController extends BaseController {
 			$report->thread = $this->threads->getById($report->post->thread);
 			array_push($reportList, $report);
 		}
-		$this->nav('Staff');
-		$this->title('Moderation Centre');
+		$this->bc(['staff' => 'Staff']);
+		$this->nav('navbar.staff.staff');
+		$this->title('Moderation Panel');
 		return $this->view('staff.moderation.index', compact('reportList'));
 	}
 
@@ -162,12 +163,22 @@ class StaffController extends BaseController {
 		if(!$report)
 			\App::abort(404);
 		$author = $this->users->getByid($report->author_id);
-		$post = $this->posts->getById($report->reported_id);
-		$thread = $this->threads->getById($post->thread);
+		$posts = $report->posts;
+		$thread = $this->threads->getById($report->post->thread[0]->id);
 		$status = $report->getStatus();
-		$this->nav('Staff');
-		$this->title('Viewing Report # ' . $report->id);
-		return $this->view('staff.moderation.report.view', compact('report', 'author', 'post', 'thread', 'status'));
+		$this->bc(['staff' => 'Staff']);
+		$this->nav('navbar.staff.staff');
+		$this->title('Viewing Report #' . $report->id);
+		return $this->view('staff.moderation.report.view', compact('report', 'author', 'posts', 'thread', 'status'));
+	}
+
+	public function getModerationReportStatusSwitch($id) {
+		$report = $this->reports->getById($id);
+		if(!$report)
+			\App::abort(404);
+		$report->status_id = $report->status == Report::STATUS_OPEN ? Report::STATUS_CLOSED : Report::STATUS_OPEN;
+		$report->save();
+		return \redirect()->to('/staff/moderation');
 	}
 
 	/**
@@ -198,7 +209,8 @@ class StaffController extends BaseController {
 		$thread = $this->threads->getById($id);
 		if(!$thread)
 			\App::abort(404);
-		$this->nav('Staff');
+		$this->bc(['staff' => 'Staff']);
+		$this->nav('navbar.staff.staff');
 		$this->title('Editing Thread Title');
 		return $this->view('staff.moderation.thread.title', compact('thread'));
 	}

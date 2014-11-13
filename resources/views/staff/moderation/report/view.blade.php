@@ -16,15 +16,19 @@
 					@lang('staff.moderation.reports.view.currently', ['status' => Lang::get('staff.moderation.reports.status.closed')])
 				</p>
 @endif
-				<div class='post'>
-
-				</div>
-				<div class='pull-right'>
-					<ul class='list-inline'>
-						<li>
-
-						</li>
-					</ul>
+@foreach($posts as $post)
+@include('forums.post._show', ['post' => $post])
+@endforeach
+				<div class='clearfix'>
+					<div class='pull-right'>
+						<ul class='list-inline'>
+							<li>
+								<a href='/staff/moderation/report/1/status/switch' class='btn btn-info'>
+									{{ $report->status == 0 ? "Close Report" : "Open Report" }}
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 @stop

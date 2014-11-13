@@ -418,6 +418,7 @@ Route::group(['prefix' => 'staff'], function() {
 		Route::group(['middleware' => 'staff.moderator', 'prefix' => 'moderation'], function() {
 			get('/', 'StaffController@getModerationIndex');
 			get('report/{id}', 'StaffController@getModerationReportView');
+			get('report/{id}/status/switch', 'StaffController@getModerationReportStatusSwitch');
 			/**
 			 * Thread Management
 			 */
