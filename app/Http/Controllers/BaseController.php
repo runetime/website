@@ -30,6 +30,11 @@ class BaseController extends Controller {
 	 * @param $nav
 	 */
 	protected function nav($nav) {
+		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
+		if(empty($locale))
+			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', 'en');
+		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
+		\Lang::setLocale($locale);
 		$this->nav = trans($nav);
 	}
 
@@ -56,11 +61,6 @@ class BaseController extends Controller {
 	 * @return \Illuminate\View\View
 	 */
 	protected function view($path, $data = []) {
-		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
-		if(empty($locale))
-			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', 'en');
-		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
-		\Lang::setLocale($locale);
 		$data['bc'] = $this->bc;
 		$data['displayPageHeader'] = $this->displayPageHeader;
 		$data['js'] = $this->js;
