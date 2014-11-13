@@ -12,9 +12,9 @@
 						{{$subforumItem->description}}
 					</div>
 					<div class='col-xs-12 col-sm-6 col-md-2'>
-						{{$subforumItem->threads}} threads
+						{{$subforumItem->thread_count}} threads
 						<br />
-						{{$subforumItem->posts}} posts
+						{{$subforumItem->post_count}} posts
 					</div>
 					<div class='col-xs-12 col-sm-12 col-md-3'>
 		@if(!empty($subforumItem->last_post_info) && !empty($subforumItem->last_thread_info))

@@ -1,10 +1,10 @@
 @extends('layouts.forums')
 @section('forum')
 				<h1>
-					{{$subforum->name}}
+					{{ $subforum->name }}
 				</h1>
 				<p class='text-muted'>
-					{!!$subforum->description!!}
+					{!! $subforum->description !!}
 				</p>
 				<div class='pull-left'>
 				</div>
@@ -14,7 +14,11 @@
 							<i class='fa fa-check'></i> Mark Read
 						</li>
 						<li>
-							<a href='/forums/create/{{\String::slugEncode($subforum->id,$subforum->name)}}' class='btn btn-primary btn-sm}' role='button'{{!\Auth::check()?' disabled':''}}>
+@if(\Auth::check() && $subforum->posts_enabled == true)
+							<a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm' role='button'>
+@else
+							<a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm disabled' role='button'>
+@endif
 								Start New Topic
 							</a>
 						</li>

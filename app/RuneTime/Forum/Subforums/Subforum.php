@@ -6,7 +6,7 @@ use App\RuneTime\Forum\Threads\Post;
 class Subforum extends Entity{
 	protected $table = 'forum_subforums';
 	protected $with = [];
-	protected $fillable = ['name', 'description', 'threads', 'replies', 'last_post', 'position', 'parent'];
+	protected $fillable = ['name', 'description', 'roles', 'posts_enabled', 'posts_active', 'thread_count', 'post_count', 'last_post', 'position', 'parent'];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
