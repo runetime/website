@@ -275,7 +275,7 @@ class ForumController extends BaseController {
 		$thread->updateLastPost($post);
 		$thread->incrementPosts();
 		$this->subforums->updateLastPost($post->id, $thread->subforum->id);
-		$this->subforums->incrementPosts($thread->subforum);
+		$this->subforums->incrementPosts($thread->subforum->id);
 		\Auth::user()->incrementPostActive();
 		return $this->getThreadLastPost($thread->id);
 	}

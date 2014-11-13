@@ -66,7 +66,7 @@ class SubforumRepository extends EloquentRepository {
 			first();
 		while(true){
 			if(!empty($subforum)){
-				$subforum->increment('replies');
+				$subforum->increment('post_count');
 				$subforum->save();
 				$subforum = $this->model->
 					where('id', '=', $subforum->parent)->
@@ -86,7 +86,7 @@ class SubforumRepository extends EloquentRepository {
 			first();
 		while(true){
 			if(!empty($subforum)){
-				$subforum->increment('threads');
+				$subforum->increment('thread_count');
 				$subforum->save();
 				$subforum = Subforum::find($subforum->parent);
 			}
