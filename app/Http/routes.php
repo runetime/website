@@ -406,7 +406,7 @@ Route::group(['prefix' => 'staff'], function() {
 	/**
 	 * Only staff can access
 	 */
-	Route::group([], function() {
+	Route::group(['middleware' => 'staff'], function() {
 		get('/', 'StaffController@getIndex');
 		get('checkup', 'StaffController@getCheckup');
 		post('checkup', 'StaffController@postCheckup');
@@ -415,7 +415,7 @@ Route::group(['prefix' => 'staff'], function() {
 		/**
 		 * Moderation Panel
 		 */
-		Route::group(['prefix' => 'moderation'], function() {
+		Route::group(['middleware' => 'staff.moderator', 'prefix' => 'moderation'], function() {
 			get('/', 'StaffController@getModerationIndex');
 			get('report/{id}', 'StaffController@getModerationReportView');
 			/**
