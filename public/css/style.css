@@ -8405,5 +8405,8 @@ blockquote {
 .label-pinned {
   background: #7f3400; }
 
+.label-dark {
+  background: #151515; }
+
 .text-muted {
   color: #777777 !important; }

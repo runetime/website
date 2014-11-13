@@ -62,11 +62,12 @@ class ForumController extends BaseController {
 				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread[0]->id);
 			array_push($subforumList[$subforum->parent], $subforum);
 		}
-		$forumInfo = new \stdClass;
-		$forumInfo->posts = $this->posts->getCount();
-		$forumInfo->members = $this->users->getCount();
-		$forumInfo->latest = $this->users->getLatest();
-		$forumInfo->mostOnline = \Cache::get('info.most_online');
+		$forumInfo = [
+			'posts' => $this->posts->getCount(),
+			'members' => $this->users->getCount(),
+			'latest' => $this->users->getLatest(),
+			'mostOnline' => \Cache::get('info.most_online'),
+		];
 		$recentThreads = $this->threads->getX(5, 'desc');
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.name'));

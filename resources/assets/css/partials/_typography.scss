@@ -110,13 +110,13 @@ blockquote {
 	}
 }
 .badge-important{
-	background-color:#820000 !important;
+	background-color: rgba(130, 0, 0, 1) !important;
 }
 .badge-info{
-	background-color:#45006b !important;
+	background-color: rgba(69, 0, 107, 1) !important;
 }
 .label-rt{
-	background:#45006b !important;
+	background: rgba(69, 0, 107, 1) !important;
 }
 .label-locked {
 	background: rgba(86, 0, 158, 1)
@@ -129,6 +129,9 @@ blockquote {
 }
 .label-pinned {
 	background: rgba(127, 52, 0, 1);
+}
+.label-dark {
+	background: rgba(21, 21, 21, 1);
 }
 
 .text-muted {
