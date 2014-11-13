@@ -341,7 +341,7 @@ class ForumController extends BaseController {
 		$post = $this->posts->getById($id);
 		if(!$post)
 			\App::abort(404);
-		$thread = $this->threads->getById($post->thread);
+		$thread = $this->threads->getById($post->thread[0]->id);
 		$this->nav('navbar.forums');
 		$this->title('Editing Post in ' . $thread->title);
 		return $this->view('forums.post.edit', compact('post', 'thread'));
@@ -352,15 +352,16 @@ class ForumController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPostEdit(PostEditRequest $form) {
-		$post = $this->posts->getById($form->id);
-		if(!$post)
+	public function postPostEdit($id, PostEditRequest $form) {
+		$id = (int) $id;
+		$post = $this->posts->getById($id);
+		if(empty($post))
 			\App::abort(404);
-		$thread = $this->threads->getById($post->thread);
+		$thread = $this->threads->getById($post->thread[0]->id);
 		$post->contents = $form->contents;
-		$post->contents_parsed = $form->contents;
+		$post->contents_parsed = with(new \Parsedown)->text($form->contents);
 		$post->save();
-		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
+		return $this->getThreadLastPost($thread->id);
 	}
 
 	/**

@@ -10,7 +10,6 @@ class PostEditRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'id'       => 'required',
 			'contents' => 'required',
 		];
 	}

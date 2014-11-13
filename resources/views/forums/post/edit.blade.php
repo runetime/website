@@ -2,8 +2,8 @@
 @section('contents')
             <div class='wrapper'>
                 <h1>
-                    Editing Post in {{$thread->title}}
+                    Editing Post in {{ $thread->title }}
                 </h1>
-@include('_edit', ['url' => '/forums/post/' . $post->id . '/edit', 'id' => $post->id, 'button' => 'Edit'])
+@include('forums.post._edit', ['url' => '/forums/post/' . $post->id . '/edit', 'button' => 'Edit', 'contents' => $post->contents])
             </div>
 @stop

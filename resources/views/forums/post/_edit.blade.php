@@ -1,6 +1,7 @@
 <?php
-if(!isset($button)) $button = 'Post';
-if(!isset($url))    $url='/forums/reply';
+if(!isset($button))   $button = 'Post';
+if(!isset($url))      $url='/forums/reply';
+if(!isset($contents)) $contents = '';
 ?>
 <form action='{{ $url }}' class='reply' method='post'>
 	<div class='row'>
@@ -8,7 +9,7 @@ if(!isset($url))    $url='/forums/reply';
 			{!! \Image::userPhoto(\Auth::user()->id, ['img-rounded']) !!}
 		</div>
 		<div class='col-xs-12 col-sm-9 col-md-10 col-lg-11'>
-			<textarea name='contents' id='contents' rows='15' class='form-control' rt-data='post.edit'></textarea>
+			<textarea name='contents' id='contents' rows='15' class='form-control' rt-data='post.edit'>{{ $contents }}</textarea>
 			<p>
 				<ul class='list-inline'>
 					<li>
