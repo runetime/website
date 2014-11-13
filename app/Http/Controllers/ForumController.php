@@ -325,11 +325,13 @@ class ForumController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postPostReport(PostReportRequest $form) {
-		$contents = $form->contents;
-		$contentsParsed = $contents;
+		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$report = new Report;
-		$report->saveNew(\Auth::user()->id, $form->id, Report::TYPE_POST, Report::STATUS_OPEN, $contents, $contentsParsed);
-		return \redirect()->to('/forums/');
+		$report = $report->saveNew(\Auth::user()->id, $form->id, Report::TYPE_POST, Report::STATUS_OPEN);
+		$post = new Post;
+		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$report->addPost($post);
+		return \redirect()->to('/forums');
 	}
 
 	/**
