@@ -31,6 +31,7 @@ class NewsController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
+		$canAdd = false;
 		if(\Auth::check() && \Auth::user()->isLeader())
 			$canAdd = true;
 		$news = $this->news->getRecentNews(5);
