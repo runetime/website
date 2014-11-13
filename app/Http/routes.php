@@ -496,3 +496,8 @@ Route::group(['prefix' => 'transparency'], function() {
 	get('/', 'TransparencyController@getIndex');
 	get('markdown', 'TransparencyController@getMarkdown');
 });
+
+/**
+ * Resources
+ */
+get('css/style.css', 'ResourceController@getCSS');
