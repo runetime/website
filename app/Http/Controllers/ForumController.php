@@ -153,10 +153,10 @@ class ForumController extends BaseController {
 			\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time()+1);
 		$thread->incrementViews();
 		$subforum = $this->subforums->getbyId($thread->subforum_id);
-		if(\Auth::check() && \Auth::user()->isCommunity())
-			$posts = $thread->posts()->skip(($page - 1) * Thread::POSTS_PER_PAGE)->take(Thread::POSTS_PER_PAGE)->get();
-		else
-			$posts = $thread->posts;
+		$posts = $thread->posts();
+		if(!\Auth::check() || !\Auth::user()->isCommunity())
+			$posts = $posts->where('status', '=', Post::STATUS_INVISIBLE);
+		$posts = $posts->skip(($page - 1) * Thread::POSTS_PER_PAGE)->take(Thread::POSTS_PER_PAGE)->get();
 		// Posts
 		// Breadcrumbs
 		$bc = [];
@@ -348,6 +348,7 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @param                 $id
 	 * @param PostEditRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -373,7 +374,7 @@ class ForumController extends BaseController {
 		$post = $this->posts->getById($id);
 		if(!$post)
 			\App::abort(404);
-		$thread = $this->threads->getById($post->thread);
+		$thread = $this->threads->getById($post->thread[0]->id);
 		$post->status = Post::STATUS_INVISIBLE;
 		$post->save();
 		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
