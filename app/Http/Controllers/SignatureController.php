@@ -74,7 +74,7 @@ class SignatureController extends BaseController {
 	public function getDisplay($slug) {
 		$info = explode(";", $slug);
 		header("Content-type: image/png");
-		$scores = \String::CURL('http://hiscore.runescape.com/index_lite.ws?player='.$username);
+		$scores = \String::CURL('http://hiscore.runescape.com/index_lite.ws?player=' . $username);
 		$scores = explode("\n", $scores);
 		foreach($scores as $key=>$text)
 			$scores[$key] = explode(",", $text);

@@ -6,6 +6,7 @@ function RuneTime() {
 	"use strict";
 	this.Calculator = null;
 	this.ChatBox = null;
+	this.CombatCalculator = null;
 	this.FormSignup = null;
 	this.Forums = null;
 	this.NameChecker = null;
@@ -265,6 +266,110 @@ function RuneTime() {
 			setTimeout(function () {
 				RuneTime.ChatBox.updateTimeAgo();
 			}, 1000);
+		};
+	};
+	this.CombatCalculator = function CombatCalculator() {
+		this.clicks = {};
+		this.generate = {};
+		this.inputs = {};
+		this.other = {};
+		this.paths = {};
+		this.getLevels = function getLevels() {
+			var name = $(this.other.name).val(),
+				data = { rsn: name},
+				levels = RuneTime.Utilities.postAJAX(this.paths.loadCombat, data)
+			levels.done(function(levels) {
+				levels = $.parseJSON(levels);
+				$(RuneTime.CombatCalculator.inputs.attack).val(levels.attack);
+				$(RuneTime.CombatCalculator.inputs.defence).val(levels.defence);
+				$(RuneTime.CombatCalculator.inputs.strength).val(levels.strength);
+				$(RuneTime.CombatCalculator.inputs.constitution).val(levels.constitution);
+				$(RuneTime.CombatCalculator.inputs.ranged).val(levels.ranged);
+				$(RuneTime.CombatCalculator.inputs.prayer).val(levels.prayer);
+				$(RuneTime.CombatCalculator.inputs.magic).val(levels.magic);
+				$(RuneTime.CombatCalculator.inputs.summoning).val(levels.summoning);
+				RuneTime.CombatCalculator.updateLevel();
+			});
+		};
+		this.updateLevel = function updateLevel() {
+			var level = 0;
+			var attacks = Math.ceil(this.val('attack') + this.val('strength'), 2 * this.val('magic'), 2 * this.val('ranged'));
+			var defences = this.val('defence') + this.val('constitution');
+			var other = (.5 * this.val('prayer')) + (.5 * this.val('summoning'));
+			level = Math.floor((1/4) * (
+				(13/10) * attacks + defences + other
+			));
+			$(RuneTime.CombatCalculator.generate.level).html(level);
+		};
+		this.val = function val(name) {
+			return parseInt($("[rt-data='combat.calculator:" + name + "']").val());
+		};
+		this.setup = function setup() {
+			this.paths = {
+				loadCombat: '/calculators/combat/load'
+			};
+			this.clicks = {
+				submit: "[rt-data='combat.calculator:submit']"
+			};
+			this.other = {
+				name: "[rt-data='combat.calculator:name']"
+			};
+			this.inputs = {
+				attack: "[rt-data='combat.calculator:attack']",
+				defence: "[rt-data='combat.calculator:defence']",
+				strength: "[rt-data='combat.calculator:strength']",
+				constitution: "[rt-data='combat.calculator:constitution']",
+				ranged: "[rt-data='combat.calculator:ranged']",
+				prayer: "[rt-data='combat.calculator:prayer']",
+				magic: "[rt-data='combat.calculator:magic']",
+				summoning: "[rt-data='combat.calculator:summoning']"
+			};
+			this.generate = {
+				level: "[rt-data='combat.calculator:level']"
+			};
+			$(this.inputs.attack).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.inputs.defence).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.inputs.strength).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.inputs.constitution).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.inputs.ranged).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.inputs.prayer).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.inputs.magic).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.inputs.summoning).keyup(function() {
+				setTimeout(function() {
+					RuneTime.CombatCalculator.updateLevel();
+				}, 25);
+			});
+			$(this.clicks.submit).click(function() {
+				RuneTime.CombatCalculator.getLevels();
+			});
 		};
 	};
 	this.SignupForm = function SignupForm() {

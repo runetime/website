@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\Calculators\CombatLoadRequest;
 use App\Http\Requests\Calculators\PostRequest;
 use App\RuneTime\Calculators\CalculatorRepository;
 /**
@@ -33,9 +34,33 @@ class CalculatorController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getCombat() {
+		$this->bc(['calculators' => 'Calculators']);
 		$this->nav('navbar.runescape.runescape');
 		$this->title('Combat Calculator');
 		return $this->view('calculators.combat');
+	}
+
+	public function getCombatLoad(CombatLoadRequest $form) {
+		$url='http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $form->rsn;
+		$results = \String::CURL($url);
+		$scoreset = explode("\n", $results);
+		$scores = [];
+		foreach($scoreset as $key=>$text) {
+			$temp = explode(",", $text);
+			$scores[$key] = (int) $temp[1];
+		}
+		$skills = (object)[
+			'attack' => $scores[1],
+			'defence' => $scores[2],
+			'strength' => $scores[3],
+			'constitution' => $scores[4],
+			'ranged' => $scores[5],
+			'prayer' => $scores[6],
+			'magic' => $scores[7],
+			'summoning' => $scores[24],
+		];
+		header('Content-Type: application/json');
+		return json_encode($skills);
 	}
 
 	/**

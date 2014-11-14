@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper'>
+			<div class='wrapper-dark'>
 				<h1>
 					<img src='/img/skills/large/{{$calculator->name_trim}}.png' alt='Firemaking' class='img-responsive pull-left' /> {{$calculator->name}} Calculator
 				</h1>
@@ -29,6 +29,8 @@
 						<input type='text' id='calculator-target-level' class='center-block' />
 					</div>
 				</div>
+			</div>
+			<div class='wrapper'>
 				<table id='calculator-table' class='full-width text-center'>
 					<thead>
 						<tr>

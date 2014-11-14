@@ -57,6 +57,7 @@ Route::group(['prefix' => 'awards'], function() {
 Route::group(['prefix' => 'calculators'], function() {
 	get('/', 'CalculatorController@getIndex');
 	get('combat', 'CalculatorController@getCombat');
+	post('combat/load', 'CalculatorController@getCombatLoad');
 	get('{type}', 'CalculatorController@getView');
 	post('load', 'CalculatorController@postLoad');
 });

@@ -8288,6 +8288,9 @@ tbody.rowlink tr:hover {
 a {
   cursor: pointer; }
 
+.input-inline {
+  display: inline !important; }
+
 input[type=text],
 input[type=password],
 input[type=email] {
