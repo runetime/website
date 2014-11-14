@@ -50,20 +50,4 @@ class GetController extends BaseController {
 		$results = \String::CURL($url);
 		return json_encode($results);
 	}
-
-	/**
-	 * @return string
-	 */
-	public function getBBCode() {
-		$bbcodes = $this->bbcode->getAll();
-		$bbcodeList = [];
-		foreach($bbcodes as $bbcode) {
-			$bbcodeCurrent = new \stdClass;
-			$bbcodeCurrent->name = $bbcode->name;
-			$bbcodeCurrent->example = $bbcode->example;
-			$bbcodeCurrent->parsed = $bbcode->parsed;
-			array_push($bbcodeList, $bbcodeCurrent);
-		}
-		return json_encode($bbcodeList);
-	}
 }
