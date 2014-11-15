@@ -1,7 +1,7 @@
-					<div id='post{{ $post->id }}' class='post row{{$post->status == 0 ? " post-hidden" : ""}}' rt-data='post#{{ $post->id }}'>
-						<div class='post-info'>
+					<div id='post{{ $post->id }}' class='post row{{$post->status == 0 ? " post-hidden" : ""}} {{ $post->userVote() }}' rt-data='post#{{ $post->id }}'>
+						<div class='post-info col-xs-12'>
 							<div class='pull-left'>
-								{!!\Link::name($post->author->id)!!}
+								{!!\Link::name($post->author->id)!!} <span class='text-muted'>{{ \Time::shortReadable($post->created_at) }}</span>
 							</div>
 							<div class='pull-right'>
 								{{ \Auth::check() && \Auth::user()->isCommunity() ? "(IP: " . \String::decodeIP($post->ip) . ") " : "" }}<a href='{{ $url }}#post{{ $post->id }}'>#{{ $post->id }}</a>
@@ -45,42 +45,54 @@
 							<hr />
 							{{$post->author_info->signature_parsed}}
 	@endif
+							<div class='clearfix'>
+								<ul class='list-inline pull-left'>
 	@if(\Auth::check())
-							<ul class='list-inline'>
 		@if(\Auth::user()->id != $post->author_id)
-								<li>
-									<a href='/forums/post/{{$post->id}}/report' title='Report This Post'>
-										Report
-									</a>
-								</li>
+									<li>
+										<a href='/forums/post/{{$post->id}}/report' title='Report This Post'>
+											Report
+										</a>
+									</li>
 		@endif
-		@if(\Auth::user()->hasOneOfRoles(1, 10, 11) || \Auth::user()->id == $post->author_id)
-								<li>
-									<a href='/forums/post/{{$post->id}}/edit' title='Edit This Post'>
-										Edit
-									</a>
-								</li>
+		@if(\Auth::user()->isCommunity() || \Auth::user()->id == $post->author_id)
+									<li>
+										<a href='/forums/post/{{$post->id}}/edit' title='Edit This Post'>
+											Edit
+										</a>
+									</li>
 		@endif
-		@if(\Auth::user()->hasOneOfRoles(1, 10, 11))
-								<li>
-									<a href='/forums/post/{{$post->id}}/status=0' title='Hide This Post'>
-										Hide
-									</a>
-								</li>
-								<li>
-									<a href='/forums/post/{{$post->id}}/delete' title='Delete This Post'>
-										Delete
-									</a>
-								</li>
+		@if(\Auth::user()->isCommunity())
+									<li>
+										<a href='/forums/post/{{$post->id}}/status=0' title='Hide This Post'>
+											Hide
+										</a>
+									</li>
+									<li>
+										<a href='/forums/post/{{$post->id}}/delete' title='Delete This Post'>
+											Delete
+										</a>
+									</li>
 		@endif
 		@if(\Auth::check())
-								<li>
-									<a title='Quote This Post' onclick="RuneTime.Forums.Post.quote({{ $post->id }});">
-										Quote
-									</a>
-								</li>
+									<li>
+										<a title='Quote This Post' onclick="RuneTime.Forums.Post.quote({{ $post->id }});">
+											Quote
+										</a>
+									</li>
 		@endif
-							</ul>
 	@endif
+							</ul>
+							<div class='post-votes pull-right'>
+	@if(\Auth::check())
+								<div class='upvote'>
+									<i class='fa fa-arrow-up fa-2x'></i>
+								</div>
+								<div class='downvote'>
+									<i class='fa fa-arrow-down fa-2x'></i>
+								</div>
+	@endif
+							</div>
 						</div>
 					</div>
+				</div>

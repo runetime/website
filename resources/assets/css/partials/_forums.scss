@@ -27,15 +27,54 @@
 	}
 }
 .post{
+	background:#212121;
+	.col-sm-3 {
+		border-left: 5px solid transparent;
+	}
+	.col-xs-3,
+	.col-sm-9 {
+		padding: 0em;
+	}
 	.post-info{
 		background:#111111;
 		padding:.5em 1em;
 	}
-	.col-sm-3{
-		background:#212121;
-		border-radius:1em;
+	&.upvote-active {
+		.col-sm-3 {
+			border-left: 5px solid rgba(23, 166, 2, 1);
+		}
+		.post-votes .upvote i {
+			color: rgba(23, 166, 2, 1);
+		}
+	}
+	&.downvote-active {
+		.col-sm-3 {
+			border-left: 5px solid rgba(199, 23, 3, 1);
+		}
+		.post-votes .downvote i {
+			color: rgba(199, 23, 3, 1);
+		}
 	}
 }
 .post-hidden{
 	background:rgba(47, 79, 79, 1) !important;
+}
+.post-votes {
+	display:inline;
+	div {
+		display:inline;
+		i:hover {
+			cursor:pointer;
+		}
+		&.upvote {
+			i:hover {
+				color: rgba(47, 122, 16, 1);
+			}
+		}
+		&.downvote {
+			i:hover {
+				color: rgba(145, 17, 2, 1);
+			}
+		}
+	}
 }

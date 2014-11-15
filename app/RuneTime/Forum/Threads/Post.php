@@ -34,4 +34,17 @@ class Post extends Entity {
 	public function author() {
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
+
+	public function userVote() {
+		if(\Auth::user()) {
+			$voteRepository = new VoteRepository(new Vote);
+			$vote = $voteRepository->getByPost($this->id);
+			if($vote)
+				if($vote->status == Vote::STATUS_UP)
+					return 'upvote-active';
+				elseif($vote->status == Vote::STATUS_DOWN)
+					return 'downvote-active';
+		}
+		return '';
+	}
 }

@@ -83,11 +83,60 @@ function RuneTime() {
 				$(RuneTime.Forums.elements.postEditor).focus();
 			}
 		};
+		this.upvote = function upvote(postID) {
+			postID = postID.replace("post", "");
+			var post = $('#post' + postID),
+				isUpvoted = $(post).hasClass('upvote-active'),
+				isDownvoted = $(post).hasClass('downvote-active');
+			if(isUpvoted === true)
+				$(post).removeClass('upvote-active');
+			else
+				$(post).addClass('upvote-active');
+			if(isDownvoted === true)
+				$(post).removeClass('downvote-active');
+			var data = {
+				'vote': 'up'
+			};
+			var vote = RuneTime.Utilities.postAJAX(this.paths.vote(postID), data);
+			vote.done(function(data) {
+				data = $.parseJSON(data);
+			});
+		};
+		this.downvote = function downvote(postID) {
+			postID = postID.replace("post", "");
+			var post = $('#post' + postID),
+				isUpvoted = $(post).hasClass('upvote-active'),
+				isDownvoted = $(post).hasClass('downvote-active');
+			if(isDownvoted === true)
+				$(post).removeClass('downvote-active');
+			else
+				$(post).addClass('downvote-active');
+			if(isUpvoted === true)
+				$(post).removeClass('upvote-active');
+			var data = {
+				'vote': 'down'
+			};
+			var vote = RuneTime.Utilities.postAJAX(this.paths.vote(postID), data);
+			vote.done(function(data) {
+				data = $.parseJSON(data);
+			});
+		};
 		this.setup = function setup() {
 			this.elements = {
 				'postEditor': "[rt-data='post.edit']"
 			};
+			this.paths = {
+				'vote': function(id) { return '/forums/post/' + id + '/vote'; }
+			};
 			this.Post = new this.Post();
+			$('.upvote').bind('click', function(e) {
+				var postID = $(e.target).parent().parent().parent().parent().parent().attr('id');
+				RuneTime.Forums.upvote(postID);
+			});
+			$('.downvote').bind('click', function(e) {
+				var postID = $(e.target).parent().parent().parent().parent().parent().attr('id');
+				RuneTime.Forums.downvote(postID);
+			});
 		}
 	};
 	this.ChatBox = function ChatBox() {
@@ -921,7 +970,7 @@ function RuneTime() {
 				} else {
 					$('#rsn-availability').html('The Runescape name <b>' + name + '</b> is not appropriate, is too long (over 12 characters), or too short (under 3 characters).');
 					$('#rsn-availability').css({
-						color: 'red',
+						color: 'red'
 					});
 				}
 			}
@@ -930,10 +979,10 @@ function RuneTime() {
 }
 RuneTime = new RuneTime();
 RuneTime.Utilities = new RuneTime.Utilities();
-RuneTime.Forums = new RuneTime.Forums();
-RuneTime.Forums.setup();
 $(function () {
 	"use strict";
+	RuneTime.Forums = new RuneTime.Forums();
+	RuneTime.Forums.setup();
 	$('[data-toggle]').tooltip();
 	$('.dropdown-toggle').dropdown();
 	$('tbody.rowlink').rowlink();

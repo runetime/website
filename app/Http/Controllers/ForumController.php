@@ -4,10 +4,10 @@ use App\Http\Requests\ForumPostEditForm;
 use App\Http\Requests\ForumPostReportForm;
 use App\Http\Requests\Forums\PostEditRequest;
 use App\Http\Requests\Forums\PostReportRequest;
+use App\Http\Requests\Forums\PostVoteRequest;
 use App\Http\Requests\Forums\ReplyRequest;
 use App\Http\Requests\Forums\ThreadCreateForm;
 use App\Http\Requests\Forums\ThreadCreateRequest;
-use App\Http\Requests\ThreadReplyForm;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Subforums\Subforum;
 use App\RuneTime\Forum\Subforums\SubforumRepository;
@@ -17,6 +17,8 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\Forum\Threads\ThreadRepository;
+use App\RuneTime\Forum\Threads\Vote;
+use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
 /**
@@ -30,6 +32,10 @@ class ForumController extends BaseController {
 	private $tags;
 	private $threads;
 	private $users;
+	/**
+	 * @var VoteRepository
+	 */
+	private $votes;
 
 	/**
 	 * @param PostRepository     $posts
@@ -37,15 +43,17 @@ class ForumController extends BaseController {
 	 * @param StatusRepository   $statuses
 	 * @param TagRepository      $tags
 	 * @param ThreadRepository   $threads
+	 * @param VoteRepository     $votes
 	 * @param UserRepository     $users
 	 */
-	public function __construct(PostRepository $posts, SubforumRepository $subforums, StatusRepository $statuses, TagRepository $tags, ThreadRepository $threads, UserRepository $users) {
+	public function __construct(PostRepository $posts, SubforumRepository $subforums, StatusRepository $statuses, TagRepository $tags, ThreadRepository $threads, VoteRepository $votes, UserRepository $users) {
 		$this->posts = $posts;
 		$this->subforums = $subforums;
 		$this->statuses = $statuses;
 		$this->tags = $tags;
 		$this->threads = $threads;
 		$this->users = $users;
+		$this->votes = $votes;
 	}
 
 	/**
@@ -312,6 +320,45 @@ class ForumController extends BaseController {
 		$this->nav('navbar.forums');
 		$this->title('Reporting a Post');
 		return $this->view('forums.post.report', compact('post', 'thread'));
+	}
+
+	/**
+	 * @param                 $id
+	 * @param PostVoteRequest $form
+	 *
+	 * @return string
+	 */
+	public function postPostVote($id, PostVoteRequest $form) {
+		$post = $this->posts->getById($id);
+		if(!$post)
+			\App::abort(404);
+		$vote = $this->votes->getByPost($id);
+		$newStatus = $form->vote == "up" ? Vote::STATUS_UP : Vote::STATUS_DOWN;
+		if($vote) {
+			if($newStatus == Vote::STATUS_UP) {
+				if($vote->status == Vote::STATUS_UP) {
+					$newStatus = Vote::STATUS_NEUTRAL;
+				} else {
+					$newStatus = Vote::STATUS_UP;
+				}
+			} elseif($newStatus == Vote::STATUS_DOWN) {
+				if($vote->status == Vote::STATUS_DOWN) {
+					$newStatus = Vote::STATUS_NEUTRAL;
+				} else {
+					$newStatus = Vote::STATUS_DOWN;
+				}
+			}
+		}
+		if($vote) {
+			$vote->status = $newStatus;
+			$vote->save();
+		} else {
+			$vote = new Vote;
+			$vote = $vote->saveNew(\Auth::user()->id, $post->id, $newStatus);
+		}
+		$response = ['voted' => $newStatus];
+		header('Content-Type: application/json');
+		return json_encode($response);
 	}
 
 	/**
