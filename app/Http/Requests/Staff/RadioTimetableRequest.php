@@ -12,7 +12,8 @@ class RadioTimetableRequest extends Request {
 	public function rules()
 	{
 		return [
-			'data' => 'true',
+			'day'  => 'required',
+			'hour' => 'required',
 		];
 	}
 

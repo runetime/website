@@ -134,6 +134,30 @@ class StaffController extends BaseController {
 		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
 	}
 
+	public function getAdministratorIndex() {
+		$this->bc(['staff' => 'Staff']);
+		$this->nav('navbar.staff.staff');
+		$this->title('Administrator Panel');
+		return $this->view('staff.administrator.index');
+	}
+
+	public function getAdministratorUsers() {
+		$this->bc(['staff' => 'Staff', 'staff/administrator' => 'Administrator Panel']);
+		$this->nav('navbar.staff.staff');
+		$this->title('User Management');
+		return $this->view('staff.administrator.users');
+	}
+
+	public function getAdministratorIPBan() {
+		$this->bc(['staff' => 'Staff', 'staff/administrator' => 'Administrator Panel']);
+		$this->nav('navbar.staff.staff');
+		$this->title('IP Banning');
+		return $this->view('staff.administrator.ip');
+	}
+	public function postAdministratorIPBan(IPBanRequest $form) {
+		return \redirect()->to('staff/administrator/ip-ban');
+	}
+
 	/**
 	 * @return \Illuminate\View\View
 	 */
@@ -257,7 +281,8 @@ class StaffController extends BaseController {
 		if($form->live !== "go")
 			return \App::abort(404);
 		$live = \Cache::get('radio.dj.current');
-		if(!$live)
+		$user = $this->users->getByid($live);
+		if(!$user)
 			\Cache::forever('radio.dj.current', \Auth::user()->id);
 		return \redirect()->to('/staff/radio/live');
 	}
@@ -298,10 +323,20 @@ class StaffController extends BaseController {
 	 */
 	public function getRadioTimetable() {
 		$timetable = $this->timetable->getThisWeek();
+		$days = [];
+		$x = 0;
+		foreach($timetable as $time) {
+			if($time->dj_id > 0)
+				$days[$x][$time->hour] = $this->users->getById($time->dj_id)->display_name;
+			else
+				$days[$x][$time->hour] = $time->dj_id;
+			if($time->hour == 23)
+				$x++;
+		}
 		$this->bc(['staff' => 'Staff', 'staff/radio' => 'Radio Panel']);
 		$this->nav('navbar.staff.staff');
 		$this->title('Radio Timetable');
-		return $this->view('staff.radio.timetable', compact('timetable'));
+		return $this->view('staff.radio.timetable', compact('days'));
 	}
 
 	/**
@@ -310,8 +345,24 @@ class StaffController extends BaseController {
 	 * @return string
 	 */
 	public function postRadioTimetable(RadioTimetableRequest $form) {
+		$timeStart = strtotime('last tuesday 00:00:00', strtotime('tomorrow'));
+		$dayStart = date('z', $timeStart);
+		$dayStart += $form->day;
+		$hour = $this->timetable->getByHourDay($form->hour, $dayStart);
+		if($hour) {
+			$response = ['valid' => true, 'hour' => $form->hour, 'day' => $form->day];
+			if($hour->dj_id == -1) {
+				$response['name'] = \Auth::user()->display_name;
+				$hour->dj_id = \Auth::user()->id;
+			} elseif($hour->dj_id == \Auth::user()->id) {
+				$response['name'] = '-';
+				$hour->dj_id = -1;
+			}
+			$hour->save();
+		} else {
+			$response = ['valid' => false];
+		}
 		header('Content-Type: application/json');
-		$response = ['valid' => true];
 		return json_encode($response);
 	}
 

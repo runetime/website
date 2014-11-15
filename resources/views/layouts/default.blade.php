@@ -99,6 +99,9 @@ $current = $nav;
 		<script src='js/{{$js}}.js'></script>
 @endif
 		<script src='/js/main.js'></script>
+@if(\Auth::check() && \Auth::user()->isStaff())
+		<script src='/js/admin.js'></script>
+@endif
 	</head>
 	<body>
 		<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' role='navigation'>
