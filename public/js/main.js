@@ -648,9 +648,9 @@ function RuneTime() {
 			var timetable = RuneTime.Utilities.getAJAX('radio/timetable');
 			timetable.done(function(timetable) {
 				timetable = $.parseJSON(timetable);
-				var html = "<table class='table'><thead><tr><td>&nbsp;</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr></thead><tbody>";
+				var html = "<table class='table text-center'><thead><tr><td>&nbsp;</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr></thead><tbody>";
 				for(var x = 0, y = 23; x <= y; x++) {
-					html += "<tr><td>" + x + "</td>";
+					html += "<tr><td>" + x + ":00</td>";
 					for(var i = 0, j = 6; i <= j; i++) {
 						html += "<td>";
 						if(timetable[i] !== undefined && timetable[i][x] !== undefined) {

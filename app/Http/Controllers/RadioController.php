@@ -4,6 +4,7 @@ use App\Http\Requests\Radio\RequestSong;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Request;
 use App\RuneTime\Radio\RequestRepository;
+use App\RuneTime\Radio\TimetableRepository;
 use App\Runis\Accounts\UserRepository;
 /**
  * Class RadioController
@@ -22,16 +23,21 @@ class RadioController extends BaseController {
 	 * @var UserRepository
 	 */
 	private $users;
+	/**
+	 * @var TimetableRepository
+	 */
+	private $timetable;
 
 	/**
 	 * @param HistoryRepository $history
 	 * @param RequestRepository $requests
 	 * @param UserRepository    $users
 	 */
-	public function __construct(HistoryRepository $history, RequestRepository $requests, UserRepository $users) {
+	public function __construct(HistoryRepository $history, RequestRepository $requests, TimetableRepository $timetable, UserRepository $users) {
 		$this->history = $history;
 		$this->requests = $requests;
 		$this->users = $users;
+		$this->timetable = $timetable;
 	}
 
 	/**
@@ -59,9 +65,19 @@ class RadioController extends BaseController {
 	 * @return mixed
 	 */
 	public function getTimetable() {
-		$filled = [];
+		$timetable = $this->timetable->getThisWeek();
+		$days = [];
+		$x = 0;
+		foreach($timetable as $time) {
+			if($time->dj_id > 0)
+				$days[$x][$time->hour] = $this->users->getById($time->dj_id)->display_name;
+			else
+				$days[$x][$time->hour] = "-";
+			if($time->hour == 23)
+				$x++;
+		}
 		header('Content-Type: application/json');
-		return json_encode($filled);
+		return json_encode($days);
 	}
 
 	/**
