@@ -183,7 +183,19 @@ Route::group(['prefix' => 'forums'], function() {
 			get('/', 'ForumController@getPostEdit');
 			post('/', 'ForumController@postPostEdit');
 		});
-		get('delete', 'ForumController@getPostDelete');
+		/**
+		 * Post voting
+		 */
+		Route::group(['prefix' => 'vote'], function() {
+			post('/', 'ForumController@postPostVote');
+		});
+
+		/**
+		 * Deleting a post
+		 */
+		Route::group(['middleware' => 'staff.moderator'], function() {
+			get('delete', 'ForumController@getPostDelete');
+		});
 	});
 });
 
@@ -449,7 +461,10 @@ Route::group(['prefix' => 'staff'], function() {
 		 * Administrator Panel
 		 */
 		Route::group(['middleware' => 'staff.admin', 'prefix' => 'administrator'], function() {
-			get('/', 'StaffController@getAdministratorPanel');
+			get('/', 'StaffController@getAdministratorIndex');
+			get('users', 'StaffController@getAdministratorUsers');
+			get('ip-ban', 'StaffController@getAdministratorIPBan');
+			post('ip-ban', 'StaffController@postAdministratorIPBan');
 		});
 	});
 });
