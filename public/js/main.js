@@ -952,26 +952,24 @@ function RuneTime() {
 					}
 				});
 				if(nameAllowed === true) {
-					details = $.ajax({
-						url: path,
-						type: 'post',
-						data: data,
-						async: false
-					}).responseText;
-					if(details.substring(0, 6) === '<html>') {
-						available = true;
-					}
-					if(available === true) {
-						$('#rsn-availability').html('The Runescape name <b>' + name + '</b> is available.');
-						$('#rsn-availability').css({
-							color: 'green',
-						});
-					} else {
-						$('#rsn-availability').html('The Runescape name <b>' + name + '</b> is not available.');
-						$('#rsn-availability').css({
-							color: 'red',
-						});
-					}
+					details = RuneTime.Utilities.postAJAX(path, data);
+					$('#rsn-availability').html('Loading...');
+					details.done(function(details) {
+						if (details.substring(0, 6) === '<html>') {
+							available = true;
+						}
+						if (available === true) {
+							$('#rsn-availability').html('The Runescape name <b>' + name + '</b> is available.');
+							$('#rsn-availability').css({
+								color: 'green',
+							});
+						} else {
+							$('#rsn-availability').html('The Runescape name <b>' + name + '</b> is not available.');
+							$('#rsn-availability').css({
+								color: 'red',
+							});
+						}
+					});
 				} else {
 					$('#rsn-availability').html('The Runescape name <b>' + name + '</b> is not appropriate, is too long (over 12 characters), or too short (under 3 characters).');
 					$('#rsn-availability').css({
