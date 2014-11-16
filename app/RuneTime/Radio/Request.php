@@ -14,4 +14,11 @@ class Request extends Entity{
 	const STATUS_NEUTRAL = 0;
 	const STATUS_ACCEPTED = 1;
 	const STATUS_REJECTED = 2;
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function author() {
+		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+	}
 }

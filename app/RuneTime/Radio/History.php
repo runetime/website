@@ -12,4 +12,11 @@ class History extends Entity{
 	protected $dates = [];
 	protected $softDelete = true;
 	const DEFAULT_AMOUNT = 20;
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user() {
+		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
+	}
 }

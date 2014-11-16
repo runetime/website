@@ -11,4 +11,11 @@ class Timetable extends Entity{
 	protected $fillable = ['dj_id', 'year', 'day', 'hour'];
 	protected $dates = [];
 	protected $softDelete = true;
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function dj() {
+		return $this->belongsTo('App\Runis\Accounts\User', 'dj_id');
+	}
 }

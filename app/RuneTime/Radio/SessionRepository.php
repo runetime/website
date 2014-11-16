@@ -12,4 +12,10 @@ class SessionRepository extends EloquentRepository {
 	public function __construct(Session $model) {
 		$this->model = $model;
 	}
+
+	public function getByStatus($status) {
+		return $this->model->
+			where('status', '=', $status)->
+			first();
+	}
 }
