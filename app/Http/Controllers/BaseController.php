@@ -71,7 +71,6 @@ class BaseController extends Controller {
 		$data['url'] = \Request::getPathInfo();
 		$this->updateCache();
 		$bans = new IPRepository(new IP);
-		dd($bans->getByIP(\Request::getClientIp()));
 		if($bans->getByIP(\Request::getClientIp())) {
 			return \View::make('errors.banned', $data);
 		}
