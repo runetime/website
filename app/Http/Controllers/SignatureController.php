@@ -73,8 +73,11 @@ class SignatureController extends BaseController {
 	 */
 	public function getDisplay($slug) {
 		$info = explode(";", $slug);
+		$username = $info[0];
 		header("Content-type: image/png");
-		$scores = \String::CURL('http://hiscore.runescape.com/index_lite.ws?player=' . $username);
+		if(!\Cache::get('hiscores.' . $username))
+			\Cache::put('hiscores.' . $username, \String::CURL('http://hiscore.runescape.com/index_lite.ws?player=' . $username), \Carbon::now()->addDay());
+		$scores = \Cache::get('hiscores.' . $username);
 		$scores = explode("\n", $scores);
 		foreach($scores as $key=>$text)
 			$scores[$key] = explode(",", $text);
