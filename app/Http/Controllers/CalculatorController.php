@@ -45,9 +45,12 @@ class CalculatorController extends BaseController {
 		$results = \String::CURL($url);
 		$scoreset = explode("\n", $results);
 		$scores = [];
-		foreach($scoreset as $key=>$text) {
-			$temp = explode(",", $text);
-			$scores[$key] = (int) $temp[1];
+		foreach($scoreset as $key => $text) {
+			if(!empty($text)) {
+				$temp = explode(",", $text)[1];
+				$scores[$key] = $temp;
+				unset($temp);
+			}
 		}
 		$skills = (object)[
 			'attack' => $scores[1],
