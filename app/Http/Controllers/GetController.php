@@ -3,15 +3,16 @@ namespace App\Http\Controllers;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Http\Request;
 class GetController extends BaseController {
-	private $bbcode;
+	/**
+	 * @var UserRepository
+	 */
 	private $users;
 
 	/**
 	 * @param BBCodeRepository $bbcode
 	 * @param UserRepository   $users
 	 */
-	public function __construct(BBCodeRepository $bbcode, UserRepository $users) {
-		$this->bbcode = $bbcode;
+	public function __construct(UserRepository $users) {
 		$this->users = $users;
 	}
 
