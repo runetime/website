@@ -430,16 +430,16 @@ Route::group(['prefix' => 'staff'], function() {
 		 * Moderation Panel
 		 */
 		Route::group(['middleware' => 'staff.moderator', 'prefix' => 'moderation'], function() {
-			get('/', 'StaffController@getModerationIndex');
-			get('report/{id}', 'StaffController@getModerationReportView');
-			get('report/{id}/status/switch', 'StaffController@getModerationReportStatusSwitch');
+			get('/', 'StaffModerator@getModerationIndex');
+			get('report/{id}', 'StaffModerator@getModerationReportView');
+			get('report/{id}/status/switch', 'StaffModerator@getModerationReportStatusSwitch');
 			/**
 			 * Thread Management
 			 */
 			Route::group(['prefix' => 'thread/{id}-{name}'], function() {
-				get('status={status}', 'StaffController@getModerationThreadStatus');
-				get('title', 'StaffController@getModerationThreadTitle');
-				post('title', 'StaffController@postModerationThreadTitle');
+				get('status={status}', 'StaffModerator@getModerationThreadStatus');
+				get('title', 'StaffModerator@getModerationThreadTitle');
+				post('title', 'StaffModerator@postModerationThreadTitle');
 			});
 		});
 
@@ -447,26 +447,26 @@ Route::group(['prefix' => 'staff'], function() {
 		 * Radio Panel
 		 */
 		Route::group(['middleware' => 'staff.radio', 'prefix' => 'radio'], function() {
-			get('/', 'StaffController@getRadioIndex');
-			get('live', 'StaffController@getRadioLive');
-			post('live', 'StaffController@postRadioLive');
-			post('live/message', 'StaffController@postRadioLiveMessage');
-			get('live/update', 'StaffController@getRadioLiveUpdate');
-			get('live/stop', 'StaffController@getRadioLiveStop');
-			get('messages', 'StaffController@getRadioMessages');
-			post('messages', 'StaffController@postRadioMessages');
-			get('timetable', 'StaffController@getRadioTimetable');
-			post('timetable', 'StaffController@postRadioTimetable');
+			get('/', 'StaffRadioController@getRadioIndex');
+			get('live', 'StaffRadioController@getRadioLive');
+			post('live', 'StaffRadioController@postRadioLive');
+			post('live/message', 'StaffRadioController@postRadioLiveMessage');
+			get('live/update', 'StaffRadioController@getRadioLiveUpdate');
+			get('live/stop', 'StaffRadioController@getRadioLiveStop');
+			get('messages', 'StaffRadioController@getRadioMessages');
+			post('messages', 'StaffRadioController@postRadioMessages');
+			get('timetable', 'StaffRadioController@getRadioTimetable');
+			post('timetable', 'StaffRadioController@postRadioTimetable');
 		});
 
 		/**
 		 * Administrator Panel
 		 */
 		Route::group(['middleware' => 'staff.admin', 'prefix' => 'administrator'], function() {
-			get('/', 'StaffController@getAdministratorIndex');
-			get('users', 'StaffController@getAdministratorUsers');
-			get('ip-ban', 'StaffController@getAdministratorIPBan');
-			post('ip-ban', 'StaffController@postAdministratorIPBan');
+			get('/', 'StaffAdminController@getAdministratorIndex');
+			get('users', 'StaffAdminController@getAdministratorUsers');
+			get('ip-ban', 'StaffAdminController@getAdministratorIPBan');
+			post('ip-ban', 'StaffAdminController@postAdministratorIPBan');
 		});
 	});
 });

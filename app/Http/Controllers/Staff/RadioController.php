@@ -2,16 +2,12 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\Staff\RadioMessageRequest;
 use App\Http\Requests\Staff\RadioTimetableRequest;
-use App\Http\Requests\Staff\CheckupRequest;
-use App\Http\Requests\Staff\ModerationThreadTitleRequest;
 use App\Http\Requests\Staff\RadioLiveMessage;
 use App\Http\Requests\Staff\RadioLiveRequest;
 use App\RuneTime\Checkup\CheckupRepository;
-use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Reports\ReportRepository;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
-use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Message;
 use App\RuneTime\Radio\MessageRepository;
@@ -20,11 +16,7 @@ use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
-/**
- * Class StaffController
- * @package App\Http\Controllers
- */
-class StaffController extends BaseController {
+class StaffRadioController extends BaseController {
 	/**
 	 * @var ReportRepository
 	 */
@@ -62,9 +54,6 @@ class StaffController extends BaseController {
 	 */
 	private $sessions;
 	/**
-	 * @var HistoryRepository
-	 */
-	private $history;
 
 	/**
 	 * @param CheckupRepository   $checkups
@@ -89,184 +78,6 @@ class StaffController extends BaseController {
 		$this->timetable = $timetable;
 		$this->sessions = $sessions;
 		$this->history = $history;
-	}
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getIndex() {
-		$this->nav('Staff Panel');
-		$this->title('Staff Panel');
-		return $this->view('staff.index');
-	}
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getCheckup() {
-		$date = \Time::long(time());
-		$this->bc(['staff' => 'Staff']);
-		$this->nav('navbar.staff.staff');
-		$this->title('Staff Checkup');
-		return $this->view('staff.checkup.form', compact('date'));
-	}
-
-	/**
-	 * @param CheckupRequest $form
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postCheckup(CheckupRequest $form) {
-		$checkup = new Checkup;
-		$hoursActive = with(new \Parsedown)->text($form->hours_active);
-		$checkup = $checkup->saveNew($form->active, $hoursActive, $form->team);
-		$checkup->addAuthor(\Auth::user());
-		return \redirect()->to('staff');
-	}
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getCheckupList() {
-		$checkups = $this->checkups->getX(30);
-		$this->bc(['staff' => 'Staff', 'staff/checkup' => 'Checkup']);
-		$this->nav('navbar.staff.staff');
-		$this->title('Staff Checkup');
-		return $this->view('staff.checkup.list', compact('checkups'));
-	}
-
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getCheckupView($id) {
-		$checkup = $this->checkups->getById($id);
-		$displayName = $this->users->getById($checkup->author()->first()->id);
-		$displayName = $displayName->display_name;
-		$this->bc(['staff' => 'Staff', 'staff/checkup' => 'Checkups']);
-		$this->nav('navbar.staff.staff');
-		$this->title('Checkup by ' . $displayName);
-		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
-	}
-
-	public function getAdministratorIndex() {
-		$this->bc(['staff' => 'Staff']);
-		$this->nav('navbar.staff.staff');
-		$this->title('Administrator Panel');
-		return $this->view('staff.administrator.index');
-	}
-
-	public function getAdministratorUsers() {
-		$this->bc(['staff' => 'Staff', 'staff/administrator' => 'Administrator Panel']);
-		$this->nav('navbar.staff.staff');
-		$this->title('User Management');
-		return $this->view('staff.administrator.users');
-	}
-
-	public function getAdministratorIPBan() {
-		$this->bc(['staff' => 'Staff', 'staff/administrator' => 'Administrator Panel']);
-		$this->nav('navbar.staff.staff');
-		$this->title('IP Banning');
-		return $this->view('staff.administrator.ip');
-	}
-	public function postAdministratorIPBan(IPBanRequest $form) {
-		return \redirect()->to('staff/administrator/ip-ban');
-	}
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getModerationIndex() {
-		$reports = $this->reports->getByStatus(Report::STATUS_OPEN);
-		$reportList = [];
-		foreach($reports as $report) {
-			$report->type=$this->reports->convertType($report->type);
-			$report->post = $this->posts->getByid($report->reported_id);
-			$report->reportee = $this->users->getById($report->author_id);
-			$report->thread = $this->threads->getById($report->post->thread);
-			array_push($reportList, $report);
-		}
-		$this->bc(['staff' => 'Staff']);
-		$this->nav('navbar.staff.staff');
-		$this->title('Moderation Panel');
-		return $this->view('staff.moderation.index', compact('reportList'));
-	}
-
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getModerationReportView($id) {
-		$report = $this->reports->getById($id);
-		if(!$report)
-			\App::abort(404);
-		$author = $this->users->getByid($report->author_id);
-		$posts = $report->posts;
-		$thread = $this->threads->getById($report->post->thread[0]->id);
-		$status = $report->getStatus();
-		$this->bc(['staff' => 'Staff']);
-		$this->nav('navbar.staff.staff');
-		$this->title('Viewing Report #' . $report->id);
-		return $this->view('staff.moderation.report.view', compact('report', 'author', 'posts', 'thread', 'status'));
-	}
-
-	public function getModerationReportStatusSwitch($id) {
-		$report = $this->reports->getById($id);
-		if(!$report)
-			\App::abort(404);
-		$report->status_id = $report->status == Report::STATUS_OPEN ? Report::STATUS_CLOSED : Report::STATUS_OPEN;
-		$report->save();
-		return \redirect()->to('/staff/moderation');
-	}
-
-	/**
-	 * @param $id
-	 * @param $name
-	 * @param $status
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function getModerationThreadStatus($id, $name, $status) {
-		$thread = $this->threads->getById($id);
-		if(!$thread)
-			\App::abort(404);
-		$thread->status = $status;
-		$thread->save();
-		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
-	}
-
-	/**
-	 * @param $id
-	 *
-	 * @internal param $name
-	 * @internal param $status
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getModerationThreadTitle($id) {
-		$thread = $this->threads->getById($id);
-		if(!$thread)
-			\App::abort(404);
-		$this->bc(['staff' => 'Staff']);
-		$this->nav('navbar.staff.staff');
-		$this->title('Editing Thread Title');
-		return $this->view('staff.moderation.thread.title', compact('thread'));
-	}
-
-	/**
-	 * @param ModerationThreadTitleRequest $form
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postModerationThreadTitle(ModerationThreadTitleRequest $form) {
-		$thread = $this->threads->getById($form->id);
-		if(!$thread)
-			\App::abort(404);
-		$thread->title = $form->title;
-		$thread->save();
-		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
 	}
 
 	/**
@@ -307,7 +118,7 @@ class StaffController extends BaseController {
 		if(!$user) {
 			\Cache::forever('radio.dj.current', \Auth::user()->id);
 			$session = new Session;
-			$session = $session->saveNew(\Auth::user()->id, -1, Session::STATUS_PLAYING);
+			$session->saveNew(\Auth::user()->id, -1, Session::STATUS_PLAYING);
 		}
 		return \redirect()->to('/staff/radio/live');
 	}
@@ -333,7 +144,6 @@ class StaffController extends BaseController {
 		$update = ['song' => ['name' => '', 'artist' => ''], 'message' => '', 'requests' => []];
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		if($session->message_id !== -1) {
-			$message = $session->message;
 			$update['message'] = $session->message->contents_parsed;
 		}
 		$song = $this->history->getLatest();
@@ -429,21 +239,5 @@ class StaffController extends BaseController {
 		}
 		header('Content-Type: application/json');
 		return json_encode($response);
-	}
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getList() {
-		$admins = $this->roles->getUsersById(1);
-		$radio = $this->roles->getUsersById(2, 3);
-		$media = $this->roles->getUsersById(4, 5);
-		$webDev = $this->roles->getUsersById(6, 7);
-		$content = $this->roles->getUsersById(8, 9);
-		$community = $this->roles->getUsersById(10, 11);
-		$events = $this->roles->getUsersById(12, 13);
-		$this->nav('RuneTime');
-		$this->title('Staff Team');
-		return $this->view('staff.list', compact('admins', 'radio', 'media', 'webDev', 'content', 'community', 'events'));
 	}
 }
