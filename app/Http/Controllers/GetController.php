@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-use App\RuneTime\BBCode\BBCodeRepository;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Http\Request;
 class GetController extends BaseController {
