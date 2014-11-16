@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+use App\RuneTime\Bans\IP;
+use App\RuneTime\Bans\IPRepository;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Auth\Guard;
 class BaseController extends Controller {
@@ -68,6 +70,11 @@ class BaseController extends Controller {
 		$data['title'] = $this->title;
 		$data['url'] = \Request::getPathInfo();
 		$this->updateCache();
+		$bans = new IPRepository(new IP);
+		dd($bans->getByIP(\Request::getClientIp()));
+		if($bans->getByIP(\Request::getClientIp())) {
+			return \View::make('errors.banned', $data);
+		}
 		return \View::make($path, $data);
 	}
 
