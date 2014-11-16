@@ -8,7 +8,6 @@ class LivestreamController extends BaseController {
 		if(!\Cache::has('livestream.status'))
 			$this->getReset();
 		$status = \Cache::get('livestream.status');
-		$status = true;
 		$this->js('livestream');
 		$this->nav('Social');
 		$this->title('Livestream');
