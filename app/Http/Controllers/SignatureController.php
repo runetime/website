@@ -22,6 +22,10 @@ class SignatureController extends BaseController {
 	 */
 	public function postUsername(RSNRequest $form) {
 		$username = $form->username;
+		if(!\Cache::get('hiscores.' . $username))
+			\Queue::push(function() use ($username){
+				\Cache::put('hiscores.' . $username, \String::CURL('http://hiscore.runescape.com/index_lite.ws?player=' . $username), \Carbon::now()->addDay());
+			});
 		$this->bc(['signatures' => 'Signature Generator']);
 		$this->nav('RuneTime');
 		$this->title('Type of Signature');
@@ -79,7 +83,7 @@ class SignatureController extends BaseController {
 			\Cache::put('hiscores.' . $username, \String::CURL('http://hiscore.runescape.com/index_lite.ws?player=' . $username), \Carbon::now()->addDay());
 		$scores = \Cache::get('hiscores.' . $username);
 		$scores = explode("\n", $scores);
-		foreach($scores as $key=>$text)
+		foreach($scores as $key => $text)
 			$scores[$key] = explode(",", $text);
 		$image = $this->signatureStat($info, $scores);
 		list($width, $height) = [400, 150];
