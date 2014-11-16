@@ -4,6 +4,7 @@
 				<br />
 				<div class='row row-flat'>
 					<div class='col-xs-12 col-md-9'>
+@if(!empty($subforumList[-1]))
 @foreach($subforumList[-1] as $subforums)
 	@if(empty(json_decode($subforums->roles)) || Auth::check() && in_array(\Auth::user()->importantRole()->id, json_decode($subforums->roles)))
 						<h3>
@@ -18,12 +19,14 @@
 		@endforeach
 	@endif
 @endforeach
+@endif
 					</div>
 					<div class='col-xs-12 col-md-3'>
 						<h3>
 							@lang('forums.sidebar.recent_threads.name')
 						</h3>
 						<div class='holo-box-dark'>
+@if(!empty($recentThreads))
 @foreach($recentThreads as $thread)
 							<div class='holo-box-in'>
 								{!! \Image::userPhoto($thread->author_id, ['photo-sm', 'pull-left']) !!}
@@ -34,6 +37,7 @@
 								{!! \Link::name($thread->author_id) !!}, <span class='text-muted'>{{ \Time::shortReadable($thread->created_at) }}</span>
 							</div>
 @endforeach
+@endif
 						</div>
 						<h3>
 							@lang('forums.sidebar.recent_posts.name')

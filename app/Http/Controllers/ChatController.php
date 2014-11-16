@@ -4,7 +4,6 @@ use App\Http\Requests\Chat\CheckChannelRequest;
 use App\Http\Requests\Chat\MessageRequest;
 use App\Http\Requests\Chat\StartRequest;
 use App\Http\Requests\Chat\UpdateRequest;
-use App\RuneTime\BBCode\BBCodeRepository;
 use App\RuneTime\Chat\ActionRepository;
 use App\RuneTime\Chat\ChannelRepository;
 use App\RuneTime\Chat\Chat;
@@ -21,10 +20,6 @@ class ChatController extends BaseController{
 	 */
 	private $actions;
 	/**
-	 * @var BBCodeRepository
-	 */
-	private $bbcode;
-	/**
 	 * @var ChannelRepository
 	 */
 	private $channels;
@@ -39,14 +34,12 @@ class ChatController extends BaseController{
 
 	/**
 	 * @param ActionRepository  $actions
-	 * @param BBCodeRepository  $bbcode
 	 * @param ChannelRepository $channels
 	 * @param ChatRepository    $chat
 	 * @param UserRepository    $users
 	 */
-	public function __construct(ActionRepository $actions, BBCodeRepository $bbcode, ChannelRepository $channels, ChatRepository $chat, UserRepository $users){
+	public function __construct(ActionRepository $actions, ChannelRepository $channels, ChatRepository $chat, UserRepository $users){
 		$this->actions = $actions;
-		$this->bbcode = $bbcode;
 		$this->channels = $channels;
 		$this->chat = $chat;
 		$this->users = $users;
