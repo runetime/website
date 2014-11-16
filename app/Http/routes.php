@@ -450,6 +450,8 @@ Route::group(['prefix' => 'staff'], function() {
 			get('/', 'StaffController@getRadioIndex');
 			get('live', 'StaffController@getRadioLive');
 			post('live', 'StaffController@postRadioLive');
+			post('live/message', 'StaffController@postRadioLiveMessage');
+			get('live/update', 'StaffController@getRadioLiveUpdate');
 			get('live/stop', 'StaffController@getRadioLiveStop');
 			get('messages', 'StaffController@getRadioMessages');
 			post('messages', 'StaffController@postRadioMessages');
