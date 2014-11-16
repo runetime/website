@@ -71,10 +71,10 @@
 @include('partials._paginator', ['url' => '/members/role=' . $searchRole . '/prefix=' . $searchPrefix . '/order=' . $searchOrder])
 				<div class='row'>
 @foreach($members as $member)
-					<div class='col-xs-1'>
+					<div class='col-xs-3 col-md-2 col-lg-1'>
 						<img src='/img/forums/photos/{{ $member->id }}.png' alt='Member Photo' class='img-responsive' />
 					</div>
-					<div class='col-xs-11'>
+					<div class='col-xs-9 col-mg-10 col-lg-11'>
 						<div class='pull-left'>
 							{!! \Link::name($member->id) !!}
 							<br />
