@@ -4,7 +4,10 @@ use App\Http\Requests\Radio\RequestSong;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Request;
 use App\RuneTime\Radio\RequestRepository;
+use App\RuneTime\Radio\Session;
+use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
+use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
 /**
  * Class RadioController
@@ -27,17 +30,24 @@ class RadioController extends BaseController {
 	 * @var TimetableRepository
 	 */
 	private $timetable;
+	/**
+	 * @var SessionRepository
+	 */
+	private $sessions;
 
 	/**
-	 * @param HistoryRepository $history
-	 * @param RequestRepository $requests
-	 * @param UserRepository    $users
+	 * @param HistoryRepository   $history
+	 * @param RequestRepository   $requests
+	 * @param SessionRepository   $sessions
+	 * @param TimetableRepository $timetable
+	 * @param UserRepository      $users
 	 */
-	public function __construct(HistoryRepository $history, RequestRepository $requests, TimetableRepository $timetable, UserRepository $users) {
+	public function __construct(HistoryRepository $history, RequestRepository $requests, SessionRepository $sessions, TimetableRepository $timetable, UserRepository $users) {
 		$this->history = $history;
 		$this->requests = $requests;
 		$this->users = $users;
 		$this->timetable = $timetable;
+		$this->sessions = $sessions;
 	}
 
 	/**
@@ -107,13 +117,16 @@ class RadioController extends BaseController {
 	 */
 	public function getUpdate() {
 		$song = $this->history->getLatest();
-		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => ''], 'dj' => ''];
+		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => ''], 'dj' => '', 'message' => ''];
 		if(!empty($song)) {
 			$update['song']['name'] = $song->song;
 			$update['song']['artist'] = $song->artist;
 		}
-		if(\Cache::get('radio.dj.current') !== null) {
-			$user = $this->users->getById(\Cache::get('radio.dj.current'));
+		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
+		if($session) {
+			if($session->message)
+				$update['message'] = $session->message->contents_parsed;
+			$user = $this->users->getById($session->dj->id);
 			if($user)
 				$update['dj'] = $user->display_name;
 		}

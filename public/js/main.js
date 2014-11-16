@@ -740,6 +740,11 @@ function RuneTime() {
 				} else {
 					$('#radio-dj').html("Auto DJ");
 				}
+				if(update['message'] !== '') {
+					$("[rt-data='radio:message.contents']").html(update['message']);
+				} else {
+					$("[rt-data='radio:message.contents']").html("Auto DJ is currently on air");
+				}
 				for(var x = 0, y = update['requests'].length; x < y; x++) {
 					var request = update['requests'][x];
 					if(request.status == 0) {

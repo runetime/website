@@ -91,6 +91,14 @@ textarea{
 		color:$c;
 	}
 }
+.holo-text-third {
+	$c:rgba(168, 47, 10, 1) !important;
+	color:$c;
+	a:link,
+	a:visited{
+		color:$c;
+	}
+}
 blockquote {
 	background: transparent;
 	border-left: 0.25em solid rgba(204, 204, 204, 1);

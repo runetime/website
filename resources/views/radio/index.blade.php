@@ -34,13 +34,14 @@
 						</h3>
 						<div class='row'>
 							<div class='col-xs-12 col-md-6'>
-								<h4>
+								<h4 class='holo-text'>
 									@lang('radio.info.dj.title')
 								</h4>
 								<p id='radio-dj' class='holo-text-secondary'>
 									N/A
 								</p>
-								<h4>
+								<p class='holo-text-third' rt-data='radio:message.contents'></p>
+								<h4 class='holo-text'>
 									@lang('radio.info.song.title')
 								</h4>
 								<p>
@@ -48,7 +49,7 @@
 								</p>
 							</div>
 							<div class='col-xs-12 col-md-6'>
-								<h4>
+								<h4 class='holo-text'>
 									@lang('radio.info.requests.title')
 								</h4>
 								<div id='requests-user-current'>
@@ -58,15 +59,16 @@
 					</div>
 					<div class='col-xs-12 col-md-4'>
 						<ul class='list-group'>
-                            <a id='radio-history' class='list-group-item' title='@lang('radio.options.song_history')'>
-                                @lang('radio.options.song_history')
-                            </a>
-                            <a id='radio-request' class='list-group-item' title='@lang('radio.options.request_song')'>
-                                @lang('radio.options.request_song')
-                            </a>
-                            <a id='radio-timetable' class='list-group-item' title='@lang('radio.options.view_timetable')'>
-                                @lang('radio.options.dj_timetable')
-                            </a>
+							<a id='radio-history' class='list-group-item' title='@lang('radio.options.song_history')'>
+								@lang('radio.options.song_history')
+							</a>
+							<a id='radio-request' class='list-group-item' title='@lang('radio.options.request_song')'>
+								@lang('radio.options.request_song')
+							</a>
+							<a id='radio-timetable' class='list-group-item' title='@lang('radio.options.view_timetable')'>
+								@lang('radio.options.dj_timetable')
+							</a>
+						</ul>
 					</div>
 				</div>
 			</div>

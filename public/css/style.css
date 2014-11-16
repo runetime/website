@@ -8396,6 +8396,12 @@ textarea {
   .holo-text-secondary a:visited {
     color: #aa66cc !important; }
 
+.holo-text-third {
+  color: #a82f0a !important; }
+  .holo-text-third a:link,
+  .holo-text-third a:visited {
+    color: #a82f0a !important; }
+
 blockquote {
   background: transparent;
   border-left: 0.25em solid #cccccc;
