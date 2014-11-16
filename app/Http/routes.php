@@ -345,7 +345,7 @@ Route::group(['prefix' => 'news'], function() {
 		 */
 		Route::group(['prefix' => 'create'], function() {
 			get('/', 'NewsController@getCreate');
-			post('/', 'Newscontroller@postCreate');
+			post('/', 'NewsController@postCreate');
 		});
 	});
 });
@@ -430,16 +430,16 @@ Route::group(['prefix' => 'staff'], function() {
 		 * Moderation Panel
 		 */
 		Route::group(['middleware' => 'staff.moderator', 'prefix' => 'moderation'], function() {
-			get('/', 'StaffModerator@getModerationIndex');
-			get('report/{id}', 'StaffModerator@getModerationReportView');
-			get('report/{id}/status/switch', 'StaffModerator@getModerationReportStatusSwitch');
+			get('/', 'StaffModeratorController@getModerationIndex');
+			get('report/{id}', 'StaffModeratorController@getModerationReportView');
+			get('report/{id}/status/switch', 'StaffModeratorController@getModerationReportStatusSwitch');
 			/**
 			 * Thread Management
 			 */
 			Route::group(['prefix' => 'thread/{id}-{name}'], function() {
-				get('status={status}', 'StaffModerator@getModerationThreadStatus');
-				get('title', 'StaffModerator@getModerationThreadTitle');
-				post('title', 'StaffModerator@postModerationThreadTitle');
+				get('status={status}', 'StaffModeratorController@getModerationThreadStatus');
+				get('title', 'StaffModeratorController@getModerationThreadTitle');
+				post('title', 'StaffModeratorController@postModerationThreadTitle');
 			});
 		});
 
@@ -485,7 +485,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 		 * Must be logged in
 		 */
 		Route::group(['middleware' => 'auth'], function() {
-			post('reply', 'TicketCOntroller@postReply');
+			post('reply', 'TicketController@postReply');
 		});
 
 		/**
