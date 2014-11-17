@@ -1,13 +1,13 @@
 <?php
 use App\Runis\Accounts\User;
-$user=User::find($member->user_id);
+$user = User::find($member->user_id);
 ?>
 						<div class='flip-container center-block' ontouchstart="this.classList.toggle('hover');">
 							<div class='flipper'>
 								<div class='front' style="background-image:url('/img/forums/photos/{{$user->id}}.png');">
 								</div>
 								<div class='back'>
-									<a href='/forums/members/{{\String::slugEncode($user->id,$user->display_name)}}' title="Visit {{$user->display_name}}'s profile">
+									<a href='/profile/{{\String::slugEncode($user->id,$user->display_name)}}' title="Visit {{$user->display_name}}'s profile">
 										<div class='back-logo center-block'>
 											<img src='/img/forums/photos/{{$user->id}}.png' class='img-rounded center-block img-resposive' />
 										</div>
