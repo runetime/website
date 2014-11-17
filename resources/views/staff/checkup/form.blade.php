@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div class='form-group'>
-						<label class='col-lg-2 control-label' for='date'>
+						<label class='col-lg-2 control-label' for='hours_active'>
 							Hours Active
 						</label>
 						<div class='col-lg-10'>
