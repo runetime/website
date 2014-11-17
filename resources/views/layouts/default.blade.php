@@ -27,7 +27,7 @@ $navs=[
 		'calculators/combat'  => trans('navbar.runescape.combat_calculator'),
 	],
 	trans('navbar.social.social') => [
-		'calendar'    => trans('navbar.social.calendar'),
+		//'calendar'    => trans('navbar.social.calendar'),
 		'livestream'  => trans('navbar.social.livestream'),
 		'media'       => trans('navbar.social.social_media'),
 		'clan'        => trans('navbar.social.our_clan'),
