@@ -3,8 +3,8 @@ namespace App\RuneTime\Statuses;
 use App\Runis\Core\Entity;
 class Status extends Entity {
 	protected $table = 'statuses';
-	protected $fillable = ['author_id', 'contents', 'comment_amount', 'published_at', 'status'];
-	protected $dates = ['published_at'];
+	protected $fillable = ['author_id', 'reply_count', 'status'];
+	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
 	const STATUS_PUBLISHED = 1;
@@ -13,13 +13,20 @@ class Status extends Entity {
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function author() {
-		return $this->belongsTo('RT\Accounts\User', 'author_id');
+		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function comments() {
-		return $this->morphMany('RT\Comments\Comment', 'owner');
+	public function posts() {
+		return $this->belongsToMany('App\RuneTime\Forums\Threads\Post');
+	}
+
+	/**
+	 * @param Post $post
+	 */
+	public function addPost(Post $post) {
+		$this->posts()->attach([$post->id]);
 	}
 }

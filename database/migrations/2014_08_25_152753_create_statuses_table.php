@@ -8,15 +8,13 @@ class CreateStatusesTable extends Migration{
 	 * @return void
 	 */
 	public function up(){
-		Schema::create('statuses',function(Blueprint $t){
-			$t->integer('id');
-			$t->primary('id');
-			$t->integer('author_id');
-			$t->string('contents');
-			$t->string('comment_amount');
-			$t->integer('status');
-			$t->timestamps();
-			$t->softDeletes();
+		Schema::create('statuses', function(Blueprint $table) {
+			$table->increments('id');
+			$table->integer('author_id');
+			$table->integer('reply_count');
+			$table->integer('status');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 	/**
