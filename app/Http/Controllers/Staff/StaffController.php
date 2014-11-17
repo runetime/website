@@ -18,69 +18,21 @@ use App\Runis\Accounts\UserRepository;
  */
 class StaffController extends BaseController {
 	/**
-	 * @var ReportRepository
-	 */
-	private $reports;
-	/**
-	 * @var RoleRepository
-	 */
-	private $roles;
-	/**
-	 * @var UserRepository
-	 */
-	private $users;
-	/**
-	 * @var ThreadRepository
-	 */
-	private $threads;
-	/**
-	 * @var PostRepository
-	 */
-	private $posts;
-	/**
 	 * @var CheckupRepository
 	 */
 	private $checkups;
 	/**
-	 * @var MessageRepository
+	 * @var RoleRepository
 	 */
-	private $messages;
-	/**
-	 * @var TimetableRepository
-	 */
-	private $timetable;
-	/**
-	 * @var SessionRepository
-	 */
-	private $sessions;
-	/**
-	 * @var HistoryRepository
-	 */
-	private $history;
+	private $roles;
 
 	/**
-	 * @param CheckupRepository   $checkups
-	 * @param HistoryRepository   $history
-	 * @param MessageRepository   $messages
-	 * @param PostRepository      $posts
-	 * @param ReportRepository    $reports
-	 * @param RoleRepository      $roles
-	 * @param SessionRepository   $sessions
-	 * @param ThreadRepository    $threads
-	 * @param TimetableRepository $timetable
-	 * @param UserRepository      $users
+	 * @param CheckupRepository $checkups
+	 * @param RoleRepository    $roles
 	 */
-	public function __construct(CheckupRepository $checkups, HistoryRepository $history, MessageRepository $messages, PostRepository $posts, ReportRepository $reports, RoleRepository $roles, SessionRepository $sessions, ThreadRepository $threads, TimetableRepository $timetable, UserRepository $users) {
-		$this->reports = $reports;
-		$this->roles = $roles;
-		$this->users = $users;
-		$this->threads = $threads;
-		$this->posts = $posts;
+	public function __construct(CheckupRepository $checkups, RoleRepository $roles) {
 		$this->checkups = $checkups;
-		$this->messages = $messages;
-		$this->timetable = $timetable;
-		$this->sessions = $sessions;
-		$this->history = $history;
+		$this->roles = $roles;
 	}
 
 	/**

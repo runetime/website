@@ -14,69 +14,33 @@ use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 class StaffModeratorController extends BaseController {
 	/**
+	 * @var PostRepository
+	 */
+	private $posts;
+	/**
 	 * @var ReportRepository
 	 */
 	private $reports;
-	/**
-	 * @var RoleRepository
-	 */
-	private $roles;
-	/**
-	 * @var UserRepository
-	 */
-	private $users;
 	/**
 	 * @var ThreadRepository
 	 */
 	private $threads;
 	/**
-	 * @var PostRepository
+	 * @var UserRepository
 	 */
-	private $posts;
-	/**
-	 * @var CheckupRepository
-	 */
-	private $checkups;
-	/**
-	 * @var MessageRepository
-	 */
-	private $messages;
-	/**
-	 * @var TimetableRepository
-	 */
-	private $timetable;
-	/**
-	 * @var SessionRepository
-	 */
-	private $sessions;
-	/**
-	 * @var HistoryRepository
-	 */
-	private $history;
+	private $users;
 
 	/**
-	 * @param CheckupRepository   $checkups
-	 * @param HistoryRepository   $history
-	 * @param MessageRepository   $messages
-	 * @param PostRepository      $posts
-	 * @param ReportRepository    $reports
-	 * @param RoleRepository      $roles
-	 * @param SessionRepository   $sessions
-	 * @param ThreadRepository    $threads
-	 * @param TimetableRepository $timetable
-	 * @param UserRepository      $users
+	 * @param PostRepository   $posts
+	 * @param ReportRepository $reports
+	 * @param ThreadRepository $threads
+	 * @param UserRepository   $users
 	 */
-	public function __construct(CheckupRepository $checkups, HistoryRepository $history, MessageRepository $messages, PostRepository $posts, ReportRepository $reports, RoleRepository $roles, SessionRepository $sessions, ThreadRepository $threads, TimetableRepository $timetable, UserRepository $users) {
-		$this->reports = $reports;
-		$this->roles = $roles;
-		$this->users = $users;
-		$this->threads = $threads;
+	public function __construct(PostRepository $posts, ReportRepository $reports, ThreadRepository $threads, UserRepository $users) {
 		$this->posts = $posts;
-		$this->checkups = $checkups;
-		$this->messages = $messages;
-		$this->timetable = $timetable;
-		$this->sessions = $sessions;
-		$this->history = $history;
+		$this->reports = $reports;
+		$this->threads = $threads;
+		$this->users = $users;
 	}
 
 	/**
