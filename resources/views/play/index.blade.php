@@ -1,16 +1,20 @@
 @extends('layouts.default')
 @section('contents')
-			<h1>
-				@lang('play.index.play_runescape')
-			</h1>
-			<p>
-				<a href='/play/3' title='@lang('play.index.3')'>
-					@lang('play.index.3')
-				</a>
-			</p>
-			<p>
-				<a href='/play/osrs' title='@lang('play.index.osrs')'>
-					@lang('play.index.osrs')
-				</a>
-			</p>
+			<div class='wrapper'>
+				<h1>
+					@lang('play.index.play_runescape')
+				</h1>
+				<div class='row'>
+					<div class='col-xs-12 col-sm-6'>
+						<a href='/play/3'>
+							<img src='/img/play/rs3.png' class='img-responsive center-block' />
+						</a>
+					</div>
+					<div class='col-xs-12 col-sm-6'>
+						<a href='/play/osrs'>
+							<img src='/img/play/osrs.png' class='img-responsive center-block' />
+						</a>
+					</div>
+				</div>
+			</div>
 @stop
