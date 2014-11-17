@@ -138,4 +138,21 @@ class String{
 		if($genderId == 2) $name = "Male";
 		return "<img src='/img/forums/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
 	}
+
+	public static function getHiscore($rsn) {
+		if(\Cache::get('hiscores.' . $rsn))
+			return \Cache::get('hiscores.' . $rsn);
+		$url='http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $rsn;
+		$results = \String::CURL($url);
+		if(substr($results, 0, 6) == "<html>")
+			$results = false;
+		else {
+			$scores = explode("\n", $results);
+			foreach($scores as $key => $text)
+				$scores[$key] = explode(",", $text);
+			$results = $scores;
+		}
+		\Cache::put('hiscores.' . $rsn, $results, \Carbon::now()->addDay());
+		return $results;
+	}
 }

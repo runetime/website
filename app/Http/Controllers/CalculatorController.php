@@ -41,26 +41,16 @@ class CalculatorController extends BaseController {
 	}
 
 	public function getCombatLoad(CombatLoadRequest $form) {
-		$url='http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $form->rsn;
-		$results = \String::CURL($url);
-		$scoreset = explode("\n", $results);
-		$scores = [];
-		foreach($scoreset as $key => $text) {
-			if(!empty($text)) {
-				$temp = explode(",", $text)[1];
-				$scores[$key] = $temp;
-				unset($temp);
-			}
-		}
+		$scores = \String::getHiscore($form->rsn);
 		$skills = (object)[
-			'attack' => $scores[1],
-			'defence' => $scores[2],
-			'strength' => $scores[3],
-			'constitution' => $scores[4],
-			'ranged' => $scores[5],
-			'prayer' => $scores[6],
-			'magic' => $scores[7],
-			'summoning' => $scores[24],
+			'attack' => $scores[1][1],
+			'defence' => $scores[2][1],
+			'strength' => $scores[3][1],
+			'constitution' => $scores[4][1],
+			'ranged' => $scores[5][1],
+			'prayer' => $scores[6][1],
+			'magic' => $scores[7][1],
+			'summoning' => $scores[24][1],
 		];
 		header('Content-Type: application/json');
 		return json_encode($skills);

@@ -79,13 +79,10 @@ class SignatureController extends BaseController {
 		$info = explode(";", $slug);
 		$username = $info[0];
 		header("Content-type: image/png");
-
+		$scores = \String::getHiscore($username);
 		if(!\Cache::get('hiscores.' . $username))
-			\Cache::put('hiscores.' . $username, \String::CURL('http://hiscore.runescape.com/index_lite.ws?player=' . $username), \Carbon::now()->addDay());
+			\String::getHiscore($username);
 		$scores = \Cache::get('hiscores.' . $username);
-		$scores = explode("\n", $scores);
-		foreach($scores as $key => $text)
-			$scores[$key] = explode(",", $text);
 		$image = $this->signatureStat($info, $scores);
 		list($width, $height) = [400, 150];
 		// Put down the logo
