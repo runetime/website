@@ -39,4 +39,12 @@ class PostRepository extends EloquentRepository {
 			orderBy('id', 'asc')->
 			get();
 	}
+
+	public function getRecent($amount = 3) {
+		return $this->model->
+			where('status', '=', Post::STATUS_VISIBLE)->
+			orderBy('id', 'desc')->
+			take($amount)->
+			get();
+	}
 }

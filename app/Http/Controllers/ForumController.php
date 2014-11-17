@@ -77,6 +77,7 @@ class ForumController extends BaseController {
 			'mostOnline' => \Cache::get('info.most_online'),
 		];
 		$recentThreads = $this->threads->getX(5, 'desc');
+		$recentPosts = $this->posts->getRecent(5);
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.name'));
 		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
@@ -97,7 +98,7 @@ class ForumController extends BaseController {
 		if($page == 0)
 			$page = 1;
 		if(\Auth::check())
-			\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time()+1);
+			\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time() + 1);
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
 		// Subforums

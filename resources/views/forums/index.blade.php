@@ -25,23 +25,33 @@
 						<h3>
 							@lang('forums.sidebar.recent_threads.name')
 						</h3>
-						<div class='holo-box-dark'>
 @if(!empty($recentThreads))
-@foreach($recentThreads as $thread)
-							<div class='holo-box-in'>
-								{!! \Image::userPhoto($thread->author_id, ['photo-sm', 'pull-left']) !!}
-								<a href='/forums/thread/{{ \String::slugEncode($thread->id, $thread->title) }}' title='{{ $thread->title }}'>
-									{{ $thread->title }}
-								</a>
-								<br />
-								{!! \Link::name($thread->author_id) !!}, <span class='text-muted'>{{ \Time::shortReadable($thread->created_at) }}</span>
-							</div>
-@endforeach
-@endif
+	@foreach($recentThreads as $thread)
+						<div class='card'>
+							{!! \Image::userPhoto($thread->author_id, ['photo-sm', 'pull-left']) !!}
+							<a href='/forums/thread/{{ \String::slugEncode($thread->id, $thread->title) }}' title='{{ $thread->title }}'>
+								{{ $thread->title }}
+							</a>
+							<br />
+							{!! \Link::name($thread->author_id) !!}, <span class='text-muted'>{{ \Time::shortReadable($thread->created_at) }}</span>
 						</div>
+	@endforeach
+@endif
 						<h3>
 							@lang('forums.sidebar.recent_posts.name')
 						</h3>
+@if(!empty($recentPosts))
+	@foreach($recentPosts as $post)
+						<div class='card'>
+							{!! \Image::userPhoto($thread->author_id, ['photo-sm', 'pull-left']) !!}
+							<a href='/forums/thread/{{ \String::slugEncode($post->thread[0]->id, $post->thread[0]->title) }}' title='{{ $post->thread[0]->title }}'>
+								{{ $post->thread[0]->title }}
+							</a>
+							<br />
+							{!! \Link::name($post->author_id) !!}, <span class='text-muted'>{{ \Time::shortReadable($post->created_at) }}</span>
+						</div>
+	@endforeach
+@endif
 					</div>
 					<div class='col-xs-12 text-center'>
 						<ul class='list-inline'>
