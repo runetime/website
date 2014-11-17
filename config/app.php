@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => 'asdfdfgsret56453532w565467679856',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -145,6 +145,7 @@ return [
 		 * Extras
 		 */
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+		'Intervention\Image\ImageServiceProvider'
 
 	],
 
@@ -212,6 +213,7 @@ return [
 		'Time'      => 'App\Utilities\Time',
 		'Carbon'    => 'Carbon\Carbon',
 		'Parsedown' => 'App\Utilities\Parsedown',
+		'ImageCache' => 'Intervention\Image\Facades\Image',
 
 	],
 

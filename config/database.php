@@ -63,25 +63,6 @@ return [
 			'prefix'    => '',
 		],
 
-		'pgsql' => [
-			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
-			'password' => '',
-			'charset'  => 'utf8',
-			'prefix'   => '',
-			'schema'   => 'public',
-		],
-
-		'sqlsrv' => [
-			'driver'   => 'sqlsrv',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
-			'prefix'   => '',
-		],
 
 	],
 

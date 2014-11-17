@@ -24,7 +24,8 @@ class CreateUsersTable extends Migration{
 			$t->integer('birthday');
 			$t->integer('gender');
 			$t->integer('referred_by');
-			$t->mediumtext('awards');
+			$t->float('timezone');
+			$t->boolean('dst');
 			$t->string('social_twitter');
 			$t->string('social_facebook');
 			$t->string('social_youtube');
