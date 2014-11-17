@@ -9,7 +9,7 @@
 						<label class='holo-text' for='combat-calculator-display-name'>
 							@lang('calculator.username')
 						</label>
-						<input type='text' class='center-block' value='Runis Altair' rt-data='combat.calculator:name' />
+						<input type='text' class='center-block' rt-data='combat.calculator:name' />
 						<p>
 							<a rt-data='combat.calculator:submit'>
 								@lang('calculator.submit')

@@ -9,7 +9,7 @@
 						<label for='calculator-display-name'>
 							@lang('calculator.username')
 						</label>
-						<input type='text' id='calculator-display-name' class='center-block' value='Runis Altair' />
+						<input type='text' id='calculator-display-name' class='center-block' />
 						<p>
 							<a id='calculator-submit'>
 								@lang('calculator.submit')
