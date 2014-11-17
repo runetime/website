@@ -3,10 +3,10 @@ class Timestamp{
 	/**
 	 * @param $i
 	 *
-	 * @return bool|string
+	 * @return string
 	 */
 	public static function createFromUnix($i) {
-		return date('Y-m-d H:i:s', $i);
+		return \Time::carbon($i)->format('Y-m-d H:i:s');
 	}
 
 	/**

@@ -41,12 +41,13 @@ class String{
 	 * @return string
 	 */
 	public static function slugEncode(){
-		$args=func_get_args();
-		$slug="";
-		foreach($args as $x=>$arg){
-			$slug.=strtolower(str_replace(" ","-",$arg));
-			if($x<count($arg))
-				$slug.="-";
+		$args = func_get_args();
+		$slug = "";
+		foreach($args as $x => $arg){
+			$arg = str_replace("?", "", $arg);
+			$slug .= strtolower(str_replace(" ", "-", $arg));
+			if($x < count($arg))
+				$slug .= "-";
 		}
 		return $slug;
 	}
