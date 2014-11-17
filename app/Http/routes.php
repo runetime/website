@@ -197,6 +197,28 @@ Route::group(['prefix' => 'forums'], function() {
 			get('delete', 'ForumController@getPostDelete');
 		});
 	});
+	/**
+	 * Statuses
+	 */
+	Route::group(['prefix' => 'statuses'], function() {
+		get('/', 'StatusController@getIndex');
+		Route::group(['prefix' => '{id}-by-{name}'], function() {
+			get('/', 'StatusController@getView');
+			/**
+			 * Reply
+			 */
+			Route::group(['middleware' => 'auth'], function() {
+				post('reply', 'StatusController@postReply');
+			});
+		});
+		/**
+		 * Create
+		 */
+		Route::group(['middleware' => 'auth', 'prefix' => 'create'], function() {
+			get('/', 'StatusController@getCreate');
+			post('/', 'StatusController@postCreate');
+		});
+	});
 });
 
 /**
