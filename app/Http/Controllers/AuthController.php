@@ -4,6 +4,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
 use App\Http\Requests\Auth\PasswordEmailRequest;
 use App\Http\Requests\Auth\PasswordResetRequest;
+use App\Runis\Accounts\RankRepository;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\PasswordBroker;
@@ -13,21 +14,27 @@ use Illuminate\Contracts\Auth\PasswordBroker;
  */
 class AuthController extends BaseController {
 	/**
-	 * @var UserRepository
-	 */
-	private $users;
-	/**
 	 * @var PasswordBroker
 	 */
 	private $passwords;
+	/**
+	 * @var RankRepository
+	 */
+	private $ranks;
+	/**
+	 * @var UserRepository
+	 */
+	private $users;
 
 	/**
 	 * @param PasswordBroker $passwords
+	 * @param RankRepository $ranks
 	 * @param UserRepository $users
 	 */
-	public function __construct(PasswordBroker $passwords, UserRepository $users) {
-		$this->users = $users;
+	public function __construct(PasswordBroker $passwords, RankRepository $ranks, UserRepository $users) {
 		$this->passwords = $passwords;
+		$this->ranks = $ranks;
+		$this->users = $users;
 	}
 
 	/**
@@ -75,8 +82,8 @@ class AuthController extends BaseController {
 		if($this->users->getByDisplayName($form->display_name))
 			return $this->view('errors.signup.taken');
 		$hash = \Hash::make($form->password);
-		$user = new User;
-		$user = $user->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, '', '', '', '', '', '', '', '', '');
+		$rank = $this->ranks->getByPostCount(0);
+		$user = with(new User)->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, 0, $rank->id, '', '', '', '', '', '', '', '', '');
 		$user->setRole('Members');
 		\Auth::loginUsingId($user->id);
 		return \redirect()->to('/');

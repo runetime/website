@@ -8,36 +8,38 @@ class CreateUsersTable extends Migration{
 	 * @return void
 	 */
 	public function up(){
-		Schema::create('users',function(Blueprint $t){
-			$t->increments('id');
-			$t->string('display_name');
-			$t->string('email');
-			$t->string('password');
-			$t->string('title');
-			$t->mediumtext('about');
-			$t->mediumtext('about_parsed');
-			$t->mediumtext('signature');
-			$t->mediumtext('signature_parsed');
-			$t->integer('posts_active');
-			$t->integer('posts_total');
-			$t->integer('profile_views');
-			$t->integer('birthday');
-			$t->integer('gender');
-			$t->integer('referred_by');
-			$t->float('timezone');
-			$t->boolean('dst');
-			$t->string('social_twitter');
-			$t->string('social_facebook');
-			$t->string('social_youtube');
-			$t->string('social_website');
-			$t->string('social_skype');
-			$t->string('runescape_version');
-			$t->string('runescape_rsn');
-			$t->string('runescape_clan');
-			$t->string('runescape_allegiance');
-			$t->rememberToken();
-			$t->timestamps();
-			$t->softDeletes();
+		Schema::create('users',function(Blueprint $table){
+			$table->increments('id');
+			$table->string('display_name');
+			$table->string('email');
+			$table->string('password');
+			$table->string('title');
+			$table->mediumtext('about');
+			$table->mediumtext('about_parsed');
+			$table->mediumtext('signature');
+			$table->mediumtext('signature_parsed');
+			$table->integer('posts_active');
+			$table->integer('posts_total');
+			$table->integer('profile_views');
+			$table->integer('birthday');
+			$table->integer('gender');
+			$table->integer('referred_by');
+			$table->float('timezone');
+			$table->boolean('dst');
+			$table->integer('reputation');
+			$table->integer('rank_id');
+			$table->string('social_twitter');
+			$table->string('social_facebook');
+			$table->string('social_youtube');
+			$table->string('social_website');
+			$table->string('social_skype');
+			$table->string('runescape_version');
+			$table->string('runescape_rsn');
+			$table->string('runescape_clan');
+			$table->string('runescape_allegiance');
+			$table->rememberToken();
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 	/**

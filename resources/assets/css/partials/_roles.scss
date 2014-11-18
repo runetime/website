@@ -164,13 +164,15 @@ $barColor: darkgoldenrod;
 $overlayColor: #fffde8;
 $backColor: #2f3439;
 @mixin badge{
-	float:left;
+	@extend .center-block;
+	float:none;
 	position:relative;
 	width:52px;
 	height:52px;
 	border-radius:50%;
 	border:2px solid $backColor !important;
 	background-color:$barColor !important;
+	display: block;
 	>div{
 		background:{
 			color:#373737 !important;
@@ -206,73 +208,73 @@ $backColor: #2f3439;
 		background-image:linear-gradient($nextdeg, $barColor 50%, transparent 50%, transparent), linear-gradient(270deg, $barColor 50%, $backColor 50%, $backColor);
 	}
 }
-.badge-novice{
+.badge-novice-member{
 	@include badge;
 	@include badge-progress(1);
 	>div{
-		background-image:url('/img/forum/roles/badge/opal.png');
+		background-image:url('/img/forums/roles/badge/opal.png');
 	}
 }
-.badge-opal{
+.badge-opal-member{
 	@include badge;
 	@include badge-progress(2);
 	>div{
-		background-image:url('/img/forum/roles/badge/opal.png');
+		background-image:url('/img/forums/roles/badge/opal.png');
 	}
 }
-.badge-jade{
+.badge-jade-member{
 	@include badge;
 	@include badge-progress(3);
 	>div{
-		background-image:url('/img/forum/roles/badge/jade.png');
+		background-image:url('/img/forums/roles/badge/jade.png');
 	}
 }
-.badge-topaz{
+.badge-topaz-member{
 	@include badge;
 	@include badge-progress(4);
 	>div{
-		background-image:url('/img/forum/roles/badge/topaz.png');
+		background-image:url('/img/forums/roles/badge/topaz.png');
 	}
 }
-.badge-sapphire{
+.badge-sapphire-member{
 	@include badge;
 	@include badge-progress(5);
 	>div{
-		background-image:url('/img/forum/roles/badge/sapphire.png');
+		background-image:url('/img/forums/roles/badge/sapphire.png');
 	}
 }
-.badge-emerald{
+.badge-emerald-member{
 	@include badge;
 	@include badge-progress(6);
 	>div{
-		background-image:url('/img/forum/roles/badge/emerald.png');
+		background-image:url('/img/forums/roles/badge/emerald.png');
 	}
 }
-.badge-ruby{
+.badge-ruby-member{
 	@include badge;
 	@include badge-progress(7);
 	>div{
-		background-image:url('/img/forum/roles/badge/ruby.png');
+		background-image:url('/img/forums/roles/badge/ruby.png');
 	}
 }
-.badge-diamond{
+.badge-diamond-member{
 	@include badge;
 	@include badge-progress(8);
 	>div{
-		background-image:url('/img/forum/roles/badge/diamond.png');
+		background-image:url('/img/forums/roles/badge/diamond.png');
 	}
 }
-.badge-dragonstone{
+.badge-dragonstone-member{
 	@include badge;
 	@include badge-progress(9);
 	>div{
-		background-image:url('/img/forum/roles/badge/dragonstone.png');
+		background-image:url('/img/forums/roles/badge/dragonstone.png');
 	}
 }
-.badge-onyx{
+.badge-onyx-member{
 	@include badge;
 	@include badge-progress(10);
 	>div{
-		background-image:url('/img/forum/roles/badge/onyx.png');
+		background-image:url('/img/forums/roles/badge/onyx.png');
 	}
 }

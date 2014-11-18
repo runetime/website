@@ -5082,7 +5082,7 @@ button.close {
 .clearfix:after {
   clear: both; }
 
-.center-block {
+.center-block, .badge-novice-member, .badge-opal-member, .badge-jade-member, .badge-topaz-member, .badge-sapphire-member, .badge-emerald-member, .badge-ruby-member, .badge-diamond-member, .badge-dragonstone-member, .badge-onyx-member {
   display: block;
   margin-left: auto;
   margin-right: auto; }
@@ -7834,16 +7834,17 @@ body {
   @extends .members;
   color: #23cee2 !important; }
 
-.badge-novice {
-  float: left;
+.badge-novice-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(90deg, #2f3439 50%, transparent 50%, transparent), linear-gradient(126deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-novice > div {
+  .badge-novice-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -7856,19 +7857,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-novice > div {
-    background-image: url("/img/forum/roles/badge/opal.png"); }
+  .badge-novice-member > div {
+    background-image: url("/img/forums/roles/badge/opal.png"); }
 
-.badge-opal {
-  float: left;
+.badge-opal-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(90deg, #2f3439 50%, transparent 50%, transparent), linear-gradient(162deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-opal > div {
+  .badge-opal-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -7881,19 +7883,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-opal > div {
-    background-image: url("/img/forum/roles/badge/opal.png"); }
+  .badge-opal-member > div {
+    background-image: url("/img/forums/roles/badge/opal.png"); }
 
-.badge-jade {
-  float: left;
+.badge-jade-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(90deg, #2f3439 50%, transparent 50%, transparent), linear-gradient(198deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-jade > div {
+  .badge-jade-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -7906,19 +7909,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-jade > div {
-    background-image: url("/img/forum/roles/badge/jade.png"); }
+  .badge-jade-member > div {
+    background-image: url("/img/forums/roles/badge/jade.png"); }
 
-.badge-topaz {
-  float: left;
+.badge-topaz-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(90deg, #2f3439 50%, transparent 50%, transparent), linear-gradient(234deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-topaz > div {
+  .badge-topaz-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -7931,19 +7935,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-topaz > div {
-    background-image: url("/img/forum/roles/badge/topaz.png"); }
+  .badge-topaz-member > div {
+    background-image: url("/img/forums/roles/badge/topaz.png"); }
 
-.badge-sapphire {
-  float: left;
+.badge-sapphire-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(-90deg, darkgoldenrod 50%, transparent 50%, transparent), linear-gradient(270deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-sapphire > div {
+  .badge-sapphire-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -7956,19 +7961,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-sapphire > div {
-    background-image: url("/img/forum/roles/badge/sapphire.png"); }
+  .badge-sapphire-member > div {
+    background-image: url("/img/forums/roles/badge/sapphire.png"); }
 
-.badge-emerald {
-  float: left;
+.badge-emerald-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(-54deg, darkgoldenrod 50%, transparent 50%, transparent), linear-gradient(270deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-emerald > div {
+  .badge-emerald-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -7981,19 +7987,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-emerald > div {
-    background-image: url("/img/forum/roles/badge/emerald.png"); }
+  .badge-emerald-member > div {
+    background-image: url("/img/forums/roles/badge/emerald.png"); }
 
-.badge-ruby {
-  float: left;
+.badge-ruby-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(-18deg, darkgoldenrod 50%, transparent 50%, transparent), linear-gradient(270deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-ruby > div {
+  .badge-ruby-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -8006,19 +8013,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-ruby > div {
-    background-image: url("/img/forum/roles/badge/ruby.png"); }
+  .badge-ruby-member > div {
+    background-image: url("/img/forums/roles/badge/ruby.png"); }
 
-.badge-diamond {
-  float: left;
+.badge-diamond-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(18deg, darkgoldenrod 50%, transparent 50%, transparent), linear-gradient(270deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-diamond > div {
+  .badge-diamond-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -8031,19 +8039,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-diamond > div {
-    background-image: url("/img/forum/roles/badge/diamond.png"); }
+  .badge-diamond-member > div {
+    background-image: url("/img/forums/roles/badge/diamond.png"); }
 
-.badge-dragonstone {
-  float: left;
+.badge-dragonstone-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(54deg, darkgoldenrod 50%, transparent 50%, transparent), linear-gradient(270deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-dragonstone > div {
+  .badge-dragonstone-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -8056,19 +8065,20 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-dragonstone > div {
-    background-image: url("/img/forum/roles/badge/dragonstone.png"); }
+  .badge-dragonstone-member > div {
+    background-image: url("/img/forums/roles/badge/dragonstone.png"); }
 
-.badge-onyx {
-  float: left;
+.badge-onyx-member {
+  float: none;
   position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 2px solid #2f3439 !important;
   background-color: darkgoldenrod !important;
+  display: block;
   background-image: linear-gradient(90deg, darkgoldenrod 50%, transparent 50%, transparent), linear-gradient(270deg, darkgoldenrod 50%, #2f3439 50%, #2f3439); }
-  .badge-onyx > div {
+  .badge-onyx-member > div {
     background-color: #373737 !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -8081,10 +8091,10 @@ body {
     position: absolute;
     text-align: center;
     width: 40px; }
-  .badge-onyx > div {
-    background-image: url("/img/forum/roles/badge/onyx.png"); }
+  .badge-onyx-member > div {
+    background-image: url("/img/forums/roles/badge/onyx.png"); }
 
-.center-block {
+.center-block, .badge-novice-member, .badge-opal-member, .badge-jade-member, .badge-topaz-member, .badge-sapphire-member, .badge-emerald-member, .badge-ruby-member, .badge-diamond-member, .badge-dragonstone-member, .badge-onyx-member {
   display: block;
   margin: 0 auto; }
 

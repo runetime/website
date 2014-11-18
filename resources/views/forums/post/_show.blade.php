@@ -18,6 +18,10 @@
 								{!!\Link::colorRole($post->author->importantRole()->id)!!}
 								<br />
 								{{$post->author->posts_active}} posts
+								<div class='badge-{{ $post->author->rank->toClassName() }}'>
+									<div>
+									</div>
+								</div>
 	@if(!empty($post->author_info->location))
 								<br />
 								<span class='text-muted'>:</span> {{$post->author_info->location}}
@@ -86,8 +90,8 @@
 								</ul>
 								<div class='post-votes pull-right'>
 	@if(\Auth::check())
-                                    <i class='fa fa-arrow-up fa-2x upvote'></i>
-                                    <i class='fa fa-arrow-down fa-2x downvote'></i>
+									<i class='fa fa-arrow-up fa-2x upvote'></i>
+									<i class='fa fa-arrow-down fa-2x downvote'></i>
 	@endif
 								</div>
 							</div>
