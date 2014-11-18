@@ -14,6 +14,7 @@ class CreatePostThreadTable extends Migration {
 	{
 		Schema::create('post_thread', function(Blueprint $table)
 		{
+			$table->increments('id');
 			$table->integer('post_id');
 			$table->integer('thread_id');
 		});
