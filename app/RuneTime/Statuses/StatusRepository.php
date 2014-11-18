@@ -36,4 +36,10 @@ class StatusRepository extends EloquentRepository {
 			take($amount)->
 			get();
 	}
+	public function getLatestByAuthor($authorId, $order = 'desc') {
+		return $this->model->
+			where('author_id', '=', $authorId)->
+			orderBy('id', $order)->
+			first();
+	}
 }

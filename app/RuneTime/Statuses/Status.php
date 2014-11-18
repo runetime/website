@@ -1,5 +1,6 @@
 <?php
 namespace App\RuneTime\Statuses;
+use App\RuneTime\Forum\Threads\Post;
 use App\Runis\Core\Entity;
 class Status extends Entity {
 	protected $table = 'statuses';
@@ -20,7 +21,7 @@ class Status extends Entity {
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
 	public function posts() {
-		return $this->belongsToMany('App\RuneTime\Forums\Threads\Post');
+		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
 	}
 
 	/**

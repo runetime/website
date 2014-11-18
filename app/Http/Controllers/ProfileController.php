@@ -30,12 +30,12 @@ class ProfileController extends BaseController {
 		if(!$profile)
 			\App::abort(404);
 		$profile->incrementProfileViews();
-		$latestStatus = $this->statuses->getByAuthor($profile->id);
+		$status = $this->statuses->getLatestByAuthor($profile->id);
 		$bc = ['forums/' => 'Forums'];
 		$this->bc($bc);
 		$this->nav('navbar.forums');
 		$this->title($profile->display_name);
-		return $this->view('forums.profile.index', compact('profile', 'latestStatus'));
+		return $this->view('forums.profile.index', compact('profile', 'status'));
 	}
 
 	/**
