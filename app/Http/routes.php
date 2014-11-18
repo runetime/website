@@ -202,7 +202,7 @@ Route::group(['prefix' => 'forums'], function() {
 	 */
 	Route::group(['prefix' => 'statuses'], function() {
 		get('/', 'StatusController@getIndex');
-		Route::group(['prefix' => '{id}-by-{name}'], function() {
+		Route::group(['prefix' => '{id}-by{name}'], function() {
 			get('/', 'StatusController@getView');
 			/**
 			 * Reply
