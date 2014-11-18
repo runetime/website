@@ -214,6 +214,7 @@ return [
 		'Carbon'    => 'Carbon\Carbon',
 		'Parsedown' => 'App\Utilities\Parsedown',
 		'ImageCache' => 'Intervention\Image\Facades\Image',
+		'Img' => 'Intervention\Image\Facades\Image'
 
 	],
 
