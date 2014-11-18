@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration{
 			$table->integer('posts_active');
 			$table->integer('posts_total');
 			$table->integer('profile_views');
-			$table->integer('birthday');
+			$table->string('birthday');
 			$table->integer('gender');
 			$table->integer('referred_by');
 			$table->float('timezone');
