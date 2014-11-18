@@ -117,4 +117,13 @@ class Time{
 	public static function DMY($time) {
 		return self::carbon($time)->format('jS \of M y');
 	}
+
+	/**
+	 * @param $i
+	 *
+	 * @return string
+	 */
+	public static function monthDay($i) {
+		return self::carbon($i)->format('M d');
+	}
 }
