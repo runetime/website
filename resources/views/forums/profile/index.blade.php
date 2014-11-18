@@ -15,12 +15,12 @@
 									<p class='inline'>{!! $status->posts[0]->contents_parsed !!}</p>
 									<ul class='list-inline'>
 										<li>
-											<a href='/forums/statuses/{{ \String::slugEncode($status->id, 'by-', $status->display_name) }}'>
+											<a href='/forums/statuses/{{ \String::slugEncode($status->id, 'by-', $status->author->display_name) }}'>
 												Posted {{ \Time::monthDay($status->created_at) }}
 											</a>
 										</li>
 										<li>
-											<a href='/forums/statuses/{{ \String::slugEncode($status->id, 'by-', $status->display_name) }}'>
+											<a href='/forums/statuses/{{ \String::slugEncode($status->id, 'by-', $status->author->display_name) }}'>
 												{{ $status->reply_count }} replies
 											</a>
 										</li>
