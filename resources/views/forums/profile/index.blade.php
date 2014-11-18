@@ -58,6 +58,12 @@
 							</h3>
 							<dl class='dl-horizontal'>
 								<dt>
+									Reputation
+								</dt>
+								<dd>
+									{{ $profile->reputation }}
+								</dd>
+								<dt>
 									@lang('profile.overview.community_statistics.group')
 								</dt>
 								<dd>

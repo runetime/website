@@ -77,7 +77,7 @@ class ForumController extends BaseController {
 			'mostOnline' => \Cache::get('info.most_online'),
 		];
 		$recentThreads = $this->threads->getX(5, 'desc');
-		$recentPosts = $this->posts->getRecent(5);
+		$recentPosts = $this->posts->hasThread(5);
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.name'));
 		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
@@ -234,7 +234,7 @@ class ForumController extends BaseController {
 		$thread = new Thread;
 		$thread = $thread->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
+		$post = $post->createNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
 		$thread->last_post = $post->id;
 		$thread->save();
 		$thread->addPost($post);
@@ -278,8 +278,7 @@ class ForumController extends BaseController {
 		if(empty($thread))
 			\App::abort(404);
 		$parsedContents = with(new \Parsedown)->text($form->contents);
-		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
+		$post = with(new Post)->createNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$thread->addPost($post);
 		$thread->updateLastPost($post);
 		$thread->incrementPosts();
@@ -333,19 +332,26 @@ class ForumController extends BaseController {
 		$post = $this->posts->getById($id);
 		if(!$post)
 			\App::abort(404);
+		if(!$post->thread)
+			\App::abort(404);
 		$vote = $this->votes->getByPost($id);
 		$newStatus = $form->vote == "up" ? Vote::STATUS_UP : Vote::STATUS_DOWN;
+		$rep = $newStatus == Vote::STATUS_UP ? 1 : -1;
 		if($vote) {
 			if($newStatus == Vote::STATUS_UP) {
 				if($vote->status == Vote::STATUS_UP) {
+					$rep = -1;
 					$newStatus = Vote::STATUS_NEUTRAL;
 				} else {
+					$rep = 1;
 					$newStatus = Vote::STATUS_UP;
 				}
 			} elseif($newStatus == Vote::STATUS_DOWN) {
 				if($vote->status == Vote::STATUS_DOWN) {
+					$rep = 1;
 					$newStatus = Vote::STATUS_NEUTRAL;
 				} else {
+					$rep = -1;
 					$newStatus = Vote::STATUS_DOWN;
 				}
 			}
@@ -357,6 +363,9 @@ class ForumController extends BaseController {
 			$vote = new Vote;
 			$vote = $vote->saveNew(\Auth::user()->id, $post->id, $newStatus);
 		}
+
+		// Poster's reputation
+		$post->author->reputationChange($rep);
 		$response = ['voted' => $newStatus];
 		header('Content-Type: application/json');
 		return json_encode($response);

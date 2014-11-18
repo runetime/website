@@ -47,4 +47,14 @@ class Post extends Entity {
 		}
 		return '';
 	}
+
+	/**
+	 * @return static
+	 */
+	public function createNew() {
+		$result = $this->create(array_combine($this->fillable, func_get_args()));
+		with(new Vote)->saveNew(\Auth::user()->id, $result->id, Vote::STATUS_UP);
+		$result->author->incrementReputation();
+		return $result;
+	}
 }

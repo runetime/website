@@ -12,11 +12,9 @@ use App\Runis\Core\Entity;
  */
 class User extends Entity implements AuthenticatableContract, CanResetPasswordContract {
 	use Authenticatable, CanResetPassword;
-	const STATE_ACTIVE  = 1;
-	const STATE_BLOCKED = 2;
 	protected $table = 'users';
 	protected $hidden = [];
-	protected $fillable = ['display_name', 'email', 'password', 'title', 'about', 'about_parsed', 'signature', 'signature_parsed', 'posts_active', 'posts_total', 'profile_views', 'birthday', 'gender', 'referred_by', 'timezone', 'dst', 'social_twitter', 'social_facebook', 'social_youtube', 'social_website', 'social_skype', 'runescape_version', 'runescape_rsn', 'runescape_clan', 'runescape_allegiance'];
+	protected $fillable = ['display_name', 'email', 'password', 'title', 'about', 'about_parsed', 'signature', 'signature_parsed', 'posts_active', 'posts_total', 'profile_views', 'birthday', 'gender', 'referred_by', 'timezone', 'dst', 'reputation', 'rank_id', 'social_twitter', 'social_facebook', 'social_youtube', 'social_website', 'social_skype', 'runescape_version', 'runescape_rsn', 'runescape_clan', 'runescape_allegiance'];
 	protected $softDelete = true;
 	private $rolesCache;
 	const PER_MEMBERS_PAGE = 20;
@@ -179,11 +177,17 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	}
 
 	/**
-	 * @return int
+	 *
 	 */
 	public function incrementPostActive() {
+		$rank = $this->rank;
+		$rankRepository = new RankRepository(new Rank);
 		$this->increment('posts_total');
-		return $this->increment('posts_active');
+		$this->increment('posts_active');
+		$rankAtPosts = $rankRepository->getByPostCount($this->posts_active);
+		if($rankAtPosts->id !== $rank->id)
+			$this->rank_id = $rankAtPosts->id;
+		$this->save();
 	}
 
 	/**
@@ -268,5 +272,30 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function referredBy() {
 		return $this->belongsTo('App\Runis\Accounts\User', 'referred_by');
+	}
+
+	public function rank() {
+		return $this->belongsTo('App\Runis\Accounts\Rank', 'rank_id');
+	}
+
+	/**
+	 *
+	 */
+	public function incrementReputation() {
+		$this->increment('reputation');
+	}
+
+	/**
+	 *
+	 */
+	public function decrementReputation() {
+		$this->decrement('reputation');
+	}
+
+	/**
+	 * @param $amount
+	 */
+	public function reputationChange($amount) {
+		$this->increment('reputation', $amount);
 	}
 }
