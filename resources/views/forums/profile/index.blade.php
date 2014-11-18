@@ -145,7 +145,7 @@
 									@lang('profile.overview.social.twitter')
 								</dt>
 								<dd>
-									<i class='fa fa-twitter'></i> {{$profile->social_twitter}} 
+									<i class='fa fa-twitter-square'></i> {{ $profile->social_twitter }}
 								</dd>
 	@endif
 	@if(!empty($profile->social_facebook))
@@ -153,7 +153,7 @@
 									@lang('profile.overview.social.facebook')
 								</dt>
 								<dd>
-									{{$profile->social_facebook}} 
+									<i class='fa fa-facebook-square'></i> {{ $profile->social_facebook }}
 								</dd>
 	@endif
 	@if(!empty($profile->social_youtube))
@@ -161,7 +161,7 @@
 									@lang('profile.overview.social.youtube')
 								</dt>
 								<dd>
-									{{$profile->social_youtube}} 
+									<i class='fa fa-youtube-play'></i> {{ $profile->social_youtube }}
 								</dd>
 	@endif
 	@if(!empty($profile->social_website))
@@ -169,7 +169,7 @@
 									@lang('profile.overview.social.website')
 								</dt>
 								<dd>
-									{{$profile->social_website}} 
+									<i class='fa fa-sitemap'></i> {{ $profile->social_website }}
 								</dd>
 	@endif
 	@if(!empty($profile->social_skype))
@@ -177,7 +177,7 @@
 									@lang('profile.overview.social.skype')
 								</dt>
 								<dd>
-									<i class='fa fa-skype'></i> {{$profile->social_skype}} 
+									<i class='fa fa-skype'></i> {{ $profile->social_skype }}
 								</dd>
 	@endif
 							</dl>
@@ -198,7 +198,7 @@
 									@lang('profile.overview.runescape.played')
 								</dt>
 								<dd>
-									{{$profile->runescape_version}} 
+									{{ $profile->runescape_version }}
 								</dd>
 	@endif
 	@if(!empty($profile->runescape_allegiance))
@@ -206,7 +206,7 @@
 									@lang('profile.overview.runescape.allegiance')
 								</dt>
 								<dd>
-									{{$profile->runescape_allegiance}} 
+									{{ $profile->runescape_allegiance }}
 								</dd>
 	@endif
 	@if(!empty($profile->runescape_clan))
@@ -214,7 +214,7 @@
 									@lang('profile.overview.runescape.clan')
 								</dt>
 								<dd>
-									{{$profile->runescape_clan}} 
+									{{ $profile->runescape_clan }}
 								</dd>
 	@endif
 	@if(!empty($profile->runescape_rsn))
@@ -222,7 +222,7 @@
 									@lang('profile.overview.runescape.runescape_name')
 								</dt>
 								<dd>
-									{{$profile->runescape_rsn}} 
+									{{ $profile->runescape_rsn }}
 								</dd>
 	@endif
 							</dl>
