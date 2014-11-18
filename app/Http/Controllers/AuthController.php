@@ -74,8 +74,9 @@ class AuthController extends BaseController {
 			return $this->view('errors.signup.passwords');
 		if($this->users->getByDisplayName($form->display_name))
 			return $this->view('errors.signup.taken');
+		$hash = \Hash::make($form->password);
 		$user = new User;
-		$user = $user->saveNew($form->display_name, $form->email, \Hash::make($form->password));
+		$user = $user->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, '', '', '', '', '', '', '', '', '');
 		$user->setRole('Members');
 		\Auth::loginUsingId($user->id);
 		return \redirect()->to('/');
