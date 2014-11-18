@@ -7562,7 +7562,7 @@ body {
 
 .post {
   background: #212121; }
-  .post .col-sm-3 {
+  .post .post-data {
     border-left: 5px solid transparent; }
   .post .col-xs-3,
   .post .col-sm-9 {
@@ -7570,13 +7570,13 @@ body {
   .post .post-info {
     background: #111111;
     padding: .5em 1em; }
-  .post.upvote-active .col-sm-3 {
+  .post.upvote-active .post-data {
     border-left: 5px solid #17a602; }
-  .post.upvote-active .post-votes .upvote i {
+  .post.upvote-active .post-votes .upvote {
     color: #17a602; }
-  .post.downvote-active .col-sm-3 {
+  .post.downvote-active .post-data {
     border-left: 5px solid #c71703; }
-  .post.downvote-active .post-votes .downvote i {
+  .post.downvote-active .post-votes .downvote {
     color: #c71703; }
 
 .post-hidden {
@@ -7584,14 +7584,12 @@ body {
 
 .post-votes {
   display: inline; }
-  .post-votes div {
-    display: inline; }
-    .post-votes div i:hover {
-      cursor: pointer; }
-    .post-votes div.upvote i:hover {
-      color: #2f7a10; }
-    .post-votes div.downvote i:hover {
-      color: #911102; }
+  .post-votes i:hover {
+    cursor: pointer; }
+  .post-votes .upvote:hover {
+    color: #2f7a10; }
+  .post-votes .downvote:hover {
+    color: #911102; }
 
 .photo-sm {
   max-width: 3em;
