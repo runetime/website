@@ -40,6 +40,11 @@ class PostRepository extends EloquentRepository {
 			get();
 	}
 
+	/**
+	 * @param int $amount
+	 *
+	 * @return mixed
+	 */
 	public function getRecent($amount = 3) {
 		return $this->model->
 			where('status', '=', Post::STATUS_VISIBLE)->
@@ -48,6 +53,11 @@ class PostRepository extends EloquentRepository {
 			get();
 	}
 
+	/**
+	 * @param int $amount
+	 *
+	 * @return object
+	 */
 	public function hasThread($amount = 5) {
 		$postRepository = new PostRepository(new Post);
 		$postList = [];
@@ -58,5 +68,19 @@ class PostRepository extends EloquentRepository {
 		foreach($posts as $post)
 			array_push($postList, $postRepository->getById($post->post_id));
 		return (object) $postList;
+	}
+
+	/**
+	 * @param     $userId
+	 * @param int $amount
+	 *
+	 * @return mixed
+	 */
+	public function getLatestByUser($userId, $amount = 5) {
+		return $this->model->
+			where('author_id', '=', $userId)->
+			orderBy('id', 'desc')->
+			take($amount)->
+			get();
 	}
 }

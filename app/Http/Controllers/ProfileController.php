@@ -1,4 +1,6 @@
 <?php namespace App\Http\Controllers;
+use App\RuneTime\Forum\Threads\PostRepository;
+use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
 class ProfileController extends BaseController {
@@ -10,14 +12,26 @@ class ProfileController extends BaseController {
 	 * @var StatusRepository
 	 */
 	private $statuses;
+	/**
+	 * @var ThreadRepository
+	 */
+	private $threads;
+	/**
+	 * @var PostRepository
+	 */
+	private $posts;
 
 	/**
+	 * @param PostRepository   $posts
 	 * @param StatusRepository $statuses
+	 * @param ThreadRepository $threads
 	 * @param UserRepository   $users
 	 */
-	public function __construct(StatusRepository $statuses, UserRepository $users) {
+	public function __construct(PostRepository $posts, StatusRepository $statuses, ThreadRepository $threads, UserRepository $users) {
 		$this->users = $users;
 		$this->statuses = $statuses;
+		$this->threads = $threads;
+		$this->posts = $posts;
 	}
 
 	/**
@@ -31,8 +45,7 @@ class ProfileController extends BaseController {
 			\App::abort(404);
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
-		$bc = ['forums/' => 'Forums'];
-		$this->bc($bc);
+		$this->bc(['forums/' => 'Forums']);
 		$this->nav('navbar.forums');
 		$this->title($profile->display_name);
 		return $this->view('forums.profile.index', compact('profile', 'status'));
@@ -41,16 +54,31 @@ class ProfileController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getProfileFeed() {
+	public function getProfileFeed($id) {
+		$profile = $this->users->getById($id);
+		if(!$profile)
+			\App::abort(404);
+		$profile->incrementProfileViews();
+		$threads = $this->threads->getLatestByUser($id, 5);
+		$status = $this->statuses->getLatestByAuthor($profile->id);
+		$this->bc(['forums/' => 'Forums', 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
 		$this->nav('navbar.forums');
-		return $this->view('forums.profile.index', compact('profile', 'latestStatus'));
+		$this->title($profile->display_name . "'s Profile Feed");
+		return $this->view('forums.profile.feed', compact('profile', 'status', 'threads'));
 	}
 
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getProfileFriends() {
+	public function getProfileFriends($id) {
+		$profile = $this->users->getById($id);
+		if(!$profile)
+			\App::abort(404);
+		$profile->incrementProfileViews();
+		$status = $this->statuses->getLatestByAuthor($profile->id);
+		$this->bc(['forums/' => 'Forums', 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
 		$this->nav('navbar.forums');
-		return $this->view('forums.profile.index', compact('profile', 'latestStatus'));
+		$this->title($profile->display_name . "'s Friends");
+		return $this->view('forums.profile.friends', compact('profile', 'status'));
 	}
 }

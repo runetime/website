@@ -99,4 +99,18 @@ class ThreadRepository extends EloquentRepository {
 
 		return $results;
 	}
+
+	/**
+	 * @param     $userId
+	 * @param int $amount
+	 *
+	 * @return mixed
+	 */
+	public function getLatestByUser($userId, $amount = 5) {
+		return $this->model->
+			where('author_id', '=', $userId)->
+			orderBy('id', 'desc')->
+			take($amount)->
+			get();
+	}
 }
