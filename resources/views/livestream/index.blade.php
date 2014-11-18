@@ -20,6 +20,16 @@
 						</div>
 					</div>
 				</div>
+                <script>
+                    $(function() {
+                        var chatbox = $('#chatbox').height(),
+                            messages = $('#chatbox-messages').height(),
+                            chatFluff = chatbox - messages,
+                            stream = $('#live_embed_player_flash').height(),
+                            newMessages = stream - chatFluff;
+                        $('#chatbox-messages').height(newMessages);
+                    });
+                </script>
 @else
 				<h2 class='text-danger text-center'>
 					RuneTime is currently not streaming
@@ -29,14 +39,4 @@
 				</div>
 @endif
 			</div>
-			<script>
-				$(function() {
-					var chatbox = $('#chatbox').height(),
-						messages = $('#chatbox-messages').height(),
-						chatFluff = chatbox - messages,
-						stream = $('#live_embed_player_flash').height(),
-						newMessages = stream - chatFluff;
-					$('#chatbox-messages').height(newMessages);
-				});
-			</script>
 @stop
