@@ -10,7 +10,7 @@
 							Enter RuneScape Name
 						</label>
 						<div class='col-lg-10'>
-							<input type='text' id='rsn-check-field' placeholder='Runescape Name' />
+							<input id='rsn-check-field' class='form-control' type='text' placeholder='Runescape Name' required />
 							<p id='rsn-availability'></p>
 						</div>
 					</div>
