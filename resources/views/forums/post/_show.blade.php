@@ -43,12 +43,12 @@
 							</div>
 							<div class='col-xs-12 col-sm-9 col-md-10'>
 								<div class='post-contents' rt-data='post#{{ $post->id }}:contents'>
-									{!!$post->contents_parsed!!}
+									{!! $post->contents_parsed !!}
 									<div class='hidden' rt-data='post#{{ $post->id }}:source'>{!! $post->contents !!}</div>
 								</div>
-	@if(!empty($post->author_info->signature_parsed))
+	@if(!empty($post->author->signature_parsed))
 								<hr />
-								{{$post->author_info->signature_parsed}}
+								{!! $post->author->signature_parsed !!}
 	@endif
 								<div class='clearfix'>
 									<ul class='list-inline pull-left'>
