@@ -8,6 +8,6 @@ class Role extends Entity{
 	 *
 	 */
 	public function users(){
-		$this->belongsToMany('Runis\Accounts\User');
+		$this->belongsToMany('App\Runis\Accounts\User');
 	}
 }
