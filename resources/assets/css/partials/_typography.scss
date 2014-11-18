@@ -76,6 +76,24 @@ textarea{
 	border:1px solid rgba(51,181,229,0.7) !important;
 	color:#ccc !important;
 }
+select {
+	background: transparent;
+	border: 1px solid rgba(51,181,229,0.7);
+	option {
+		background: rgb(41, 41, 41);
+	}
+	&::-webkit-scrollbar{
+		width:.75em;
+	}
+	&::-webkit-scrollbar-thumb{
+		border-radius:10px;
+		background:rgba(115,11,115,0.8);
+		box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
+		&:window-inactive{
+			background:rgba(115,11,115,0.8);
+		}
+	}
+}
 .holo-text{
 	$c:#2991B8 !important;
 	color:$c;
