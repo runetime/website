@@ -39,7 +39,7 @@ class HomeController extends BaseController {
 	 */
 	public function getIndex() {
 		$news = $this->news->getRecentNews(3);
-		$statuses = $this->statuses->getRecentStatuses(5);
+		$statuses = $this->statuses->getLatest(5);
 		$threads = $this->threads->getX(5, 'desc');
 		$posts = $this->posts->getRecent(5);
 		$this->bc(false);
