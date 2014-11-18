@@ -81,11 +81,31 @@ class BaseController extends Controller {
 	 *
 	 */
 	private function updateCache() {
-		$user = \Request::getClientIp();
+		$current = [
+			'url' => \Request::url(),
+			'time' => time(),
+			'title' => $this->title,
+			'logged' => \Auth::check()
+		];
+		$activity = \Cache::get('activity.users');
+		if(empty($activity))
+			$activity = [];
 		if(\Auth::check())
-			$user = \Auth::user()->id;
-		$activity = ['url' => \Request::url(), 'time' => time(), 'title' => $this->title];
-		$time = \Carbon::now()->addMinutes(15);
-		\Cache::put('activity.' . $user, $activity, $time);
+			$current['user'] = \Auth::user()->id;
+		else
+			$current['user'] = \Request::getClientIp();
+		$ago15 = \Carbon::now()->subMinutes(15)->timestamp;
+		foreach($activity as $key => $value) {
+			if(ceil($key / 1000) <= $ago15)
+				unset($activity[$key]);
+			if((\Auth::check() && $value['user'] === \Auth::user()->id) || $value['user'] === \Request::getClientIp())
+				unset($activity[$key]);
+		}
+		$activity[microtime(true) * 1000] = $current;
+		$most = \Cache::get('activity.most');
+		$activeCount = count($activity);
+		if($activeCount > $most)
+			\Cache::forever('activity.most', $activeCount);
+		\Cache::forever('activity.users', $activity);
 	}
 }

@@ -75,8 +75,9 @@
 					<div class='col-xs-12'>
 						<div>
 							<h3>
-								@lang('forums.online.current', ['amount' => 1]) <small>(@lang('forums.online.in_time', ['amount' => 30]))</small>
+								@lang('forums.online.current', ['amount' => count($activity)]) <small>(@lang('forums.online.in_time', ['amount' => 30]))</small>
 							</h3>
+@include('partials._activity', ['activity' => $activity])
 						</div>
 					</div>
 				</div>

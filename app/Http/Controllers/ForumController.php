@@ -74,13 +74,14 @@ class ForumController extends BaseController {
 			'posts' => $this->posts->getCount(),
 			'members' => $this->users->getCount(),
 			'latest' => $this->users->getLatest(),
-			'mostOnline' => \Cache::get('info.most_online'),
+			'mostOnline' => \Cache::get('activity.most'),
 		];
 		$recentThreads = $this->threads->getX(5, 'desc');
 		$recentPosts = $this->posts->hasThread(5);
+		$activity = \Cache::get('activity.users');
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.name'));
-		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo'));
+		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo', 'activity'));
 	}
 
 	/**
