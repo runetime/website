@@ -41,7 +41,7 @@ class HomeController extends BaseController {
 		$news = $this->news->getRecentNews(3);
 		$statuses = $this->statuses->getLatest(5);
 		$threads = $this->threads->getX(5, 'desc');
-		$posts = $this->posts->getRecent(5);
+		$posts = $this->posts->hasThread(5);
 		$this->bc(false);
 		$this->nav('navbar.home');
 		$this->title(trans('navbar.home'));

@@ -32,7 +32,7 @@ class PostRepository extends EloquentRepository {
 		$res = $this->model->
 			where('thread_id', '=', $thread);
 		if($status > -1)
-			$res = $res->where('status', '=', $status);
+			$res = $res->where('status', '=', $status);;
 		return $res->
 			skip(($page - 1) * Thread::POSTS_PER_PAGE)->
 			take($amount)->
@@ -46,5 +46,17 @@ class PostRepository extends EloquentRepository {
 			orderBy('id', 'desc')->
 			take($amount)->
 			get();
+	}
+
+	public function hasThread($amount = 5) {
+		$postRepository = new PostRepository(new Post);
+		$postList = [];
+		$posts = \DB::table('post_thread')->
+			orderBy('id', 'desc')->
+			take($amount)->
+			get();
+		foreach($posts as $post)
+			array_push($postList, $postRepository->getById($post->post_id));
+		return (object) $postList;
 	}
 }
