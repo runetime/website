@@ -17,7 +17,7 @@ class StaffModerator implements Middleware {
 		if(!\Auth::check())
 			return \redirect()->to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1, 10, 11))
-			return response('Unauthorized.', 401);
+			return \View::make('framework.unauthorized');
 		return $next($request);
 	}
 

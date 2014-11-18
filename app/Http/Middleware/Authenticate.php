@@ -37,7 +37,7 @@ class Authenticate implements Middleware {
 		{
 			if ($request->ajax())
 			{
-				return response('Unauthorized.', 401);
+				return \View::make('framework.unauthorized');
 			}
 			else
 			{

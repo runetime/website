@@ -20,7 +20,7 @@ class Staff implements Middleware {
 		if(!\Auth::check())
 			return \redirect()->to('/login');
 		if(!\Auth::user()->hasOneOfRoles(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
-			return response('Unauthorized.', 401);
+			return \View::make('framework.unauthorized');
 		return $next($request);
 	}
 
