@@ -12,7 +12,8 @@ class PasswordRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			//
+			'current' => 'required',
+			'new'     => 'required',
 		];
 	}
 
@@ -23,7 +24,7 @@ class PasswordRequest extends FormRequest {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 }

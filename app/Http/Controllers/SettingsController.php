@@ -83,7 +83,17 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postIndex(ProfileRequest $form) {
-		return \redirect()->to('/settings/profile');
+		$user = $this->users->getById(\Auth::user()->id);
+		$referred = $this->users->getByDisplayName($form->referred_by);
+		$user->timezone = (float) $form->timezone;
+		$user->dst = $form->dst ? true : false;
+		if($form->gender >= 0 && $form->gender <= 2)
+			$user->gender = $form->gender;
+		$user->location = $form->location;
+		$user->interests = $form->interests;
+		$user->referred_by = !empty($referred) ? $referred->id : -1;
+		$user->save();
+		return \redirect()->to('settings');
 	}
 
 	/**
@@ -100,6 +110,11 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postPhoto(PhotoRequest $form) {
+		$file = \Request::file('photo');
+		if(substr($file->getMimeType(), 0, 6) == 'image/') {
+			$img = \Img::make($form->file('photo'));
+			$img->save('./img/forums/photos/' . \Auth::user()->id . '.png');
+		}
 		return \redirect()->to('/settings/photo');
 	}
 
@@ -117,6 +132,13 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postPassword(PasswordRequest $form) {
+		$user = $this->users->getById(\Auth::user()->id);
+		if(\Auth::validate(['email' => \Auth::user()->email, 'password' => $form->current])) {
+			$user->password = \Hash::make($form->new);
+			$user->save();
+		} else {
+			dd("There was an error");
+		}
 		return \redirect()->to('/settings/password');
 	}
 
@@ -134,7 +156,11 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postAbout(AboutRequest $form) {
-		return \redirect()->to('/settings/about');
+		$user = $this->users->getById(\Auth::user()->id);
+		$user->about = $form->contents;
+		$user->about_parsed = with(new \Parsedown)->text($form->contents);
+		$user->save();
+		return \redirect()->to('/settings/about/me');
 	}
 
 	/**
@@ -151,6 +177,10 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postSignature(SignatureRequest $form) {
+		$user = $this->users->getById(\Auth::user()->id);
+		$user->signature = $form->contents;
+		$user->signature_parsed = with(new \Parsedown)->text($form->contents);
+		$user->save();
 		return \redirect()->to('/settings/signature');
 	}
 
@@ -168,6 +198,13 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postSocial(SocialRequest $form) {
+		$user = $this->users->getById(\Auth::user()->id);
+		$user->social_twitter = $form->twitter;
+		$user->social_facebook = $form->facebook;
+		$user->social_youtube = $form->youtube;
+		$user->social_website = $form->website;
+		$user->social_skype = $form->skype;
+		$user->save();
 		return \redirect()->to('/settings/social');
 	}
 
@@ -175,8 +212,24 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getRuneScape() {
+		$versions = [
+			'Old-School',
+			'RuneScape 3',
+			'Neither',
+		];
+		$allegiances = [
+			'Godless',
+			'Saradomin',
+			'Zamorak',
+			'Armadyl',
+			'Zaros',
+			'Seren',
+			'Brassica Prime',
+			'Bandos (Deceased)',
+			'Guthix (Deceased)',
+		];
 		$thisURL = '/settings/runescape';
-		return $this->view('settings.runescape', compact('thisURL'));
+		return $this->view('settings.runescape', compact('thisURL', 'versions', 'allegiances'));
 	}
 
 	/**
@@ -185,6 +238,30 @@ class SettingsController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postRuneScape(RuneScapeRequest $form) {
+		$user = $this->users->getById(\Auth::user()->id);
+		$versions = [
+			'Old-School',
+			'RuneScape 3',
+			'Neither',
+		];
+		$allegiances = [
+			'Godless',
+			'Saradomin',
+			'Zamorak',
+			'Armadyl',
+			'Zaros',
+			'Seren',
+			'Brassica Prime',
+			'Bandos (Deceased)',
+			'Guthix (Deceased)',
+		];
+		if(in_array($form->version, $versions))
+			$user->runescape_version = $form->version;
+		if(in_array($form->allegiance, $allegiances))
+			$user->runescape_allegiance = $form->allegiance;
+		$user->runescape_rsn = $form->rsn;
+		$user->runescape_clan = $form->clan;
+		$user->save();
 		return \redirect()->to('/settings/runescape');
 	}
 }

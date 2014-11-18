@@ -2,13 +2,13 @@
 @section('settings')
 						<form action='' class='form-horizontal' method='post' role='form'>
 							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
+								<label class='col-lg-2 control-label' for='timezone'>
 									@lang('settings.profile.timezone.name')
 								</label>
 								<div class='col-lg-10'>
-									<select name='timezone'>
+									<select id='timezone' name='timezone'>
 @foreach($timezoneOptions as $timezoneHour => $timezoneName)
-										<option name='{{$timezoneHour}}'>
+										<option value='{{$timezoneHour}}'{!! $timezoneHour == \Auth::user()->timezone ? " selected='selected'" : ""  !!}>
 											{{$timezoneName}}
 										</option>
 @endforeach
@@ -16,55 +16,42 @@
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
+								<label class='col-lg-2 control-label' for='timezone_dst'>
 									@lang('settings.profile.timezone.dst')
 								</label>
 								<div class='col-lg-10'>
-									<input type='checkbox' name='timezone_dst' />
+									<input type='checkbox' name='timezone_dst' id='timezone_dst'{{\Auth::user()->dst ? " checked='checked" : ""}} />
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
-									@lang('settings.profile.comments_visitors.name')
-								</label>
-								<div class='col-lg-10'>
-									<input type='checkbox' name='visitors_show' />
-									<span class='help-block'>
-										@lang('settings.profile.comments_visitors.help')
-									</span>
-								</div>
-							</div>
-							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
-									@lang('settings.profile.friends.name')
-								</label>
-								<div class='col-lg-10'>
-									<input type='checkbox' name='friends_show' />
-									<span class='help-block'>
-										@lang('settings.profile.friends.help')
-									</span>
-								</div>
-							</div>
-							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
+								<label class='col-lg-2 control-label' for='birthday_year'>
 									@lang('settings.profile.birthday.name')
 								</label>
 								<div class='col-lg-10'>
-									<select name='birthday_year'>
+									<select id='birthday_year' name='birthday_year'>
+										<option value='0'>
+											--
+										</option>
 @foreach(range(1900, date('Y')) as $year)
 										<option value='{{$year}}'>
 											{{$year}}
 										</option>
 @endforeach
 									</select>
-									<select name='birthday_month'>
+									<select id='birthday_month' name='birthday_month'>
+										<option value='0'>
+											--
+										</option>
 @foreach(range(1, 12) as $month)
 										<option value='{{$month}}'>
 											@lang('settings.profile.birthday.months.' . $month)
 										</option>
 @endforeach
 									</select>
-									<select name='birthday_day'>
+									<select id='birthday_day' name='birthday_day'>
+										<option value='0'>
+											--
+										</option>
 @foreach(range(1, 31) as $day)
 										<option value='{{$day}}'>
 											{{$day}}
@@ -77,11 +64,11 @@
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
+								<label class='col-lg-2 control-label' for='gender'>
 									@lang('settings.profile.gender')
 								</label>
 								<div class='col-lg-10'>
-									<select name='gender'>
+									<select id='gender' name='gender'>
 										<option value='0'>
 											@lang('profile.gender.not_telling')
 										</option>
@@ -95,30 +82,37 @@
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
+								<label class='col-lg-2 control-label' for='location'>
 									@lang('settings.profile.location')
 								</label>
 								<div class='col-lg-10'>
-									<input type='text' name='location' />
+									<input type='text' id='location' name='location' />
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
+								<label class='col-lg-2 control-label' for='interests'>
 									@lang('settings.profile.interests')
 								</label>
 								<div class='col-lg-10'>
-									<input type='text' name='interests' />
+									<input type='text' id='interests' name='interests' />
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-lg-2 control-label' for='email'>
+								<label class='col-lg-2 control-label' for='referred_by'>
 									@lang('settings.profile.referred_by.name'):
 								</label>
 								<div class='col-lg-10'>
-                                    <input type='text' name='referred_by' />
-                                    <span class='help-block'>
-                                        @lang('settings.profile.referred_by.note')
-                                    </span>
+									<input type='text' id='referred_by' name='referred_by' />
+									<span class='help-block'>
+										@lang('settings.profile.referred_by.note')
+									</span>
+								</div>
+							</div>
+							<div class='form-group'>
+								<div class='col-lg-offset-2 col-lg-10'>
+									<button class='btn btn-primary' type='submit'>
+										Save
+									</button>
 								</div>
 							</div>
 						</form>

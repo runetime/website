@@ -12,7 +12,7 @@ class AboutRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			//
+			'contents' => 'required',
 		];
 	}
 
@@ -23,7 +23,7 @@ class AboutRequest extends FormRequest {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 }

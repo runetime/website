@@ -12,7 +12,7 @@ class PhotoRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			//
+			'photo' => 'required',
 		];
 	}
 
@@ -23,7 +23,7 @@ class PhotoRequest extends FormRequest {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 }

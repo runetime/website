@@ -12,7 +12,11 @@ class ProfileRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			//
+			'timezone'       => 'required',
+			'birthday_year'  => 'required',
+			'birthday_month' => 'required',
+			'birthday_day'   => 'required',
+			'gender'         => 'required',
 		];
 	}
 
@@ -23,7 +27,7 @@ class ProfileRequest extends FormRequest {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 }

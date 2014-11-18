@@ -12,7 +12,6 @@ class SocialRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			//
 		];
 	}
 
@@ -23,7 +22,7 @@ class SocialRequest extends FormRequest {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 }
