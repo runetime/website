@@ -45,7 +45,7 @@
 								@lang('profile.overview.about.name')
 							</h3>
 @if(!empty($profile->about_parsed))
-							{{ $profile->about_parsed }}
+							{!! $profile->about_parsed !!}
 @else
 							<em>
 								@lang('profile.overview.about.empty', ['name' => $profile->display_name])
