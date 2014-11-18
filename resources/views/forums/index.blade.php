@@ -43,7 +43,7 @@
 @if(!empty($recentPosts))
 	@foreach($recentPosts as $post)
 						<div class='card'>
-							{!! \Image::userPhoto($thread->author_id, ['photo-sm', 'pull-left']) !!}
+							{!! \Image::userPhoto($post->author_id, ['photo-sm', 'pull-left']) !!}
 							<a href='/forums/thread/{{ \String::slugEncode($post->thread[0]->id, $post->thread[0]->title) }}' title='{{ $post->thread[0]->title }}'>
 								{{ $post->thread[0]->title }}
 							</a>
