@@ -95,9 +95,13 @@ class RadioController extends BaseController {
 	 */
 	public function getRequest() {
 		header('Content-Type: application/json');
+		$response = ['response' => 0];
 		if(\Auth::check())
-			return json_encode(['response' => true]);
-		return json_encode(['response' => false]);
+			$response['response'] = 2;
+		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
+		if(empty($session))
+			$response['response'] = 1;
+		return $response;
 	}
 
 	/**

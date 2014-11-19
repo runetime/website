@@ -672,13 +672,14 @@ function RuneTime() {
 			request.done(function(request) {
 				request = $.parseJSON(request);
 				var html = "";
-				if(request.response === true) {
+				if(request.response === 2) {
 					html += "<form role='form'><div class='form-group'><label for='request-artist'>Artist Name</label><input type='text' id='request-artist' class='form-control' name='request-artist' placeholder='Artist Name' required /></div><div class='form-group'><label for='request-name'>Song Name</label><input type='text' id='request-name' class='form-control' name='request-name' placeholder='Song Name' required /></div><div class='form-group'><p id='request-button' class='btn btn-primary'>Request</p></div></form>";
-					RuneTime.Radio.openPull(html);
+				} else if(request.response === 1) {
+					html += "<p class='text-warning'>Auto DJ currently does not accept song requests, sorry!";
 				} else {
 					html += "<p class='text-danger'>You must be logged in to request a song from the DJ.</p>";
-					RuneTime.Radio.openPull(html);
 				}
+				RuneTime.Radio.openPull(html);
 			});
 			setTimeout(function () {
 				$('#request-button').click(function () {
