@@ -17,7 +17,6 @@ class CreateNotificationsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id');
 			$table->string('section');
-			$table->mediumtext('contents');
 			$table->mediumtext('contents_parsed');
 			$table->integer('status');
 			$table->timestamps();
