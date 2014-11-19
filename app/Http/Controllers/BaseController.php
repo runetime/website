@@ -94,9 +94,9 @@ class BaseController extends Controller {
 			$current['user'] = \Auth::user()->id;
 		else
 			$current['user'] = \Request::getClientIp();
-		$ago15 = \Carbon::now()->subMinutes(15)->timestamp;
+		$ago = \Carbon::now()->subMinutes(30)->timestamp;
 		foreach($activity as $key => $value) {
-			if(ceil($key / 1000) <= $ago15)
+			if(ceil($key / 1000) <= $ago)
 				unset($activity[$key]);
 			if((\Auth::check() && $value['user'] === \Auth::user()->id) || $value['user'] === \Request::getClientIp())
 				unset($activity[$key]);
