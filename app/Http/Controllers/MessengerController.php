@@ -5,6 +5,7 @@ use App\Http\Requests\Messenger\ReplyRequest;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Messenger\Message;
 use App\RuneTime\Messenger\MessageRepository;
+use App\RuneTime\Notifications\Notification;
 use App\Runis\Accounts\UserRepository;
 /**
  * Class AboutController
@@ -39,6 +40,8 @@ class MessengerController extends BaseController {
 	}
 
 	/**
+	 * @param $id
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($id) {
@@ -66,11 +69,22 @@ class MessengerController extends BaseController {
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$message->addPost($post);
+
+		// Notifications
+		foreach($message->users as $user) {
+			if($user->id !== \Auth::user()->id) {
+				$notification = new Notification;
+				$contents = \Link::name(\Auth::user()->id) . " has replied to the private message <a href='" . $message->toSlug() . "'>" . $message->title . "</a> you're a participant of.";
+				$notification->saveNew($user->id, 'Messenger', $contents, Notification::STATUS_UNREAD);
+			}
+		}
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
 	}
 
 	/**
+	 * @param int $id
 	 *
+	 * @return \Illuminate\View\View
 	 */
 	public function getCreate($id = 0) {
 		$to = '';
@@ -87,6 +101,8 @@ class MessengerController extends BaseController {
 
 	/**
 	 * @param CreateRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postCreate(CreateRequest $form) {
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
@@ -98,8 +114,12 @@ class MessengerController extends BaseController {
 		$message->addUser(\Auth::user());
 		foreach(explode(", ", $form->participants) as $participant) {
 			$participant = $this->users->getByDisplayName(($participant));
-			if($participant)
+			if($participant) {
 				$message->addUser($participant);
+				$notification = new Notification;
+				$contents = \Link::name(\Auth::user()->id) . " has sent you a private message titled <a href='" . $message->toSlug() . "'>" . $message->title . "</a>.";
+				$notification->saveNew($participant->id, 'Messenger', $contents, Notification::STATUS_UNREAD);
+			}
 		}
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
 	}
