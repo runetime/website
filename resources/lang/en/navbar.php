@@ -52,11 +52,11 @@ return [
 	],
 	'logged' => [
 		'in' => [
-			'my_profile'  => 'My Profile',
-			'my_settings' => 'My Settings',
-			'messenger'   => 'Messenger',
-			'content'     => 'Content',
-			'logout'      => 'Logout',
+			'my_profile'    => 'My Profile',
+			'my_settings'   => 'My Settings',
+			'messenger'     => 'Messenger',
+			'notifications' => 'Notifications',
+			'logout'        => 'Logout',
 		],
 		'out' => [
 			'login'  => 'Login',
