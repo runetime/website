@@ -1,7 +1,13 @@
 <?php
-$messages=3;
-$notifications=6;
-$notificationsTotal=$messages + $notifications;
+use App\RuneTime\Notifications\NotificationRepository;
+use App\RuneTime\Notifications\Notification;
+$messages = 0;
+$notifications = 0;
+if(\Auth::check()) {
+    $notificationRepository = new NotificationRepository(new Notification);
+    $messages = $notificationRepository->getCountByUser(\Auth::user()->id, 'Messenger');
+    $notifications = $notificationRepository->getCountByUser(\Auth::user()->id);
+}
 $navs=[
 	''       => trans('navbar.home'),
 	'forums' => trans('navbar.forums'),
@@ -128,9 +134,9 @@ $current = $nav;
 								{{$url}} <span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
-		@foreach($name as $url2=>$name2)
+		@foreach($name as $url2 => $name2)
 								<li>
-									<a href='{{$url2}}' title='{{$name2}}'>
+									<a href='{{ $url2 }}' title='{{ $name2 }}'>
 										{!! $name2 !!}
 									</a>
 								</li>
@@ -138,8 +144,8 @@ $current = $nav;
 							</ul>
 						</li>
 	@else
-						<li{{$name==$current?" class=active":""}}>
-							<a href='{{$url}}' title='{{$name}}'>
+						<li{{ $name == $current ? " class=active" : "" }}>
+							<a href='{{ $url }}' title='{{$name}}'>
 								{!! $name !!}
 							</a>
 						</li>
@@ -147,16 +153,16 @@ $current = $nav;
 @endforeach
 					</ul>
 					<ul class='nav navbar-nav navbar-right'>
-@foreach($navLogged as $url=>$name)
+@foreach($navLogged as $url => $name)
 	@if(is_array($name))
-						<li class='dropdown{{$url==$current?" active":""}}'>
+						<li class='dropdown{{ $url == $current ? " active" : "" }}'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-								{{ $url }} {!! $notificationsTotal > 0 ? "<span class='badge badge-important'>".$notificationsTotal."</span>" : "" !!}<span class='caret'></span>
+								{{ $url }} {!! $notifications > 0 ? "<span class='badge badge-important'>" . $notifications . "</span>" : "" !!}<span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
 		@foreach($name as $url2 => $name2)
 								<li>
-									<a href='{{$url2}}'>
+									<a href='{{ $url2 }}'>
 										{!! $name2 !!}
 									</a>
 								</li>

@@ -51,4 +51,14 @@ class NotificationRepository extends EloquentRepository{
 			orderBy('id', $order)->
 			get();
 	}
+
+	public function getCountByUser($userId, $section = '', $status = Notification::STATUS_UNREAD) {
+		$query = $this->model->
+			where('user_id', '=', $userId);
+		if(!empty($section))
+			$query = $query->where('section', '=', $section);
+		if(!empty($status))
+			$query = $query->where('status', '=', $status);
+		return $query->count();
+	}
 }

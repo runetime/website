@@ -10,6 +10,7 @@ function RuneTime() {
 	this.FormSignup = null;
 	this.Forums = null;
 	this.NameChecker = null;
+	this.Notifications = null;
 	this.Utilities = null;
 	this.Utilities = function Utilities() {
 		this.getAJAX = function getAJAX(path) {
@@ -977,6 +978,18 @@ function RuneTime() {
 					});
 				}
 			}
+		};
+	};
+	this.Notifications = function Notifications() {
+		this.elements = {};
+		this.paths = {};
+		this.setup = function setup() {
+			this.paths = {
+				markRead: '/notifications/mark-read'
+			};
+			$("[rt-hook='hook!notifications:mark.read']").bind('click', function(e) {
+				console.log(e.target.attr('rt-data'));
+			})
 		};
 	};
 }

@@ -8464,3 +8464,6 @@ blockquote {
 
 .text-muted {
   color: #777777 !important; }
+
+.hover-pointer:hover {
+  cursor: pointer; }

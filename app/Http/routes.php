@@ -378,6 +378,7 @@ Route::group(['prefix' => 'news'], function() {
 Route::group(['middleware' => 'auth', 'prefix' => 'notifications'], function() {
 	get('/', 'NotificationController@getIndex');
 	get('{id}-at{time}', 'NotificationController@getView');
+	get('set-all-read', 'NotificationController@getSetAllRead');
 });
 
 /**
