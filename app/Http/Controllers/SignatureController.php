@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Requests\Signatures\RSNRequest;
+use Intervention\Image\Gd\Font;
 /**
  * Class SignatureController
  * @package App\Http\Controllers
@@ -76,21 +77,20 @@ class SignatureController extends BaseController {
 	 * @param $slug
 	 */
 	public function getDisplay($slug) {
-		$info = explode(";", $slug);
-		$username = $info[0];
-		header("Content-type: image/png");
-		$scores = \String::getHiscore($username);
-		if(!\Cache::get('hiscores.' . $username))
-			\String::getHiscore($username);
-		$scores = \Cache::get('hiscores.' . $username);
-		$image = $this->signatureStat($info, $scores);
-		list($width, $height) = [400, 150];
-		// Put down the logo
-		$logo = imagescale(imagecreatefrompng('./img/header.png'), 85, 24, IMG_BICUBIC_FIXED);
-		list($logoW, $logoH) = getimagesize('./img/header.png');
-		imagecopy($image, $logo, $width-($logoW/2), $height-($logoH/2), 0, 0, 85, 21);
-		imagepng($image);
-		imagedestroy($image);
+		$path = './img/signatures/generated/' . $slug . '.png';
+		if(file_exists($path))
+			return \Img::make($path)->response();
+		else {
+			$info = explode(";", $slug);
+			$rsn = $info[0];
+			$scores = \String::getHiscore($rsn);
+			$image = $this->signatureStat($info, $scores);
+			// Put down the logo
+			$logo = \Img::make('./img/header.png')->resize(85, 24);
+			$image->insert($logo, 'bottom-right');
+			$image->save($path);
+			return $image->response();
+		}
 	}
 
 	/**
@@ -101,72 +101,238 @@ class SignatureController extends BaseController {
 	 */
 	private function signatureStat($info, $scores) {
 		$skills = $this->skills();
-		$im = imagecreatefrompng('./img/signatures/backgrounds/' . $info[2] . '.png');
+		$img = \Img::canvas(400, 150);
+		$bg = \Img::make('./img/signatures/backgrounds/' . $info[2] . '.png');
+		$bg->resize(400, 150);
+		$img->insert($bg, 'top-left', 0, 0);
 		// Resize
 		list($width, $height) = getimagesize('./img/signatures/backgrounds/' . $info[2] . '.png');
-		$img = imagecreatetruecolor(400, 150);
-		imagecopyresized($img, $im, 0, 0, 0, 0, 400, 150, $width, $height);
-		imagecopy($img, $skills['attack'], 12, 12, 0, 0, 20, 20);
-		imagecopy($img, $skills['defence'], 12, 37, 0, 0, 20, 20);
-		imagecopy($img, $skills['strength'], 12, 62, 0, 0, 20, 20);
-		imagecopy($img, $skills['constitution'], 12, 88, 0, 0, 20, 20);
-		imagecopy($img, $skills['ranged'], 12, 113, 0, 0, 20, 20);
-		imagecopy($img, $skills['prayer'], 62, 12, 0, 0, 20, 20);
-		imagecopy($img, $skills['magic'], 62, 37, 0, 0, 20, 20);
-		imagecopy($img, $skills['cooking'], 62, 62, 0, 0, 20, 20);
-		imagecopy($img, $skills['woodcutting'], 62, 87, 0, 0, 20, 20);
-		imagecopy($img, $skills['fletching'], 62, 112, 0, 0, 20, 20);
-		imagecopy($img, $skills['fishing'], 112, 12, 0, 0, 20, 20);
-		imagecopy($img, $skills['firemaking'], 112, 37, 0, 0, 20, 20);
-		imagecopy($img, $skills['crafting'], 112, 62, 0, 0, 20, 20);
-		imagecopy($img, $skills['smithing'], 112, 87, 0, 0, 20, 20);
-		imagecopy($img, $skills['mining'], 112, 112, 0, 0, 20, 20);
-		imagecopy($img, $skills['herblore'], 162, 12, 0, 0, 20, 20);
-		imagecopy($img, $skills['agility'], 162, 37, 0, 0, 20, 20);
-		imagecopy($img, $skills['thieving'], 162, 62, 0, 0, 20, 20);
-		imagecopy($img, $skills['slayer'], 162, 87, 0, 0, 20, 20);
-		imagecopy($img, $skills['farming'], 162, 112, 0, 0, 20, 20);
-		imagecopy($img, $skills['runecrafting'], 212, 12, 0, 0, 20, 20);
-		imagecopy($img, $skills['hunter'], 212, 37, 0, 0, 20, 20);
-		imagecopy($img, $skills['construction'], 212, 62, 0, 0, 20, 20);
-		imagecopy($img, $skills['summoning'], 212, 87, 0, 0, 20, 20);
-		imagecopy($img, $skills['dungeoneering'], 212, 112, 0, 0, 20, 20);
-		imagecopy($img, $skills['divination'], 262, 12, 0, 0, 20, 20);
-		imagecopy($img, $skills['overall'], 262, 37, 0, 0, 20, 20);
-		$angle = 0;
+		$img->insert($skills['attack'], 'top-left', 12, 12);
+		$img->insert($skills['defence'], 'top-left', 12, 37);
+		$img->insert($skills['strength'], 'top-left', 12, 62);
+		$img->insert($skills['constitution'], 'top-left', 12, 88);
+		$img->insert($skills['ranged'], 'top-left', 12, 113);
+		$img->insert($skills['prayer'], 'top-left', 62, 12);
+		$img->insert($skills['magic'], 'top-left', 62, 37);
+		$img->insert($skills['cooking'], 'top-left', 62, 62);
+		$img->insert($skills['woodcutting'], 'top-left', 62, 87);
+		$img->insert($skills['fletching'], 'top-left', 62, 112);
+		$img->insert($skills['fishing'], 'top-left', 112, 12);
+		$img->insert($skills['firemaking'], 'top-left', 112, 37);
+		$img->insert($skills['crafting'], 'top-left', 112, 62);
+		$img->insert($skills['smithing'], 'top-left', 112, 87);
+		$img->insert($skills['mining'], 'top-left', 112, 112);
+		$img->insert($skills['herblore'], 'top-left', 162, 12);
+		$img->insert($skills['agility'], 'top-left', 162, 37);
+		$img->insert($skills['thieving'], 'top-left', 162, 62);
+		$img->insert($skills['slayer'], 'top-left', 162, 87);
+		$img->insert($skills['farming'], 'top-left', 162, 112);
+		$img->insert($skills['runecrafting'], 'top-left', 212, 12);
+		$img->insert($skills['hunter'], 'top-left', 212, 37);
+		$img->insert($skills['construction'], 'top-left', 212, 62);
+		$img->insert($skills['summoning'], 'top-left', 212, 87);
+		$img->insert($skills['dungeoneering'], 'top-left', 212, 112);
+		$img->insert($skills['divination'], 'top-left', 262, 12);
+		$img->insert($skills['overall'], 'top-left', 262, 37);
 		$size = 15;
-		$loc = $size+7;
-		$color = imagecolorallocate($im, 255, 255, 255);
-		$font = './fonts/vendor/open-sans/OpenSans-Light.ttf';
-		$h = $size + 3;
-		imagettftext($img, $size, $angle, $loc+12, $h+12, $color, $font, $scores[1][1]);
-		imagettftext($img, $size, $angle, $loc+12, $h+37, $color, $font, $scores[2][1]);
-		imagettftext($img, $size, $angle, $loc+12, $h+62, $color, $font, $scores[3][1]);
-		imagettftext($img, $size, $angle, $loc+12, $h+88, $color, $font, $scores[4][1]);
-		imagettftext($img, $size, $angle, $loc+12, $h+113, $color, $font, $scores[5][1]);
-		imagettftext($img, $size, $angle, $loc+62, $h+12, $color, $font, $scores[6][1]);
-		imagettftext($img, $size, $angle, $loc+62, $h+37, $color, $font, $scores[7][1]);
-		imagettftext($img, $size, $angle, $loc+62, $h+62, $color, $font, $scores[8][1]);
-		imagettftext($img, $size, $angle, $loc+62, $h+87, $color, $font, $scores[9][1]);
-		imagettftext($img, $size, $angle, $loc+62, $h+112, $color, $font, $scores[10][1]);
-		imagettftext($img, $size, $angle, $loc+112, $h+12, $color, $font, $scores[11][1]);
-		imagettftext($img, $size, $angle, $loc+112, $h+37, $color, $font, $scores[12][1]);
-		imagettftext($img, $size, $angle, $loc+112, $h+62, $color, $font, $scores[13][1]);
-		imagettftext($img, $size, $angle, $loc+112, $h+87, $color, $font, $scores[14][1]);
-		imagettftext($img, $size, $angle, $loc+112, $h+112, $color, $font, $scores[15][1]);
-		imagettftext($img, $size, $angle, $loc+162, $h+12, $color, $font, $scores[16][1]);
-		imagettftext($img, $size, $angle, $loc+162, $h+37, $color, $font, $scores[17][1]);
-		imagettftext($img, $size, $angle, $loc+162, $h+62, $color, $font, $scores[18][1]);
-		imagettftext($img, $size, $angle, $loc+162, $h+87, $color, $font, $scores[19][1]);
-		imagettftext($img, $size, $angle, $loc+162, $h+112, $color, $font, $scores[20][1]);
-		imagettftext($img, $size, $angle, $loc+212, $h+12, $color, $font, $scores[21][1]);
-		imagettftext($img, $size, $angle, $loc+212, $h+37, $color, $font, $scores[22][1]);
-		imagettftext($img, $size, $angle, $loc+212, $h+62, $color, $font, $scores[23][1]);
-		imagettftext($img, $size, $angle, $loc+212, $h+87, $color, $font, $scores[24][1]);
-		imagettftext($img, $size, $angle, $loc+212, $h+112, $color, $font, $scores[25][1]);
-		imagettftext($img, $size, $angle, $loc+262, $h+12, $color, $font, $scores[26][1]);
-		imagettftext($img, $size, $angle, $loc+262, $h+37, $color, $font, $scores[0][1]);
-		imagettftext($img, $size, $angle, 262, $h+62, $color, $font, $info[0]);
+		$loc = $size + 7;
+		$h = $size - 12;
+		$img->text($scores[1][1], $loc + 12, $h + 12, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[2][1], $loc + 12, $h + 37, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[3][1], $loc + 12, $h + 62, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[4][1], $loc + 12, $h + 87, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[5][1], $loc + 12, $h + 113, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[6][1], $loc + 62, $h + 12, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[7][1], $loc + 62, $h + 37, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[8][1], $loc + 62, $h + 62, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[9][1], $loc + 62, $h + 87, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[10][1], $loc + 62, $h + 113, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[11][1], $loc + 112, $h + 12, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[12][1], $loc + 112, $h + 37, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[13][1], $loc + 112, $h + 62, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[14][1], $loc + 112, $h + 87, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[15][1], $loc + 112, $h + 113, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[16][1], $loc + 162, $h + 12, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[17][1], $loc + 162, $h + 37, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[18][1], $loc + 162, $h + 62, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[19][1], $loc + 162, $h + 87, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[20][1], $loc + 162, $h + 113, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[21][1], $loc + 212, $h + 12, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[22][1], $loc + 212, $h + 37, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[23][1], $loc + 212, $h + 62, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[24][1], $loc + 212, $h + 87, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[25][1], $loc + 212, $h + 113, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[26][1], $loc + 262, $h + 12, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($scores[0][1], $loc + 262, $h + 37, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
+		$img->text($info[0], 262, $h + 62, function($font) {
+			$font->angle(0);
+			$font->color('#ffffff');
+			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->size(18);
+			$font->valign('top');
+		});
 		return $img;
 	}
 
@@ -203,8 +369,8 @@ class SignatureController extends BaseController {
 		$skills['divination'] = 'divination';
 		$skills['overall'] = 'overall';
 		list($width, $height) = [20, 20];
-		foreach($skills as $name=>$dir)
-			$skills[$name] = imagescale(imagecreatefrompng('./img/skills/' . $dir . '.png'), $width, $height, IMG_BICUBIC_FIXED);
+		foreach($skills as $name => $dir)
+			$skills[$name] = \Img::make('./img/skills/' . $dir . '.png')->resize($width, $height);
 		return $skills;
 	}
 }
