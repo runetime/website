@@ -19,6 +19,7 @@ use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Forum\Threads\Vote;
 use App\RuneTime\Forum\Threads\VoteRepository;
+use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
 /**
@@ -286,6 +287,11 @@ class ForumController extends BaseController {
 		$this->subforums->updateLastPost($post->id, $thread->subforum->id);
 		$this->subforums->incrementPosts($thread->subforum->id);
 		\Auth::user()->incrementPostActive();
+
+		// Notify author
+		$notification = new Notification;
+		$contents = \Link::name(\Auth::user()->id) . " has replied to your thread <a href='" . $thread->toSlug() . "'>" . $thread->title . "</a>.";
+		$notification->saveNew($thread->author->id, 'Threads', $contents, Notification::STATUS_UNREAD);
 		return $this->getThreadLastPost($thread->id);
 	}
 
