@@ -1,7 +1,7 @@
 <?php
 $messages=3;
-$follow=6;
-$notifications=$messages + $follow;
+$notifications=6;
+$notificationsTotal=$messages + $notifications;
 $navs=[
 	''       => trans('navbar.home'),
 	'forums' => trans('navbar.forums'),
@@ -57,7 +57,7 @@ else
 			'profile/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
 			'settings'  => Lang::get('navbar.logged.in.my_settings'),
 			'messenger' => Lang::get('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messages.'</span>',
-			'forums/content'   => Lang::get('navbar.logged.in.content').'<span class=\'badge badge-info pull-right\'>'.$follow.'</span>',
+			'notifications'   => Lang::get('navbar.logged.in.notifications').'<span class=\'badge badge-info pull-right\'>'.$notifications.'</span>',
 		],
 		'logout' => Lang::get('navbar.logged.in.logout'),
 	];
@@ -151,7 +151,7 @@ $current = $nav;
 	@if(is_array($name))
 						<li class='dropdown{{$url==$current?" active":""}}'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-								{{$url}} {!!$notifications>0?"<span class='badge badge-important'>".$notifications."</span>":""!!}<span class='caret'></span>
+								{{ $url }} {!! $notificationsTotal > 0 ? "<span class='badge badge-important'>".$notificationsTotal."</span>" : "" !!}<span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
 		@foreach($name as $url2 => $name2)
