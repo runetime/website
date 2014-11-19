@@ -346,8 +346,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'messenger'], function() {
  * Name Checker
  */
 Route::group(['prefix' => 'name/check'], function() {
-	get('/', 'UtilityController@getNameCheck');
-	post('/', 'UtilityController@postNameCheck');
+	get('/', 'NameCheckerController@getIndex');
+	post('/', 'NameCheckerController@postCheck');
 });
 
 /**
