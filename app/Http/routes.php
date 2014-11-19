@@ -373,6 +373,14 @@ Route::group(['prefix' => 'news'], function() {
 });
 
 /**
+ * Notifications
+ */
+Route::group(['middleware' => 'auth', 'prefix' => 'notifications'], function() {
+	get('/', 'NotificationController@getIndex');
+	get('{id}-at{time}', 'NotificationController@getView');
+});
+
+/**
  * Play
  */
 Route::group(['prefix' => 'play'], function() {
