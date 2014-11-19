@@ -91,16 +91,16 @@ class String{
 	 *
 	 * @return string
 	 */
-	public static function color($str,$roleInfo){
-		$roles=new RoleRepository(new Role);
-		if(ctype_digit($roleInfo))
-			$role=$roles->getById($roleInfo);
+	public static function color($str, $roleInfo, $img = true){
+		$roles = new RoleRepository(new Role);
+		if(is_numeric($roleInfo))
+			$role = $roles->getById($roleInfo);
 		else
-			$role=$roles->getByName($roleInfo);
+			$role = $roles->getByName($roleInfo);
 		if($role)
-			return "<span class='members-".$role->class_name."'>".$str."</a>";
+			return "<span class='members-" . $role->class_name . "" . ($img ? "" : "-no-img") . "'>" . $str . "</a>";
 		else
-			\Log::warning('Utilities\Link::color - '.$roleInfo.' does not exist.');
+			\Log::warning('Utilities\Link::color - ' . $roleInfo . ' does not exist.');
 		return $str;
 	}
 

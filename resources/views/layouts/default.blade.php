@@ -59,7 +59,7 @@ if(!Auth::check())
 	];
 else
 	$navLogged = [
-		Auth::user()->display_name => [
+		\Link::name(Auth::user()->id) => [
 			'profile/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
 			'settings'  => Lang::get('navbar.logged.in.my_settings'),
 			'messenger' => Lang::get('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messages.'</span>',
@@ -156,8 +156,8 @@ $current = $nav;
 @foreach($navLogged as $url => $name)
 	@if(is_array($name))
 						<li class='dropdown{{ $url == $current ? " active" : "" }}'>
-							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-								{{ $url }} {!! $notifications > 0 ? "<span class='badge badge-important'>" . $notifications . "</span>" : "" !!}<span class='caret'></span>
+							<a href='#' class='dropdown-toggle members-{{ \Auth::user()->importantRole()->class_name }}' data-toggle='dropdown'>
+								{{ \Auth::user()->display_name }} {!! $notifications > 0 ? "<span class='badge badge-important'>" . $notifications . "</span>" : "" !!}<span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
 		@foreach($name as $url2 => $name2)
