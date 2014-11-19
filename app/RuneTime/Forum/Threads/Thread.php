@@ -39,6 +39,10 @@ class Thread extends Entity {
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function user() {
+		return $this->author;
+	}
+
+	public function author() {
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
@@ -148,5 +152,9 @@ class Thread extends Entity {
 				return false;
 		}
 		return true;
+	}
+
+	public function toSlug() {
+		return '/forums/thread/' . \String::slugEncode($this->id, $this->title);
 	}
 }
