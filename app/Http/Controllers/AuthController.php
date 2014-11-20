@@ -83,7 +83,7 @@ class AuthController extends BaseController {
 			return $this->view('errors.signup.taken');
 		$hash = \Hash::make($form->password);
 		$rank = $this->ranks->getByPostCount(0);
-		$user = with(new User)->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, 0, $rank->id, '', '', '', '', '', '', '', '', '');
+		$user = with(new User)->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, 0, $rank->id, '', '', '', '', '', '', '', '', '', '', '');
 		$user->setRole('Members');
 		\Auth::loginUsingId($user->id);
 		return \redirect()->to('/');

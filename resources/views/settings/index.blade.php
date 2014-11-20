@@ -86,7 +86,7 @@
 									@lang('settings.profile.location')
 								</label>
 								<div class='col-lg-10'>
-									<input type='text' id='location' name='location' />
+									<input type='text' id='location' name='location' value='{{ \Auth::user()->location }}' />
 								</div>
 							</div>
 							<div class='form-group'>
@@ -94,7 +94,7 @@
 									@lang('settings.profile.interests')
 								</label>
 								<div class='col-lg-10'>
-									<input type='text' id='interests' name='interests' />
+									<input type='text' id='interests' name='interests' value='{{ \Auth::user()->interests }}' />
 								</div>
 							</div>
 							<div class='form-group'>
@@ -102,7 +102,7 @@
 									@lang('settings.profile.referred_by.name'):
 								</label>
 								<div class='col-lg-10'>
-									<input type='text' id='referred_by' name='referred_by' />
+									<input type='text' id='referred_by' name='referred_by' value='{{ \Auth::user()->referred_by }}' />
 									<span class='help-block'>
 										@lang('settings.profile.referred_by.note')
 									</span>
