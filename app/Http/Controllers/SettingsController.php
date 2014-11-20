@@ -113,8 +113,10 @@ class SettingsController extends BaseController {
 		$file = \Request::file('photo');
 		if(substr($file->getMimeType(), 0, 6) == 'image/') {
 			$img = \Img::make($form->file('photo'));
-			unlink('./img/forums/photos/' . \Auth::user()->id . '.png');
-			$img->save('./img/forums/photos/' . \Auth::user()->id . '.png');
+			$path = './img/forums/photos/' . \Auth::user()->id . '.png';
+			if(file_exists($path))
+				unlink($path);
+			$img->save($path);
 		}
 		return \redirect()->to('/settings/photo');
 	}
