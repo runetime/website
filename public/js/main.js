@@ -342,13 +342,20 @@ function RuneTime() {
 			});
 		};
 		this.updateLevel = function updateLevel() {
-			var level = 0;
-			var attacks = Math.ceil(this.val('attack') + this.val('strength'), 2 * this.val('magic'), 2 * this.val('ranged'));
-			var defences = this.val('defence') + this.val('constitution');
-			var other = (.5 * this.val('prayer')) + (.5 * this.val('summoning'));
-			level = Math.floor((1/4) * (
-				(13/10) * attacks + defences + other
-			));
+			var level = 0,
+				melee = 0,
+				magic = 0,
+				ranged = 0,
+				def = 0,
+				other = 0;
+			melee = this.val('attack') + this.val('strength');
+			magic = 2 * this.val('magic');
+			ranged = 2 * this.val('ranged');
+			def = this.val('defence') + this.val('constitution');
+			other = (.5 * this.val('prayer')) + (.5 * this.val('summoning'));
+			level = (13/10) * Math.max(melee, magic, ranged) + def + other;
+			level *= .25;
+			level = Math.floor(level);
 			$(RuneTime.CombatCalculator.generate.level).html(level);
 		};
 		this.val = function val(name) {
