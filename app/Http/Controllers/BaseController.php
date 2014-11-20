@@ -81,9 +81,10 @@ class BaseController extends Controller {
 	 *
 	 */
 	private function updateCache() {
+		\Cache::forever('activity.users', []);
 		$current = [
 			'url' => \Request::url(),
-			'time' => time(),
+			'time' => \Carbon::parse(time()),
 			'title' => $this->title,
 			'logged' => \Auth::check()
 		];
