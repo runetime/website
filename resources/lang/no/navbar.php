@@ -41,7 +41,7 @@ return [
 	'staff' => [
 		'staff'         => 'Personal Senter',
 		'gallery'       => 'Galleri',
-		'ticket'        => 'Billett System',
+		'ticket'        => 'Ticket System',
 		'checkup'       => 'Staff Checkup',
 		'administrator' => 'Administrator Panel',
 		'moderation'    => 'Moderator Panel',
