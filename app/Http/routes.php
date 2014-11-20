@@ -427,7 +427,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'settings'], function() {
 	get('runescape', 'SettingsController@getRunescape');
 	post('runescape', 'SettingsController@postRunescape');
 	get('signature', 'SettingsController@getSignature');
-	post('signature', 'SettingsCOntroller@postSignature');
+	post('signature', 'SettingsController@postSignature');
 	get('social', 'SettingsController@getSocial');
 	post('social', 'SettingsController@postSocial');
 });
