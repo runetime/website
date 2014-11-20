@@ -66,7 +66,7 @@ class SignatureController extends BaseController {
 			's' => $style,
 		];
 		$hash = implode(";", $args);
-		$location = 'http://runetime.com/signatures/h' . $hash;
+		$location = url('signatures/h' . $hash);
 		$this->bc(['signatures' => 'Signature Generator', '#1' => $username, 'signatures/username=' . $username . '/type=' . $type => ucwords($type)]);
 		$this->nav('RuneTime');
 		$this->title('Finished Signature');
