@@ -12,7 +12,7 @@
 								<h3>
 									{{ $newsPiece->title }}
 								</h3>
-								<span class='text-muted'>{{ Time::long($newsPiece->id) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
+								<span class='text-muted'>{{ \Time::long($newsPiece->created_at) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
 								<p>
 									{!! $newsPiece->contents_parsed !!}
 								</p>
@@ -39,7 +39,7 @@
 @foreach($statuses as $status)
 						<div class='card row row-flat'>
 							<div class='col-xs-3 col-md-2 padding-none'>
-								<img src='/img/forums/photos/{{ $status->author->id }}.png' class='img-responsive center-block' />
+								{!! \Image::userPhoto($status->author->id, ['center-block']) !!}
 							</div>
 							<div class='col-xs-9 col-md-10 clearfix'>
 								<div class='pull-right'>
