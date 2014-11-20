@@ -30,4 +30,12 @@ class Status extends Entity {
 	public function addPost(Post $post) {
 		$this->posts()->attach([$post->id]);
 	}
+
+	/**
+	 *
+	 */
+	public function incrementReplies() {
+		$this->increment('reply_count');
+		$this->save();
+	}
 }
