@@ -64,9 +64,14 @@ class RadioController extends BaseController {
 	 * @return mixed
 	 */
 	public function getHistory() {
-		$history = $this->history->getRecentX()->toArray();
-		foreach($history as $key => $value)
-			$history[$key]['created_at'] = \Time::getEpoch($value['created_at']);
+		$historySet = $this->history->getRecentX();
+		$history = [];
+		foreach($historySet as $x => $value) {
+			$history[$x] = [];
+			$history[$x]['created_at'] = $value->created_at->timestamp;
+			$history[$x]['artist'] = $value->artist;
+			$history[$x]['song'] = $value->song;
+		}
 		header('Content-Type: application/json');
 		return json_encode($history);
 	}
