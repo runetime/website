@@ -20,6 +20,9 @@
 							<input id='password' class='form-control' type='password' name='password' required />
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
+							<span class='help-block'>
+								Forgot your password?  <a href='/password/reset'>Click here to reset it.</a>
+							</span>
 						</div>
 					</div>
 					<div class='form-group'>
