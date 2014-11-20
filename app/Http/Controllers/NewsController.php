@@ -77,9 +77,18 @@ class NewsController extends BaseController {
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$news = new News;
 		$news = $news->saveNew(\Auth::user()->id, $form->name, $form->contents, $contentsParsed, 0, News::STATUS_PUBLISHED);
-		if($form->hasFile('image') && $form->file('image')->isValid())
-			$form->file('image')->move('./img/news/' . $news->id . '.png');
-
+		if(\Request::hasFile('image')) {
+			\Img::make($form->file('image'))->save();
+			$thumbnail = \Img::make($form->file('image'));
+			$h = $thumbnail->height();
+			$w = $thumbnail->width();
+			$max = max($h, $w);
+			$scale = $max / 200;
+			$h /= $scale;
+			$w /= $scale;
+			$thumbnail->resize((int) $w, (int) $h);
+			$thumbnail->save('./img/news/thumbnail/' . $news->id . '.png');
+		}
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
 			$tag = $this->tags->getByName($tagName);
