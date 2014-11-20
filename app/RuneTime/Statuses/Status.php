@@ -29,7 +29,7 @@ class Status extends Entity {
 	 */
 	public function addPost(Post $post) {
 		$this->posts()->attach([$post->id]);
-		$this->increment();
+		$this->incrementReplies();
 	}
 
 	/**
