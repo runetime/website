@@ -83,7 +83,7 @@ class BaseController extends Controller {
 	private function updateCache() {
 		$current = [
 			'url' => \Request::url(),
-			'time' => \Carbon::parse(time()),
+			'time' => \Carbon::createFromTimestamp(time()),
 			'title' => $this->title,
 			'logged' => \Auth::check()
 		];
