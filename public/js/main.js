@@ -170,7 +170,9 @@ function RuneTime() {
 			this.displayMessages();
 		};
 		this.displayMessages = function displayMessages() {
-			var startingPoint = $(this.messages).size()-20;
+			var startingPoint = $(this.messages).size() - 20;
+			if(startingPoint < 0)
+				startingPoint = 0;
 			var messages = $(this.messages).slice(startingPoint);
 			$(this.elements.messages).html('');
 			$.each(messages, function(index, message) {
@@ -208,7 +210,6 @@ function RuneTime() {
 			});
 		};
 		this.update = function update() {
-			var delta = RuneTime.Utilities.currentTime() - this.times.lastRefresh;
 			var data = {
 				id: this.lastId,
 				channel: this.channel
