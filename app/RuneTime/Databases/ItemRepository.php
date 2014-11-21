@@ -14,17 +14,6 @@ class ItemRepository extends EloquentRepository {
 	}
 
 	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function getById($id) {
-		return $this->model->
-		where('id', '=', $id)->
-		first();
-	}
-
-	/**
 	 * @param $membership
 	 * @param $tradable
 	 * @param $questItem

@@ -12,19 +12,6 @@ class MessageRepository extends EloquentRepository {
 		$this->model = $model;
 	}
 
-	/**
-	 * @param $messageId
-	 *
-	 * @internal param $threadId
-	 *
-	 * @return mixed
-	 */
-	public function getById($messageId) {
-		return $this->model->
-		where('id', '=', $messageId)->
-		first();
-	}
-
 	public function getByUser($userId) {
 
 	}

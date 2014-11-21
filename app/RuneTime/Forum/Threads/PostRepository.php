@@ -10,17 +10,6 @@ class PostRepository extends EloquentRepository {
 	}
 
 	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function getById($id) {
-		return $this->model->
-			where('id', '=', $id)->
-			first();
-	}
-
-	/**
 	 * @param     $thread
 	 * @param int $amount
 	 * @param int $page

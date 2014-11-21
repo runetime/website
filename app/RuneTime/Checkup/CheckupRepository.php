@@ -14,17 +14,6 @@ class CheckupRepository extends EloquentRepository {
 	}
 
 	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function getById($id) {
-		return $this->model->
-			where('id', '=', $id)->
-			first();
-	}
-
-	/**
 	 * @param        $amount
 	 * @param string $order
 	 * @param int    $skip

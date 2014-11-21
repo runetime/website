@@ -11,17 +11,6 @@ class ThreadRepository extends EloquentRepository {
 	}
 
 	/**
-	 * @param $threadId
-	 *
-	 * @return mixed
-	 */
-	public function getById($threadId) {
-		return $this->model->
-			where('id', '=', $threadId)->
-			first();
-	}
-
-	/**
 	 * @param        $subforumId
 	 * @param int    $page
 	 * @param string $orderBy
