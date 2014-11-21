@@ -5,27 +5,27 @@
 @endif
 					<div class='col-xs-12 col-sm-6 col-md-7'>
 						<h3>
-							<a href='/forums/{{\String::slugEncode($subforumItem->id, $subforumItem->name)}}'>
-								{{$subforumItem->name}}
+							<a href='{{ $subforum->toSlug() }}'>
+								{{ $subforum->name }}
 							</a>
 						</h3>
-						{{$subforumItem->description}}
+						{{ $subforum->description }}
 					</div>
 					<div class='col-xs-12 col-sm-6 col-md-2'>
-						{{$subforumItem->thread_count}} threads
+						{{ $subforum->thread_count }} threads
 						<br />
-						{{$subforumItem->post_count}} posts
+						{{ $subforum->post_count }} posts
 					</div>
 					<div class='col-xs-12 col-sm-12 col-md-3'>
-		@if(!empty($subforumItem->last_post_info) && !empty($subforumItem->last_thread_info))
-						<a href='/forums/thread/{{\String::slugEncode($subforumItem->last_thread_info->id, $subforumItem->last_thread_info->title)}}' title='{{$subforumItem->last_thread_title}}'>
-							{{$subforumItem->last_thread_info->title}}
+		@if(!empty($subforum->lastPost()))
+						<a href='{{ $subforum->lastThread()->toSlug() }}' title='{{ $subforum->lastThread()->title }}'>
+							{{$subforum->lastThread()->title}}
 						</a>
 						<br />
-						by {!!\Link::name($subforumItem->last_post_info->author_id)!!}
+						by {!! \Link::name($subforum->lastPost()->author_id) !!}
 						<br />
-						<a href='/forums/thread/{{\String::slugEncode($subforumItem->last_thread_info->id, $subforumItem->last_thread_info->title)}}/last-post' title='{{$subforumItem->last_thread_title}}'>
-							{!!\Time::shortReadable($subforumItem->last_post_info->created_at)!!}
+						<a href='{{ $subforum->lastThread()->toSlug() }}/last-post' title='{{ $subforum->lastThread()->title }}'>
+							{!! \Time::shortReadable($subforum->lastPost()->created_at) !!}
 						</a>
 		@endif
 					</div>

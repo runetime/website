@@ -1,5 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Subforums;
+use App\RuneTime\Forum\Threads\Thread;
+use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\Runis\Core\Entity;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Post;
@@ -13,6 +15,9 @@ class Subforum extends Entity{
 	const STATUS_PUBLISHED = 1;
 	const THREADS_PER_PAGE = 20;
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function threads() {
 		return $this->hasMany('App\RuneTime\Forum\Threads\Thread', 'subforum_id');
 	}
@@ -21,8 +26,19 @@ class Subforum extends Entity{
 	 * @return mixed
 	 */
 	public function lastPost() {
-		$posts = new PostRepository(new Post);
-		return $posts->getById($this->last_post);
+		if(!$this->cachePosts)
+			$this->cachePosts = with(new PostRepository(new Post))->getByid($this->last_post);
+		return $this->cachePosts;
+	}
+
+	/**
+	 * @return bool|mixed
+	 */
+	public function lastThread() {
+		$post = $this->lastPost();
+		if(!$this->cacheThreads)
+			$this->cacheThreads = with(new ThreadRepository(new Thread()))->getById($post->thread[0]->id);
+		return $this->cacheThreads;
 	}
 
 	/**
@@ -41,5 +57,21 @@ class Subforum extends Entity{
 				return true;
 		}
 		return true;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function toSlug() {
+		return '/forums/' . \String::slugEncode($this->id, $this->name);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function canPost() {
+		if(\Auth::check() && $this->posts_enabled === true)
+			return true;
+		return false;
 	}
 }

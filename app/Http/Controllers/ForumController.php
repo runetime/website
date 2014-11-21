@@ -9,7 +9,6 @@ use App\Http\Requests\Forums\ReplyRequest;
 use App\Http\Requests\Forums\ThreadCreateForm;
 use App\Http\Requests\Forums\ThreadCreateRequest;
 use App\RuneTime\Forum\Reports\Report;
-use App\RuneTime\Forum\Subforums\Subforum;
 use App\RuneTime\Forum\Subforums\SubforumRepository;
 use App\RuneTime\Forum\Tags\Tag;
 use App\RuneTime\Forum\Tags\TagRepository;
@@ -66,18 +65,14 @@ class ForumController extends BaseController {
 		foreach($subforums as $subforum) {
 			if(!isset($subforumList[$subforum->parent]))
 				$subforumList[$subforum->parent] = [];
-			$subforum->last_post_info = $this->posts->getById($subforum->last_post);
-			if(!empty($subforum->last_post_info))
-				$subforum->last_thread_info = $this->threads->getById($subforum->last_post_info->thread[0]->id);
 			array_push($subforumList[$subforum->parent], $subforum);
 		}
-		$forumInfo = [
-			'posts' => $this->posts->getCount(),
-			'members' => $this->users->getCount(),
-			'latest' => $this->users->getLatest(),
-			'mostOnline' => \Cache::get('activity.most'),
-		];
-		$recentThreads = $this->threads->getX(5, 'desc');
+		$forumInfo = new \stdClass;
+		$forumInfo->posts = $this->posts->getCount();
+		$forumInfo->members = $this->users->getCount();
+		$forumInfo->latest = $this->users->getLatest();
+		$forumInfo->mostOnline = \Cache::get('activity.most');
+		$recentThreads = $this->threads->getX(5);
 		$recentPosts = $this->posts->hasThread(5);
 		$activity = \Cache::get('activity.users');
 		$this->nav('navbar.forums');
@@ -93,45 +88,15 @@ class ForumController extends BaseController {
 	 */
 	public function getSubforum($id, $page = 1) {
 		$subforum = $this->subforums->getById($id);
-		if($page == "»")
-			$page = ceil($this->threads->getCountInSubforum($subforum->id) / Subforum::THREADS_PER_PAGE);
-		if($page == "«")
-			$page = 1;
-		if($page == 0)
-			$page = 1;
 		if(\Auth::check())
 			\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time() + 1);
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
-		// Subforums
-		$subforumList = [];
-		foreach($subforums as $subforumItem) {
-			$subforumItem->last_post_info = $this->posts->getById($subforumItem->last_post);
-			if(!empty($subforumItem->last_post_info))
-				$subforumItem->last_thread_info = $this->threads->getById($subforumItem->last_post_info->thread[0]->id);
-			array_push($subforumList, $subforumItem);
-		}
 		$hasMod = false;
 		if(\Auth::check())
-			$hasMod = \Auth::user()->hasOneOfRoles(1, 10, 11);
+			$hasMod = \Auth::user()->isCommunity();
 		// Threads
 		$threadsPinned = $this->threads->getBySubforum($subforum->id, $page, 'last_post', true);
-		$threadListPrior = [];
-		foreach($threadsPinned as $thread)
-			array_push($threadListPrior, $thread);
-		foreach($threads as $thread)
-			array_push($threadListPrior, $thread);
-		$threadList = [];
-		foreach($threadListPrior as $thread) {
-			$thread->last_post_info = $this->posts->getById($thread->last_post);
-			if($hasMod) {
-				$thread->modControls = new \stdClass;
-				$thread->modControls->pin = $thread->getStatusPinSwitch();
-				$thread->modControls->lock = $thread->getStatusLockSwitch();
-				$thread->modControls->hidden = $thread->getStatusHiddenSwitch();
-			}
-			array_push($threadList, $thread);
-		}
 		// Breadcrumbs
 		$bc = [];
 		$parent = $this->subforums->getById($subforum->parent);
@@ -139,37 +104,36 @@ class ForumController extends BaseController {
 			if(!empty($parent)) {
 				$bc['forums/' . \String::slugEncode($parent->id, $parent->name)] = $parent->name;
 				$parent = $this->subforums->getById($parent->parent);
-			} else
+			} else {
 				break;
+			}
 		}
 		$bc['forums'] = 'Forums';
-		$bc = array_reverse($bc);
-		$this->bc($bc);
+		$this->bc(array_reverse($bc));
 		$this->nav('navbar.forums');
 		$this->title($subforum->name);
-		return $this->view('forums.subforum.view', compact('subforum', 'subforumList', 'threadList'));
+		return $this->view('forums.subforum.view', compact('subforum', 'subforums', 'threads', 'threadsPinned'));
 	}
 
 	/**
 	 * @param     $id
+	 * @param     $name
 	 * @param int $page
 	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getThread($id, $name, $page = 1) {
-		$page = (int) $page;
 		$thread = $this->threads->getById($id);
 		if(!$thread)
 			\App::abort(404);
 		if(\Auth::check())
 			\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time() + 1);
 		$thread->incrementViews();
-		$subforum = $this->subforums->getbyId($thread->subforum_id);
+		$subforum = $thread->subforum;
 		$posts = $thread->posts();
 		if(!\Auth::check() || !\Auth::user()->isCommunity())
 			$posts = $posts->where('status', '=', Post::STATUS_VISIBLE);
 		$posts = $posts->skip(($page - 1) * Thread::POSTS_PER_PAGE)->take(Thread::POSTS_PER_PAGE)->get();
-		// Posts
 		// Breadcrumbs
 		$bc = [];
 		$subforumParent = $subforum;
@@ -181,10 +145,9 @@ class ForumController extends BaseController {
 				break;
 			}
 		}
-		$bc['forums/'] = 'Forums';
-		$bc = array_reverse($bc);
 		$pages = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
-		$this->bc($bc);
+		$bc['forums/'] = 'Forums';
+		$this->bc(array_reverse($bc));
 		$this->nav('navbar.forums');
 		$this->title($thread->title);
 		return $this->view('forums.thread.view', compact('thread', 'posts', 'page', 'pages'));
@@ -196,7 +159,7 @@ class ForumController extends BaseController {
 			return \App::abort(404);
 		$page = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
 		$post = $thread->lastPost();
-		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title) . '/page=' . $page . '/#post' . $post->id);
+		return \redirect()->to($thread->toSlug() . '/page=' . $page . '/#post' . $post->id);
 	}
 
 	/**
@@ -231,42 +194,24 @@ class ForumController extends BaseController {
 	public function postThreadCreate(ThreadCreateRequest $form) {
 		$subforum = $this->subforums->getById($form->subforum);
 		if(empty($subforum))
-			return $this->view('errors.forums.subforum.missing');
+			\App::abort(404);
 		$poll = -1;
-		$thread = new Thread;
-		$thread = $thread->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE);
-		$post = new Post;
-		$post = $post->createNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
+		$thread = with(new Thread)->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE);
+		$post = with(new Post)->createNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
 		$thread->last_post = $post->id;
 		$thread->save();
 		$thread->addPost($post);
-		$post->save();
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
 			$tag = $this->tags->getByName($tagName);
-			if(empty($tag)) {
-				$tag = new Tag;
-				$tag = $tag->saveNew(\Auth::user()->id, $tagName);
-			} else {
-				$tag = $this->tags->getByName($tagName);
-			}
+			if(empty($tag))
+				$tag = with(new Tag)->saveNew(\Auth::user()->id, $tagName);
 			$thread->addTag($tag);
 		}
 		$this->subforums->incrementPosts($subforum->id);
-		$this->subforums->updateLastPost($post->id, (int)$subforum->id);
+		$this->subforums->updateLastPost($post->id, $subforum->id);
 		$this->subforums->incrementThreads($subforum->id);
-		return \redirect()->to('forums/thread/' . \String::slugEncode($thread->id, $thread->title));
-	}
-
-	/**
-	 * @param $id
-	 */
-	public function getThreadEdit($id) {
-		$thread = $this->threads->getById($id);
-		if(!$thread)
-			\App::abort(404);
-		if($thread->author_id != \Auth::user()->id)
-			\App::abort(403);
+		return \redirect()->to($thread->toSlug());
 	}
 
 	/**
@@ -276,11 +221,11 @@ class ForumController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postReply($id, ReplyRequest $form) {
-		$thread = Thread::find($id);
+		$thread = $this->threads->getById($id);
 		if(empty($thread))
 			\App::abort(404);
 		$parsedContents = with(new \Parsedown)->text($form->contents);
-		$post = with(new Post)->createNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
+		$post = with(new Post)->createNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$thread->addPost($post);
 		$thread->updateLastPost($post);
 		$thread->incrementPosts();
@@ -306,9 +251,7 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$news = $tag->news;
 		$threads = $tag->threads;
-		// Breadcrumbs
-		$bc = ['forums/' => 'Forums'];
-		$this->bc($bc);
+		$this->bc(['forums/' => 'Forums']);
 		$this->nav('navbar.forums');
 		$this->title('Tag: ' . $tag->name);
 		return $this->view('forums.tags.view', compact('tag', 'news', 'threads'));
@@ -363,12 +306,13 @@ class ForumController extends BaseController {
 				}
 			}
 		}
+		$post->rep += $rep;
+		$post->save();
 		if($vote) {
 			$vote->status = $newStatus;
 			$vote->save();
 		} else {
-			$vote = new Vote;
-			$vote = $vote->saveNew(\Auth::user()->id, $post->id, $newStatus);
+			with(new Vote)->saveNew(\Auth::user()->id, $post->id, $newStatus);
 		}
 
 		// Poster's reputation
@@ -385,10 +329,8 @@ class ForumController extends BaseController {
 	 */
 	public function postPostReport(PostReportRequest $form) {
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$report = new Report;
-		$report = $report->saveNew(\Auth::user()->id, $form->id, Report::TYPE_POST, Report::STATUS_OPEN);
-		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$report = with(new Report)->saveNew(\Auth::user()->id, $form->id, Report::TYPE_POST, Report::STATUS_OPEN);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$report->addPost($post);
 		return \redirect()->to('/forums');
 	}
@@ -415,7 +357,6 @@ class ForumController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postPostEdit($id, PostEditRequest $form) {
-		$id = (int) $id;
 		$post = $this->posts->getById($id);
 		if(empty($post))
 			\App::abort(404);
@@ -438,6 +379,6 @@ class ForumController extends BaseController {
 		$thread = $this->threads->getById($post->thread[0]->id);
 		$post->status = Post::STATUS_INVISIBLE;
 		$post->save();
-		return \redirect()->to('/forums/thread/' . \String::slugEncode($thread->id, $thread->title));
+		return \redirect()->to($thread->toSlug());
 	}
 }

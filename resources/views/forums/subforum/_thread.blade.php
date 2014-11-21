@@ -37,7 +37,7 @@
 @endforeach
 		</div>
 		<div class='pull-right'>
-@if(!empty($thread->modControls))
+@if(\Auth::check() && \Auth::user()->isCommunity())
 			<div class='btn-group btn-group-dark'>
 				<button type='button' class='btn'>Mod</button>
 				<button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
@@ -51,17 +51,17 @@
 						</a>
 					</li>
 					<li>
-						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->modControls->pin }}'>
+						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->getStatusPinSwitch() }}'>
 							Switch Pin
 						</a>
 					</li>
 					<li>
-						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->modControls->lock }}'>
+						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->getStatusLockSwitch() }}'>
 							Switch Lock
 						</a>
 					</li>
 					<li>
-						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->modControls->hidden }}'>
+						<a href='/staff/moderation/thread/{{ \String::slugEncode($thread->id, $thread->title) }}/status={{ $thread->getStatusHiddenSwitch() }}'>
 							Switch Visibility
 						</a>
 					</li>

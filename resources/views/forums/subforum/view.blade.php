@@ -6,19 +6,10 @@
 				<p class='text-muted'>
 					{!! $subforum->description !!}
 				</p>
-				<div class='pull-left'>
-				</div>
 				<div class='pull-right'>
 					<ul class='list-inline'>
 						<li>
-							<i class='fa fa-check'></i> Mark Read
-						</li>
-						<li>
-@if(\Auth::check() && $subforum->posts_enabled == true)
-							<a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm' role='button'>
-@else
-							<a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm disabled' role='button'>
-@endif
+							<a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm{{ !$subforum->canPost() ? " btn-disabled" : "" }}' role='button'>
 								Start New Topic
 							</a>
 						</li>
@@ -26,13 +17,18 @@
 				</div>
 				<div class='clearfix'>
 				</div>
-@if(!empty($subforumList))
-	@foreach($subforumList as $subforumItem)
-		@include('forums.subforum._subforum', ['subforumItem' => $subforumItem])
+@if(count($subforums) > 0)
+	@foreach($subforums as $subforumItem)
+		@include('forums.subforum._subforum', ['subforum' => $subforumItem])
 	@endforeach
 @endif
-@if(!empty($threadList))
-	@foreach($threadList as $thread)
+@if(count($threadsPinned) > 0)
+	@foreach($threadsPinned as $thread)
+		@include('forums.subforum._thread', ['thread' => $thread])
+	@endforeach
+@endif
+@if(count($threads) > 0)
+	@foreach($threads as $thread)
 		@include('forums.subforum._thread', ['thread' => $thread])
 	@endforeach
 @endif

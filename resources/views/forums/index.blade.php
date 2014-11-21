@@ -14,7 +14,7 @@
 						</h3>
 		@foreach($subforumList[$subforums->id] as $subforum)
 			@if(empty(json_decode($subforum->roles)) || \Auth::check() && in_array(\Auth::user()->importantRole()->id, json_decode($subforum->roles)))
-				@include('forums.subforum._subforum', ['subforumItem' => $subforum])
+				@include('forums.subforum._subforum', ['subforum' => $subforum])
 			@endif
 		@endforeach
 	@endif
@@ -56,19 +56,19 @@
 					<div class='col-xs-12 text-center'>
 						<ul class='list-inline'>
 							<li>
-								<span class='label label-dark'>{{ $forumInfo['posts'] }}</span> @lang('forums.bar.total_posts')
+								<span class='label label-dark'>{{ $forumInfo->posts }}</span> @lang('forums.bar.total_posts')
 							</li>
 							<li>
-								<span class='label label-dark'>{{ $forumInfo['members'] }}</span> @lang('forums.bar.total_members')
+								<span class='label label-dark'>{{ $forumInfo->members }}</span> @lang('forums.bar.total_members')
 							</li>
 							<li>
 								<span class='label label-dark'>
-@if(!empty($forumInfo['latest']->id))
-									{!! \Link::name($forumInfo['latest']->id) !!}</span> newest member
+@if(!empty($forumInfo->latest->id))
+									{!! \Link::name($forumInfo->latest->id) !!}</span> newest member
 @endif
 							</li>
 							<li>
-								<span class='label label-dark'>{{ $forumInfo['mostOnline'] }}</span> @lang('forums.bar.most_online')
+								<span class='label label-dark'>{{ $forumInfo->mostOnline }}</span> @lang('forums.bar.most_online')
 							</li>
 						</ul>
 					</div>
