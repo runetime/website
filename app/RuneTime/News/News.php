@@ -42,8 +42,18 @@ class News extends Entity{
 		$this->posts()->attach([$post->id]);
 	}
 
+	/**
+	 *
+	 */
 	public function incrementPosts() {
 		$this->increment('post_count');
 		$this->save();
+	}
+
+	public function hasImage() {
+		$path = 'img/news/thumbnail/' . $this->id . '.png';
+		if(file_exists('./' . $path))
+			return $path;
+		return false;
 	}
 }

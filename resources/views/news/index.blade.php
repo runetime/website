@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper'>
+			<div class='wrapper wrapper-none-res'>
 				<h1>
 					News
 				</h1>
@@ -15,29 +15,9 @@
 					</ul>
 				</div>
 @endif
+			</div>
 @foreach($news as $newsPiece)
-				<div class='news'>
-					<h3>
-						{{ $newsPiece->title }}
-					</h3>
-					<span class='text-muted'>{{ \Time::long($newsPiece->id) }}</span> by {!! \Link::name($newsPiece->author_id) !!}
-					</span>
-					<p>
-						{!! $newsPiece->contents_parsed !!}
-					</p>
-					<ul class='list-inline'>
-						<li>
-							<a href='{{ \Link::URL('news/'.String::slugEncode($newsPiece->id,$newsPiece->title)) }}' title='{{ $newsPiece->title }}'>
-								Read More
-							</a>
-						</li>
-						<li>
-							<a href='{{ \Link::URL('news/'.String::slugEncode($newsPiece->id,$newsPiece->title).'#comments') }}' title='{{ $newsPiece->comments }} comments'>
-								{{ $newsPiece->post_count }} comments
-							</a>
-						</li>
-					</ul>
-				</div>
+	@include('news._show', ['news' => $newsPiece])
 @endforeach
 			</div>
 @stop

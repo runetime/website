@@ -9,6 +9,9 @@
 @foreach($news as $newsPiece)
 						<div class='news'>
 							<div class='holo-box-dark'>
+@if($newsPiece->hasImage())
+								<img src='/img/news/thumbnail/{{ $newsPiece->id }}.png' alt='{{ $newsPiece->title }}' class='pull-right img-news img-responsive' />
+@endif
 								<h3>
 									{{ $newsPiece->title }}
 								</h3>
