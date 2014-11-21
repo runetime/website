@@ -43,9 +43,10 @@ class String{
 	public static function slugEncode(){
 		$args = func_get_args();
 		$slug = "";
-		foreach($args as $x => $arg){
-			$arg = str_replace("?", "", $arg);
-			$slug .= strtolower(str_replace(" ", "-", $arg));
+		foreach($args as $x => $arg) {
+			$from = ['?', ' '];
+			$to = [' ', '-'];
+			$slug .= strtolower(str_ireplace($from, $to, $arg));
 			if($x < count($arg))
 				$slug .= "-";
 		}
@@ -134,7 +135,7 @@ class String{
 	 * @return string
 	 */
 	public static function gender($genderId, $image = true) {
-		if($genderId == 0) $name = "Not Telling";
+		$name = "Not Telling";
 		if($genderId == 1) $name = "Female";
 		if($genderId == 2) $name = "Male";
 		return "<img src='/img/forums/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
