@@ -76,7 +76,6 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function postUpdate(UpdateRequest $form){
-		header('Content-Type: application/json');
 		if($form->id <= 0)
 			return json_encode([]);
 		$messages = $this->chat->getAfterId($form->id, $form->channel);
@@ -93,6 +92,7 @@ class ChatController extends BaseController{
 			$messageCurrent->uuid = uniqid(md5(microtime(true)), true);
 			array_push($messageList, $messageCurrent);
 		}
+		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
 	}
 
@@ -140,7 +140,7 @@ class ChatController extends BaseController{
 	 */
 	public function postCheckChannel(CheckChannelRequest $form){
 		$channel=$this->channels->getByNameTrim($form->channel);
-		$response=['valid' => false];
+		$response = ['valid' => false];
 		if($channel)
 			$response['valid'] = true;
 		header('Content-Type: application/json');
