@@ -31,6 +31,9 @@ class Thread extends Entity {
 		$this->posts()->attach([$post->id]);
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function subforum() {
 		return $this->belongsTo('App\RuneTime\Forum\Subforums\Subforum', 'subforum_id');
 	}
@@ -53,10 +56,16 @@ class Thread extends Entity {
 		return $this->belongsToMany('App\RuneTime\Forum\Tags\Tag');
 	}
 
+	/**
+	 * @param $tag
+	 */
 	public function addTag($tag) {
 		$this->tags()->attach([$tag->id]);
 	}
 
+	/**
+	 * @param Post $post
+	 */
 	public function updateLastPost(Post $post) {
 		$this->last_post = $post->id;
 		$this->save();
@@ -115,17 +124,29 @@ class Thread extends Entity {
 			return true;
 		return false;
 	}
+
+	/**
+	 * @return mixed
+	 */
 	public function getStatusLockSwitch() {
 		if($this->status < 4)
 			return $this->status + 4;
 		return $this->status - 4;
 	}
+
+	/**
+	 * @return mixed
+	 */
 	public function getStatusPinSwitch() {
 		if($this->status == 2 || $this->status == 3 || $this->status == 6 || $this->status == 7)
 			return $this->status - 2;
 		else
 			return $this->status + 2;
 	}
+
+	/**
+	 * @return mixed
+	 */
 	public function getStatusHiddenSwitch() {
 		if($this->status % 2 == 1)
 			return $this->status - 1;
@@ -154,6 +175,9 @@ class Thread extends Entity {
 		return true;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function toSlug() {
 		return '/forums/thread/' . \String::slugEncode($this->id, $this->title);
 	}
