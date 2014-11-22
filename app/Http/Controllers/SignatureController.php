@@ -39,11 +39,9 @@ class SignatureController extends BaseController {
 	 */
 	public function getStyle($username, $type) {
 		$imgs = [];
-		foreach(scandir('./img/signatures/backgrounds') as $filename) {
+		foreach(scandir('./img/signatures/backgrounds') as $filename)
 			$imgs[] = $filename;
-		}
-		unset($imgs[0]);
-		unset($imgs[1]);
+		unset($imgs[0], $imgs[1]);
 		$this->bc(['signatures' => 'Signature Generator', '#1' => $username]);
 		$this->nav('RuneTime');
 		$this->title('Style of Signature');
@@ -76,14 +74,13 @@ class SignatureController extends BaseController {
 	 */
 	public function getDisplay($slug) {
 		$path = './img/signatures/generated/' . $slug . '.png';
-		if(file_exists($path))
+		if(file_exists($path)) {
 			return \Img::make($path)->response();
-		else {
+		} else {
 			$info = explode(";", $slug);
 			$rsn = $info[0];
 			$scores = \String::getHiscore($rsn);
 			$image = $this->signatureStat($info, $scores);
-			// Put down the logo
 			$logo = \Img::make('./img/header.png')->resize(85, 24);
 			$image->insert($logo, 'bottom-right');
 			$image->save($path);
@@ -336,37 +333,37 @@ class SignatureController extends BaseController {
 	 * @return array
 	 */
 	private function skills() {
-		$skills = [];
-		$skills['attack'] = 'attack';
-		$skills['defence'] = 'defence';
-		$skills['strength'] = 'strength';
-		$skills['constitution'] = 'constitution';
-		$skills['ranged'] = 'ranged';
-		$skills['prayer'] = 'prayer';
-		$skills['magic'] = 'magic';
-		$skills['cooking'] = 'cooking';
-		$skills['woodcutting'] = 'woodcutting';
-		$skills['fletching'] = 'fletching';
-		$skills['fishing'] = 'fishing';
-		$skills['firemaking'] = 'firemaking';
-		$skills['crafting'] = 'crafting';
-		$skills['smithing'] = 'smithing';
-		$skills['mining'] = 'mining';
-		$skills['herblore'] = 'herblore';
-		$skills['agility'] = 'agility';
-		$skills['thieving'] = 'thieving';
-		$skills['slayer'] = 'slayer';
-		$skills['farming'] = 'farming';
-		$skills['runecrafting'] = 'runecrafting';
-		$skills['hunter'] = 'hunter';
-		$skills['construction'] = 'construction';
-		$skills['summoning'] = 'summoning';
-		$skills['dungeoneering'] = 'dungeoneering';
-		$skills['divination'] = 'divination';
-		$skills['overall'] = 'overall';
-		list($width, $height) = [20, 20];
+		$skills = [
+			'attack'        => 'attack',
+			'defence'       => 'defence',
+			'strength'      => 'strength',
+			'constitution'  => 'constitution',
+			'ranged'        => 'ranged',
+			'prayer'        => 'prayer',
+			'magic'         => 'magic',
+			'cooking'       => 'cooking',
+			'woodcutting'   => 'woodcutting',
+			'fletching'     => 'fletching',
+			'fishing'       => 'fishing',
+			'firemaking'    => 'firemaking',
+			'crafting'      => 'crafting',
+			'smithing'      => 'smithing',
+			'mining'        => 'mining',
+			'herblore'      => 'herblore',
+			'agility'       => 'agility',
+			'thieving'      => 'thieving',
+			'slayer'        => 'slayer',
+			'farming'       => 'farming',
+			'runecrafting'  => 'runecrafting',
+			'hunter'        => 'hunter',
+			'construction'  => 'construction',
+			'summoning'     => 'summoning',
+			'dungeoneering' => 'dungeoneering',
+			'divination'    => 'divination',
+			'overall'       => 'overall',
+		];
 		foreach($skills as $name => $dir)
-			$skills[$name] = \Img::make('./img/skills/' . $dir . '.png')->resize($width, $height);
+			$skills[$name] = \Img::make('./img/skills/' . $dir . '.png')->resize(20, 20);
 		return $skills;
 	}
 }
