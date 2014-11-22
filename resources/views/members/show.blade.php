@@ -71,27 +71,31 @@
 @include('partials._paginator', ['url' => '/members/role=' . $searchRole . '/prefix=' . $searchPrefix . '/order=' . $searchOrder])
 				<div class='row'>
 @foreach($members as $member)
-					<div class='col-xs-3 col-md-2 col-lg-1'>
-						<img src='/img/forums/photos/{{ $member->id }}.png' alt='Member Photo' class='img-responsive' />
-					</div>
-					<div class='col-xs-9 col-mg-10 col-lg-11'>
-						<div class='pull-left'>
-							{!! \Link::name($member->id) !!}
-							<br />
-							@lang('members.joined',['date' => Time::long($member->created_at)])
-							<br />
-							{!! \Link::colorRole($member->importantRole()->id) !!}
+					<div class='col-xs-12 row row-flat'>
+						<div class='col-xs-3 col-md-2 col-lg-1'>
+							{!! \Image::userPhoto($member->id, ['center-block']) !!}
 						</div>
-						<div class='pull-right'>
-							<ul class='list-inline'>
+						<div class='col-xs-9 col-md-10 col-lg-11'>
+							<div class='clearfix'>
+								<div class='pull-left'>
+									{!! \Link::name($member->id) !!}
+									<br />
+									@lang('members.joined',['date' => Time::long($member->created_at)])
+									<br />
+									{!! \Link::colorRole($member->importantRole()->id) !!}
+								</div>
+								<div class='pull-right'>
+									<ul class='list-inline'>
 @if(Auth::check())
-								<li>
-									<a href='/messenger/compose/to={{ \String::slugEncode($member->id, $member->display_name) }}' title='Message {{ $member->display_name }}'>
-										<i class='text-primary fa fa-inbox fa-3x'></i>
-									</a>
-								</li>
+										<li>
+											<a href='/messenger/compose/to={{ \String::slugEncode($member->id, $member->display_name) }}' title='Message {{ $member->display_name }}'>
+												<i class='text-primary fa fa-inbox fa-3x'></i>
+											</a>
+										</li>
 @endif
-							</ul>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 @endforeach
