@@ -24,9 +24,7 @@ class SignatureController extends BaseController {
 	public function postUsername(RSNRequest $form) {
 		$username = $form->username;
 		if(!\Cache::get('hiscores.' . $username))
-			\Queue::push(function() use ($username){
-				\Cache::put('hiscores.' . $username, \String::CURL('http://hiscore.runescape.com/index_lite.ws?player=' . $username), \Carbon::now()->addDay());
-			});
+			\String::getHiscore($username);
 		$this->bc(['signatures' => 'Signature Generator']);
 		$this->nav('RuneTime');
 		$this->title('Type of Signature');
@@ -105,8 +103,6 @@ class SignatureController extends BaseController {
 		$bg = \Img::make('./img/signatures/backgrounds/' . $info[2] . '.png');
 		$bg->resize(400, 150);
 		$img->insert($bg, 'top-left', 0, 0);
-		// Resize
-		list($width, $height) = getimagesize('./img/signatures/backgrounds/' . $info[2] . '.png');
 		$img->insert($skills['attack'], 'top-left', 12, 12);
 		$img->insert($skills['defence'], 'top-left', 12, 37);
 		$img->insert($skills['strength'], 'top-left', 12, 62);
