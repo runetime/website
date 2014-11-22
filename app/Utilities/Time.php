@@ -3,7 +3,7 @@ namespace App\Utilities;
 
 use Carbon\Carbon;
 
-class Time{
+class Time {
 	/**
 	 * @param $time
 	 *
@@ -12,7 +12,12 @@ class Time{
 	public static function carbon($time = 0) {
 		if(is_a($time, 'Carbon'))
 			return $time;
-		$date = \Carbon::parse($time);
+		if(is_numeric($time)) {
+			$date = \Carbon::createFromTimestamp($time);
+		}
+		else {
+			$date = \Carbon::parse($time);
+		}
 		if(self::isDST())
 			$date->addHour();
 		return $date;

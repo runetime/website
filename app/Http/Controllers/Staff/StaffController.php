@@ -48,7 +48,7 @@ class StaffController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getCheckup() {
-		$date = \Time::long(time());
+		$date = \Time::long(\Carbon::now());
 		$this->bc(['staff' => 'Staff']);
 		$this->nav('navbar.staff.staff');
 		$this->title('Staff Checkup');
