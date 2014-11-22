@@ -92,9 +92,6 @@ class ForumController extends BaseController {
 			\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time() + 1);
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
-		$hasMod = false;
-		if(\Auth::check())
-			$hasMod = \Auth::user()->isCommunity();
 		// Threads
 		$threadsPinned = $this->threads->getBySubforum($subforum->id, $page, 'last_post', true);
 		// Breadcrumbs
