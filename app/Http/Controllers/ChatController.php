@@ -63,6 +63,7 @@ class ChatController extends BaseController{
 			$messageCurrent->author_name = $users[$message->author_id]->display_name;
 			$messageCurrent->contents_parsed = $message->contents_parsed;
 			$messageCurrent->created_at = strtotime($message->created_at);
+			$messageCurrent->class_name = $message->author->importantRole()->class_name;
 			$messageCurrent->uuid = uniqid('', true);
 			array_push($messageList, $messageCurrent);
 		}
@@ -87,6 +88,7 @@ class ChatController extends BaseController{
 				$users[$message->author_id] = $this->users->getById($message->author_id);
 			$messageCurrent->id = $message->id;
 			$messageCurrent->author_name = $users[$message->author_id]->display_name;
+			$messageCurrent->class_name = $message->author->importantRole()->class_name;
 			$messageCurrent->contents_parsed = $message->contents_parsed;
 			$messageCurrent->created_at = strtotime($message->created_at);
 			$messageCurrent->uuid = uniqid(md5(microtime(true)), true);

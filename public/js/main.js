@@ -182,7 +182,7 @@ function RuneTime() {
 				html += RuneTime.Utilities.timeAgo(message.created_at);
 				html += "</time>";
 				html += "<p>";
-				html += "<a onclick='RuneTime.ChatBox.nameClick();'>" + message.author_name + "</a>: " + message.contents_parsed;
+				html += "<a class='members-" + message.class_name + "' onclick='RuneTime.ChatBox.nameClick();'>" + message.author_name + "</a>: " + message.contents_parsed;
 				html += "</p>";
 				html += "</div>";
 				$(RuneTime.ChatBox.elements.messages).prepend(html);
