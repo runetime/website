@@ -92,7 +92,6 @@ class ForumController extends BaseController {
 			\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time() + 1);
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
-		// Threads
 		$threadsPinned = $this->threads->getBySubforum($subforum->id, $page, 'last_post', true);
 		// Breadcrumbs
 		$bc = [];
@@ -194,7 +193,9 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$poll = -1;
 		$thread = with(new Thread)->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE);
-		$post = with(new Post)->createNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
+		$post = with(new Post)->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
+		$post->author->incrementReputation();
+		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
 		$thread->last_post = $post->id;
 		$thread->save();
 		$thread->addPost($post);

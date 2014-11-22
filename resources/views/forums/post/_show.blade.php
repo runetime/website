@@ -89,6 +89,7 @@
 	@endif
 								</ul>
 								<div class='post-votes pull-right'>
+									{{ $post->rep }}
 	@if(\Auth::check())
 									<i class='fa fa-arrow-up fa-2x upvote'></i>
 									<i class='fa fa-arrow-down fa-2x downvote'></i>

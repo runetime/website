@@ -4,7 +4,7 @@ use App\Runis\Core\Entity;
 class Post extends Entity {
 	protected $table = 'forum_posts';
 	protected $with = [];
-	protected $fillable = ['author_id', 'ups', 'downs', 'status', 'ip', 'contents', 'contents_parsed'];
+	protected $fillable = ['author_id', 'rep', 'status', 'ip', 'contents', 'contents_parsed'];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
@@ -46,15 +46,5 @@ class Post extends Entity {
 					return 'downvote-active';
 		}
 		return '';
-	}
-
-	/**
-	 * @return static
-	 */
-	public function createNew() {
-		$result = $this->create(array_combine($this->fillable, func_get_args()));
-		with(new Vote)->saveNew(\Auth::user()->id, $result->id, Vote::STATUS_UP);
-		$result->author->incrementReputation();
-		return $result;
 	}
 }
