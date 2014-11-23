@@ -223,7 +223,9 @@ class ForumController extends BaseController {
 		if(empty($thread))
 			\App::abort(404);
 		$parsedContents = with(new \Parsedown)->text($form->contents);
-		$post = with(new Post)->createNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
+		$post->author->incrementReputation();
+		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
 		$thread->addPost($post);
 		$thread->updateLastPost($post);
 		$thread->incrementPosts();
