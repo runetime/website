@@ -16,4 +16,11 @@ class Award extends Entity{
 	public function users() {
 		return $this->belongsToMany('App\Runis\Accounts\User');
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function lastAwarded() {
+		return $this->belongsTo('App\Runis\Accounts\User', 'last_awarded');
+	}
 }

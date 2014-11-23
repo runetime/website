@@ -2,8 +2,11 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Award
+					{{ $award->name }}
 				</h1>
+				<p class='text-muted'>
+					{!! $award->description !!}
+				</p>
 				<table class='table'>
 					<thead>
 						<tr>
@@ -14,10 +17,7 @@
 								Name
 							</td>
 							<td>
-								Table
-							</td>
-							<td>
-								Date Awarded
+								Title
 							</td>
 						</tr>
 					</thead>
@@ -25,15 +25,13 @@
 @foreach($awardees as $awardee)
 						<tr>
 							<td>
-								{{HTML::image(Utilities::URL(forums.$awardee->id.'.png'),'Photo',['class'=>'img-responsive photo-sm'])}}
+								{!! \Image::userPhoto($awardee->id) !!}
 							</td>
 							<td>
-								{{$awardee->name}} 
+								{{ $awardee->display_name }}
 							</td>
 							<td>
-								{{$awardee->title}} 
-							</td>
-							<td>
+								{{ $awardee->title }}
 							</td>
 						</tr>
 @endforeach

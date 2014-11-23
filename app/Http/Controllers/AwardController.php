@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\RuneTime\Awards\Award;
 use App\RuneTime\Awards\AwardRepository;
 class AwardController extends BaseController {
 	private $awards;
@@ -12,11 +13,10 @@ class AwardController extends BaseController {
 	}
 
 	/**
-	 * @get("awards")
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$awards = $this->awards->getAllAwards();
+		$awards = $this->awards->getByStatus(Award::STATUS_AVAILABLE);
 		$this->nav('RuneTime');
 		$this->title('Awards');
 		return $this->view('awards.index', compact('awards'));
@@ -24,12 +24,11 @@ class AwardController extends BaseController {
 
 	/**
 	 * @param $slug
-	 * @get("awards/{slug}")
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($slug) {
 		$award = $this->awards->getBySlug($slug);
-		$awardees = $this->awards->getAwardees($award->id);
+		$awardees = $award->users;
 		$this->bc(['awards' => 'Awards']);
 		$this->nav('RuneTime');
 		$this->title($award->name . " Award");

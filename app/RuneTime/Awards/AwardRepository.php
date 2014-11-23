@@ -10,12 +10,10 @@ class AwardRepository extends EloquentRepository{
 		$this->model = $model;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getAllAwards() {
+	public function getByStatus($status, $order = 'asc') {
 		return $this->model->
-			orderBy('name', 'asc')->
+			where('status', '=', $status)->
+			orderBy('id', $order)->
 			get();
 	}
 
@@ -28,18 +26,5 @@ class AwardRepository extends EloquentRepository{
 		return $this->model->
 			where('id',explode("-",$slug)[0])->
 			first();
-	}
-
-	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function getAwardees($id) {
-		return (new User())->
-			where('awards','LIKE','%,'.$id.',')->
-			orWhere('awards','LIKE',$id.',%')->
-			orWhere('awards','LIKE',$id)->
-			get();
 	}
 }
