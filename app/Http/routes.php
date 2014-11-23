@@ -48,7 +48,7 @@ Route::group([], function() {
  */
 Route::group(['prefix' => 'awards'], function() {
 	get('/', 'AwardController@getIndex');
-	get('{slug}', 'AwardsController@getView');
+	get('{slug}', 'AwardController@getView');
 });
 
 /**
