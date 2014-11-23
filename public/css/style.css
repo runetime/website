@@ -7563,7 +7563,13 @@ body {
 .post {
   background: #212121; }
   .post .post-contents {
-    max-width: 100%; }
+    max-width: 100%;
+    /** Fix posts extending past width */
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto; }
   .post .post-data {
     border-left: 5px solid transparent; }
   .post .col-xs-3,
