@@ -234,9 +234,11 @@ class ForumController extends BaseController {
 		\Auth::user()->incrementPostActive();
 
 		// Notify author
-		$notification = new Notification;
-		$contents = \Link::name(\Auth::user()->id) . " has replied to your thread <a href='" . $thread->toSlug() . "'>" . $thread->title . "</a>.";
-		$notification->saveNew($thread->author->id, 'Threads', $contents, Notification::STATUS_UNREAD);
+		if($thread->author->id !== \Auth::user()->id) {
+			$notification = new Notification;
+			$contents = \Link::name(\Auth::user()->id) . " has replied to your thread <a href='" . $thread->toSlug() . "'>" . $thread->title . "</a>.";
+			$notification->saveNew($thread->author->id, 'Threads', $contents, Notification::STATUS_UNREAD);
+		}
 		return $this->getThreadLastPost($thread->id);
 	}
 
