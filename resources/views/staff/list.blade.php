@@ -1,6 +1,9 @@
 @extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
+				<h1>
+					Staff List
+				</h1>
 @if(!empty($admins))
 				<h2>
 					{!!Link::color('Administrators','Administrator')!!}
