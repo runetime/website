@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Statuses\StatusCreateRequest;
 use App\Http\Requests\Statuses\StatusReplyRequest;
 use App\RuneTime\Forum\Threads\Post;
+use App\RuneTime\Forum\Threads\Vote;
 use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
 class StatusController extends BaseController {
@@ -56,9 +57,17 @@ class StatusController extends BaseController {
 			\App::abort(404);
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$post = $post->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
 		$status->addPost($post);
-		return \redirect()->to('/forums/statuses/' . \String::slugEncode($status->id, 'by-', $status->author->display_name) . '#post' . $post->id);
+
+		// Notify author
+		if($status->author->id !== \Auth::user()->id) {
+			$notification = new Notification;
+			$contents = \Link::name(\Auth::user()->id) . " has replied to your status update <a href='" . $status->toSlug() . "#post" . $post->id . "'>" . $status->title . "</a>.";
+			$notification->saveNew($status->author->id, 'Statuses', $contents, Notification::STATUS_UNREAD);
+		}
+		return \redirect()->to($status->toSlug() . '#post' . $post->id);
 	}
 
 	/**
@@ -81,7 +90,8 @@ class StatusController extends BaseController {
 		$status = new Status;
 		$status = $status->saveNew(\Auth::user()->id, 0, Status::STATUS_PUBLISHED);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$post = $post->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
 		$status->addPost($post);
 		return \redirect()->to('/forums/statuses/' . \String::slugEncode($status->id, 'by', \Auth::user()->display_name));
 	}

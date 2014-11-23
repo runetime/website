@@ -39,4 +39,8 @@ class Status extends Entity {
 		$this->increment('reply_count');
 		$this->save();
 	}
+
+	public function toSlug() {
+		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name);
+	}
 }
