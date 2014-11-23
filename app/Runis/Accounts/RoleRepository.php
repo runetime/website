@@ -1,23 +1,16 @@
 <?php
 namespace App\Runis\Accounts;
-use App\Runis\Core\EloquentRepository;
-class RoleRepository extends EloquentRepository{
-	private $users;
 
-	/**
-	 * @param Role $model
-	 */
-	public function __construct(Role $model){
-		$this->model=$model;
-		$this->users=\App::make('App\Runis\Accounts\UserRepository');
-	}
+use App\Runis\Core\EloquentRepository;
+
+class RoleRepository extends EloquentRepository {
 
 	/**
 	 * @return mixed
 	 */
-	public function getRoleList(){
+	public function getRoleList() {
 		return $this->model->
-			orderBy('id','asc')->
+			orderBy('id', 'asc')->
 			get();
 	}
 
@@ -26,10 +19,11 @@ class RoleRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getUsersById($id){
+	public function getUsersById($id) {
 		return $this->model->
 			where('id', '=', $id)->
-			first()->users;
+			first()->
+			users;
 	}
 
 	/**
@@ -37,9 +31,9 @@ class RoleRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByName($roleName){
+	public function getByName($roleName) {
 		return $this->model->
-			where('name','=',$roleName)->
+			where('name', '=', $roleName)->
 			first();
 	}
 
@@ -48,9 +42,9 @@ class RoleRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getById($id){
+	public function getById($id) {
 		return $this->model->
-			where('id','=',$id)->
+			where('id', '=', $id)->
 			first();
 	}
 }
