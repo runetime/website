@@ -2,12 +2,7 @@
 namespace App\Runis\Accounts;
 use App\Runis\Core\EloquentRepository;
 use App\Runis\Core\Exceptions\EntityNotFoundException;
-/**
- * Class UserRepository
- * @package App\Runis\Accounts
- */
 class UserRepository extends EloquentRepository{
-
 	/**
 	 * @param RoleRepository $roles
 	 * @param User           $model
@@ -30,10 +25,9 @@ class UserRepository extends EloquentRepository{
 	 * @throws EntityNotFoundException
 	 */
 	public function requireByName($name){
-		$model=$this->getByName($name);
-		if(!$model){
-			throw new EntityNotFoundException("User with name ".$name." could not be found");
-		}
+		$model = $this->getByName($name);
+		if(!$model)
+			\Log::error("User with name " . $name . " could not be found");
 		return $model;
 	}
 
@@ -43,7 +37,8 @@ class UserRepository extends EloquentRepository{
 	 * @return mixed
 	 */
 	public function getByName($name){
-		return $this->model->where('name','=',$name)->
+		return $this->model->
+			where('name', '=', $name)->
 			first();
 	}
 
@@ -64,7 +59,7 @@ class UserRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getX($from,$to){
+	public function getX($from, $to){
 		return $this->model->
 			take($to)->
 			skip($from)->
@@ -78,7 +73,7 @@ class UserRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByRole($id,$op='=',$order='desc'){
+	public function getByRole($id, $op='=', $order='desc'){
 		return $this->model->
 			where('role', $op, $id)->
 			orderBy('id', $order)->
@@ -92,7 +87,7 @@ class UserRepository extends EloquentRepository{
 	 */
 	public function getByUsername($username){
 		return $this->model->
-			where('username','=',$username)->
+			where('username', '=', $username)->
 			first();
 	}
 
@@ -103,7 +98,7 @@ class UserRepository extends EloquentRepository{
 	 */
 	public function getByDisplayName($displayName){
 		return $this->model->
-			where('display_name','=',$displayName)->
+			where('display_name', '=', $displayName)->
 			first();
 	}
 
@@ -114,7 +109,7 @@ class UserRepository extends EloquentRepository{
 	 */
 	public function getByEmail($email){
 		return $this->model->
-			where('email','=',$email)->
+			where('email', '=', $email)->
 			first();
 	}
 
@@ -124,9 +119,9 @@ class UserRepository extends EloquentRepository{
 	 * @return mixed
 	 */
 	public function selectArray(array $selections){
-		$q=$this->model;
+		$q = $this->model;
 		foreach($selections as $key=>$selection)
-			$q=$q->where($key,$selection['op'],$selection['val']);
+			$q = $q->where($key, $selection['op'], $selection['val']);
 		return $q->get();
 	}
 
