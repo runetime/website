@@ -4,47 +4,47 @@
 				<h1>
 					Staff List
 				</h1>
-@if(!empty($admins))
+@if(count($admins) > 0)
 				<h2>
-					{!!Link::color('Administrators','Administrator')!!}
+					{!! \Link::color('Administrators', 'Administrator') !!}
 				</h2>
-@include('staff.list.group',['staff'=>$admins])
+@include('staff.list.group',['staff' => $admins])
 @endif
-@if(!empty($radio))
+@if(count($radio) > 0)
 				<h2>
-					{!!Link::color('DJ Team','Radio DJ')!!}
+					{!! \Link::color('DJ Team','Radio DJ') !!}
 				</h2>
-@include('staff.list.group',['staff'=>$radio])
+@include('staff.list.group',['staff' => $radio])
 @endif
-@if(!empty($media))
+@if(count($media) > 0)
 				<h2>
-					{!!Link::color('Media Team','Media Team')!!}
+					{!! \Link::color('Media Team','Media Team') !!}
 				</h2>
-@include('staff.list.group',['staff'=>$media])
+@include('staff.list.group',['staff' => $media])
 @endif
-@if(!empty($content))
+@if(count($content) > 0)
 				<h2>
-					{!!Link::color('Content Team','Content Team')!!}
+					{!! \Link::color('Content Team','Content Team') !!}
 				</h2>
-@include('staff.list.group',['staff'=>$content])
+@include('staff.list.group',['staff' => $content])
 @endif
-@if(!empty($webDev))
+@if(count($webDev) > 0)
 				<h2>
-					{!!Link::color('Web Development Team','Web Developer')!!}
+					{!! \Link::color('Web Development Team','Web Developer') !!}
 				</h2>
-@include('staff.list.group',['staff'=>$webDev])
+@include('staff.list.group',['staff' => $webDev])
 @endif
-@if(!empty($community))
+@if(count($community) > 0)
 				<h2>
-					{!!Link::color('Community Team','Community Team')!!}
+					{!! \Link::color('Community Team','Community Team') !!}
 				</h2>
-@include('staff.list.group',['staff'=>$community])
+@include('staff.list.group',['staff' => $community])
 @endif
-@if(!empty($events))
+@if(count($events) > 0)
 				<h2>
-					{!!Link::color('Events Team','Events Team')!!}
+					{!! \Link::color('Events Team','Events Team') !!}
 				</h2>
-@include('staff.list.group',['staff'=>$events])
+@include('staff.list.group',['staff' => $events])
 @endif
 			</div>
 @stop

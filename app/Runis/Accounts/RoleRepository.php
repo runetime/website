@@ -22,24 +22,14 @@ class RoleRepository extends EloquentRepository{
 	}
 
 	/**
-	 * @return array
+	 * @param $id
+	 *
+	 * @return mixed
 	 */
-	public function getUsersById(){
-		$q=\DB::table('role_user');
-		$roles=func_get_args();
-		foreach($roles as $x=>$role){
-			if($x==0)
-				$q->where('role_id','=',$role);
-			else
-				$q->orWhere('role_id','=',$role);
-		}
-		$q->orderBy('role_id','asc');
-		$q->orderBy('user_id','asc');
-		$q=$q->get();
-		$list = [];
-		foreach($q as $item)
-			array_push($list, $item);
-		return $list;
+	public function getUsersById($id){
+		return $this->model->
+			where('id', '=', $id)->
+			first()->users;
 	}
 
 	/**

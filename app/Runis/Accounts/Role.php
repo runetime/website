@@ -5,9 +5,9 @@ class Role extends Entity{
 	protected $table='roles';
 
 	/**
-	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function users(){
-		$this->belongsToMany('App\Runis\Accounts\User');
+		return $this->belongsToMany('App\Runis\Accounts\User');
 	}
 }
