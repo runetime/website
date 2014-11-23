@@ -12,16 +12,16 @@ class CreateAwardsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('awards', function(Blueprint $t)
+		Schema::create('awards', function(Blueprint $table)
 		{
-			$t->increments('id');
-			$t->string('name');
-			$t->string('name_trim');
-			$t->string('description');
-			$t->integer('given');
-			$t->integer('last_awarded');
-			$t->timestamps();
-			$t->softDeletes();
+			$table->increments('id');
+			$table->string('name');
+			$table->string('name_trim');
+			$table->string('description');
+			$table->integer('last_awarded');
+			$table->integer('status');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
