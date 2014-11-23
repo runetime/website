@@ -29,6 +29,11 @@ class StatusController extends BaseController {
 		return $this->view('forums.statuses.index', compact('statusList'));
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getView($id) {
 		$status = $this->statuses->getById($id);
 		if(!$status)
@@ -39,6 +44,12 @@ class StatusController extends BaseController {
 		return $this->view('forums.statuses.view', compact('status'));
 	}
 
+	/**
+	 * @param                    $id
+	 * @param StatusReplyRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function postReply($id, StatusReplyRequest $form) {
 		$status = $this->statuses->getById($id);
 		if(!$status)
@@ -50,6 +61,9 @@ class StatusController extends BaseController {
 		return \redirect()->to('/forums/statuses/' . \String::slugEncode($status->id, 'by-', $status->author->display_name) . '#post' . $post->id);
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function getCreate() {
 		$this->bc(['forums' => 'Forums', 'forums/statuses' => 'Status Updates']);
 		$this->nav('navbar.forums');
@@ -57,6 +71,11 @@ class StatusController extends BaseController {
 		return $this->view('forums.statuses.create');
 	}
 
+	/**
+	 * @param StatusCreateRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function postCreate(StatusCreateRequest $form) {
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$status = new Status;
