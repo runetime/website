@@ -13,14 +13,21 @@ class Award extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
+	public function awardees() {
+		return $this->belongsToMany('App\RuneTime\Awards\Awardee');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function users() {
-		return $this->belongsToMany('App\Runis\Accounts\User');
+		return $this->awardees;
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function lastAwarded() {
-		return $this->belongsTo('App\Runis\Accounts\User', 'last_awarded');
+		return $this->belongsTo('App\RuneTime\Awards\Awardee', 'last_awarded');
 	}
 }

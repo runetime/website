@@ -19,11 +19,11 @@
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<p>
-							@lang('awards.times_awarded', ['amount' => count($award->users)]) <a href='/awards/{{ \String::slugEncode($award->id, $award->name) }}' title='@lang('awards.view_awardees')'>@lang('awards.view_awardees')</a>
+							@lang('awards.times_awarded', ['amount' => count($award->awardees)]) <a href='/awards/{{ \String::slugEncode($award->id, $award->name) }}' title='@lang('awards.view_awardees')'>@lang('awards.view_awardees')</a>
 						</p>
 						<p>
-@if(!empty($award->lastAwarded))
-							@lang('awards.last_awarded', ['time' => \Time::long($award->last_awarded)])
+@if($award->last_awarded > 0)
+							@lang('awards.last_awarded', ['time' => \Time::long($award->lastAwarded->created_at)])
 @endif
 						</p>
 					</div>
