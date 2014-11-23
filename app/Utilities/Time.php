@@ -28,7 +28,7 @@ class Time {
 	 * @return boolean    Whether or not it is currently DST
 	 */
 	public static function isDST() {
-		return self::carbon()->dst;
+		return carbon::now()->dst;
 	}
 
 	/**
