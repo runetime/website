@@ -55,7 +55,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 			getRoleList();
 		foreach((array)$roleNames as $allowedRole) {
 			if(!in_array($allowedRole, $roleList))
-				throw new InvalidRoleException("Unidentified role: " . $allowedRole);
+				\Log::error("Unidentified role: " . $allowedRole);
 			if(!$this->roleCollectionHasRole($allowedRole))
 				return false;
 		}
