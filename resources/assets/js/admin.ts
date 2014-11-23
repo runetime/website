@@ -1,45 +1,43 @@
 /*global $:false, jQuery:false */
-var Admin = (function () {
-    function Admin() {
-    }
-    return Admin;
-})();
-var Radio = (function () {
-    function Radio() {
-    }
-    return Radio;
-})();
-var Timetable = (function () {
-    function Timetable() {
+class Admin {
+    radio: Radio;
+}
+class Radio {
+    live: Live;
+    timetable: Timetable;
+}
+class Timetable {
+    paths: {};
+    constructor() {
         this.paths = {
             claim: '/staff/radio/timetable'
         };
-        $("[rt-data='radio.panel.timetable:update.hour']").bind('click', function (e) {
+        $("[rt-data='radio.panel.timetable:update.hour']").bind('click', function(e: any) {
             admin.radio.Timetable.claim(e);
         });
     }
-    Timetable.prototype.claim = function (e) {
+    claim(e: any) {
         var src = $(e.target).attr('rt-data2');
         var src2 = src.split(":");
-        var day = src2[0], hour = src[1];
+        var day = src2[0],
+            hour = src[1];
         var data = {
             day: day,
             hour: hour
         };
         var claim = RuneTime.Utilities.PostAJAX(this.paths.claim, data);
-        claim.done(function (claim) {
+        claim.done(function(claim: any) {
             claim = $.parseJSON(claim);
-            if (claim.valud === true) {
+            if(claim.valud === true) {
                 $("[rt-data2='" + claim.day + ":" + claim.hour + "']").html(claim.name);
             }
         });
-    };
-    return Timetable;
-})();
-var Live = (function () {
-    function Live() {
-        this.elements = {};
-        this.paths = {};
+    }
+}
+class Live {
+    elements = {};
+    paths = {};
+    constructor() {
         this.elements = {
             song: "[rt-data='radio.panel:current.song']",
             songName: "[rt-data='radio.panel:current.song.name']",
@@ -52,32 +50,31 @@ var Live = (function () {
             update: '/staff/radio/live/update'
         };
         this.update();
-        $("[rt-data='radio.panel:message.update']").bind('click', function (e) {
+        $("[rt-data='radio.panel:message.update']").bind('click', function(e: any) {
             admin.radio.live.updateMessage($(e.target).attr('rt-data2'));
         });
     }
-    Live.prototype.update = function () {
+    update() {
         var data = RuneTime.Utilities.getAJAX(this.paths.update);
-        data.done(function (data) {
+        data.done(function(data: any) {
             data = $.parseJSON(data);
             $(admin.radio.live.elements.songName).html(data.song.name);
             $(admin.radio.live.elements.songArtist).html(data.song.artist);
             $(admin.radio.live.elements.currentMessage).html(data.song.message);
         });
-        setTimeout(function () {
+        setTimeout(function() {
             admin.radio.live.update();
         }, 30000);
-    };
-    Live.prototype.updateMessage = function (id) {
+    }
+    updateMessage(id: number) {
         var data = {
             id: id
         };
         var load = RuneTime.Utilities.postAJAX(this.paths.message, data);
-        load.done(function (load) {
+        load.done(function(load: any) {
             load = $.parseJSON(load);
             $(admin.radio.live.elements.currentMessage).html(load.message);
         });
-    };
-    return Live;
-})();
+    }
+}
 var admin = new Admin();

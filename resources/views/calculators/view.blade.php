@@ -55,4 +55,5 @@
 			<script>
 				CALCULATOR_LOAD = {{$calculator->id}};
 			</script>
+			<script src='/js/calculator.js'></script>
 @stop

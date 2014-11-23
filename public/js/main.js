@@ -15,10 +15,10 @@ function RuneTime() {
 	this.Utilities = function Utilities() {
 		this.getAJAX = function getAJAX(path) {
 			return $.ajax({
-				url     : path,
-				type    : 'get',
+				url: path,
+				type: 'get',
 				dataType: 'html',
-				async   : true
+				async: true
 			});
 		};
 		this.postAJAX = function postAJAX(path, data) {

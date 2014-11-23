@@ -68,7 +68,6 @@ class CalculatorController extends BaseController {
 		$levelsRequired = json_decode($calculator->levels_required);
 		$xp = json_decode($calculator->xp);
 		$this->bc(['calculators' => 'Calculators']);
-		$this->js('calculator');
 		$this->nav('Runescape');
 		$this->title($calculator->name . ' Calculator');
 		return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
