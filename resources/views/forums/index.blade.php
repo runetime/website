@@ -5,20 +5,20 @@
 				<div class='row row-flat'>
 					<div class='col-xs-12 col-md-9'>
 @if(!empty($subforumList[-1]))
-@foreach($subforumList[-1] as $subforums)
-	@if(empty(json_decode($subforums->roles)) || Auth::check() && in_array(\Auth::user()->importantRole()->id, json_decode($subforums->roles)))
+	@foreach($subforumList[-1] as $subforums)
+		@if(empty(json_decode($subforums->roles)) || Auth::check() && in_array(\Auth::user()->importantRole()->id, json_decode($subforums->roles)))
 						<h3>
 							<a href='/forums/{{ \String::slugEncode($subforums->id,$subforums->name) }}' title='{{ $subforums->name }}'>
 								{{ $subforums->name }}
 							</a>
 						</h3>
-		@foreach($subforumList[$subforums->id] as $subforum)
-			@if(empty(json_decode($subforum->roles)) || \Auth::check() && in_array(\Auth::user()->importantRole()->id, json_decode($subforum->roles)))
-				@include('forums.subforum._subforum', ['subforum' => $subforum])
-			@endif
-		@endforeach
-	@endif
-@endforeach
+			@foreach($subforumList[$subforums->id] as $subforum)
+				@if(empty(json_decode($subforum->roles)) || \Auth::check() && in_array(\Auth::user()->importantRole()->id, json_decode($subforum->roles)))
+					@include('forums.subforum._subforum', ['subforum' => $subforum])
+				@endif
+			@endforeach
+		@endif
+	@endforeach
 @endif
 					</div>
 					<div class='col-xs-12 col-md-3'>
