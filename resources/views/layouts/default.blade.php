@@ -94,9 +94,6 @@ $current = $nav;
 		<link rel='home' href='/' />
 		<link rel='index' href='/sitemap/' />
 		<link rel='stylesheet' href='/css/style.css' />
-@if(!empty($css))
-		<link rel='stylesheet' href='/css/{{$css}}.css'>
-@endif
 		<script src='/js/vendor/jquery.js'></script>
 		<script src='/js/vendor/jquery-ui.js'></script>
 		<script src='/js/vendor/bootstrap.js'></script>
