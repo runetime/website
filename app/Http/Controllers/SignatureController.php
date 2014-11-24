@@ -77,15 +77,24 @@ class SignatureController extends BaseController {
 		if(file_exists($path)) {
 			return \Img::make($path)->response();
 		} else {
-			$info = explode(";", $slug);
-			$rsn = $info[0];
-			$scores = \String::getHiscore($rsn);
-			$image = $this->signatureStat($info, $scores);
-			$logo = \Img::make('./img/header.png')->resize(85, 24);
-			$image->insert($logo, 'bottom-right');
-			$image->save($path);
+			$this->createSignature($slug);
+			$image = \Img::make($path);
 			return $image->response();
 		}
+	}
+
+	/**
+	 * @param $slug
+	 */
+	public function createSignature($slug) {
+		$path = public_path('img/signatures/generated/' . $slug . '.png');
+		$info = explode(";", $slug);
+		$rsn = $info[0];
+		$scores = \String::getHiscore($rsn);
+		$image = $this->signatureStat($info, $scores);
+		$logo = \Img::make(public_path('img/header.png'))->resize(85, 24);
+		$image->insert($logo, 'bottom-right');
+		$image->save($path);
 	}
 
 	/**
@@ -97,7 +106,7 @@ class SignatureController extends BaseController {
 	private function signatureStat($info, $scores) {
 		$skills = $this->skills();
 		$img = \Img::canvas(400, 150);
-		$bg = \Img::make('./img/signatures/backgrounds/' . $info[2] . '.png');
+		$bg = \Img::make(public_path('img/signatures/backgrounds/' . $info[2] . '.png'));
 		$bg->resize(400, 150);
 		$img->insert($bg, 'top-left', 0, 0);
 		$img->insert($skills['attack'], 'top-left', 12, 12);
@@ -133,196 +142,196 @@ class SignatureController extends BaseController {
 		$img->text($scores[1][1], $loc + 12, $h + 12, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[2][1], $loc + 12, $h + 37, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[3][1], $loc + 12, $h + 62, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[4][1], $loc + 12, $h + 87, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[5][1], $loc + 12, $h + 113, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[6][1], $loc + 62, $h + 12, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[7][1], $loc + 62, $h + 37, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[8][1], $loc + 62, $h + 62, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[9][1], $loc + 62, $h + 87, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[10][1], $loc + 62, $h + 113, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[11][1], $loc + 112, $h + 12, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[12][1], $loc + 112, $h + 37, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[13][1], $loc + 112, $h + 62, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[14][1], $loc + 112, $h + 87, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[15][1], $loc + 112, $h + 113, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[16][1], $loc + 162, $h + 12, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[17][1], $loc + 162, $h + 37, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[18][1], $loc + 162, $h + 62, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[19][1], $loc + 162, $h + 87, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[20][1], $loc + 162, $h + 113, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[21][1], $loc + 212, $h + 12, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[22][1], $loc + 212, $h + 37, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[23][1], $loc + 212, $h + 62, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[24][1], $loc + 212, $h + 87, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[25][1], $loc + 212, $h + 113, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[26][1], $loc + 262, $h + 12, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($scores[0][1], $loc + 262, $h + 37, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
 		$img->text($info[0], 262, $h + 62, function($font) {
 			$font->angle(0);
 			$font->color('#ffffff');
-			$font->file('./fonts/vendor/open-sans/OpenSans-Light.ttf');
+			$font->file(public_path('fonts/vendor/open-sans/OpenSans-Light.ttf'));
 			$font->size(18);
 			$font->valign('top');
 		});
@@ -363,7 +372,7 @@ class SignatureController extends BaseController {
 			'overall'       => 'overall',
 		];
 		foreach($skills as $name => $dir)
-			$skills[$name] = \Img::make('./img/skills/' . $dir . '.png')->resize(20, 20);
+			$skills[$name] = \Img::make(public_path('img/skills/' . $dir . '.png'))->resize(20, 20);
 		return $skills;
 	}
 }

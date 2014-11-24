@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\Radio\Song',
 		'App\Console\Commands\Radio\Timetable',
 		'App\Console\Commands\Radio\Update',
+		'App\Console\Commands\Signatures\UpdateAll',
 	];
 
 	/**
@@ -30,6 +31,8 @@ class Kernel extends ConsoleKernel {
 	{
 		$schedule->command('radio:update')
 			->cron('*/1 * * * * *');
+		$schedule->command('signatures:update')->
+			daily();
 	}
 
 }
