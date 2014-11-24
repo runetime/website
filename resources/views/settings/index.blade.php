@@ -102,7 +102,7 @@
 									@lang('settings.profile.referred_by.name'):
 								</label>
 								<div class='col-lg-10'>
-									<input type='text' id='referred_by' name='referred_by' value='{{ \Auth::user()->referred_by }}' />
+									<input type='text' id='referred_by' name='referred_by' value='{{ !empty(\Auth::user()->referredBy->id) ? \Auth::user()->referredBy->display_name : "" }}' />
 									<span class='help-block'>
 										@lang('settings.profile.referred_by.note')
 									</span>

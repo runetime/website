@@ -102,29 +102,17 @@
 @endif
 								</dd>
 								<dt>
-									@lang('profile.overview.community_statistics.age.name')
-								</dt>
-								<dd>
-@if($profile->birthday > 0)
-									{{$profile->birthday}} 
-@else
-									<em>
-										@lang('profile.overview.community_statistics.age.unknown')
-									</em>
-@endif
-								</dd>
-								<dt>
 									@lang('profile.overview.community_statistics.gender')
 								</dt>
 								<dd>
 									{!!\String::gender($profile->gender)!!}
 								</dd>
-@if(!empty($profile->referred_by))
+@if(!empty($profile->referredBy))
 								<dt>
 									@lang('profile.overview.community_statistics.referred_by')
 								</dt>
 								<dd>
-									{{$profile->referred_by}} 
+									{!! \Link::name($profile->referredBy->display_name) !!}
 								</dd>
 @endif
 							</dl>

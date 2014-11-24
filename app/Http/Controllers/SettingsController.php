@@ -85,6 +85,7 @@ class SettingsController extends BaseController {
 	public function postIndex(ProfileRequest $form) {
 		$user = $this->users->getById(\Auth::user()->id);
 		$referred = $this->users->getByDisplayName($form->referred_by);
+		$birthday = $user->birthday;
 		$user->timezone = (float) $form->timezone;
 		$user->dst = $form->dst ? true : false;
 		if($form->gender >= 0 && $form->gender <= 2)
