@@ -4,9 +4,9 @@ use App\RuneTime\Notifications\Notification;
 $messages = 0;
 $notifications = 0;
 if(\Auth::check()) {
-    $notificationRepository = new NotificationRepository(new Notification);
-    $messages = $notificationRepository->getCountByUser(\Auth::user()->id, 'Messenger');
-    $notifications = $notificationRepository->getCountByUser(\Auth::user()->id);
+	$notificationRepository = new NotificationRepository(new Notification);
+	$messages = $notificationRepository->getCountByUser(\Auth::user()->id, 'Messenger');
+	$notifications = $notificationRepository->getCountByUser(\Auth::user()->id);
 }
 $navs=[
 	''       => trans('navbar.home'),
@@ -98,13 +98,14 @@ $current = $nav;
 		<script src='/js/vendor/jquery-ui.js'></script>
 		<script src='/js/vendor/bootstrap.js'></script>
 		<script src='/js/vendor/jasny-bootstrap.js'></script>
-@if(!empty($js))
-		<script src='js/{{$js}}.js'></script>
-@endif
+@foreach($js as $jsFile)
+		<script src='js/{{ $jsFile }}.js'></script>
+@endforeach
 		<script src='/js/main.js'></script>
 @if(\Auth::check() && \Auth::user()->isStaff())
 		<script src='/js/admin.js'></script>
 @endif
+		<script src='/js/utilities.js'></script>
 	</head>
 	<body>
 		<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' role='navigation'>

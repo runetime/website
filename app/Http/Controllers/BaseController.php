@@ -5,9 +5,9 @@ use App\RuneTime\Bans\IPRepository;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Auth\Guard;
 class BaseController extends Controller {
-	protected $bc;
+	protected $bc = [];
 	protected $displayPageHeader = true;
-	protected $js;
+	protected $js = [];
 	protected $nav;
 	protected $title = '';
 
