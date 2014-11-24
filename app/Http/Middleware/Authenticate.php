@@ -37,11 +37,11 @@ class Authenticate implements Middleware {
 		{
 			if ($request->ajax())
 			{
-				return \View::make('framework.unauthorized');
+				return response('Unauthorized.', 401);
 			}
 			else
 			{
-				return redirect()->guest('login');
+				return redirect()->guest('auth/login');
 			}
 		}
 

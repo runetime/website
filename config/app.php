@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => 'asdfdfgsret56453532w565467679856',
+	'key' => '96tG59Jt8wVUxa84FBdHu8qYzeOY2P9e',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -214,7 +214,7 @@ return [
 		'Carbon'    => 'Carbon\Carbon',
 		'Parsedown' => 'App\Utilities\Parsedown',
 		'ImageCache' => 'Intervention\Image\Facades\Image',
-		'Img' => 'Intervention\Image\Facades\Image'
+		'Img' => 'Intervention\Image\Facades\Image',
 
 	],
 
