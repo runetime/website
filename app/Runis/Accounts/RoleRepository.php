@@ -4,7 +4,9 @@ namespace App\Runis\Accounts;
 use App\Runis\Core\EloquentRepository;
 
 class RoleRepository extends EloquentRepository {
-
+	public function __construct(Role $model) {
+		$this->model = $model;
+	}
 	/**
 	 * @return mixed
 	 */
