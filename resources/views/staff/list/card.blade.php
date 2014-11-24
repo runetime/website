@@ -1,6 +1,6 @@
-						<div class='flip-container center-block' ontouchstart="this.classList.toggle('hover');">
+						<div class='flip-container center-block' rt-hook='hook!staff.list:card' rt-data='{{ $member->id }}'>
 							<div class='flipper'>
-								<div class='front' style="background-image:url('/img/forums/photos/{{ $member->id }}.png');">
+								<div class='front'>
 								</div>
 								<div class='back'>
 									<a href='/profile/{{ \String::slugEncode($member->id, $member->display_name) }}' title="Visit {{ $member->display_name }}'s profile">

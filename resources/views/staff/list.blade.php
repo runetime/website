@@ -12,39 +12,40 @@
 @endif
 @if(count($radio) > 0)
 				<h2>
-					{!! \Link::color('DJ Team','Radio DJ') !!}
+					{!! \Link::color('DJ Team', 'Radio DJ') !!}
 				</h2>
 @include('staff.list.group',['staff' => $radio])
 @endif
 @if(count($media) > 0)
 				<h2>
-					{!! \Link::color('Media Team','Media Team') !!}
+					{!! \Link::color('Media Team', 'Media Team') !!}
 				</h2>
 @include('staff.list.group',['staff' => $media])
 @endif
 @if(count($content) > 0)
 				<h2>
-					{!! \Link::color('Content Team','Content Team') !!}
+					{!! \Link::color('Content Team', 'Content Team') !!}
 				</h2>
 @include('staff.list.group',['staff' => $content])
 @endif
 @if(count($webDev) > 0)
 				<h2>
-					{!! \Link::color('Web Development Team','Web Developer') !!}
+					{!! \Link::color('Web Development Team', 'Web Developer') !!}
 				</h2>
 @include('staff.list.group',['staff' => $webDev])
 @endif
 @if(count($community) > 0)
 				<h2>
-					{!! \Link::color('Community Team','Community Team') !!}
+					{!! \Link::color('Community Team', 'Community Team') !!}
 				</h2>
 @include('staff.list.group',['staff' => $community])
 @endif
 @if(count($events) > 0)
 				<h2>
-					{!! \Link::color('Events Team','Events Team') !!}
+					{!! \Link::color('Events Team', 'Events Team') !!}
 				</h2>
 @include('staff.list.group',['staff' => $events])
 @endif
 			</div>
+			<script src='/js/staff_list.js'></script>
 @stop
