@@ -49,7 +49,7 @@ class Update extends Command {
 	{
 		\Cache::forever('radio.artisan.lastRan', time());
 		$lastUpdated = \Cache::get('radio.artisan.lastUpdated');
-		if(time() - $lastUpdated >= 180) {
+		if(time() - $lastUpdated >= 240) {
 			$this->info("Pulling data from Primcast servers");
 			$results = \String::CURL('http://widgets.primcast.com/SHOUTinfo/data.php?id=runetime.primcast.com%3A6582&songslist=1&ap64=wqs%24%24lkt117B4w2&timezone=GMT&color=FF0000');
 			$this->info("Pulled data from Primcast servers");
