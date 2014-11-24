@@ -99,7 +99,7 @@ $current = $nav;
 		<script src='/js/vendor/bootstrap.js'></script>
 		<script src='/js/vendor/jasny-bootstrap.js'></script>
 @foreach($js as $jsFile)
-		<script src='js/{{ $jsFile }}.js'></script>
+		<script src='/js/{{ $jsFile }}.js'></script>
 @endforeach
 		<script src='/js/main.js'></script>
 @if(\Auth::check() && \Auth::user()->isStaff())
