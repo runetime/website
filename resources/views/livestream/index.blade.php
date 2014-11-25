@@ -39,4 +39,5 @@
 				</div>
 @endif
 			</div>
+			<script src='/js/livestream.js'></script>
 @stop

@@ -81,7 +81,7 @@
 		@endif
 		@if(\Auth::check())
 										<li>
-											<a title='Quote This Post' onclick="RuneTime.Forums.Post.quote({{ $post->id }});">
+											<a title='Quote This Post' rt-hook='forums.thread.post:quote' rt-data='{{ $post->id }}'>
 												Quote
 											</a>
 										</li>

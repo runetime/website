@@ -54,7 +54,7 @@ class RadioController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->js(['radio']);
+		$this->js(['radio', 'chatbox']);
 		$this->nav('navbar.radio');
 		$this->title('RuneTime ' . trans('navbar.radio'));
 		return $this->view('radio.index');

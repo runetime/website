@@ -1,5 +1,4 @@
 $(function () {
     "use strict";
-    RuneTime.ChatBox = new RuneTime.ChatBox();
-    RuneTime.ChatBox.setup('radio');
+    chatbox = new Chatbox('radio');
 });

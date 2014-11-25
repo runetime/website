@@ -16,14 +16,11 @@
 					</div>
 					<div class='form-group'>
 						<div class='col-lg-10 col-lg-offset-2'>
-							<button type='button' class='btn btn-info' onclick='RuneTime.NameChecker.check();'>
+							<button type='button' class='btn btn-info' rt-hook='name.checker:submit'>
 								Check for Availability
 							</button>
 						</div>
 					</div>
 				</form>
-				<script>
-					RuneTime.NameChecker = new RuneTime.NameChecker();
-				</script>
 			</div>
 @stop

@@ -77,4 +77,11 @@
 @include('partials.chat')
 				</div>
 			</div>
+			<script>
+                $(function () {
+                    "use strict";
+                    chatbox = new Chatbox('radio');
+                    radio = new Radio();
+                });
+			</script>
 @stop

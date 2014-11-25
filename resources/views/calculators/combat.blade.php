@@ -86,10 +86,5 @@
 					</dd>
 				</dl>
 			</div>
-			<script>
-                $(function() {
-                    RuneTime.CombatCalculator = new RuneTime.CombatCalculator();
-                    RuneTime.CombatCalculator.setup();
-                });
-			</script>
+			<script src='/js/combatcalculator.js'></script>
 @stop

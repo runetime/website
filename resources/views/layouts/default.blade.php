@@ -252,5 +252,6 @@ $current = $nav;
 				<i class='fa fa-chevron-up'></i>
 			</a>
 		</div>
+		<script src='/js/forums.js'></script>
 	</body>
 </html>
