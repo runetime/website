@@ -160,7 +160,7 @@ Route::group(['prefix' => 'forums'], function() {
 	/**
 	 * Create Thread
 	 */
-	Route::group(['prefix' => 'create/{id}-{name}'], function() {
+	Route::group(['middleware' => 'auth', 'prefix' => 'create/{id}-{name}'], function() {
 		get('/', 'ForumController@getThreadCreate');
 		post('/', 'ForumController@postThreadCreate');
 	});
