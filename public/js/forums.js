@@ -4,6 +4,7 @@ var Forums = (function () {
         this.elements = {};
         this.paths = {};
         this.post = null;
+        this.threadCreate = null;
         this.elements = {
             'postEditor': "[rt-data='post.edit']"
         };
@@ -78,6 +79,45 @@ var Post = (function () {
         $(forums.elements.postEditor).focus();
     };
     return Post;
+})();
+var ForumsThreadCreate = (function () {
+    function ForumsThreadCreate() {
+        this.hooks = {};
+        this.questions = [];
+        this.values = {};
+        this.views = {};
+        this.hooks = {
+            questionAdd: "[rt-hook='forums.thread.create:poll.question.add']",
+            questions: "[rt-hook='forums.thread.create:poll.questions']"
+        };
+        this.questions = Array(500);
+        this.values = {
+            questions: 0
+        };
+        this.views = {
+            answer: $("[rt-view='forums.thread.create:poll.answer']").html(),
+            question: $("[rt-view='forums.thread.create:poll.question']").html()
+        };
+        $(this.hooks.questionAdd).bind('click', function () {
+            forums.threadCreate.addQuestion();
+        });
+    }
+    ForumsThreadCreate.prototype.addQuestion = function () {
+        var html = this.views.question;
+        $(this.hooks.questions).append(html);
+        this.values.questions += 1;
+    };
+    ForumsThreadCreate.prototype.removeQuestion = function (number) {
+        this.questions.splice(number, 1);
+    };
+    ForumsThreadCreate.prototype.setListener = function (element, type) {
+        if (type === "remove question") {
+            this.setListenerRemoveQuestion(element);
+        }
+    };
+    ForumsThreadCreate.prototype.setListenerRemoveQuestion = function (element) {
+    };
+    return ForumsThreadCreate;
 })();
 $(function () {
     forums = new Forums();

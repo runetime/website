@@ -1,9 +1,10 @@
 var forums;
 class Forums {
-	elements: any = {};
-	paths: any = {};
-	post: Post = null;
-	constructor() {
+	public elements: any = {};
+	public paths: any = {};
+	public post: Post = null;
+	public threadCreate: ForumsThreadCreate = null;
+	public constructor() {
 		this.elements = {
 			'postEditor': "[rt-data='post.edit']"
 		};
@@ -25,7 +26,7 @@ class Forums {
 		});
 	}
 
-	downvote(postId: any) {
+	public downvote(postId: any) {
 		postId = postId.replace("post", "");
 		var post = $('#post' + postId),
 			isUpvoted = $(post).hasClass('upvote-active'),
@@ -45,7 +46,7 @@ class Forums {
 		});
 	}
 
-	upvote(postId: any) {
+	public upvote(postId: any) {
 		postId = postId.replace("post", "");
 		var post = $('#post' + postId),
 			isUpvoted = $(post).hasClass('upvote-active'),
@@ -66,7 +67,7 @@ class Forums {
 	}
 }
 class Post {
-	quote(id: any) {
+	public quote(id: any) {
 		var source = $("[rt-data='post#" + id +":source']").html(),
 			postContents = $(forums.elements.postEditor).val();
 		source = source.replace(/\n/g, '\n>');
@@ -78,6 +79,53 @@ class Post {
 		$(forums.elements.postEditor).val(postContents + source + "\n");
 		utilities.scrollTo($(forums.elements.postEditor), 1000);
 		$(forums.elements.postEditor).focus();
+	}
+}
+
+class ForumsThreadCreate {
+	public hooks: any = {};
+	public questions: Array = [];
+	public values: any = {};
+	public views: any = {};
+	public constructor() {
+		this.hooks = {
+			questionAdd: "[rt-hook='forums.thread.create:poll.question.add']",
+			questions: "[rt-hook='forums.thread.create:poll.questions']"
+		};
+		this.questions = Array(500);
+		this.values = {
+			questions: 0
+		};
+		this.views = {
+			answer: $("[rt-view='forums.thread.create:poll.answer']").html(),
+			question: $("[rt-view='forums.thread.create:poll.question']").html()
+		};
+		$(this.hooks.questionAdd).bind('click', function() {
+			forums.threadCreate.addQuestion();
+		});
+	}
+	public addQuestion() {
+		var html = this.views.question;
+		$(this.hooks.questions).append(html);
+		this.setListener("remove question",
+		this.values.questions += 1;
+	}
+
+	public removeQuestion(number: number) {
+		alert(number);
+		this.questions.splice(number, 1);
+	}
+
+	public setListener(element: any, type: string) {
+		if(type === "remove question") {
+			this.setListenerRemoveQuestion(element);
+		}
+	}
+
+	private setListenerRemoveQuestion(element: any) {
+		$(element).bind('click', function(e: any) {
+			forums.threadCreate.removeQuestion($(element).parent().parent().attr('rt-data'));
+		});
 	}
 }
 
