@@ -1,19 +1,19 @@
 /*global $:false, jQuery:false */
 class Admin {
-    radio: Radio;
+    radio: Radio = null;
 }
 class Radio {
-    live: Live;
-    timetable: Timetable;
+    live: Live = null;
+    timetable: Timetable = null;
 }
 class Timetable {
-    paths: {};
+    paths: any = {};
     constructor() {
         this.paths = {
             claim: '/staff/radio/timetable'
         };
         $("[rt-data='radio.panel.timetable:update.hour']").bind('click', function(e: any) {
-            admin.radio.Timetable.claim(e);
+            admin.radio.timetable.claim(e);
         });
     }
     claim(e: any) {
@@ -25,18 +25,18 @@ class Timetable {
             day: day,
             hour: hour
         };
-        var claim = RuneTime.Utilities.PostAJAX(this.paths.claim, data);
+        var claim = utilities.PostAJAX(this.paths.claim, data);
         claim.done(function(claim: any) {
             claim = $.parseJSON(claim);
-            if(claim.valud === true) {
+            if(claim.valid === true) {
                 $("[rt-data2='" + claim.day + ":" + claim.hour + "']").html(claim.name);
             }
         });
     }
 }
 class Live {
-    elements = {};
-    paths = {};
+    elements: any = {};
+    paths: any = {};
     constructor() {
         this.elements = {
             song: "[rt-data='radio.panel:current.song']",
@@ -55,7 +55,7 @@ class Live {
         });
     }
     update() {
-        var data = RuneTime.Utilities.getAJAX(this.paths.update);
+        var data = utilities.getAJAX(this.paths.update);
         data.done(function(data: any) {
             data = $.parseJSON(data);
             $(admin.radio.live.elements.songName).html(data.song.name);
@@ -70,7 +70,7 @@ class Live {
         var data = {
             id: id
         };
-        var load = RuneTime.Utilities.postAJAX(this.paths.message, data);
+        var load = utilities.postAJAX(this.paths.message, data);
         load.done(function(load: any) {
             load = $.parseJSON(load);
             $(admin.radio.live.elements.currentMessage).html(load.message);

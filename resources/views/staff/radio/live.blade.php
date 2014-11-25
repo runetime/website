@@ -36,5 +36,5 @@
 					</div>
 				</div>
 			</div>
-			<script src='/js/adminradiolive.js'></script>
+			<script src='/js/admin_radio_live.js'></script>
 @stop

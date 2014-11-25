@@ -1,21 +1,25 @@
 /*global $:false, jQuery:false */
 var Admin = (function () {
     function Admin() {
+        this.radio = null;
     }
     return Admin;
 })();
 var Radio = (function () {
     function Radio() {
+        this.live = null;
+        this.timetable = null;
     }
     return Radio;
 })();
 var Timetable = (function () {
     function Timetable() {
+        this.paths = {};
         this.paths = {
             claim: '/staff/radio/timetable'
         };
         $("[rt-data='radio.panel.timetable:update.hour']").bind('click', function (e) {
-            admin.radio.Timetable.claim(e);
+            admin.radio.timetable.claim(e);
         });
     }
     Timetable.prototype.claim = function (e) {
@@ -26,10 +30,10 @@ var Timetable = (function () {
             day: day,
             hour: hour
         };
-        var claim = RuneTime.Utilities.PostAJAX(this.paths.claim, data);
+        var claim = utilities.PostAJAX(this.paths.claim, data);
         claim.done(function (claim) {
             claim = $.parseJSON(claim);
-            if (claim.valud === true) {
+            if (claim.valid === true) {
                 $("[rt-data2='" + claim.day + ":" + claim.hour + "']").html(claim.name);
             }
         });
@@ -57,7 +61,7 @@ var Live = (function () {
         });
     }
     Live.prototype.update = function () {
-        var data = RuneTime.Utilities.getAJAX(this.paths.update);
+        var data = utilities.getAJAX(this.paths.update);
         data.done(function (data) {
             data = $.parseJSON(data);
             $(admin.radio.live.elements.songName).html(data.song.name);
@@ -72,7 +76,7 @@ var Live = (function () {
         var data = {
             id: id
         };
-        var load = RuneTime.Utilities.postAJAX(this.paths.message, data);
+        var load = utilities.postAJAX(this.paths.message, data);
         load.done(function (load) {
             load = $.parseJSON(load);
             $(admin.radio.live.elements.currentMessage).html(load.message);
