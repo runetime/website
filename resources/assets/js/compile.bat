@@ -1,0 +1,2 @@
+call tsc --out ../../../public/js/compiled.js calculator.ts chatbox.ts combatcalculator.ts forums.ts livestream.ts namechecker.ts notifications.ts radio.ts signup.ts staff_list.ts utilities.ts
+call tsc --out ../../../public/js/admin.js admin.ts

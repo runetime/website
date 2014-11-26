@@ -86,5 +86,9 @@
 					</dd>
 				</dl>
 			</div>
-			<script src='/js/combatcalculator.js'></script>
+			<script>
+                $(function() {
+                    combatCalculator = new CombatCalculator();
+                });
+			</script>
 @stop

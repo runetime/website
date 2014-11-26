@@ -53,7 +53,9 @@
 				</table>
 			</div>
 			<script>
-				CALCULATOR_LOAD = {{$calculator->id}};
+                $(function() {
+                    "use strict";
+                    calculator = new Calculator({{ $calculator->id }});
+                });
 			</script>
-			<script src='/js/calculator.js'></script>
 @stop

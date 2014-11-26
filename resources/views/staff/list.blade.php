@@ -47,5 +47,7 @@
 @include('staff.list.group',['staff' => $events])
 @endif
 			</div>
-			<script src='/js/staff_list.js'></script>
+			<script>
+				var staffList = new StaffList();
+			</script>
 @stop

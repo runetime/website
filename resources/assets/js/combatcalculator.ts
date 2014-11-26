@@ -106,6 +106,3 @@ class CombatCalculator {
 		return parseInt($("[rt-data='combat.calculator:" + name + "']").val());
 	}
 }
-$(function() {
-	combatCalculator = new CombatCalculator();
-});

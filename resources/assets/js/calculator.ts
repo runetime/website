@@ -114,7 +114,3 @@ class Calculator {
         });
     }
 }
-$(function() {
-    "use strict";
-    calculator = new Calculator(CALCULATOR_LOAD);
-});

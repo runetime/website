@@ -107,16 +107,14 @@ class ForumsThreadCreate {
 	public addQuestion() {
 		var html = this.views.question;
 		$(this.hooks.questions).append(html);
-		this.setListener("remove question",
 		this.values.questions += 1;
 	}
 
 	public removeQuestion(number: number) {
-		alert(number);
 		this.questions.splice(number, 1);
 	}
 
-	public setListener(element: any, type: string) {
+	public setListener(element, type) {
 		if(type === "remove question") {
 			this.setListenerRemoveQuestion(element);
 		}

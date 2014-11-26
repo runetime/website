@@ -101,11 +101,10 @@ $current = $nav;
 @foreach($js as $jsFile)
 		<script src='/js/{{ $jsFile }}.js'></script>
 @endforeach
-		<script src='/js/main.js'></script>
+		<script src='/js/compiled.js'></script>
 @if(\Auth::check() && \Auth::user()->isStaff())
 		<script src='/js/admin.js'></script>
 @endif
-		<script src='/js/utilities.js'></script>
 	</head>
 	<body>
 		<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' role='navigation'>
@@ -252,6 +251,5 @@ $current = $nav;
 				<i class='fa fa-chevron-up'></i>
 			</a>
 		</div>
-		<script src='/js/forums.js'></script>
 	</body>
 </html>

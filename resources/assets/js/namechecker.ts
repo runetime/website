@@ -81,6 +81,3 @@ class NameChecker {
 			});
 	}
 }
-$(function() {
-	nameChecker = new NameChecker();
-});

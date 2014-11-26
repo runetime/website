@@ -74,4 +74,11 @@
 					</div>
 				</form>
 			</div>
+			<script>
+				$(function () {
+                	setTimeout(function () {
+                		signupForm = new SignupForm();
+                	}, 1000);
+                });
+			</script>
 @stop

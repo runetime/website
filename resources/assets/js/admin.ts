@@ -1,12 +1,12 @@
 /*global $:false, jQuery:false */
 class Admin {
-    radio: Radio = null;
+    radio: AdminRadio = null;
 }
-class Radio {
-    live: Live = null;
-    timetable: Timetable = null;
+class AdminRadio {
+    live: AdminLive = null;
+    timetable: AdminTimetable = null;
 }
-class Timetable {
+class AdminTimetable {
     paths: any = {};
     constructor() {
         this.paths = {
@@ -34,7 +34,7 @@ class Timetable {
         });
     }
 }
-class Live {
+class AdminLive {
     elements: any = {};
     paths: any = {};
     constructor() {

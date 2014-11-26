@@ -23,4 +23,9 @@
 					</div>
 				</form>
 			</div>
+			<script>
+				$(function() {
+                	nameChecker = new NameChecker();
+                });
+			</script>
 @stop

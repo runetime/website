@@ -8,5 +8,9 @@
 @include('partials.chat')
 				</div>
 			</div>
-			<script src='/js/play.js'></script>
+			<script>
+				$(function () {
+                    chatbox = new Chatbox('radio');
+                });
+			</script>
 @stop

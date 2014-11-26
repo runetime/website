@@ -187,9 +187,3 @@ class SignupForm {
 		}
 	}
 }
-$(function () {
-	"use strict";
-	setTimeout(function () {
-		signupForm = new SignupForm();
-	}, 1000);
-});

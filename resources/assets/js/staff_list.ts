@@ -13,4 +13,3 @@ class StaffList {
         });
     }
 }
-var staffList = new StaffList();

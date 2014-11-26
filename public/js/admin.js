@@ -5,15 +5,15 @@ var Admin = (function () {
     }
     return Admin;
 })();
-var Radio = (function () {
-    function Radio() {
+var AdminRadio = (function () {
+    function AdminRadio() {
         this.live = null;
         this.timetable = null;
     }
-    return Radio;
+    return AdminRadio;
 })();
-var Timetable = (function () {
-    function Timetable() {
+var AdminTimetable = (function () {
+    function AdminTimetable() {
         this.paths = {};
         this.paths = {
             claim: '/staff/radio/timetable'
@@ -22,7 +22,7 @@ var Timetable = (function () {
             admin.radio.timetable.claim(e);
         });
     }
-    Timetable.prototype.claim = function (e) {
+    AdminTimetable.prototype.claim = function (e) {
         var src = $(e.target).attr('rt-data2');
         var src2 = src.split(":");
         var day = src2[0], hour = src[1];
@@ -38,10 +38,10 @@ var Timetable = (function () {
             }
         });
     };
-    return Timetable;
+    return AdminTimetable;
 })();
-var Live = (function () {
-    function Live() {
+var AdminLive = (function () {
+    function AdminLive() {
         this.elements = {};
         this.paths = {};
         this.elements = {
@@ -60,7 +60,7 @@ var Live = (function () {
             admin.radio.live.updateMessage($(e.target).attr('rt-data2'));
         });
     }
-    Live.prototype.update = function () {
+    AdminLive.prototype.update = function () {
         var data = utilities.getAJAX(this.paths.update);
         data.done(function (data) {
             data = $.parseJSON(data);
@@ -72,7 +72,7 @@ var Live = (function () {
             admin.radio.live.update();
         }, 30000);
     };
-    Live.prototype.updateMessage = function (id) {
+    AdminLive.prototype.updateMessage = function (id) {
         var data = {
             id: id
         };
@@ -82,6 +82,6 @@ var Live = (function () {
             $(admin.radio.live.elements.currentMessage).html(load.message);
         });
     };
-    return Live;
+    return AdminLive;
 })();
 var admin = new Admin();

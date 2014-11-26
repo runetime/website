@@ -36,5 +36,10 @@
 					</div>
 				</div>
 			</div>
-			<script src='/js/admin_radio_live.js'></script>
+			<script>
+				$(function() {
+                    admin.radio = new Radio();
+                    admin.radio.live = new Live();
+                });
+			</script>
 @stop
