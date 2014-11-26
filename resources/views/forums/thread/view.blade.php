@@ -8,9 +8,9 @@
 						</div>
 						<div class='col-xs-8 col-sm-9 col-md-10 col-lg-11'>
 							<h1>
-								{{$thread->title}}
+								{{ $thread->title }}
 							</h1>
-							by {!!\Link::name($thread->author_id)!!}, {{\Time::shortReadable($thread->created_at)}}
+							by { !!\Link::name($thread->author_id) !!}, {{ \Time::shortReadable($thread->created_at) }}
 						</div>
 					</div>
 @if(!empty($thread->tags))
