@@ -44,6 +44,6 @@ class MembersController extends BaseController {
 		$this->nav('RuneTime');
 		$this->title('Members List');
 		$pages = ceil($this->users->getAmount() / User::PER_MEMBERS_PAGE);
-		return $this->view('members.show', compact('members', 'roles', 'prefixes', 'orders', 'memberRoles', 'searchRole', 'searchPrefix', 'searchOrder', 'page', 'pages'));
+		return $this->view('members', compact('members', 'roles', 'prefixes', 'orders', 'memberRoles', 'searchRole', 'searchPrefix', 'searchOrder', 'page', 'pages'));
 	}
 }

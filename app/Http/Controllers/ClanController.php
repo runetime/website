@@ -24,6 +24,6 @@ class ClanController extends BaseController {
 	public function getIndex() {
 		$this->nav('navbar.social.social');
 		$this->title('RuneTime Clan');
-		return $this->view('clan.index');
+		return $this->view('clan');
 	}
 }

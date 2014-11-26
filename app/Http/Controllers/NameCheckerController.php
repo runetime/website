@@ -9,7 +9,7 @@ class NameCheckerController extends BaseController {
 		$this->js(['namechecker']);
 		$this->nav('Runescape');
 		$this->title('Name Checker');
-		return $this->view('namechecker.index');
+		return $this->view('namechecker');
 	}
 
 	/**
