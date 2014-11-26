@@ -18,7 +18,7 @@
 							</h3>
 							<dl class='dl-horizontal'>
 								<dt>
-									Reputation
+									@lang('profile.overview.community_statistics.reputation')
 								</dt>
 								<dd>
 									{{ $profile->reputation }}

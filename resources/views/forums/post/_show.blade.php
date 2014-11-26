@@ -34,12 +34,6 @@
 								<br />
 								<span class='text-muted'>:</span> {{$post->author_info->allegiance}}
 	@endif
-	@if(!empty(json_decode($post->author->awards)))
-								<div class='post-awards'>
-									<a href='/awards/user/{{\String::slugEncode($post->author_info->id, $post->author_info->display_name)}}' title="View {{$post->author_info->display_name}}'s awards">
-										Awards
-									</a>
-	@endif
 							</div>
 							<div class='col-xs-12 col-sm-9 col-md-10'>
 								<div class='post-contents' rt-data='post#{{ $post->id }}:contents'>
@@ -55,34 +49,34 @@
 	@if(\Auth::check())
 		@if(\Auth::user()->id != $post->author_id)
 										<li>
-											<a href='/forums/post/{{$post->id}}/report' title='Report This Post'>
-												Report
+											<a href='/forums/post/{{$post->id}}/report' title='@lang('forums.post.show.bar.report')'>
+												@lang('forums.post.show.bar.report')
 											</a>
 										</li>
 		@endif
 		@if(\Auth::user()->isCommunity() || \Auth::user()->id == $post->author_id)
 										<li>
-											<a href='/forums/post/{{$post->id}}/edit' title='Edit This Post'>
-												Edit
+											<a href='/forums/post/{{$post->id}}/edit' title='@lang('forums.post.show.bar.edit')'>
+												@lang('forums.post.show.bar.edit')
 											</a>
 										</li>
 		@endif
 		@if(\Auth::user()->isCommunity())
 										<li>
-											<a href='/forums/post/{{$post->id}}/status=0' title='Hide This Post'>
-												Hide
+											<a href='/forums/post/{{$post->id}}/status=0' title='@lang('forums.post.show.bar.hide')'>
+												@lang('forums.post.show.bar.hide')
 											</a>
 										</li>
 										<li>
-											<a href='/forums/post/{{$post->id}}/delete' title='Delete This Post'>
-												Delete
+											<a href='/forums/post/{{$post->id}}/delete' title='@lang('forums.post.show.bar.delete')'>
+												@lang('forums.post.show.bar.delete')
 											</a>
 										</li>
 		@endif
 		@if(\Auth::check())
 										<li>
-											<a title='Quote This Post' rt-hook='forums.thread.post:quote' rt-data='{{ $post->id }}'>
-												Quote
+											<a title='@lang('forums.post.show.bar.quote')' rt-hook='forums.thread.post:quote' rt-data='{{ $post->id }}'>
+												@lang('forums.post.show.bar.quote')
 											</a>
 										</li>
 		@endif

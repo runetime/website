@@ -10,7 +10,7 @@
 					<ul class='list-inline'>
 						<li>
 							<a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm{{ !$subforum->canPost() ? " btn-disabled" : "" }}' role='button'>
-								Start New Topic
+								@lang('forums.subforums.create_topic')
 							</a>
 						</li>
 					</ul>

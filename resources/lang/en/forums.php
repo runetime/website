@@ -1,7 +1,67 @@
 <?php
 return [
 	'name' => 'Forums',
+	'bar'  => [
+		'total_posts'   => 'total posts',
+		'total_members' => 'total members',
+		'most_online'   => 'most online',
+	],
+	'online' => [
+		'current' => ':amount users are online',
+		'in_time' => 'in the past :amount minutes',
+	],
+	'post' => [
+		'auth'   => 'You must be logged in to post.',
+		'create' => [
+			'submit' => 'Post',
+		],
+		'edit' => [
+			'title' => 'Editing Post in :thread',
+		],
+		'locked' => 'This thread is locked.',
+		'report' => [
+			'title' => 'Reporting a Post by :author in thread :thread',
+		],
+		'show' => [
+			'ip' => 'IP: :ipAddress',
+			'bar' => [
+				'edit'   => 'Edit',
+				'hide'   => 'Hide',
+				'unhide' => 'Unhide',
+				'delete' => 'Delete',
+				'quote'  => 'Quote',
+				'report' => 'Report',
+			],
+		],
+	],
+	'posts'   => ':amount posts',
+	'sidebar' => [
+		'recent_threads' => [
+			'name' => 'Recent Threads',
+		],
+		'recent_posts' => [
+			'name' => 'Recent Posts',
+		],
+	],
+	'statuses' => [
+		'create' => [
+			'create' => 'Create',
+			'status' => 'Status',
+		],
+		'index' => [
+			'title' => 'Recent Status Updates',
+		],
+		'view' => [
+			'title' => 'Status Update by :author',
+			'no_comments' => 'There are no comments! Why not leave a message?',
+		]
+	],
+	'subforums' => [
+		'create_topic' => 'Start New Topic',
+	],
 	'thread' => [
+		'title' => 'Thread',
+		'titles' => 'Threads',
 		'create' => [
 			'name'  => 'Creating a New Thread in :subforum',
 			'title' => [
@@ -11,8 +71,8 @@ return [
 				'name'     => 'Poll',
 				'summary'  => 'Click here if you would like to create a poll.',
 				'title'    => 'Poll Title',
-				'question' => 'Question',
-				'answer'    => 'Answer',
+				'question' => 'Question :number',
+				'answer'    => 'Answer :number',
 			],
 			'tags' => [
 				'name'        => 'Tags',
@@ -26,46 +86,25 @@ return [
 				'name' => 'Post Thread',
 			],
 		],
-	],
-	'post' => [
-		'show' => [
-			'ip' => 'IP: :ipAddress',
-			'bar' => [
-				'edit'   => 'Edit',
-				'hide'   => 'Hide',
-				'unhide' => 'Unhide',
-				'delete' => 'Delete',
-				'quote'  => 'Quote',
-			],
+		'label' => [
+			'hidden' => 'hidden',
+			'locked' => 'locked',
+			'pinned' => 'pinned',
+			'poll'   => 'poll',
 		],
-		'create' => [
-			'submit' => 'Post',
+		'mod' => [
+			'title'             => 'Mod',
+			'edit_title'        => 'Edit Title',
+			'switch_lock'       => 'Switch Lock',
+			'switch_pin'        => 'Switch Pin',
+			'switch_visibility' => 'Switch Visibility',
+			'toggle'            => 'Toggle Dropdown',
 		],
-		'auth'   => 'You must be logged in to post.',
-		'locked' => 'This thread is locked.',
+		'started_by' => 'Started by :author',
 	],
-	'sidebar' => [
-		'recent_threads' => [
-			'name' => 'Recent Threads',
-		],
-		'recent_posts' => [
-			'name' => 'Recent Posts',
-		],
-	],
-	'bar' => [
-		'total_posts'   => 'total posts',
-		'total_members' => 'total members',
-		'most_online'   => 'most online',
-	],
+	'threads'     => ':amount threads',
 	'top_posters' => [
 		'today'   => "Today's Top Posters",
 		'overall' => "Overall Top Posters",
 	],
-	'online' => [
-		'current' => ':amount users are online',
-		'in_time' => 'in the past :amount minutes',
-	],
-	'posts'   => ':amount posts',
-	'threads' => ':amount threads',
-	'by'      => 'by', // 'Thread name' by 'author' for example
 ];

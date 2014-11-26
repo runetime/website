@@ -12,9 +12,9 @@
 						{{ $subforum->description }}
 					</div>
 					<div class='col-xs-12 col-sm-6 col-md-2'>
-						{{ $subforum->thread_count }} threads
+						@lang('forums.threads', ['amount' => $subforum->thread_count])
 						<br />
-						{{ $subforum->post_count }} posts
+						@lang('forums.posts', ['amount' => $subforum->post_count])
 					</div>
 					<div class='col-xs-12 col-sm-12 col-md-3'>
 		@if(!empty($subforum->lastPost()))
@@ -22,7 +22,7 @@
 							{{$subforum->lastThread()->title}}
 						</a>
 						<br />
-						by {!! \Link::name($subforum->lastPost()->author_id) !!}
+						@lang('utilities.by') {!! \Link::name($subforum->lastPost()->author_id) !!}
 						<br />
 						<a href='{{ $subforum->lastThread()->toSlug() }}/last-post' title='{{ $subforum->lastThread()->title }}'>
 							{!! \Time::shortReadable($subforum->lastPost()->created_at) !!}

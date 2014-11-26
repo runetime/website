@@ -1,5 +1,11 @@
 <?php
- return [
+return [
+	'feed' => [
+		'title' => 'Recent Threads by :name',
+	],
+	'friends' => [
+
+	],
 	'nav' => [
 		'overview'     => 'Overview',
 		'profile_feed' => 'Profile Feed',
@@ -7,18 +13,14 @@
 	],
 	'overview' => [
 		'member_since' => 'Member since :date',
-		'last_active'  => 'Last Active :date',
-		'about' => [
-			'name'  => 'About Me',
+		'about'        => [
 			'empty' => ':name has not written about themselves yet.',
+			'name'  => 'About Me',
 		],
 		'community_statistics' => [
-			'name'          => 'Community Statistics',
-			'group'         => 'Group',
-			'active_posts'  => 'Active Posts',
-			'profile_views' => 'Profile Views',
-			'title'         => 'Title',
-			'age' => [
+			'name'         => 'Community Statistics',
+			'active_posts' => 'Active Posts',
+			'age'          => [
 				'name'    => 'Age',
 				'unknown' => 'Age Unknown',
 			],
@@ -26,32 +28,37 @@
 				'name'    => 'Birthday',
 				'unknown' => 'Birthday Unknown',
 			],
-			'gender'      => 'Gender',
-			'referred_by' => 'Referred By',
+			'gender'        => 'Gender',
+			'group'         => 'Group',
+			'profile_views' => 'Profile Views',
+			'referred_by'   => 'Referred By',
+			'reputation'    => 'Reputation',
+			'title'         => 'Title',
 		],
+		'last_active'  => 'Last Active :date',
 		'social' => [
 			'name'     => 'Social Information',
-			'twitter'  => 'Twitter',
 			'facebook' => 'Facebook',
+			'skype'    => 'Skype',
+			'twitter'  => 'Twitter',
 			'youtube'  => 'YouTube',
 			'website'  => 'Website',
-			'skype'    => 'Skype',
 		],
 		'runescape' => [
 			'name'           => 'RuneScape Information',
-			'played'         => 'RuneScape Played',
 			'allegiance'     => 'Allegiance',
 			'clan'           => 'Clan',
+			'played'         => 'RuneScape Played',
 			'runescape_name' => 'RuneScape Name',
 		],
 	],
-	 'status' => [
-		 'offline' => 'Offline',
-		 'online'  => 'Online',
-	 ],
-	 'gender' => [
-		 'not_telling' => 'Not Telling',
-		 'female'      => 'Female',
-		 'male'        => 'Male',
-	 ]
+	'status' => [
+		'offline' => 'Offline',
+		'online'  => 'Online',
+	],
+	'gender' => [
+		'female'      => 'Female',
+		'male'        => 'Male',
+		'not_telling' => 'Not Telling',
+	],
  ];

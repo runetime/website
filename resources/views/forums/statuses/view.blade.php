@@ -20,7 +20,7 @@
 					</div>
 				</div>
 				<h3 id='comments'>
-					Comments
+					@lang('utilities.comments')
 				</h3>
 @if(!empty($status->posts[1]))
 	@foreach($status->posts as $x => $post)
@@ -31,12 +31,12 @@
 @else
 				<p class='text-warning'>
 					<em>
-						There are no comments!  Why not leave a message?
+						@lang('forums.statuses.view.no_comments')
 					</em>
 				</p>
 @endif
 				<h3 id='comment'>
-					Comment
+					@lang('utilities.comment')
 				</h3>
 @if(\Auth::check())
 		@include('forums.post._edit', ['url' => '/forums/statuses/' . \String::slugEncode($status->id, 'by', $status->author->display_name) . '/reply'])

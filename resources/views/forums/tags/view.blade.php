@@ -5,7 +5,7 @@
 					{{ $tag->name }}
 				</h1>
 				<h3>
-					News
+					@lang('news.title')
 				</h3>
 @foreach($news as $newsPiece)
                 <div class='holo-box-dark'>
@@ -19,19 +19,19 @@
                     <ul class='list-inline'>
                         <li>
                             <a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}' title='{{ $newsPiece->title }}'>
-                                Read More
+                               @lang('utilities.read_more')
                             </a>
                         </li>
                         <li>
-                            <a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}#comments') }}' title='{{ $newsPiece->comments }} comments'>
-                                {{ $newsPiece->post_count }} comments
+                            <a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}#comments') }}'>
+                                @lang('utilities.comments', ['amount' => $newsPiece->post_count])
                             </a>
                         </li>
                     </ul>
                 </div>
 @endforeach
 				<h3>
-					Threads
+					@lang('forums.thread.titles')
 				</h3>
 @foreach($threads as $thread)
 	@include('forums.subforum._thread', ['thread' => $thread])
