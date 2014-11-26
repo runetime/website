@@ -24,20 +24,20 @@
     @endforeach
 					</ul>
 @endif
-@include('partials._paginator', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title)])
+@include('partials._paginator', ['url' => $thread->toSlug()])
 @foreach($posts as $post)
 	@include('forums.post._show')
 @endforeach
 				</div>
 @if(\Auth::check())
 	@if(!$thread->isLocked())
-		@include('forums.post._edit', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title) . '/reply'])
+		@include('forums.post._edit', ['url' => $thread->toSlug('reply')])
 	@else
 		@include('forums.post._locked')
 	@endif
 @else
 	@include('forums.post._auth')
 @endif
-@include('partials._paginator', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title)])
+@include('partials._paginator', ['url' => $thread->toSlug()])
 			</div>
 @stop

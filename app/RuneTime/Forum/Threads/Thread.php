@@ -178,7 +178,7 @@ class Thread extends Entity {
 	/**
 	 * @return string
 	 */
-	public function toSlug() {
-		return '/forums/thread/' . \String::slugEncode($this->id, $this->title);
+	public function toSlug($path = '') {
+		return '/forums/thread/' . \String::slugEncode($this->id, $this->title) . (!empty($path) ? '/' . $path : '');
 	}
 }
