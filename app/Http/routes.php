@@ -6,6 +6,9 @@ get('about', 'AboutController@getIndex');
  * Auth
  */
 Route::group([], function() {
+	get('auth/login', function() {
+		return \redirect()->to('login');
+	});
 	/**
 	 * Logged in
 	 */
