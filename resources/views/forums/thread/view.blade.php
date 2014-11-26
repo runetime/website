@@ -13,19 +13,17 @@
 							by {!!\Link::name($thread->author_id)!!}, {{\Time::shortReadable($thread->created_at)}}
 						</div>
 					</div>
-	@if(!empty($thread->tags()->get()))
+@if(!empty($thread->tags))
 					<ul class='list-inline'>
-		@foreach($thread->tags()->get() as $tag)
-			@if(!empty($tag->name))
+    @foreach($thread->tags as $tag)
 						<li>
 							<a href='/forums/tag/{{ $tag->name }}' class='label label-rt' title='{{ $tag->name }}'>
 								{{ $tag->name }}
 							</a>
 						</li>
-			@endif
-		@endforeach
+    @endforeach
 					</ul>
-	@endif
+@endif
 @include('partials._paginator', ['url' => '/forums/thread/' . \String::slugEncode($thread->id, $thread->title)])
 @foreach($posts as $post)
 	@include('forums.post._show')
