@@ -300,6 +300,7 @@ Route::group([], function() {
 Route::group(['prefix' => 'livestream'], function() {
 	get('/', 'LivestreamController@getIndex');
 	get('reset', 'LivestreamController@getReset');
+	post('reset', 'LivestreamController@postReset');
 });
 /**
  * Maps

@@ -1,6 +1,15 @@
 @extends('layouts.default')
 @section('contents')
 			<div class='wrapper wrapper-none-res'>
+@if(\Auth::check() && \Auth::user()->isStaff())
+				<ul class='list-inline pull-right'>
+					<li>
+						<a href='/livestream/reset' class='btn btn-sm btn-primary'>
+							Recheck Status
+						</a>
+					</li>
+				</ul>
+@endif
 @if($status)
 				<div class='row row-flat'>
 					<div class='col-xs-12 col-sm-8 col-md-9 padding-none'>
@@ -20,16 +29,16 @@
 						</div>
 					</div>
 				</div>
-                <script>
-                    $(function() {
-                        var chatbox = $('#chatbox').height(),
-                            messages = $('#chatbox-messages').height(),
-                            chatFluff = chatbox - messages,
-                            stream = $('#live_embed_player_flash').height(),
-                            newMessages = stream - chatFluff;
-                        $('#chatbox-messages').height(newMessages);
-                    });
-                </script>
+				<script>
+					$(function() {
+						var chatbox = $('#chatbox').height(),
+							messages = $('#chatbox-messages').height(),
+							chatFluff = chatbox - messages,
+							stream = $('#live_embed_player_flash').height(),
+							newMessages = stream - chatFluff;
+						$('#chatbox-messages').height(newMessages);
+					});
+				</script>
 @else
 				<h2 class='text-danger text-center'>
 					RuneTime is currently not streaming
@@ -39,5 +48,9 @@
 				</div>
 @endif
 			</div>
-			<script src='/js/livestream.js'></script>
+			<script>
+                $(function() {
+                    chatbox = new Chatbox('livestream');
+                });
+			</script>
 @stop

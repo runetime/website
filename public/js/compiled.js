@@ -528,8 +528,9 @@ var LivestreamReset = (function () {
         this.hooks = {};
         this.paths = {};
         this.hooks = {
-            note: "[rt-hook='livestream.recheck:note']",
-            status: "[rt-hook='livestream.recheck:status']"
+            note: "[rt-hook='livestream.reset:note']",
+            spinner: "[rt-hook='livestream.reset:spinner']",
+            status: "[rt-hook='livestream.reset:status']"
         };
         this.paths = {
             reset: '/livestream/reset'
@@ -537,10 +538,35 @@ var LivestreamReset = (function () {
         this.reset();
     }
     LivestreamReset.prototype.reset = function () {
-        status = utilities.postAJAX(this.paths.reset, {});
-        status.done(function (e) {
-            console.log(e);
+        var status = utilities.postAJAX(this.paths.reset, {});
+        status.done(function (results) {
+            results = utilities.JSONDecode(results);
+            console.log(results);
+            if (results.online === true) {
+                livestreamReset.statusOnline();
+            }
+            else if (results.online === false) {
+                livestreamReset.statusOffline();
+            }
+            else {
+                livestreamReset.statusUnknown();
+            }
+            livestreamReset.spinnerRemove();
         });
+    };
+    LivestreamReset.prototype.spinnerRemove = function () {
+        $(this.hooks.spinner).css({
+            opacity: 0
+        });
+    };
+    LivestreamReset.prototype.statusOnline = function () {
+        $(this.hooks.status).html("online").removeClass().addClass('text-success');
+    };
+    LivestreamReset.prototype.statusOffline = function () {
+        $(this.hooks.status).html("offline").removeClass().addClass('text-danger');
+    };
+    LivestreamReset.prototype.statusUnknown = function () {
+        $(this.hooks.status).html("unknown").removeClass().addClass('text-warning');
     };
     return LivestreamReset;
 })();
