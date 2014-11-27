@@ -94,10 +94,7 @@ $current = $nav;
 		<link rel='home' href='/' />
 		<link rel='index' href='/sitemap/' />
 		<link rel='stylesheet' href='/css/style.css' />
-		<script src='/js/vendor/jquery.js'></script>
-		<script src='/js/vendor/jquery-ui.js'></script>
-		<script src='/js/vendor/bootstrap.js'></script>
-		<script src='/js/vendor/jasny-bootstrap.js'></script>
+		<script src='/js/vendor.js'></script>
 @foreach($js as $jsFile)
 		<script src='/js/{{ $jsFile }}.js'></script>
 @endforeach
