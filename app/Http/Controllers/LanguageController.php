@@ -19,17 +19,18 @@ class LanguageController extends BaseController {
 	}
 
 	/**
-	 * @param $initials
+	 * @param        $initials
+	 * @param string $redirect
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function getChange($initials) {
+	public function getChange($initials, $redirect = '') {
 		$languagesDone = [
 			'en' => 'English',
 			'no' => 'Norweigian',
 		];
 		if(array_key_exists($initials, $languagesDone))
 			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', $initials);
-		return \redirect()->to('/');
+		return \redirect()->to('/' . $redirect);
 	}
 }
