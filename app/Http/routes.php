@@ -280,6 +280,7 @@ Route::group(['prefix' => 'language'], function() {
  * Legal
  */
 Route::group([], function() {
+	get('legal/{language}', 'LegalController@getLegal');
 	get('privacy', 'LegalController@getPrivacy');
 	get('terms', 'LegalController@getTerms');
 });
