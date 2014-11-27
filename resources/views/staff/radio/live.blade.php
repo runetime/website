@@ -7,19 +7,19 @@
 				<div class='row row-flat text-center'>
 					<div class='col-xs-12 col-sm-4'>
 						<h3 class='holo-text'>
-							Current Song
+							@lang('staff.radio.live.current_song')
 						</h3>
 						<p rt-data='radio.panel:current.song'>
-							<span class='holo-text-secondary' rt-data='radio.panel:current.song.name'>N/A</span> by <span class='holo-text-secondary' rt-data='radio.panel:current.song.artist'>N/A</span>
+							<span class='holo-text-secondary' rt-data='radio.panel:current.song.name'>@lang('radio.na')</span> by <span class='holo-text-secondary' rt-data='radio.panel:current.song.artist'>@lang('radio.na')</span>
 						</p>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<h3 class='holo-text'>
-							Current Message
+							@lang('staff.radio.live.current_message')
 						</h3>
 						<p rt-data='radio.panel:current.message'></p>
 						<h3 class='holo-text'>
-							Messages
+							@lang('staff.radio.live.messages')
 						</h3>
 @foreach($messages as $message)
 						<p>
@@ -29,7 +29,7 @@
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<h3 class='holo-text'>
-							Requests
+							@lang('staff.radio.live.requests')
 						</h3>
 						<div rt-data='radio.panel:requests'>
 						</div>

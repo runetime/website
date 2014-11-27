@@ -2,48 +2,48 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Radio Panel
+					@lang('staff.radio.title')
 				</h1>
 				<div class='row row-flat'>
 					<div class='col-xs-12 col-sm-4'>
 						<h3 class='holo-text text-center'>
-							Currently Live
+							@lang('staff.radio.index.currently_live.title')
 						</h3>
 @if($live)
 	@if($live->id == \Auth::user()->id)
 						<p>
-							You are currently live.
+							@lang('staff.radio.index.currently_live.you')
 						</p>
 						<p>
 							<a href='/staff/radio/live' class='btn btn-sm btn-success'>
-								Live Panel
+								@lang('staff.radio.index.currently_live.live_panel')
 							</a>
 						</p>
 						<p>
 							<a href='/staff/radio/live/stop' class='btn btn-sm btn-info'>
-								Stop DJing
+								@lang('staff.radio.index.currently_live.stop')
 							</a>
 						</p>
 	@else
 						<p>
-							{!! \Link::name($live->id) !!} is currently live.
+							@lang('staff.radio.index.currently_live.current', ['name' => \Link::name($live->id)])
 						</p>
 	@endif
 @else
 						<p>
-							No one is currently live.
+							@lang('staff.radio.index.currently_live.no_one')
 						</p>
 						<form action='/staff/radio/live' method='post' role='form'>
 							<input type='hidden' name='live' value='go' />
 							<button type='submit' class='btn btn-sm btn-primary'>
-								Go Live
+								@lang('staff.radio.index.currently_live.go_live')
 							</button>
 						</form>
 @endif
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<h3 class='holo-text text-center'>
-							Your Messages
+							@lang('staff.radio.index.your_messages.title')
 						</h3>
 @foreach($messages as $message)
 						<p>
@@ -52,17 +52,17 @@
 @endforeach
 						<p>
 							<a href='/staff/radio/messages' class='btn btn-sm btn-primary'>
-								Update Messages
+								@lang('staff.radio.index.your_messages.update')
 							</a>
 						</p>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<h3 class='holo-text text-center'>
-							Timetable
+							@lang('staff.radio.index.timetable.title')
 						</h3>
 						<p>
 							<a href='/staff/radio/timetable' class='btn btn-sm btn-primary'>
-								Update Timetable
+								@lang('staff.radio.index.timetable.title')
 							</a>
 						</p>
 					</div>

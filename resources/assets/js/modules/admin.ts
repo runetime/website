@@ -17,6 +17,7 @@ class AdminTimetable {
         });
     }
     claim(e: any) {
+		alert(1);
         var src = $(e.target).attr('rt-data2');
         var src2 = src.split(":");
         var day = src2[0],

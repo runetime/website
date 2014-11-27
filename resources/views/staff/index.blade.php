@@ -2,10 +2,10 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Staff Panel
+					@lang('staff.index.title')
 				</h1>
 				<p>
-					Still a work in progress, unfortunately.  Not sure what to put here.
+					@lang('staff.index.wip')
 				</p>
 			</div>
 @stop

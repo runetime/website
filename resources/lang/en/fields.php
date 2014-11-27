@@ -1,5 +1,11 @@
 <?php
 return [
-	'name'  => 'Name',
-	'title' => 'Title',
+	'active'       => 'Active',
+	'date'         => 'Date',
+	'hours_active' => 'Hours Active',
+	'message'      => 'Message',
+	'name'         => 'Name',
+	'team'         => 'Team',
+	'title'        => 'Title',
+	'username'     => 'Username',
 ];

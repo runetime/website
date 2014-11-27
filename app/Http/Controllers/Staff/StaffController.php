@@ -39,8 +39,8 @@ class StaffController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->nav('Staff Panel');
-		$this->title('Staff Panel');
+		$this->nav('navbar.staff.staff');
+		$this->title(trans('staff.index.title'));
 		return $this->view('staff.index');
 	}
 
@@ -49,9 +49,9 @@ class StaffController extends BaseController {
 	 */
 	public function getCheckup() {
 		$date = \Time::long(\Carbon::now());
-		$this->bc(['staff' => 'Staff']);
+		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('Staff Checkup');
+		$this->title(trans('staff.checkup.title'));
 		return $this->view('staff.checkup.form', compact('date'));
 	}
 
@@ -73,9 +73,9 @@ class StaffController extends BaseController {
 	 */
 	public function getCheckupList() {
 		$checkups = $this->checkups->getX(30);
-		$this->bc(['staff' => 'Staff', 'staff/checkup' => 'Checkup']);
+		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('Staff Checkup');
+		$this->title(trans('staff.checkup.title'));
 		return $this->view('staff.checkup.list', compact('checkups'));
 	}
 
@@ -88,7 +88,7 @@ class StaffController extends BaseController {
 		$checkup = $this->checkups->getById($id);
 		$displayName = $this->users->getById($checkup->author()->first()->id);
 		$displayName = $displayName->display_name;
-		$this->bc(['staff' => 'Staff', 'staff/checkup' => 'Checkups']);
+		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title('Checkup by ' . $displayName);
 		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
@@ -105,8 +105,8 @@ class StaffController extends BaseController {
 		$content = $this->roles->getUsersById(8, 9);
 		$community = $this->roles->getUsersById(10, 11);
 		$events = $this->roles->getUsersById(12, 13);
-		$this->nav('RuneTime');
-		$this->title('Staff Team');
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('staff.list.title'));
 		return $this->view('staff.list', compact('admins', 'radio', 'media', 'webDev', 'content', 'community', 'events'));
 	}
 }

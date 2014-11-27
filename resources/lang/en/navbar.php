@@ -5,6 +5,7 @@ return [
 	'forums'   => 'Forums',
 	'radio'    => 'Radio',
 	'runetime' => [
+		'title'      => 'RuneTime',
 		'runetime'   => 'RuneTime',
 		'news'       => 'News',
 		'awards'     => 'Awards',
@@ -15,6 +16,7 @@ return [
 		'tickets'    => 'Tickets',
 	],
 	'runescape' => [
+		'title'     => 'Runescape',
 		'runescape' => 'Runescape',
 		'guides'    => [
 			'quests'    => 'Quest Guides',
@@ -31,6 +33,7 @@ return [
 		'combat_calculator' => 'Combat Calculator',
 	],
 	'social' => [
+		'title'        => 'Social',
 		'social'       => 'Social',
 		'calendar'     => 'Event Calendar',
 		'livestream'   => 'Livestream',
@@ -39,6 +42,7 @@ return [
 		'our_clan'     => 'Our Clan',
 	],
 	'staff' => [
+		'title'         => 'Staff',
 		'staff'         => 'Staff',
 		'staff_panel'   => 'Staff Panel',
 		'gallery'       => 'Gallery',

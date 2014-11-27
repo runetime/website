@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Radio Timetable
+					@lang('staff.radio.timetable.title')
 				</h1>
 				<table class='table text-center'>
 					<thead>
@@ -11,25 +11,25 @@
 								&nbsp;
 							</th>
 							<th class='text-center'>
-								Monday
+								@lang('utilities.time.day.monday')
 							</th>
 							<th class='text-center'>
-								Tuesday
+								@lang('utilities.time.day.tuesday')
 							</th>
 							<th class='text-center'>
-								Wednesday
+								@lang('utilities.time.day.wednesday')
 							</th>
 							<th class='text-center'>
-								Thursday
+								@lang('utilities.time.day.thursday')
 							</th>
 							<th class='text-center'>
-								Friday
+								@lang('utilities.time.day.friday')
 							</th>
 							<th class='text-center'>
-								Saturday
+								@lang('utilities.time.day.saturday')
 							</th>
 							<th class='text-center'>
-								Sunday
+								@lang('utilities.time.day.sunday')
 							</th>
 						</tr>
 					</thead>
@@ -57,9 +57,8 @@
 			</div>
 			<script>
 				$(function() {
-					Admin.Radio = new Admin.Radio();
-					Admin.Radio.Timetable = new Admin.Radio.Timetable();
-					Admin.Radio.Timetable.setup();
+					admin.radio = new AdminRadio();
+					admin.radio.timetable = new AdminTimetable();
 				});
 			</script>
 @stop
