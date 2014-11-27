@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<p>
-					Please click the button below to see either the old-school map or the new up to date map.
+					@lang('maps.rs.note')
 				</p>
 				<div class='row'>
 					<div class='col-xs-12 col-sm-6'>
