@@ -19,6 +19,9 @@ class Ticket extends Entity {
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function posts() {
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
 	}
