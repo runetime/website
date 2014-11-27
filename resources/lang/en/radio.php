@@ -1,17 +1,11 @@
 <?php
 return [
-	'player'=>[
-		'title'   => 'Radio Player',
-		'click'   => 'Click here',
-		'message' => 'to listen to RuneTime Radio!',
-		'status'  => 'Status',
-		'off'     => 'Off',
-		'on'      => 'On',
-	],
+	'title' => 'RuneTime Radio',
+	'close' => 'Close',
 	'info' => [
 		'title' => 'Information',
-		'dj' => [
-			'title' => 'Current DJ:',
+		'dj'    => [
+			'title' => 'Current DJ',
 		],
 		'song' => [
 			'title' => 'Current Song',
@@ -20,12 +14,20 @@ return [
 			'title' => 'Requests',
 		],
 	],
+	'na' => 'N/A', // Not Available
 	'options' => [
-		'song_history'   => 'Song History',
-		'request_song'   => 'Request Song From DJ',
 		'dj_timetable'   => 'DJ Timetable',
-		'view_requests'  => 'View Requests',
 		'edit_timetable' => 'Edit Timetable',
+		'request_song'   => 'Request Song From DJ',
+		'song_history'   => 'Song History',
+		'view_requests'  => 'View Requests',
 	],
-	'close' => 'Close',
+	'player' => [
+		'title'   => 'Radio Player',
+		'click'   => 'Click here',
+		'message' => 'to listen to RuneTime Radio!',
+		'off'     => 'Off',
+		'on'      => 'On',
+		'status'  => 'Status',
+	],
 ];

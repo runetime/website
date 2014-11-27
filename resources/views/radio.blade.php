@@ -38,14 +38,14 @@
 									@lang('radio.info.dj.title')
 								</h4>
 								<p id='radio-dj' class='holo-text-secondary'>
-									N/A
+									@lang('radio.na')
 								</p>
 								<p class='holo-text-third' rt-data='radio:message.contents'></p>
 								<h4 class='holo-text'>
 									@lang('radio.info.song.title')
 								</h4>
 								<p>
-									<span id='radio-song-name' class='holo-text-secondary'>N/A</span> by <span id='radio-song-artist' class='holo-text-secondary'>N/A</span>
+									<span id='radio-song-name' class='holo-text-secondary'>@lang('radio.na')</span> @lang('utilities.by') <span id='radio-song-artist' class='holo-text-secondary'>@lang('radio.na')</span>
 								</p>
 							</div>
 							<div class='col-xs-12 col-md-6'>
