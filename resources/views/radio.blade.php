@@ -77,11 +77,8 @@
 @include('partials.chat')
 				</div>
 			</div>
-			<script src='/js/chatbox.js'></script>
-			<script src='/js/radio.js'></script>
 			<script>
                 $(function () {
-                    "use strict";
                     chatbox = new Chatbox('radio');
                     radio = new Radio();
                 });
