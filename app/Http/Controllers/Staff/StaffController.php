@@ -62,7 +62,7 @@ class StaffController extends BaseController {
 	 */
 	public function postCheckup(CheckupRequest $form) {
 		$hoursActive = with(new \Parsedown)->text($form->hours_active);
-		$checkup =with(new Checkup)->saveNew($form->active, $hoursActive, $form->team);
+		$checkup = with(new Checkup)->saveNew($form->active, $hoursActive, $form->team);
 		$checkup->addAuthor(\Auth::user());
 		return \redirect()->to('staff');
 	}
