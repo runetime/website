@@ -36,7 +36,7 @@ class MembersController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getPage($searchRole = 'none', $searchPrefix = 'none', $searchOrder = 'none', $page = 1) {
+	public function getIndex($searchRole = 'none', $searchPrefix = 'none', $searchOrder = 'none', $page = 1) {
 		$members = $this->users->getByOptions($searchRole, $searchPrefix, $searchOrder, $page);
 		$roles = $this->roles->getAll();
 		$prefixes = range('a', 'z');

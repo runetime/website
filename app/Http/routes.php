@@ -90,9 +90,7 @@ Route::group(['prefix' => 'chat'], function() {
 /**
  * Clan
  */
-Route::group(['prefix' => 'clan'], function() {
-	get('/', 'ClanController@getIndex');
-});
+get('clan', 'ClanController@getIndex');
 
 /**
  * Databases
@@ -224,7 +222,6 @@ Route::group(['prefix' => 'get'], function() {
 	post('signup/email', 'GetController@postEmail');
 	post('signup/display_name', 'GetController@postDisplayName');
 	get('hiscore/{rsn}', 'GetController@getHiscore');
-	get('bbcode', 'GetController@getBBCode');
 });
 
 /**
@@ -308,18 +305,16 @@ Route::group(['prefix' => 'map'], function() {
 	});
 });
 
-/**
- * Media
- */
+# Media
 get('media', 'MediaController@getIndex');
 
 /**
  * Members
  */
 Route::group(['prefix' => 'members'], function() {
-	get('/', 'MembersController@getPage', ['page' => 1]);
-	get('role={searchRole}/prefix={searchPrefix}/order={searchOrder}', 'MembersController@getPage');
-	get('role={searchRole}/prefix={searchPrefix}/order={searchOrder}/page={page}', 'MembersController@getPage');
+	get('/', 'MembersController@getIndex');
+	get('role={searchRole}/prefix={searchPrefix}/order={searchOrder}', 'MembersController@getIndex');
+	get('role={searchRole}/prefix={searchPrefix}/order={searchOrder}/page={page}', 'MembersController@getIndex');
 });
 
 /**
