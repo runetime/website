@@ -2,9 +2,10 @@
 return [
 	'name' => 'Forums',
 	'bar'  => [
-		'total_posts'   => 'total posts',
-		'total_members' => 'total members',
 		'most_online'   => 'most online',
+		'newest_member' => 'newest member',
+		'total_members' => 'total members',
+		'total_posts'   => 'total posts',
 	],
 	'online' => [
 		'current' => ':amount users are online',

@@ -64,7 +64,7 @@
 							<li>
 								<span class='label label-dark'>
 @if(!empty($forumInfo->latest->id))
-									{!! \Link::name($forumInfo->latest->id) !!}</span> newest member
+									{!! \Link::name($forumInfo->latest->id) !!}</span> @lang('forums.bar.newest_member')
 @endif
 							</li>
 							<li>

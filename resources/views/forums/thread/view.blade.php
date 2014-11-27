@@ -10,7 +10,7 @@
 							<h1>
 								{{ $thread->title }}
 							</h1>
-							@lang('forums.by') {!! \Link::name($thread->author_id) !!}, {{ \Time::shortReadable($thread->created_at) }}
+							@lang('utilities.by') {!! \Link::name($thread->author_id) !!}, {{ \Time::shortReadable($thread->created_at) }}
 						</div>
 					</div>
 @if(!empty($thread->tags))
