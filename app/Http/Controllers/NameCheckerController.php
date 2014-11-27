@@ -6,8 +6,8 @@ class NameCheckerController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->nav('Runescape');
-		$this->title('Name Checker');
+		$this->nav('navbar.runescape.runescape');
+		$this->title(trans('namechecker.title'));
 		return $this->view('namechecker');
 	}
 
