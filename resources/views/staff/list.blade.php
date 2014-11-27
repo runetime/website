@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Staff List
+					@lang('staff.list.title')
 				</h1>
 @if(count($admins) > 0)
 				<h2>

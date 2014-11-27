@@ -1,5 +1,8 @@
 <?php
 return [
+	'list' => [
+		'title' => 'Staff List',
+	],
 	'moderation' => [
 		'name'    => 'Moderation Panel',
 		'reports' => [
