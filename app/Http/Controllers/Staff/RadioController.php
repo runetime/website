@@ -4,17 +4,12 @@ use App\Http\Requests\Staff\RadioMessageRequest;
 use App\Http\Requests\Staff\RadioTimetableRequest;
 use App\Http\Requests\Staff\RadioLiveMessage;
 use App\Http\Requests\Staff\RadioLiveRequest;
-use App\RuneTime\Checkup\CheckupRepository;
-use App\RuneTime\Forum\Reports\ReportRepository;
-use App\RuneTime\Forum\Threads\PostRepository;
-use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Message;
 use App\RuneTime\Radio\MessageRepository;
 use App\RuneTime\Radio\Session;
 use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
-use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 class StaffRadioController extends BaseController {
 	/**
@@ -90,8 +85,7 @@ class StaffRadioController extends BaseController {
 		$user = $this->users->getById($live);
 		if(!$user) {
 			\Cache::forever('radio.dj.current', \Auth::user()->id);
-			$session = new Session;
-			$session->saveNew(\Auth::user()->id, -1, Session::STATUS_PLAYING);
+			with(new Session)->saveNew(\Auth::user()->id, -1, Session::STATUS_PLAYING);
 		}
 		return \redirect()->to('/staff/radio/live');
 	}
@@ -105,9 +99,8 @@ class StaffRadioController extends BaseController {
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		$session->message_id = $form->id;
 		$session->save();
-		$request = ['message' => $session->message->contents_parsed];
 		header('Content-Type: application/json');
-		return json_encode($request);
+		return json_encode(['message' => $session->message->contents_parsed]);
 	}
 
 	/**
@@ -116,9 +109,8 @@ class StaffRadioController extends BaseController {
 	public function getRadioLiveUpdate() {
 		$update = ['song' => ['name' => '', 'artist' => ''], 'message' => '', 'requests' => []];
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
-		if($session->message_id !== -1) {
+		if($session->message_id !== -1)
 			$update['message'] = $session->message->contents_parsed;
-		}
 		$song = $this->history->getLatest();
 		if($song)
 			$update['song'] = ['name' => $song->song, 'artist' => $song->artist];
@@ -131,7 +123,7 @@ class StaffRadioController extends BaseController {
 	 */
 	public function getRadioLiveStop() {
 		$live = \Cache::get('radio.dj.current');
-		if($live)
+		if($live) {
 			if($live === \Auth::user()->id || \Auth::user()->isAdmin()) {
 				\Cache::forever('radio.dj.current', null);
 				$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
@@ -140,6 +132,7 @@ class StaffRadioController extends BaseController {
 					$session->save();
 				}
 			}
+		}
 		return \redirect()->to('/staff/radio');
 	}
 
@@ -161,8 +154,7 @@ class StaffRadioController extends BaseController {
 	 */
 	public function postRadioMessages(RadioMessageRequest $form) {
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$message = new Message;
-		$message->saveNew(\Auth::user()->id, $form->contents, $contentsParsed);
+		with(new Message)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed);
 		return \redirect()->to('/staff/radio/messages');
 	}
 
