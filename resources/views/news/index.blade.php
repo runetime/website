@@ -2,14 +2,14 @@
 @section('contents')
 			<div class='wrapper wrapper-none-res'>
 				<h1>
-					News
+					@lang('news.title')
 				</h1>
 @if($canAdd)
 				<div class='clearfix'>
 					<ul class='list-inline pull-right'>
 						<li>
-							<a href='/news/create' class='btn btn-primary' title='Create News Piece'>
-								<i class='fa fa-plus'></i> Create Newspiece
+							<a href='/news/create' class='btn btn-primary'>
+								<i class='fa fa-plus'></i> @lang('news.create_newspiece')
 							</a>
 						</li>
 					</ul>

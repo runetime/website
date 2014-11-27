@@ -3,7 +3,7 @@
 					{{ $news->title }}
 				</h1>
 				<p class='text-muted'>
-					{{ \Time::shortTime($news->created_at) }} by {!! \Link::name($news->author_id) !!}
+					{{ \Time::shortTime($news->created_at) }} @lang('utilities.by') {!! \Link::name($news->author_id) !!}
 				</p>
 			</div>
 			<div class='wrapper-dark'>
@@ -13,7 +13,7 @@
 				{!! $news->contents_parsed !!}
 			</div>
 			<div class='wrapper'>
-				Tagged as
+				@lang('tags.tagged_as')
 				<ul class='list-inline inline'>
 @foreach($news->tags as $tag)
 					<li>

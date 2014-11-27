@@ -2,7 +2,7 @@
 @section('contents')
 @include('news._show', ['news' => $news])
 				<h2 id='comments'>
-					Comments
+					@lang('utilities.comments')
 				</h2>
 @foreach($posts as $post)
 	@include('forums.post._show', ['post' => $post])
