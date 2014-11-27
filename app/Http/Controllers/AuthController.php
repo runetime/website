@@ -105,7 +105,7 @@ class AuthController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getPasswordEmail() {
-		$this->nav('navbar.login');
+		$this->nav('navbar.logged.out.login');
 		$this->title(trans('auth.reset.title'));
 		return $this->view('auth.password.email');
 	}
@@ -134,7 +134,7 @@ class AuthController extends BaseController {
 		$reset = $this->resets->getByToken($token);
 		if(!$reset)
 			\App::abort(404);
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.logged.out.login');
 		$this->title(trans('auth.reset.title'));
 		return $this->view('auth.password.reset', compact('reset'));
 	}
