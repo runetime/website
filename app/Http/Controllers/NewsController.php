@@ -75,15 +75,13 @@ class NewsController extends BaseController {
 	 */
 	public function postCreate(CreateNewsRequest $form) {
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$news = new News;
-		$news = $news->saveNew(\Auth::user()->id, $form->name, $form->contents, $contentsParsed, 0, News::STATUS_PUBLISHED);
+		$news = with(new News)->saveNew(\Auth::user()->id, $form->name, $form->contents, $contentsParsed, 0, News::STATUS_PUBLISHED);
 		if(\Request::hasFile('image')) {
 			\Img::make($form->file('image'))->save();
 			$thumbnail = \Img::make($form->file('image'));
 			$h = $thumbnail->height();
 			$w = $thumbnail->width();
-			$max = max($h, $w);
-			$scale = $max / 200;
+			$scale = max($h, $w) / 200;
 			$h /= $scale;
 			$w /= $scale;
 			$thumbnail->resize((int) $w, (int) $h);
@@ -92,12 +90,10 @@ class NewsController extends BaseController {
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
 			$tag = $this->tags->getByName($tagName);
-			if(empty($tag)) {
-				$tag = new Tag;
-				$tag = $tag->saveNew(\Auth::user()->id, $tagName);
-			} else {
+			if(empty($tag))
+				$tag = with(new Tag)->saveNew(\Auth::user()->id, $tagName);
+			else
 				$tag = $this->tags->getByName($tagName);
-			}
 			$news->addTag($tag);
 		}
 		return \redirect()->to($news->toSlug());
@@ -114,8 +110,7 @@ class NewsController extends BaseController {
 		if(empty($news))
 			\App::abort(404);
 		$parsedContents = with(new \Parsedown)->text($form->contents);
-		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$news->addPost($post);
 		$news->incrementPosts();
 		return \redirect()->to($news->toSlug('#comments'));
