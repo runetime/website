@@ -71,7 +71,7 @@ class String{
 	 *
 	 * @return int
 	 */
-	public static function encodeIP($ip=""){
+	public static function encodeIP($ip = ''){
 		if(empty($ip))
 			$ip = \Request::ip();
 		return ip2long($ip);
