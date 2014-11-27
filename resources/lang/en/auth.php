@@ -2,9 +2,16 @@
 return [
 	'login' => [
 		'email_address' => 'Email Address',
-		'forgot'       => 'Forgot your password?',
+		'forgot'        => 'Forgot your password?',
 		'login'         => 'Login',
 		'password'      => 'Password',
+	],
+	'reset' => [
+		'title'                 => 'Password Reset',
+		'note'                  => 'An email will be sent to your account with a password reset link.',
+		'password_new'          => 'New Password',
+		'password_confirmation' => 'New Password Confirmation',
+		'reset_password'        => 'Reset Password',
 	],
 	'signup' => [
 		'display_name'     => 'Display Name',

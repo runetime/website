@@ -7,18 +7,17 @@
 				</p>
 @endif
 				<form action='' method='post' class='form-horizontal' role='form'>
-					<input type='hidden' name='token' value='{{$token}}' disabled required />
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='email'>
-							Email Address
+							@lang('auth.login.email_address')
 						</label>
 						<div class='col-lg-10'>
-							<input id='email' class='form-control' type='text' name='email' placeholder='john@example.com' required />
+							<input id='email' class='form-control' type='text' name='email' value='{{ $reset->email }}' required disabled />
 						</div>
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='password'>
-							New Password
+							@lang('auth.reset.password_new')
 						</label>
 						<div class='col-lg-10'>
 							<input id='password' class='form-control' type='password' name='password' required />
@@ -26,7 +25,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='password_confirmation'>
-							New Password Confirmation
+							@lang('auth.reset.password_confirmation')
 						</label>
 						<div class='col-lg-10'>
 							<input id='password_confirmation' class='form-control' type='password' name='password_confirmation' required />
@@ -35,7 +34,7 @@
 					<div class='form-group'>
 						<div class='col-lg-offset-2 col-lg-10'>
 							<button class='btn btn-primary' type='submit'>
-								Reset Password
+								@lang('auth.reset.reset_password')
 							</button>
 						</div>
 					</div>
