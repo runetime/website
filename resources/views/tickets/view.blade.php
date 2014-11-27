@@ -5,7 +5,7 @@
 					{{ $ticket->name }}
 				</h1>
 				<p>
-					This ticket is currently {!! $ticket->status == 0 ? "<span class='text-success'>open</span>" : "<span class='text-danger'>closed</span>" !!}.
+					@lang('tickets.view.currently', ['status' => ($ticket->status == 0 ? "<span class='text-success'>" . Lang::get('tickets.status.open') . "</span>" : "<span class='text-danger'>" . Lang::get('tickets.status.closed') . "</span>")])
 				</p>
 @foreach($posts as $post)
 	@include('forums.post._show', ['post' => $post])

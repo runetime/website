@@ -2,10 +2,10 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Manage Tickets
+					@lang('tickets.manage.title')
 				</h1>
 				<h3 class='text-success'>
-					Open Tickets
+					@lang('tickets.manage.tickets_open')
 				</h3>
 @if(count($ticketsOpen) > 0)
 	@foreach($ticketsOpen as $ticket)
@@ -14,12 +14,12 @@
 @else
 				<p class='text-info'>
 					<em>
-						There are currently no open tickets.
+						@lang('tickets.manage.none', ['status' => Lang::get('tickets.status.open')])
 					</em>
 				</p>
 @endif
 				<h3 class='text-danger'>
-					Closed Tickets
+					@lang('tickets.manage.tickets_closed')
 				</h3>
 @if(count($ticketsClosed) > 0)
 	@foreach($ticketsClosed as $ticket)
@@ -28,7 +28,7 @@
 @else
 				<p class='text-info'>
 					<em>
-						There are currently no closed tickets.
+						@lang('tickets.manage.none', ['status' => Lang::get('tickets.status.closed')])
 					</em>
 				</p>
 @endif
