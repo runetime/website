@@ -98,7 +98,7 @@ $current = $nav;
 @foreach($js as $jsFile)
 		<script src='/js/{{ $jsFile }}.js'></script>
 @endforeach
-		<script src='/js/compiled.js'></script>
+		<script src='/js/modules.js'></script>
 @if(\Auth::check() && \Auth::user()->isStaff())
 		<script src='/js/admin.js'></script>
 @endif

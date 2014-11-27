@@ -2,13 +2,13 @@
 
 call tsc --out temp-admin.js modules/admin.ts
 
-call tsc --out temp-compiled.js modules/calculator.ts modules/chatbox.ts modules/combatcalculator.ts modules/forums.ts modules/livestream.ts modules/namechecker.ts modules/notifications.ts modules/radio.ts modules/signup.ts modules/staff_list.ts modules/utilities.ts
+call tsc --out temp-modules.js modules/calculator.ts modules/chatbox.ts modules/combatcalculator.ts modules/forums.ts modules/livestream.ts modules/namechecker.ts modules/notifications.ts modules/radio.ts modules/signup.ts modules/staff_list.ts modules/utilities.ts
 
 
 :: UglifyJS
 
 call uglifyjs temp-admin.js -c -m -o ./../../../public/js/admin.js
-call uglifyjs temp-compiled.js -c -m -o ./../../../public/js/compiled.js
+call uglifyjs temp-modules.js -c -m -o ./../../../public/js/compiled.js
 
 
 :: Vendor
@@ -18,4 +18,4 @@ call uglifyjs vendor/jquery.js vendor/jquery-ui.js vendor/bootstrap.js vendor/ja
 :: Remove temporary files
 
 call del .\temp-admin.js
-call del .\temp-compiled.js
+call del .\temp-modules.js
