@@ -8,6 +8,7 @@ use App\Http\Requests\Forums\PostVoteRequest;
 use App\Http\Requests\Forums\ReplyRequest;
 use App\Http\Requests\Forums\ThreadCreateForm;
 use App\Http\Requests\Forums\ThreadCreateRequest;
+use App\RuneTime\Forum\Polls\Poll;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Subforums\SubforumRepository;
 use App\RuneTime\Forum\Tags\Tag;
@@ -183,16 +184,24 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @param                     $id
 	 * @param ThreadCreateRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postThreadCreate(ThreadCreateRequest $form) {
-		$subforum = $this->subforums->getById($form->subforum);
+	public function postThreadCreate($id, ThreadCreateRequest $form) {
+		$subforum = $this->subforums->getById($id);
 		if(empty($subforum))
-			\App::abort(404);
-		$poll = -1;
-		$thread = with(new Thread)->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, $poll, Thread::STATUS_VISIBLE);
+			abort(404);
+		$poll = [];
+		foreach($form->questions as $key => $question)
+			if(!empty($question))
+				$poll[$key] = [];
+		foreach($form->answers as $questionKey => $answerToQuestion)
+			foreach($answerToQuestion as $answerKey => $answer)
+				if(!empty($answer))
+					$poll[$questionKey][$answerKey] = $answer;
+		$thread = with(new Thread)->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, -1, Thread::STATUS_VISIBLE);
 		$post = with(new Post)->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
 		$post->author->incrementReputation();
 		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
@@ -205,6 +214,11 @@ class ForumController extends BaseController {
 			if(empty($tag))
 				$tag = with(new Tag)->saveNew(\Auth::user()->id, $tagName);
 			$thread->addTag($tag);
+		}
+		if(!empty($poll)) {
+			$poll = with(new Poll)->saveNew($thread->id, json_encode($poll));
+			$thread->poll_id = $poll->id;
+			$thread->save();
 		}
 		$this->subforums->incrementPosts($subforum->id);
 		$this->subforums->updateLastPost($post->id, $subforum->id);
@@ -275,6 +289,19 @@ class ForumController extends BaseController {
 	}
 
 	/**
+	 * @param PostReportRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postPostReport(PostReportRequest $form) {
+		$contentsParsed = with(new \Parsedown)->text($form->contents);
+		$report = with(new Report)->saveNew(\Auth::user()->id, $form->id, Report::TYPE_POST, Report::STATUS_OPEN);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$report->addPost($post);
+		return \redirect()->to('/forums');
+	}
+
+	/**
 	 * @param                 $id
 	 * @param PostVoteRequest $form
 	 *
@@ -322,19 +349,6 @@ class ForumController extends BaseController {
 		$response = ['voted' => $newStatus];
 		header('Content-Type: application/json');
 		return json_encode($response);
-	}
-
-	/**
-	 * @param PostReportRequest $form
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postPostReport(PostReportRequest $form) {
-		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$report = with(new Report)->saveNew(\Auth::user()->id, $form->id, Report::TYPE_POST, Report::STATUS_OPEN);
-		$post = with(new Post)->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
-		$report->addPost($post);
-		return \redirect()->to('/forums');
 	}
 
 	/**
