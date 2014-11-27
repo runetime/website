@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Calculators
+					@lang('calculator.title')
 				</h1>
 				<div class='row'>
 @foreach($calculators as $calculator)

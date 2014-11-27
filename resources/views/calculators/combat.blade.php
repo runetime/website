@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper-dark'>
 				<h1>
-					<img src='/img/skills/large/attack.png' alt='Combat Calculator' class='img-responsive pull-left' /> Combat Calculator
+					<img src='/img/skills/large/attack.png' alt='@lang('calculator.combat.title')' class='img-responsive pull-left' /> @lang('calculator.combat.title')
 				</h1>
 				<div class='row text-center'>
 					<div class='col-xs-12 col-sm-4'>
@@ -18,7 +18,7 @@
 					</div>
 					<div class='col-xs-12 col-sm-6'>
 						<h3 class='holo-text'>
-							Combat Level
+							@lang('calculator.combat.level')
 						</h3>
 						<p class='holo-text-secondary' rt-data='combat.calculator:level'>
 							4
@@ -29,56 +29,56 @@
 			<div class='wrapper'>
 				<dl class='dl-horizontal'>
 					<dt>
-						Attack
+						@lang('skills.attack')
 					</dt>
 					<dd>
 						<img src='/img/skills/attack.png' />
 						<input type='text' size='3' value='1' style='display:inline !important;' rt-data='combat.calculator:attack' />
 					</dd>
 					<dt>
-						Defence
+						@lang('skills.defence')
 					</dt>
 					<dd>
 						<img src='/img/skills/defence.png' />
 						<input type='text' size='3' value='1' style='display:inline !important;' rt-data='combat.calculator:defence' />
 					</dd>
 					<dt>
-						Strength
+						@lang('skills.strength')
 					</dt>
 					<dd>
 						<img src='/img/skills/strength.png' />
 						<input type='text' size='3' value='1' style='display:inline !important;' rt-data='combat.calculator:strength' />
 					</dd>
 					<dt>
-						Constitution
+						@lang('skills.constitution')
 					</dt>
 					<dd>
 						<img src='/img/skills/constitution.png' />
 						<input type='text' size='3' value='10' style='display:inline !important;' rt-data='combat.calculator:constitution' />
 					</dd>
 					<dt>
-						Ranged
+						@lang('skills.ranged')
 					</dt>
 					<dd>
 						<img src='/img/skills/ranged.png' />
 						<input type='text' size='3' value='1' style='display:inline !important;' rt-data='combat.calculator:ranged' />
 					</dd>
 					<dt>
-						Prayer
+						@lang('skills.prayer')
 					</dt>
 					<dd>
 						<img src='/img/skills/prayer.png' />
 						<input type='text' size='3' value='1' style='display:inline !important;' rt-data='combat.calculator:prayer' />
 					</dd>
 					<dt>
-						Magic
+						@lang('skills.magic')
 					</dt>
 					<dd>
 						<img src='/img/skills/magic.png' />
 						<input type='text' size='3' value='1' style='display:inline !important;' rt-data='combat.calculator:magic' />
 					</dd>
 					<dt>
-						Summoning
+						@lang('skills.summoning')
 					</dt>
 					<dd>
 						<img src='/img/skills/summoning.png' />

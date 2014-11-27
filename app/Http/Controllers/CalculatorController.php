@@ -25,8 +25,8 @@ class CalculatorController extends BaseController {
 	 */
 	public function getIndex() {
 		$calculators = $this->calculators->getAll();
-		$this->nav('Runescape');
-		$this->title('Calculators');
+		$this->nav('navbar.runescape.runescape');
+		$this->title(trans('calculator.title'));
 		return $this->view('calculators.index', compact('calculators'));
 	}
 
@@ -34,12 +34,17 @@ class CalculatorController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getCombat() {
-		$this->bc(['calculators' => 'Calculators']);
+		$this->bc(['calculators' => trans('calculator.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Combat Calculator');
+		$this->title(trans('calculator.combat.title'));
 		return $this->view('calculators.combat');
 	}
 
+	/**
+	 * @param CombatLoadRequest $form
+	 *
+	 * @return string
+	 */
 	public function getCombatLoad(CombatLoadRequest $form) {
 		$scores = \String::getHiscore($form->rsn);
 		$skills = (object)[
@@ -67,9 +72,9 @@ class CalculatorController extends BaseController {
 		$items = json_decode($calculator->items);
 		$levelsRequired = json_decode($calculator->levels_required);
 		$xp = json_decode($calculator->xp);
-		$this->bc(['calculators' => 'Calculators']);
-		$this->nav('Runescape');
-		$this->title($calculator->name . ' Calculator');
+		$this->bc(['calculators' => trans('calculator.title')]);
+		$this->nav('navbar.runescape.runescape');
+		$this->title(trans('calculator.calculator', ['name' => $calculator->name]));
 		return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
 	}
 
