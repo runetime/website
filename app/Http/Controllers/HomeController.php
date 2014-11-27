@@ -45,6 +45,6 @@ class HomeController extends BaseController {
 		$this->bc(false);
 		$this->nav('navbar.home');
 		$this->title(trans('navbar.home'));
-		return $this->view('home.index', compact('news', 'statuses', 'threads', 'posts'));
+		return $this->view('index', compact('news', 'statuses', 'threads', 'posts'));
 	}
 }
