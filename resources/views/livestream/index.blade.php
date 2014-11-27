@@ -5,7 +5,7 @@
 				<ul class='list-inline pull-right'>
 					<li>
 						<a href='/livestream/reset' class='btn btn-sm btn-primary'>
-							Recheck Status
+							<i class='fa fa-refresh'></i> @lang('livestream.reset_status')
 						</a>
 					</li>
 				</ul>
@@ -41,7 +41,7 @@
 				</script>
 @else
 				<h2 class='text-danger text-center'>
-					RuneTime is currently not streaming
+					@lang('livestream.not_streaming')
 				</h2>
 				<div id='chatbox-holder' class='col-xs-12'>
 @include('partials.chat')
