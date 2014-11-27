@@ -298,4 +298,13 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	public function reputationChange($amount) {
 		$this->increment('reputation', $amount);
 	}
+
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
+	public function toSlug($path = '') {
+		return url('profile/' . \String::slugEncode($this->id, $this->display_name) . (!empty($path) ? '/' . $path : ''));
+	}
 }

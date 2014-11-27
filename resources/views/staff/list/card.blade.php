@@ -3,7 +3,7 @@
 								<div class='front'>
 								</div>
 								<div class='back'>
-									<a href='/profile/{{ \String::slugEncode($member->id, $member->display_name) }}' title="Visit {{ $member->display_name }}'s profile">
+									<a href='{{ $member->toSlug() }}' title="Visit {{ $member->display_name }}'s profile">
 										<div class='back-logo center-block'>
 											<img src='/img/forums/photos/{{ $member->id }}.png' class='img-rounded center-block img-resposive' />
 										</div>
