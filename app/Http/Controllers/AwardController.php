@@ -17,8 +17,8 @@ class AwardController extends BaseController {
 	 */
 	public function getIndex() {
 		$awards = $this->awards->getByStatus(Award::STATUS_AVAILABLE);
-		$this->nav('RuneTime');
-		$this->title('Awards');
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('awards.title'));
 		return $this->view('awards.index', compact('awards'));
 	}
 
@@ -29,9 +29,9 @@ class AwardController extends BaseController {
 	public function getView($slug) {
 		$award = $this->awards->getBySlug($slug);
 		$awardees = $award->users;
-		$this->bc(['awards' => 'Awards']);
-		$this->nav('RuneTime');
-		$this->title($award->name . " Award");
+		$this->bc(['awards' => trans('awards.title')]);
+		$this->nav('navbar.runetime.runetime');
+		$this->title($award->name . trans('awards.award'));
 		return $this->view('awards.view', compact('award', 'awardees'));
 	}
 }

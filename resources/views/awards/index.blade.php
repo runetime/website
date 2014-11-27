@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h2>
-					@lang('awards.name')
+					@lang('awards.title')
 				</h2>
 @foreach($awards as $award)
 				<div class='award-list row'>

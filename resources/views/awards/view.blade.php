@@ -14,10 +14,10 @@
 								&nbsp;
 							</td>
 							<td>
-								Name
+								@lang('fields.name')
 							</td>
 							<td>
-								Title
+								@lang('fields.title')
 							</td>
 						</tr>
 					</thead>

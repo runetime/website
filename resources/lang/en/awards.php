@@ -1,7 +1,8 @@
 <?php
 return [
-	'name'          => 'RuneTime Awards',
-	'view_awardees' => 'View Awardees',
+	'title'         => 'RuneTime Awards',
+	'award'         => 'Award',
+	'last_awarded'  => 'Last Awarded: :time',
 	'times_awarded' => 'Times Awarded: :amount',
-	'last_awarded'  => 'Last Awarded: :time'
+	'view_awardees' => 'View Awardees',
 ];
