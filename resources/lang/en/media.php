@@ -1,5 +1,6 @@
 <?php
 return [
+	'title' => 'Social Media',
 	'facebook' => [
 		'name' => 'Facebook',
 	],

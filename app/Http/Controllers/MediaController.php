@@ -5,8 +5,8 @@ class MediaController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->nav('Social');
-		$this->title('Social Media');
+		$this->nav('navbar.social.social');
+		$this->title(trans('media.title'));
 		return $this->view('media');
 	}
 }
