@@ -6,11 +6,10 @@ class LivestreamController extends BaseController {
 	 */
 	public function getIndex() {
 		if(!\Cache::has('livestream.status'))
-			$this->getReset();
+			$this->postReset();
 		$status = \Cache::get('livestream.status');
-		$this->js(['chatbox']);
 		$this->nav('navbar.social.social');
-		$this->title('Livestream');
+		$this->title(trans('livestream.title'));
 		return $this->view('livestream.index', compact('status'));
 	}
 
@@ -18,9 +17,9 @@ class LivestreamController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getReset() {
-		$this->bc(['livestream' => 'Livestream']);
-		$this->nav('Social');
-		$this->title('Reset');
+		$this->bc(['livestream' => trans('livestream.title')]);
+		$this->nav('navbar.social.social');
+		$this->title(trans('livestream.reset.title'));
 		return $this->view('livestream.reset');
 	}
 
