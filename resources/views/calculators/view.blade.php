@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper-dark'>
 				<h1>
-					<img src='/img/skills/large/{{$calculator->name_trim}}.png' alt='Firemaking' class='img-responsive pull-left' /> {{$calculator->name}} Calculator
+					<img src='/img/skills/large/{{ $calculator->name_trim }}.png' alt='Firemaking' class='img-responsive pull-left' /> {{ $calculator->name }} Calculator
 				</h1>
 				<div class='row text-center'>
 					<div class='col-xs-12 col-sm-4'>
