@@ -8,7 +8,7 @@ call tsc --out temp-modules.js modules/calculator.ts modules/chatbox.ts modules/
 :: UglifyJS
 
 call uglifyjs temp-admin.js -c -m -o ./../../../public/js/admin.js
-call uglifyjs temp-modules.js -c -m -o ./../../../public/js/compiled.js
+call uglifyjs temp-modules.js -c -m -o ./../../../public/js/modules.js
 
 
 :: Vendor
