@@ -12,18 +12,18 @@
                     <h3>
                         {{ $newsPiece->title }}
                     </h3>
-                    <span class='text-muted'>{{ Time::long($newsPiece->id) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
+                    <span class='text-muted'>{{ Time::long($newsPiece->created_at) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
                     <p>
                         {!! $newsPiece->contents_parsed !!}
                     </p>
                     <ul class='list-inline'>
                         <li>
-                            <a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}' title='{{ $newsPiece->title }}'>
+                            <a href='{{ $newsPiece->toSlug() }}' title='{{ $newsPiece->title }}'>
                                @lang('utilities.read_more')
                             </a>
                         </li>
                         <li>
-                            <a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}#comments') }}'>
+                            <a href='{{ $newsPiece->toSlug('#comments') }}') }}'>
                                 @lang('utilities.comments', ['amount' => $newsPiece->post_count])
                             </a>
                         </li>

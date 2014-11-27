@@ -8,7 +8,7 @@
 	@include('forums.post._show', ['post' => $post])
 @endforeach
 @if(\Auth::check())
-    @include('forums.post._edit', ['url' => '/news/' . \String::slugEncode($news->id, $news->title) . '/reply'])
+    @include('forums.post._edit', ['url' => $news->toSlug('reply')])
 @else
 	@include('forums.post._auth')
 @endif

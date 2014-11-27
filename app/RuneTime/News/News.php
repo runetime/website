@@ -56,4 +56,8 @@ class News extends Entity{
 			return $path;
 		return false;
 	}
+
+	public function toSlug($path = '') {
+		return url('news/' . \String::slugEncode($this->id, $this->title) . (!empty($path) ? '/' . $path : ''));
+	}
 }

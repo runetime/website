@@ -26,9 +26,8 @@
 										</a>
 									</li>
 									<li>
-										<a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}#comments') }}' title='{{ $newsPiece->comments }} comments'>
-											{{ $newsPiece->post_count }} comments
-											@lang('comments_amount', ['amount' => $newsPiece->post_count])
+										<a href='{{ $newsPiece->toSlug('#comments') }}'>
+											@lang('utilities.comments_amount', ['amount' => $newsPiece->post_count])
 										</a>
 									</li>
 								</ul>
