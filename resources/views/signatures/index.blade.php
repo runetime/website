@@ -19,7 +19,7 @@
 					</div>
 				</form>
 				<p class='text-warning'>
-					Please note that signatures do not update instantly, but instead update every 24 hours at midnight London time.
+					@lang('signature.name.note')
 				</p>
 			</div>
 @stop

@@ -7,7 +7,7 @@
 				<img src='/signatures/h{{ $hash }}' alt='RuneTime Signature for {{ $username }}' />
 				<br />
 				<p class='text-info'>
-					RuneTime uses <b>Markdown</b>, not BBCode.
+					@lang('signature.final.note')
 				</p>
 				<dl class='dl-horizontal'>
 					<dt>
