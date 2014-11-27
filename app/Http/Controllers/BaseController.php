@@ -8,7 +8,7 @@ class BaseController extends Controller {
 	protected $bc = [];
 	protected $displayPageHeader = true;
 	protected $js = [];
-	protected $nav;
+	protected $nav = '';
 	protected $title = '';
 
 	/**
@@ -33,9 +33,10 @@ class BaseController extends Controller {
 	 */
 	protected function nav($nav) {
 		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
-		if(empty($locale))
+		if(empty($locale)) {
 			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', 'en');
-		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
+			$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
+		}
 		\Lang::setLocale($locale);
 		$this->nav = trans($nav);
 	}
@@ -52,8 +53,7 @@ class BaseController extends Controller {
 	 * @param $newTitle
 	 */
 	protected function title($newTitle) {
-		if(!empty($newTitle))
-			$this->title = $newTitle;
+		$this->title = $newTitle;
 	}
 
 	/**
@@ -71,9 +71,8 @@ class BaseController extends Controller {
 		$data['url'] = \Request::getPathInfo();
 		$this->updateCache();
 		$bans = new IPRepository(new IP);
-		if($bans->getByIP(\Request::getClientIp())) {
+		if($bans->getByIP(\Request::getClientIp()))
 			return \View::make('errors.banned', $data);
-		}
 		return \View::make($path, $data);
 	}
 
@@ -82,9 +81,9 @@ class BaseController extends Controller {
 	 */
 	private function updateCache() {
 		$current = [
-			'url' => \Request::url(),
-			'time' => \Carbon::createFromTimestamp(time()),
-			'title' => $this->title,
+			'url'    => \Request::url(),
+			'time'   => \Carbon::createFromTimestamp(time()),
+			'title'  => $this->title,
 			'logged' => \Auth::check()
 		];
 		$activity = \Cache::get('activity.users');
