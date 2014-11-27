@@ -4,7 +4,7 @@
 				<div class='row'>
 					<div class='col-xs-12 col-sm-8 col-md-9'>
 						<h2>
-							News
+							@lang('news.title')
 						</h2>
 @foreach($news as $newsPiece)
 						<div class='news'>
@@ -22,12 +22,13 @@
 								<ul class='list-inline'>
 									<li>
 										<a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}' title='{{ $newsPiece->title }}'>
-											Read More
+											@lang('utilities.read_more')
 										</a>
 									</li>
 									<li>
 										<a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}#comments') }}' title='{{ $newsPiece->comments }} comments'>
 											{{ $newsPiece->post_count }} comments
+											@lang('comments_amount', ['amount' => $newsPiece->post_count])
 										</a>
 									</li>
 								</ul>
@@ -37,7 +38,7 @@
 					</div>
 					<div class='col-xs-12 col-sm-4 col-md-3'>
 						<h3>
-							Status Updates
+							@lang('home.status_updates')
 						</h3>
 @foreach($statuses as $status)
 						<div class='card row row-flat'>
@@ -54,14 +55,14 @@
 								<br />
 								<p class='inline'>{!! $status->posts[0]->contents_parsed !!}</p>
 								<a href='/forums/statuses/{{ \String::slugEncode($status->id, 'by-', $status->author->display_name) }}#comments' title='View {{ $status->reply_count }}'>
-									Read {{ $status->reply_count }} comments
+									@lang('utilities.read_comments_amount', ['amount' => $status->reply_count])
 								</a>
 							</div>
 						</div>
 @endforeach
 						<p class='text-center'>
 							<a href='/forums/statuses' class='text-muted'>
-								View All Statuses
+								@lang('home.all_statuses')
 							</a>
 						</p>
 						<h3>
