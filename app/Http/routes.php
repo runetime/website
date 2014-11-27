@@ -66,13 +66,6 @@ Route::group(['prefix' => 'calculators'], function() {
 });
 
 /**
- * Calendar
- */
-Route::group(['prefix' => 'calendar'], function() {
-	get('/', 'CalendarController@getIndex');
-});
-
-/**
  * Chat
  */
 Route::group(['prefix' => 'chat'], function() {
