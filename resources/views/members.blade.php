@@ -13,13 +13,13 @@
 					<ul class='list-inline holo-text-secondary'>
 @foreach($roles as $role)
 						<li>
-							<a href='/members/role={{$role->name}}/prefix={{$searchPrefix}}/order={{$searchOrder}}'>
+							<a href='/members/role={{ $role->name }}/prefix={{ $searchPrefix }}/order={{ $searchOrder }}'>
 	@if($searchRole == $role->name)
 								<b>
-									{{$role->name}}
+									{{ $role->name }}
 								</b>
 	@else
-								{{$role->name}}
+								{{ $role->name }}
 	@endif
 							</a>
 						</li>
@@ -33,13 +33,13 @@
 					<ul class='list-inline holo-text-secondary'>
 @foreach($prefixes as $prefix)
 						<li>
-							<a href='/members/role={{$searchRole}}/prefix={{$prefix}}/order={{$searchOrder}}'>
+							<a href='/members/role={{ $searchRole }}/prefix={{ $prefix }}/order={{ $searchOrder }}'>
 	@if($searchPrefix == $prefix)
 								<b>
-									{{$prefix}}
+									{{ $prefix }}
 								</b>
 	@else
-								{{$prefix}}
+								{{ $prefix }}
 	@endif
 							</a>
 						</li>
@@ -53,13 +53,13 @@
 					<ul class='list-inline holo-text-secondary'>
 @foreach($orders as $order)
 						<li>
-							<a href='/members/role={{$searchRole}}/prefix={{$searchPrefix}}/order={{$order}}'>
+							<a href='/members/role={{ $searchRole }}/prefix={{ $searchPrefix }}/order={{ $order }}'>
 	@if($searchOrder == $order)
 								<b>
-									{{ucwords($order)}}
+									{{ ucwords($order) }}
 								</b>
 	@else
-								{{ucwords($order)}}
+								{{ ucwords($order) }}
 	@endif
 							</a>
 						</li>
