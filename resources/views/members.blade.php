@@ -2,13 +2,13 @@
 @section('contents')
 			<div class='wrapper-flat'>
 				<h1>
-					Member List
+					@lang('members.title')
 				</h1>
 			</div>
 			<div class='wrapper-dark row row-margin text-center'>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Role
+						@lang('members.search.role')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($roles as $role)
@@ -28,7 +28,7 @@
 				</div>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Prefix Letter
+						@lang('members.search.prefix')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($prefixes as $prefix)
@@ -48,7 +48,7 @@
 				</div>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Order
+						@lang('members.search.order')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($orders as $order)
