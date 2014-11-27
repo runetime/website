@@ -100,7 +100,7 @@ class NewsController extends BaseController {
 			}
 			$news->addTag($tag);
 		}
-		return \redirect()->to('news/' . \String::slugEncode($news->id, $news->title));
+		return \redirect()->to($news->toSlug());
 	}
 
 	/**
@@ -118,6 +118,6 @@ class NewsController extends BaseController {
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$news->addPost($post);
 		$news->incrementPosts();
-		return \redirect()->to('/news/' . \String::slugEncode($news->id, $news->title) . '#comments');
+		return \redirect()->to($news->toSlug('#comments'));
 	}
 }

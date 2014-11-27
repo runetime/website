@@ -24,6 +24,9 @@ class News extends Entity{
 		return $this->belongsToMany('App\RuneTime\Forum\Tags\Tag');
 	}
 
+	/**
+	 * @param $tag
+	 */
 	public function addTag($tag) {
 		$this->tags()->attach([$tag->id]);
 	}
@@ -50,6 +53,9 @@ class News extends Entity{
 		$this->save();
 	}
 
+	/**
+	 * @return bool|string
+	 */
 	public function hasImage() {
 		$path = 'img/news/thumbnail/' . $this->id . '.png';
 		if(file_exists('./' . $path))
@@ -57,6 +63,11 @@ class News extends Entity{
 		return false;
 	}
 
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
 	public function toSlug($path = '') {
 		return url('news/' . \String::slugEncode($this->id, $this->title) . (!empty($path) ? '/' . $path : ''));
 	}
