@@ -56,9 +56,9 @@ class StaffModeratorController extends BaseController {
 			$report->thread = $this->threads->getById($report->post->thread);
 			array_push($reportList, $report);
 		}
-		$this->bc(['staff' => 'Staff']);
+		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('Moderation Panel');
+		$this->title(trans('staff.moderation.title'));
 		return $this->view('staff.moderation.index', compact('reportList'));
 	}
 
@@ -75,9 +75,9 @@ class StaffModeratorController extends BaseController {
 		$posts = $report->posts;
 		$thread = $this->threads->getById($report->post->thread[0]->id);
 		$status = $report->getStatus();
-		$this->bc(['staff' => 'Staff']);
+		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('Viewing Report #' . $report->id);
+		$this->title(trans('staff.moderation.reports.view.title', ['number' => $report->id]));
 		return $this->view('staff.moderation.report.view', compact('report', 'author', 'posts', 'thread', 'status'));
 	}
 
@@ -118,7 +118,7 @@ class StaffModeratorController extends BaseController {
 		$thread = $this->threads->getById($id);
 		if(!$thread)
 			\App::abort(404);
-		$this->bc(['staff' => 'Staff']);
+		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title('Editing Thread Title');
 		return $this->view('staff.moderation.thread.title', compact('thread'));

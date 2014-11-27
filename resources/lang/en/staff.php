@@ -1,6 +1,15 @@
 <?php
 return [
 	'title'   => 'Staff',
+	'admin'   => [
+		'title' => 'Administrator Panel',
+		'ip'    => [
+			'title' => 'IP Banning',
+		],
+		'users' => [
+			'title' => 'User Management',
+		],
+	],
 	'checkup' => [
 		'title' => 'Staff Checkup',
 		'team'  => [
@@ -10,19 +19,28 @@ return [
 			'graphics'    => 'Graphics',
 			'radio'       => 'Radio',
 		],
+		'view' => [
+			'title' => 'Checkup by :author',
+		],
 	],
 	'index' => [
 		'title' => 'Staff Panel',
-		'wip' => 'Still a work in progress, unfortunately.  Not sure what to put here.',
+		'wip'   => 'Still a work in progress, unfortunately.  Not sure what to put here.',
 	],
 	'list' => [
 		'title' => 'Staff List',
 	],
 	'moderation' => [
-		'name'    => 'Moderation Panel',
+		'title' => 'Moderation Panel',
+		'name'  => 'Moderation Panel',
+		'edit'  => [
+			'title' => 'Editing Title of Thread :name',
+		],
 		'reports' => [
-			'closed_reports' => 'Closed Reports',
-			'open_reports'   => 'Open Reports',
+			'reports_closed' => 'Closed Reports',
+			'reports_open'   => 'Open Reports',
+			'report_close'   => 'Close Report',
+			'report_open'    => 'Open Report',
 			'reported_at'    => 'Reported at :date',
 			'reported_desc'  => 'User reported the post located in thread',
 			'status' => [
@@ -30,7 +48,10 @@ return [
 				'open'   => 'open',
 			],
 			'view' => [
+				'title'        => 'Viewing Report #:number',
 				'currently'    => 'The report is currently <b>:status</b>.',
+				'report_close' => 'Close Report',
+				'report_open'  => 'Open Report',
 				'submitted_on' => 'Submitted on :date',
 				'viewing'      => 'Viewing Report by :name',
 			],

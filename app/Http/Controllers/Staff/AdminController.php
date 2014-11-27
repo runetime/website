@@ -20,9 +20,9 @@ class StaffAdminController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getAdministratorIndex() {
-		$this->bc(['staff' => 'Staff']);
+		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('Administrator Panel');
+		$this->title(trans('staff.admin.title'));
 		return $this->view('staff.administrator.index');
 	}
 
@@ -30,9 +30,9 @@ class StaffAdminController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getAdministratorUsers() {
-		$this->bc(['staff' => 'Staff', 'staff/administrator' => 'Administrator Panel']);
+		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('User Management');
+		$this->title(trans('staff.admin.users.title'));
 		return $this->view('staff.administrator.users');
 	}
 
@@ -41,9 +41,9 @@ class StaffAdminController extends BaseController {
 	 */
 	public function getAdministratorIPBan() {
 		$addresses = $this->ips->getByStatus(IP::STATUS_ACTIVE);
-		$this->bc(['staff' => 'Staff', 'staff/administrator' => 'Administrator Panel']);
+		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('IP Banning');
+		$this->title(trans('staff.admin.ip.title'));
 		return $this->view('staff.administrator.ip', compact('addresses'));
 	}
 
@@ -53,8 +53,7 @@ class StaffAdminController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postAdministratorIPBan(IPBanRequest $form) {
-		$IPBan = new IP;
-		$IPBan->saveNew(\Auth::user()->id, \String::encodeIP($form->ip), $form->contents, IP::STATUS_ACTIVE);
+		with(new IP)->saveNew(\Auth::user()->id, \String::encodeIP($form->ip), $form->contents, IP::STATUS_ACTIVE);
 		return \redirect()->to('staff/administrator/ip-ban');
 	}
 }

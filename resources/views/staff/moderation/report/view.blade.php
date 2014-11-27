@@ -9,22 +9,22 @@
 				</p>
 @if($status == "open")
 				<p class='text-success'>
-					@lang('staff.moderation.reports.view.currently', ['status' => Lang::get('staff.moderation.reports.status.open')])
+					@lang('staff.moderation.reports.view.currently', ['status' => trans('staff.moderation.reports.status.open')])
 				</p>
 @else
 				<p class='text-danger'>
-					@lang('staff.moderation.reports.view.currently', ['status' => Lang::get('staff.moderation.reports.status.closed')])
+					@lang('staff.moderation.reports.view.currently', ['status' => trans('staff.moderation.reports.status.closed')])
 				</p>
 @endif
 @foreach($posts as $post)
-@include('forums.post._show', ['post' => $post])
+	@include('forums.post._show', ['post' => $post])
 @endforeach
 				<div class='clearfix'>
 					<div class='pull-right'>
 						<ul class='list-inline'>
 							<li>
 								<a href='/staff/moderation/report/1/status/switch' class='btn btn-info'>
-									{{ $report->status == 0 ? "Close Report" : "Open Report" }}
+									{{ $report->status == 0 ? trans('staff.moderation.reports.report_close') : trans('staff.moderation.reports.report_open') }}
 								</a>
 							</li>
 						</ul>

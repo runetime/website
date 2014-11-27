@@ -61,9 +61,8 @@ class StaffController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postCheckup(CheckupRequest $form) {
-		$checkup = new Checkup;
 		$hoursActive = with(new \Parsedown)->text($form->hours_active);
-		$checkup = $checkup->saveNew($form->active, $hoursActive, $form->team);
+		$checkup =with(new Checkup)->saveNew($form->active, $hoursActive, $form->team);
 		$checkup->addAuthor(\Auth::user());
 		return \redirect()->to('staff');
 	}
@@ -90,7 +89,7 @@ class StaffController extends BaseController {
 		$displayName = $displayName->display_name;
 		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('Checkup by ' . $displayName);
+		$this->title(trans('staff.checkup.view.title', ['author' => $displayName]));
 		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
 	}
 
