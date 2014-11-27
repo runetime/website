@@ -66,7 +66,7 @@ class TicketController extends BaseController {
 	public function postCreate(CreateTicketRequest $form) {
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$ticket = new Ticket;
-		$ticket = $ticket->saveNew(\Auth::user()->id, $form->name, 0, 0, Ticket::STATUS_OPEN);
+		$ticket = $ticket->saveNew(\Auth::user()->id, $form->name, 0, Ticket::STATUS_OPEN);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$ticket->last_post = $post->id;
