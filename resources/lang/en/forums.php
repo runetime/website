@@ -45,7 +45,9 @@ return [
 		],
 	],
 	'statuses' => [
+		'title' => 'Status Updates',
 		'create' => [
+			'title'  => 'Create a Status Update',
 			'create' => 'Create',
 			'status' => 'Status',
 		],

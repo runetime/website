@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Status Update by {{ $status->author->display_name }}
+					@lang('forums.statuses.view.title', ['author' => $status->author->display_name])
 				</h1>
 				<div class='well'>
 					<div class='row row-flat'>

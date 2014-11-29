@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Recent Status Updates
+					@lang('forums.statuses.index.title')
 				</h1>
 @foreach($statusList as $status)
 				<div class='card row row-flat'>

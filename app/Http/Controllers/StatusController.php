@@ -24,9 +24,9 @@ class StatusController extends BaseController {
 	 */
 	public function getIndex() {
 		$statusList = $this->statuses->getLatest(10);
-		$this->bc(['forums' => 'Forums']);
+		$this->bc(['forums' => trans('forums.title')]);
 		$this->nav('navbar.forums');
-		$this->title('Latest Status Updates');
+		$this->title(trans('forums.statuses.title'));
 		return $this->view('forums.statuses.index', compact('statusList'));
 	}
 
@@ -39,9 +39,9 @@ class StatusController extends BaseController {
 		$status = $this->statuses->getById($id);
 		if(!$status)
 			\App::abort(404);
-		$this->bc(['forums' => 'Forums', 'forums/statuses' => 'Status Updates']);
+		$this->bc(['forums' => trans('forums.title'), 'forums/statuses' => trans('forums.statuses.title')]);
 		$this->nav('navbar.forums');
-		$this->title('Status Update by ' . $status->author->display_name);
+		$this->title(trans('forums.statuses.view.title', ['author' => $status->author->display_name]));
 		return $this->view('forums.statuses.view', compact('status'));
 	}
 
@@ -74,9 +74,9 @@ class StatusController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getCreate() {
-		$this->bc(['forums' => 'Forums', 'forums/statuses' => 'Status Updates']);
+		$this->bc(['forums' => trans('forums.title'), 'forums/statuses' => trans('forums.statuses.title')]);
 		$this->nav('navbar.forums');
-		$this->title('Create a Status Update');
+		$this->title(trans('forums.statuses.create.title'));
 		return $this->view('forums.statuses.create');
 	}
 
