@@ -105,7 +105,7 @@ class ForumController extends BaseController {
 				break;
 			}
 		}
-		$bc['forums'] = 'Forums';
+		$bc['forums'] = trans('forums.title');
 		$this->bc(array_reverse($bc));
 		$this->nav('navbar.forums');
 		$this->title($subforum->name);
@@ -143,7 +143,7 @@ class ForumController extends BaseController {
 			}
 		}
 		$pages = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
-		$bc['forums/'] = trans('navbar.forums');
+		$bc['forums'] = trans('navbar.forums');
 		$this->bc(array_reverse($bc));
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.thread.view.title', ['name' => $thread->title]));
@@ -269,7 +269,7 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$news = $tag->news;
 		$threads = $tag->threads;
-		$this->bc(['forums/' => trans('navbar.forums')]);
+		$this->bc(['forums' => trans('navbar.forums')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.thread.tags.title', ['name' => $tag->name]));
 		return $this->view('forums.tags.view', compact('tag', 'news', 'threads'));
