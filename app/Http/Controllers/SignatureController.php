@@ -11,8 +11,8 @@ class SignatureController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->nav('RuneTime');
-		$this->title('Signature Generator');
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('signature.title'));
 		return $this->view('signatures.index');
 	}
 
@@ -25,9 +25,9 @@ class SignatureController extends BaseController {
 		$username = $form->username;
 		if(!\Cache::get('hiscores.' . $username))
 			\String::getHiscore($username);
-		$this->bc(['signatures' => 'Signature Generator']);
-		$this->nav('RuneTime');
-		$this->title('Type of Signature');
+		$this->bc(['signatures' => trans('signature.title')]);
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('signature.type.title'));
 		return $this->view('signatures.type', compact('username'));
 	}
 
@@ -42,9 +42,9 @@ class SignatureController extends BaseController {
 		foreach(scandir('./img/signatures/backgrounds') as $filename)
 			$imgs[] = $filename;
 		unset($imgs[0], $imgs[1]);
-		$this->bc(['signatures' => 'Signature Generator', '#1' => $username]);
-		$this->nav('RuneTime');
-		$this->title('Style of Signature');
+		$this->bc(['signatures' => trans('signature.title'), '#1' => $username]);
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('signature.style.title'));
 		return $this->view('signatures.style', compact('username', 'type', 'imgs'));
 	}
 
@@ -63,9 +63,9 @@ class SignatureController extends BaseController {
 		];
 		$hash = implode(";", $args);
 		$location = url('signatures/h' . $hash);
-		$this->bc(['signatures' => 'Signature Generator', '#1' => $username, 'signatures/username=' . $username . '/type=' . $type => ucwords($type)]);
-		$this->nav('RuneTime');
-		$this->title('Finished Signature');
+		$this->bc(['signatures' => trans('signature.title'), '#1' => $username, 'signatures/username=' . $username . '/type=' . $type => ucwords($type)]);
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('signature.final.title'));
 		return $this->view('signatures.final', compact('username', 'hash', 'location'));
 	}
 
