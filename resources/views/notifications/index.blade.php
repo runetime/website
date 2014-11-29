@@ -2,14 +2,14 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Notifications
+					@lang('notifications.title')
 				</h1>
 				<h3>
-					Unread
+					@lang('notifications.unread')
 				</h3>
 @if(count($notificationsUnread) > 0)
 				<a href='/notifications/set-all-read'>
-					Set All Notifications Read
+					@lang('notifications.set_all_read')
 				</a>
 	@foreach($notificationsUnread as $notification)
 		@include('notifications.card', ['notification' => $notification, 'status' => 'bad'])
@@ -17,12 +17,12 @@
 @else
 				<p class='text-info'>
 					<em>
-						You have no unread notifications.
+						@lang('notifications.unread_none')
 					</em>
 				</p>
 @endif
 				<h3>
-					Read
+					@lang('notifications.read')
 				</h3>
 @if(count($notificationsRead) > 0)
 	@foreach($notificationsRead as $notification)
@@ -31,7 +31,7 @@
 @else
 				<p class='text-info'>
 					<em>
-						You have no read notifications.
+						@lang('notifications.read_none')
 					</em>
 				</p>
 @endif

@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Notification in {{ $notification->section }}
+					@lang('notifications.view.title', ['section' => $notification->section])
 				</h1>
 				<p class='text-muted'>
 					{{ \Time::shortReadable($notification->created_at) }}
