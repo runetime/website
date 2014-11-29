@@ -5,8 +5,8 @@ class DonateController extends BaseController{
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex(){
-		$this->nav('RuneTime');
-		$this->title('Donate to RuneTime');
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('donate.title'));
 		return $this->view('donate.index');
 	}
 }
