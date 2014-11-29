@@ -13,7 +13,7 @@ $settingsNav = [
 ?>
 			<div class='wrapper'>
 				<h1>
-					@lang('settings.name')
+					@lang('settings.title')
 				</h1>
 				<div class='row'>
 					<div class='col-xs-12 col-sm-4 col-md-2'>

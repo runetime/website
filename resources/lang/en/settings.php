@@ -1,6 +1,11 @@
 <?php
 return [
-	'name' => 'Settings',
+	'title' => 'Settings',
+	'about' => [
+		'title'   => 'About Me',
+		'current' => 'Current About Me',
+		'edit'    => 'Edit About Me',
+	],
 	'nav' => [
 		'profile_settings' => 'Profile Settings',
 		'photo'            => 'Photo',
@@ -10,22 +15,21 @@ return [
 		'social'           => 'Social',
 		'runescape'        => 'RuneScape',
 	],
+	'password' => [
+		'title'       => 'Password',
+		'current'     => 'Current Password',
+		'confirm_new' => 'Confirm New Password',
+		'new'         => 'New Password',
+		'note'        => 'We will attempt to log you in with your new password.  If there are difficulties please logout and try again with your new password.',
+	],
+	'photo' => [
+		'title'   => 'Photo',
+		'current' => 'Current Photo',
+		'change'  => 'Change Photo',
+	],
 	'profile' => [
-		'timezone'  => [
-			'name'  => 'Timezone',
-			'hours' => 'hours',
-			'dst'   => 'Automatically detect DST',
-		],
-		'comments_visitors' => [
-			'name' => 'Comments & Visitors',
-			'help' => 'Show last 5 visitors',
-		],
-		'friends'  => [
-			'name' => 'Friends',
-			'help' => 'Show my friends in my profile',
-		],
+		'title'    => 'User Settings',
 		'birthday' => [
-			'name' => 'Birthday',
 			'months' => [
 				1  => 'January',
 				2  => 'February',
@@ -40,39 +44,42 @@ return [
 				11 => 'November',
 				12 => 'December',
 			],
+			'name' => 'Birthday',
 			'note' => 'Entering your birthday is optional.',
 		],
+		'comments_visitors' => [
+			'help' => 'Show last 5 visitors',
+			'name' => 'Comments & Visitors',
+		],
+		'friends'  => [
+			'help' => 'Show my friends in my profile',
+			'name' => 'Friends',
+		],
 		'gender'      => 'Gender',
-		'location'    => 'Location',
 		'interests'   => 'Interests',
+		'location'    => 'Location',
 		'referred_by' => [
 			'name' => 'Referred By',
 			'note' => 'Did someone tell you about us?  Tell us who told you!',
 		],
+		'timezone'  => [
+			'dst'   => 'Automatically detect DST',
+			'hours' => 'hours',
+			'name'  => 'Timezone',
+		],
 	],
-	'photo' => [
-		'current' => 'Current Photo',
-		'change'  => 'Change Photo',
+	'runescape' => [
+		'title' => 'RuneScape Settings',
+		'edit' => 'Edit RuneScape Information',
 	],
-	'password' => [
-		'note'        => 'We will attempt to log you in with your new password.  If there are difficulties please logout and try again with your new password.',
-		'current'     => 'Current Password',
-		'new'         => 'New Password',
-		'confirm_new' => 'Confirm New Password',
-	],
-	'about' => [
-		'current' => 'Current About Me',
-		'edit'    => 'Edit About Me',
-	],
-	'signature' => [
+	'save_changes' => 'Save Changes',
+	'signature'    => [
+		'title'   => 'Signature',
 		'current' => 'Current Signature',
 		'edit'    => 'Edit Signature',
 	],
 	'social' => [
-		'edit' => 'Edit Social Information',
+		'title' => 'Social Settings',
+		'edit'  => 'Edit Social Information',
 	],
-	'runescape' => [
-		'edit' => 'Edit RuneScape Information',
-	],
-	'save_changes' => 'Save Changes',
 ];

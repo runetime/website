@@ -72,8 +72,8 @@ class SettingsController extends BaseController {
 			'14'    => '(UTC+14:00 ' . $h . ') Kiritimati',
 		];
 		$thisURL = '/settings/';
-		$this->nav('Forums');
-		$this->title('User Settings');
+		$this->nav('navbar.forums');
+		$this->title(trans('settings.profile.title'));
 		return $this->view('settings.index', compact('timezoneOptions', 'thisURL'));
 	}
 
@@ -102,6 +102,9 @@ class SettingsController extends BaseController {
 	 */
 	public function getPhoto() {
 		$thisURL = '/settings/photo';
+		$this->bc(['settings' => trans('settings.title')]);
+		$this->nav('navbar.forums');
+		$this->title(trans('settings.photo.title'));
 		return $this->view('settings.photo', compact('thisURL'));
 	}
 
@@ -127,6 +130,9 @@ class SettingsController extends BaseController {
 	 */
 	public function getPassword() {
 		$thisURL = '/settings/password';
+		$this->bc(['settings' => trans('settings.title')]);
+		$this->nav('navbar.forums');
+		$this->title(trans('settings.password.title'));
 		return $this->view('settings.password', compact('thisURL'));
 	}
 
@@ -151,6 +157,9 @@ class SettingsController extends BaseController {
 	 */
 	public function getAbout() {
 		$thisURL = '/settings/about/me';
+		$this->bc(['settings' => trans('settings.title')]);
+		$this->nav('navbar.forums');
+		$this->title(trans('settings.about.title'));
 		return $this->view('settings.about', compact('thisURL'));
 	}
 
@@ -172,6 +181,9 @@ class SettingsController extends BaseController {
 	 */
 	public function getSignature() {
 		$thisURL = '/settings/signature';
+		$this->bc(['settings' => trans('settings.title')]);
+		$this->nav('navbar.forums');
+		$this->title(trans('settings.signature.title'));
 		return $this->view('settings.signature', compact('thisURL'));
 	}
 
@@ -193,6 +205,9 @@ class SettingsController extends BaseController {
 	 */
 	public function getSocial() {
 		$thisURL = '/settings/social';
+		$this->bc(['settings' => trans('settings.title')]);
+		$this->nav('navbar.forums');
+		$this->title(trans('settings.social.title'));
 		return $this->view('settings.social', compact('thisURL'));
 	}
 
@@ -233,6 +248,9 @@ class SettingsController extends BaseController {
 			'Guthix (Deceased)',
 		];
 		$thisURL = '/settings/runescape';
+		$this->bc(['settings' => trans('settings.title')]);
+		$this->nav('navbar.forums');
+		$this->title(trans('settings.runescape.title'));
 		return $this->view('settings.runescape', compact('thisURL', 'versions', 'allegiances'));
 	}
 
