@@ -26,7 +26,7 @@ class TicketController extends BaseController {
 		foreach($tickets as $ticket)
 			array_push($ticketList[$ticket->status], $ticket);
 		$this->nav('navbar.runetime.runetime');
-		$this->title('Tickets');
+		$this->title(trans('tickets.title'));
 		return $this->view('tickets.index', compact('ticketList'));
 	}
 
@@ -42,9 +42,9 @@ class TicketController extends BaseController {
 		if($ticket->author->id !== \Auth::user()->id || !\Auth::user()->isStaff())
 			\App::abort(403);
 		$posts = $ticket->posts;
-		$this->bc(['tickets' => 'Tickets']);
+		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title($ticket->name);
+		$this->title(trans('tickets.view.title', ['name' => $ticket->name]));
 		return $this->view('tickets.view', compact('ticket', 'posts'));
 	}
 
@@ -52,9 +52,9 @@ class TicketController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getCreate() {
-		$this->bc(['tickets' => 'Tickets']);
+		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title('Creating a Ticket');
+		$this->title(trans('tickets.create.title'));
 		return $this->view('tickets.create');
 	}
 
@@ -100,9 +100,9 @@ class TicketController extends BaseController {
 	public function getManageIndex() {
 		$ticketsOpen = $this->tickets->getAllByStatus(Ticket::STATUS_OPEN);
 		$ticketsClosed = $this->tickets->getXByStatus(Ticket::PER_PAGE, Ticket::STATUS_CLOSED);
-		$this->bc(['tickets' => 'Tickets']);
+		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title('Manage Tickets');
+		$this->title(trans('tickets.manage.title'));
 		return $this->view('tickets.manage.index', compact('ticketsOpen', 'ticketsClosed'));
 	}
 
