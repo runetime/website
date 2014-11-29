@@ -31,7 +31,7 @@ class AwardController extends BaseController {
 		$awardees = $award->users;
 		$this->bc(['awards' => trans('awards.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title($award->name . trans('awards.award'));
+		$this->title(trans('awards.view.title', ['name' => $award->name]));
 		return $this->view('awards.view', compact('award', 'awardees'));
 	}
 }
