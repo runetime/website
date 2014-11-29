@@ -6,7 +6,6 @@ class PlayController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->js(['chatbox']);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('play.index.play_runescape'));
 		return $this->view('play.index');
