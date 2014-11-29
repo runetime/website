@@ -18,7 +18,7 @@ class MapController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getMembers() {
-		$this->bc(['map' => 'Maps']);
+		$this->bc(['map' => trans('maps.title')]);
 		$this->nav('navbar.social.social');
 		$this->title(lang('maps.members.title'));
 		return $this->view('map.members');
@@ -28,7 +28,7 @@ class MapController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getRunescape() {
-		$this->bc(['map' => 'Maps']);
+		$this->bc(['map' => trans('maps.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(lang('maps.rs.title'));
 		return $this->view('map.runescape.index');
@@ -38,7 +38,7 @@ class MapController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getRS3() {
-		$this->bc(['map' => 'Maps', 'map/runescape' => 'RuneScape Maps']);
+		$this->bc(['map' => 'Maps', 'map/runescape' => trans('maps.rs.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(lang('maps.rs.rs3'));
 		return $this->view('map.runescape.3');
