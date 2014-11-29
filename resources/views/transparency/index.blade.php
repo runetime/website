@@ -2,12 +2,12 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Transparency
+					@lang('transparency.title')
 				</h1>
 				<div class='blocks'>
 					<div>
 						<a href='/transparency/markdown'>
-							Markdown
+							@lang('transparency.markdown.title')
 						</a>
 					</div>
 				</div>

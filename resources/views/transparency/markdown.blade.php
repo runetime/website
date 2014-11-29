@@ -1,51 +1,51 @@
 @extends('layouts.default')
 @section('contents')
-<div class='wrapper'>
-	<h1>
-		Markdown
-	</h1>
-	<p class='text-info'>
-		Each of these is an example of how different components of Markdown works, which is similar to BBCode.
-	</p>
-	<p class='text-info'>
-		RuneTime uses a Markdown renderer called <a href='http://parsedown.com'>Parsedown</a>.  These Markdown templates are from their <a href='https://github.com/erusev/parsedown'>Github repository</a> and rendered by their Markdown parser on pageload.  Their Markdown parser is under MIT license.
-	</p>
-	<h3>
-		Table of Contents
-	</h3>
-	<ul>
+			<div class='wrapper'>
+				<h1>
+					@lang('transparency.markdown.title')
+				</h1>
+				<p class='text-info'>
+					@lang('transparency.markdown.note')
+				</p>
+				<p class='text-info'>
+					@lang('transparency.markdown.source')
+				</p>
+				<h3>
+					@lang('transparency.markdown.table_of_contents')
+				</h3>
+				<ul>
 @foreach($files as $name => $markdown)
-		<li>
-			<a onclick="$('html, body').animate({scrollTop: $('#markdown-set-{{str_replace(" ", "-", $name)}}').offset().top-50}, 1000);">
-				{{$name}}
-			</a>
-		</li>
+					<li>
+						<a onclick="$('html, body').animate({scrollTop: $('#markdown-set-{{ str_replace(" ", "-", $name) }}').offset().top-50}, 1000);">
+							{{ $name }}
+						</a>
+					</li>
 @endforeach
-	</ul>
+				</ul>
 	@foreach($files as $name => $markdown)
-	<div id='markdown-set-{{str_replace(" ", "-", $name)}}' class='well'>
-		<h3 class='text-center'>
-			{{$name}}
-		</h3>
-		<div class='row'>
-			<div class='col-xs-12 col-sm-6'>
-				<h4 class='text-center'>
-					Markdown
-				</h4>
-				<pre>
+				<div id='markdown-set-{{ str_replace(" ", "-", $name) }}' class='well'>
+					<h3 class='text-center'>
+						{{ $name }}
+					</h3>
+					<div class='row'>
+						<div class='col-xs-12 col-sm-6'>
+							<h4 class='text-center'>
+								@lang('transparency.markdown.title')
+							</h4>
+							<pre>
 {{$markdown}}
-				</pre>
-			</div>
-			<div class='col-xs-12 col-sm-6'>
-				<h4 class='text-center'>
-					Rendered Result
-				</h4>
-				<div>
-					{!!$renderedFiles[$name]!!}
+							</pre>
+						</div>
+						<div class='col-xs-12 col-sm-6'>
+							<h4 class='text-center'>
+								@lang('transparency.markdown.rendered')
+							</h4>
+							<div>
+								{!! $renderedFiles[$name] !!}
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
 	@endforeach
-</div>
+			</div>
 @stop

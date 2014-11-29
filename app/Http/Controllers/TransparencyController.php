@@ -9,8 +9,8 @@ class TransparencyController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex() {
-		$this->nav('RuneTime');
-		$this->title('Transparency');
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('transparency.title'));
 		return $this->view('transparency.index');
 	}
 	/**
@@ -30,9 +30,9 @@ class TransparencyController extends BaseController {
 		$parsedown = new \Parsedown;
 		foreach($files as $name => $file)
 			$renderedFiles[$name] = $parsedown->text($file);
-		$this->bc(['transparency' => 'Transparency']);
-		$this->nav('RuneTime');
-		$this->title('Markdown');
+		$this->bc(['transparency' => trans('transparency.title')]);
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('transparency.markdown.title'));
 		return $this->view('transparency.markdown', compact('files', 'renderedFiles'));
 	}
 }
