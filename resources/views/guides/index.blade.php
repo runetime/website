@@ -2,17 +2,17 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Guides
+					@lang('guides.title')
 				</h1>
 				<ul>
 					<li>
 						<a href='/guides/locations'>
-							Location Guides
+							@lang('guides.locations.title')
 						</a>
 					</li>
 					<li>
 						<a href='/guides/quests'>
-							Quest Guides
+							@lang('guides.quests.title')
 						</a>
 					</li>
 				</ul>

@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper-dark'>
 				<h1>
-					{{$guide->name}}
+					{{ $guide->name }}
 				</h1>
 				<p>
 					<small>

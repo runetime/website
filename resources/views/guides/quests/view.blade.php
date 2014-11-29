@@ -21,67 +21,67 @@
 			<div class='wrapper-dark'>
 				<dl class='dl-horizontal'>
 					<dt>
-						Description
+						@lang('guides.quests.view.description')
 					</dt>
 					<dd>
 						{!!$guide->description!!}
 					</dd>
 					<dt>
-						Difficulty
+						@lang('guides.quests.difficulty.title')
 					</dt>
 					<dd>
 						{{$difficulty->name}} 
 					</dd>
 					<dt>
-						Length
+						@lang('guides.quests.length.title')
 					</dt>
 					<dd>
 						{{$length->name}} 
 					</dd>
 					<dt>
-						Quest Points
+						@lang('guides.quests.view.quest_points')
 					</dt>
 					<dd>
 						<img src='/img/guides/quests/qp.png' alt='QP' /> {{$guide->qp}} 
 					</dd>
 					<dt>
-						Membership
+						@lang('guides.quests.view.membership')
 					</dt>
 					<dd>
-						{{$guide->membership == 1 ? "Yes" : "No"}}
+						{{$guide->membership == 1 ? trans('utilities.yes') : trans('utilities.no')}}
 					</dd>
 					<dt>
-						Quest Requirements
+						@lang('guides.quests.view.quest_requirements')
 					</dt>
 					<dd>
 						{!!$guide->quest_requirements!!}
 					</dd>
 					<dt>
-						Skill Requirements
+						@lang('guides.quests.view.skill_requirements')
 					</dt>
 					<dd>
 						{!!$guide->skill_requirements!!}
 					</dd>
 					<dt>
-						Items Required
+						@lang('guides.quests.view.items_required')
 					</dt>
 					<dd>
 						{!!$guide->items_required!!}
 					</dd>
 					<dt>
-						Items Recommended
+						@lang('guides.quests.view.items_recommended')
 					</dt>
 					<dd>
 						{!!$guide->items_recommended!!}
 					</dd>
 					<dt>
-						Rewards
+						@lang('guides.quests.view.reward')
 					</dt>
 					<dd>
 						{!!$guide->rewards!!}
 					</dd>
 					<dt>
-						Starting Point
+						@lang('guides.quests.view.starting_point')
 					</dt>
 					<dd>
 						{!!$guide->starting_point!!}

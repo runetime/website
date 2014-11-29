@@ -34,7 +34,7 @@ class GuideController extends BaseController {
 	 */
 	public function getIndex() {
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Guides');
+		$this->title(trans('guides.title'));
 		return $this->view('guides.index');
 	}
 
@@ -50,9 +50,9 @@ class GuideController extends BaseController {
 		$lengths = $this->quests->getOptions('length');
 		$memberships = $this->quests->getOptions('membership');
 		$guides = $this->quests->getByOptions($searchDifficulty, $searchLength, $searchMembership);
-		$this->bc(['guides' => 'Guides']);
-		$this->nav('Runescape');
-		$this->title('Quest Guides');
+		$this->bc(['guides' => trans('guides.title')]);
+		$this->nav('navbar.runescape.runescape');
+		$this->title(trans('guides.quests.title'));
 		return $this->view('guides.quests.index', compact('difficulties', 'lengths', 'memberships', 'guides', 'searchDifficulty', 'searchLength', 'searchMembership'));
 	}
 
@@ -72,9 +72,9 @@ class GuideController extends BaseController {
 		if(!empty($guide->editors))
 			foreach($guide->editors as $x => $editor)
 				$editList .= \Link::name($editor) . ($x < count(json_decode($guide->editors)) -1 ? ", " : "");
-		$this->bc(['guides' => 'Guides', 'guides/quests' => 'Quests']);
+		$this->bc(['guides' => trans('guides.title'), 'guides/quests' => trans('guides.quests.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title($guide->name);
+		$this->title(trans('guides.quests.view.title', ['name' => $guide->name]));
 		return $this->view('guides.quests.view', compact('guide', 'difficulty', 'length', 'editList'));
 	}
 
@@ -82,9 +82,9 @@ class GuideController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getQuestCreate() {
-		$this->bc(['guides' => 'Guides', 'guides/quests' => 'Quests']);
+		$this->bc(['guides' => trans('guides.title'), 'guides/quests' => trans('guides.quests.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Creating a Quest Guide');
+		$this->title(trans('guides.quests.create.title'));
 		return $this->view('guides.quests.create');
 	}
 
@@ -117,9 +117,9 @@ class GuideController extends BaseController {
 	 */
 	public function getLocations() {
 		$guides = $this->locations->getAll();
-		$this->bc(['guides' => 'Guides']);
+		$this->bc(['guides' => trans('guides.title')]);
 		$this->nav(trans('navbar.runescape.runescape'));
-		$this->title('Location Guides');
+		$this->title(trans('guides.locations.title'));
 		return $this->view('guides.locations.index', compact('guides'));
 	}
 
@@ -137,9 +137,9 @@ class GuideController extends BaseController {
 		if(!empty($guide->editors))
 			foreach($guide->editors as $x => $editor)
 				$editList .= \Link::name($editor) . ($x < count($guide->editors) -1 ? ", " : "");
-		$this->bc(['guides' => 'Guides', 'guides/locations' => 'Locations']);
+		$this->bc(['guides' => trans('guides.title'), 'guides/locations' => trans('guides.locations.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title($guide->name);
+		$this->title(trans('guides.locations.view.title', ['name' => $guide->name]));
 		return $this->view('guides.locations.view', compact('guide', 'editList'));
 	}
 
@@ -147,9 +147,9 @@ class GuideController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getLocationCreate() {
-		$this->bc(['guides' => 'Guides', 'guides/locations' => 'Locations']);
+		$this->bc(['guides' => trans('guides.title'), 'guides/locations' => trans('guides.locations.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Creating a Location Guide');
+		$this->title(trans('guides.locations.create.title'));
 		return $this->view('guides.locations.create');
 	}
 

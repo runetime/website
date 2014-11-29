@@ -2,15 +2,15 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Creating a Quest Guide
+					@lang('guides.quests.create.title')
 				</h1>
 				<p class='text-info'>
-					All textareas on RuneTime, including the ones in this guide, use <a href='/transparency/markdown'>Markdown</a> for styling.
+					@lang('guides.create_note')
 				</p>
 				<form action='' method='post' class='form-horizontal' role='form'>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='name'>
-							Name of Quest
+							@lang('guides.quests.create.name')
 						</label>
 						<div class='col-lg-10'>
 							<input id='name' class='form-control' type='text' name='name' required />
@@ -18,37 +18,37 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='difficulty'>
-							Difficulty
+							@lang('guides.quests.create.difficulty')
 						</label>
 						<div class='col-lg-10'>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='difficulty' value='1' checked />
-									Novice
+									@lang('guides.quests.difficulty.novice')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='difficulty' value='2' />
-									Intermediate
+									@lang('guides.quests.difficulty.intermediate')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='difficulty' value='3' />
-									Experienced
+									@lang('guides.quests.difficulty.experienced')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='difficulty' value='4' />
-									Master
+									@lang('guides.quests.difficulty.master')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='difficulty' value='5' />
-									Grandmaster
+									@lang('guides.quests.difficulty.grandmaster')
 								</label>
 							</div>
 						</div>
@@ -61,51 +61,51 @@
 							<div class='radio'>
 								<label>
 									<input type='radio' name='length' value='6' checked />
-									Short
+									@lang('guides.quests.length.short')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='length' value='7' />
-									Medium
+									@lang('guides.quests.length.medium')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='length' value='8' />
-									Long
+									@lang('guides.quests.length.long')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='length' value='9' />
-									Very Long
+									@lang('guides.quests.length.very_long')
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='membership'>
-							Membership?
+							@lang('guides.quests.view.membership')
 						</label>
 						<div class='col-lg-10'>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='membership' value='10' checked />
-									Free
+									@lang('utilities.membership.free')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='membership' value='11' />
-									Members
+									@lang('utilities.membership.members')
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='qp'>
-							Quest Points
+							@lang('guides.quests.view.quest_points')
 						</label>
 						<div class='col-lg-10'>
 							<input id='qp' class='form-control' type='text' name='qp' required />
@@ -113,29 +113,29 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='completed'>
-							Completed
+							@lang('guides.quests.view.completed')
 						</label>
 						<div class='col-lg-10'>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='completed' value='1' checked />
-									Yes
+									@lang('utilities.yes')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='completed' value='0' />
-									No
+									@lang('utilities.no')
 								</label>
 							</div>
 							<p class='help-block'>
-								Is this guide complete?
+								@lang('guides.quests.create.completed_note')
 							</p>
 						</div>
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='description'>
-							Description
+							@lang('guides.quests.view.description')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='description' id='description' class='form-control' rows='10' required></textarea>
@@ -143,7 +143,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='quest_requirements'>
-							Quest Requirements
+							@lang('guides.quests.view.quest_requirements')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='quest_requirements' id='quest_requirements' class='form-control' rows='10' required></textarea>
@@ -151,7 +151,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='skill_requirements'>
-							Skill Requirements
+							@lang('guides.quests.view.skill_requirements')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='skill_requirements' id='skill_requirements' class='form-control' rows='10' required></textarea>
@@ -159,7 +159,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='items_required'>
-							Items Required
+							@lang('guides.quests.view.items_required')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='items_required' id='items_required' class='form-control' rows='10' required></textarea>
@@ -167,7 +167,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='items_recommended'>
-							Items Recommended
+							@lang('guides.quests.view.items_recommended')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='items_recommended' id='items_recommended' class='form-control' rows='10' required></textarea>
@@ -175,7 +175,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='reward'>
-							Reward
+							@lang('guides.quests.view.reward')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='reward' id='reward' class='form-control' rows='10' required></textarea>
@@ -183,7 +183,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='starting_point'>
-							Starting Point
+							@lang('guides.quests.view.starting_point')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='starting_point' id='starting_point' class='form-control' rows='10' required></textarea>
@@ -191,7 +191,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='contents'>
-							Guide
+							@lang('guides.quests.view.guide')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='contents' id='contents' class='form-control' rows='10' required></textarea>
@@ -200,7 +200,7 @@
 					<div class='form-group'>
 						<div class='col-lg-offset-2 col-lg-10'>
 							<button class='btn btn-primary' type='submit'>
-								Create Guide
+								@lang('guides.quests.create.submit')
 							</button>
 						</div>
 					</div>

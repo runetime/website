@@ -5,7 +5,7 @@
 @if(\Auth::check() && \Auth::user()->isContent())
 					<li>
 						<a href='/guides/locations/create' class='btn btn-sm btn-success'>
-							Create Location
+							@lang('guides.locations.create_location')
 						</a>
 					</li>
 @endif
@@ -15,8 +15,8 @@
 @foreach($guides as $guide)
 						<tr>
 							<td>
-								<a href='/guides/locations/{{\String::slugEncode($guide->id, $guide->name)}}' title='{{$guide->name}}'>
-									{{$guide->name}}
+								<a href='/guides/locations/{{ \String::slugEncode($guide->id, $guide->name) }}' title='{{ $guide->name }}'>
+									{{ $guide->name }}
 								</a>
 							</td>
 						</tr>

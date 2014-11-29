@@ -3,7 +3,7 @@
 			<div class='wrapper-dark row row-margin text-center'>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Difficulty
+						@lang('guides.quests.difficulty.title')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($difficulties as $difficulty)
@@ -23,7 +23,7 @@
 				</div>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Length
+						@lang('guides.quests.length.title')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($lengths as $length)
@@ -43,7 +43,7 @@
 				</div>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Membership
+						@lang('utilities.membership.title')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($memberships as $membership)
@@ -61,18 +61,18 @@
 @endforeach
 					</ul>
 				</div>
-                <div class='col-xs-12'>
-                    <a href='/guides/quests' class='text-muted'>
-                        Clear Search
-                    </a>
-                </div>
+				<div class='col-xs-12'>
+					<a href='/guides/quests' class='text-muted'>
+						@lang('guides.quests.search.clear')
+					</a>
+				</div>
 			</div>
 			<div class='wrapper'>
 				<ul class='list-inline pull-right'>
 @if(\Auth::check() && \Auth::user()->isContent())
 					<li>
 						<a href='/guides/quests/create' class='btn btn-sm btn-success'>
-							Create Quest
+							@lang('guides.quests.create_quest')
 						</a>
 					</li>
 @endif
@@ -81,22 +81,22 @@
 					<thead>
 						<tr>
 							<td>
-								Name
+								@lang('guides.quests.create.name')
 							</td>
 							<td>
-								Difficulty
+								@lang('guides.quests.difficulty.title')
 							</td>
 							<td>
-								Length
+								@lang('guides.quests.length.title')
 							</td>
 							<td>
-								Quest Points
+								@lang('guides.quests.view.quest_points')
 							</td>
 							<td>
-								Membership?
+								@lang('guides.quests.view.membership')
 							</td>
 							<td>
-								Completed?
+								@lang('guides.quests.view.completed')
 							</td>
 						</tr>
 					</thead>
@@ -122,7 +122,7 @@
 								{{$guide->getMembership()}}
 							</td>
 							<td>
-								{{$guide->completed == 1 ? "Yes" : "No"}}
+								{{$guide->completed == 1 ? trans('utilities.yes') : trans('utilities.no')}}
 							</td>
 						</tr>
 	@endforeach
