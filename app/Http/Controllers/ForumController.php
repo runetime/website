@@ -143,10 +143,10 @@ class ForumController extends BaseController {
 			}
 		}
 		$pages = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
-		$bc['forums/'] = 'Forums';
+		$bc['forums/'] = trans('navbar.forums');
 		$this->bc(array_reverse($bc));
 		$this->nav('navbar.forums');
-		$this->title($thread->title);
+		$this->title(trans('forums.thread.view.title', ['name' => $thread->title]));
 		return $this->view('forums.thread.view', compact('thread', 'posts', 'page', 'pages'));
 	}
 
@@ -171,7 +171,7 @@ class ForumController extends BaseController {
 		if($subforum->posts_enabled == false)
 			return \redirect()->to('/forums');
 		$bc = [];
-		$bc['forums'] = 'Forums';
+		$bc['forums'] = trans('navbar.forums');
 		if($subforum->parent != -1) {
 			$parent = $this->subforums->getById($subforum->parent);
 			$bc['forums/' . \String::slugEncode($parent->id, $parent->name)] = $parent->name;
@@ -179,7 +179,7 @@ class ForumController extends BaseController {
 		$bc['forums/' . \String::slugEncode($subforum->id, $subforum->name)] = $subforum->name;
 		$this->bc($bc);
 		$this->nav('navbar.forums');
-		$this->title('Creating a New Thread');
+		$this->title(trans('forums.thread.create.name', ['subforum' => $subforum->name]));
 		return $this->view('forums.thread.create', compact('subforum'));
 	}
 
@@ -250,7 +250,9 @@ class ForumController extends BaseController {
 		// Notify author
 		if($thread->author->id !== \Auth::user()->id) {
 			$notification = new Notification;
-			$contents = \Link::name(\Auth::user()->id) . " has replied to your thread <a href='" . $thread->toSlug() . "'>" . $thread->title . "</a>.";
+			$name = \Link::name(\Auth::user()->id);
+			$threadInfo = "<a href='" . $thread->toSlug() . "'>" . $thread->title . "</a>";
+			$contents = trans('notifications.thread.reply', ['name' => $name, 'thread' => $threadInfo]);
 			$notification->saveNew($thread->author->id, 'Threads', $contents, Notification::STATUS_UNREAD);
 		}
 		return $this->getThreadLastPost($thread->id);
@@ -267,9 +269,9 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$news = $tag->news;
 		$threads = $tag->threads;
-		$this->bc(['forums/' => 'Forums']);
+		$this->bc(['forums/' => trans('navbar.forums')]);
 		$this->nav('navbar.forums');
-		$this->title('Tag: ' . $tag->name);
+		$this->title(trans('forums.thread.tags.title', ['name' => $tag->name]));
 		return $this->view('forums.tags.view', compact('tag', 'news', 'threads'));
 	}
 
@@ -284,7 +286,7 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread[0]->id);
 		$this->nav('navbar.forums');
-		$this->title('Reporting a Post');
+		$this->title(trans('forums.post.report.title', ['author' => $post->author->display_name, 'thread' => $thread->title]));
 		return $this->view('forums.post.report', compact('post', 'thread'));
 	}
 
@@ -362,7 +364,7 @@ class ForumController extends BaseController {
 			\App::abort(404);
 		$thread = $this->threads->getById($post->thread[0]->id);
 		$this->nav('navbar.forums');
-		$this->title('Editing Post in ' . $thread->title);
+		$this->title(trans('forums.post.edit.title', ['thread' => $thread->title]));
 		return $this->view('forums.post.edit', compact('post', 'thread'));
 	}
 

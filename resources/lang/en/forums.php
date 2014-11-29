@@ -17,7 +17,7 @@ return [
 			'submit' => 'Post',
 		],
 		'edit' => [
-			'title' => 'Editing Post in :thread',
+			'title' => 'Editing a Post in :thread',
 		],
 		'locked' => 'This thread is locked.',
 		'report' => [
@@ -61,7 +61,7 @@ return [
 		'create_topic' => 'Start New Topic',
 	],
 	'thread' => [
-		'title' => 'Thread',
+		'title'  => 'Thread',
 		'titles' => 'Threads',
 		'create' => [
 			'name'  => 'Creating a New Thread in :subforum',
@@ -69,13 +69,14 @@ return [
 				'name' => 'Title',
 			],
 			'poll' => [
-				'name'     => 'Poll',
-				'summary'  => 'Click here if you would like to create a poll.',
-				'title'    => 'Poll Title',
-				'question' => 'Question :number',
+				'name'      => 'Poll',
+				'summary'   => 'Click here if you would like to create a poll.',
+				'title'     => 'Poll Title',
+				'question'  => 'Question :number',
 				'answer'    => 'Answer :number',
 			],
 			'tags' => [
+				'title'       => 'Tag: :name',
 				'name'        => 'Tags',
 				'placeholder' => 'runescape, event',
 				'help'        => 'If you use tags separate all tags by a comma.',
@@ -100,6 +101,9 @@ return [
 			'switch_pin'        => 'Switch Pin',
 			'switch_visibility' => 'Switch Visibility',
 			'toggle'            => 'Toggle Dropdown',
+		],
+		'view' => [
+			'title' => ':name',
 		],
 		'started_by' => 'Started by :author',
 	],
