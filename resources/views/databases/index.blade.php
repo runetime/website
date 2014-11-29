@@ -2,17 +2,17 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Databases
+					@lang('database.title')
 				</h1>
 				<ul>
 					<li>
 						<a href='/databases/items'>
-							Items Database
+							@lang('database.items.title')
 						</a>
 					</li>
 					<li>
 						<a href='/databases/monsters'>
-							Monsters Database
+							@lang('database.monsters.title')
 						</a>
 					</li>
 				</ul>

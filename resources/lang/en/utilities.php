@@ -5,6 +5,12 @@ return [
 	'comment'              => 'Comment',
 	'comments'             => 'Comments',
 	'comments_amount'      => ':amount comments',
+	'membership'           => [
+		'title'   => 'Membership',
+		'free'    => 'Free',
+		'members' => 'Members',
+	],
+	'no'                   => 'No',
 	'offline'              => 'offline',
 	'online'               => 'online',
 	'open'                 => 'Open', // To open a ticket for example
@@ -44,4 +50,5 @@ return [
 		],
 	],
 	'views' => ':amount views',
+	'yes'   => 'Yes',
 ];

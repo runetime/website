@@ -3,7 +3,7 @@
 			<div class='wrapper-dark row row-margin text-center'>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Membership
+						@lang('database.items.search.membership')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($memberships as $membership)
@@ -23,7 +23,7 @@
 				</div>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Tradable
+						@lang('database.items.search.tradable')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($tradables as $tradable)
@@ -43,7 +43,7 @@
 				</div>
 				<div class='col-xs-12 col-sm-4'>
 					<h3 class='holo-text'>
-						Quest Item
+						@lang('database.items.search.quest_item')
 					</h3>
 					<ul class='list-inline holo-text-secondary'>
 @foreach($questItems as $questItem)
@@ -63,7 +63,7 @@
 				</div>
                 <div class='col-xs-12'>
                     <a href='/databases/items' class='text-muted'>
-                        Clear Search
+                        @lang('database.items.search.clear')
                     </a>
                 </div>
 			</div>
@@ -72,7 +72,7 @@
 @if(\Auth::check() && \Auth::user()->isContent())
 					<li>
 						<a href='/databases/items/create' class='btn btn-sm btn-success'>
-							Create Item
+							@lang('database.items.create_item')
 						</a>
 					</li>
 @endif
@@ -84,19 +84,19 @@
 								&nbsp;
 							</td>
 							<td>
-								Name
+								@lang('database.items.table.name')
 							</td>
 							<td>
-								Examine
+								@lang('database.items.table.examine')
 							</td>
 							<td>
-								Membership
+								@lang('database.items.table.membership')
 							</td>
 							<td>
-								Tradable
+								@lang('database.items.table.tradable')
 							</td>
 							<td>
-								Quest Item
+								@lang('database.items.table.quest_item')
 							</td>
 						</tr>
 					</thead>
@@ -115,13 +115,13 @@
 								{!! $item->examine_parsed !!}
 							</td>
 							<td>
-								{{ $item->membership ? "Yes" : "No" }}
+								{{ $item->membership ? trans('utilities.yes') : trans('utilities.no') }}
 							</td>
 							<td>
-								{{ $item->tradable ? "Yes" : "No" }}
+								{{ $item->tradable ? trans('utilities.yes') : trans('utilities.no') }}
 							</td>
 							<td>
-								{{ $item->quest_item ? "Yes" : "No" }}
+								{{ $item->quest_item ? trans('utilities.yes') : trans('utilities.no') }}
 							</td>
 						</tr>
 @endforeach

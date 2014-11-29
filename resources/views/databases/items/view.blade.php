@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					{{$item->name}}
+					{{ $item->name }}
 				</h1>
 				<p>
 					<small>
@@ -21,28 +21,28 @@
 			<div class='wrapper-dark'>
 				<dl class='dl-horizontal'>
 					<dt>
-						Examine
+						@lang('database.items.view.examine')
 					</dt>
 					<dd>
 						{!! $item->examine_parsed !!}
 					</dd>
 					<dt>
-						Membership
+						@lang('database.items.view.membership')
 					</dt>
 					<dd>
-						{{ $item->membership == 1 ? "Yes" : "No" }}
+						{{ $item->membership == 1 ? trans('utilities.yes') : trans('utilities.no') }}
 					</dd>
 					<dt>
-						Tradable
+						@lang('database.items.view.tradable')
 					</dt>
 					<dd>
-						{{ $item->tradable == 1 ? "Yes" : "No" }}
+						{{ $item->tradable == 1 ? trans('utilities.yes') : trans('utilities.no') }}
 					</dd>
 					<dt>
-						Quest Item
+						@lang('database.items.view.quest_item')
 					</dt>
 					<dd>
-						{{ $item->quest_item == 1 ? "Yes" : "No" }}
+						{{ $item->quest_item == 1 ? trans('utilities.yes') : trans('utilities.no') }}
 					</dd>
 				</dl>
 			</div>

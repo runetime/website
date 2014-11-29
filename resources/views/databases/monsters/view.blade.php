@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					{{$monster->name}}
+					{{ $monster->name }}
 				</h1>
 				<p>
 					<small>
@@ -21,37 +21,37 @@
 			<div class='wrapper-dark'>
 				<dl class='dl-horizontal'>
 					<dt>
-						Examine
+						@lang('database.monsters.view.examine')
 					</dt>
 					<dd>
 						{!! $monster->examine_parsed !!}
 					</dd>
 					<dt>
-						Stats
+						@lang('database.monsters.view.stats')
 					</dt>
 					<dd>
 						{!! $monster->stats_parsed !!}
 					</dd>
 					<dt>
-						Location
+						@lang('database.monsters.view.location')
 					</dt>
 					<dd>
 						{!! $monster->location_parsed !!}
 					</dd>
 					<dt>
-						Drops
+						@lang('database.monsters.view.drops')
 					</dt>
 					<dd>
 						{!! $monster->drops_parsed !!}
 					</dd>
 					<dt>
-						Membership
+						@lang('database.monsters.view.membership')
 					</dt>
 					<dd>
-						{{ $monster->membership == 1 ? "Yes" : "No" }}
+						{{ $monster->membership == 1 ? trans('utilities.yes') : trans('utilities.no') }}
 					</dd>
 					<dt>
-						Other Information
+						@lang('database.monsters.view.other_information')
 					</dt>
 					<dd>
 						{!! $monster->other_information_parsed !!}

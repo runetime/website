@@ -34,7 +34,7 @@ class DatabaseController extends BaseController {
 	 */
 	public function getIndex() {
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Databases');
+		$this->title(trans('database.title'));
 		return $this->view('databases.index');
 	}
 
@@ -50,9 +50,9 @@ class DatabaseController extends BaseController {
 		$memberships = ['yes', 'no'];
 		$tradables = ['yes', 'no'];
 		$questItems = ['yes', 'no'];
-		$this->bc(['databases' => 'Databases']);
+		$this->bc(['databases' => trans('database.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Items Database');
+		$this->title(trans('database.items.title'));
 		return $this->view('databases.items.index', compact('items', 'searchMembership', 'searchTradable', 'searchQuestItem', 'memberships', 'tradables', 'questItems'));
 	}
 
@@ -65,9 +65,9 @@ class DatabaseController extends BaseController {
 		$item = $this->items->getById($id);
 		if(!$item)
 			\App::abort(404);
-		$this->bc(['databases' => 'Databases', 'databases/items' => 'Items']);
+		$this->bc(['databases' => trans('database.title'), 'databases/items' => trans('database.items.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title($item->name);
+		$this->title(trans('database.items.view.title', ['name' => $item->name]));
 		return $this->view('databases.items.view', compact('item'));
 	}
 
@@ -75,9 +75,9 @@ class DatabaseController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getItemsCreate() {
-		$this->bc(['databases' => 'Databases', 'databases/items' => 'Items']);
+		$this->bc(['databases' => trans('database.title'), 'databases/items' => trans('database.items.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Create an Item');
+		$this->title(trans('database.items.create.title'));
 		return $this->view('databases.items.create');
 	}
 
@@ -108,9 +108,9 @@ class DatabaseController extends BaseController {
 	public function getMonstersIndex($searchMembership = 'none') {
 		$monsters = $this->monsters->getByOptions($searchMembership);
 		$memberships = ['yes', 'no'];
-		$this->bc(['databases' => 'Databases']);
+		$this->bc(['databases' => trans('database.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Monsters Database');
+		$this->title(trans('database.monsters.title'));
 		return $this->view('databases.monsters.index', compact('monsters', 'searchMembership', 'memberships'));
 	}
 
@@ -123,9 +123,9 @@ class DatabaseController extends BaseController {
 		$monster = $this->monsters->getById($id);
 		if(!$monster)
 			\App::abort(404);
-		$this->bc(['databases' => 'Databases', 'databases/monsters' => 'Monsters']);
+		$this->bc(['databases' => trans('database.title'), 'databases/monsters' => trans('database.monsters.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title($monster->name);
+		$this->title(trans('database.monsters.view.title', ['name' => $monster->name]));
 		return $this->view('databases.monsters.view', compact('monster', 'editList'));
 	}
 
@@ -133,9 +133,9 @@ class DatabaseController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getMonstersCreate() {
-		$this->bc(['databases' => 'Databases', 'databases/monsters' => 'Monsters']);
+		$this->bc(['databases' => trans('database.title'), 'databases/monsters' => trans('database.monsters.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title('Create a Monster');
+		$this->title(trans('database.monsters.create.title'));
 		return $this->view('databases.monsters.create');
 	}
 

@@ -2,15 +2,15 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Creating a Monster
+					@lang('database.monsters.create.title')
 				</h1>
 				<p class='text-info'>
-					All textareas on RuneTime, including the ones in this guide, use <a href='/transparency/markdown'>Markdown</a> for styling.
+					@lang('database.create_note')
 				</p>
 				<form action='' method='post' class='form-horizontal' role='form'>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='name'>
-							Name
+							@lang('database.monsters.view.name')
 						</label>
 						<div class='col-lg-10'>
 							<input id='name' class='form-control' type='text' name='name' required />
@@ -18,7 +18,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='examine'>
-							Examine
+							@lang('database.monsters.view.examine')
 						</label>
 						<div class='col-lg-10'>
 							<input id='examine' class='form-control' type='text' name='examine' required />
@@ -26,7 +26,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='stats'>
-							Stats
+							@lang('database.monsters.view.stats')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='stats' id='stats' class='form-control' rows='10' required></textarea>
@@ -34,7 +34,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='location'>
-							Location
+							@lang('database.monsters.view.location')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='location' id='location' class='form-control' rows='10' required></textarea>
@@ -42,7 +42,7 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='drops'>
-							Drops
+							@lang('database.monsters.view.drops')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='drops' id='drops' class='form-control' rows='10' required></textarea>
@@ -50,26 +50,26 @@
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='membership'>
-							Membership?
+							@lang('database.monsters.view.membership')
 						</label>
 						<div class='col-lg-10'>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='membership' value='0' checked />
-									Free
+									@lang('utilities.membership.free')
 								</label>
 							</div>
 							<div class='radio'>
 								<label>
 									<input type='radio' name='membership' value='1' />
-									Members
+									@lang('utilities.membership.members')
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='other_information'>
-							Other Information
+							@lang('database.monsters.view.other_information')
 						</label>
 						<div class='col-lg-10'>
 							<textarea name='other_information' id='other_information' class='form-control' rows='10' required></textarea>
@@ -78,7 +78,7 @@
 					<div class='form-group'>
 						<div class='col-lg-offset-2 col-lg-10'>
 							<button class='btn btn-primary' type='submit'>
-								Create Monster
+								@lang('database.monsters.create.submit')
 							</button>
 						</div>
 					</div>
