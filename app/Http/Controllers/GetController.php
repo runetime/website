@@ -9,7 +9,6 @@ class GetController extends BaseController {
 	private $users;
 
 	/**
-	 * @param BBCodeRepository $bbcode
 	 * @param UserRepository   $users
 	 */
 	public function __construct(UserRepository $users) {
@@ -46,8 +45,6 @@ class GetController extends BaseController {
 	 * @return string
 	 */
 	public function getHiscore($rsn) {
-		$url='http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $rsn;
-		$results = \String::CURL($url);
-		return json_encode($results);
+		return json_encode(\String::getHiscore($rsn));
 	}
 }
