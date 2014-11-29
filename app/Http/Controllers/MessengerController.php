@@ -35,7 +35,7 @@ class MessengerController extends BaseController {
 	public function getIndex() {
 		$messages = \Auth::user()->messages;
 		$this->nav('navbar.forums');
-		$this->title('Messenger');
+		$this->title(trans('messenger.title'));
 		return $this->view('messenger.index', compact('messages'));
 	}
 
@@ -49,9 +49,9 @@ class MessengerController extends BaseController {
 		if(!$message)
 			\App::abort(404);
 		$posts = $message->posts;
-		$this->bc(['messenger' => 'Messenger']);
+		$this->bc(['messenger' => trans('messenger.title')]);
 		$this->nav('navbar.forums');
-		$this->title($message->title);
+		$this->title(trans('messenger.view.title', ['name' => $message->title]));
 		return $this->view('messenger.view', compact('message', 'posts'));
 	}
 
@@ -75,7 +75,7 @@ class MessengerController extends BaseController {
 			if($user->id !== \Auth::user()->id) {
 				$notification = new Notification;
 				$contents = \Link::name(\Auth::user()->id) . " has replied to the private message <a href='" . $message->toSlug() . "'>" . $message->title . "</a> you're a participant of.";
-				$notification->saveNew($user->id, 'Messenger', $contents, Notification::STATUS_UNREAD);
+				$notification->saveNew($user->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
 			}
 		}
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
@@ -93,9 +93,9 @@ class MessengerController extends BaseController {
 			if(!$to)
 				$to = '';
 		}
-		$this->bc(['messenger' => 'Messenger']);
-		$this->nav('Forums');
-		$this->title('Compose a Message');
+		$this->bc(['messenger' => trans('messenger.title')]);
+		$this->nav(trans('forums.title'));
+		$this->title(trans('messenger.create.title'));
 		return $this->view('messenger.compose.index', compact('to'));
 	}
 
@@ -109,7 +109,7 @@ class MessengerController extends BaseController {
 		$message = new Message;
 		$message = $message->saveNew(\Auth::user()->id, $form->title, 0, 0);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$post = $post->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$message->addPost($post);
 		$message->addUser(\Auth::user());
 		foreach(explode(", ", $form->participants) as $participant) {
@@ -118,7 +118,7 @@ class MessengerController extends BaseController {
 				$message->addUser($participant);
 				$notification = new Notification;
 				$contents = \Link::name(\Auth::user()->id) . " has sent you a private message titled <a href='" . $message->toSlug() . "'>" . $message->title . "</a>.";
-				$notification->saveNew($participant->id, 'Messenger', $contents, Notification::STATUS_UNREAD);
+				$notification->saveNew($participant->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
 			}
 		}
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));

@@ -2,11 +2,11 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					Messenger
+					@lang('messenger.title')
 				</h1>
 				<div class='pull-right'>
 					<a href='/messenger/compose' class='btn btn-sm btn-primary'>
-						Compose
+						@lang('messenger.compose')
 					</a>
 				</div>
 				<div class='clearfix'></div>
@@ -19,18 +19,18 @@
 							</a>
 						</p>
 						<p class='text-muted'>
-							Started by {!! \Link::name($message->author_id) !!}, {{$message->replies}} replies
+							@lang('utilities.started_by', ['author' => \Link::name($message->author_id)]), @lang('utilities.replies_amount', ['amount' => $message->replies])
 						</p>
 					</div>
 					<div class='pull-right'>
-                        Participants:
-                        <ul class='list-inline'>
+						@lang('messenger.participants'):
+						<ul class='list-inline'>
 	@foreach($message->users as $user)
-                            <li>
-                                {!! \Link::name($user->id) !!}
-                            </li>
+							<li>
+								{!! \Link::name($user->id) !!}
+							</li>
 	@endforeach
-                        </ul>
+						</ul>
 					</div>
 				</div>
 @endforeach
