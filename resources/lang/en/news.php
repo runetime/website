@@ -9,5 +9,8 @@ return [
 		'tags'       => 'Tags',
 		'tags_note'  => 'Separate all tags by a comma.',
 	],
+	'view' => [
+		'title' => ':name',
+	],
 	'create_newspiece' => 'Create Newspiece',
 ];

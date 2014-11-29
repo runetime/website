@@ -54,7 +54,7 @@ class NewsController extends BaseController {
 		$posts = $posts->get();
 		$this->bc(['news' => trans('news.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title($news->title);
+		$this->title(trans('news.view.title', ['name' => $news->title]));
 		return $this->view('news.view', compact('news', 'posts', 'tags'));
 	}
 
@@ -100,8 +100,8 @@ class NewsController extends BaseController {
 	}
 
 	/**
-	 * @param                  $id
-	 * @param NewsReplyRequest $form
+	 * @param              $id
+	 * @param ReplyRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
