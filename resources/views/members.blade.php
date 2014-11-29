@@ -88,7 +88,7 @@
 									<ul class='list-inline'>
 @if(Auth::check())
 										<li>
-											<a href='/messenger/compose/to={{ \String::slugEncode($member->id, $member->display_name) }}' title='Message {{ $member->display_name }}'>
+											<a href='/messenger/compose/to={{ \String::slugEncode($member->id, $member->display_name) }}' title='@lang('members.message', ['name' => $member->display_name])'>
 												<i class='text-primary fa fa-inbox fa-3x'></i>
 											</a>
 										</li>

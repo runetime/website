@@ -1,8 +1,9 @@
 <?php
 return [
-	'title' => 'Member List',
-	'joined' => 'Joined :date',
-	'search' => [
+	'title'   => 'Members List',
+	'joined'  => 'Joined :date',
+	'message' => 'Message :name',
+	'search'  => [
 		'prefix' => 'Prefix Letter',
 		'order'  => 'Order',
 		'role'   => 'Role',
