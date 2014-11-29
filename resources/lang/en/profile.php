@@ -1,10 +1,17 @@
 <?php
 return [
+	'title' => ':name',
 	'feed' => [
-		'title' => 'Recent Threads by :name',
+		'title' => ":name's Profile Feed",
+		'recent_threads' => 'Recent Threads by :name',
 	],
 	'friends' => [
 
+	],
+	'gender' => [
+		'female'      => 'Female',
+		'male'        => 'Male',
+		'not_telling' => 'Not Telling',
 	],
 	'nav' => [
 		'overview'     => 'Overview',
@@ -55,10 +62,5 @@ return [
 	'status' => [
 		'offline' => 'Offline',
 		'online'  => 'Online',
-	],
-	'gender' => [
-		'female'      => 'Female',
-		'male'        => 'Male',
-		'not_telling' => 'Not Telling',
 	],
  ];

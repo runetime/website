@@ -45,9 +45,9 @@ class ProfileController extends BaseController {
 			\App::abort(404);
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
-		$this->bc(['forums/' => 'Forums']);
+		$this->bc(['forums/' => trans('forums.name')]);
 		$this->nav('navbar.forums');
-		$this->title($profile->display_name);
+		$this->title(trans('profile.title', ['name' => $profile->display_name]));
 		return $this->view('forums.profile.index', compact('profile', 'status'));
 	}
 
@@ -61,9 +61,9 @@ class ProfileController extends BaseController {
 		$profile->incrementProfileViews();
 		$threads = $this->threads->getLatestByUser($id, 5);
 		$status = $this->statuses->getLatestByAuthor($profile->id);
-		$this->bc(['forums/' => 'Forums', 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
+		$this->bc(['forums/' => trans('forums.title'), 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
 		$this->nav('navbar.forums');
-		$this->title($profile->display_name . "'s Profile Feed");
+		$this->title(trans('profile.feed.title', ['name' => $profile->display_name]));
 		return $this->view('forums.profile.feed', compact('profile', 'status', 'threads'));
 	}
 
