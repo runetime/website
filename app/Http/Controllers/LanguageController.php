@@ -5,16 +5,10 @@ class LanguageController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getSet() {
-		$languagesDone = [
-			'en' => 'English',
-			'no' => 'Norweigian',
-		];
-		$languagesWIP = [
-			'nl' => 'Dutch',
-			'es' => 'Spanish',
-		];
-		$this->nav('RuneTime');
-		$this->title('Set Your Language');
+		$languagesDone = ['en', 'no'];
+		$languagesWIP = ['es'];
+		$this->nav('navbar.runetime.runetime');
+		$this->title(trans('language.set.title'));
 		return $this->view('language.set', compact('languagesDone', 'languagesWIP'));
 	}
 
