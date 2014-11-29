@@ -17,9 +17,6 @@ class CreateForumPollsTable extends Migration {
 			$table->increments('id');
 			$table->integer('thread_id');
 			$table->mediumtext('questions');
-			$table->mediumtext('answers');
-			$table->mediumtext('votes');
-			$table->mediumtext('voters');
 			$table->timestamps();
 		});
 	}

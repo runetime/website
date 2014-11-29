@@ -2,10 +2,9 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					@lang('forums.thread.create.name',['subforum' => $subforum->name])
+					@lang('forums.thread.create.name', ['subforum' => $subforum->name])
 				</h1>
 				<form action='' class='form-horizontal' method='post' role='form'>
-					<input type='hidden' name='subforum' value='{{$subforum->id}}' />
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='title'>
 							@lang('forums.thread.create.title.name')
