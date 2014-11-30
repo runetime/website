@@ -138,6 +138,8 @@ class RadioController extends BaseController {
 			if($user)
 				$update['dj'] = $user->display_name;
 		}
+		if(empty($session->message))
+			$update['message'] = -1;
 		if(\Auth::check())
 			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
 		header('Content-Type: application/json');

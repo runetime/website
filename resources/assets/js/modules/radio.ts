@@ -180,9 +180,11 @@ class Radio {
             } else {
                 $('#radio-dj').html("Auto DJ");
             }
-            if(update['message'] !== '') {
+            if(update['message'] !== '' && update['message'] !== -1) {
                 $("[rt-data='radio:message.contents']").html(update['message']);
-            } else {
+            } else if(update['message'] === -1) {
+				$("[rt-data='radio:message.contents']").html("DJ " + update['dj'] + " is currently on air!");
+			} else {
                 $("[rt-data='radio:message.contents']").html("Auto DJ is currently on air");
             }
             for(var x = 0, y = update['requests'].length; x < y; x++) {
