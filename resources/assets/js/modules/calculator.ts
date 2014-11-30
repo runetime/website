@@ -34,9 +34,44 @@ class Calculator {
             }, 25);
         });
     }
+
+	calculateXP(level: number) {
+		var total = 0,
+			i = 0;
+		for (i = 1; i < level; i += 1) {
+			total += Math.floor(i + 300 * Math.pow(2, i / 7.0));
+		}
+		return Math.floor(total / 4);
+	}
+
+	calculateLevel(xp: number) {
+		var total = 0,
+			i = 0;
+		for (i = 1; i < 120; i += 1) {
+			total += Math.floor(i + 300 + Math.pow(2, i / 7));
+			if(Math.floor(total / 4) > xp)
+				return i;
+			else if(i >= 99)
+				return 99;
+		}
+	}
+
     getInfo() {
         var name = $(this.elements.displayName).val();
+		var info = utilities.getAJAX(this.URL.getInfo + '/' + name);
+		info.done(function(info: any) {
+			info = $.parseJSON(info);
+			var relevant = info[13];
+			calculator.info.levelCurrent = relevant[1];
+			calculator.info.XPCurrent = relevant[2];
+			$(calculator.elements.currentXP).val(calculator.info.XPCurrent);
+			if($(calculator.elements.targetLevel).val().length === 0) {
+				$(calculator.elements.targetLevel).val(parseInt(calculator.info.levelCurrent, 10) + 1);
+			}
+			calculator.updateCalc();
+		});
     }
+
     loadCalc() {
         var data = {id: this.calculator};
         var info = utilities.postAJAX(this.URL.getCalc, data);
@@ -55,25 +90,7 @@ class Calculator {
             });
         });
     }
-    calculateXP(level: number) {
-        var total = 0,
-            i = 0;
-        for (i = 1; i < level; i += 1) {
-            total += Math.floor(i + 300 * Math.pow(2, i / 7.0));
-        }
-        return Math.floor(total / 4);
-    }
-    calculateLevel(xp: number) {
-        var total = 0,
-            i = 0;
-        for (i = 1; i < 120; i += 1) {
-            total += Math.floor(i + 300 + Math.pow(2, i / 7));
-            if(Math.floor(total / 4) > xp)
-                return i;
-            else if(i >= 99)
-                return 99;
-        }
-    }
+
     updateCalc() {
         var levelCurrent = 0,
             levelTarget = 0,
