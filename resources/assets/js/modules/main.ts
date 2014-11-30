@@ -1,3 +1,8 @@
+var runetime;
+class RuneTime {
+	loading:string = '#loading';
+}
+runetime = new RuneTime();
 $(function () {
 	"use strict";
 	$('[data-toggle]').tooltip();

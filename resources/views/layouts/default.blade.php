@@ -248,5 +248,6 @@ $current = $nav;
 				<i class='fa fa-chevron-up'></i>
 			</a>
 		</div>
+		<div id='loading'></div>
 	</body>
 </html>

@@ -21,10 +21,10 @@ class LivestreamReset {
 	}
 
 	private reset() {
+		$('#loading').css({ opacity: 1});
 		var status = utilities.postAJAX(this.paths.reset, {});
 		status.done(function(results: string) {
 			results = utilities.JSONDecode(results);
-			console.log(results);
 			if(results.online === true) {
 				livestreamReset.statusOnline();
 			} else if(results.online === false) {
@@ -34,6 +34,7 @@ class LivestreamReset {
 			}
 			livestreamReset.spinnerRemove();
 		});
+		$('#loading').css({ opacity: 0});
 	}
 
 	public spinnerRemove() {
