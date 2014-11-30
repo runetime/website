@@ -77,7 +77,7 @@ class ForumController extends BaseController {
 		$recentPosts = $this->posts->hasThread(5);
 		$activity = \Cache::get('activity.users');
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.name'));
+		$this->title(trans('forums.title'));
 		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo', 'activity'));
 	}
 

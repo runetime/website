@@ -1,6 +1,6 @@
 <?php
 return [
-	'name' => 'Forums',
+	'title' => 'Forums',
 	'bar'  => [
 		'most_online'   => 'most online',
 		'newest_member' => 'newest member',
