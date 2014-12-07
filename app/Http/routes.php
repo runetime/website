@@ -450,21 +450,15 @@ Route::group(['prefix' => 'staff'], function() {
 		post('checkup', 'StaffController@postCheckup');
 		get('checkup/view/{id}', 'StaffController@getCheckupView');
 		get('checkup/list', 'StaffController@getCheckupList');
+
 		/**
-		 * Moderation Panel
+		 * Administrator Panel
 		 */
-		Route::group(['middleware' => 'staff.moderator', 'prefix' => 'moderation'], function() {
-			get('/', 'StaffModeratorController@getModerationIndex');
-			get('report/{id}', 'StaffModeratorController@getModerationReportView');
-			get('report/{id}/status/switch', 'StaffModeratorController@getModerationReportStatusSwitch');
-			/**
-			 * Thread Management
-			 */
-			Route::group(['prefix' => 'thread/{id}-{name}'], function() {
-				get('status={status}', 'StaffModeratorController@getModerationThreadStatus');
-				get('title', 'StaffModeratorController@getModerationThreadTitle');
-				post('title', 'StaffModeratorController@postModerationThreadTitle');
-			});
+		Route::group(['middleware' => 'staff.admin', 'prefix' => 'administrator'], function() {
+			get('/', 'StaffAdminController@getAdministratorIndex');
+			get('users', 'StaffAdminController@getAdministratorUsers');
+			get('ip-ban', 'StaffAdminController@getAdministratorIPBan');
+			post('ip-ban', 'StaffAdminController@postAdministratorIPBan');
 		});
 
 		/**
@@ -484,13 +478,10 @@ Route::group(['prefix' => 'staff'], function() {
 		});
 
 		/**
-		 * Administrator Panel
+		 * Team Leader Panel
 		 */
-		Route::group(['middleware' => 'staff.admin', 'prefix' => 'administrator'], function() {
-			get('/', 'StaffAdminController@getAdministratorIndex');
-			get('users', 'StaffAdminController@getAdministratorUsers');
-			get('ip-ban', 'StaffAdminController@getAdministratorIPBan');
-			post('ip-ban', 'StaffAdminController@postAdministratorIPBan');
+		Route::group(['middleware' => 'staff.team_leader', 'prefix' => 'leader'], function() {
+			get('/', 'TeamLeaderController@getIndex');
 		});
 	});
 });

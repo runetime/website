@@ -55,9 +55,9 @@ return [
 		'mysql' => [
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'runetime',
-			'username'  => 'root',
-			'password'  => 'root',
+			'database'  => getenv('APP_DATABASE'),
+			'username'  => getenv('APP_DATABASE_USERNAME'),
+			'password'  => getenv('APP_DATABASE_PASSWORD'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

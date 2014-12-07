@@ -47,19 +47,20 @@ class Link {
 	}
 
 	/**
-	 * @param $str
-	 * @param $roleInfo
+	 * @param      $str
+	 * @param      $roleInfo
+	 * @param bool $displayImage
 	 *
 	 * @return string
 	 */
-	public static function color($str,$roleInfo) {
+	public static function color($str, $roleInfo, $displayImage = true) {
 		$roles = new RoleRepository(new Role);
-		if(ctype_digit($roleInfo))
+		if(is_numeric($roleInfo))
 			$role = $roles->getById($roleInfo);
 		else
 			$role = $roles->getByName($roleInfo);
 		if($role)
-			return "<span class='members-" . $role->class_name . "'>" . $str . "</a>";
+			return "<span class='members-" . $role->class_name . ($displayImage ? "" : "-no-img") . "'>" . $str . "</a>";
 		\Log::warning('Utilities\Link::color - ' . $roleInfo . ' does not exist.');
 		return $str;
 	}

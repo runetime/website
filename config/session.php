@@ -16,7 +16,7 @@ return [
 	|
 	*/
 
-	'driver' => 'file',
+	'driver' => getenv('SESSION_DRIVER') ?: 'file',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
 	|
 	*/
 
-	'cookie' => 'runetime_session',
+	'cookie' => (bool) getenv('SESSION_NAME') ?: 'runetime_session',
 
 	/*
 	|--------------------------------------------------------------------------

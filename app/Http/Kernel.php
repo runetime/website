@@ -1,6 +1,5 @@
 <?php namespace App\Http;
 
-use Exception;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel {
@@ -25,15 +24,17 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-		'auth' => 'App\Http\Middleware\Authenticate',
-		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
+		'auth'              => 'App\Http\Middleware\Authenticate',
+		'auth.basic'        => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+		'guest'             => 'App\Http\Middleware\RedirectIfAuthenticated',
 		
-		'staff' => 'App\Http\Middleware\Staff',
-		'staff.admin' => 'App\Http\Middleware\StaffAdministrator',
-		'staff.content' => 'App\Http\Middleware\StaffContent',
-		'staff.moderator' => 'App\Http\Middleware\StaffModerator',
-		'staff.radio' => 'App\Http\Middleware\StaffRadio',
+		'staff'             => 'App\Http\Middleware\Staff',
+		'staff.admin'       => 'App\Http\Middleware\StaffAdministrator',
+		'staff.content'     => 'App\Http\Middleware\StaffContent',
+		'staff.leader'      => 'App\Http\Middleware\StaffLeader',
+		'staff.moderator'   => 'App\Http\Middleware\StaffModerator',
+		'staff.radio'       => 'App\Http\Middleware\StaffRadio',
+		'staff.team_leader' => 'App\Http\Middleware\StaffLeader',
 	];
 
 }

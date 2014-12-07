@@ -47,8 +47,8 @@ if(\Auth::check() && \Auth::user()->isStaff()) {
 		$navs[trans('navbar.staff.staff')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . Lang::get('navbar.staff.administrator') . "</span>";
 	if(\Auth::user()->hasOneOfRoles(1, 2, 3))
 		$navs[trans('navbar.staff.staff')]['staff/radio'] = "<span class='members-radio-dj-no-img'>" . Lang::get('navbar.staff.radio') . "</span>";
-	if(\Auth::user()->hasOneOfRoles(1, 10, 11))
-		$navs[trans('navbar.staff.staff')]['staff/moderation'] = "<span class='members-community-team-no-img'>" . Lang::get('navbar.staff.moderation') . "</span>";
+	if(\Auth::user()->isLeader() && !\Auth::user()->isAdmin())
+		$navs[trans('navbar.staff.staff')]['staff/leader'] = \Link::color(trans('navbar.staff.team_leader'), \Auth::user()->importantRole()->id, false);
 	$navs[trans('navbar.staff.staff')]['tickets/manage'] = Lang::get('navbar.staff.ticket');
 	$navs[trans('navbar.staff.staff')]['staff/checkup']  = Lang::get('navbar.staff.checkup');
 }

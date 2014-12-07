@@ -49,7 +49,7 @@ return [
 		'ticket'        => 'Ticket System',
 		'checkup'       => 'Staff Checkup',
 		'administrator' => 'Administrator Panel',
-		'moderation'    => 'Moderation Panel',
+		'team_leader'   => 'Team Leader Panel',
 		'radio'         => 'Radio Panel',
 		'content'       => 'Content Panel',
 		'events'        => 'Events Panel',
