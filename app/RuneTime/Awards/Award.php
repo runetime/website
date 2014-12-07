@@ -21,7 +21,7 @@ class Award extends Entity{
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function users() {
-		return $this->awardees;
+		return $this->belongsToMany('App\RuneTime\Awards\Awardee');
 	}
 
 	/**
