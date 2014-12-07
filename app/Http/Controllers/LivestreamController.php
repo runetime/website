@@ -32,7 +32,6 @@ class LivestreamController extends BaseController {
 			\Cache::put('livestream.status', true, \Carbon::now()->addMinutes(10));
 		else
 			\Cache::put('livestream.status', false, \Carbon::now()->addMinutes(10));
-		header('Content-Type: application/json');
 		return json_encode(['online' => \Cache::get('livestream.status')]);
 	}
 }
