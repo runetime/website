@@ -144,7 +144,6 @@ return [
 		/*
 		 * Extras
 		 */
-
 	],
 
 	/*
@@ -214,7 +213,7 @@ return [
 		'ImageCache' => 'Intervention\Image\Facades\Image',
 		'Img'        => 'Intervention\Image\Facades\Image',
 		'HTMLMin'    => 'GrahamCampbell\HTMLMin\Facades\HTMLMin',
-		'Error'     => 'App\Utilities\Error',
+		'Error'      => 'App\Utilities\Error',
 
 	],
 
