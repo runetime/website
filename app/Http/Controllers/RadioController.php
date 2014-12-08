@@ -71,7 +71,6 @@ class RadioController extends BaseController {
 			$history[$x]['artist'] = $value->artist;
 			$history[$x]['song'] = $value->song;
 		}
-		header('Content-Type: application/json');
 		return json_encode($history);
 	}
 
@@ -90,7 +89,6 @@ class RadioController extends BaseController {
 			if($time->hour == 23)
 				$x++;
 		}
-		header('Content-Type: application/json');
 		return json_encode($days);
 	}
 
@@ -98,7 +96,6 @@ class RadioController extends BaseController {
 	 * @return mixed
 	 */
 	public function getRequest() {
-		header('Content-Type: application/json');
 		$response = ['response' => 0];
 		if(\Auth::check())
 			$response['response'] = 2;
@@ -116,7 +113,6 @@ class RadioController extends BaseController {
 	public function postRequest(RequestSong $form) {
 		$request = new Request;
 		$request->saveNew(\Auth::user()->id, $form->artist, $form->name, \Request::getClientIp(true), Request::STATUS_NEUTRAL);
-		header('Content-Type: application/json');
 		return json_encode(['sent' => true]);
 	}
 
@@ -142,7 +138,6 @@ class RadioController extends BaseController {
 			$update['message'] = -1;
 		if(\Auth::check())
 			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
-		header('Content-Type: application/json');
 		return json_encode($update);
 	}
 }
