@@ -1,4 +1,5 @@
 <?php
+use App\Runis\Accounts\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	public function setUp()
@@ -19,6 +20,15 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		$app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
 		return $app;
+	}
+
+	/**
+	 *
+	 */
+	public function login()
+	{
+		$user = User::orderBy('created_at', 'desc')->first();
+		\Auth::loginUsingId($user->id);
 	}
 
 }

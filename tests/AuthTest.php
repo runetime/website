@@ -1,4 +1,5 @@
 <?php
+use App\Runis\Accounts\User;
 
 class AuthTest extends TestCase {
 	/**
@@ -23,6 +24,10 @@ class AuthTest extends TestCase {
 			'password2'    => 'test',
 		];
 		$response = $this->action('POST', 'AuthController@postSignupForm', null, $credentials);
+
+		$user = User::orderBy('created_at', 'desc')->first();
+		$user->setRole('Administrator');
+		$user->save();
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 
@@ -37,7 +42,7 @@ class AuthTest extends TestCase {
 
 	public function testLoginPost()
 	{
-		$user = \App\Runis\Accounts\User::orderBy('created_at', 'desc')->first();
+		$user = User::orderBy('created_at', 'desc')->first();
 		$credentials = [
 			'email'        => $user->email,
 			'display_name' => $user->display_name,
