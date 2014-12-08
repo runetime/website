@@ -8,7 +8,9 @@
 					Looks like this page isn't here. :(
 				</p>
 				<p>
-					{!!HTML::link(\Link::URL(),'Back to Homepage',['class'=>'btn btn-info btn-lg','role'=>'button'])!!}
+					<a href='/' title='Back to Homepage' class='btn btn-info btn-lg' role='button'>
+						Back to Homepage
+					</a>
 				</p>
 			</div>
 @stop

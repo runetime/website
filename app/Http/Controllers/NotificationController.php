@@ -34,6 +34,8 @@ class NotificationController extends BaseController {
 	 */
 	public function getView($id) {
 		$notification = $this->notifications->getById($id);
+		if(!$notification)
+			return \Error::abort(404);
 		$notification->setRead();
 		$this->bc(['notifications' => trans('notifications.title')]);
 		$this->nav('navbar.runetime.runetime');
