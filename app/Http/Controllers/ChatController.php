@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Chat\CheckChannelRequest;
 use App\Http\Requests\Chat\MessageRequest;
 use App\Http\Requests\Chat\StartRequest;
@@ -9,7 +10,7 @@ use App\RuneTime\Chat\ChannelRepository;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
 use App\Runis\Accounts\UserRepository;
-use Illuminate\Http\Response;
+
 /**
  * Class ChatController
  * @package App\Http\Controllers
@@ -105,15 +106,11 @@ class ChatController extends BaseController{
 		$response = ['sent' => false];
 		if(\Auth::check()){
 			$contentsParsed = with(new \Parsedown)->text($form->contents);
-			with(new Chat)->saveNew(\Auth::user()->id,
-				$form->contents,
-				$contentsParsed,
-				Chat::STATUS_USER_PUBLISHED,
-				$this->channels->getByNameTrim($form->channel)->id);
+			with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_USER_PUBLISHED, $this->channels->getByNameTrim($form->channel)->id);
 			$channel = $this->channels->getByNameTrim($form->channel);
 			$channel->messages = $channel->messages+1;
 			$channel->save();
-			$response = ['sent' => true];
+			$response['sent'] = true;
 		}
 		return json_encode($response);
 	}
@@ -141,7 +138,7 @@ class ChatController extends BaseController{
 	 * @return array
 	 */
 	public function postCheckChannel(CheckChannelRequest $form){
-		$channel=$this->channels->getByNameTrim($form->channel);
+		$channel = $this->channels->getByNameTrim($form->channel);
 		$response = ['valid' => false];
 		if($channel)
 			$response['valid'] = true;
