@@ -45,8 +45,11 @@ class Update extends Command {
 	 *
 	 * @return mixed
 	 */
-	public function fire()
-	{
+	public function fire() {
+		if(getenv('APP_ENV') === 'local') {
+			$this->info('Local: not running');
+			return;
+		}
 		\Cache::forever('radio.artisan.lastRan', time());
 		$lastUpdated = \Cache::get('radio.artisan.lastUpdated');
 		if(time() - $lastUpdated >= 240) {

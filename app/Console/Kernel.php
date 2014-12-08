@@ -28,9 +28,8 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		if(getenv('APP_ENV') != 'local')
-			$schedule->command('radio:update')
-				->cron('*/1 * * * * *');
+		$schedule->command('radio:update')->
+			cron('*/1 * * * * *');
 		$schedule->command('signatures:update')->
 			daily();
 	}
