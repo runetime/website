@@ -158,4 +158,8 @@ class AuthController extends BaseController {
 		}
 		return 1;
 	}
+
+	public function getRedirect() {
+		return \redirect()->to('login');
+	}
 }
