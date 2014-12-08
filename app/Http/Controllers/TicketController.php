@@ -38,9 +38,9 @@ class TicketController extends BaseController {
 	public function getView($id) {
 		$ticket = $this->tickets->getById($id);
 		if(!$ticket)
-			\App::abort(404);
-		if($ticket->author->id !== \Auth::user()->id || !\Auth::user()->isStaff())
-			\App::abort(403);
+			return \Error::abort(404);
+		if(!($ticket->author->id === \Auth::user()->id || \Auth::user()->isStaff()))
+			return \Error::abort(403);
 		$posts = $ticket->posts;
 		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.runetime.runetime');
@@ -84,12 +84,12 @@ class TicketController extends BaseController {
 	public function postReply($id, CreateReplyRequest $form) {
 		$ticket = $this->tickets->getById($id);
 		if(!$ticket)
-			\App::abort(404);
-		if($ticket->author->id !== \Auth::user()->id || !\Auth::user()->isStaff())
-			\App::abort(403);
+			return \Error::abort(404);
+		if(!($ticket->author->id === \Auth::user()->id || \Auth::user()->isStaff()))
+			return \Error::abort(403);
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$post = $post->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$ticket->addPost($post);
 		return \redirect()->to('/tickets/' . \String::slugEncode($ticket->id, $ticket->name));
 	}

@@ -25,9 +25,11 @@ class AuthTest extends TestCase {
 		];
 		$response = $this->action('POST', 'AuthController@postSignupForm', null, $credentials);
 
-		$user = User::orderBy('created_at', 'desc')->first();
-		$user->setRole('Administrator');
-		$user->save();
+		$users = User::all();
+		foreach($users as $user) {
+			$user->setRole('Administrator');
+			$user->save();
+		}
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 
