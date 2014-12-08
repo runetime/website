@@ -95,8 +95,7 @@ class DatabaseController extends BaseController {
 		$membership = $form->membership == 1 ? true : false;
 		$tradable = $form->tradable == 1 ? true : false;
 		$questItem = $form->quest_item == 1 ? true : false;
-		$item = new Item;
-		$item = $item->saveNew(\Auth::user()->id, $editors, $name, $examine, $examineParsed, $membership, $tradable, $questItem);
+		$item = with(new Item)->saveNew(\Auth::user()->id, $editors, $name, $examine, $examineParsed, $membership, $tradable, $questItem);
 		return \redirect()->to('/databases/items/' . \String::slugEncode($item->id, $item->name));
 	}
 
@@ -159,8 +158,7 @@ class DatabaseController extends BaseController {
 		$members = $form->membership == 1 ? true : false;
 		$otherInformation = $form->other_information;
 		$otherInformationParsed = $parsedown->text($otherInformation);
-		$monster = new Monster;
-		$monster = $monster->saveNew(\Auth::user()->id, $editors, $name, $examine, $examineParsed, $stats, $statsParsed, $location, $locationParsed, $drops, $dropsParsed, $members, $otherInformation, $otherInformationParsed);
+		$monster = with(new Monster)->saveNew(\Auth::user()->id, $editors, $name, $examine, $examineParsed, $stats, $statsParsed, $location, $locationParsed, $drops, $dropsParsed, $members, $otherInformation, $otherInformationParsed);
 		return \redirect()->to('/databases/monsters/' . \String::slugEncode($monster->id, $monster->name));
 	}
 }
