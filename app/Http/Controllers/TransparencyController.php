@@ -17,7 +17,7 @@ class TransparencyController extends BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function getMarkdown() {
-		$paths = \File::allFiles(\base_path() . '/resources/views/parsedown');
+		$paths = \File::allFiles(\base_path('views/parsedown'));
 		$files = [];
 		foreach($paths as $path) {
 			$name = str_replace("_", " ", $path);
