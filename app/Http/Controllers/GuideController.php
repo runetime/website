@@ -63,9 +63,9 @@ class GuideController extends BaseController {
 	 */
 	public function getQuestView($id) {
 		$guide = $this->quests->getById($id);
+		if(empty($guide))
+			return \Error::abort(404);
 		$guide->editors = json_decode($guide->editors);
-		if(!$guide)
-			\App::abort(404);
 		$difficulty = $this->quests->getOptionById($guide->difficulty);
 		$length = $this->quests->getOptionById($guide->length);
 		$editList = "";
@@ -107,8 +107,7 @@ class GuideController extends BaseController {
 		$startingPoint = $parsedown->text($form->starting_point);
 		$contents = $form->contents;
 		$contentsParsed = $parsedown->text($form->contents);
-		$quest = new Quest;
-		$quest = $quest->saveNew($form->name, \Auth::user()->id, $editors, $form->difficulty, $form->length, $form->qp, $membership, $completed, $description, $questRequirements, $skillRequirements, $itemsRequired, $itemsRecommended, $rewards, $startingPoint, $contents, $contentsParsed);
+		$quest = with(new Quest)->saveNew($form->name, \Auth::user()->id, $editors, $form->difficulty, $form->length, $form->qp, $membership, $completed, $description, $questRequirements, $skillRequirements, $itemsRequired, $itemsRecommended, $rewards, $startingPoint, $contents, $contentsParsed);
 		return \redirect()->to('guides/quests/' . \String::slugEncode($quest->id, $quest->name));
 	}
 
@@ -130,6 +129,8 @@ class GuideController extends BaseController {
 	 */
 	public function getLocationView($id) {
 		$guide = $this->locations->getById($id);
+		if(empty($guide))
+			return \Error::abort(404);
 		$guide->editors = json_decode($guide->editors);
 		if(!$guide)
 			\App::abort(404);
@@ -159,12 +160,10 @@ class GuideController extends BaseController {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postLocationCreate(LocationCreateRequest $form) {
-		$parsedown = new \Parsedown;
 		$editors = json_encode([]);
 		$contents = $form->contents;
-		$contentsParsed = $parsedown->text($contents);
-		$location = new Location;
-		$location = $location->saveNew($form->name, \Auth::user()->id, $editors, $contents, $contentsParsed);
+		$contentsParsed = with(new \Parsedown)->text($contents);
+		$location = with(new Location)->saveNew($form->name, \Auth::user()->id, $editors, $contents, $contentsParsed);
 		return \redirect()->to('guides/locations/' . \String::slugEncode($location->id, $location->name));
 	}
 }
