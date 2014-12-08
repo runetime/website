@@ -51,24 +51,46 @@ class Update extends Command {
 		$lastUpdated = \Cache::get('radio.artisan.lastUpdated');
 		if(time() - $lastUpdated >= 240) {
 			$this->info("Pulling data from Primcast servers");
-			$results = \String::CURL('http://widgets.primcast.com/SHOUTinfo/data.php?id=runetime.primcast.com%3A6582&songslist=1&ap64=wqs%24%24lkt117B4w2&timezone=GMT&color=FF0000');
+			$path = 'runetime.primcast.com';
+			$port = 6582;
+			$results = $this->radioInfo($path, $port);
+			$song = explode(" - ", $results[6]);
+			$artist = $song[0];
+			$name = $song[1];
 			$this->info("Pulled data from Primcast servers");
-			$result = explode("\n", $results);
-			$result = explode("</span> ", $result[0]);
-			$songInfo = explode(" - ", $result[1]);
-			$artist = $songInfo[0];
-			$song = str_replace("</li>", "", $songInfo[1]);
-			$history = new History;
 			$currentDJ = \Cache::get('radio.dj.current');
 			if(empty($currentDJ))
 				$currentDJ = -1;
 			$currentHistory = $this->history->getCurrent();
-			if(empty($currentHistory) || ($currentHistory->song != $song && $currentHistory->artist != $artist)) {
-				$history->saveNew($currentDJ, $artist, $song);
+			if(empty($currentHistory) || ($currentHistory->song != $name && $currentHistory->artist != $artist)) {
+				with(new History)->saveNew($currentDJ, $artist, $name);
 				\Cache::forever('radio.artisan.lastUpdated', time());
-				$this->info("Updated radio to be playing " . $song . " by " . $artist);
+				$this->info("Updated radio to be playing " . $name . " by " . $artist);
 			}
 		}
+	}
+
+	/**
+	 * @param $ip
+	 * @param $port
+	 *
+	 * @return array|int
+	 */
+	private function radioInfo($ip, $port) {
+		ini_set("allow_url_fopen", "On");
+		$sh = fsockopen($ip, $port, $errno, $errstr, 30);
+		if($sh) {
+			fputs($sh, "GET /7.html HTTP/1.0\r\nUser-Agent: SHOUTcast Song Status (Mozilla Compatible)\r\n\r\n");
+			$results = "";
+			while(!feof($sh))
+				$results .= fgets($sh, 1000);
+			fclose($sh);
+			$results = strstr($results, "<body>");
+			$results = str_replace("</body></html>", "", $results);
+			$results = str_replace("<body>", "", $results);
+			return explode(",", $results);
+		}
+		return -1;
 	}
 
 	/**
