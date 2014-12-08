@@ -67,7 +67,6 @@ class ChatController extends BaseController{
 			$messageCurrent->uuid = uniqid('', true);
 			array_push($messageList, $messageCurrent);
 		}
-		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
 	}
 
@@ -94,7 +93,6 @@ class ChatController extends BaseController{
 			$messageCurrent->uuid = uniqid(md5(microtime(true)), true);
 			array_push($messageList, $messageCurrent);
 		}
-		header('Content-Type: application/json');
 		return json_encode(array_reverse($messageList));
 	}
 
@@ -107,13 +105,16 @@ class ChatController extends BaseController{
 		$response = ['sent' => false];
 		if(\Auth::check()){
 			$contentsParsed = with(new \Parsedown)->text($form->contents);
-			with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_USER_PUBLISHED, $this->channels->getByNameTrim($form->channel)->id);
+			with(new Chat)->saveNew(\Auth::user()->id,
+				$form->contents,
+				$contentsParsed,
+				Chat::STATUS_USER_PUBLISHED,
+				$this->channels->getByNameTrim($form->channel)->id);
 			$channel = $this->channels->getByNameTrim($form->channel);
 			$channel->messages = $channel->messages+1;
 			$channel->save();
 			$response = ['sent' => true];
 		}
-		header('Content-Type: application/json');
 		return json_encode($response);
 	}
 
@@ -131,7 +132,6 @@ class ChatController extends BaseController{
 			$channelCurrent->last_message = strtotime($message['created_at']);
 			array_push($channelList, $channelCurrent);
 		}
-		header('Content-Type: application/json');
 		return json_encode(array_reverse($channelList));
 	}
 
@@ -145,7 +145,6 @@ class ChatController extends BaseController{
 		$response = ['valid' => false];
 		if($channel)
 			$response['valid'] = true;
-		header('Content-Type: application/json');
 		return json_encode($response);
 	}
 }
