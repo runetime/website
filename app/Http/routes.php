@@ -479,7 +479,7 @@ Route::group(['prefix' => 'staff'], function() {
 		 * Team Leader Panel
 		 */
 		Route::group(['middleware' => 'staff.team_leader', 'prefix' => 'leader'], function() {
-			get('/', 'TeamLeaderController@getIndex');
+			get('/', 'StaffTeamLeaderController@getIndex');
 		});
 	});
 });

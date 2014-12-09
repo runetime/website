@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class TeamLeaderController extends BaseController {
+class StaffTeamLeaderController extends BaseController {
 	public function __construct()
 	{
 
