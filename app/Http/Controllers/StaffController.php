@@ -5,16 +5,8 @@ use App\Http\Requests\Staff\CheckupRequest;
 use App\Http\Requests\Staff\UserMuteRequest;
 use App\Http\Requests\Staff\UserReportRequest;
 use App\RuneTime\Checkup\CheckupRepository;
-use App\RuneTime\Forum\Reports\ReportRepository;
-use App\RuneTime\Forum\Threads\PostRepository;
-use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Checkup\Checkup;
-use App\RuneTime\Radio\HistoryRepository;
-use App\RuneTime\Radio\MessageRepository;
-use App\RuneTime\Radio\SessionRepository;
-use App\RuneTime\Radio\TimetableRepository;
 use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\UserRepository;
 
 class StaffController extends BaseController {
 	/**
