@@ -4,7 +4,7 @@ use App\Runis\Core\Entity;
 class Thread extends Entity {
 	protected $table = 'forum_threads';
 	protected $with = [];
-	protected $fillable = ['author_id', 'subforum_id', 'title', 'views_count', 'posts_count', 'last_post', 'poll', 'status'];
+	protected $fillable = ['author_id', 'subforum_id', 'title', 'views_count', 'posts_count', 'last_post', 'poll_id', 'status'];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
