@@ -351,7 +351,6 @@ class ForumController extends BaseController {
 		// Poster's reputation
 		$post->author->reputationChange($rep);
 		$response = ['voted' => $newStatus];
-		header('Content-Type: application/json');
 		return json_encode($response);
 	}
 
