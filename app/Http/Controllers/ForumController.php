@@ -194,13 +194,15 @@ class ForumController extends BaseController {
 		if(empty($subforum))
 			abort(404);
 		$poll = [];
-		foreach($form->questions as $key => $question)
-			if(!empty($question))
-				$poll[$key] = [];
-		foreach($form->answers as $questionKey => $answerToQuestion)
-			foreach($answerToQuestion as $answerKey => $answer)
-				if(!empty($answer))
-					$poll[$questionKey][$answerKey] = $answer;
+		if(!empty($form->questions)) {
+			foreach($form->questions as $key => $question)
+				if(!empty($question))
+					$poll[$key] = [];
+			foreach($form->answers as $questionKey => $answerToQuestion)
+				foreach($answerToQuestion as $answerKey => $answer)
+					if(!empty($answer))
+						$poll[$questionKey][$answerKey] = $answer;
+		}
 		$thread = with(new Thread)->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, -1, Thread::STATUS_VISIBLE);
 		$post = with(new Post)->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
 		$post->author->incrementReputation();
