@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Staff\CheckupRequest;
+use App\Http\Requests\Staff\UserMuteRequest;
+use App\Http\Requests\Staff\UserReportRequest;
 use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Forum\Reports\ReportRepository;
 use App\RuneTime\Forum\Threads\PostRepository;
@@ -12,10 +15,7 @@ use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
-/**
- * Class StaffController
- * @package App\Http\Controllers
- */
+
 class StaffController extends BaseController {
 	/**
 	 * @var CheckupRepository
@@ -45,6 +45,26 @@ class StaffController extends BaseController {
 	}
 
 	/**
+	 * @param UserReportRequest $form
+	 *
+	 * @return string
+	 */
+	public function postUserReport(UserReportRequest $form) {
+		$response = ['done' => true];
+		return json_encode($response);
+	}
+
+	/**
+	 * @param UserMuteRequest $form
+	 *
+	 * @return string
+	 */
+	public function postUserMute(UserMuteRequest $form) {
+		$response = ['done' => true];
+		return json_encode($response);
+	}
+
+	/**
 	 * @return \Illuminate\View\View
 	 */
 	public function getCheckup() {
@@ -65,32 +85,6 @@ class StaffController extends BaseController {
 		$checkup = with(new Checkup)->saveNew($form->active, $hoursActive, $form->team);
 		$checkup->addAuthor(\Auth::user());
 		return \redirect()->to('staff');
-	}
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getCheckupList() {
-		$checkups = $this->checkups->getX(30);
-		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
-		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.checkup.title'));
-		return $this->view('staff.checkup.list', compact('checkups'));
-	}
-
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getCheckupView($id) {
-		$checkup = $this->checkups->getById($id);
-		$displayName = $this->users->getById($checkup->author()->first()->id);
-		$displayName = $displayName->display_name;
-		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
-		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.checkup.view.title', ['author' => $displayName]));
-		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
 	}
 
 	/**
