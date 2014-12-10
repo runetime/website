@@ -35,7 +35,7 @@ class Chatbox {
 				chatbox.submitMessage();
 		});
 		$(this.elements.channels).bind('click', function () {
-			chatbox.Panels.channels();
+			chatbox.panelChannels();
 		});
 		setTimeout(function () {
 			chatbox.update();
