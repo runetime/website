@@ -75,6 +75,9 @@ gulp.task('scripts-vendor', function() {
 
 gulp.task('watch', function() {
 	gulp.watch('./assets/typescript/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
+	gulp.watch('./assets/typescript/admin/*.ts', ['scripts-admin']);
+	gulp.watch('./assets/typescript/modules/*.ts', ['scripts-modules']);
+	gulp.watch('./assets/typescript/vendor/*.ts', ['scripts-vendor']);
 	gulp.watch('./assets/scss/*.scss', ['scss']);
 	gulp.watch('./assets/scss/partials/*.scss', ['scss']);
 });
