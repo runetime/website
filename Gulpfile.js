@@ -36,7 +36,9 @@ gulp.task('scripts-admin', function() {
 		}));
 
 	return tsResult.js
-		.pipe(concat('admin.js'))
+		.pipe(uglifyjs('admin.js'), {
+			compress: true
+		})
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('./public/js/'));
 });
@@ -57,17 +59,24 @@ gulp.task('scripts-modules', function() {
 
 // Scripts-Admin Task
 gulp.task('scripts-vendor', function() {
-	gulp.src('./assets/typescript/vendor/*.js')
+	var src = [
+		'./assets/typescript/vendor/jquery.js',
+		'./assets/typescript/vendor/jquery-ui.js',
+		'./assets/typescript/vendor/bootstrap.js',
+		'./assets/typescript/vendor/jasny-bootstrap.js'
+	];
+	gulp.src(src)
 		.pipe(uglifyjs('vendor.js', {
+			compress: true,
 			outSourceMap: false
 		}))
 		.pipe(gulp.dest('./public/js'))
 });
 
 gulp.task('watch', function() {
-	gulp.watch('./assets/typescripts/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
+	gulp.watch('./assets/typescript/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
 	gulp.watch('./assets/scss/*.scss', ['scss']);
 	gulp.watch('./assets/scss/partials/*.scss', ['scss']);
 });
 
-gulp.task('default', ['cass']);
+gulp.task('default', ['scss', 'scripts-admin', 'scripts-modules', 'scripts-vendor']);
