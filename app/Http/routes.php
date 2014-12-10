@@ -446,8 +446,8 @@ Route::group(['prefix' => 'staff'], function() {
 		get('/', 'StaffController@getIndex');
 		get('checkup', 'StaffController@getCheckup');
 		post('checkup', 'StaffController@postCheckup');
-		get('checkup/view/{id}', 'StaffController@getCheckupView');
-		get('checkup/list', 'StaffController@getCheckupList');
+		post('mute', 'StaffController@postUserMute');
+		post('report', 'StaffController@postUserReport');
 
 		/**
 		 * Administrator Panel
@@ -457,6 +457,8 @@ Route::group(['prefix' => 'staff'], function() {
 			get('users', 'StaffAdminController@getAdministratorUsers');
 			get('ip-ban', 'StaffAdminController@getAdministratorIPBan');
 			post('ip-ban', 'StaffAdminController@postAdministratorIPBan');
+			get('checkup/view/{id}', 'StaffController@getCheckupView');
+			get('checkup/list', 'StaffController@getCheckupList');
 		});
 
 		/**
