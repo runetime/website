@@ -6,8 +6,10 @@ use App\Http\Requests\Staff\UserMuteRequest;
 use App\Http\Requests\Staff\UserReportRequest;
 use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Checkup\Checkup;
+use App\RuneTime\Forum\Threads\Post;
+use App\RuneTime\Tickets\Ticket;
 use App\Runis\Accounts\RoleRepository;
-
+use App\Runis\Accounts\UserRepository;
 class StaffController extends BaseController {
 	/**
 	 * @var CheckupRepository
@@ -17,14 +19,20 @@ class StaffController extends BaseController {
 	 * @var RoleRepository
 	 */
 	private $roles;
+	/**
+	 * @var UserRepository
+	 */
+	private $users;
 
 	/**
 	 * @param CheckupRepository $checkups
 	 * @param RoleRepository    $roles
+	 * @param UserRepository    $users
 	 */
-	public function __construct(CheckupRepository $checkups, RoleRepository $roles) {
+	public function __construct(CheckupRepository $checkups, RoleRepository $roles, UserRepository $users) {
 		$this->checkups = $checkups;
 		$this->roles = $roles;
+		$this->users = $users;
 	}
 
 	/**
@@ -43,6 +51,20 @@ class StaffController extends BaseController {
 	 */
 	public function postUserReport(UserReportRequest $form) {
 		$response = ['done' => true];
+		$user = $this->users->getByDisplayName($form->username);
+		if(!empty($user)) {
+			$contentsParsed = with(new \Parsedown)->text($form->contents);
+			$ticket = with(new Ticket)->saveNew(\Auth::user()->id, $user->display_name . " reported by " . \Auth::user()->display_name, 0, 0, Ticket::STATUS_ESCALATED);
+			$post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $contentsParsed);
+			$ticket->last_post = $post->id;
+			$ticket->save();
+			$ticket->addPost($post);
+			if(!$ticket || !$post)
+				$response['error'] = -2;
+		} else {
+			$response['done'] = false;
+			$response['error'] = -1;
+		}
 		return json_encode($response);
 	}
 

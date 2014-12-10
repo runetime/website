@@ -170,6 +170,15 @@ $cardWidth:200px;
 .card-poll {
 	border-left-color:rgba(237, 210, 16, 1);
 }
+.card-open {
+	@extend .card-good;
+}
+.card-bad {
+	@extend .card-bad;
+}
+.card-escalated {
+	@extend .card-pinned;
+}
 .card-link {
 	&:hover {
 		cursor:pointer;

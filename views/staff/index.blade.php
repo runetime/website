@@ -138,7 +138,7 @@
 							</h4>
 						</div>
 						<div class='modal-body'>
-							<p class='text-success'>
+							<p class='text-success' rt-hook='staff.panel:results.good.message'>
 								Your request has been successfully sent.
 							</p>
 						</div>
@@ -162,7 +162,7 @@
 							</h4>
 						</div>
 						<div class='modal-body'>
-							<p class='text-warning'>
+							<p class='text-warning' rt-hook='staff.panel:results.bad.message'>
 								There was an error processing your request.  Please try again.
 							</p>
 						</div>

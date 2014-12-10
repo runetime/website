@@ -507,7 +507,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 		 * Must be a staff member
 		 */
 		Route::group(['middleware' => 'staff'], function() {
-			get('status/switch', 'TicketController@getStatusSwitch');
+			get('status/switch={status}', 'TicketController@getStatusSwitch');
 		});
 	});
 	/**

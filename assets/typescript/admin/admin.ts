@@ -93,6 +93,10 @@ class StaffPanel {
 				username: '#report-username',
 				reason: '#report-contents',
 				send: "[rt-hook='staff.panel:report.send']"
+			},
+			results: {
+				good: "[rt-hook='staff.panel:results.good.message']",
+				bad: "[rt-hook='staff.panel:results.bad.message']"
 			}
 		};
 		this.paths = {
@@ -139,6 +143,13 @@ class StaffPanel {
 			if(results.done === true) {
 				$('#modal-results-good').modal('show')
 			} else {
+				if(results.error === -1) {
+					$(staffPanel.hooks.results.bad).html("That user does not exist.");
+				} else if(results.error === -2) {
+					$(staffPanel.hooks.results.bad).html("There was an error with processing the report.");
+				} else {
+					$(staffPanel.hooks.results.bad).html("There was an unknown error.");
+				}
 				$('#modal-results-bad').modal('show')
 			}
 		});

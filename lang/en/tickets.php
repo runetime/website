@@ -11,6 +11,7 @@ return [
 		'name'  => 'Name',
 		'ticket_message' => 'Ticket Message',
 	],
+	'escalate' => 'Escalate',
 	'index' => [
 		'no_closed'      => 'You have no closed tickets currently.',
 		'no_open'        => 'You have no open tickets currently.',
@@ -24,8 +25,9 @@ return [
 		'tickets_open'   => 'Open Tickets',
 	],
 	'status' => [
-		'closed' => 'closed',
-		'open'   => 'open',
+		'closed'    => 'closed',
+		'escalated' => 'escalated',
+		'open'      => 'open',
 	],
 	'view' => [
 		'title' => ':name',

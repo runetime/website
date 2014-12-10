@@ -7614,7 +7614,7 @@ body {
 .card-bad {
   border-left-color: #990000; }
 
-.card-good {
+.card-good, .card-open {
   border-left-color: #009900; }
 
 .card-read {
@@ -7629,7 +7629,7 @@ body {
 .card-locked {
   border-left-color: #56009e; }
 
-.card-pinned {
+.card-pinned, .card-escalated {
   border-left-color: #ed7710; }
 
 .card-poll {
