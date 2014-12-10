@@ -20,7 +20,14 @@ class IPRepository extends EloquentRepository {
 
 	public function getByIP($ip) {
 		return $this->model->
-			where('ip', '=', \String::encodeIP($ip))->
+			where('ip', '=', $ip)->
+			get();
+	}
+
+	public function getByIPActive($ip) {
+		return $this->model->
+			where('ip', '=', $ip)->
+			where('status', '=', IP::STATUS_ACTIVE)->
 			first();
 	}
 }

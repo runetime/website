@@ -71,8 +71,17 @@ class BaseController extends Controller {
 		$data['url'] = \Request::getPathInfo();
 		$this->updateCache();
 		$bans = new IPRepository(new IP);
-		if($bans->getByIP(\Request::getClientIp()))
-			return \View::make('errors.banned', $data);
+		$ban = $bans->getByIPActive(\Request::getClientIp());
+		if(!empty($ban)) {
+			if(\Auth::check())
+				\Auth::logout();
+			$data['ban'] = $ban;
+			$data['bc'] = false;
+			$data['displayPageHeader'] = false;
+			$data['nav'] = 'navbar.home';
+			$data['title'] = trans('navbar.home');
+			return \View::make('errors.ip_banned', $data);
+		}
 		return \View::make($path, $data);
 	}
 

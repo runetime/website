@@ -16,7 +16,7 @@ class CreateBansIpTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('author_id');
-			$table->integer('ip');
+			$table->string('ip');
 			$table->string('reason');
 			$table->integer('status');
 			$table->timestamps();
