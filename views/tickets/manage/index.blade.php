@@ -4,6 +4,22 @@
 				<h1>
 					@lang('tickets.manage.title')
 				</h1>
+@if(\Auth::user()->isAdmin())
+				<h3 class='text-warning'>
+					Escalated Tickets
+				</h3>
+	@if(count($ticketsEscalated) > 0)
+		@foreach($ticketsEscalated as $ticket)
+			@include('tickets._card', ['ticket' => $ticket])
+		@endforeach
+	@else
+					<p class='text-info'>
+						<em>
+							@lang('tickets.manage.none', ['status' => Lang::get('tickets.status.escalated')])
+						</em>
+					</p>
+	@endif
+@endif
 				<h3 class='text-success'>
 					@lang('tickets.manage.tickets_open')
 				</h3>

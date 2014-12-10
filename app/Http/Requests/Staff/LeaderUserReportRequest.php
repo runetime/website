@@ -1,8 +1,11 @@
 <?php namespace App\Http\Requests\Staff;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class ModerationThreadTitleRequest extends FormRequest {
+use App\Http\Requests\Request;
+/**
+ * Class LeaderUserReportRequest
+ * @package App\Http\Requests
+ */
+class LeaderUserReportRequest extends Request {
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -12,8 +15,6 @@ class ModerationThreadTitleRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'id'    => 'required',
-			'title' => 'required',
 		];
 	}
 

@@ -27,4 +27,10 @@ class CheckupRepository extends EloquentRepository {
 			take($amount)->
 			get();
 	}
+
+	public function getByStatus($status) {
+		return $this->model->
+			where('status', '=', $status)->
+			get();
+	}
 }

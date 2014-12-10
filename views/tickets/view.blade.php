@@ -5,13 +5,21 @@
 					{{ $ticket->name }}
 				</h1>
 				<p>
-					@lang('tickets.view.currently', ['status' => ($ticket->status == 0 ? "<span class='text-success'>" . Lang::get('tickets.status.open') . "</span>" : "<span class='text-danger'>" . Lang::get('tickets.status.closed') . "</span>")])
+@if($ticket->status === 0)
+	@lang('tickets.view.currently', ['status' => "<span class='text-success'>" . trans('tickets.status.open') . "</span>"])
+@elseif($ticket->status === 1)
+	@lang('tickets.view.currently', ['status' => "<span class='text-danger'>" . trans('tickets.status.closed') . "</span>"])
+@elseif($ticket->status === 2)
+	@lang('tickets.view.currently', ['status' => "<span class='text-warning'>" . trans('tickets.status.escalated') . "</span>"])
+@else
+	Error.  Please report this.
+@endif
 				</p>
 @foreach($posts as $post)
 	@include('forums.post._show', ['post' => $post])
 @endforeach
 @if(\Auth::check())
-	@if(!$ticket->status == 1)
+	@if($ticket->status !== $ticket->STATUS_CLOSED)
 		@include('forums.post._edit', ['url' => '/tickets/' . \String::slugEncode($ticket->id, $ticket->name) . '/reply'])
 	@else
 		@include('forums.post._locked')

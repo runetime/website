@@ -71,12 +71,7 @@ Route::group(['prefix' => 'chat'], function() {
 	post('start', 'ChatController@postStart');
 	get('channels', 'ChatController@getChannels');
 	post('channels/check', 'ChatController@postCheckChannel');
-	/**
-	 * Only logged in can perform
-	 */
-	Route::group(['middleware' => 'auth'], function() {
-		post('post/message', 'ChatController@postMessage');
-	});
+	post('post/message', 'ChatController@postMessage');
 	/**
 	 * Only moderators can perform
 	 */
@@ -446,8 +441,8 @@ Route::group(['prefix' => 'staff'], function() {
 		get('/', 'StaffController@getIndex');
 		get('checkup', 'StaffController@getCheckup');
 		post('checkup', 'StaffController@postCheckup');
-		get('checkup/view/{id}', 'StaffController@getCheckupView');
-		get('checkup/list', 'StaffController@getCheckupList');
+		post('mute', 'StaffController@postUserMute');
+		post('report', 'StaffController@postUserReport');
 
 		/**
 		 * Administrator Panel
@@ -457,6 +452,8 @@ Route::group(['prefix' => 'staff'], function() {
 			get('users', 'StaffAdminController@getAdministratorUsers');
 			get('ip-ban', 'StaffAdminController@getAdministratorIPBan');
 			post('ip-ban', 'StaffAdminController@postAdministratorIPBan');
+			get('checkup/view/{id}', 'StaffController@getCheckupView');
+			get('checkup/list', 'StaffController@getCheckupList');
 		});
 
 		/**
@@ -505,7 +502,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 		 * Must be a staff member
 		 */
 		Route::group(['middleware' => 'staff'], function() {
-			get('status/switch', 'TicketController@getStatusSwitch');
+			get('status/switch={status}', 'TicketController@getStatusSwitch');
 		});
 	});
 	/**

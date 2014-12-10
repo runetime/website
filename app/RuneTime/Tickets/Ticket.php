@@ -10,6 +10,7 @@ class Ticket extends Entity {
 	protected $softDelete = true;
 	const STATUS_OPEN = 0;
 	const STATUS_CLOSED = 1;
+	const STATUS_ESCALATED = 2;
 	const PER_PAGE = 20;
 
 	/**
@@ -39,7 +40,31 @@ class Ticket extends Entity {
 	}
 
 	public function statusSwitch() {
-		$this->status = $this->status == Ticket::STATUS_CLOSED ? Ticket::STATUS_OPEN : Ticket::STATUS_CLOSED;
+		switch($this->status) {
+			case Ticket::STATUS_OPEN:
+			case Ticket::STATUS_ESCALATED:
+				$this->status = TICKET::STATUS_CLOSED;
+				break;
+			case Ticket::STATUS_CLOSED:
+			default:
+				$this->status = TICKET::STATUS_OPEN;
+				break;
+		}
 		$this->save();
+	}
+
+	public function readableStatus() {
+		switch($this->status) {
+			case TICKET::STATUS_OPEN:
+				return 'good';
+				break;
+			case TICKET::STATUS_CLOSED:
+				return 'closed';
+				break;
+			case TICKET::STATUS_ESCALATED:
+			default:
+				return 'escalated';
+				break;
+		}
 	}
 }

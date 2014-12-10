@@ -10,6 +10,7 @@ return [
 		'free'    => 'Free',
 		'members' => 'Members',
 	],
+	'name'                 => ':name',
 	'no'                   => 'No',
 	'offline'              => 'offline',
 	'online'               => 'online',

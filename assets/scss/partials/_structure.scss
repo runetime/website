@@ -170,6 +170,15 @@ $cardWidth:200px;
 .card-poll {
 	border-left-color:rgba(237, 210, 16, 1);
 }
+.card-open {
+	@extend .card-good;
+}
+.card-bad {
+	@extend .card-bad;
+}
+.card-escalated {
+	@extend .card-pinned;
+}
 .card-link {
 	&:hover {
 		cursor:pointer;
@@ -276,9 +285,62 @@ table {
 	}
 }
 
-//Jasney
+// Jasney
 tbody.rowlink tr {
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+.pretty-row {
+	$e: 0.25em;
+	@extend .row;
+	background: #474747;
+	padding-bottom: 0 - $e;
+	> div {
+		padding: {
+			left: 0;
+			right: 0;
+		}
+		> div:nth-child(1) {
+			background: #595959;
+			margin: {
+				top: 0;
+			}
+			> h3 {
+				margin-top: 0;
+			}
+		}
+		padding-bottom: $e;
+	}
+	> div:nth-child(odd) {
+		> div {
+			margin-right: $e;
+		}
+	}
+	> div:nth-child(even) {
+		> div {
+			margin-left: $e;
+		}
+	}
+}
+
+// Modals
+.modal {
+	.modal-content {
+		background: rgba(37, 37, 37, 1);
+	}
+	.modal-header{
+		border-bottom: rgba(78, 78, 78, 1) 1px solid !important;
+	}
+	.modal-body {
+		border-bottom: none !important;
+	}
+	.modal-footer {
+		border-top: rgba(78, 78, 78, 1) 1px solid !important;
+	}
+	h4,
+	label {
+		color: rgba(221, 221, 221, 1);
 	}
 }

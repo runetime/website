@@ -12,8 +12,8 @@ class Checkup extends Entity{
 	protected $dates = [];
 	protected $softDelete = true;
 	const PER_PAGE = 20;
-	const STATUS_HIDDEN = 0;
-	const STATUS_PUBLISHED = 1;
+	const STATUS_UNCOMPLETED = 0;
+	const STATUS_COMPLETED = 1;
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
