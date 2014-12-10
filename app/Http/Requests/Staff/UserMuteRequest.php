@@ -15,6 +15,8 @@ class UserMuteRequest extends Request {
 	public function rules()
 	{
 		return [
+			'username' => 'required',
+			'contents' => 'required',
 		];
 	}
 

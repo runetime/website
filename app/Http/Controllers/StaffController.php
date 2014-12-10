@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Staff\CheckupRequest;
 use App\Http\Requests\Staff\UserMuteRequest;
 use App\Http\Requests\Staff\UserReportRequest;
+use App\RuneTime\Bans\Mute;
 use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Forum\Threads\Post;
@@ -74,7 +75,18 @@ class StaffController extends BaseController {
 	 * @return string
 	 */
 	public function postUserMute(UserMuteRequest $form) {
-		$response = ['done' => true];
+		$response = ['done' => false];
+		$user = $this->users->getByDisplayName($form->username);
+		if(!empty($user)) {
+			$contentsParsed = with(new \Parsedown)->text($form->contents);
+			$mute = with(new Mute)->saveNew(\Auth::user()->id, $user->id, $form->contents, $contentsParsed, time(), \Carbon::now()->addHour()->timestamp);
+			if(!empty($mute))
+				$response['done'] = true;
+			else
+				$response['error'] = -2;
+		} else {
+			$response['error'] = -1;
+		}
 		return json_encode($response);
 	}
 

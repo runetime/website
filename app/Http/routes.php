@@ -71,12 +71,7 @@ Route::group(['prefix' => 'chat'], function() {
 	post('start', 'ChatController@postStart');
 	get('channels', 'ChatController@getChannels');
 	post('channels/check', 'ChatController@postCheckChannel');
-	/**
-	 * Only logged in can perform
-	 */
-	Route::group(['middleware' => 'auth'], function() {
-		post('post/message', 'ChatController@postMessage');
-	});
+	post('post/message', 'ChatController@postMessage');
 	/**
 	 * Only moderators can perform
 	 */

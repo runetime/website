@@ -6972,6 +6972,12 @@ body {
     #chatbox #chatbox-message.message-sent:focus {
       border-color: #3c763d;
       outline: none; }
+    #chatbox #chatbox-message.message-bad {
+      border-color: #940000;
+      box-shadow: inset 1px 1px 1px rgba(148, 0, 0, 0.775); }
+    #chatbox #chatbox-message.message-bad:focus {
+      border-color: #940000;
+      outline: none; }
 
 .table-subforums tr td:nth-child(1) {
   width: 5%; }

@@ -114,6 +114,17 @@ class StaffPanel {
 		this.setup();
 	}
 
+	public error(error: number) {
+		if(results.error === -1) {
+			$(staffPanel.hooks.results.bad).html("That user does not exist.");
+		} else if(results.error === -2) {
+			$(staffPanel.hooks.results.bad).html("There was an error with processing the report.");
+		} else {
+			$(staffPanel.hooks.results.bad).html("There was an unknown error.");
+		}
+		$('#modal-results-bad').modal('show');
+	}
+
 	public sendMute() {
 		var data = {
 			username: $(this.hooks.mute.username).val(),
@@ -126,7 +137,7 @@ class StaffPanel {
 			if(results.done === true) {
 				$('#modal-results-good').modal('show')
 			} else {
-				$('#modal-results-bad').modal('show')
+				staffPanel.error(results.error);
 			}
 		});
 	}
@@ -143,14 +154,7 @@ class StaffPanel {
 			if(results.done === true) {
 				$('#modal-results-good').modal('show')
 			} else {
-				if(results.error === -1) {
-					$(staffPanel.hooks.results.bad).html("That user does not exist.");
-				} else if(results.error === -2) {
-					$(staffPanel.hooks.results.bad).html("There was an error with processing the report.");
-				} else {
-					$(staffPanel.hooks.results.bad).html("There was an unknown error.");
-				}
-				$('#modal-results-bad').modal('show')
+				staffPanel.error(results.error);
 			}
 		});
 	}

@@ -74,12 +74,20 @@
 		width:100%;
 		height:2.2em;
 		&.message-sent {
-			border-color:#3c763d;
-			box-shadow:inset 1px 1px 1px rgba(60,118,61,0.775);
+			border-color: rgba(60, 118, 61, 1);
+			box-shadow: inset 1px 1px 1px rgba(60, 118, 61, 0.775);
 		}
 		&.message-sent:focus {
-			border-color:#3c763d;
-			outline:none;
+			border-color: rgba(60, 118, 61, 1);
+			outline: none;
+		}
+		&.message-bad {
+			border-color: rgba(148, 0, 0, 1);
+			box-shadow: inset 1px 1px 1px rgba(148, 0, 0, 0.775);
+		}
+		&.message-bad:focus {
+			border-color: rgba(148, 0, 0, 1);
+			outline: none;
 		}
 	}
 }

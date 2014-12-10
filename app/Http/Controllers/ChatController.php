@@ -5,6 +5,7 @@ use App\Http\Requests\Chat\CheckChannelRequest;
 use App\Http\Requests\Chat\MessageRequest;
 use App\Http\Requests\Chat\StartRequest;
 use App\Http\Requests\Chat\UpdateRequest;
+use App\RuneTime\Bans\MuteRepository;
 use App\RuneTime\Chat\ActionRepository;
 use App\RuneTime\Chat\ChannelRepository;
 use App\RuneTime\Chat\Chat;
@@ -32,18 +33,24 @@ class ChatController extends BaseController{
 	 * @var UserRepository
 	 */
 	private $users;
+	/**
+	 * @var MuteRepository
+	 */
+	private $mutes;
 
 	/**
 	 * @param ActionRepository  $actions
 	 * @param ChannelRepository $channels
 	 * @param ChatRepository    $chat
+	 * @param MuteRepository    $mutes
 	 * @param UserRepository    $users
 	 */
-	public function __construct(ActionRepository $actions, ChannelRepository $channels, ChatRepository $chat, UserRepository $users){
+	public function __construct(ActionRepository $actions, ChannelRepository $channels, ChatRepository $chat, MuteRepository $mutes, UserRepository $users){
 		$this->actions = $actions;
 		$this->channels = $channels;
 		$this->chat = $chat;
 		$this->users = $users;
+		$this->mutes = $mutes;
 	}
 
 	/**
@@ -103,14 +110,21 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function postMessage(MessageRequest $form){
-		$response = ['sent' => false];
+		$response = ['done' => false];
 		if(\Auth::check()){
-			$contentsParsed = with(new \Parsedown)->text($form->contents);
-			with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_USER_PUBLISHED, $this->channels->getByNameTrim($form->channel)->id);
-			$channel = $this->channels->getByNameTrim($form->channel);
-			$channel->messages = $channel->messages+1;
-			$channel->save();
-			$response['sent'] = true;
+			$mute = $this->mutes->getByUserActive(\Auth::user()->id);
+			if(!empty($mute)) {
+				$response['error'] = -2;
+			} else {
+				$contentsParsed = with(new \Parsedown)->text($form->contents);
+				with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_USER_PUBLISHED, $this->channels->getByNameTrim($form->channel)->id);
+				$channel = $this->channels->getByNameTrim($form->channel);
+				$channel->messages = $channel->messages + 1;
+				$channel->save();
+				$response['done'] = true;
+			}
+		} else {
+			$response['error'] = -1;
 		}
 		return json_encode($response);
 	}
