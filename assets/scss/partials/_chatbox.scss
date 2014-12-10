@@ -1,58 +1,53 @@
-#chatbox-holder{
+#chatbox-holder {
 	padding:0em !important;
 }
-#chatbox{
+#chatbox {
 	width:100%;
-	#chatbox-messages{
+	#chatbox-messages {
 		overflow-y:scroll;
 		height:20em;
 		width:100%;
-		.msg{
+		.msg {
 			$paddingW:.5em;
 			$paddingH:.25em;
-			padding:{
+			padding: {
 				top:$paddingH;
 				left:$paddingW;
 				right:$paddingW;
 				bottom:$paddingH;
 			}
 			width:100%;
-			time{
+			time {
 				color:#AA66CC;
 			}
 			p {
 				display: inline;
 				margin-bottom: 0em;
 			}
-			&:nth-child(even){
+			&:nth-child(even) {
 				background:#121212;
 			}
-			&:nth-child(odd){
+			&:nth-child(odd) {
 				background:#1b1b1b;
 			}
 		}
-		&::-webkit-scrollbar{
+		&::-webkit-scrollbar {
 			width:.75em;
 		}
-		&::-webkit-scrollbar-thumb{
+		&::-webkit-scrollbar-thumb {
 			border-radius:10px;
 			background:rgba(115,11,115,0.8);
 			box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
-			&:window-inactive{
+			&:window-inactive {
 				background:rgba(115,11,115,0.8);
 			}
 		}
 	}
-	#chatbox-actions{
+	#chatbox-actions {
 		$actions-h:2.2em;
 		height:$actions-h;
 		width:100%;
-		#chatbox-popup-bbcode{
-		}
-		#chatbox-popup-prefs{
-			
-		}
-		>a{
+		>a {
 			$border:1px solid rgba(181,181,181,0.9);
 			color:#2991b8;
 			display:inline-block;
@@ -60,29 +55,29 @@
 			line-height:$actions-h;
 			text-align:center;
 			width:50%;
-			&:nth-child(1){
+			&:nth-child(1) {
 				border-right:$border;
 			}
-			&:nth-child(2){
+			&:nth-child(2) {
 				border-left:$border;
 				border-right:$border;
 			}
-			&:nth-child(3){
+			&:nth-child(3) {
 				border-left:$border;
 			}
-			&:hover{
+			&:hover {
 				background:#303030;
 			}
 		}
 	}
-	#chatbox-message{
+	#chatbox-message {
 		width:100%;
 		height:2.2em;
-		&.message-sent{
+		&.message-sent {
 			border-color:#3c763d;
 			box-shadow:inset 1px 1px 1px rgba(60,118,61,0.775);
 		}
-		&.message-sent:focus{
+		&.message-sent:focus {
 			border-color:#3c763d;
 			outline:none;
 		}

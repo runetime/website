@@ -1,6 +1,28 @@
 {
   "devDependencies": {
-    "gulp": "^3.8.8",
+    "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.2",
+    "gulp-jshint": "^1.9.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^1.2.4",
+    "gulp-uglify": "^1.0.2",
     "laravel-elixir": "*"
-  }
+  },
+  "name": "runetime",
+  "description": "[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework) [![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework) [![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework) [![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework) [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)",
+  "version": "1.0.0",
+  "main": "Gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://izRunis@bitbucket.org/runetime/website.git"
+  },
+  "author": "Runis",
+  "license": "ISC",
+  "dependencies": {}
 }
