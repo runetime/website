@@ -1,16 +1,24 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Staff\LeaderUserMuteRequest;
-use App\Http\Requests\Staff\LeaderUserReportRequest;
+use App\Http\Requests\Staff\LeaderClearChatboxRequest;
+use App\Http\Requests\Staff\LeaderDemoteStaffRequest;
+use App\Http\Requests\Staff\LeaderMuteUserRequest;
+use App\Http\Requests\Staff\LeaderTempBanRequest;
+use App\Runis\Accounts\UserRepository;
 
 class StaffTeamLeaderController extends BaseController {
 	/**
+	 * @var UserRepository
+	 */
+	private $users;
+
+	/**
 	 *
 	 */
-	public function __construct()
+	public function __construct(UserRepository $users)
 	{
-
+		$this->users = $users;
 	}
 
 	/**
@@ -25,24 +33,53 @@ class StaffTeamLeaderController extends BaseController {
 	}
 
 	/**
-	 * @param LeaderUserMuteRequest $form
+	 * @param LeaderDemoteStaffRequest $form
 	 *
 	 * @return string
-	 */
-	public function postMuteUser(LeaderUserMuteRequest $form)
+	 */public function postDemoteStaff(LeaderDemoteStaffRequest $form)
 	{
-		$response = ['muted' => false];
+		$response = ['done' => false];
+		$user = $this->users->getById($form->id);
+		if(\Auth::user()->isLeader()) {
+			if($user->importantRole()->id -1 === \Auth::user()->importantRole()->id) {
+				$user->removeRole($user->importantRole());
+			}
+		} else {
+			$response['error'] = -1;
+		}
 		return json_encode($response);
 	}
 
 	/**
-	 * @param LeaderUserReportRequest $form
+	 * @param LeaderTempBanRequest $form
+	 *
+	 * @return string
+	 */public function postTempBan(LeaderTempBanRequest $form)
+	{
+		$response = ['done' => false];
+		return json_encode($response);
+	}
+
+	/**
+	 * @param LeaderMuteUserRequest $form
+	 *
+	 * @return string
+	 */public function postMuteUser(LeaderMuteUserRequest $form)
+	{
+		$response = ['done' => false];
+		return json_encode($response);
+
+	}
+
+	/**
+	 * @param LeaderClearChatboxRequest $form
 	 *
 	 * @return string
 	 */
-	public function postReportUser(LeaderUserReportRequest $form)
+	public function postClearChatbox(LeaderClearChatboxRequest $form)
 	{
-		$response = ['reported' => false];
+		$response = ['done' => false];
 		return json_encode($response);
+
 	}
 }
