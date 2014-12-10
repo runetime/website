@@ -1,11 +1,8 @@
 <?php namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
-/**
- * Class LeaderUserReportRequest
- * @package App\Http\Requests
- */
-class LeaderUserReportRequest extends Request {
+
+class LeaderMuteUserRequest extends Request {
 
 	/**
 	 * Get the validation rules that apply to the request.
