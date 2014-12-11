@@ -23,11 +23,11 @@ class ChatTest extends TestCase {
 	public function testUpdate()
 	{
 		$chat = Chat::find(1);
-		$id = 1;
-		if(!$chat)
-			$id = 0;
+		$id = 0;
+		if(!empty($chat))
+			$id = $chat->id;
 		$form = [
-			'id' => $chat->id,
+			'id' => $id,
 		];
 		$response = $this->call('POST', 'chat/update', $form);
 
