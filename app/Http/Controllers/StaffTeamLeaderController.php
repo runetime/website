@@ -43,12 +43,13 @@ class StaffTeamLeaderController extends BaseController {
 	 * @param LeaderDemoteStaffRequest $form
 	 *
 	 * @return string
-	 */public function postDemoteStaff(LeaderDemoteStaffRequest $form)
+	 */
+	public function postDemoteStaff(LeaderDemoteStaffRequest $form)
 	{
 		$response = ['done' => false];
 		$user = $this->users->getById($form->id);
 		if(\Auth::user()->isLeader()) {
-			if($user->importantRole()->id -1 === \Auth::user()->importantRole()->id) {
+			if($user->importantRole()->id - 1 === \Auth::user()->importantRole()->id) {
 				$user->removeRole($user->importantRole());
 			}
 		} else {
@@ -61,7 +62,8 @@ class StaffTeamLeaderController extends BaseController {
 	 * @param LeaderTempBanRequest $form
 	 *
 	 * @return string
-	 */public function postTempBan(LeaderTempBanRequest $form)
+	 */
+	public function postTempBan(LeaderTempBanRequest $form)
 	{
 		$response = ['done' => false];
 		return json_encode($response);
@@ -71,11 +73,11 @@ class StaffTeamLeaderController extends BaseController {
 	 * @param LeaderMuteUserRequest $form
 	 *
 	 * @return string
-	 */public function postMuteUser(LeaderMuteUserRequest $form)
+	 */
+	public function postMuteUser(LeaderMuteUserRequest $form)
 	{
 		$response = ['done' => false];
 		return json_encode($response);
-
 	}
 
 	/**
@@ -87,6 +89,5 @@ class StaffTeamLeaderController extends BaseController {
 	{
 		$response = ['done' => false];
 		return json_encode($response);
-
 	}
 }
