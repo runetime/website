@@ -62,6 +62,9 @@ return [
 	'subforums' => [
 		'create_topic' => 'Start New Topic',
 	],
+	'tags' => [
+		'title' => 'Tag: :name',
+	],
 	'thread' => [
 		'title'  => 'Thread',
 		'titles' => 'Threads',
