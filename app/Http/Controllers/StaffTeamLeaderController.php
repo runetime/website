@@ -6,19 +6,25 @@ use App\Http\Requests\Staff\LeaderDemoteStaffRequest;
 use App\Http\Requests\Staff\LeaderMuteUserRequest;
 use App\Http\Requests\Staff\LeaderTempBanRequest;
 use App\Runis\Accounts\UserRepository;
-
+use App\Runis\Accounts\UserRoleRepository;
 class StaffTeamLeaderController extends BaseController {
 	/**
 	 * @var UserRepository
 	 */
 	private $users;
+	/**
+	 * @var UserRoleRepository
+	 */
+	private $userRoles;
 
 	/**
-	 *
+	 * @param UserRepository     $users
+	 * @param UserRoleRepository $userRoles
 	 */
-	public function __construct(UserRepository $users)
+	public function __construct(UserRepository $users, UserRoleRepository $userRoles)
 	{
 		$this->users = $users;
+		$this->userRoles = $userRoles;
 	}
 
 	/**
@@ -29,7 +35,8 @@ class StaffTeamLeaderController extends BaseController {
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.team_leader');
 		$this->title(trans('staff.team_leader.title'));
-		return $this->view('staff.team_leader.index');
+		$members = $this->userRoles->getByRole(\Auth::user()->importantRole()->id - 1);
+		return $this->view('staff.team_leader.index', compact('members'));
 	}
 
 	/**

@@ -30,7 +30,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function getRoles() {
 		if(!isset($this->rolesCache))
-			$this->rolesCache = $this->roles;
+			$this->rolesCache = $this->belongsToMany('App\Runis\Accounts\Role');
 		return $this->rolesCache;
 	}
 
@@ -74,9 +74,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 * @return int
 	 */
 	public function importantRole() {
-		$userRoles = new UserRoleRepository(new UserRole);
-		$roles = new RoleRepository(new Role);
+		$userRoles = \App::make('App\Runis\Accounts\UserRoleRepository');
 		$important = $userRoles->getImportantByUser($this->id);
+		$roles = \App::make('App\Runis\Accounts\RoleRepository');
 		$role = $roles->getById($important->role_id);
 		return $role;
 	}
@@ -111,8 +111,18 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	/**
 	 * @param Role $role
 	 */
-	public function removeRole(Role $role) {
-		$this->roles()->detach([$role->id]);
+	public function roleRemove(Role $role) {
+		$roles = \App::make('App\Runis\Accounts\UserRoleRepository');
+		$role = $roles->selectByUserAndRole($this->id, $role->id);
+		$role->delete();
+	}
+
+	/**
+	 * @param Role $role
+	 * @param bool $important
+	 */
+	public function roleAdd(Role $role, $important = false) {
+		with(new UserRole)->saveNew($this->id, $role->id, $important);
 	}
 
 	/**

@@ -119,7 +119,7 @@ class ForumController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getThread($id, $name, $page = 1) {
+	public function getThread($id, $page = 1) {
 		$thread = $this->threads->getById($id);
 		if(!$thread)
 			\App::abort(404);
