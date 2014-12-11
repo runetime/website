@@ -6,8 +6,10 @@ use App\Http\Requests\Auth\PasswordEmailRequest;
 use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Runis\Accounts\RankRepository;
 use App\Runis\Accounts\ResetRepository;
+use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
+use App\Runis\Accounts\UserRole;
 use Illuminate\Contracts\Auth\PasswordBroker;
 /**
  * Class AuthController
@@ -30,18 +32,24 @@ class AuthController extends BaseController {
 	 * @var UserRepository
 	 */
 	private $users;
+	/**
+	 * @var RoleRepository
+	 */
+	private $roles;
 
 	/**
 	 * @param PasswordBroker  $passwords
 	 * @param RankRepository  $ranks
 	 * @param ResetRepository $resets
+	 * @param RoleRepository  $roles
 	 * @param UserRepository  $users
 	 */
-	public function __construct(PasswordBroker $passwords, RankRepository $ranks, ResetRepository $resets, UserRepository $users) {
+	public function __construct(PasswordBroker $passwords, RankRepository $ranks, ResetRepository $resets, RoleRepository $roles, UserRepository $users) {
 		$this->passwords = $passwords;
 		$this->ranks = $ranks;
 		$this->resets = $resets;
 		$this->users = $users;
+		$this->roles = $roles;
 	}
 
 	/**
@@ -88,7 +96,8 @@ class AuthController extends BaseController {
 		$hash = \Hash::make($form->password);
 		$rank = $this->ranks->getByPostCount(0);
 		$user = with(new User)->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, 0, $rank->id, '', '', '', '', '', '', '', '', '', '', '');
-		$user->setRole('Members');
+		$role = $this->roles->getByName("Members");
+		with(new UserRole)->saveNew($user->id, $role->id, true);
 		\Auth::loginUsingId($user->id);
 		return \redirect()->to('/');
 	}

@@ -47,7 +47,6 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 * @param array $roleNames
 	 *
 	 * @return bool
-	 * @throws InvalidRoleException
 	 */
 	public function hasRoles($roleNames = []) {
 		$roleList = \App::make('App\Runis\Accounts\RoleRepository')->
@@ -75,10 +74,11 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 * @return int
 	 */
 	public function importantRole() {
-		$roles = $this->getRoles();
-		if(!empty($roles))
-			return $roles[rand(0, count($roles) - 1)];
-		return -1;
+		$userRoles = new UserRoleRepository(new UserRole);
+		$roles = new RoleRepository(new Role);
+		$important = $userRoles->getImportantByUser($this->id);
+		$role = $roles->getById($important->role_id);
+		return $role;
 	}
 
 	/**
@@ -109,12 +109,22 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	}
 
 	/**
+	 * @param Role $role
+	 */
+	public function removeRole(Role $role) {
+		$this->roles()->detach([$role->id]);
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isStaff() {
 		return $this->hasOneOfRoles(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function isLeader() {
 		return $this->hasOneOfRoles(1, 2, 4, 6, 8, 10, 12);
 	}
