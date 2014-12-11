@@ -1,12 +1,10 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\ForumPostEditForm;
-use App\Http\Requests\ForumPostReportForm;
+
 use App\Http\Requests\Forums\PostEditRequest;
 use App\Http\Requests\Forums\PostReportRequest;
 use App\Http\Requests\Forums\PostVoteRequest;
 use App\Http\Requests\Forums\ReplyRequest;
-use App\Http\Requests\Forums\ThreadCreateForm;
 use App\Http\Requests\Forums\ThreadCreateRequest;
 use App\RuneTime\Forum\Polls\Poll;
 use App\RuneTime\Forum\Reports\Report;
@@ -22,10 +20,7 @@ use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
-/**
- * Class ForumController
- * @package App\Http\Controllers
- */
+
 class ForumController extends BaseController {
 	private $posts;
 	private $subforums;
@@ -40,14 +35,14 @@ class ForumController extends BaseController {
 
 	/**
 	 * @param PostRepository     $posts
-	 * @param SubforumRepository $subforums
 	 * @param StatusRepository   $statuses
+	 * @param SubforumRepository $subforums
 	 * @param TagRepository      $tags
 	 * @param ThreadRepository   $threads
-	 * @param VoteRepository     $votes
 	 * @param UserRepository     $users
+	 * @param VoteRepository     $votes
 	 */
-	public function __construct(PostRepository $posts, SubforumRepository $subforums, StatusRepository $statuses, TagRepository $tags, ThreadRepository $threads, VoteRepository $votes, UserRepository $users) {
+	public function __construct(PostRepository $posts, StatusRepository $statuses, SubforumRepository $subforums, TagRepository $tags, ThreadRepository $threads, UserRepository $users, VoteRepository $votes) {
 		$this->posts = $posts;
 		$this->subforums = $subforums;
 		$this->statuses = $statuses;
@@ -114,7 +109,6 @@ class ForumController extends BaseController {
 
 	/**
 	 * @param     $id
-	 * @param     $name
 	 * @param int $page
 	 *
 	 * @return \Illuminate\View\View
