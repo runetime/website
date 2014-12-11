@@ -80,7 +80,7 @@ class TicketTest extends TestCase {
 	public function testSwitch()
 	{
 		$this->login();
-		$response = $this->call('GET', 'tickets/1-test/status/switch');
+		$response = $this->call('GET', 'tickets/1-test/status/switch=2');
 
 		$this->assertEquals(302, $response->getStatusCode());
 	}
