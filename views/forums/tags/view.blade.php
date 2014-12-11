@@ -2,7 +2,7 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					{{ $tag->name }}
+					{{ $name }}
 				</h1>
 				<h3>
 					@lang('news.title')

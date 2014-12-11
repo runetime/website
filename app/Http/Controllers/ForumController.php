@@ -261,14 +261,16 @@ class ForumController extends BaseController {
 	 */
 	public function getTagSearch($name) {
 		$tag = $this->tags->getByName($name);
-		if(empty($tag))
-			\App::abort(404);
-		$news = $tag->news;
-		$threads = $tag->threads;
+		$news = [];
+		$threads = [];
+		if(!empty($tag)) {
+			$news = $tag->news;
+			$threads = $tag->threads;
+		}
 		$this->bc(['forums' => trans('navbar.forums')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.thread.tags.title', ['name' => $tag->name]));
-		return $this->view('forums.tags.view', compact('tag', 'news', 'threads'));
+		$this->title(trans('forums.tags.title', ['name' => $name]));
+		return $this->view('forums.tags.view', compact('tag', 'news', 'threads', 'name'));
 	}
 
 	/**
