@@ -1,6 +1,7 @@
 <?php
 use App\RuneTime\Notifications\NotificationRepository;
 use App\RuneTime\Notifications\Notification;
+
 $messages = 0;
 $notifications = 0;
 if(\Auth::check()) {
@@ -8,7 +9,7 @@ if(\Auth::check()) {
 	$messages = $notificationRepository->getCountByUser(\Auth::user()->id, 'Messenger');
 	$notifications = $notificationRepository->getCountByUser(\Auth::user()->id);
 }
-$navs=[
+$navs = [
 	''       => trans('navbar.home'),
 	'forums' => trans('navbar.forums'),
 	'radio'  => trans('navbar.radio'),
@@ -33,7 +34,6 @@ $navs=[
 		'calculators/combat'  => trans('navbar.runescape.combat_calculator'),
 	],
 	trans('navbar.social.social') => [
-		//'calendar'    => trans('navbar.social.calendar'),
 		'livestream'  => trans('navbar.social.livestream'),
 		'media'       => trans('navbar.social.social_media'),
 		'clan'        => trans('navbar.social.our_clan'),
@@ -233,9 +233,9 @@ $current = $nav;
 					@lang('footer.follow_us')
 				</p>
 				<div id='portfolio-social'>
-					<a href='https://www.facebook.com/RuneTimeOfficial' title='@lang('footer.facebook')'><img src='img/fb.png' alt='Facebook' /></a>
-					<a href='https://twitter.com/Rune_Time' title='@lang('footer.twitter')'><img src='img/tw.png' alt='Twitter' /></a>
-					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'><img src='img/yt.png' alt='YouTube' /></a>
+					<a href='https://www.facebook.com/RuneTimeOfficial' title='@lang('footer.facebook')'><img src='/img/fb.png' alt='Facebook' /></a>
+					<a href='https://twitter.com/Rune_Time' title='@lang('footer.twitter')'><img src='/img/tw.png' alt='Twitter' /></a>
+					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'><img src='/img/yt.png' alt='YouTube' /></a>
 				</div>
 			</div>
 			<p class='pull-right'>
