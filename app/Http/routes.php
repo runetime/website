@@ -477,6 +477,10 @@ Route::group(['prefix' => 'staff'], function() {
 		 */
 		Route::group(['middleware' => 'staff.team_leader', 'prefix' => 'leader'], function() {
 			get('/', 'StaffTeamLeaderController@getIndex');
+			post('demote', 'StaffTeamLeaderController@postDemote');
+			post('temp-ban', 'StaffTeamLeaderController@postTempBan');
+			post('mute', 'StaffTeamLeaderController@postMuteUser');
+			post('clear-chatbox', 'StaffTeamLeaderController@postClearChatbox');
 		});
 	});
 });
