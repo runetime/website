@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBansIpTable extends Migration {
+class CreateRoleUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,14 @@ class CreateBansIpTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('bans_ip', function(Blueprint $table)
+		Schema::create('role_user', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('author_id');
-			$table->string('ip');
-			$table->string('reason');
-			$table->integer('status');
+			$table->integer('role_id');
+			$table->integer('user_id');
+			$table->boolean('important');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
@@ -30,7 +30,7 @@ class CreateBansIpTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('bans_ip');
+		Schema::drop('role_user');
 	}
 
 }

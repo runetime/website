@@ -6883,7 +6883,8 @@ body {
   height: 283px;
   background: url('/img/loading.gif');
   z-index: 9000;
-  opacity: 0; }
+  opacity: 0;
+  display: none; }
 
 .patched-bg {
   background: url('/img/background.png') center repeat; }

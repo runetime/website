@@ -3,13 +3,6 @@ use App\Runis\Accounts\User;
 
 class AuthTest extends TestCase {
 	/**
-	 * @param \App\Runis\Accounts\RoleRepository $roles
-	 */
-	public function __construct(\App\Runis\Accounts\RoleRepository $roles)
-	{
-
-	}
-	/**
 	 *
 	 */
 	public function testSignupIndex()
@@ -31,13 +24,11 @@ class AuthTest extends TestCase {
 			'password2'    => 'test',
 		];
 		$response = $this->action('POST', 'AuthController@postSignupForm', null, $credentials);
-
-		$users = User::all();
-		foreach($users as $user) {
-			$user->roleRemove($user->importantRole());
-			$role = $this->roles->getByName("Administrator");
-			$user->roleAdd($role);
-		}
+		$user = User::orderBy('created_at', 'desc')->first();
+		$user->roleRemove($user->importantRole());
+		$roles = \App::make('App\Runis\Accounts\RoleRepository');
+		$role = $roles->getByName("Administrator");
+		$user->roleAdd($role, true);
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 
@@ -50,6 +41,9 @@ class AuthTest extends TestCase {
 		$this->assertEquals(200, $response->getStatusCode());
 	}
 
+	/**
+	 *
+	 */
 	public function testLoginPost()
 	{
 		$user = User::orderBy('created_at', 'desc')->first();

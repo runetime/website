@@ -10,10 +10,8 @@ class Link {
 	 * @param  string $url The URL
 	 * @return string      The URL-encoded and parsed URL
 	 */
-	public static function URL($url = ""){
-		$str = "/";
-		$url = str_replace(" ", "-", $url);
-		return $str . $url;
+	public static function URL($url = "") {
+		return "/" . str_replace(" ", "-", $url);
 	}
 
 	/**
@@ -21,13 +19,11 @@ class Link {
 	 *
 	 * @return string
 	 */
-	public static function name($userId){
-		$users = new UserRepository(new User);
-		$user = $users->getById($userId);
-		if($user){
-			$role = $user->importantRole();
-			return "<a href='/profile/" . \String::slugEncode($user->id, $user->display_name) . "' class='members-" . $role->class_name . "' title'='" . $user->display_name . "&#39;s profile'>" . $user->display_name . "</a>";
-		}
+	public static function name($userId) {
+		$users = \App::make('App\Runis\Accounts\UserRepository');
+		$user = $users->getById((int) $userId);
+		if($user)
+			return "<a href='/profile/" . \String::slugEncode($user->id, $user->display_name) . "' class='members-" . $user->importantRole()->class_name . "' title'='" . $user->display_name . "&#39;s profile'>" . $user->display_name . "</a>";
 		\Log::warning('Utilities\Link::name - ' . $userId . ' does not exist.');
 		return "unknown";
 	}

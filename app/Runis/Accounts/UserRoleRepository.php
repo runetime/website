@@ -17,4 +17,17 @@ class UserRoleRepository extends EloquentRepository{
 			where('important', '=', 1)->
 			first();
 	}
+
+	public function getByRole($id) {
+		return $this->model->
+			where('role_id', '=', $id)->
+			get();
+	}
+
+	public function selectByUserAndRole($userId, $roleId) {
+		return $this->model->
+			where('user_id', '=', $userId)->
+			where('role_id', '=', $roleId)->
+			first();
+	}
 }

@@ -1,16 +1,30 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Staff\LeaderUserMuteRequest;
-use App\Http\Requests\Staff\LeaderUserReportRequest;
-
+use App\Http\Requests\Staff\LeaderClearChatboxRequest;
+use App\Http\Requests\Staff\LeaderDemoteStaffRequest;
+use App\Http\Requests\Staff\LeaderMuteUserRequest;
+use App\Http\Requests\Staff\LeaderTempBanRequest;
+use App\Runis\Accounts\UserRepository;
+use App\Runis\Accounts\UserRoleRepository;
 class StaffTeamLeaderController extends BaseController {
 	/**
-	 *
+	 * @var UserRepository
 	 */
-	public function __construct()
-	{
+	private $users;
+	/**
+	 * @var UserRoleRepository
+	 */
+	private $userRoles;
 
+	/**
+	 * @param UserRepository     $users
+	 * @param UserRoleRepository $userRoles
+	 */
+	public function __construct(UserRepository $users, UserRoleRepository $userRoles)
+	{
+		$this->users = $users;
+		$this->userRoles = $userRoles;
 	}
 
 	/**
@@ -21,28 +35,58 @@ class StaffTeamLeaderController extends BaseController {
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.team_leader');
 		$this->title(trans('staff.team_leader.title'));
-		return $this->view('staff.team_leader.index');
+		$members = $this->userRoles->getByRole(\Auth::user()->importantRole()->id - 1);
+		return $this->view('staff.team_leader.index', compact('members'));
 	}
 
 	/**
-	 * @param LeaderUserMuteRequest $form
+	 * @param LeaderDemoteStaffRequest $form
 	 *
 	 * @return string
-	 */
-	public function postMuteUser(LeaderUserMuteRequest $form)
+	 */public function postDemoteStaff(LeaderDemoteStaffRequest $form)
 	{
-		$response = ['muted' => false];
+		$response = ['done' => false];
+		$user = $this->users->getById($form->id);
+		if(\Auth::user()->isLeader()) {
+			if($user->importantRole()->id -1 === \Auth::user()->importantRole()->id) {
+				$user->removeRole($user->importantRole());
+			}
+		} else {
+			$response['error'] = -1;
+		}
 		return json_encode($response);
 	}
 
 	/**
-	 * @param LeaderUserReportRequest $form
+	 * @param LeaderTempBanRequest $form
+	 *
+	 * @return string
+	 */public function postTempBan(LeaderTempBanRequest $form)
+	{
+		$response = ['done' => false];
+		return json_encode($response);
+	}
+
+	/**
+	 * @param LeaderMuteUserRequest $form
+	 *
+	 * @return string
+	 */public function postMuteUser(LeaderMuteUserRequest $form)
+	{
+		$response = ['done' => false];
+		return json_encode($response);
+
+	}
+
+	/**
+	 * @param LeaderClearChatboxRequest $form
 	 *
 	 * @return string
 	 */
-	public function postReportUser(LeaderUserReportRequest $form)
+	public function postClearChatbox(LeaderClearChatboxRequest $form)
 	{
-		$response = ['reported' => false];
+		$response = ['done' => false];
 		return json_encode($response);
+
 	}
 }
