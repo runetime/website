@@ -3,6 +3,13 @@ use App\Runis\Accounts\User;
 
 class AuthTest extends TestCase {
 	/**
+	 * @param \App\Runis\Accounts\RoleRepository $roles
+	 */
+	public function __construct(\App\Runis\Accounts\RoleRepository $roles)
+	{
+
+	}
+	/**
 	 *
 	 */
 	public function testSignupIndex()
@@ -27,8 +34,9 @@ class AuthTest extends TestCase {
 
 		$users = User::all();
 		foreach($users as $user) {
-			$user->setRole('Administrator');
-			$user->save();
+			$user->roleRemove($user->importantRole());
+			$role = $this->roles->getByName("Administrator");
+			$user->roleAdd($role);
 		}
 		$this->assertEquals(302, $response->getStatusCode());
 	}
