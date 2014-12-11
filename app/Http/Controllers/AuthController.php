@@ -97,7 +97,7 @@ class AuthController extends BaseController {
 		$rank = $this->ranks->getByPostCount(0);
 		$user = with(new User)->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, 0, $rank->id, '', '', '', '', '', '', '', '', '', '', '');
 		$role = $this->roles->getByName("Members");
-		with(new UserRole)->saveNew($user->id, $role->id, true);
+		$user->roleAdd($role, true);
 		\Auth::loginUsingId($user->id);
 		return \redirect()->to('/');
 	}
@@ -149,9 +149,10 @@ class AuthController extends BaseController {
 	}
 
 	/**
+	 * @param                      $token
 	 * @param PasswordResetRequest $form
 	 *
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse|int
 	 */
 	public function postPasswordReset($token, PasswordResetRequest $form) {
 		$reset = $this->resets->getByToken($token);
