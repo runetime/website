@@ -114,7 +114,7 @@ class ChatController extends BaseController{
 	 * @return string
 	 */
 	public function getModerator() {
-		$response = ['mod' => true];
+		$response = ['mod' => false];
 		if(\Auth::check() && \Auth::user()->isCommunity())
 			$response['mod'] = true;
 		return json_encode($response);
