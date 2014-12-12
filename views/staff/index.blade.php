@@ -1,6 +1,9 @@
 @extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
+				<h1>
+					@lang('staff.index.title')
+				</h1>
 				<div class='pretty-row'>
 					<div class='col-xs-6'>
 						<div>
@@ -54,7 +57,7 @@
 							</h4>
 						</div>
 						<div class='modal-body'>
-							<form class='form-horizontal' method='post' action='' role='form'>
+							<form class='form-horizontal' role='form'>
 								<div class='form-group'>
 									<label class='col-lg-2 control-label' for='report-username'>
 										User Name
@@ -96,7 +99,7 @@
 							</h4>
 						</div>
 						<div class='modal-body'>
-							<form class='form-horizontal' method='post' action='' role='form'>
+							<form class='form-horizontal' role='form'>
 								<div class='form-group'>
 									<label class='col-lg-2 control-label' for='mute-username'>
 										User Name
