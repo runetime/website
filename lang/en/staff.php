@@ -103,4 +103,7 @@ return [
 			'title' => 'Radio Timetable',
 		],
 	],
+	'team_leader' => [
+		'title' => 'Team Leader Panel',
+	],
 ];
