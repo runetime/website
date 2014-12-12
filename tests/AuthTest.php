@@ -24,11 +24,13 @@ class AuthTest extends TestCase {
 			'password2'    => 'test',
 		];
 		$response = $this->action('POST', 'AuthController@postSignupForm', null, $credentials);
+
 		$user = User::orderBy('created_at', 'desc')->first();
 		$user->roleRemove($user->importantRole());
 		$roles = \App::make('App\Runis\Accounts\RoleRepository');
 		$role = $roles->getByName("Administrator");
 		$user->roleAdd($role, true);
+
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 
