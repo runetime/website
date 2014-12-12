@@ -11,12 +11,10 @@ class Chat extends Entity{
 	protected $dates = [];
 	protected $softDelete = true;
 	const PER_PAGE = 20;
-	const STATUS_USER_PUBLISHED = 0;
-	const STATUS_USER_HIDDEN = 1;
-	const STATUS_USER_PINNED = 2;
-	const STATUS_STAFF_PUBLISHED = 3;
-	const STATUS_STAFF_HIDDEN = 4;
-	const STATUS_STAFF_PINNED = 5;
+	const STATUS_VISIBLE = 0;
+	const STATUS_INVISIBLE = 1;
+	const STATUS_PINNED = 2;
+	const STATUS_PINNED_INVISIBLE = 3;
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

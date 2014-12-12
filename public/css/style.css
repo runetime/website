@@ -6937,6 +6937,18 @@ body {
         background: #121212; }
       #chatbox #chatbox-messages .msg:nth-child(odd) {
         background: #1b1b1b; }
+    #chatbox #chatbox-messages .msg-hidden:nth-child(even) {
+      background: #00241e !important; }
+    #chatbox #chatbox-messages .msg-hidden:nth-child(odd) {
+      background: #002b24 !important; }
+    #chatbox #chatbox-messages .msg-pinned:nth-child(even) {
+      background: #4f2700 !important; }
+    #chatbox #chatbox-messages .msg-pinned:nth-child(odd) {
+      background: #5e2e00 !important; }
+    #chatbox #chatbox-messages .msg-pinhid:nth-child(even) {
+      background: #1f045e !important; }
+    #chatbox #chatbox-messages .msg-pinhid:nth-child(odd) {
+      background: #1a034f !important; }
     #chatbox #chatbox-messages::-webkit-scrollbar {
       width: 0.75em; }
     #chatbox #chatbox-messages::-webkit-scrollbar-thumb {

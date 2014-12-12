@@ -67,16 +67,18 @@ Route::group(['prefix' => 'calculators'], function() {
  * Chat
  */
 Route::group(['prefix' => 'chat'], function() {
-	post('update', 'ChatController@postUpdate');
-	post('start', 'ChatController@postStart');
 	get('channels', 'ChatController@getChannels');
 	post('channels/check', 'ChatController@postCheckChannel');
+	get('moderator', 'ChatController@getModerator');
+	get('pinned', 'ChatController@getPinned');
 	post('post/message', 'ChatController@postMessage');
+	post('start', 'ChatController@postStart');
+	post('update', 'ChatController@postUpdate');
 	/**
 	 * Only moderators can perform
 	 */
 	Route::group(['middleware' => 'staff.moderator'], function() {
-		post('post/status/change', 'ChatController@postStatusChange');
+		post('status-change', 'ChatController@postStatusChange');
 	});
 });
 

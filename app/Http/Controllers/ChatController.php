@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Chat\CheckChannelRequest;
 use App\Http\Requests\Chat\MessageRequest;
 use App\Http\Requests\Chat\StartRequest;
+use App\Http\Requests\Chat\StatusChangeRequest;
 use App\Http\Requests\Chat\UpdateRequest;
 use App\RuneTime\Bans\MuteRepository;
 use App\RuneTime\Chat\ActionRepository;
@@ -54,82 +55,6 @@ class ChatController extends BaseController{
 	}
 
 	/**
-	 * @param StartRequest $form
-	 *
-	 * @return string
-	 */
-	public function postStart(StartRequest $form){
-		$channel = $this->channels->getByNameTrim($form->channel);
-		$messages = $this->chat->getByChannel($channel->id, Chat::PER_PAGE);
-		$messageList = [];
-		$users = [];
-		foreach($messages as $message){
-			$messageCurrent = new \stdClass;
-			if(!isset($users[$message->author_id]))
-				$users[$message->author_id]=$this->users->getById($message->author_id);
-			$messageCurrent->id = $message->id;
-			$messageCurrent->author_name = $users[$message->author_id]->display_name;
-			$messageCurrent->contents_parsed = $message->contents_parsed;
-			$messageCurrent->created_at = strtotime($message->created_at);
-			$messageCurrent->class_name = $message->author->importantRole()->class_name;
-			$messageCurrent->uuid = uniqid('', true);
-			array_push($messageList, $messageCurrent);
-		}
-		return json_encode(array_reverse($messageList));
-	}
-
-	/**
-	 * @param UpdateRequest $form
-	 *
-	 * @return string
-	 */
-	public function postUpdate(UpdateRequest $form){
-		if($form->id <= 0)
-			return json_encode([]);
-		$messages = $this->chat->getAfterId($form->id, $form->channel);
-		$messageList = [];
-		$users = [];
-		foreach($messages as $message){
-			$messageCurrent = new \stdClass;
-			if(!isset($users[$message->author_id]))
-				$users[$message->author_id] = $this->users->getById($message->author_id);
-			$messageCurrent->id = $message->id;
-			$messageCurrent->author_name = $users[$message->author_id]->display_name;
-			$messageCurrent->class_name = $message->author->importantRole()->class_name;
-			$messageCurrent->contents_parsed = $message->contents_parsed;
-			$messageCurrent->created_at = strtotime($message->created_at);
-			$messageCurrent->uuid = uniqid(md5(microtime(true)), true);
-			array_push($messageList, $messageCurrent);
-		}
-		return json_encode(array_reverse($messageList));
-	}
-
-	/**
-	 * @param MessageRequest $form
-	 *
-	 * @return string
-	 */
-	public function postMessage(MessageRequest $form){
-		$response = ['done' => false];
-		if(\Auth::check()){
-			$mute = $this->mutes->getByUserActive(\Auth::user()->id);
-			if(!empty($mute)) {
-				$response['error'] = -2;
-			} else {
-				$contentsParsed = with(new \Parsedown)->text($form->contents);
-				with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_USER_PUBLISHED, $this->channels->getByNameTrim($form->channel)->id);
-				$channel = $this->channels->getByNameTrim($form->channel);
-				$channel->messages = $channel->messages + 1;
-				$channel->save();
-				$response['done'] = true;
-			}
-		} else {
-			$response['error'] = -1;
-		}
-		return json_encode($response);
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getChannels(){
@@ -154,8 +79,149 @@ class ChatController extends BaseController{
 	public function postCheckChannel(CheckChannelRequest $form){
 		$channel = $this->channels->getByNameTrim($form->channel);
 		$response = ['valid' => false];
-		if($channel)
+		if($channel) {
 			$response['valid'] = true;
+		}
 		return json_encode($response);
+	}
+
+	/**
+	 * @param MessageRequest $form
+	 *
+	 * @return string
+	 */
+	public function postMessage(MessageRequest $form){
+		$response = ['done' => false];
+		if(\Auth::check()){
+			$mute = $this->mutes->getByUserActive(\Auth::user()->id);
+			if(!empty($mute)) {
+				$response['error'] = -2;
+			} else {
+				$contentsParsed = with(new \Parsedown)->text($form->contents);
+				with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_VISIBLE, $this->channels->getByNameTrim($form->channel)->id);
+				$channel = $this->channels->getByNameTrim($form->channel);
+				$channel->messages = $channel->messages + 1;
+				$channel->save();
+				$response['done'] = true;
+			}
+		} else {
+			$response['error'] = -1;
+		}
+		return json_encode($response);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getModerator() {
+		$response = ['mod' => true];
+		if(\Auth::check() && \Auth::user()->isCommunity())
+			$response['mod'] = true;
+		return json_encode($response);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPinned() {
+		if(\Auth::check() && \Auth::user()->isStaff()) {
+			$messages = $this->chat->getByStatus(Chat::STATUS_PINNED, '>=');
+		} else {
+			$messages = $this->chat->getByStatus(Chat::STATUS_PINNED);
+		}
+
+		$messageList = $this->sortMessages($messages);
+		return json_encode($messageList);
+	}
+
+	/**
+	 * @param StartRequest $form
+	 *
+	 * @return string
+	 */
+	public function postStart(StartRequest $form){
+		$channel = $this->channels->getByNameTrim($form->channel);
+		if(\Auth::check() && \Auth::user()->isStaff()) {
+			$messages = $this->chat->getByChannel($channel->id, Chat::PER_PAGE, Chat::STATUS_VISIBLE, '>=');
+		} else {
+			$messages = $this->chat->getByChannel($channel->id, Chat::PER_PAGE, Chat::STATUS_VISIBLE);
+		}
+
+		$messageList = $this->sortMessages($messages);
+
+		if(\Auth::check() && \Auth::user()->isStaff()) {
+			$pinned = $this->chat->getByStatus(Chat::STATUS_PINNED, '>=');
+		} else {
+			$pinned = $this->chat->getByStatus(Chat::STATUS_PINNED);
+		}
+
+		$pinnedList = $this->sortMessages($pinned);
+		$res = (object) [
+			'messages' => $messageList,
+			'pinned'   => $pinnedList,
+		];
+		return json_encode($res);
+	}
+
+	/**
+	 * @param StatusChangeRequest $form
+	 *
+	 * @return string
+	 */
+	public function postStatusChange(StatusChangeRequest $form) {
+		$response = ['done' => false];
+		$chat = $this->chat->getById($form->id);
+		if(!empty($chat)) {
+			$chat->status = $form->status;
+			$chat->save();
+			$response['done'] = true;
+		} else {
+			$response['error'] = -1;
+		}
+		return json_encode($response);
+	}
+
+	/**
+	 * @param UpdateRequest $form
+	 *
+	 * @return string
+	 */
+	public function postUpdate(UpdateRequest $form){
+		if($form->id <= 0) {
+			return json_encode([]);
+		}
+		if(\Auth::check() && \Auth::user()->isStaff()) {
+			$messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_VISIBLE, '>=');
+		} else {
+			$messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_VISIBLE);
+		}
+
+		$messageList = $this->sortMessages($messages);
+		return json_encode(array_reverse($messageList));
+	}
+
+	/**
+	 * @param $messages
+	 *
+	 * @return array
+	 */
+	private function sortMessages($messages) {
+		$messageList = [];
+		$users = [];
+		foreach($messages as $message) {
+			$messageCurrent = new \stdClass;
+			if(!isset($users[$message->author_id])) {
+				$users[$message->author_id] = $this->users->getById($message->author_id);
+			}
+			$messageCurrent->id = $message->id;
+			$messageCurrent->author_name = $users[$message->author_id]->display_name;
+			$messageCurrent->class_name = $message->author->importantRole()->class_name;
+			$messageCurrent->contents_parsed = $message->contents_parsed;
+			$messageCurrent->created_at = strtotime($message->created_at);
+			$messageCurrent->uuid = uniqid(md5(microtime(true)), true);
+			$messageCurrent->status = $message->status;
+			array_push($messageList, $messageCurrent);
+		}
+		return $messageList;
 	}
 }

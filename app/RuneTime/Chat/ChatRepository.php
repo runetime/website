@@ -37,17 +37,26 @@ class ChatRepository extends EloquentRepository {
 	}
 
 	/**
-	 * @param $channelId
-	 * @param $amount
+	 * @param        $channelId
+	 * @param        $amount
+	 * @param int    $status
+	 * @param string $op
 	 *
 	 * @return mixed
 	 */
-	public function getByChannel($channelId, $amount) {
+	public function getByChannel($channelId, $amount, $status = Chat::STATUS_VISIBLE, $op = '=') {
 		return $this->model->
 			where('channel', '=', $channelId)->
+			where('status', $op, $status)->
 			orderBy('id', 'desc')->
 			take($amount)->
 			get();
+	}
+
+	public function getLatest() {
+		return $this->model->
+			orderBy('id', 'desc')->
+			first();
 	}
 
 	/**
@@ -74,6 +83,42 @@ class ChatRepository extends EloquentRepository {
 		return $this->model->
 			where('id', '>', $id)->
 			where('channel', '=', $message->channel)->
+			get();
+	}
+
+	/**
+	 * @param        $id
+	 * @param int    $status
+	 * @param string $op
+	 *
+	 * @return mixed
+	 */
+	public function getAfterIdByStatus($id, $status = Chat::STATUS_VISIBLE, $op = '=') {
+		$message = $this->model->
+			where('id', '=', $id)->
+			first();
+		return $this->model->
+			where('id', '>', $id)->
+			where('channel', '=', $message->channel)->
+			where('status', $op, $status)->
+			get();
+	}
+
+	/**
+	 * @param bool $actuallyDo
+	 */
+	public function setAllInvisible($actuallyDo = false) {
+		if($actuallyDo === true)
+			$this->model->
+				update([
+					'status' => Chat::STATUS_INVISIBLE
+				]);
+	}
+
+	public function getByStatus($status, $op = '=') {
+		return $this->model->
+			where('status', $op, $status)->
+			orderBy('created_at', 'desc')->
 			get();
 	}
 }
