@@ -97,8 +97,28 @@ class ChatController extends BaseController{
 			if(!empty($mute)) {
 				$response['error'] = -2;
 			} else {
-				$contentsParsed = with(new \Parsedown)->text($form->contents);
-				with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, Chat::STATUS_VISIBLE, $this->channels->getByNameTrim($form->channel)->id);
+				$status = Chat::STATUS_VISIBLE;
+				$contents = $form->contents;
+				if(\Auth::user()->isStaff()) {
+					if(\String::startsWith("/pin ", $contents)) {
+						$contents = \String::replaceFirst("/pin ", $contents);
+						$status = Chat::STATUS_PINNED;
+					} elseif(\String::startsWith("/hide ", $contents)) {
+						$contents = \String::replaceFirst("/hide ", $contents);
+						$status = Chat::STATUS_INVISIBLE;
+					} elseif(\String::startsWith("/hid ", $contents)) {
+						$contents = \String::replaceFirst("/hid ", $contents);
+						$status = Chat::STATUS_INVISIBLE;
+					} elseif(\String::startsWith("/pinhid ", $contents)) {
+						$contents = \String::replaceFirst("/pinhid ", $contents);
+						$status = Chat::STATUS_PINNED_INVISIBLE;
+					} elseif(\String::startsWith("/hidpin ", $contents)) {
+						$contents = \String::replaceFirst("/hidpin ", $contents);
+						$status = Chat::STATUS_PINNED_INVISIBLE;
+					}
+				}
+				$contentsParsed = with(new \Parsedown)->text($contents);
+				with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, $status, $this->channels->getByNameTrim($form->channel)->id);
 				$channel = $this->channels->getByNameTrim($form->channel);
 				$channel->messages = $channel->messages + 1;
 				$channel->save();
@@ -148,6 +168,7 @@ class ChatController extends BaseController{
 		}
 
 		$messageList = $this->sortMessages($messages);
+		$messageList = array_reverse($messageList);
 
 		if(\Auth::check() && \Auth::user()->isStaff()) {
 			$pinned = $this->chat->getByStatus(Chat::STATUS_PINNED, '>=');
@@ -156,10 +177,11 @@ class ChatController extends BaseController{
 		}
 
 		$pinnedList = $this->sortMessages($pinned);
-		$res = (object) [
+		$res = [
 			'messages' => $messageList,
 			'pinned'   => $pinnedList,
 		];
+		$res = (object) $res;
 		return json_encode($res);
 	}
 
@@ -191,7 +213,7 @@ class ChatController extends BaseController{
 			return json_encode([]);
 		}
 		if(\Auth::check() && \Auth::user()->isStaff()) {
-			$messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_VISIBLE, '>=');
+			$messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_INVISIBLE, '<=');
 		} else {
 			$messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_VISIBLE);
 		}

@@ -93,19 +93,7 @@ class Chatbox {
 	}
 
 	public displayMessages() {
-		var displayed = 20;
-		var msgAmount = this.messages.length;
-		if(msgAmount > displayed) {
-			var messages = this.messages.slice(msgAmount - displayed, displayed);
-		} else {
-			var messages = this.messages;
-		}
-		var messages2 = messages;
-		messages = [];
-		var ii = messages2.length;
-		for (var i = ii - 1; i !== 0; i--) {
-			messages.push(messages2[i]);
-		}
+		var messages = this.messages;
 		$(this.elements.messages).html('');
 		$.each(messages, function(index, message) {
 			chatbox.displayMessage(message);

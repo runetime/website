@@ -24,6 +24,14 @@ class String{
 		return(substr($haystack,-strlen($needle))===$needle);
 	}
 
+	public static function replaceFirst($needle, $haystack, $with = '') {
+		$pos = strpos($haystack, $needle);
+		if($pos !== false) {
+			return substr_replace($haystack, $with, $pos, strlen($needle));
+		}
+		return $haystack;
+	}
+
 	/**
 	 * @param $url
 	 *
