@@ -103,11 +103,10 @@ class StaffTeamLeaderController extends BaseController {
 	}
 
 	/**
-	 * @param LeaderClearChatboxRequest $form
 	 *
 	 * @return string
 	 */
-	public function postClearChatbox(LeaderClearChatboxRequest $form)
+	public function postClearChatbox()
 	{
 		$response = ['done' => false];
 		$this->chats->setAllInvisible(true);
