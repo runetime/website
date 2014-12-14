@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Databases;
+
 use App\Runis\Core\EloquentRepository;
-/**
- * Class ItemRepository
- * @package App\RuneTime\Calculators
- */
+
 class ItemRepository extends EloquentRepository
 {
 	/**

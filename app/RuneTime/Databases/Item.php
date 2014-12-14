@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Databases;
+
 use App\Runis\Core\Entity;
-/**
- * Class Item
- * @package App\RuneTime\Databases
- */
+
 class Item extends Entity
 {
 	protected $table = 'database_items';

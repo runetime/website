@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Databases;
+
 use App\Runis\Core\Entity;
-/**
- * Class Monster
- * @package App\RuneTime\Calculators
- */
+
 class Monster extends Entity
 {
 	protected $table = 'database_monsters';
