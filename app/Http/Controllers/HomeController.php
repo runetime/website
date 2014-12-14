@@ -6,7 +6,8 @@ use App\RuneTime\News\NewsRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 
-class HomeController extends BaseController {
+class HomeController extends BaseController
+{
 	/**
 	 * @var NewsRepository
 	 */
@@ -29,7 +30,8 @@ class HomeController extends BaseController {
 	 * @param StatusRepository $statuses
 	 * @param ThreadRepository $threads
 	 */
-	public function __construct(NewsRepository $news, PostRepository $posts, StatusRepository $statuses, ThreadRepository $threads) {
+	public function __construct(NewsRepository $news, PostRepository $posts, StatusRepository $statuses, ThreadRepository $threads)
+	{
 		$this->news = $news;
 		$this->statuses = $statuses;
 		$this->threads = $threads;
@@ -39,7 +41,8 @@ class HomeController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$news = $this->news->getRecentNews(3);
 		$statuses = $this->statuses->getLatest(5);
 		$threads = $this->threads->getX(5, 'desc');
