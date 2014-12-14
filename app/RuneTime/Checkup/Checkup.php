@@ -6,7 +6,8 @@ use App\Runis\Accounts\User as User;
  * Class Checkup
  * @package App\RuneTime\Checkup
  */
-class Checkup extends Entity{
+class Checkup extends Entity
+{
 	protected $table = 'staff_checkup';
 	protected $fillable = ['active', 'hours_active', 'team'];
 	protected $dates = [];
@@ -18,14 +19,16 @@ class Checkup extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsToMany('App\Runis\Accounts\User');
 	}
 
 	/**
 	 * @param $user
 	 */
-	public function addAuthor($user) {
+	public function addAuthor($user)
+	{
 		$this->author()->attach([$user->id]);
 	}
 }

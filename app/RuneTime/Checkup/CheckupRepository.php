@@ -5,11 +5,13 @@ use App\Runis\Core\EloquentRepository;
  * Class CheckupRepository
  * @package App\RuneTime\Chat
  */
-class CheckupRepository extends EloquentRepository {
+class CheckupRepository extends EloquentRepository
+{
 	/**
 	 * @param Checkup $model
 	 */
-	public function __construct(Checkup $model) {
+	public function __construct(Checkup $model)
+	{
 		$this->model = $model;
 	}
 
@@ -20,7 +22,8 @@ class CheckupRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getX($amount, $order='desc', $skip = 0) {
+	public function getX($amount, $order='desc', $skip = 0)
+	{
 		return $this->model->
 			orderBy('id', $order)->
 			skip($skip)->
@@ -28,7 +31,8 @@ class CheckupRepository extends EloquentRepository {
 			get();
 	}
 
-	public function getByStatus($status) {
+	public function getByStatus($status)
+	{
 		return $this->model->
 			where('status', '=', $status)->
 			get();
