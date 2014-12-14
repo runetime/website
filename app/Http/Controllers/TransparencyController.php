@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
-class TransparencyController extends BaseController {
+class TransparencyController extends BaseController
+{
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('transparency.title'));
 		return $this->view('transparency.index');
@@ -13,7 +15,8 @@ class TransparencyController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getMarkdown() {
+	public function getMarkdown()
+	{
 		$paths = \File::allFiles(\base_path('views/parsedown'));
 		$files = [];
 		foreach($paths as $path) {
@@ -25,8 +28,9 @@ class TransparencyController extends BaseController {
 		}
 		$renderedFiles = [];
 		$parsedown = new \Parsedown;
-		foreach($files as $name => $file)
+		foreach($files as $name => $file) {
 			$renderedFiles[$name] = $parsedown->text($file);
+		}
 		$this->bc(['transparency' => trans('transparency.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('transparency.markdown.title'));
