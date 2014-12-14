@@ -5,11 +5,13 @@ use App\Runis\Core\EloquentRepository;
  * Class ItemRepository
  * @package App\RuneTime\Calculators
  */
-class ItemRepository extends EloquentRepository {
+class ItemRepository extends EloquentRepository
+{
 	/**
 	 * @param Item $model
 	 */
-	public function __construct(Item $model) {
+	public function __construct(Item $model)
+	{
 		$this->model = $model;
 	}
 
@@ -20,17 +22,21 @@ class ItemRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByOptions($membership, $tradable, $questItem) {
+	public function getByOptions($membership, $tradable, $questItem)
+	{
 		if($membership == 'none') $membership = '';
 		if($tradable == 'none')   $tradable = '';
 		if($questItem == 'none')  $questItem = '';
 		$query = $this->model;
-		if(!empty($membership))
+		if(!empty($membership)) {
 			$query = $query->where('membership', '=', $membership == 'yes' ? true : false);
-		if(!empty($tradable))
+		}
+		if(!empty($tradable)) {
 			$query = $query->where('tradable', '=', $tradable == 'yes' ? true : false);
-		if(!empty($questItem))
+		}
+		if(!empty($questItem)) {
 			$query = $query->where('quest_item', '=', $questItem == 'yes' ? true : false);
+		}
 		return $query->get();
 	}
 }

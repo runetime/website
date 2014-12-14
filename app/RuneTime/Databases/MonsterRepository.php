@@ -5,11 +5,13 @@ use App\Runis\Core\EloquentRepository;
  * Class ItemRepository
  * @package App\RuneTime\Calculators
  */
-class MonsterRepository extends EloquentRepository {
+class MonsterRepository extends EloquentRepository
+{
 	/**
 	 * @param Monster $model
 	 */
-	public function __construct(Monster $model) {
+	public function __construct(Monster $model)
+	{
 		$this->model = $model;
 	}
 
@@ -18,13 +20,16 @@ class MonsterRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByOptions($membership) {
-		if($membership == 'none') $membership = '';
+	public function getByOptions($membership)
+	{
+		if($membership == 'none') {
+			$membership = '';
+		}
 		$query = $this->model->
 			where('id', '>=', 1);
-		if(!empty($membership))
-			$query = $query->
-			where('members', '=', $membership == 'yes' ? 1 : 0);
+		if(!empty($membership)) {
+			$query = $query->where('members', '=', $membership == 'yes' ? 1 : 0);
+		}
 		return $query->get();
 	}
 }
