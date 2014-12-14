@@ -1,5 +1,6 @@
 <?php
 namespace App\Runis\Core;
+
 use Illuminate\Database\Eloquent\Model;
 use App\Runis\Core\Exceptions\EntityNotFoundException;
 
