@@ -8,7 +8,8 @@ use App\RuneTime\Guides\LocationRepository;
 use App\RuneTime\Guides\Quest;
 use App\RuneTime\Guides\QuestRepository;
 
-class GuideController extends BaseController {
+class GuideController extends BaseController
+{
 	/**
 	 * @var QuestRepository
 	 */
@@ -22,7 +23,8 @@ class GuideController extends BaseController {
 	 * @param LocationRepository $locations
 	 * @param QuestRepository    $quests
 	 */
-	public function __construct(LocationRepository $locations, QuestRepository $quests) {
+	public function __construct(LocationRepository $locations, QuestRepository $quests)
+	{
 		$this->quests = $quests;
 		$this->locations = $locations;
 	}
@@ -30,7 +32,8 @@ class GuideController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('guides.title'));
 		return $this->view('guides.index');
@@ -43,7 +46,8 @@ class GuideController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getQuests($searchDifficulty = 0, $searchLength = 0, $searchMembership = 0) {
+	public function getQuests($searchDifficulty = 0, $searchLength = 0, $searchMembership = 0)
+	{
 		$difficulties = $this->quests->getOptions('difficulty');
 		$lengths = $this->quests->getOptions('length');
 		$memberships = $this->quests->getOptions('membership');
@@ -59,17 +63,22 @@ class GuideController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View|int
 	 */
-	public function getQuestView($id) {
+	public function getQuestView($id)
+	{
 		$guide = $this->quests->getById($id);
-		if(empty($guide))
+		if(empty($guide)) {
 			return \Error::abort(404);
+		}
 		$guide->editors = json_decode($guide->editors);
 		$difficulty = $this->quests->getOptionById($guide->difficulty);
 		$length = $this->quests->getOptionById($guide->length);
 		$editList = "";
-		if(!empty($guide->editors))
-			foreach($guide->editors as $x => $editor)
-				$editList .= \Link::name($editor) . ($x < count(json_decode($guide->editors)) -1 ? ", " : "");
+		if(!empty($guide->editors)) {
+			foreach($guide->editors as $x => $editor) {
+				$editList .= \Link::name($editor) . ($x < count(json_decode($guide->editors)) - 1 ? ", " : "");
+			}
+		}
+
 		$this->bc(['guides' => trans('guides.title'), 'guides/quests' => trans('guides.quests.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('guides.quests.view.title', ['name' => $guide->name]));
@@ -79,7 +88,8 @@ class GuideController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getQuestCreate() {
+	public function getQuestCreate()
+	{
 		$this->bc(['guides' => trans('guides.title'), 'guides/quests' => trans('guides.quests.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('guides.quests.create.title'));
@@ -91,7 +101,8 @@ class GuideController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postQuestCreate(QuestCreateRequest $form) {
+	public function postQuestCreate(QuestCreateRequest $form)
+	{
 		$parsedown = new \Parsedown;
 		$editors = json_encode([]);
 		$membership = $form->membership == 11 ? 11 : 10;
@@ -112,7 +123,8 @@ class GuideController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getLocations() {
+	public function getLocations()
+	{
 		$guides = $this->locations->getAll();
 		$this->bc(['guides' => trans('guides.title')]);
 		$this->nav(trans('navbar.runescape.runescape'));
@@ -125,17 +137,25 @@ class GuideController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View|int
 	 */
-	public function getLocationView($id) {
+	public function getLocationView($id)
+	{
 		$guide = $this->locations->getById($id);
-		if(empty($guide))
+		if(empty($guide)) {
 			return \Error::abort(404);
+		}
+
 		$guide->editors = json_decode($guide->editors);
-		if(!$guide)
+		if(!$guide) {
 			\App::abort(404);
+		}
+
 		$editList = "";
-		if(!empty($guide->editors))
-			foreach($guide->editors as $x => $editor)
-				$editList .= \Link::name($editor) . ($x < count($guide->editors) -1 ? ", " : "");
+		if(!empty($guide->editors)) {
+			foreach($guide->editors as $x => $editor) {
+				$editList .= \Link::name($editor) . ($x < count($guide->editors) - 1 ? ", " : "");
+			}
+		}
+
 		$this->bc(['guides' => trans('guides.title'), 'guides/locations' => trans('guides.locations.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('guides.locations.view.title', ['name' => $guide->name]));
@@ -145,7 +165,8 @@ class GuideController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getLocationCreate() {
+	public function getLocationCreate()
+	{
 		$this->bc(['guides' => trans('guides.title'), 'guides/locations' => trans('guides.locations.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('guides.locations.create.title'));
@@ -157,7 +178,8 @@ class GuideController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postLocationCreate(LocationCreateRequest $form) {
+	public function postLocationCreate(LocationCreateRequest $form)
+	{
 		$editors = json_encode([]);
 		$contents = $form->contents;
 		$contentsParsed = with(new \Parsedown)->text($contents);
