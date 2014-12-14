@@ -11,6 +11,7 @@ class LivestreamController extends BaseController
 		if(!\Cache::has('livestream.status')) {
 			$this->postReset();
 		}
+
 		$status = \Cache::get('livestream.status');
 		$this->nav('navbar.social.social');
 		$this->title(trans('livestream.title'));
@@ -39,6 +40,7 @@ class LivestreamController extends BaseController
 		} else {
 			\Cache::put('livestream.status', false, \Carbon::now()->addMinutes(10));
 		}
+
 		return json_encode(['online' => \Cache::get('livestream.status')]);
 	}
 }
