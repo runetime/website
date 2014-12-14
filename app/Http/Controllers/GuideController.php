@@ -52,6 +52,7 @@ class GuideController extends BaseController
 		$lengths = $this->quests->getOptions('length');
 		$memberships = $this->quests->getOptions('membership');
 		$guides = $this->quests->getByOptions($searchDifficulty, $searchLength, $searchMembership);
+
 		$this->bc(['guides' => trans('guides.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('guides.quests.title'));
@@ -69,6 +70,7 @@ class GuideController extends BaseController
 		if(empty($guide)) {
 			return \Error::abort(404);
 		}
+
 		$guide->editors = json_decode($guide->editors);
 		$difficulty = $this->quests->getOptionById($guide->difficulty);
 		$length = $this->quests->getOptionById($guide->length);
@@ -117,6 +119,7 @@ class GuideController extends BaseController
 		$contents = $form->contents;
 		$contentsParsed = $parsedown->text($form->contents);
 		$quest = with(new Quest)->saveNew($form->name, \Auth::user()->id, $editors, $form->difficulty, $form->length, $form->qp, $membership, $completed, $description, $questRequirements, $skillRequirements, $itemsRequired, $itemsRecommended, $rewards, $startingPoint, $contents, $contentsParsed);
+
 		return \redirect()->to('guides/quests/' . \String::slugEncode($quest->id, $quest->name));
 	}
 
@@ -126,6 +129,7 @@ class GuideController extends BaseController
 	public function getLocations()
 	{
 		$guides = $this->locations->getAll();
+
 		$this->bc(['guides' => trans('guides.title')]);
 		$this->nav(trans('navbar.runescape.runescape'));
 		$this->title(trans('guides.locations.title'));
@@ -184,6 +188,7 @@ class GuideController extends BaseController
 		$contents = $form->contents;
 		$contentsParsed = with(new \Parsedown)->text($contents);
 		$location = with(new Location)->saveNew($form->name, \Auth::user()->id, $editors, $contents, $contentsParsed);
+
 		return \redirect()->to('guides/locations/' . \String::slugEncode($location->id, $location->name));
 	}
 }
