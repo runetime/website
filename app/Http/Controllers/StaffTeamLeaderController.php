@@ -12,7 +12,8 @@ use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 use App\Runis\Accounts\UserRoleRepository;
 
-class StaffTeamLeaderController extends BaseController {
+class StaffTeamLeaderController extends BaseController
+{
 	/**
 	 * @var UserRepository
 	 */
