@@ -87,7 +87,7 @@ class MessengerController extends BaseController
 				$notification->saveNew($user->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
 			}
 		}
-		
+
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
 	}
 
