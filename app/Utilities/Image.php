@@ -1,13 +1,15 @@
 <?php
 namespace App\Utilities;
 
-class Image {
+class Image
+{
 	/**
 	 * Deprecated, use \Image::userPhoto() instead
 	 * @param   int    $userId The ID of the user to display the photo of
 	 * @returns String The image of the user to display the photo of
 	 */
-	public static function memberPhoto($userId) {
+	public static function memberPhoto($userId)
+	{
 		return self::userPhoto($userId);
 	}
 
@@ -18,14 +20,22 @@ class Image {
 	 * @param array $classes
 	 * @returns String The img of the user along with classes specified in [, array $classes]
 	 */
-	public static function userPhoto($userId, array $classes=[]) {
+	public static function userPhoto($userId, array $classes = [])
+	{
 		$str = "<img src='/img/forums/photos/";
-		if(file_exists('./img/forums/photos/' . $userId . '.png'))
+
+		if(file_exists('./img/forums/photos/' . $userId . '.png')) {
 			$str .= $userId;
-		else
+		} else {
 			$str .= 'no_photo';
+		}
+
 		$str .= ".png' alt='Photo' class='img-responsive";
-		foreach($classes as $class) $str .= " " . $class;
+
+		foreach($classes as $class) {
+			$str .= " " . $class;
+		}
+
 		return $str . "' />";
 	}
 }

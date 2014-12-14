@@ -1,13 +1,15 @@
 <?php
 namespace App\Utilities;
 
-class Error{
+class Error
+{
 	/**
 	 * @param $status
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public static function abort($status) {
+	public static function abort($status)
+	{
 		switch($status) {
 			case 403:
 				return view('errors.forbidden');
@@ -16,6 +18,7 @@ class Error{
 				return view('errors.missing');
 				break;
 		}
+
 		return view('errors.missing');
 	}
 }
