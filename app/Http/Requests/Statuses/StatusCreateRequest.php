@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\Statuses;
+<?php
+namespace App\Http\Requests\Statuses;
 
 use App\Http\Requests\Request;
 

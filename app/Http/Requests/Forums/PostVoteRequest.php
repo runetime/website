@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\Forums;
+<?php
+namespace App\Http\Requests\Forums;
 
 use App\Http\Requests\Request;
 

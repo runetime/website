@@ -1,10 +1,8 @@
-<?php namespace App\Http\Requests\Auth;
+<?php
+namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\Request;
-/**
- * Class PasswordResetRequest
- * @package App\Http\Requests\Auth
- */
+
 class PasswordResetRequest extends Request {
 
 	/**

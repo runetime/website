@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\NameCheck;
+<?php
+namespace App\Http\Requests\NameCheck;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -1,10 +1,8 @@
-<?php namespace App\Http\Requests\Auth;
+<?php
+namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\Request;
-/**
- * Class PasswordEmailRequest
- * @package App\Http\Requests\Auth
- */
+
 class PasswordEmailRequest extends Request {
 
 	/**

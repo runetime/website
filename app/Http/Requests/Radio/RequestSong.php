@@ -1,10 +1,8 @@
-<?php namespace App\Http\Requests\Radio;
+<?php
+namespace App\Http\Requests\Radio;
 
 use App\Http\Requests\Request;
-/**
- * Class RequestSong
- * @package App\Http\Requests\Radio
- */
+
 class RequestSong extends Request {
 
 	/**

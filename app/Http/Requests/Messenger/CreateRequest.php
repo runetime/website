@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\Messenger;
+<?php
+namespace App\Http\Requests\Messenger;
 
 use Illuminate\Foundation\Http\FormRequest;
 

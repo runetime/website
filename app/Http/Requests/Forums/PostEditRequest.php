@@ -1,5 +1,8 @@
-<?php namespace App\Http\Requests\Forums;
+<?php
+namespace App\Http\Requests\Forums;
+
 use Illuminate\Foundation\Http\FormRequest;
+
 class PostEditRequest extends FormRequest {
 
 	/**

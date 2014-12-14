@@ -1,10 +1,8 @@
-<?php namespace App\Http\Requests\Databases;
+<?php
+namespace App\Http\Requests\Databases;
 
 use App\Http\Requests\Request;
-/**
- * Class MonsterCreateRequest
- * @package App\Http\Requests
- */
+
 class MonsterCreateRequest extends Request {
 
 	/**
