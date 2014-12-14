@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
-class AboutController extends BaseController {
+class AboutController extends BaseController
+{
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('about.name'));
 		return $this->view('about');
