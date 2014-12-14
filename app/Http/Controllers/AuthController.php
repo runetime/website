@@ -12,7 +12,8 @@ use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
-class AuthController extends BaseController {
+class AuthController extends BaseController
+{
 	/**
 	 * @var PasswordBroker
 	 */
@@ -41,7 +42,8 @@ class AuthController extends BaseController {
 	 * @param RoleRepository  $roles
 	 * @param UserRepository  $users
 	 */
-	public function __construct(PasswordBroker $passwords, RankRepository $ranks, ResetRepository $resets, RoleRepository $roles, UserRepository $users) {
+	public function __construct(PasswordBroker $passwords, RankRepository $ranks, ResetRepository $resets, RoleRepository $roles, UserRepository $users)
+	{
 		$this->passwords = $passwords;
 		$this->ranks = $ranks;
 		$this->resets = $resets;
@@ -52,7 +54,8 @@ class AuthController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getLoginForm() {
+	public function getLoginForm()
+	{
 		$this->nav('navbar.logged.out.login');
 		$this->title(trans('navbar.logged.out.login'));
 		return $this->view('auth.login');
@@ -63,18 +66,24 @@ class AuthController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postLoginForm(LoginRequest $form) {
+	public function postLoginForm(LoginRequest $form)
+	{
 		$user = $this->users->getByEmail($form->email);
-		if($user)
-			if(\Auth::attempt(['email' => $form->email, 'password' => $form->password], true))
+
+		if($user) {
+			if(\Auth::attempt(['email' => $form->email, 'password' => $form->password], true)) {
 				return \redirect()->to('/');
+			}
+		}
+
 		return \redirect()->to('login');
 	}
 
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getSignupForm() {
+	public function getSignupForm()
+	{
 		$this->nav('navbar.logged.out.signup');
 		$this->title(trans('navbar.logged.out.signup'));
 		return $this->view('auth.signup');
@@ -85,32 +94,41 @@ class AuthController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postSignupForm(SignupRequest $form) {
-		if(!$form->password == $form->password2)
+	public function postSignupForm(SignupRequest $form)
+	{
+		if(!$form->password == $form->password2) {
 			return $this->view('errors.signup.passwords');
-		if($this->users->getByDisplayName($form->display_name))
+		}
+
+		if($this->users->getByDisplayName($form->display_name)) {
 			return $this->view('errors.signup.taken');
+		}
+
 		$hash = \Hash::make($form->password);
 		$rank = $this->ranks->getByPostCount(0);
 		$user = with(new User)->saveNew($form->display_name, $form->email, $hash, '', '', '', '', '', 0, 0, 0, -1, 0, -1, 0, 1, 0, $rank->id, '', '', '', '', '', '', '', '', '', '', '');
 		$role = $this->roles->getByName("Members");
 		$user->roleAdd($role, true);
 		\Auth::loginUsingId($user->id);
+
 		return \redirect()->to('/');
 	}
 
 	/**
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function getLogout() {
+	public function getLogout()
+	{
 		\Auth::logout();
+
 		return redirect()->to('/');
 	}
 
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getPasswordEmail() {
+	public function getPasswordEmail()
+	{
 		$this->nav('navbar.logged.out.login');
 		$this->title(trans('auth.reset.title'));
 		return $this->view('auth.password.email');
@@ -121,13 +139,16 @@ class AuthController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse|int
 	 */
-	public function postPasswordEmail(PasswordEmailRequest $request) {
-		switch ($response = $this->passwords->sendResetLink($request->only('email'))) {
+	public function postPasswordEmail(PasswordEmailRequest $request)
+	{
+		switch ($response = $this->passwords->sendResetLink($request->only('email')))
+		{
 			case PasswordBroker::INVALID_USER:
 				return redirect()->back()->with('error', trans($response));
 			case PasswordBroker::RESET_LINK_SENT:
 				return redirect()->back()->with('status', trans($response));
 		}
+
 		return 1;
 	}
 
@@ -136,12 +157,16 @@ class AuthController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getPasswordReset($token) {
+	public function getPasswordReset($token)
+	{
 		$reset = $this->resets->getByToken($token);
-		if(!$reset)
+		if(!$reset) {
 			\App::abort(404);
+		}
+
 		$this->nav('navbar.logged.out.login');
 		$this->title(trans('auth.reset.title'));
+
 		return $this->view('auth.password.reset', compact('reset'));
 	}
 
@@ -151,10 +176,13 @@ class AuthController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse|int
 	 */
-	public function postPasswordReset($token, PasswordResetRequest $form) {
+	public function postPasswordReset($token, PasswordResetRequest $form)
+	{
 		$reset = $this->resets->getByToken($token);
-		if(!$reset)
+		if(!$reset) {
 			\App::abort(404);
+		}
+
 		$user = $this->users->getByEmail($reset->email);
 		if($user) {
 			$user->password = \Hash::make($form->password);
@@ -163,10 +191,12 @@ class AuthController extends BaseController {
 			\Auth::loginUsingId($user->id);
 			return \redirect()->to('/');
 		}
+
 		return 1;
 	}
 
-	public function getRedirect() {
+	public function getRedirect()
+	{
 		return \redirect()->to('login');
 	}
 }
