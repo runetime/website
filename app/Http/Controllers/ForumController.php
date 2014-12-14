@@ -23,11 +23,29 @@ use App\Runis\Accounts\UserRepository;
 
 class ForumController extends BaseController
 {
+	/**
+	 * @var PostRepository
+	 */
 	private $posts;
-	private $subforums;
+	/**
+	 * @var StatusRepository
+	 */
 	private $statuses;
+	/**
+	 * @var SubforumRepository
+	 */
+	private $subforums;
+	/**
+	 * @var TagRepository
+	 */
 	private $tags;
+	/**
+	 * @var ThreadRepository
+	 */
 	private $threads;
+	/**
+	 * @var UserRepository
+	 */
 	private $users;
 	/**
 	 * @var VoteRepository
@@ -46,8 +64,8 @@ class ForumController extends BaseController
 	public function __construct(PostRepository $posts, StatusRepository $statuses, SubforumRepository $subforums, TagRepository $tags, ThreadRepository $threads, UserRepository $users, VoteRepository $votes)
 	{
 		$this->posts = $posts;
-		$this->subforums = $subforums;
 		$this->statuses = $statuses;
+		$this->subforums = $subforums;
 		$this->tags = $tags;
 		$this->threads = $threads;
 		$this->users = $users;
