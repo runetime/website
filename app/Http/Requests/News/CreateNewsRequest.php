@@ -3,7 +3,8 @@ namespace App\Http\Requests\News;
 
 use App\Http\Requests\Request;
 
-class CreateNewsRequest extends Request {
+class CreateNewsRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

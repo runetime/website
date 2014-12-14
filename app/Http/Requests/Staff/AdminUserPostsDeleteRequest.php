@@ -3,7 +3,8 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
-class AdminUserPostsDeleteRequest extends Request {
+class AdminUserPostsDeleteRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

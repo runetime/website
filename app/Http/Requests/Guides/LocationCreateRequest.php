@@ -3,7 +3,8 @@ namespace App\Http\Requests\Guides;
 
 use App\Http\Requests\Request;
 
-class LocationCreateRequest extends Request {
+class LocationCreateRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

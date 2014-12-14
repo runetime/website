@@ -3,7 +3,8 @@ namespace App\Http\Requests\Guides;
 
 use App\Http\Requests\Request;
 
-class QuestCreateRequest extends Request {
+class QuestCreateRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

@@ -2,7 +2,8 @@
 namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
-class AdminUserChangeRequest extends Request {
+class AdminUserChangeRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

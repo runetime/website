@@ -2,7 +2,8 @@
 namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
-class AdminUserChatboxDeleteRequest extends Request {
+class AdminUserChatboxDeleteRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

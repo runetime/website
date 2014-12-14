@@ -3,13 +3,15 @@ namespace App\Http\Requests\Forums;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostReportRequest extends FormRequest {
+class PostReportRequest extends FormRequest
+{
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
 	 * @return array
 	 */
-	public function rules() {
+	public function rules()
+	{
 		return [
 			'contents' => 'required',
 		];
@@ -20,7 +22,8 @@ class PostReportRequest extends FormRequest {
 	 *
 	 * @return bool
 	 */
-	public function authorize() {
+	public function authorize()
+	{
 		return true;
 	}
 }

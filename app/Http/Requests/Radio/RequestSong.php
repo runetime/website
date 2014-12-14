@@ -3,7 +3,8 @@ namespace App\Http\Requests\Radio;
 
 use App\Http\Requests\Request;
 
-class RequestSong extends Request {
+class RequestSong extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -14,7 +15,7 @@ class RequestSong extends Request {
 	{
 		return [
 			'artist' => 'required',
-			'name' => 'required',
+			'name'   => 'required',
 		];
 	}
 

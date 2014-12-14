@@ -3,7 +3,8 @@ namespace App\Http\Requests\Messenger;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRequest extends FormRequest {
+class CreateRequest extends FormRequest
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

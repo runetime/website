@@ -3,7 +3,8 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
-class RadioMessageRequest extends Request {
+class RadioMessageRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

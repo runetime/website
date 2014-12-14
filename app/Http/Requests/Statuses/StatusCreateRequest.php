@@ -3,7 +3,8 @@ namespace App\Http\Requests\Statuses;
 
 use App\Http\Requests\Request;
 
-class StatusCreateRequest extends Request {
+class StatusCreateRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.
