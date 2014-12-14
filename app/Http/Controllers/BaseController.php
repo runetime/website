@@ -146,7 +146,7 @@ class BaseController extends Controller
 				unset($activity[$key]);
 			}
 		}
-		
+
 		$activity[microtime(true) * 1000] = $current;
 		$most = \Cache::get('activity.most');
 		$activeCount = count($activity);
