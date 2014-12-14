@@ -8,7 +8,8 @@ use App\RuneTime\Databases\ItemRepository;
 use App\RuneTime\Databases\Monster;
 use App\RuneTime\Databases\MonsterRepository;
 
-class DatabaseController extends BaseController {
+class DatabaseController extends BaseController
+{
 	/**
 	 * @var ItemRepository
 	 */
@@ -22,7 +23,8 @@ class DatabaseController extends BaseController {
 	 * @param ItemRepository    $items
 	 * @param MonsterRepository $monsters
 	 */
-	public function __construct(ItemRepository $items, MonsterRepository $monsters) {
+	public function __construct(ItemRepository $items, MonsterRepository $monsters)
+	{
 		$this->items = $items;
 		$this->monsters = $monsters;
 	}
@@ -30,7 +32,8 @@ class DatabaseController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('database.title'));
 		return $this->view('databases.index');
@@ -43,11 +46,13 @@ class DatabaseController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getItemsIndex($searchMembership = 'none', $searchTradable = 'none', $searchQuestItem = 'none') {
+	public function getItemsIndex($searchMembership = 'none', $searchTradable = 'none', $searchQuestItem = 'none')
+	{
 		$items = $this->items->getByOptions($searchMembership, $searchTradable, $searchQuestItem);
 		$memberships = ['yes', 'no'];
 		$tradables = ['yes', 'no'];
 		$questItems = ['yes', 'no'];
+
 		$this->bc(['databases' => trans('database.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('database.items.title'));
@@ -59,10 +64,13 @@ class DatabaseController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getItemsView($id) {
+	public function getItemsView($id)
+	{
 		$item = $this->items->getById($id);
-		if(!$item)
+		if(!$item) {
 			\App::abort(404);
+		}
+
 		$this->bc(['databases' => trans('database.title'), 'databases/items' => trans('database.items.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('database.items.view.title', ['name' => $item->name]));
@@ -72,7 +80,8 @@ class DatabaseController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getItemsCreate() {
+	public function getItemsCreate()
+	{
 		$this->bc(['databases' => trans('database.title'), 'databases/items' => trans('database.items.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('database.items.create.title'));
@@ -84,7 +93,8 @@ class DatabaseController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postItemsCreate(ItemCreateRequest $form) {
+	public function postItemsCreate(ItemCreateRequest $form)
+	{
 		$parsedown = new \Parsedown;
 		$name = $form->name;
 		$editors = json_encode([]);
@@ -94,6 +104,7 @@ class DatabaseController extends BaseController {
 		$tradable = $form->tradable == 1 ? true : false;
 		$questItem = $form->quest_item == 1 ? true : false;
 		$item = with(new Item)->saveNew(\Auth::user()->id, $editors, $name, $examine, $examineParsed, $membership, $tradable, $questItem);
+
 		return \redirect()->to('/databases/items/' . \String::slugEncode($item->id, $item->name));
 	}
 
@@ -102,9 +113,11 @@ class DatabaseController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getMonstersIndex($searchMembership = 'none') {
+	public function getMonstersIndex($searchMembership = 'none')
+	{
 		$monsters = $this->monsters->getByOptions($searchMembership);
 		$memberships = ['yes', 'no'];
+
 		$this->bc(['databases' => trans('database.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('database.monsters.title'));
@@ -116,10 +129,13 @@ class DatabaseController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getMonstersView($id) {
+	public function getMonstersView($id)
+	{
 		$monster = $this->monsters->getById($id);
-		if(!$monster)
+		if(!$monster) {
 			\App::abort(404);
+		}
+
 		$this->bc(['databases' => trans('database.title'), 'databases/monsters' => trans('database.monsters.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('database.monsters.view.title', ['name' => $monster->name]));
@@ -129,7 +145,8 @@ class DatabaseController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getMonstersCreate() {
+	public function getMonstersCreate()
+	{
 		$this->bc(['databases' => trans('database.title'), 'databases/monsters' => trans('database.monsters.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('database.monsters.create.title'));
@@ -141,7 +158,8 @@ class DatabaseController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postMonstersCreate(MonsterCreateRequest $form) {
+	public function postMonstersCreate(MonsterCreateRequest $form)
+	{
 		$parsedown = new \Parsedown;
 		$editors = json_encode([]);
 		$name = $form->name;
@@ -157,6 +175,7 @@ class DatabaseController extends BaseController {
 		$otherInformation = $form->other_information;
 		$otherInformationParsed = $parsedown->text($otherInformation);
 		$monster = with(new Monster)->saveNew(\Auth::user()->id, $editors, $name, $examine, $examineParsed, $stats, $statsParsed, $location, $locationParsed, $drops, $dropsParsed, $members, $otherInformation, $otherInformationParsed);
+
 		return \redirect()->to('/databases/monsters/' . \String::slugEncode($monster->id, $monster->name));
 	}
 }
