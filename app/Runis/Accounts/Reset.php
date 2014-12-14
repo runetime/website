@@ -3,7 +3,8 @@ namespace App\Runis\Accounts;
 
 use App\Runis\Core\Entity;
 
-class Reset extends Entity {
+class Reset extends Entity
+{
 	protected $table = 'password_resets';
 	protected $with = [];
 	protected $fillable = ['email', 'token'];

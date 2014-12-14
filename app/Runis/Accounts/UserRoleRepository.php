@@ -3,11 +3,13 @@ namespace App\Runis\Accounts;
 
 use App\Runis\Core\EloquentRepository;
 
-class UserRoleRepository extends EloquentRepository{
+class UserRoleRepository extends EloquentRepository
+{
 	/**
 	 * @param UserRole $model
 	 */
-	public function __construct(UserRole $model) {
+	public function __construct(UserRole $model)
+	{
 		$this->model = $model;
 	}
 
@@ -16,7 +18,8 @@ class UserRoleRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getImportantByUser($id) {
+	public function getImportantByUser($id)
+	{
 		return $this->model->
 			where('user_id', '=', $id)->
 			where('important', '=', 1)->
@@ -28,7 +31,8 @@ class UserRoleRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByRole($id) {
+	public function getByRole($id)
+	{
 		return $this->model->
 			where('role_id', '=', $id)->
 			get();
@@ -40,7 +44,8 @@ class UserRoleRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function selectByUserAndRole($userId, $roleId) {
+	public function selectByUserAndRole($userId, $roleId)
+	{
 		return $this->model->
 			where('user_id', '=', $userId)->
 			where('role_id', '=', $roleId)->
@@ -55,6 +60,7 @@ class UserRoleRepository extends EloquentRepository{
 	public function getByRoles($roles)
 	{
 		$q = $this->model;
+
 		foreach($roles as $role) {
 			$q = $q->where('role_id',
 				$role[0],
