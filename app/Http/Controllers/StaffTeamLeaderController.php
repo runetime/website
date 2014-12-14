@@ -50,11 +50,12 @@ class StaffTeamLeaderController extends BaseController
 	 */
 	public function getIndex()
 	{
+		$roleId = \Auth::user()->importantRole()->id + 1;
+		$members = $this->userRoles->getByRole($roleId);
+
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.team_leader');
 		$this->title(trans('staff.team_leader.title'));
-		$roleId = \Auth::user()->importantRole()->id + 1;
-		$members = $this->userRoles->getByRole($roleId);
 		return $this->view('staff.team_leader.index', compact('members'));
 	}
 
@@ -80,6 +81,7 @@ class StaffTeamLeaderController extends BaseController
 		} else {
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 
@@ -104,6 +106,7 @@ class StaffTeamLeaderController extends BaseController
 		} else {
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 
@@ -129,6 +132,7 @@ class StaffTeamLeaderController extends BaseController
 					]);
 				}
 			}
+
 			$contentsParsed = with(new \Parsedown)->text($form->reason);
 			$mute = with(new Mute)->saveNew(\Auth::user()->id, $user->id, $form->reason, $contentsParsed, time(), \Carbon::now()->addHours($hours)->timestamp);
 			if(!empty($mute)) {
@@ -140,6 +144,7 @@ class StaffTeamLeaderController extends BaseController
 		} else {
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 
@@ -157,6 +162,7 @@ class StaffTeamLeaderController extends BaseController
 		} else {
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 }
