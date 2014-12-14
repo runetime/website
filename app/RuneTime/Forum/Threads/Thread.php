@@ -1,7 +1,8 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
 use App\Runis\Core\Entity;
-class Thread extends Entity {
+class Thread extends Entity
+{
 	protected $table = 'forum_threads';
 	protected $with = [];
 	protected $fillable = ['author_id', 'subforum_id', 'title', 'views_count', 'posts_count', 'last_post', 'poll_id', 'status'];
@@ -20,53 +21,61 @@ class Thread extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function posts() {
+	public function posts()
+	{
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
 	}
 
 	/**
 	 * @param Post $post
 	 */
-	public function addPost(Post $post) {
+	public function addPost(Post $post)
+	{
 		$this->posts()->attach([$post->id]);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function subforum() {
+	public function subforum()
+	{
 		return $this->belongsTo('App\RuneTime\Forum\Subforums\Subforum', 'subforum_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function user() {
+	public function user()
+	{
 		return $this->author;
 	}
 
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function tags() {
+	public function tags()
+	{
 		return $this->belongsToMany('App\RuneTime\Forum\Tags\Tag');
 	}
 
 	/**
 	 * @param $tag
 	 */
-	public function addTag($tag) {
+	public function addTag($tag)
+	{
 		$this->tags()->attach([$tag->id]);
 	}
 
 	/**
 	 * @param Post $post
 	 */
-	public function updateLastPost(Post $post) {
+	public function updateLastPost(Post $post)
+	{
 		$this->last_post = $post->id;
 		$this->save();
 	}
@@ -74,7 +83,8 @@ class Thread extends Entity {
 	/**
 	 *
 	 */
-	public function incrementViews() {
+	public function incrementViews()
+	{
 		$this->increment('views_count');
 		$this->save();
 	}
@@ -82,7 +92,8 @@ class Thread extends Entity {
 	/**
 	 *
 	 */
-	public function incrementPosts() {
+	public function incrementPosts()
+	{
 		$this->increment('posts_count');
 		$this->save();
 	}
@@ -90,18 +101,22 @@ class Thread extends Entity {
 	/**
 	 * @return bool
 	 */
-	public function isPinned() {
-		if($this->status >= 2 && $this->status <= 3)
+	public function isPinned()
+	{
+		if($this->status >= 2 && $this->status <= 3) {
 			return true;
-		if($this->status == 6 || $this->status == 7)
+		}
+		if($this->status == 6 || $this->status == 7) {
 			return true;
+		}
 		return false;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isLocked() {
+	public function isLocked()
+	{
 		if($this->status >= 4)
 			return true;
 		return false;
@@ -110,53 +125,64 @@ class Thread extends Entity {
 	/**
 	 * @return bool
 	 */
-	public function isPoll() {
-		if($this->poll > -1)
+	public function isPoll()
+	{
+		if($this->poll > -1) {
 			return true;
+		}
 		return false;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isVisible() {
-		if($this->status % 2 == 1)
+	public function isVisible()
+	{
+		if($this->status % 2 == 1) {
 			return true;
+		}
 		return false;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getStatusLockSwitch() {
-		if($this->status < 4)
+	public function getStatusLockSwitch()
+	{
+		if($this->status < 4) {
 			return $this->status + 4;
+		}
 		return $this->status - 4;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getStatusPinSwitch() {
-		if($this->status == 2 || $this->status == 3 || $this->status == 6 || $this->status == 7)
+	public function getStatusPinSwitch()
+	{
+		if($this->status == 2 || $this->status == 3 || $this->status == 6 || $this->status == 7) {
 			return $this->status - 2;
-		else
+		} else {
 			return $this->status + 2;
+		}
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getStatusHiddenSwitch() {
-		if($this->status % 2 == 1)
+	public function getStatusHiddenSwitch()
+	{
+		if($this->status % 2 == 1) {
 			return $this->status - 1;
+		}
 		return $this->status + 1;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function lastPost() {
+	public function lastPost()
+	{
 		$posts = new PostRepository(new Post);
 		return $posts->getById($this->last_post);
 	}
@@ -164,13 +190,15 @@ class Thread extends Entity {
 	/**
 	 * @return bool
 	 */
-	public function isRead() {
+	public function isRead()
+	{
 		if(\Auth::check()) {
 			$lastRead = \Cache::get('user' . \Auth::user()->id . '.thread#' . $this->id . '.read');
-			if($lastRead > \Time::getEpoch($this->lastPost()->created_at))
+			if($lastRead > \Time::getEpoch($this->lastPost()->created_at)) {
 				return true;
-			else
+			} else {
 				return false;
+			}
 		}
 		return true;
 	}
@@ -178,7 +206,8 @@ class Thread extends Entity {
 	/**
 	 * @return string
 	 */
-	public function toSlug($path = '') {
+	public function toSlug($path = '')
+	{
 		return '/forums/thread/' . \String::slugEncode($this->id, $this->title) . (!empty($path) ? '/' . $path : '');
 	}
 }
