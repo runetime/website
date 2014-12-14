@@ -1,7 +1,8 @@
 <?php
 namespace App\RuneTime\Awards;
 use App\Runis\Core\Entity;
-class Award extends Entity{
+class Award extends Entity
+{
 	protected $table = 'awards';
 	protected $with = [];
 	protected $fillable = ['name', 'name_trim', 'description', 'last_awarded', 'status'];
@@ -13,21 +14,24 @@ class Award extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function awardees() {
+	public function awardees()
+	{
 		return $this->belongsToMany('App\RuneTime\Awards\Awardee');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function users() {
+	public function users()
+	{
 		return $this->belongsToMany('App\RuneTime\Awards\Awardee');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function lastAwarded() {
+	public function lastAwarded()
+	{
 		return $this->belongsTo('App\RuneTime\Awards\Awardee', 'last_awarded');
 	}
 }
