@@ -26,6 +26,7 @@ class SignatureController extends BaseController
 		if(!\Cache::get('hiscores.' . $username)) {
 			\String::getHiscore($username);
 		}
+
 		$this->bc(['signatures' => trans('signature.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('signature.type.title'));
@@ -44,7 +45,9 @@ class SignatureController extends BaseController
 		foreach(scandir('./img/signatures/backgrounds') as $filename) {
 			$imgs[] = $filename;
 		}
+
 		unset($imgs[0], $imgs[1]);
+
 		$this->bc(['signatures' => trans('signature.title'), '#1' => $username]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('signature.style.title'));
@@ -67,6 +70,7 @@ class SignatureController extends BaseController
 		];
 		$hash = implode(";", $args);
 		$location = url('signatures/h' . $hash);
+
 		$this->bc(['signatures' => trans('signature.title'), '#1' => $username, 'signatures/username=' . $username . '/type=' . $type => ucwords($type)]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('signature.final.title'));
@@ -382,6 +386,7 @@ class SignatureController extends BaseController
 		foreach($skills as $name => $dir) {
 			$skills[$name] = \Img::make(public_path('img/skills/' . $dir . '.png'))->resize(20, 20);
 		}
+
 		return $skills;
 	}
 }
