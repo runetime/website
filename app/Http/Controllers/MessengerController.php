@@ -75,16 +75,14 @@ class MessengerController extends BaseController
 		}
 
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$message->addPost($post);
 
 		// Notifications
 		foreach($message->users as $user) {
 			if($user->id !== \Auth::user()->id) {
-				$notification = new Notification;
 				$contents = \Link::name(\Auth::user()->id) . " has replied to the private message <a href='" . $message->toSlug() . "'>" . $message->title . "</a> you're a participant of.";
-				$notification->saveNew($user->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
+				with(new Notification)->saveNew($user->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
 			}
 		}
 
@@ -118,19 +116,16 @@ class MessengerController extends BaseController
 	public function postCreate(CreateRequest $form)
 	{
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$message = new Message;
-		$message = $message->saveNew(\Auth::user()->id, $form->title, 0, 0);
-		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$message = with(new Message)->saveNew(\Auth::user()->id, $form->title, 0, 0);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$message->addPost($post);
 		$message->addUser(\Auth::user());
 		foreach(explode(", ", $form->participants) as $participant) {
 			$participant = $this->users->getByDisplayName(($participant));
 			if($participant) {
 				$message->addUser($participant);
-				$notification = new Notification;
 				$contents = \Link::name(\Auth::user()->id) . " has sent you a private message titled <a href='" . $message->toSlug() . "'>" . $message->title . "</a>.";
-				$notification->saveNew($participant->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
+				with(new Notification)->saveNew($participant->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
 			}
 		}
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
