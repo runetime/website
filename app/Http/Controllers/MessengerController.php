@@ -35,6 +35,7 @@ class MessengerController extends BaseController
 	public function getIndex()
 	{
 		$messages = \Auth::user()->messages;
+
 		$this->nav('navbar.forums');
 		$this->title(trans('messenger.title'));
 		return $this->view('messenger.index', compact('messages'));
@@ -51,7 +52,9 @@ class MessengerController extends BaseController
 		if(!$message) {
 			\App::abort(404);
 		}
+
 		$posts = $message->posts;
+
 		$this->bc(['messenger' => trans('messenger.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('messenger.view.title', ['name' => $message->title]));
@@ -70,6 +73,7 @@ class MessengerController extends BaseController
 		if(!$message) {
 			return \App::abort(404);
 		}
+
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
@@ -83,6 +87,7 @@ class MessengerController extends BaseController
 				$notification->saveNew($user->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
 			}
 		}
+		
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
 	}
 
