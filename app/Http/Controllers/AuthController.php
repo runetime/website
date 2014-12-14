@@ -10,7 +10,6 @@ use App\Runis\Accounts\ResetRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
-use App\Runis\Accounts\UserRole;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
 class AuthController extends BaseController {

@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Staff\LeaderClearChatboxRequest;
 use App\Http\Requests\Staff\LeaderDemoteStaffRequest;
 use App\Http\Requests\Staff\LeaderMuteUserRequest;
 use App\Http\Requests\Staff\LeaderTempBanRequest;

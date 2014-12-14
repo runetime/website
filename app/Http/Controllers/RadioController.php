@@ -8,7 +8,6 @@ use App\RuneTime\Radio\RequestRepository;
 use App\RuneTime\Radio\Session;
 use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
-use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
 
 class RadioController extends BaseController {

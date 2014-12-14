@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Signatures\RSNRequest;
-use Intervention\Image\Gd\Font;
 
 class SignatureController extends BaseController {
 	/**
