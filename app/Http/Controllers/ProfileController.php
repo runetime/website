@@ -50,8 +50,10 @@ class ProfileController extends BaseController
 		if(!$profile) {
 			\App::abort(404);
 		}
+
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
+
 		$this->bc(['forums/' => trans('forums.name')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('profile.title', ['name' => $profile->display_name]));
@@ -67,9 +69,11 @@ class ProfileController extends BaseController
 		if(!$profile) {
 			\App::abort(404);
 		}
+
 		$profile->incrementProfileViews();
 		$threads = $this->threads->getLatestByUser($id, 5);
 		$status = $this->statuses->getLatestByAuthor($profile->id);
+
 		$this->bc(['forums/' => trans('forums.title'), 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
 		$this->nav('navbar.forums');
 		$this->title(trans('profile.feed.title', ['name' => $profile->display_name]));
@@ -85,8 +89,10 @@ class ProfileController extends BaseController
 		if(!$profile) {
 			\App::abort(404);
 		}
+
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
+
 		$this->bc(['forums/' => 'Forums', 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
 		$this->nav('navbar.forums');
 		$this->title($profile->display_name . "'s Friends");
