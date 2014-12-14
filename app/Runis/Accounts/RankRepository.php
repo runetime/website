@@ -13,6 +13,11 @@ class RankRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param int $count
+	 *
+	 * @return mixed
+	 */
 	public function getByPostCount($count = 0)
 	{
 		return $this->model->
