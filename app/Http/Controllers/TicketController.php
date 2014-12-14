@@ -21,6 +21,7 @@ class TicketController extends BaseController
 	{
 		$this->tickets = $tickets;
 	}
+
 	/**
 	 * @return \Illuminate\View\View
 	 */
@@ -35,6 +36,7 @@ class TicketController extends BaseController
 				array_push($ticketList[Ticket::STATUS_OPEN], $ticket);
 			}
 		}
+
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('tickets.title'));
 		return $this->view('tickets.index', compact('ticketList'));
@@ -51,13 +53,17 @@ class TicketController extends BaseController
 		if(!$ticket) {
 			return \Error::abort(404);
 		}
+
 		if(!($ticket->author->id === \Auth::user()->id || \Auth::user()->isStaff())) {
 			return \Error::abort(403);
 		}
+
 		if($ticket->status == TICKET::STATUS_ESCALATED && !\Auth::user()->isAdmin()) {
 			return \Error::abort(403);
 		}
+
 		$posts = $ticket->posts;
+
 		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('tickets.view.title', ['name' => $ticket->name]));
@@ -88,6 +94,7 @@ class TicketController extends BaseController
 		$ticket->last_post = $post->id;
 		$ticket->save();
 		$ticket->addPost($post);
+
 		return \redirect()->to('/tickets/' . \String::slugEncode($ticket->id, $ticket->name));
 	}
 
@@ -103,12 +110,15 @@ class TicketController extends BaseController
 		if(!$ticket) {
 			return \Error::abort(404);
 		}
+
 		if(!($ticket->author->id === \Auth::user()->id || \Auth::user()->isStaff())) {
 			return \Error::abort(403);
 		}
+
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		$ticket->addPost($post);
+
 		return \redirect()->to('/tickets/' . \String::slugEncode($ticket->id, $ticket->name));
 	}
 
@@ -123,6 +133,7 @@ class TicketController extends BaseController
 		if(\Auth::user()->isAdmin()) {
 			$ticketsEscalated = $this->tickets->getAllByStatus(Ticket::STATUS_ESCALATED);
 		}
+
 		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title(trans('tickets.manage.title'));
@@ -141,8 +152,10 @@ class TicketController extends BaseController
 		if(!$ticket) {
 			\App::abort(404);
 		}
+
 		$ticket->status = $status;
 		$ticket->save();
+
 		return \redirect()->to('/tickets/manage');
 	}
 }
