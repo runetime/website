@@ -1,7 +1,8 @@
 <?php
 namespace App\RuneTime\Bans;
 use App\Runis\Core\Entity;
-class IP extends Entity{
+class IP extends Entity
+{
 	protected $table = 'bans_ip';
 	protected $fillable = ['author_id', 'ip', 'reason', 'status'];
 	protected $dates = [];
@@ -12,7 +13,8 @@ class IP extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 }
