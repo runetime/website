@@ -27,13 +27,13 @@ class AuthController extends BaseController
 	 */
 	private $resets;
 	/**
-	 * @var UserRepository
-	 */
-	private $users;
-	/**
 	 * @var RoleRepository
 	 */
 	private $roles;
+	/**
+	 * @var UserRepository
+	 */
+	private $users;
 
 	/**
 	 * @param PasswordBroker  $passwords
@@ -47,8 +47,8 @@ class AuthController extends BaseController
 		$this->passwords = $passwords;
 		$this->ranks = $ranks;
 		$this->resets = $resets;
-		$this->users = $users;
 		$this->roles = $roles;
+		$this->users = $users;
 	}
 
 	/**
