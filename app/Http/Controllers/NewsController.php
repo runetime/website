@@ -12,8 +12,14 @@ use Illuminate\Contracts\Auth\Guard;
 
 class NewsController extends BaseController
 {
-	protected $auth;
-	protected $news;
+	/**
+	 * @var Guard
+	 */
+	private $auth;
+	/**
+	 * @var NewsRepository
+	 */
+	private $news;
 	/**
 	 * @var TagRepository
 	 */
