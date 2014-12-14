@@ -74,9 +74,8 @@ class StatusController extends BaseController
 
 		// Notify author
 		if($status->author->id !== \Auth::user()->id) {
-			$notification = new Notification;
 			$contents = \Link::name(\Auth::user()->id) . " has replied to your status update <a href='" . $status->toSlug() . "#post" . $post->id . "'>" . $status->title . "</a>.";
-			$notification->saveNew($status->author->id, 'Statuses', $contents, Notification::STATUS_UNREAD);
+			with(new Notification)->saveNew($status->author->id, 'Statuses', $contents, Notification::STATUS_UNREAD);
 		}
 
 		return \redirect()->to($status->toSlug() . '#post' . $post->id);
