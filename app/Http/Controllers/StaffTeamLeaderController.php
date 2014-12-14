@@ -151,10 +151,11 @@ class StaffTeamLeaderController extends BaseController {
 		$response = ['done' => false];
 		$this->chats->setAllInvisible(true);
 		$chat = $this->chats->getLatest();
-		if($chat->status === Chat::STATUS_INVISIBLE)
+		if($chat->status === Chat::STATUS_INVISIBLE) {
 			$response['done'] = true;
-		else
+		} else {
 			$response['error'] = -1;
+		}
 		return json_encode($response);
 	}
 }
