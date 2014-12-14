@@ -1,7 +1,8 @@
 <?php
 namespace App\RuneTime\News;
 use App\Runis\Core\Entity;
-class News extends Entity{
+class News extends Entity
+{
 	protected $table = 'news';
 	protected $with = [];
 	protected $fillable = ['author_id', 'title', 'contents', 'contents_parsed', 'post_count', 'status'];
@@ -13,42 +14,48 @@ class News extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function tags() {
+	public function tags()
+	{
 		return $this->belongsToMany('App\RuneTime\Forum\Tags\Tag');
 	}
 
 	/**
 	 * @param $tag
 	 */
-	public function addTag($tag) {
+	public function addTag($tag)
+	{
 		$this->tags()->attach([$tag->id]);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function posts() {
+	public function posts()
+	{
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
 	}
 
 	/**
 	 * @param $post
 	 */
-	public function addPost($post) {
+	public function addPost($post)
+	{
 		$this->posts()->attach([$post->id]);
 	}
 
 	/**
 	 *
 	 */
-	public function incrementPosts() {
+	public function incrementPosts()
+	{
 		$this->increment('post_count');
 		$this->save();
 	}
@@ -56,10 +63,12 @@ class News extends Entity{
 	/**
 	 * @return bool|string
 	 */
-	public function hasImage() {
+	public function hasImage()
+	{
 		$path = 'img/news/thumbnail/' . $this->id . '.png';
-		if(file_exists('./' . $path))
+		if(file_exists('./' . $path)) {
 			return $path;
+		}
 		return false;
 	}
 
@@ -68,7 +77,8 @@ class News extends Entity{
 	 *
 	 * @return string
 	 */
-	public function toSlug($path = '') {
+	public function toSlug($path = '')
+	{
 		return url('news/' . \String::slugEncode($this->id, $this->title) . (!empty($path) ? '/' . $path : ''));
 	}
 }
