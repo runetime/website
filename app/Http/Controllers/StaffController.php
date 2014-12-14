@@ -12,7 +12,8 @@ use App\RuneTime\Tickets\Ticket;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 
-class StaffController extends BaseController {
+class StaffController extends BaseController
+{
 	/**
 	 * @var CheckupRepository
 	 */
@@ -31,7 +32,8 @@ class StaffController extends BaseController {
 	 * @param RoleRepository    $roles
 	 * @param UserRepository    $users
 	 */
-	public function __construct(CheckupRepository $checkups, RoleRepository $roles, UserRepository $users) {
+	public function __construct(CheckupRepository $checkups, RoleRepository $roles, UserRepository $users)
+	{
 		$this->checkups = $checkups;
 		$this->roles = $roles;
 		$this->users = $users;
@@ -40,7 +42,8 @@ class StaffController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.staff.staff');
 		$this->title(trans('staff.index.title'));
 		return $this->view('staff.index');
@@ -51,7 +54,8 @@ class StaffController extends BaseController {
 	 *
 	 * @return string
 	 */
-	public function postUserReport(UserReportRequest $form) {
+	public function postUserReport(UserReportRequest $form)
+	{
 		$response = ['done' => true];
 		$user = $this->users->getByDisplayName($form->username);
 		if(!empty($user)) {
@@ -61,8 +65,9 @@ class StaffController extends BaseController {
 			$ticket->last_post = $post->id;
 			$ticket->save();
 			$ticket->addPost($post);
-			if(!$ticket || !$post)
+			if(!$ticket || !$post) {
 				$response['error'] = -2;
+			}
 		} else {
 			$response['done'] = false;
 			$response['error'] = -1;
@@ -75,16 +80,18 @@ class StaffController extends BaseController {
 	 *
 	 * @return string
 	 */
-	public function postUserMute(UserMuteRequest $form) {
+	public function postUserMute(UserMuteRequest $form)
+	{
 		$response = ['done' => false];
 		$user = $this->users->getByDisplayName($form->username);
 		if(!empty($user)) {
 			$contentsParsed = with(new \Parsedown)->text($form->contents);
 			$mute = with(new Mute)->saveNew(\Auth::user()->id, $user->id, $form->contents, $contentsParsed, time(), \Carbon::now()->addHour()->timestamp);
-			if(!empty($mute))
+			if(!empty($mute)) {
 				$response['done'] = true;
-			else
+			} else {
 				$response['error'] = -2;
+			}
 		} else {
 			$response['error'] = -1;
 		}
@@ -94,7 +101,8 @@ class StaffController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getCheckup() {
+	public function getCheckup()
+	{
 		$date = \Time::long(\Carbon::now());
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
@@ -107,7 +115,8 @@ class StaffController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postCheckup(CheckupRequest $form) {
+	public function postCheckup(CheckupRequest $form)
+	{
 		$hoursActive = with(new \Parsedown)->text($form->hours_active);
 		$checkup = with(new Checkup)->saveNew($form->active, $hoursActive, $form->team);
 		$checkup->addAuthor(\Auth::user());
@@ -117,7 +126,8 @@ class StaffController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getList() {
+	public function getList()
+	{
 		$admins = $this->roles->getUsersById(1);
 		$radio = $this->roles->getUsersById(2, 3);
 		$media = $this->roles->getUsersById(4, 5);
