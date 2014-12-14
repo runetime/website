@@ -167,6 +167,8 @@ class StaffAdminController extends BaseController
 	}
 
 	/**
+	 * @param int $page
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getUserList($page = 1)
