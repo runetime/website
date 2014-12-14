@@ -74,6 +74,7 @@ class SettingsController extends BaseController
 			'14'    => '(UTC+14:00 ' . $h . ') Kiritimati',
 		];
 		$thisURL = '/settings/';
+
 		$this->nav('navbar.forums');
 		$this->title(trans('settings.profile.title'));
 		return $this->view('settings.index', compact('timezoneOptions', 'thisURL'));
@@ -93,10 +94,12 @@ class SettingsController extends BaseController
 		$user->dst = $form->dst ? true : false;
 		if($form->gender >= 0 && $form->gender <= 2)
 			$user->gender = $form->gender;
+
 		$user->location = $form->location;
 		$user->interests = $form->interests;
 		$user->referred_by = !empty($referred) ? $referred->id : -1;
 		$user->save();
+
 		return \redirect()->to('settings');
 	}
 
@@ -106,6 +109,7 @@ class SettingsController extends BaseController
 	public function getPhoto()
 	{
 		$thisURL = '/settings/photo';
+
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('settings.photo.title'));
@@ -126,8 +130,10 @@ class SettingsController extends BaseController
 			if(file_exists($path)) {
 				unlink($path);
 			}
+
 			$img->save($path);
 		}
+
 		return \redirect()->to('/settings/photo');
 	}
 
@@ -137,6 +143,7 @@ class SettingsController extends BaseController
 	public function getPassword()
 	{
 		$thisURL = '/settings/password';
+
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('settings.password.title'));
@@ -157,6 +164,7 @@ class SettingsController extends BaseController
 		} else {
 			dd("There was an error");
 		}
+
 		return \redirect()->to('/settings/password');
 	}
 
@@ -166,6 +174,7 @@ class SettingsController extends BaseController
 	public function getAbout()
 	{
 		$thisURL = '/settings/about/me';
+
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('settings.about.title'));
@@ -183,6 +192,7 @@ class SettingsController extends BaseController
 		$user->about = $form->contents;
 		$user->about_parsed = with(new \Parsedown)->text($form->contents);
 		$user->save();
+
 		return \redirect()->to('/settings/about/me');
 	}
 
@@ -192,6 +202,7 @@ class SettingsController extends BaseController
 	public function getSignature()
 	{
 		$thisURL = '/settings/signature';
+
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('settings.signature.title'));
@@ -209,6 +220,7 @@ class SettingsController extends BaseController
 		$user->signature = $form->contents;
 		$user->signature_parsed = with(new \Parsedown)->text($form->contents);
 		$user->save();
+
 		return \redirect()->to('/settings/signature');
 	}
 
@@ -218,6 +230,7 @@ class SettingsController extends BaseController
 	public function getSocial()
 	{
 		$thisURL = '/settings/social';
+
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('settings.social.title'));
@@ -238,6 +251,7 @@ class SettingsController extends BaseController
 		$user->social_website = $form->website;
 		$user->social_skype = $form->skype;
 		$user->save();
+
 		return \redirect()->to('/settings/social');
 	}
 
@@ -263,6 +277,7 @@ class SettingsController extends BaseController
 			'Guthix (Deceased)',
 		];
 		$thisURL = '/settings/runescape';
+
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('settings.runescape.title'));
@@ -296,12 +311,15 @@ class SettingsController extends BaseController
 		if(in_array($form->version, $versions)) {
 			$user->runescape_version = $form->version;
 		}
+
 		if(in_array($form->allegiance, $allegiances)) {
 			$user->runescape_allegiance = $form->allegiance;
 		}
+
 		$user->runescape_rsn = $form->rsn;
 		$user->runescape_clan = $form->clan;
 		$user->save();
+
 		return \redirect()->to('/settings/runescape');
 	}
 }
