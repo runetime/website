@@ -450,7 +450,7 @@ class ForumController extends BaseController
 		$post->contents = $form->contents;
 		$post->contents_parsed = with(new \Parsedown)->text($form->contents);
 		$post->save();
-		
+
 		return $this->getThreadLastPost($thread->id);
 	}
 
@@ -461,11 +461,14 @@ class ForumController extends BaseController
 	 */
 	public function getPostDelete($id) {
 		$post = $this->posts->getById($id);
-		if(!$post)
+		if(!$post) {
 			\App::abort(404);
+		}
+
 		$thread = $this->threads->getById($post->thread[0]->id);
 		$post->status = Post::STATUS_INVISIBLE;
 		$post->save();
+		
 		return \redirect()->to($thread->toSlug());
 	}
 }
