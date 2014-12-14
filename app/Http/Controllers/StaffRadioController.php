@@ -61,7 +61,9 @@ class StaffRadioController extends BaseController
 		if($live) {
 			$live = $this->users->getById($live);
 		}
+
 		$messages = $this->messages->getByUser(\Auth::user()->id);
+
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title(trans('staff.radio.title'));
@@ -74,6 +76,7 @@ class StaffRadioController extends BaseController
 	public function getRadioLive()
 	{
 		$messages = $this->messages->getByUser(\Auth::user()->id);
+
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title(trans('staff.radio.live.title'));
@@ -90,12 +93,14 @@ class StaffRadioController extends BaseController
 		if($form->live !== "go") {
 			return \App::abort(404);
 		}
+
 		$live = \Cache::get('radio.dj.current');
 		$user = $this->users->getById($live);
 		if(!$user) {
 			\Cache::forever('radio.dj.current', \Auth::user()->id);
 			with(new Session)->saveNew(\Auth::user()->id, -1, Session::STATUS_PLAYING);
 		}
+
 		return \redirect()->to('/staff/radio/live');
 	}
 
@@ -110,6 +115,7 @@ class StaffRadioController extends BaseController
 		$session->message_id = $form->id;
 		$session->save();
 		header('Content-Type: application/json');
+
 		return json_encode(['message' => $session->message->contents_parsed]);
 	}
 
@@ -123,11 +129,14 @@ class StaffRadioController extends BaseController
 		if($session->message_id !== -1) {
 			$update['message'] = $session->message->contents_parsed;
 		}
+
 		$song = $this->history->getLatest();
 		if($song) {
 			$update['song'] = ['name' => $song->song, 'artist' => $song->artist];
 		}
+
 		header('Content-Type: application/json');
+
 		return json_encode($update);
 	}
 
@@ -147,6 +156,7 @@ class StaffRadioController extends BaseController
 				}
 			}
 		}
+
 		return \redirect()->to('/staff/radio');
 	}
 
@@ -156,6 +166,7 @@ class StaffRadioController extends BaseController
 	public function getRadioMessages()
 	{
 		$messages = $this->messages->getByUser(\Auth::user()->id);
+
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title(trnas('staff.radio.messages.title'));
@@ -171,6 +182,7 @@ class StaffRadioController extends BaseController
 	{
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		with(new Message)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed);
+
 		return \redirect()->to('/staff/radio/messages');
 	}
 
@@ -188,10 +200,12 @@ class StaffRadioController extends BaseController
 			} else {
 				$days[$x][$time->hour] = $time->dj_id;
 			}
+
 			if($time->hour == 23) {
 				$x++;
 			}
 		}
+
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title(trans('staff.radio.timetable.title'));
@@ -218,11 +232,14 @@ class StaffRadioController extends BaseController
 				$response['name'] = '-';
 				$hour->dj_id = -1;
 			}
+
 			$hour->save();
 		} else {
 			$response = ['valid' => false];
 		}
+
 		header('Content-Type: application/json');
+		
 		return json_encode($response);
 	}
 }
