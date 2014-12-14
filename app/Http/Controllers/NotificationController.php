@@ -57,7 +57,7 @@ class NotificationController extends BaseController
 		foreach($notifications as $notification) {
 			$notification->setRead();
 		}
-		
+
 		return \redirect()->to('/notifications');
 	}
 }
