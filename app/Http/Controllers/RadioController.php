@@ -10,7 +10,8 @@ use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
 use App\Runis\Accounts\UserRepository;
 
-class RadioController extends BaseController {
+class RadioController extends BaseController
+{
 	/**
 	 * @var HistoryRepository
 	 */
@@ -39,7 +40,8 @@ class RadioController extends BaseController {
 	 * @param TimetableRepository $timetable
 	 * @param UserRepository      $users
 	 */
-	public function __construct(HistoryRepository $history, RequestRepository $requests, SessionRepository $sessions, TimetableRepository $timetable, UserRepository $users) {
+	public function __construct(HistoryRepository $history, RequestRepository $requests, SessionRepository $sessions, TimetableRepository $timetable, UserRepository $users)
+	{
 		$this->history = $history;
 		$this->requests = $requests;
 		$this->users = $users;
@@ -50,7 +52,8 @@ class RadioController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.radio');
 		$this->title(trans('radio.title'));
 		return $this->view('radio');
@@ -59,7 +62,8 @@ class RadioController extends BaseController {
 	/**
 	 * @return mixed
 	 */
-	public function getHistory() {
+	public function getHistory()
+	{
 		$historySet = $this->history->getRecentX();
 		$history = [];
 		foreach($historySet as $x => $value) {
@@ -74,17 +78,20 @@ class RadioController extends BaseController {
 	/**
 	 * @return mixed
 	 */
-	public function getTimetable() {
+	public function getTimetable()
+	{
 		$timetable = $this->timetable->getThisWeek();
 		$days = [];
 		$x = 0;
 		foreach($timetable as $time) {
-			if($time->dj_id > 0)
+			if($time->dj_id > 0) {
 				$days[$x][$time->hour] = $this->users->getById($time->dj_id)->display_name;
-			else
+			} else {
 				$days[$x][$time->hour] = "-";
-			if($time->hour == 23)
+			}
+			if($time->hour == 23) {
 				$x++;
+			}
 		}
 		return json_encode($days);
 	}
@@ -92,13 +99,16 @@ class RadioController extends BaseController {
 	/**
 	 * @return mixed
 	 */
-	public function getRequest() {
+	public function getRequest()
+	{
 		$response = ['response' => 0];
-		if(\Auth::check())
+		if(\Auth::check()) {
 			$response['response'] = 2;
+		}
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
-		if(empty($session))
+		if(empty($session)) {
 			$response['response'] = 1;
+		}
 		return $response;
 	}
 
@@ -107,7 +117,8 @@ class RadioController extends BaseController {
 	 *
 	 * @return string
 	 */
-	public function postRequest(RequestSong $form) {
+	public function postRequest(RequestSong $form)
+	{
 		$request = new Request;
 		$request->saveNew(\Auth::user()->id, $form->artist, $form->name, \Request::getClientIp(true), Request::STATUS_NEUTRAL);
 		return json_encode(['sent' => true]);
@@ -116,7 +127,8 @@ class RadioController extends BaseController {
 	/**
 	 * @return string
 	 */
-	public function getUpdate() {
+	public function getUpdate()
+	{
 		$song = $this->history->getLatest();
 		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => ''], 'dj' => '', 'message' => '', 'online' => true];
 		if(!empty($song)) {
