@@ -6,8 +6,8 @@ class LeaderPanel {
 	public constructor() {
 		this.elements = {
 			ban: {
-				username: "[rt-hook='leader.panel:ban.username']",
-				reason: "[rt-hook='leader.panel:ban.reason']"
+				username: "#ban-username",
+				reason: "#ban-reason"
 			},
 			modals: {
 				ban: "#modal-temp-ban-user",
@@ -28,6 +28,9 @@ class LeaderPanel {
 			}
 		};
 		this.hooks = {
+			ban: {
+				submit: "[rt-hook='leader.panel:ban.submit']"
+			},
 			chatbox: {
 				reason: "#chatbox-clear-reason",
 				confirm: "[rt-hook='leader.panel:chatbox.clear']"
@@ -37,18 +40,41 @@ class LeaderPanel {
 			},
 			mute: {
 				submit: "[rt-hook='leader.panel:mute.submit']"
-			},
-			ban: {
-				submit: "[rt-hook='leader.panel:ban.submit']"
 			}
 		};
 		this.paths = {
 			chatboxClear: '/staff/leader/clear-chatbox',
 			demote: '/staff/leader/demote',
 			mute: '/staff/leader/mute',
-			tempBan: '/staff/leader/temp-ban'
+			ban: '/staff/leader/temp-ban'
 		};
 		this.setup();
+	}
+
+	public ban() {
+		var username = $(this.elements.ban.username).val(),
+			reason = $(this.elements.ban.reason).val();
+		if(username.length > 0 && reason.length > 0) {
+			var data = {
+				username: username,
+				reason: reason
+			};
+			var results = utilities.postAJAX(this.paths.ban, data);
+			results.done(function(results: string) {
+				results = $.parseJSON(results);
+				if(results.done === true) {
+					leaderPanel.done("The user " + results.name + " was successfully temporarily banned.");
+				} else {
+					if(results.error === -1) {
+						leaderPanel.error("That user does not exist.");
+					} else {
+						leaderPanel.error("An unknown error occurred.");
+					}
+				}
+			});
+		} else {
+			this.error("All fields need to be completed.");
+		}
 	}
 
 	public chatboxClear() {

@@ -1,9 +1,12 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\RuneTime\Bans\Ban;
+use App\RuneTime\Bans\BanRepository;
 use App\RuneTime\Bans\IP;
 use App\RuneTime\Bans\IPRepository;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Auth\Guard;
+
 class BaseController extends Controller {
 	protected $bc = [];
 	protected $displayPageHeader = true;
@@ -69,19 +72,34 @@ class BaseController extends Controller {
 		$data['nav'] = $this->nav;
 		$data['title'] = $this->title;
 		$data['url'] = \Request::getPathInfo();
-		$this->updateCache();
-		$bans = new IPRepository(new IP);
-		$ban = $bans->getByIPActive(\Request::getClientIp());
-		if(!empty($ban)) {
-			if(\Auth::check())
+		if(\Auth::check()) {
+			$bans = new BanRepository(new Ban);
+			$ban = $bans->getByUserId(\Auth::user()->id);
+			if(!empty($ban)) {
+				$data['ban'] = $ban;
+				$data['bc'] = false;
+				$data['displayPageHeader'] = false;
+				$data['nav'] = 'navbar.home';
+				$data['time'] = \Carbon::createFromTimestamp($ban->time_ends)->diffForHumans();
+				$data['title'] = trans('navbar.home');
+				return \View::make('errors.banned', $data);
+			}
+		}
+
+		$ipBans = new IPRepository(new IP);
+		$ipBan = $ipBans->getByIPActive(\Request::getClientIp());
+		if(!empty($ipBan)) {
+			if(\Auth::check()) {
 				\Auth::logout();
-			$data['ban'] = $ban;
+			}
+			$data['ban'] = $ipBan;
 			$data['bc'] = false;
 			$data['displayPageHeader'] = false;
 			$data['nav'] = 'navbar.home';
 			$data['title'] = trans('navbar.home');
 			return \View::make('errors.ip_banned', $data);
 		}
+		$this->updateCache();
 		return \View::make($path, $data);
 	}
 

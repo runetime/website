@@ -12,6 +12,8 @@ class LeaderTempBanRequest extends Request {
 	public function rules()
 	{
 		return [
+			'username' => 'required',
+			'reason'   => 'required',
 		];
 	}
 

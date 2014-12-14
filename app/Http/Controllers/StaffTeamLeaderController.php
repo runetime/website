@@ -5,6 +5,7 @@ use App\Http\Requests\Staff\LeaderClearChatboxRequest;
 use App\Http\Requests\Staff\LeaderDemoteStaffRequest;
 use App\Http\Requests\Staff\LeaderMuteUserRequest;
 use App\Http\Requests\Staff\LeaderTempBanRequest;
+use App\RuneTime\Bans\Ban;
 use App\RuneTime\Bans\Mute;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
@@ -89,6 +90,19 @@ class StaffTeamLeaderController extends BaseController {
 	public function postTempBan(LeaderTempBanRequest $form)
 	{
 		$response = ['done' => false];
+		$user = $this->users->getByDisplayName($form->username);
+		if(!empty($user)) {
+			$ban = with(new Ban)->saveNew(\Auth::user()->id, $user->id, $form->reason,
+				\Carbon::now()->addDays(3)->timestamp);
+			if(!empty($ban)) {
+				$response['done'] = true;
+				$response['name'] = $user->display_name;
+			} else {
+				$response['error'] = -2;
+			}
+		} else {
+			$response['error'] = -1;
+		}
 		return json_encode($response);
 	}
 
