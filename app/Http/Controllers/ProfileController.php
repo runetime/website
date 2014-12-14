@@ -9,9 +9,9 @@ use App\Runis\Accounts\UserRepository;
 class ProfileController extends BaseController
 {
 	/**
-	 * @var UserRepository
+	 * @var PostRepository
 	 */
-	private $users;
+	private $posts;
 	/**
 	 * @var StatusRepository
 	 */
@@ -21,9 +21,9 @@ class ProfileController extends BaseController
 	 */
 	private $threads;
 	/**
-	 * @var PostRepository
+	 * @var UserRepository
 	 */
-	private $posts;
+	private $users;
 
 	/**
 	 * @param PostRepository   $posts
@@ -33,10 +33,10 @@ class ProfileController extends BaseController
 	 */
 	public function __construct(PostRepository $posts, StatusRepository $statuses, ThreadRepository $threads, UserRepository $users)
 	{
-		$this->users = $users;
+		$this->posts = $posts;
 		$this->statuses = $statuses;
 		$this->threads = $threads;
-		$this->posts = $posts;
+		$this->users = $users;
 	}
 
 	/**
