@@ -1,11 +1,13 @@
 <?php
 namespace App\RuneTime\Forum\Reports;
 use App\Runis\Core\EloquentRepository;
-class ReportRepository extends EloquentRepository {
+class ReportRepository extends EloquentRepository
+{
 	/**
 	 * @param Report $model
 	 */
-	public function __construct(Report $model) {
+	public function __construct(Report $model)
+	{
 		$this->model = $model;
 	}
 
@@ -14,7 +16,8 @@ class ReportRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByStatus($statusId) {
+	public function getByStatus($statusId)
+	{
 		return $this->model->
 			where('status_id', '=', $statusId)->
 			get();
@@ -25,7 +28,8 @@ class ReportRepository extends EloquentRepository {
 	 *
 	 * @return string
 	 */
-	public function convertType($type) {
+	public function convertType($type)
+	{
 		if(ctype_digit($type)) {
 			switch($type) {
 				case 0:
