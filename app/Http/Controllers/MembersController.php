@@ -5,7 +5,8 @@ use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 
-class MembersController extends BaseController {
+class MembersController extends BaseController
+{
 	/**
 	 * @var RoleRepository
 	 */
@@ -19,7 +20,8 @@ class MembersController extends BaseController {
 	 * @param RoleRepository $roles
 	 * @param UserRepository $users
 	 */
-	public function __construct(RoleRepository $roles, UserRepository $users) {
+	public function __construct(RoleRepository $roles, UserRepository $users)
+	{
 		$this->roles = $roles;
 		$this->users = $users;
 	}
@@ -33,7 +35,8 @@ class MembersController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex($searchRole = 'none', $searchPrefix = 'none', $searchOrder = 'none', $page = 1) {
+	public function getIndex($searchRole = 'none', $searchPrefix = 'none', $searchOrder = 'none', $page = 1)
+	{
 		$members = $this->users->getByOptions($searchRole, $searchPrefix, $searchOrder, $page);
 		$roles = $this->roles->getAll();
 		$prefixes = range('a', 'z');
