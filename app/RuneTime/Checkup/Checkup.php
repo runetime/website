@@ -2,7 +2,6 @@
 namespace App\RuneTime\Checkup;
 
 use App\Runis\Core\Entity;
-use App\Runis\Accounts\User as User;
 
 class Checkup extends Entity
 {
