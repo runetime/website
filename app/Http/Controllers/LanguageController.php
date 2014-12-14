@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
-class LanguageController extends BaseController {
+class LanguageController extends BaseController
+{
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getSet() {
+	public function getSet()
+	{
 		$languagesDone = ['en', 'no'];
 		$languagesWIP = ['es'];
 		$this->nav('navbar.runetime.runetime');
@@ -19,13 +21,15 @@ class LanguageController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function getChange($initials, $redirect = '') {
+	public function getChange($initials, $redirect = '')
+	{
 		$languagesDone = [
 			'en' => 'English',
 			'no' => 'Norweigian',
 		];
-		if(array_key_exists($initials, $languagesDone))
+		if(array_key_exists($initials, $languagesDone)) {
 			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', $initials);
+		}
 		return \redirect()->to('/' . $redirect);
 	}
 }
