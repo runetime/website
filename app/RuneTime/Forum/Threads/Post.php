@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
+
 use App\Runis\Core\Entity;
+
 class Post extends Entity
 {
 	protected $table = 'forum_posts';

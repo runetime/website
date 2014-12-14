@@ -1,10 +1,12 @@
 <?php
 namespace App\RuneTime\Forum\Subforums;
+
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\Runis\Core\Entity;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Post;
+
 class Subforum extends Entity
 {
 	protected $table = 'forum_subforums';

@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Forum\Tags;
+
 use App\Runis\Core\Entity;
+
 class Tag extends Entity
 {
 	protected $table = 'forum_tags';

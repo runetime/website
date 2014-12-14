@@ -1,7 +1,9 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
+
 use App\RuneTime\Forum\Subforums\Subforum;
 use App\Runis\Core\EloquentRepository;
+
 class ThreadRepository extends EloquentRepository
 {
 	/**

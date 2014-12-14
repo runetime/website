@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Forum\Polls;
+
 use App\Runis\Core\Entity;
+
 class Poll extends Entity
 {
 	protected $table = 'forum_polls';

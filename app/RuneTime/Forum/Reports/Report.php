@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Forum\Reports;
+
 use App\Runis\Core\Entity;
+
 class Report extends Entity
 {
 	protected $table = 'forum_reports';
