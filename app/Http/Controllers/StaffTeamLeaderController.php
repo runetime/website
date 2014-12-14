@@ -15,14 +15,6 @@ use App\Runis\Accounts\UserRoleRepository;
 class StaffTeamLeaderController extends BaseController
 {
 	/**
-	 * @var UserRepository
-	 */
-	private $users;
-	/**
-	 * @var UserRoleRepository
-	 */
-	private $userRoles;
-	/**
 	 * @var ChatRepository
 	 */
 	private $chats;
@@ -30,6 +22,14 @@ class StaffTeamLeaderController extends BaseController
 	 * @var RoleRepository
 	 */
 	private $roles;
+	/**
+	 * @var UserRepository
+	 */
+	private $users;
+	/**
+	 * @var UserRoleRepository
+	 */
+	private $userRoles;
 
 	/**
 	 * @param ChatRepository     $chats
@@ -39,10 +39,10 @@ class StaffTeamLeaderController extends BaseController
 	 */
 	public function __construct(ChatRepository $chats, RoleRepository $roles, UserRepository $users, UserRoleRepository $userRoles)
 	{
-		$this->users = $users;
-		$this->userRoles = $userRoles;
 		$this->chats = $chats;
 		$this->roles = $roles;
+		$this->users = $users;
+		$this->userRoles = $userRoles;
 	}
 
 	/**
