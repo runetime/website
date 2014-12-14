@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Runis\Accounts\UserRepository;
 use Illuminate\Http\Request;
 
-class GetController extends BaseController {
+class GetController extends BaseController
+{
 	/**
 	 * @var UserRepository
 	 */
@@ -13,7 +14,8 @@ class GetController extends BaseController {
 	/**
 	 * @param UserRepository   $users
 	 */
-	public function __construct(UserRepository $users) {
+	public function __construct(UserRepository $users)
+	{
 		$this->users = $users;
 	}
 
@@ -22,10 +24,13 @@ class GetController extends BaseController {
 	 *
 	 * @return string
 	 */
-	public function postEmail(Request $form) {
+	public function postEmail(Request $form)
+	{
 		$available = true;
-		if($this->users->getByEmail($form->email))
+		if($this->users->getByEmail($form->email)) {
 			$available = false;
+		}
+
 		return json_encode(['available' => $available]);
 	}
 
@@ -34,10 +39,13 @@ class GetController extends BaseController {
 	 *
 	 * @return string
 	 */
-	public function postDisplayName(Request $form) {
+	public function postDisplayName(Request $form)
+	{
 		$available = true;
-		if($this->users->getByDisplayName($form->display_name) || $this->users->getByDisplayName($form->display_name))
+		if($this->users->getByDisplayName($form->display_name) || $this->users->getByDisplayName($form->display_name)) {
 			$available = false;
+		}
+
 		return json_encode(['available' => $available]);
 	}
 
@@ -46,7 +54,8 @@ class GetController extends BaseController {
 	 *
 	 * @return string
 	 */
-	public function getHiscore($rsn) {
+	public function getHiscore($rsn)
+	{
 		return json_encode(\String::getHiscore($rsn));
 	}
 }
