@@ -68,8 +68,7 @@ class StatusController extends BaseController
 		}
 
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
 		$status->addPost($post);
 
@@ -102,10 +101,8 @@ class StatusController extends BaseController
 	public function postCreate(StatusCreateRequest $form)
 	{
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
-		$status = new Status;
-		$status = $status->saveNew(\Auth::user()->id, 0, Status::STATUS_PUBLISHED);
-		$post = new Post;
-		$post = $post->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
+		$status = with(new Status)->saveNew(\Auth::user()->id, 0, Status::STATUS_PUBLISHED);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
 		$status->addPost($post);
 
