@@ -9,7 +9,8 @@ use App\RuneTime\Messenger\MessageRepository;
 use App\RuneTime\Notifications\Notification;
 use App\Runis\Accounts\UserRepository;
 
-class MessengerController extends BaseController {
+class MessengerController extends BaseController
+{
 	/**
 	 * @var MessageRepository
 	 */
@@ -23,14 +24,16 @@ class MessengerController extends BaseController {
 	 * @param MessageRepository $messages
 	 * @param UserRepository    $users
 	 */
-	public function __construct(MessageRepository $messages, UserRepository $users) {
+	public function __construct(MessageRepository $messages, UserRepository $users)
+	{
 		$this->messages = $messages;
 		$this->users = $users;
 	}
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$messages = \Auth::user()->messages;
 		$this->nav('navbar.forums');
 		$this->title(trans('messenger.title'));
@@ -42,10 +45,12 @@ class MessengerController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getView($id) {
+	public function getView($id)
+	{
 		$message = $this->messages->getById($id);
-		if(!$message)
+		if(!$message) {
 			\App::abort(404);
+		}
 		$posts = $message->posts;
 		$this->bc(['messenger' => trans('messenger.title')]);
 		$this->nav('navbar.forums');
@@ -59,10 +64,12 @@ class MessengerController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postReply($id, ReplyRequest $form) {
+	public function postReply($id, ReplyRequest $form)
+	{
 		$message = $this->messages->getById($id);
-		if(!$message)
+		if(!$message) {
 			return \App::abort(404);
+		}
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
@@ -88,8 +95,9 @@ class MessengerController extends BaseController {
 		$to = '';
 		if($id > 0) {
 			$to = $this->users->getById($id);
-			if(!$to)
+			if(!$to) {
 				$to = '';
+			}
 		}
 		$this->bc(['messenger' => trans('messenger.title')]);
 		$this->nav(trans('forums.title'));
@@ -102,7 +110,8 @@ class MessengerController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postCreate(CreateRequest $form) {
+	public function postCreate(CreateRequest $form)
+	{
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$message = new Message;
 		$message = $message->saveNew(\Auth::user()->id, $form->title, 0, 0);
