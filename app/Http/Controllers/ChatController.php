@@ -13,7 +13,8 @@ use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
 use App\Runis\Accounts\UserRepository;
 
-class ChatController extends BaseController{
+class ChatController extends BaseController
+{
 	/**
 	 * @var ActionRepository
 	 */
@@ -42,7 +43,8 @@ class ChatController extends BaseController{
 	 * @param MuteRepository    $mutes
 	 * @param UserRepository    $users
 	 */
-	public function __construct(ActionRepository $actions, ChannelRepository $channels, ChatRepository $chat, MuteRepository $mutes, UserRepository $users){
+	public function __construct(ActionRepository $actions, ChannelRepository $channels, ChatRepository $chat, MuteRepository $mutes, UserRepository $users)
+	{
 		$this->actions = $actions;
 		$this->channels = $channels;
 		$this->chat = $chat;
@@ -53,7 +55,8 @@ class ChatController extends BaseController{
 	/**
 	 * @return string
 	 */
-	public function getChannels(){
+	public function getChannels()
+	{
 		$channels = $this->channels->getAll();
 		$channelList = [];
 		foreach($channels as $channel) {
@@ -64,6 +67,7 @@ class ChatController extends BaseController{
 			$channelCurrent->last_message = strtotime($message['created_at']);
 			array_push($channelList, $channelCurrent);
 		}
+
 		return json_encode(array_reverse($channelList));
 	}
 
@@ -72,12 +76,14 @@ class ChatController extends BaseController{
 	 *
 	 * @return array
 	 */
-	public function postCheckChannel(CheckChannelRequest $form){
+	public function postCheckChannel(CheckChannelRequest $form)
+	{
 		$channel = $this->channels->getByNameTrim($form->channel);
 		$response = ['valid' => false];
 		if($channel) {
 			$response['valid'] = true;
 		}
+
 		return json_encode($response);
 	}
 
@@ -86,7 +92,8 @@ class ChatController extends BaseController{
 	 *
 	 * @return string
 	 */
-	public function postMessage(MessageRequest $form){
+	public function postMessage(MessageRequest $form)
+	{
 		$response = ['done' => false];
 		if(\Auth::check()){
 			$mute = $this->mutes->getByUserActive(\Auth::user()->id);
@@ -113,6 +120,7 @@ class ChatController extends BaseController{
 						$status = Chat::STATUS_PINNED_INVISIBLE;
 					}
 				}
+
 				$contentsParsed = with(new \Parsedown)->text($contents);
 				with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, $status, $this->channels->getByNameTrim($form->channel)->id);
 				$channel = $this->channels->getByNameTrim($form->channel);
@@ -123,23 +131,28 @@ class ChatController extends BaseController{
 		} else {
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getModerator() {
+	public function getModerator()
+	{
 		$response = ['mod' => false];
-		if(\Auth::check() && \Auth::user()->isCommunity())
+		if(\Auth::check() && \Auth::user()->isCommunity()) {
 			$response['mod'] = true;
+		}
+
 		return json_encode($response);
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getPinned() {
+	public function getPinned()
+	{
 		if(\Auth::check() && \Auth::user()->isStaff()) {
 			$messages = $this->chat->getByStatus(Chat::STATUS_PINNED, '>=');
 		} else {
@@ -155,7 +168,8 @@ class ChatController extends BaseController{
 	 *
 	 * @return string
 	 */
-	public function postStart(StartRequest $form){
+	public function postStart(StartRequest $form)
+	{
 		$channel = $this->channels->getByNameTrim($form->channel);
 		if(\Auth::check() && \Auth::user()->isStaff()) {
 			$messages = $this->chat->getByChannel($channel->id, Chat::PER_PAGE, Chat::STATUS_VISIBLE, '>=');
@@ -178,6 +192,7 @@ class ChatController extends BaseController{
 			'pinned'   => $pinnedList,
 		];
 		$res = (object) $res;
+
 		return json_encode($res);
 	}
 
@@ -186,7 +201,8 @@ class ChatController extends BaseController{
 	 *
 	 * @return string
 	 */
-	public function postStatusChange(StatusChangeRequest $form) {
+	public function postStatusChange(StatusChangeRequest $form)
+	{
 		$response = ['done' => false];
 		$chat = $this->chat->getById($form->id);
 		if(!empty($chat)) {
@@ -196,6 +212,7 @@ class ChatController extends BaseController{
 		} else {
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 
@@ -204,10 +221,12 @@ class ChatController extends BaseController{
 	 *
 	 * @return string
 	 */
-	public function postUpdate(UpdateRequest $form){
+	public function postUpdate(UpdateRequest $form)
+	{
 		if($form->id <= 0) {
 			return json_encode([]);
 		}
+
 		if(\Auth::check() && \Auth::user()->isStaff()) {
 			$messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_INVISIBLE, '<=');
 		} else {
@@ -215,6 +234,7 @@ class ChatController extends BaseController{
 		}
 
 		$messageList = $this->sortMessages($messages);
+
 		return json_encode(array_reverse($messageList));
 	}
 
@@ -223,7 +243,8 @@ class ChatController extends BaseController{
 	 *
 	 * @return array
 	 */
-	private function sortMessages($messages) {
+	private function sortMessages($messages)
+	{
 		$messageList = [];
 		$users = [];
 		foreach($messages as $message) {
@@ -231,6 +252,7 @@ class ChatController extends BaseController{
 			if(!isset($users[$message->author_id])) {
 				$users[$message->author_id] = $this->users->getById($message->author_id);
 			}
+
 			$messageCurrent->id = $message->id;
 			$messageCurrent->author_name = $users[$message->author_id]->display_name;
 			$messageCurrent->class_name = $message->author->importantRole()->class_name;
@@ -240,6 +262,7 @@ class ChatController extends BaseController{
 			$messageCurrent->status = $message->status;
 			array_push($messageList, $messageCurrent);
 		}
+
 		return $messageList;
 	}
 }
