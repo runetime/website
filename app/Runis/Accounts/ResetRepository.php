@@ -13,6 +13,11 @@ class ResetRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param $token
+	 *
+	 * @return mixed
+	 */
 	public function getByToken($token)
 	{
 		return $this->model->
