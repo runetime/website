@@ -142,6 +142,7 @@ class BaseController extends Controller
 			if(ceil($key / 1000) <= $ago) {
 				unset($activity[$key]);
 			}
+			
 			if((\Auth::check() && $value['user'] === \Auth::user()->id) || $value['user'] === \Request::getClientIp()) {
 				unset($activity[$key]);
 			}
