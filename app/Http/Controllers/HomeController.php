@@ -13,6 +13,10 @@ class HomeController extends BaseController
 	 */
 	private $news;
 	/**
+	 * @var PostRepository
+	 */
+	private $posts;
+	/**
 	 * @var StatusRepository
 	 */
 	private $statuses;
@@ -20,22 +24,19 @@ class HomeController extends BaseController
 	 * @var ThreadRepository
 	 */
 	private $threads;
-	/**
-	 * @var PostRepository
-	 */
-	private $posts;
 
 	/**
 	 * @param NewsRepository   $news
+	 * @param PostRepository   $posts
 	 * @param StatusRepository $statuses
 	 * @param ThreadRepository $threads
 	 */
 	public function __construct(NewsRepository $news, PostRepository $posts, StatusRepository $statuses, ThreadRepository $threads)
 	{
 		$this->news = $news;
+		$this->posts = $posts;
 		$this->statuses = $statuses;
 		$this->threads = $threads;
-		$this->posts = $posts;
 	}
 
 	/**
