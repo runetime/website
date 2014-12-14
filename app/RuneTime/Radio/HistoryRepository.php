@@ -5,14 +5,17 @@ use App\Runis\Core\EloquentRepository;
  * Class HistoryRepository
  * @package App\RuneTime\Radio
  */
-class HistoryRepository extends EloquentRepository {
+class HistoryRepository extends EloquentRepository
+{
 	/**
 	 * @param History $model
 	 */
-	public function __construct(History $model) {
+	public function __construct(History $model)
+	{
 		$this->model = $model;
 	}
-	public function getLatest() {
+	public function getLatest()
+	{
 		return $this->model->
 			orderBy('id', 'desc')->
 			first();
@@ -21,7 +24,8 @@ class HistoryRepository extends EloquentRepository {
 	/**
 	 * @return mixed
 	 */
-	public function getCurrent() {
+	public function getCurrent()
+	{
 		return $this->getLatest();
 	}
 
@@ -30,7 +34,8 @@ class HistoryRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getRecentX($amount = History::DEFAULT_AMOUNT) {
+	public function getRecentX($amount = History::DEFAULT_AMOUNT)
+	{
 		return $this->model->
 			orderBy('id', 'desc')->
 			take($amount)->

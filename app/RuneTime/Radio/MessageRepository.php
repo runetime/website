@@ -5,15 +5,18 @@ use App\Runis\Core\EloquentRepository;
  * Class MessageRepository
  * @package App\RuneTime\Radio
  */
-class MessageRepository extends EloquentRepository {
+class MessageRepository extends EloquentRepository
+{
 	/**
 	 * @param Message $model
 	 */
-	public function __construct(Message $model) {
+	public function __construct(Message $model)
+	{
 		$this->model = $model;
 	}
 
-	public function getByUser($id) {
+	public function getByUser($id)
+	{
 		return $this->model->
 			where('author_id', '=', $id)->
 			get();

@@ -5,7 +5,8 @@ use App\Runis\Core\Entity;
  * Class Session
  * @package App\RuneTime\Radio
  */
-class Session extends Entity{
+class Session extends Entity
+{
 	protected $table = 'radio_sessions';
 	protected $with = [];
 	protected $fillable = ['dj_id', 'message_id', 'status'];
@@ -17,11 +18,13 @@ class Session extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function message() {
+	public function message()
+	{
 		return $this->belongsTo('App\RuneTime\Radio\Message', 'message_id');
 	}
 
-	public function dj() {
+	public function dj()
+	{
 		return $this->belongsTO('App\Runis\Accounts\User', 'dj_id');
 	}
 }

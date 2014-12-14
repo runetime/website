@@ -5,7 +5,8 @@ use App\Runis\Core\Entity;
  * Class Message
  * @package App\RuneTime\Radio
  */
-class Message extends Entity{
+class Message extends Entity
+{
 	protected $table = 'radio_messages';
 	protected $with = [];
 	protected $fillable = ['author_id', 'contents', 'contents_parsed'];
@@ -15,7 +16,8 @@ class Message extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 }
