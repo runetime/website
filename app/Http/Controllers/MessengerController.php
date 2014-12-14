@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Messenger\CreateRequest;
 use App\Http\Requests\Messenger\ReplyRequest;
 use App\RuneTime\Forum\Threads\Post;
@@ -7,10 +8,7 @@ use App\RuneTime\Messenger\Message;
 use App\RuneTime\Messenger\MessageRepository;
 use App\RuneTime\Notifications\Notification;
 use App\Runis\Accounts\UserRepository;
-/**
- * Class AboutController
- * @package App\Http\Controllers
- */
+
 class MessengerController extends BaseController {
 	/**
 	 * @var MessageRepository

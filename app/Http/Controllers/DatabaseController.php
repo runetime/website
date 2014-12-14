@@ -1,15 +1,13 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Databases\ItemCreateRequest;
 use App\Http\Requests\Databases\MonsterCreateRequest;
 use App\RuneTime\Databases\Item;
 use App\RuneTime\Databases\ItemRepository;
 use App\RuneTime\Databases\Monster;
 use App\RuneTime\Databases\MonsterRepository;
-/**
- * Class DatabaseController
- * @package App\Http\Controllers
- */
+
 class DatabaseController extends BaseController {
 	/**
 	 * @var ItemRepository

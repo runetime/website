@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-/**
- * Class TransparencyController
- * @package App\Http\Controllers
- */
+
 class TransparencyController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View

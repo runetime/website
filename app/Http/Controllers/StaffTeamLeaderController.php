@@ -12,6 +12,7 @@ use App\RuneTime\Chat\ChatRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 use App\Runis\Accounts\UserRoleRepository;
+
 class StaffTeamLeaderController extends BaseController {
 	/**
 	 * @var UserRepository

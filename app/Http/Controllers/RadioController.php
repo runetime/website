@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Radio\RequestSong;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Request;
@@ -9,10 +10,7 @@ use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
-/**
- * Class RadioController
- * @package App\Http\Controllers
- */
+
 class RadioController extends BaseController {
 	/**
 	 * @var HistoryRepository

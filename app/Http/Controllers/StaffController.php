@@ -11,6 +11,7 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Tickets\Ticket;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
+
 class StaffController extends BaseController {
 	/**
 	 * @var CheckupRepository

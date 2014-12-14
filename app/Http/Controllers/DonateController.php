@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 class DonateController extends BaseController{
 	/**
 	 * @return \Illuminate\View\View

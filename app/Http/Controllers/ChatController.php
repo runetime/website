@@ -13,10 +13,6 @@ use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
 use App\Runis\Accounts\UserRepository;
 
-/**
- * Class ChatController
- * @package App\Http\Controllers
- */
 class ChatController extends BaseController{
 	/**
 	 * @var ActionRepository

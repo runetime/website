@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\RuneTime\Awards\Award;
 use App\RuneTime\Awards\AwardRepository;
+
 class AwardController extends BaseController {
 	private $awards;
 

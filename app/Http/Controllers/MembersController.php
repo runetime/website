@@ -1,13 +1,10 @@
 <?php
 namespace App\Http\Controllers;
-namespace App\Http\Controllers;
+
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
-/**
- * Class MembersController
- * @package App\Http\Controllers
- */
+
 class MembersController extends BaseController {
 	/**
 	 * @var RoleRepository

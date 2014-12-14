@@ -1,15 +1,13 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Guides\LocationCreateRequest;
 use App\Http\Requests\Guides\QuestCreateRequest;
 use App\RuneTime\Guides\Location;
 use App\RuneTime\Guides\LocationRepository;
 use App\RuneTime\Guides\Quest;
 use App\RuneTime\Guides\QuestRepository;
-/**
- * Class GuideController
- * @package App\Http\Controllers
- */
+
 class GuideController extends BaseController {
 	/**
 	 * @var QuestRepository

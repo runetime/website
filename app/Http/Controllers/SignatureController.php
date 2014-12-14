@@ -1,11 +1,9 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Signatures\RSNRequest;
 use Intervention\Image\Gd\Font;
-/**
- * Class SignatureController
- * @package App\Http\Controllers
- */
+
 class SignatureController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View

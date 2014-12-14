@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\NameCheck\CheckRequest;
+
 class NameCheckerController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View

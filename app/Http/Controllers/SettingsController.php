@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+namespace App\Http\Controllers;
+
 use App\Http\Requests\Settings\AboutRequest;
 use App\Http\Requests\Settings\PasswordRequest;
 use App\Http\Requests\Settings\PhotoRequest;
@@ -7,10 +9,7 @@ use App\Http\Requests\Settings\RuneScapeRequest;
 use App\Http\Requests\Settings\SignatureRequest;
 use App\Http\Requests\Settings\SocialRequest;
 use App\Runis\Accounts\UserRepository;
-/**
- * Class SettingsController
- * @package App\Http\Controllers
- */
+
 class SettingsController extends BaseController {
 	/**
 	 * @var UserRepository

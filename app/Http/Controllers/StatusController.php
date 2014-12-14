@@ -7,6 +7,7 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\Vote;
 use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
+
 class StatusController extends BaseController {
 	/**
 	 * @var StatusRepository

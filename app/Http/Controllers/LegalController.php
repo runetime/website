@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 class LegalController extends BaseController {
 	public function getLegal($language) {
 		if($language == "english")

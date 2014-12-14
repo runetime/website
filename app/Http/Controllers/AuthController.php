@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
 use App\Http\Requests\Auth\PasswordEmailRequest;
@@ -11,10 +12,7 @@ use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 use App\Runis\Accounts\UserRole;
 use Illuminate\Contracts\Auth\PasswordBroker;
-/**
- * Class AuthController
- * @package App\Http\Controllers
- */
+
 class AuthController extends BaseController {
 	/**
 	 * @var PasswordBroker

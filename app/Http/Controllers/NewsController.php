@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\News\CreateNewsRequest;
 use App\Http\Requests\News\ReplyRequest;
 use App\RuneTime\Forum\Threads\Post;
@@ -8,6 +9,7 @@ use App\RuneTime\Forum\Tags\TagRepository;
 use App\RuneTime\News\News;
 use App\RuneTime\News\NewsRepository;
 use Illuminate\Contracts\Auth\Guard;
+
 class NewsController extends BaseController {
 	protected $auth;
 	protected $news;

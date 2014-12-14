@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Tickets\CreateReplyRequest;
 use App\Http\Requests\Tickets\CreateTicketRequest;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Tickets\TicketRepository;
+
 class TicketController extends BaseController {
 	/**
 	 * @var TicketRepository
