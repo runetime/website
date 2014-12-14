@@ -7,8 +7,7 @@ use App\Runis\Core\Exceptions\EntityNotFoundException;
 class UserRepository extends EloquentRepository
 {
 	/**
-	 * @param RoleRepository $roles
-	 * @param User           $model
+	 * @param User $model
 	 */
 	public function __construct(User $model)
 	{
