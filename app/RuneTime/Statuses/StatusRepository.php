@@ -1,11 +1,13 @@
 <?php
 namespace App\RuneTime\Statuses;
 use App\Runis\Core\EloquentRepository;
-class StatusRepository extends EloquentRepository {
+class StatusRepository extends EloquentRepository
+{
 	/**
 	 * @param Status $model
 	 */
-	public function __construct(Status $model) {
+	public function __construct(Status $model)
+	{
 		$this->model = $model;
 	}
 
@@ -14,7 +16,8 @@ class StatusRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getLatest($count = 5) {
+	public function getLatest($count = 5)
+	{
 		return $this->model->
 			where('status', '=', Status::STATUS_PUBLISHED)->
 			orderBy('created_at', 'desc')->
@@ -29,14 +32,16 @@ class StatusRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByAuthor($authorId, $amount = 1, $order = 'desc') {
+	public function getByAuthor($authorId, $amount = 1, $order = 'desc')
+	{
 		return $this->model->
 			where('author_id', '=', $authorId)->
 			orderBy('id', $order)->
 			take($amount)->
 			get();
 	}
-	public function getLatestByAuthor($authorId, $order = 'desc') {
+	public function getLatestByAuthor($authorId, $order = 'desc')
+	{
 		return $this->model->
 			where('author_id', '=', $authorId)->
 			orderBy('id', $order)->

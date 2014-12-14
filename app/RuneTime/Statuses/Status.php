@@ -2,7 +2,8 @@
 namespace App\RuneTime\Statuses;
 use App\RuneTime\Forum\Threads\Post;
 use App\Runis\Core\Entity;
-class Status extends Entity {
+class Status extends Entity
+{
 	protected $table = 'statuses';
 	protected $fillable = ['author_id', 'reply_count', 'status'];
 	protected $dates = [];
@@ -13,21 +14,24 @@ class Status extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function posts() {
+	public function posts()
+	{
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
 	}
 
 	/**
 	 * @param Post $post
 	 */
-	public function addPost(Post $post) {
+	public function addPost(Post $post)
+	{
 		$this->posts()->attach([$post->id]);
 		$this->incrementReplies();
 	}
@@ -35,12 +39,14 @@ class Status extends Entity {
 	/**
 	 *
 	 */
-	public function incrementReplies() {
+	public function incrementReplies()
+	{
 		$this->increment('reply_count');
 		$this->save();
 	}
 
-	public function toSlug() {
+	public function toSlug()
+	{
 		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name);
 	}
 }
