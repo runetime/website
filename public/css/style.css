@@ -4590,10 +4590,10 @@ button.close {
     bottom: 20px; }
  }
 
-.clearfix:before, .clearfix:after {
+.clearfix:before, .blocks:before, .clearfix:after, .blocks:after {
   content: " ";
   display: table; }
-.clearfix:after {
+.clearfix:after, .blocks:after {
   clear: both; }
 
 .center-block, .badge-novice-member, .badge-opal-member, .badge-jade-member, .badge-topaz-member, .badge-sapphire-member, .badge-emerald-member, .badge-ruby-member, .badge-diamond-member, .badge-dragonstone-member, .badge-onyx-member {
@@ -7704,7 +7704,10 @@ pre {
     text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center; }
+    align-items: center;
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em; }
     .blocks > div > a {
       display: flex;
       justify-content: center;

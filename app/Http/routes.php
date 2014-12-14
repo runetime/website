@@ -450,12 +450,22 @@ Route::group(['prefix' => 'staff'], function() {
 		 * Administrator Panel
 		 */
 		Route::group(['middleware' => 'staff.admin', 'prefix' => 'administrator'], function() {
-			get('/', 'StaffAdminController@getAdministratorIndex');
-			get('users', 'StaffAdminController@getAdministratorUsers');
-			get('ip-ban', 'StaffAdminController@getAdministratorIPBan');
-			post('ip-ban', 'StaffAdminController@postAdministratorIPBan');
-			get('checkup/view/{id}', 'StaffController@getCheckupView');
-			get('checkup/list', 'StaffController@getCheckupList');
+			get('/', 'StaffAdminController@getIndex');
+
+			Route::group(['prefix' => 'checkups'], function() {
+				get('/', 'StaffAdminController@getCheckupList');
+				get('{id}/view', 'StaffAdminController@getCheckupView');
+				post('mark-completed', 'StaffAdminController@postCheckupMark');
+			});
+
+			post('ip-ban', 'StaffAdminController@postIPBan');
+			post('radio-stop', 'StaffAdminController@postRadioStop');
+			post('staff-demote', 'StaffAdminController@postStaffDemote');
+
+			Route::group(['prefix' => 'users'], function() {
+				get('/', 'StaffAdminController@getUserList');
+				get('{id}-{name}', 'StaffAdminController@getUserView');
+			});
 		});
 
 		/**
@@ -483,6 +493,7 @@ Route::group(['prefix' => 'staff'], function() {
 			post('temp-ban', 'StaffTeamLeaderController@postTempBan');
 			post('mute', 'StaffTeamLeaderController@postMuteUser');
 			post('clear-chatbox', 'StaffTeamLeaderController@postClearChatbox');
+			post('chatbox-clear', 'StaffTeamLeaderController@postClearChatbox');
 		});
 	});
 });

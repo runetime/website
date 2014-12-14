@@ -27,6 +27,9 @@
 						</p>
 						<p>
 							@lang('radio.player.status'): <span id='radio-status' class='text-danger'><i id='power-button' class='fa fa-power-off'></i>@lang('radio.player.off')</span>
+						</p>
+						<p id='radio-status-message' class='text-info'>
+						</p>
 					</div>
 					<div class='col-xs-12 col-md-4'>
 						<h3 class='holo-text'>

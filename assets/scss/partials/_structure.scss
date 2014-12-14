@@ -236,6 +236,7 @@ pre {
 }
 
 .blocks {
+	@extend .clearfix;
 	width: 100%;
 	>div {
 		background:#474747;
@@ -245,6 +246,11 @@ pre {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		float: left;
+		margin: {
+			right: 1em;
+			bottom: 1em;
+		}
 		>a {
 			display: flex;
 			justify-content: center;

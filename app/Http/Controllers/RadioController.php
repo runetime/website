@@ -121,23 +121,36 @@ class RadioController extends BaseController {
 	 */
 	public function getUpdate() {
 		$song = $this->history->getLatest();
-		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => ''], 'dj' => '', 'message' => ''];
+		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => ''], 'dj' => '', 'message' => '', 'online' => true];
 		if(!empty($song)) {
 			$update['song']['name'] = $song->song;
 			$update['song']['artist'] = $song->artist;
 		}
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		if($session) {
-			if($session->message)
+			if($session->message) {
 				$update['message'] = $session->message->contents_parsed;
+			}
 			$user = $this->users->getById($session->dj->id);
-			if($user)
+			if($user) {
 				$update['dj'] = $user->display_name;
+			}
 		}
-		if(empty($session->message))
+		if(empty($session->message)) {
 			$update['message'] = -1;
-		if(\Auth::check())
+		}
+
+		if(\Auth::check()) {
 			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
+		}
+
+		$online = \Cache::get('radio.online');
+		if($online === true || $online === false) {
+			$update['online'] = (bool) $online;
+		} else {
+			\Cache::forever('radio.online', true);
+		}
+
 		return json_encode($update);
 	}
 }
