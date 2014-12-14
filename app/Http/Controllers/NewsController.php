@@ -45,7 +45,9 @@ class NewsController extends BaseController
 		if(\Auth::check() && \Auth::user()->isLeader()) {
 			$canAdd = true;
 		}
+
 		$news = $this->news->getRecentNews(5);
+
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('news.title'));
 		return $this->view('news.index', compact('news', 'canAdd'));
@@ -64,7 +66,9 @@ class NewsController extends BaseController
 		if(!\Auth::check() || !\Auth::user()->isCommunity()) {
 			$posts = $posts->where('status', '=', Post::STATUS_VISIBLE);
 		}
+
 		$posts = $posts->get();
+
 		$this->bc(['news' => trans('news.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('news.view.title', ['name' => $news->title]));
@@ -102,6 +106,7 @@ class NewsController extends BaseController
 			$thumbnail->resize((int) $w, (int) $h);
 			$thumbnail->save('./img/news/thumbnail/' . $news->id . '.png');
 		}
+
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
 			$tag = $this->tags->getByName($tagName);
@@ -112,6 +117,7 @@ class NewsController extends BaseController
 			}
 			$news->addTag($tag);
 		}
+
 		return \redirect()->to($news->toSlug());
 	}
 
@@ -127,10 +133,12 @@ class NewsController extends BaseController
 		if(empty($news)) {
 			\App::abort(404);
 		}
+
 		$parsedContents = with(new \Parsedown)->text($form->contents);
 		$post = with(new Post)->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$news->addPost($post);
 		$news->incrementPosts();
+
 		return \redirect()->to($news->toSlug('#comments'));
 	}
 }
