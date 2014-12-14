@@ -5,11 +5,20 @@ class LeaderPanel {
 	paths: any = {};
 	public constructor() {
 		this.elements = {
+			ban: {
+				username: "[rt-hook='leader.panel:ban.username']",
+				reason: "[rt-hook='leader.panel:ban.reason']"
+			},
 			modals: {
 				ban: "#modal-temp-ban-user",
 				chatbox: "#modal-clear-chatbox",
 				demote: "#modal-demote-member",
 				mute: "#modal-mute-user"
+			},
+			mute: {
+				reason: "#mute-reason",
+				time: "#mute-time",
+				username: "#mute-username"
 			},
 			results: {
 				good: "#modal-results-good",
@@ -27,13 +36,10 @@ class LeaderPanel {
 				data: "[rt-hook='leader.panel:demote.data']"
 			},
 			mute: {
-				username: "[rt-hook='leader.panel:mute.username']",
-				time: "[rt-hook='leader.panel:mute.time']",
-				reason: "[rt-hook='leader.panel:mute.reason']"
+				submit: "[rt-hook='leader.panel:mute.submit']"
 			},
-			tempBan: {
-				username: "[rt-hook='leader.panel:ban.username']",
-				reason: "[rt-hook='leader.panel:ban.reason']"
+			ban: {
+				submit: "[rt-hook='leader.panel:ban.submit']"
 			}
 		};
 		this.paths = {
@@ -109,12 +115,50 @@ class LeaderPanel {
 		$(this.elements.results.badMessage).html(reason);
 	}
 
+	private mute() {
+		var username = $(this.elements.mute.username).val(),
+			time = $(this.elements.mute.time).val(),
+			reason = $(this.elements.mute.reason).val();
+		if(username.length > 0 && time.length > 0 && reason.length > 0) {
+			var data = {
+				username: username,
+				time: time,
+				reason: reason
+			};
+			var results = utilities.postAJAX(this.paths.mute, data);
+			results.done(function(results: string) {
+				results = $.parseJSON(results);
+				if(results.done === true) {
+					leaderPanel.done("The user " + results.name + " has been successfully muted.");
+				} else {
+					if(results.error === -1) {
+						leaderPanel.error("That user does not exist.");
+					} else if(results.error === -2) {
+						leaderPanel.error("There was an unknown error while muting that user.");
+					} else if(results.error === -3) {
+						leaderPanel.error("You did not write a 'infinite' but did not write a number either.");
+					} else {
+						leaderPanel.error("There was an unknown error while muting that user.");
+					}
+				}
+			});
+		} else {
+			leaderPanel.error("All of the fields need to be completed.");
+		}
+	}
+
 	private setup() {
 		$(this.hooks.chatbox.confirm).click(function() {
 			leaderPanel.chatboxClear();
 		});
 		$(this.hooks.demote.data).click(function(e: any) {
 			leaderPanel.demote(e);
+		});
+		$(this.hooks.mute.submit).click(function() {
+			leaderPanel.mute();
+		});
+		$(this.hooks.ban.submit).click(function() {
+			leaderPanel.ban();
 		});
 	}
 }

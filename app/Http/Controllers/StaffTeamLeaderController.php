@@ -5,6 +5,7 @@ use App\Http\Requests\Staff\LeaderClearChatboxRequest;
 use App\Http\Requests\Staff\LeaderDemoteStaffRequest;
 use App\Http\Requests\Staff\LeaderMuteUserRequest;
 use App\Http\Requests\Staff\LeaderTempBanRequest;
+use App\RuneTime\Bans\Mute;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
 use App\Runis\Accounts\RoleRepository;
@@ -99,6 +100,31 @@ class StaffTeamLeaderController extends BaseController {
 	public function postMuteUser(LeaderMuteUserRequest $form)
 	{
 		$response = ['done' => false];
+		$user = $this->users->getByDisplayName($form->username);
+		if(!empty($user)) {
+			if(ctype_digit($form->time)) {
+				$hours = (int) $form->time;
+			} else {
+				if($form->time === "infinite") {
+					$hours = 42000;
+				} else {
+					return json_encode([
+						'done' => false,
+						'error' => -3
+					]);
+				}
+			}
+			$contentsParsed = with(new \Parsedown)->text($form->reason);
+			$mute = with(new Mute)->saveNew(\Auth::user()->id, $user->id, $form->reason, $contentsParsed, time(), \Carbon::now()->addHours($hours)->timestamp);
+			if(!empty($mute)) {
+				$response['done'] = true;
+				$response['name'] = $user->display_name;
+			} else {
+				$response['error'] = -2;
+			}
+		} else {
+			$response['error'] = -1;
+		}
 		return json_encode($response);
 	}
 

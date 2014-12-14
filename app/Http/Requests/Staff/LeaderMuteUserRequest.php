@@ -12,6 +12,9 @@ class LeaderMuteUserRequest extends Request {
 	public function rules()
 	{
 		return [
+			'username' => 'required',
+			'time'     => 'required',
+			'reason'   => 'required',
 		];
 	}
 
