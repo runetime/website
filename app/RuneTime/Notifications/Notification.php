@@ -1,7 +1,8 @@
 <?php
 namespace App\RuneTime\Notifications;
 use App\Runis\Core\Entity;
-class Notification extends Entity {
+class Notification extends Entity
+{
 	protected $table = 'notifications';
 	protected $with = [];
 	protected $fillable = ['user_id', 'section', 'contents_parsed', 'status'];
@@ -13,11 +14,13 @@ class Notification extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function user() {
+	public function user()
+	{
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'user_id');
 	}
 
-	public function setRead() {
+	public function setRead()
+	{
 		$this->status = self::STATUS_READ;
 		$this->save();
 	}
