@@ -468,7 +468,7 @@ class ForumController extends BaseController
 		$thread = $this->threads->getById($post->thread[0]->id);
 		$post->status = Post::STATUS_INVISIBLE;
 		$post->save();
-		
+
 		return \redirect()->to($thread->toSlug());
 	}
 }
