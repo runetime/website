@@ -3,7 +3,8 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
-class LeaderDemoteStaffRequest extends Request {
+class LeaderDemoteStaffRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

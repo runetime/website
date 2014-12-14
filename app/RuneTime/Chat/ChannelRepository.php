@@ -1,18 +1,23 @@
 <?php
 namespace App\RuneTime\Chat;
+
 use App\Runis\Core\EloquentRepository;
-class ChannelRepository extends EloquentRepository{
+
+class ChannelRepository extends EloquentRepository
+{
 	/**
 	 * @param Channel $model
 	 */
-	public function __construct(Channel $model) {
+	public function __construct(Channel $model)
+	{
 		$this->model = $model;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getAll() {
+	public function getAll()
+	{
 		return $this->model->
 			orderBy('messages', 'asc')->
 			get();
@@ -23,7 +28,8 @@ class ChannelRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByName($name) {
+	public function getByName($name)
+	{
 		return $this->model->
 			where('name', '=', $name)->
 			first();
@@ -34,7 +40,8 @@ class ChannelRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByNameTrim($nameTrim) {
+	public function getByNameTrim($nameTrim)
+	{
 		return $this->model->
 			where('name_trim', '=', $nameTrim)->
 			first();

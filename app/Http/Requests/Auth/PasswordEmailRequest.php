@@ -3,7 +3,8 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\Request;
 
-class PasswordEmailRequest extends Request {
+class PasswordEmailRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

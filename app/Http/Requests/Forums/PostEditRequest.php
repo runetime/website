@@ -3,7 +3,8 @@ namespace App\Http\Requests\Forums;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostEditRequest extends FormRequest {
+class PostEditRequest extends FormRequest
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

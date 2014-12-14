@@ -3,7 +3,8 @@ namespace App\Http\Requests\Tickets;
 
 use App\Http\Requests\Request;
 
-class CreateTicketRequest extends Request {
+class CreateTicketRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

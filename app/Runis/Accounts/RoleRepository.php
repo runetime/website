@@ -5,6 +5,9 @@ use App\Runis\Core\EloquentRepository;
 
 class RoleRepository extends EloquentRepository
 {
+	/**
+	 * @param Role $model
+	 */
 	public function __construct(Role $model)
 	{
 		$this->model = $model;

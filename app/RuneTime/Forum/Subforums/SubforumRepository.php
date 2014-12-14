@@ -1,11 +1,15 @@
 <?php
 namespace App\RuneTime\Forum\Subforums;
+
 use App\Runis\Core\EloquentRepository;
-class SubforumRepository extends EloquentRepository {
+
+class SubforumRepository extends EloquentRepository
+{
 	/**
 	 * @param Subforum $model
 	 */
-	public function __construct(Subforum $model) {
+	public function __construct(Subforum $model)
+	{
 		$this->model = $model;
 	}
 
@@ -14,7 +18,8 @@ class SubforumRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByParent($id) {
+	public function getByParent($id)
+	{
 		return $this->model->
 			where('parent', $id)->
 			get();
@@ -26,7 +31,8 @@ class SubforumRepository extends EloquentRepository {
 	 *
 	 * @return bool
 	 */
-	public function updateLastPost($postId, $subforumId) {
+	public function updateLastPost($postId, $subforumId)
+	{
 		$subforum = $this->model->
 			where('id', '=', $subforumId)->
 			first();
@@ -34,12 +40,12 @@ class SubforumRepository extends EloquentRepository {
 			if(!empty($subforum)) {
 				$subforum->last_post = $postId;
 				$subforum->save();
-				if($subforum->parent > 0)
+				if($subforum->parent > 0) {
 					$subforum = Subforum::find($subforum->parent);
-				else
+				} else {
 					break;
-			}
-			else{
+				}
+			} else{
 				break;
 			}
 		}
@@ -49,38 +55,40 @@ class SubforumRepository extends EloquentRepository {
 	/**
 	 * @param $subforumId
 	 */
-	public function incrementPosts($subforumId) {
+	public function incrementPosts($subforumId)
+	{
 		$subforum = $this->model->
 			where('id', '=', $subforumId)->
 			first();
-		while(true){
-			if(!empty($subforum)){
+		while(true) {
+			if(!empty($subforum)) {
 				$subforum->increment('post_count');
 				$subforum->save();
 				$subforum = $this->model->
 					where('id', '=', $subforum->parent)->
 					first();
-			}
-			else
+			} else {
 				break;
+			}
 		}
 	}
 
 	/**
 	 * @param $subforumId
 	 */
-	public function incrementThreads($subforumId) {
+	public function incrementThreads($subforumId)
+	{
 		$subforum = $this->model->
 			where('id', '=', $subforumId)->
 			first();
-		while(true){
-			if(!empty($subforum)){
+		while(true) {
+			if(!empty($subforum)) {
 				$subforum->increment('thread_count');
 				$subforum->save();
 				$subforum = Subforum::find($subforum->parent);
-			}
-			else
+			} else {
 				break;
+			}
 		}
 	}
 }

@@ -3,7 +3,8 @@ namespace App\Http\Requests\Databases;
 
 use App\Http\Requests\Request;
 
-class ItemCreateRequest extends Request {
+class ItemCreateRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

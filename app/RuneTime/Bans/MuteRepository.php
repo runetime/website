@@ -3,7 +3,8 @@ namespace App\RuneTime\Bans;
 
 use App\Runis\Core\EloquentRepository;
 
-class MuteRepository extends EloquentRepository {
+class MuteRepository extends EloquentRepository
+{
 	/**
 	 * @param Mute $model
 	 */

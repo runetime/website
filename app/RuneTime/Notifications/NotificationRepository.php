@@ -1,11 +1,15 @@
 <?php
 namespace App\RuneTime\Notifications;
+
 use App\Runis\Core\EloquentRepository;
-class NotificationRepository extends EloquentRepository{
+
+class NotificationRepository extends EloquentRepository
+{
 	/**
 	 * @param Notification $model
 	 */
-	public function __construct(Notification $model) {
+	public function __construct(Notification $model)
+	{
 		$this->model = $model;
 	}
 
@@ -15,7 +19,8 @@ class NotificationRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getAllByUser($userId, $order = 'asc') {
+	public function getAllByUser($userId, $order = 'asc')
+	{
 		return $this->model->
 			where('user_id', '=', $userId)->
 			orderBy('id', $order)->
@@ -29,7 +34,8 @@ class NotificationRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getXByUser($userId, $amount = 5, $order = 'asc') {
+	public function getXByUser($userId, $amount = 5, $order = 'asc')
+	{
 		return $this->model->
 			where('user_id', '=', $userId)->
 			orderBy('id', $order)->
@@ -44,7 +50,8 @@ class NotificationRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getStatusByUser($userId, $statusId, $order = 'desc') {
+	public function getStatusByUser($userId, $statusId, $order = 'desc')
+	{
 		return $this->model->
 			where('user_id', '=', $userId)->
 			where('status', '=', $statusId)->
@@ -52,13 +59,16 @@ class NotificationRepository extends EloquentRepository{
 			get();
 	}
 
-	public function getCountByUser($userId, $section = '', $status = Notification::STATUS_UNREAD) {
+	public function getCountByUser($userId, $section = '', $status = Notification::STATUS_UNREAD)
+	{
 		$query = $this->model->
 			where('user_id', '=', $userId);
-		if(!empty($section))
+		if(!empty($section)) {
 			$query = $query->where('section', '=', $section);
-		if(!empty($status))
+		}
+		if(!empty($status)) {
 			$query = $query->where('status', '=', $status);
+		}
 		return $query->count();
 	}
 }

@@ -3,7 +3,8 @@ namespace App\Http\Requests\Chat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StatusChangeRequest extends FormRequest {
+class StatusChangeRequest extends FormRequest
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

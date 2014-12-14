@@ -1,7 +1,10 @@
 <?php
 namespace App\RuneTime\Event;
+
 use App\Runis\Core\Entity;
-class Calendar extends Entity {
+
+class Calendar extends Entity
+{
 	protected $table = 'calendar_calendars';
 	protected $fillable = ['title', 'status'];
 	protected $dates = [];

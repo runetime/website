@@ -3,7 +3,8 @@ namespace App\Http\Requests\Messenger;
 
 use App\Http\Requests\Request;
 
-class ReplyRequest extends Request {
+class ReplyRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

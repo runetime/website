@@ -1,11 +1,10 @@
 <?php
 namespace App\RuneTime\Radio;
+
 use App\Runis\Core\Entity;
-/**
- * Class Timetable
- * @package App\RuneTime\Radio
- */
-class Timetable extends Entity{
+
+class Timetable extends Entity
+{
 	protected $table = 'radio_timetables';
 	protected $with = [];
 	protected $fillable = ['dj_id', 'year', 'day', 'hour'];
@@ -15,7 +14,8 @@ class Timetable extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function dj() {
+	public function dj()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'dj_id');
 	}
 }

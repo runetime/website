@@ -1,15 +1,15 @@
 <?php
 namespace App\RuneTime\Chat;
+
 use App\Runis\Core\EloquentRepository;
-/**
- * Class ChatRepository
- * @package App\RuneTime\Chat
- */
-class ChatRepository extends EloquentRepository {
+
+class ChatRepository extends EloquentRepository
+{
 	/**
 	 * @param Chat $model
 	 */
-	public function __construct(Chat $model) {
+	public function __construct(Chat $model)
+	{
 		$this->model = $model;
 	}
 
@@ -18,7 +18,8 @@ class ChatRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getX($amount) {
+	public function getX($amount)
+	{
 		return $this->model->
 			orderBy('id', 'desc')->
 			take($amount)->
@@ -30,7 +31,8 @@ class ChatRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByCreatedAt($time) {
+	public function getByCreatedAt($time)
+	{
 		return $this->model->
 			where('created_at', '>', $time)->
 			get();
@@ -44,7 +46,8 @@ class ChatRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByChannel($channelId, $amount, $status = Chat::STATUS_VISIBLE, $op = '=') {
+	public function getByChannel($channelId, $amount, $status = Chat::STATUS_VISIBLE, $op = '=')
+	{
 		return $this->model->
 			where('channel', '=', $channelId)->
 			where('status', $op, $status)->
@@ -53,7 +56,8 @@ class ChatRepository extends EloquentRepository {
 			get();
 	}
 
-	public function getLatest() {
+	public function getLatest()
+	{
 		return $this->model->
 			orderBy('id', 'desc')->
 			first();
@@ -64,7 +68,8 @@ class ChatRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getLatestByChannel($channelId) {
+	public function getLatestByChannel($channelId)
+	{
 		return $this->model->
 			where('channel', '=', $channelId)->
 			orderBy('id', 'desc')->
@@ -76,7 +81,8 @@ class ChatRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getAfterId($id) {
+	public function getAfterId($id)
+	{
 		$message = $this->model->
 			where('id', '=', $id)->
 			first();
@@ -93,7 +99,8 @@ class ChatRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getAfterIdByStatus($id, $status = Chat::STATUS_VISIBLE, $op = '=') {
+	public function getAfterIdByStatus($id, $status = Chat::STATUS_VISIBLE, $op = '=')
+	{
 		$message = $this->model->
 			where('id', '=', $id)->
 			first();
@@ -107,15 +114,17 @@ class ChatRepository extends EloquentRepository {
 	/**
 	 * @param bool $actuallyDo
 	 */
-	public function setAllInvisible($actuallyDo = false) {
-		if($actuallyDo === true)
-			$this->model->
-				update([
-					'status' => Chat::STATUS_INVISIBLE
-				]);
+	public function setAllInvisible($actuallyDo = false)
+	{
+		if($actuallyDo === true) {
+			$this->model->update([
+				'status' => Chat::STATUS_INVISIBLE
+			]);
+		}
 	}
 
-	public function getByStatus($status, $op = '=') {
+	public function getByStatus($status, $op = '=')
+	{
 		return $this->model->
 			where('status', $op, $status)->
 			orderBy('created_at', 'desc')->

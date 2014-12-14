@@ -1,15 +1,15 @@
 <?php
 namespace App\RuneTime\Radio;
+
 use App\Runis\Core\EloquentRepository;
-/**
- * Class RequestRepository
- * @package App\RuneTime\Radio
- */
-class RequestRepository extends EloquentRepository {
+
+class RequestRepository extends EloquentRepository
+{
 	/**
 	 * @param Request $model
 	 */
-	public function __construct(Request $model) {
+	public function __construct(Request $model)
+	{
 		$this->model = $model;
 	}
 
@@ -18,7 +18,8 @@ class RequestRepository extends EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getByUser($id) {
+	public function getByUser($id)
+	{
 		return $this->model->
 			where('author_id', '=', $id)->
 			get();

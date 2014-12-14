@@ -6,10 +6,13 @@ use App\Runis\Core\Exceptions\EntityNotFoundException;
 
 abstract class EloquentRepository
 {
+	/**
+	 * @var null
+	 */
 	protected $model;
 
 	/**
-	 * @param null $mode
+	 * @param null $model
 	 */
 	public function __construct($model = null)
 	{

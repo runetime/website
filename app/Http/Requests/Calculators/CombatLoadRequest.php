@@ -3,7 +3,8 @@ namespace App\Http\Requests\Calculators;
 
 use App\Http\Requests\Request;
 
-class CombatLoadRequest extends Request {
+class CombatLoadRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

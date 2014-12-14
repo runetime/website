@@ -3,7 +3,8 @@ namespace App\Http\Requests\Forums;
 
 use App\Http\Requests\Request;
 
-class PostVoteRequest extends Request {
+class PostVoteRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

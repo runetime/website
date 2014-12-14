@@ -1,7 +1,10 @@
 <?php
 namespace App\RuneTime\Calculators;
+
 use App\Runis\Core\Entity;
-class Calculator extends Entity{
+
+class Calculator extends Entity
+{
 	protected $table = 'calculators';
 	protected $fillable = [];
 	protected $dates = [];

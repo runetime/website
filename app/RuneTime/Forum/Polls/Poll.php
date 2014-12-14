@@ -1,7 +1,10 @@
 <?php
 namespace App\RuneTime\Forum\Polls;
+
 use App\Runis\Core\Entity;
-class Poll extends Entity {
+
+class Poll extends Entity
+{
 	protected $table = 'forum_polls';
 	protected $with = [];
 	protected $fillable = ['thread_id', 'questions'];
@@ -13,14 +16,16 @@ class Poll extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function thread() {
+	public function thread()
+	{
 		return $this->belongsTo('App\RuneTime\Forum\Threads\Thread', 'thread_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function answers() {
+	public function answers()
+	{
 		return $this->hasMany('App\RuneTime\Forum\Polls\Answer');
 	}
 }

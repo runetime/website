@@ -1,7 +1,10 @@
 <?php
 namespace App\RuneTime\Forum\Polls;
+
 use App\Runis\Core\Entity;
-class Answer extends Entity {
+
+class Answer extends Entity
+{
 	protected $table = 'forum_poll_answers';
 	protected $with = [];
 	protected $fillable = ['author_id', 'poll_id', 'answers'];
@@ -13,14 +16,16 @@ class Answer extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function poll() {
+	public function poll()
+	{
 		return $this->belongsTo('App\RuneTime\Forum\Polls\Poll', 'poll_id');
 	}
 }

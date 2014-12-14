@@ -1,7 +1,10 @@
 <?php
 namespace App\RuneTime\Forum\Reports;
+
 use App\Runis\Core\Entity;
-class Report extends Entity {
+
+class Report extends Entity
+{
 	protected $table = 'forum_reports';
 	protected $with = [];
 	protected $fillable = ['author_id', 'reported_id', 'type_id', 'status_id'];
@@ -16,42 +19,48 @@ class Report extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function posts() {
+	public function posts()
+	{
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
 	}
 
 	/**
 	 * @param Post $post
 	 */
-	public function addPost($post) {
+	public function addPost($post)
+	{
 		$this->posts()->attach([$post->id]);
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function thread() {
+	public function thread()
+	{
 		return $this->belongsTo('App\RuneTime\Forum\Threads\Thread', 'reported_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function post() {
+	public function post()
+	{
 		return $this->belongsTo('App\RuneTime\Forum\Threads\Post', 'reported_id');
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getStatus() {
+	public function getStatus()
+	{
 		switch($this->status_id) {
 			case 0:
 				return 'open';

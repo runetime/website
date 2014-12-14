@@ -3,18 +3,20 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignupRequest extends FormRequest {
+class SignupRequest extends FormRequest
+{
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
 	 * @return array
 	 */
-	public function rules(){
+	public function rules()
+	{
 		return [
-			'display_name'=>'required',
-			'email'       =>'required|email',
-			'password'    =>'required',
-			'password2'   =>'required',
+			'display_name' => 'required',
+			'email'        => 'required|email',
+			'password'     => 'required',
+			'password2'    => 'required',
 		];
 	}
 	/**
@@ -22,7 +24,8 @@ class SignupRequest extends FormRequest {
 	 *
 	 * @return bool
 	 */
-	public function authorize(){
+	public function authorize()
+	{
 		return true;
 	}
 }

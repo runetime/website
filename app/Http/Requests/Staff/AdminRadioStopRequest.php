@@ -3,7 +3,8 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
-class AdminRadioStopRequest extends Request {
+class AdminRadioStopRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

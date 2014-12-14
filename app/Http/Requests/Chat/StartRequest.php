@@ -3,7 +3,8 @@ namespace App\Http\Requests\Chat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StartRequest extends FormRequest {
+class StartRequest extends FormRequest
+{
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -13,7 +14,7 @@ class StartRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'channel'=>'required',
+			'channel' => 'required',
 		];
 	}
 

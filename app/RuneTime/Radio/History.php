@@ -1,11 +1,10 @@
 <?php
 namespace App\RuneTime\Radio;
+
 use App\Runis\Core\Entity;
-/**
- * Class History
- * @package App\RuneTime\Radio
- */
-class History extends Entity{
+
+class History extends Entity
+{
 	protected $table = 'radio_history';
 	protected $with = [];
 	protected $fillable = ['user_id', 'artist', 'song'];
@@ -16,7 +15,8 @@ class History extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function user() {
+	public function user()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
 	}
 }

@@ -1,11 +1,10 @@
 <?php
 namespace App\RuneTime\Radio;
+
 use App\Runis\Core\Entity;
-/**
- * Class Request
- * @package App\RuneTime\Radio
- */
-class Request extends Entity{
+
+class Request extends Entity
+{
 	protected $table = 'radio_requests';
 	protected $with = [];
 	protected $fillable = ['author_id', 'song_artist', 'song_name', 'ip_address', 'status'];
@@ -18,7 +17,8 @@ class Request extends Entity{
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 }

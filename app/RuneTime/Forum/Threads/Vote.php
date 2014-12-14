@@ -1,7 +1,10 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
+
 use App\Runis\Core\Entity;
-class Vote extends Entity {
+
+class Vote extends Entity
+{
 	protected $table = 'forum_votes';
 	protected $with = [];
 	protected $fillable = ['author_id', 'post_id', 'status'];
@@ -14,14 +17,16 @@ class Vote extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function post() {
+	public function post()
+	{
 		return $this->belongsTo('App\RuneTime\Forum\Threads\Post', 'post_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
 	}
 }
