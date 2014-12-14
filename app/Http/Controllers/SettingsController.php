@@ -10,7 +10,8 @@ use App\Http\Requests\Settings\SignatureRequest;
 use App\Http\Requests\Settings\SocialRequest;
 use App\Runis\Accounts\UserRepository;
 
-class SettingsController extends BaseController {
+class SettingsController extends BaseController
+{
 	/**
 	 * @var UserRepository
 	 */
@@ -19,14 +20,16 @@ class SettingsController extends BaseController {
 	/**
 	 * @param UserRepository $users
 	 */
-	public function __construct(UserRepository $users) {
+	public function __construct(UserRepository $users)
+	{
 		$this->users = $users;
 	}
 
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$h = \Lang::get('settings.profile.timezone.hours');
 		$timezoneOptions = [
 			'-12'   => '(UTC-12:00 ' . $h . ') Enitwetok, Kwajalien',
@@ -81,7 +84,8 @@ class SettingsController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postIndex(ProfileRequest $form) {
+	public function postIndex(ProfileRequest $form)
+	{
 		$user = $this->users->getById(\Auth::user()->id);
 		$referred = $this->users->getByDisplayName($form->referred_by);
 		$birthday = $user->birthday;
@@ -99,7 +103,8 @@ class SettingsController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getPhoto() {
+	public function getPhoto()
+	{
 		$thisURL = '/settings/photo';
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
@@ -112,13 +117,15 @@ class SettingsController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPhoto(PhotoRequest $form) {
+	public function postPhoto(PhotoRequest $form)
+	{
 		$file = \Request::file('photo');
 		if(substr($file->getMimeType(), 0, 6) == 'image/') {
 			$img = \Img::make($form->file('photo'));
 			$path = './img/forums/photos/' . \Auth::user()->id . '.png';
-			if(file_exists($path))
+			if(file_exists($path)) {
 				unlink($path);
+			}
 			$img->save($path);
 		}
 		return \redirect()->to('/settings/photo');
@@ -127,7 +134,8 @@ class SettingsController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getPassword() {
+	public function getPassword()
+	{
 		$thisURL = '/settings/password';
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
@@ -140,7 +148,8 @@ class SettingsController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPassword(PasswordRequest $form) {
+	public function postPassword(PasswordRequest $form)
+	{
 		$user = $this->users->getById(\Auth::user()->id);
 		if(\Auth::validate(['email' => \Auth::user()->email, 'password' => $form->current])) {
 			$user->password = \Hash::make($form->new);
@@ -154,7 +163,8 @@ class SettingsController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getAbout() {
+	public function getAbout()
+	{
 		$thisURL = '/settings/about/me';
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
@@ -167,7 +177,8 @@ class SettingsController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postAbout(AboutRequest $form) {
+	public function postAbout(AboutRequest $form)
+	{
 		$user = $this->users->getById(\Auth::user()->id);
 		$user->about = $form->contents;
 		$user->about_parsed = with(new \Parsedown)->text($form->contents);
@@ -178,7 +189,8 @@ class SettingsController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getSignature() {
+	public function getSignature()
+	{
 		$thisURL = '/settings/signature';
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
@@ -191,7 +203,8 @@ class SettingsController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postSignature(SignatureRequest $form) {
+	public function postSignature(SignatureRequest $form)
+	{
 		$user = $this->users->getById(\Auth::user()->id);
 		$user->signature = $form->contents;
 		$user->signature_parsed = with(new \Parsedown)->text($form->contents);
@@ -202,7 +215,8 @@ class SettingsController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getSocial() {
+	public function getSocial()
+	{
 		$thisURL = '/settings/social';
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
@@ -215,7 +229,8 @@ class SettingsController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postSocial(SocialRequest $form) {
+	public function postSocial(SocialRequest $form)
+	{
 		$user = $this->users->getById(\Auth::user()->id);
 		$user->social_twitter = $form->twitter;
 		$user->social_facebook = $form->facebook;
@@ -229,7 +244,8 @@ class SettingsController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getRuneScape() {
+	public function getRuneScape()
+	{
 		$versions = [
 			'Old-School',
 			'RuneScape 3',
@@ -258,7 +274,8 @@ class SettingsController extends BaseController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postRuneScape(RuneScapeRequest $form) {
+	public function postRuneScape(RuneScapeRequest $form
+	{
 		$user = $this->users->getById(\Auth::user()->id);
 		$versions = [
 			'Old-School',
@@ -276,10 +293,12 @@ class SettingsController extends BaseController {
 			'Bandos (Deceased)',
 			'Guthix (Deceased)',
 		];
-		if(in_array($form->version, $versions))
+		if(in_array($form->version, $versions)) {
 			$user->runescape_version = $form->version;
-		if(in_array($form->allegiance, $allegiances))
+		}
+		if(in_array($form->allegiance, $allegiances)) {
 			$user->runescape_allegiance = $form->allegiance;
+		}
 		$user->runescape_rsn = $form->rsn;
 		$user->runescape_clan = $form->clan;
 		$user->save();
