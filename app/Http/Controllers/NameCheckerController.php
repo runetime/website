@@ -23,6 +23,7 @@ class NameCheckerController extends BaseController
 	public function postCheck(CheckRequest $form)
 	{
 		$url = 'http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $form->rsn;
+
 		return \String::CURL($url);
 	}
 }
