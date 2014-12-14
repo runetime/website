@@ -224,6 +224,7 @@ class ForumController extends BaseController
 		if(empty($subforum)) {
 			abort(404);
 		}
+
 		$poll = [];
 		if(!empty($form->questions)) {
 			foreach($form->questions as $key => $question) {
