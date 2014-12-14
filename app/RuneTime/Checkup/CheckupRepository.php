@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Checkup;
+
 use App\Runis\Core\EloquentRepository;
-/**
- * Class CheckupRepository
- * @package App\RuneTime\Chat
- */
+
 class CheckupRepository extends EloquentRepository
 {
 	/**

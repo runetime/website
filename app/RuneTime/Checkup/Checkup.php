@@ -1,11 +1,9 @@
 <?php
 namespace App\RuneTime\Checkup;
+
 use App\Runis\Core\Entity;
 use App\Runis\Accounts\User as User;
-/**
- * Class Checkup
- * @package App\RuneTime\Checkup
- */
+
 class Checkup extends Entity
 {
 	protected $table = 'staff_checkup';
