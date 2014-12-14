@@ -3,11 +3,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NameCheck\CheckRequest;
 
-class NameCheckerController extends BaseController {
+class NameCheckerController extends BaseController
+{
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('namechecker.title'));
 		return $this->view('namechecker');
@@ -18,7 +20,8 @@ class NameCheckerController extends BaseController {
 	 *
 	 * @return mixed
 	 */
-	public function postCheck(CheckRequest $form) {
+	public function postCheck(CheckRequest $form)
+	{
 		$url = 'http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $form->rsn;
 		return \String::CURL($url);
 	}
