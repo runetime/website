@@ -72,6 +72,7 @@ class RadioController extends BaseController
 			$history[$x]['artist'] = $value->artist;
 			$history[$x]['song'] = $value->song;
 		}
+
 		return json_encode($history);
 	}
 
@@ -89,10 +90,12 @@ class RadioController extends BaseController
 			} else {
 				$days[$x][$time->hour] = "-";
 			}
+
 			if($time->hour == 23) {
 				$x++;
 			}
 		}
+
 		return json_encode($days);
 	}
 
@@ -105,10 +108,12 @@ class RadioController extends BaseController
 		if(\Auth::check()) {
 			$response['response'] = 2;
 		}
+
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		if(empty($session)) {
 			$response['response'] = 1;
 		}
+
 		return $response;
 	}
 
