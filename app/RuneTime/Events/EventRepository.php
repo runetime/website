@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Event;
+
 use App\Runis\Core\EloquentRepository;
+
 class EventRepository extends EloquentRepository
 {
 	/**
