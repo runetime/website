@@ -11,13 +11,13 @@ use App\RuneTime\Guides\QuestRepository;
 class GuideController extends BaseController
 {
 	/**
-	 * @var QuestRepository
-	 */
-	private $quests;
-	/**
 	 * @var LocationRepository
 	 */
 	private $locations;
+	/**
+	 * @var QuestRepository
+	 */
+	private $quests;
 
 	/**
 	 * @param LocationRepository $locations
@@ -25,8 +25,8 @@ class GuideController extends BaseController
 	 */
 	public function __construct(LocationRepository $locations, QuestRepository $quests)
 	{
-		$this->quests = $quests;
 		$this->locations = $locations;
+		$this->quests = $quests;
 	}
 
 	/**
