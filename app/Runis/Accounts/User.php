@@ -1,10 +1,12 @@
 <?php
 namespace App\Runis\Accounts;
+
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Runis\Core\Entity;
+
 /**
  * Class User
  * @package App\Runis\Accounts

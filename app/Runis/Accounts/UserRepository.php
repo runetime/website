@@ -1,7 +1,9 @@
 <?php
 namespace App\Runis\Accounts;
+
 use App\Runis\Core\EloquentRepository;
 use App\Runis\Core\Exceptions\EntityNotFoundException;
+
 class UserRepository extends EloquentRepository{
 	/**
 	 * @param RoleRepository $roles

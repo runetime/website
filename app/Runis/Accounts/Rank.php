@@ -1,6 +1,8 @@
 <?php
 namespace App\Runis\Accounts;
+
 use App\Runis\Core\Entity;
+
 class Rank extends Entity{
 	protected $table='forum_ranks';
 	protected $hidden = [];
