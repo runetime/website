@@ -274,7 +274,7 @@ class SettingsController extends BaseController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postRuneScape(RuneScapeRequest $form
+	public function postRuneScape(RuneScapeRequest $form)
 	{
 		$user = $this->users->getById(\Auth::user()->id);
 		$versions = [
