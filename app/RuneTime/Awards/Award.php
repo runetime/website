@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Awards;
+
 use App\Runis\Core\Entity;
+
 class Award extends Entity
 {
 	protected $table = 'awards';
