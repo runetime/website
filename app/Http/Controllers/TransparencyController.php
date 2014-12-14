@@ -33,7 +33,7 @@ class TransparencyController extends BaseController
 		foreach($files as $name => $file) {
 			$renderedFiles[$name] = $parsedown->text($file);
 		}
-		
+
 		$this->bc(['transparency' => trans('transparency.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('transparency.markdown.title'));
