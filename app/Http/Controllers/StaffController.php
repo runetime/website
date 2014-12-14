@@ -46,6 +46,7 @@ class StaffController extends BaseController
 	{
 		$this->nav('navbar.staff.staff');
 		$this->title(trans('staff.index.title'));
+
 		return $this->view('staff.index');
 	}
 
@@ -72,6 +73,7 @@ class StaffController extends BaseController
 			$response['done'] = false;
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 
@@ -95,6 +97,7 @@ class StaffController extends BaseController
 		} else {
 			$response['error'] = -1;
 		}
+
 		return json_encode($response);
 	}
 
@@ -104,6 +107,7 @@ class StaffController extends BaseController
 	public function getCheckup()
 	{
 		$date = \Time::long(\Carbon::now());
+
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
 		$this->title(trans('staff.checkup.title'));
@@ -120,6 +124,7 @@ class StaffController extends BaseController
 		$hoursActive = with(new \Parsedown)->text($form->hours_active);
 		$checkup = with(new Checkup)->saveNew($form->active, $hoursActive, $form->team);
 		$checkup->addAuthor(\Auth::user());
+
 		return \redirect()->to('staff');
 	}
 
@@ -135,6 +140,7 @@ class StaffController extends BaseController
 		$content = $this->roles->getUsersById(8, 9);
 		$community = $this->roles->getUsersById(10, 11);
 		$events = $this->roles->getUsersById(12, 13);
+
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('staff.list.title'));
 		return $this->view('staff.list', compact('admins', 'radio', 'media', 'webDev', 'content', 'community', 'events'));
