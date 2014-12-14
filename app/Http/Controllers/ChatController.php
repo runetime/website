@@ -28,13 +28,13 @@ class ChatController extends BaseController
 	 */
 	private $chat;
 	/**
-	 * @var UserRepository
-	 */
-	private $users;
-	/**
 	 * @var MuteRepository
 	 */
 	private $mutes;
+	/**
+	 * @var UserRepository
+	 */
+	private $users;
 
 	/**
 	 * @param ActionRepository  $actions
@@ -48,8 +48,8 @@ class ChatController extends BaseController
 		$this->actions = $actions;
 		$this->channels = $channels;
 		$this->chat = $chat;
-		$this->users = $users;
 		$this->mutes = $mutes;
+		$this->users = $users;
 	}
 
 	/**
