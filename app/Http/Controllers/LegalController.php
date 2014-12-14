@@ -10,7 +10,9 @@ class LegalController extends BaseController
 		} else {
 			$lang = "en";
 		}
+
 		\Lang::setLocale($lang);
+
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('legal.title'));
 		return $this->view('legal.legal');
