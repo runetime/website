@@ -1,9 +1,11 @@
 <?php
 namespace App\Utilities;
+
 use App\Runis\Accounts\Role;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
+
 class Link {
 	/**
 	 * Outputs an encoded and parsed URL

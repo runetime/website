@@ -1,8 +1,10 @@
 <?php
 namespace App\Utilities;
+
 use App\Runis\Accounts\Role;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\User;
+
 class String{
 	/**
 	 * Determines whether a string begins with a substring

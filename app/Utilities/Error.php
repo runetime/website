@@ -1,6 +1,7 @@
 <?php
 namespace App\Utilities;
-class Error {
+
+class Error{
 	/**
 	 * @param $status
 	 *

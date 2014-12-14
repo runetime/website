@@ -1,5 +1,6 @@
 <?php
 namespace App\Utilities;
+
 class Parsedown {
     function text($text)
     {

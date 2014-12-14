@@ -1,5 +1,6 @@
 <?php
 namespace App\Utilities;
+
 class Image {
 	/**
 	 * Deprecated, use \Image::userPhoto() instead
