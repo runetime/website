@@ -122,8 +122,9 @@ class String
 	}
 
 	/**
-	 * @param $str
-	 * @param $roleInfo
+	 * @param      $str
+	 * @param      $roleInfo
+	 * @param bool $img
 	 *
 	 * @return string
 	 */
@@ -195,6 +196,11 @@ class String
 		return "<img src='/img/forums/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
 	}
 
+	/**
+	 * @param $rsn
+	 *
+	 * @return array|bool|mixed
+	 */
 	public static function getHiscore($rsn)
 	{
 		if(\Cache::get('hiscores.' . $rsn)) {
