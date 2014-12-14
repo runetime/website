@@ -12,6 +12,7 @@ class TransparencyController extends BaseController
 		$this->title(trans('transparency.title'));
 		return $this->view('transparency.index');
 	}
+
 	/**
 	 * @return \Illuminate\View\View
 	 */
@@ -26,11 +27,13 @@ class TransparencyController extends BaseController
 			$name = ucwords($name);
 			$files[$name] = \File::get($path);
 		}
+
 		$renderedFiles = [];
 		$parsedown = new \Parsedown;
 		foreach($files as $name => $file) {
 			$renderedFiles[$name] = $parsedown->text($file);
 		}
+		
 		$this->bc(['transparency' => trans('transparency.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('transparency.markdown.title'));
