@@ -1,7 +1,8 @@
 <?php
 namespace App\RuneTime\Chat;
 use App\Runis\Core\Entity;
-class Action extends Entity {
+class Action extends Entity
+{
 	protected $table = 'chat_actions';
 	protected $fillable = ['author_id','action','message_id'];
 	protected $dates = [];
@@ -12,7 +13,8 @@ class Action extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 }
