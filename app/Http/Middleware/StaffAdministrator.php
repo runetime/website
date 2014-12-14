@@ -3,7 +3,8 @@
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 
-class StaffAdministrator implements Middleware {
+class StaffAdministrator implements Middleware
+{
 
 	/**
 	 * Handle an incoming request.
@@ -14,10 +15,12 @@ class StaffAdministrator implements Middleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if(!\Auth::check())
+		if(!\Auth::check()) {
 			return \redirect()->to('/login');
-		if(!\Auth::user()->hasOneOfRoles(1))
+		}
+		if(!\Auth::user()->hasOneOfRoles(1)) {
 			return \View::make('framework.unauthorized');
+		}
 		return $next($request);
 	}
 

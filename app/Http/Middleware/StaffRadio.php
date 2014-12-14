@@ -6,7 +6,8 @@ use Illuminate\Contracts\Routing\Middleware;
  * Class StaffRadio
  * @package App\Http\Middleware
  */
-class StaffRadio implements Middleware {
+class StaffRadio implements Middleware
+{
 
 	/**
 	 * Handle an incoming request.
@@ -17,10 +18,12 @@ class StaffRadio implements Middleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if(!\Auth::check())
+		if(!\Auth::check()) {
 			return \redirect()->to('/login');
-		if(!\Auth::user()->hasOneOfRoles(1, 2, 3))
+		}
+		if(!\Auth::user()->hasOneOfRoles(1, 2, 3)) {
 			return \View::make('framework.unauthorized');
+		}
 		return $next($request);
 	}
 

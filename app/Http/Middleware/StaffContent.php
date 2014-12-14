@@ -6,7 +6,8 @@ use Illuminate\Contracts\Routing\Middleware;
  * Class StaffContent
  * @package App\Http\Middleware
  */
-class StaffContent implements Middleware {
+class StaffContent implements Middleware
+{
 
 	/**
 	 * Handle an incoming request.
@@ -17,10 +18,12 @@ class StaffContent implements Middleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if(!\Auth::check())
+		if(!\Auth::check()) {
 			return \redirect()->to('/login');
-		if(!\Auth::user()->hasOneOfRoles(1, 8, 9))
+		}
+		if(!\Auth::user()->hasOneOfRoles(1, 8, 9)) {
 			return \View::make('framework.unauthorized');
+		}
 		return $next($request);
 	}
 
