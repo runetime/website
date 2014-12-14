@@ -9,7 +9,7 @@ abstract class EloquentRepository
 	/**
 	 * @var null
 	 */
-	private $model;
+	protected $model;
 
 	/**
 	 * @param null $model
