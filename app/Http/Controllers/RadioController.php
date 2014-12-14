@@ -21,17 +21,17 @@ class RadioController extends BaseController
 	 */
 	private $requests;
 	/**
-	 * @var UserRepository
+	 * @var SessionRepository
 	 */
-	private $users;
+	private $sessions;
 	/**
 	 * @var TimetableRepository
 	 */
 	private $timetable;
 	/**
-	 * @var SessionRepository
+	 * @var UserRepository
 	 */
-	private $sessions;
+	private $users;
 
 	/**
 	 * @param HistoryRepository   $history
@@ -44,9 +44,9 @@ class RadioController extends BaseController
 	{
 		$this->history = $history;
 		$this->requests = $requests;
-		$this->users = $users;
-		$this->timetable = $timetable;
 		$this->sessions = $sessions;
+		$this->timetable = $timetable;
+		$this->users = $users;
 	}
 
 	/**
