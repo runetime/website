@@ -1,7 +1,8 @@
 <?php
 namespace App\RuneTime\Forum\Tags;
 use App\Runis\Core\Entity;
-class Tag extends Entity {
+class Tag extends Entity
+{
 	protected $table = 'forum_tags';
 	protected $with = [];
 	protected $fillable = ['author_id', 'name'];
@@ -12,18 +13,21 @@ class Tag extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function threads() {
+	public function threads()
+	{
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Thread');
 	}
 
-	public function news() {
+	public function news()
+	{
 		return $this->belongsToMany('App\RuneTime\News\News');
 	}
 
 	/**
 	 * @return array|static[]
 	 */
-	public function getThreads() {
+	public function getThreads()
+	{
 		return \DB::table('tag_thread')->
 			where('tag_id', '=', $this->id)->
 			orderBy('thread_id', 'desc')->
@@ -33,7 +37,8 @@ class Tag extends Entity {
 	/**
 	 * @param $threadId
 	 */
-	public function addThread($threadId) {
+	public function addThread($threadId)
+	{
 		$this->threads()->attach([$this->id, $threadId]);
 	}
 }
