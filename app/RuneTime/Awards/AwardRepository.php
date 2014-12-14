@@ -2,7 +2,6 @@
 namespace App\RuneTime\Awards;
 
 use App\Runis\Core\EloquentRepository;
-use App\Runis\Accounts\User;
 
 class AwardRepository extends EloquentRepository
 {
