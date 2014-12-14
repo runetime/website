@@ -5,11 +5,13 @@ use App\Runis\Core\EloquentRepository;
  * Class QuestRepository
  * @package App\RuneTime\Guides
  */
-class QuestRepository extends EloquentRepository{
+class QuestRepository extends EloquentRepository
+{
 	/**
 	 * @param Quest $model
 	 */
-	public function __construct(Quest $model) {
+	public function __construct(Quest $model)
+	{
 		$this->model = $model;
 	}
 
@@ -18,7 +20,8 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByName($name) {
+	public function getByName($name)
+	{
 		return $this->model->
 			where('name', '=', $name)->
 			first();
@@ -29,7 +32,8 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByAuthor($authorId) {
+	public function getByAuthor($authorId)
+	{
 		return $this->model->
 			where('author_id', '=', $authorId)->
 			get();
@@ -40,7 +44,8 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByDifficulty($difficulty) {
+	public function getByDifficulty($difficulty)
+	{
 		return $this->model->
 			where('difficulty', '=', $difficulty)->
 			get();
@@ -51,7 +56,8 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByLength($length) {
+	public function getByLength($length)
+	{
 		return $this->model->
 			where('length', '=', $length)->
 			get();
@@ -62,7 +68,8 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByMembership($membership) {
+	public function getByMembership($membership)
+	{
 		return $this->model->
 			where('membership', '=', $membership)->
 			get();
@@ -71,7 +78,8 @@ class QuestRepository extends EloquentRepository{
 	/**
 	 * @return mixed
 	 */
-	public function getAll() {
+	public function getAll()
+	{
 		return $this->model->
 			get();
 	}
@@ -83,14 +91,18 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getByOptions($difficulty, $length, $membership) {
+	public function getByOptions($difficulty, $length, $membership)
+	{
 		$query = $this->model;
-		if($difficulty > 0)
+		if($difficulty > 0) {
 			$query = $query->where('difficulty', '=', $difficulty);
-		if($length > 0)
+		}
+		if($length > 0) {
 			$query = $query->where('length', '=', $length);
-		if($membership > 0)
+		}
+		if($membership > 0) {
 			$query = $query->where('membership', '=', $membership);
+		}
 		return $query->get();
 	}
 
@@ -99,7 +111,8 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getOptions($option) {
+	public function getOptions($option)
+	{
 		return \DB::table('guide_info')->
 			where('type', '=', strtolower($option))->
 			get();
@@ -110,7 +123,8 @@ class QuestRepository extends EloquentRepository{
 	 *
 	 * @return mixed
 	 */
-	public function getOptionById($optionId) {
+	public function getOptionById($optionId)
+	{
 		return \DB::table('guide_info')->
 			where('id', '=', $optionId)->
 			first();

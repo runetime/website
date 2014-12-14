@@ -5,7 +5,8 @@ use App\Runis\Core\Entity;
  * Class Quest
  * @package App\RuneTime\Guides
  */
-class Location extends Entity {
+class Location extends Entity
+{
 	protected $table = 'guides_locations';
 	protected $fillable = ['name', 'author_id', 'editors', 'contents', 'contents_parsed'];
 	protected $dates = [];
@@ -16,7 +17,8 @@ class Location extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function author() {
+	public function author()
+	{
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 }
