@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Chat;
+
 use App\Runis\Core\Entity;
+
 class Channel extends Entity
 {
 	protected $table = 'chat_channels';

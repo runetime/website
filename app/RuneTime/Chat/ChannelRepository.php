@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Chat;
+
 use App\Runis\Core\EloquentRepository;
+
 class ChannelRepository extends EloquentRepository
 {
 	/**

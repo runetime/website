@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Chat;
+
 use App\Runis\Core\Entity;
-/**
- * Class Chat
- * @package App\RuneTime\Chat
- */
+
 class Chat extends Entity
 {
 	protected $table = 'chat_messages';

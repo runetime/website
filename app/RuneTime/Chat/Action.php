@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Chat;
+
 use App\Runis\Core\Entity;
+
 class Action extends Entity
 {
 	protected $table = 'chat_actions';
