@@ -6,7 +6,8 @@ use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\Runis\Accounts\UserRepository;
 
-class ProfileController extends BaseController {
+class ProfileController extends BaseController
+{
 	/**
 	 * @var UserRepository
 	 */
@@ -30,7 +31,8 @@ class ProfileController extends BaseController {
 	 * @param ThreadRepository $threads
 	 * @param UserRepository   $users
 	 */
-	public function __construct(PostRepository $posts, StatusRepository $statuses, ThreadRepository $threads, UserRepository $users) {
+	public function __construct(PostRepository $posts, StatusRepository $statuses, ThreadRepository $threads, UserRepository $users)
+	{
 		$this->users = $users;
 		$this->statuses = $statuses;
 		$this->threads = $threads;
@@ -42,10 +44,12 @@ class ProfileController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getProfileIndex($id) {
+	public function getProfileIndex($id)
+	{
 		$profile = $this->users->getById($id);
-		if(!$profile)
+		if(!$profile) {
 			\App::abort(404);
+		}
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
 		$this->bc(['forums/' => trans('forums.name')]);
@@ -57,10 +61,12 @@ class ProfileController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getProfileFeed($id) {
+	public function getProfileFeed($id)
+	{
 		$profile = $this->users->getById($id);
-		if(!$profile)
+		if(!$profile) {
 			\App::abort(404);
+		}
 		$profile->incrementProfileViews();
 		$threads = $this->threads->getLatestByUser($id, 5);
 		$status = $this->statuses->getLatestByAuthor($profile->id);
@@ -73,10 +79,12 @@ class ProfileController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getProfileFriends($id) {
+	public function getProfileFriends($id)
+	{
 		$profile = $this->users->getById($id);
-		if(!$profile)
+		if(!$profile) {
 			\App::abort(404);
+		}
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
 		$this->bc(['forums/' => 'Forums', 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
