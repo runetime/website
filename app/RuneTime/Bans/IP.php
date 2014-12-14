@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Bans;
+
 use App\Runis\Core\Entity;
+
 class IP extends Entity
 {
 	protected $table = 'bans_ip';
