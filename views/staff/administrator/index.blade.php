@@ -25,11 +25,17 @@
 							Clear Chatbox
 						</a>
 					</div>
+					<div>
+						<a rt-hook='admin.panel:ip.ban.open'>
+							IP Ban
+						</a>
+					</div>
 				</div>
 			</div>
 			@include('staff.administrator.modals.radio_stop', ['id' => 'radio-stop'])
 			@include('staff.administrator.modals.chatbox_clear')
 			@include('staff.administrator.modals.staff_demote', ['id' => 'staff-demote'])
+			@include('staff.administrator.modals.ip_ban', ['id' => 'ip-ban'])
 			@include('partials.modals.good')
 			@include('partials.modals.bad')
 			<script>

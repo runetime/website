@@ -5,8 +5,13 @@ class AdminPanel {
 	paths: any = {};
 	public constructor() {
 		this.elements = {
+			ipBan: {
+				ip: '#ip-ban-address',
+				reason: '#ip-ban-reason'
+			},
 			modals: {
 				chatboxClear: '#modal-chatbox-clear',
+				ipBan: '#modal-ip-ban',
 				radioStop: '#modal-radio-stop',
 				staffDemote: '#modal-staff-demote'
 			},
@@ -22,6 +27,12 @@ class AdminPanel {
 				clear: {
 					confirm: "[rt-hook='admin.panel:chatbox.clear.confirm']",
 					open: "[rt-hook='admin.panel:chatbox.clear.open']"
+				}
+			},
+			ip: {
+				ban: {
+					confirm: "[rt-hook='admin.panel:ip.ban.confirm']",
+					open: "[rt-hook='admin.panel:ip.ban.open']"
 				}
 			},
 			radio: {
@@ -41,6 +52,9 @@ class AdminPanel {
 			chatbox: {
 				clear: '/staff/leader/chatbox-clear'
 			},
+			ip: {
+				ban: '/staff/administrator/ip-ban'
+			},
 			radio: {
 				stop: '/staff/administrator/radio-stop'
 			},
@@ -50,6 +64,9 @@ class AdminPanel {
 		};
 		$(this.hooks.chatbox.clear.open).click(function() {
 			$(adminPanel.elements.modals.chatboxClear).modal('show');
+		});
+		$(this.hooks.ip.ban.open).click(function() {
+			$(adminPanel.elements.modals.ipBan).modal('show');
 		});
 		$(this.hooks.radio.stop.open).click(function() {
 			$(adminPanel.elements.modals.radioStop).modal('show');
@@ -61,11 +78,32 @@ class AdminPanel {
 		$(this.hooks.chatbox.clear.confirm).click(function() {
 			adminPanel.chatboxClear();
 		});
+		$(this.hooks.ip.ban.confirm).click(function() {
+			adminPanel.ban();
+		});
 		$(this.hooks.radio.stop.confirm).click(function() {
 			adminPanel.radioStop();
 		});
 		$(this.hooks.staff.demote.confirm).click(function() {
 			adminPanel.staffDemote();
+		});
+	}
+
+	public ban() {
+		var ip = $(this.elements.ipBan.ip).val(),
+			reason = $(this.elements.ipBan.reason).val();
+		var data = {
+			ip: ip,
+			contents: reason
+		};
+		var results = utilities.postAJAX(this.paths.ip.ban, data);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			if(results.done === true) {
+				adminPanel.done("The IP has been successfully banned.");
+			} else {
+				adminPanel.error("There was an unknown error while performing the IP ban.");
+			}
 		});
 	}
 
@@ -90,7 +128,7 @@ class AdminPanel {
 		$(this.elements.results.goodMessage).html(message);
 	}
 
-	private error(reason: string) {
+	public error(reason: string) {
 		$.each(this.elements.modals, function(index: number, value: string) {
 			$(value).modal('hide');
 		});
