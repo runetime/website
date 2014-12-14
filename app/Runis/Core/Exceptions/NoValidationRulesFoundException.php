@@ -1,6 +1,7 @@
 <?php
 namespace App\Runis\Core\Exceptions;
 
-class NoValidationRulesFoundException extends \Exception{
+class NoValidationRulesFoundException extends \Exception
+{
 	
 }
