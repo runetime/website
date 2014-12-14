@@ -29,6 +29,7 @@ class StatusController extends BaseController
 	public function getIndex()
 	{
 		$statusList = $this->statuses->getLatest(10);
+
 		$this->bc(['forums' => trans('forums.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.statuses.title'));
@@ -46,6 +47,7 @@ class StatusController extends BaseController
 		if(!$status) {
 			\App::abort(404);
 		}
+
 		$this->bc(['forums' => trans('forums.title'), 'forums/statuses' => trans('forums.statuses.title')]);
 		$this->nav('navbar.forums');
 		$this->title(trans('forums.statuses.view.title', ['author' => $status->author->display_name]));
@@ -64,6 +66,7 @@ class StatusController extends BaseController
 		if(!$status) {
 			\App::abort(404);
 		}
+
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$post = new Post;
 		$post = $post->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
@@ -76,6 +79,7 @@ class StatusController extends BaseController
 			$contents = \Link::name(\Auth::user()->id) . " has replied to your status update <a href='" . $status->toSlug() . "#post" . $post->id . "'>" . $status->title . "</a>.";
 			$notification->saveNew($status->author->id, 'Statuses', $contents, Notification::STATUS_UNREAD);
 		}
+
 		return \redirect()->to($status->toSlug() . '#post' . $post->id);
 	}
 
@@ -104,6 +108,7 @@ class StatusController extends BaseController
 		$post = $post->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
 		with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
 		$status->addPost($post);
+
 		return \redirect()->to('/forums/statuses/' . \String::slugEncode($status->id, 'by', \Auth::user()->display_name));
 	}
 }
