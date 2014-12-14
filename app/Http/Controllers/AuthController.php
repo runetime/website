@@ -69,7 +69,6 @@ class AuthController extends BaseController
 	public function postLoginForm(LoginRequest $form)
 	{
 		$user = $this->users->getByEmail($form->email);
-
 		if($user) {
 			if(\Auth::attempt(['email' => $form->email, 'password' => $form->password], true)) {
 				return \redirect()->to('/');
