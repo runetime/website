@@ -7,7 +7,8 @@ use App\RuneTime\Bans\IP;
 use App\RuneTime\Bans\IPRepository;
 use Illuminate\Routing\Controller;
 
-class BaseController extends Controller {
+class BaseController extends Controller
+{
 	protected $bc = [];
 	protected $displayPageHeader = true;
 	protected $js = [];
@@ -17,29 +18,35 @@ class BaseController extends Controller {
 	/**
 	 * @param array $breadcrumbs
 	 */
-	protected function bc($breadcrumbs = []) {
-		if($breadcrumbs == false)
+	protected function bc($breadcrumbs = [])
+	{
+		if($breadcrumbs == false) {
 			$this->displayPageHeader = false;
-		else
+		} else {
 			$this->bc = $breadcrumbs;
+		}
 	}
 
 	/**
 	 * @param $js
 	 */
-	protected function js($js) {
+	protected function js($js)
+	{
 		$this->js = $js;
 	}
 
 	/**
 	 * @param $nav
 	 */
-	protected function nav($nav) {
+	protected function nav($nav)
+	{
 		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
+
 		if(empty($locale)) {
 			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', 'en');
 			$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
 		}
+
 		\Lang::setLocale($locale);
 		$this->nav = trans($nav);
 	}
@@ -47,15 +54,18 @@ class BaseController extends Controller {
 	/**
 	 *
 	 */
-	protected function setupLayout() {
-		if(!is_null($this->layout))
+	protected function setupLayout()
+	{
+		if(!is_null($this->layout)) {
 			$this->layout = \View::make($this->layout);
+		}
 	}
 
 	/**
 	 * @param $newTitle
 	 */
-	protected function title($newTitle) {
+	protected function title($newTitle)
+	{
 		$this->title = $newTitle;
 	}
 
@@ -65,7 +75,8 @@ class BaseController extends Controller {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	protected function view($path, $data = []) {
+	protected function view($path, $data = [])
+	{
 		$data['bc'] = $this->bc;
 		$data['displayPageHeader'] = $this->displayPageHeader;
 		$data['js'] = $this->js;
@@ -99,6 +110,7 @@ class BaseController extends Controller {
 			$data['title'] = trans('navbar.home');
 			return \View::make('errors.ip_banned', $data);
 		}
+
 		$this->updateCache();
 		return \View::make($path, $data);
 	}
@@ -106,7 +118,8 @@ class BaseController extends Controller {
 	/**
 	 *
 	 */
-	private function updateCache() {
+	private function updateCache()
+	{
 		$current = [
 			'url'    => \Request::url(),
 			'time'   => \Carbon::createFromTimestamp(time()),
@@ -114,24 +127,32 @@ class BaseController extends Controller {
 			'logged' => \Auth::check()
 		];
 		$activity = \Cache::get('activity.users');
-		if(empty($activity))
+		if(empty($activity)) {
 			$activity = [];
-		if(\Auth::check())
+		}
+
+		if(\Auth::check()) {
 			$current['user'] = \Auth::user()->id;
-		else
+		} else {
 			$current['user'] = \Request::getClientIp();
+		}
+
 		$ago = \Carbon::now()->subMinutes(30)->timestamp;
 		foreach($activity as $key => $value) {
-			if(ceil($key / 1000) <= $ago)
+			if(ceil($key / 1000) <= $ago) {
 				unset($activity[$key]);
-			if((\Auth::check() && $value['user'] === \Auth::user()->id) || $value['user'] === \Request::getClientIp())
+			}
+			if((\Auth::check() && $value['user'] === \Auth::user()->id) || $value['user'] === \Request::getClientIp()) {
 				unset($activity[$key]);
+			}
 		}
 		$activity[microtime(true) * 1000] = $current;
 		$most = \Cache::get('activity.most');
 		$activeCount = count($activity);
-		if($activeCount > $most)
+		if($activeCount > $most) {
 			\Cache::forever('activity.most', $activeCount);
+		}
+
 		\Cache::forever('activity.users', $activity);
 	}
 }
