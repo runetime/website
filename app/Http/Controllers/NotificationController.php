@@ -3,7 +3,8 @@
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Notifications\NotificationRepository;
 
-class NotificationController extends BaseController {
+class NotificationController extends BaseController
+{
 	/**
 	 * @var NotificationRepository
 	 */
@@ -12,16 +13,19 @@ class NotificationController extends BaseController {
 	/**
 	 * @param NotificationRepository $notifications
 	 */
-	public function __construct(NotificationRepository $notifications) {
+	public function __construct(NotificationRepository $notifications)
+	{
 		$this->notifications = $notifications;
 	}
 
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$notificationsUnread = $this->notifications->getStatusByUser(\Auth::user()->id, Notification::STATUS_UNREAD);
 		$notificationsRead = $this->notifications->getStatusByUser(\Auth::user()->id, Notification::STATUS_READ);
+
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('notifications.title'));
 		return $this->view('notifications.index', compact('notificationsUnread', 'notificationsRead'));
@@ -32,21 +36,28 @@ class NotificationController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getView($id) {
+	public function getView($id)
+	{
 		$notification = $this->notifications->getById($id);
-		if(!$notification)
+		if(!$notification) {
 			return \Error::abort(404);
+		}
+
 		$notification->setRead();
+
 		$this->bc(['notifications' => trans('notifications.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('notifications.title'));
 		return $this->view('notifications.view', compact('notification'));
 	}
 
-	public function getSetAllRead() {
+	public function getSetAllRead()
+	{
 		$notifications = $this->notifications->getStatusByUser(\Auth::user()->id, Notification::STATUS_UNREAD);
-		foreach($notifications as $notification)
+		foreach($notifications as $notification) {
 			$notification->setRead();
+		}
+
 		return \redirect()->to('/notifications');
 	}
 }

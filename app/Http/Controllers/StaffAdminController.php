@@ -153,8 +153,8 @@ class StaffAdminController extends BaseController
 		if(count($memberFirst) === 0) {
 			return json_encode(['error' => -1]);
 		}
-		$newRole = $this->roles->getByName("Members");
 
+		$newRole = $this->roles->getByName("Members");
 		foreach($memberRoles as $memberRole) {
 			$id = $memberRole->user_id;
 			$memberRole->delete();
@@ -167,6 +167,8 @@ class StaffAdminController extends BaseController
 	}
 
 	/**
+	 * @param int $page
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getUserList($page = 1)

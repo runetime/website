@@ -1,36 +1,42 @@
 <?php
 namespace App\Runis\Core;
+
 use Illuminate\Database\Eloquent\Model;
 use App\Runis\Core\Exceptions\EntityNotFoundException;
 
-abstract class EloquentRepository {
+abstract class EloquentRepository
+{
 	protected $model;
 
 	/**
 	 * @param null $mode
 	 */
-	public function __construct($mode=null) {
+	public function __construct($model = null)
+	{
 		$this->model = $model;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getModel() {
+	public function getModel()
+	{
 		return $this->model;
 	}
 
 	/**
 	 * @param $model
 	 */
-	public function setModel($model) {
+	public function setModel($model)
+	{
 		$this->model = $model;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getAll() {
+	public function getAll()
+	{
 		return $this->model->all();
 	}
 
@@ -39,7 +45,8 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getAllPaginated($count) {
+	public function getAllPaginated($count)
+	{
 		return $this->model->paginate($count);
 	}
 
@@ -48,7 +55,8 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getById($id) {
+	public function getById($id)
+	{
 		return $this->model->find($id);
 	}
 
@@ -58,10 +66,14 @@ abstract class EloquentRepository {
 	 * @return mixed
 	 * @throws EntityNotFoundException
 	 */
-	public function requireById($id) {
+	public function requireById($id)
+	{
 		$model = $this->getById($id);
-		if(!$model)
+
+		if(!$model) {
 			throw new EntityNotFoundException;
+		}
+
 		return $model;
 	}
 
@@ -70,7 +82,8 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function getNew($attributes= [] ) {
+	public function getNew($attributes = [])
+	{
 		return $this->model->newInstance($attributes);
 	}
 
@@ -79,11 +92,13 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function save($data) {
-		if($data instanceOf Model)
+	public function save($data)
+	{
+		if($data instanceOf Model) {
 			return $this->storeEloquentModel($data);
-		elseif(is_array($data))
-			return $this->storeArray($data);
+		}
+
+		return $this->storeArray($data);
 	}
 
 	/**
@@ -91,7 +106,8 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function delete($model) {
+	public function delete($model)
+	{
 		return $model->delete();
 	}
 
@@ -100,9 +116,12 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	protected function storeEloquentModel($model) {
-		if($model->getDirty())
+	protected function storeEloquentModel($model)
+	{
+		if($model->getDirty()) {
 			return $model->save();
+		}
+
 		return $model->touch();
 	}
 
@@ -111,7 +130,8 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	protected function storeArray($data) {
+	protected function storeArray($data)
+	{
 		return $this->storeEloquentModel($this->getNew($data));
 	}
 
@@ -120,14 +140,16 @@ abstract class EloquentRepository {
 	 *
 	 * @return mixed
 	 */
-	public function paginate($number) {
+	public function paginate($number)
+	{
 		return $this->model->simplePaginate($number);
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getCount() {
+	public function getCount()
+	{
 		return $this->model->count();
 	}
 }

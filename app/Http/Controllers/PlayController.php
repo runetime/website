@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
-class PlayController extends BaseController {
+class PlayController extends BaseController
+{
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('play.index.play_runescape'));
 		return $this->view('play.index');
@@ -14,7 +16,8 @@ class PlayController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function get3() {
+	public function get3()
+	{
 		$this->bc(['play' => trans('play.index.play_runescape')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('play.index.3'));
@@ -24,7 +27,8 @@ class PlayController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getOSRS() {
+	public function getOSRS()
+	{
 		$this->bc(['play' => trans('play.index.play_runescape')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('play.index.osrs'));

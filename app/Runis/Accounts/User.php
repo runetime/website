@@ -1,15 +1,18 @@
 <?php
 namespace App\Runis\Accounts;
+
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Runis\Core\Entity;
+
 /**
  * Class User
  * @package App\Runis\Accounts
  */
-class User extends Entity implements AuthenticatableContract, CanResetPasswordContract {
+class User extends Entity implements AuthenticatableContract, CanResetPasswordContract
+{
 	use Authenticatable, CanResetPassword;
 	protected $table = 'users';
 	protected $hidden = [];
@@ -21,16 +24,19 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function roles() {
+	public function roles()
+	{
 		return $this->belongsToMany('App\Runis\Accounts\Role');
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getRoles() {
-		if(!isset($this->rolesCache))
+	public function getRoles()
+	{
+		if(!isset($this->rolesCache)) {
 			$this->rolesCache = $this->belongsToMany('App\Runis\Accounts\Role');
+		}
 		return $this->rolesCache;
 	}
 
@@ -39,7 +45,8 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 *
 	 * @return bool
 	 */
-	public function hasRole($roleName) {
+	public function hasRole($roleName)
+	{
 		return in_array($roleName, array_fetch($this->roles->toArray(), 'name'));
 	}
 
@@ -48,14 +55,17 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 *
 	 * @return bool
 	 */
-	public function hasRoles($roleNames = []) {
+	public function hasRoles($roleNames = [])
+	{
 		$roleList = \App::make('App\Runis\Accounts\RoleRepository')->
 			getRoleList();
-		foreach((array)$roleNames as $allowedRole) {
-			if(!in_array($allowedRole, $roleList))
+		foreach((array) $roleNames as $allowedRole) {
+			if(!in_array($allowedRole, $roleList)) {
 				\Log::error("Unidentified role: " . $allowedRole);
-			if(!$this->roleCollectionHasRole($allowedRole))
+			}
+			if(!$this->roleCollectionHasRole($allowedRole)) {
 				return false;
+			}
 		}
 		return true;
 	}
@@ -63,17 +73,21 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	/**
 	 * @return bool
 	 */
-	public function hasOneOfRoles() {
-		foreach(func_get_args() as $role)
-			if(in_array($role, array_fetch($this->roles->toArray(), 'id')))
+	public function hasOneOfRoles()
+	{
+		foreach(func_get_args() as $role) {
+			if(in_array($role, array_fetch($this->roles->toArray(), 'id'))) {
 				return true;
+			}
+		}
 		return false;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function importantRole() {
+	public function importantRole()
+	{
 		$userRoles = \App::make('App\Runis\Accounts\UserRoleRepository');
 		$important = $userRoles->getImportantByUser($this->id);
 		$roles = \App::make('App\Runis\Accounts\RoleRepository');
@@ -86,32 +100,39 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 *
 	 * @return bool
 	 */
-	private function roleCollectionHasRole($allowedRole) {
+	private function roleCollectionHasRole($allowedRole)
+	{
 		$roles = $this->getRoles();
-		if(!$roles)
+		if(!$roles) {
 			return false;
-		foreach($roles as $role)
-			if(strtolower($role->name) == strtolower($allowedRole))
+		}
+		foreach($roles as $role) {
+			if(strtolower($role->name) == strtolower($allowedRole)) {
 				return true;
+			}
+		}
 		return false;
 	}
 
 	/**
 	 * @param $name
 	 */
-	public function setRole($name) {
+	public function setRole($name)
+	{
 		$role = \App::make('App\Runis\Accounts\RoleRepository')->
 			getByName($name);
 		$assigned_roles = [];
-		if($role)
+		if($role) {
 			$assigned_roles[] = $role->id;
+		}
 		$this->roles()->attach($assigned_roles);
 	}
 
 	/**
 	 * @param Role $role
 	 */
-	public function roleRemove(Role $role) {
+	public function roleRemove(Role $role)
+	{
 		$roles = \App::make('App\Runis\Accounts\UserRoleRepository');
 		$role = $roles->selectByUserAndRole($this->id, $role->id);
 		$role->delete();
@@ -121,200 +142,229 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 * @param Role $role
 	 * @param bool $important
 	 */
-	public function roleAdd(Role $role, $important = false) {
+	public function roleAdd(Role $role, $important = false)
+	{
 		with(new UserRole)->saveNew($this->id, $role->id, $important);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isStaff() {
+	public function isStaff()
+	{
 		return $this->hasOneOfRoles(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isLeader() {
+	public function isLeader()
+	{
 		return $this->hasOneOfRoles(1, 2, 4, 6, 8, 10, 12);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isAdmin() {
+	public function isAdmin()
+	{
 		return $this->hasOneOfRoles(1);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isRadio() {
+	public function isRadio()
+	{
 		return $this->hasOneOfRoles(1, 2, 3);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isMedia() {
+	public function isMedia()
+	{
 		return $this->hasOneOfRoles(1, 4, 5);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isDeveloper() {
+	public function isDeveloper()
+	{
 		return $this->hasOneOfRoles(1, 6, 7);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isContent() {
+	public function isContent()
+	{
 		return $this->hasOneOfRoles(1, 8, 9);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isCommunity() {
+	public function isCommunity()
+	{
 		return $this->hasOneOfRoles(1, 10, 11);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isEvents() {
+	public function isEvents()
+	{
 		return $this->hasOneOfRoles(1, 12, 13);
 	}
 
 	/**
 	 * @return int
 	 */
-	public function incrementPostTotal() {
+	public function incrementPostTotal()
+	{
 		return $this->increment('posts_total');
 	}
 
 	/**
 	 *
 	 */
-	public function incrementPostActive() {
+	public function incrementPostActive()
+	{
 		$rank = $this->rank;
 		$rankRepository = new RankRepository(new Rank);
 		$this->increment('posts_total');
 		$this->increment('posts_active');
 		$rankAtPosts = $rankRepository->getByPostCount($this->posts_active);
-		if($rankAtPosts->id !== $rank->id)
+		if($rankAtPosts->id !== $rank->id) {
 			$this->rank_id = $rankAtPosts->id;
+		}
 		$this->save();
 	}
 
 	/**
 	 * @return int
 	 */
-	public function incrementProfileViews() {
+	public function incrementProfileViews()
+	{
 		return $this->increment('profile_views');
 	}
 
 	/**
 	 * UserInterface
 	 */
-	public function getAuthIdentifier() {
+	public function getAuthIdentifier()
+	{
 		return $this->getKey();
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getAuthPassword() {
+	public function getAuthPassword()
+	{
 		return $this->password;
 	}
 
 	/**
 	 * RemindableInterface
 	 */
-	public function getReminderEmail() {
+	public function getReminderEmail()
+	{
 		return $this->email;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getRememberToken() {
+	public function getRememberToken()
+	{
 		return $this->remember_token;
 	}
 
 	/**
 	 * @param string $newValue
 	 */
-	public function setRememberToken($newValue) {
+	public function setRememberToken($newValue)
+	{
 		$this->remember_token = $newValue;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getRememberTokenName() {
+	public function getRememberTokenName()
+	{
 		return 'remember_token';
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function threads() {
+	public function threads()
+	{
 		return $this->hasMany('App\RuneTime\Forum\Threads\Thread', 'author_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function checkups() {
+	public function checkups()
+	{
 		return $this->belongsToMany('App\RuneTime\Checkup\Checkup');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function messages() {
+	public function messages()
+	{
 		return $this->belongsToMany('App\RuneTime\Messenger\Message');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function tickets() {
+	public function tickets()
+	{
 		return $this->belongsToMany('App\RuneTime\Tickets\Ticket');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function referredBy() {
+	public function referredBy()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'referred_by');
 	}
 
-	public function rank() {
+	public function rank()
+	{
 		return $this->belongsTo('App\Runis\Accounts\Rank', 'rank_id');
 	}
 
 	/**
 	 *
 	 */
-	public function incrementReputation() {
+	public function incrementReputation()
+	{
 		$this->increment('reputation');
 	}
 
 	/**
 	 *
 	 */
-	public function decrementReputation() {
+	public function decrementReputation()
+	{
 		$this->decrement('reputation');
 	}
 
 	/**
 	 * @param $amount
 	 */
-	public function reputationChange($amount) {
+	public function reputationChange($amount)
+	{
 		$this->increment('reputation', $amount);
 	}
 
@@ -323,7 +373,8 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 *
 	 * @return string
 	 */
-	public function toSlug($path = '') {
+	public function toSlug($path = '')
+	{
 		return url('profile/' . \String::slugEncode($this->id, $this->display_name) . (!empty($path) ? '/' . $path : ''));
 	}
 }

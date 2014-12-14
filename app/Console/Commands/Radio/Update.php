@@ -33,8 +33,7 @@ class Update extends Command {
 	 *
 	 * @param HistoryRepository $history
 	 */
-	public function __construct(HistoryRepository $history
-	)
+	public function __construct(HistoryRepository $history)
 	{
 		parent::__construct();
 		$this->history = $history;
@@ -62,8 +61,9 @@ class Update extends Command {
 			$name = $song[1];
 			$this->info("Pulled data from Primcast servers");
 			$currentDJ = \Cache::get('radio.dj.current');
-			if(empty($currentDJ))
+			if(empty($currentDJ)) {
 				$currentDJ = -1;
+			}
 			$currentHistory = $this->history->getCurrent();
 			if(empty($currentHistory) || ($currentHistory->song != $name && $currentHistory->artist != $artist)) {
 				with(new History)->saveNew($currentDJ, $artist, $name);
@@ -85,8 +85,9 @@ class Update extends Command {
 		if($sh) {
 			fputs($sh, "GET /7.html HTTP/1.0\r\nUser-Agent: SHOUTcast Song Status (Mozilla Compatible)\r\n\r\n");
 			$results = "";
-			while(!feof($sh))
+			while(!feof($sh)) {
 				$results .= fgets($sh, 1000);
+			}
 			fclose($sh);
 			$results = strstr($results, "<body>");
 			$results = str_replace("</body></html>", "", $results);

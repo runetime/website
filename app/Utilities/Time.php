@@ -3,23 +3,29 @@ namespace App\Utilities;
 
 use Carbon\Carbon;
 
-class Time {
+class Time
+{
 	/**
 	 * @param $time
 	 *
 	 * @return Carbon
 	 */
-	public static function carbon($time = 0) {
-		if(is_a($time, 'Carbon'))
+	public static function carbon($time = 0)
+	{
+		if(is_a($time, 'Carbon')) {
 			return $time;
+		}
+
 		if(is_numeric($time)) {
 			$date = \Carbon::createFromTimestamp($time);
-		}
-		else {
+		} else {
 			$date = \Carbon::parse($time);
 		}
-		if(self::isDST())
+
+		if(self::isDST()) {
 			$date->addHour();
+		}
+
 		return $date;
 	}
 
@@ -27,7 +33,8 @@ class Time {
 	 * Returns whether or not it is currently DST for the user
 	 * @return boolean    Whether or not it is currently DST
 	 */
-	public static function isDST() {
+	public static function isDST()
+	{
 		return carbon::now()->dst;
 	}
 
@@ -36,7 +43,8 @@ class Time {
 	 *
 	 * @return bool|string
 	 */
-	public static function short($i = 0) {
+	public static function short($i = 0)
+	{
 		return self::carbon($i)->format('jS \of F Y');
 	}
 
@@ -45,7 +53,8 @@ class Time {
 	 *
 	 * @return bool|string
 	 */
-	public static function shortTime($i = 0) {
+	public static function shortTime($i = 0)
+	{
 		return self::carbon($i)->format('jS \of F Y H:i:s');
 	}
 
@@ -54,7 +63,8 @@ class Time {
 	 *
 	 * @return bool|string
 	 */
-	public static function long($i = 0) {
+	public static function long($i = 0)
+	{
 		return self::carbon($i)->format('jS \of F Y \- H:i:s');
 	}
 
@@ -63,7 +73,8 @@ class Time {
 	 *
 	 * @return int
 	 */
-	public static function getEpoch($str) {
+	public static function getEpoch($str)
+	{
 		return self::carbon($str)->timestamp;
 	}
 
@@ -72,7 +83,8 @@ class Time {
 	 *
 	 * @return bool|string
 	 */
-	public static function formatTime($unix) {
+	public static function formatTime($unix)
+	{
 		return self::carbon($unix)->format('Y-m-d H:i:s');
 	}
 
@@ -81,7 +93,8 @@ class Time {
 	 *
 	 * @return string
 	 */
-	public static function shortReadable($time) {
+	public static function shortReadable($time)
+	{
 		return self::carbon($time)->diffForHumans();
 	}
 
@@ -90,11 +103,15 @@ class Time {
 	 *
 	 * @return string
 	 */
-	public static function timeAgo($time) {
-		if(!is_numeric($time))
+	public static function timeAgo($time)
+	{
+		if(!is_numeric($time)) {
 			$time = self::getEpoch($time);
+		}
+
 		$nowTs = time();
 		$seconds = $nowTs - $time;
+
 		if($seconds > 2 * 24 * 3600) {
 			return "a few days ago";
 		} else if($seconds > 24 * 3600) {
@@ -119,7 +136,8 @@ class Time {
 	 *
 	 * @return bool|string
 	 */
-	public static function DMY($time) {
+	public static function DMY($time)
+	{
 		return self::carbon($time)->format('jS \of M y');
 	}
 
@@ -128,7 +146,8 @@ class Time {
 	 *
 	 * @return string
 	 */
-	public static function monthDay($i) {
+	public static function monthDay($i)
+	{
 		return self::carbon($i)->format('M d');
 	}
 }

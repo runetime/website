@@ -1,16 +1,15 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\Signatures\RSNRequest;
-use Intervention\Image\Gd\Font;
-/**
- * Class SignatureController
- * @package App\Http\Controllers
- */
-class SignatureController extends BaseController {
+
+class SignatureController extends BaseController
+{
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('signature.title'));
 		return $this->view('signatures.index');
@@ -21,10 +20,13 @@ class SignatureController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function postUsername(RSNRequest $form) {
+	public function postUsername(RSNRequest $form)
+	{
 		$username = $form->username;
-		if(!\Cache::get('hiscores.' . $username))
+		if(!\Cache::get('hiscores.' . $username)) {
 			\String::getHiscore($username);
+		}
+
 		$this->bc(['signatures' => trans('signature.title')]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('signature.type.title'));
@@ -37,11 +39,15 @@ class SignatureController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getStyle($username, $type) {
+	public function getStyle($username, $type)
+	{
 		$imgs = [];
-		foreach(scandir('./img/signatures/backgrounds') as $filename)
+		foreach(scandir('./img/signatures/backgrounds') as $filename) {
 			$imgs[] = $filename;
+		}
+
 		unset($imgs[0], $imgs[1]);
+
 		$this->bc(['signatures' => trans('signature.title'), '#1' => $username]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('signature.style.title'));
@@ -55,7 +61,8 @@ class SignatureController extends BaseController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getFinal($username, $type, $style) {
+	public function getFinal($username, $type, $style)
+	{
 		$args = [
 			'u' => $username,
 			't' => $type,
@@ -63,6 +70,7 @@ class SignatureController extends BaseController {
 		];
 		$hash = implode(";", $args);
 		$location = url('signatures/h' . $hash);
+
 		$this->bc(['signatures' => trans('signature.title'), '#1' => $username, 'signatures/username=' . $username . '/type=' . $type => ucwords($type)]);
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('signature.final.title'));
@@ -72,7 +80,8 @@ class SignatureController extends BaseController {
 	/**
 	 * @param $slug
 	 */
-	public function getDisplay($slug) {
+	public function getDisplay($slug)
+	{
 		$path = './img/signatures/generated/' . $slug . '.png';
 		if(file_exists($path)) {
 			return \Img::make($path)->response();
@@ -86,7 +95,8 @@ class SignatureController extends BaseController {
 	/**
 	 * @param $slug
 	 */
-	public function createSignature($slug) {
+	public function createSignature($slug)
+	{
 		$path = public_path('img/signatures/generated/' . $slug . '.png');
 		$info = explode(";", $slug);
 		$rsn = $info[0];
@@ -103,7 +113,8 @@ class SignatureController extends BaseController {
 	 *
 	 * @return resource
 	 */
-	private function signatureStat($info, $scores) {
+	private function signatureStat($info, $scores)
+	{
 		$skills = $this->skills();
 		$img = \Img::canvas(400, 150);
 		$bg = \Img::make(public_path('img/signatures/backgrounds/' . $info[2] . '.png'));
@@ -341,7 +352,8 @@ class SignatureController extends BaseController {
 	/**
 	 * @return array
 	 */
-	private function skills() {
+	private function skills()
+	{
 		$skills = [
 			'attack'        => 'attack',
 			'defence'       => 'defence',
@@ -371,8 +383,10 @@ class SignatureController extends BaseController {
 			'divination'    => 'divination',
 			'overall'       => 'overall',
 		];
-		foreach($skills as $name => $dir)
+		foreach($skills as $name => $dir) {
 			$skills[$name] = \Img::make(public_path('img/skills/' . $dir . '.png'))->resize(20, 20);
+		}
+
 		return $skills;
 	}
 }

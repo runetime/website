@@ -1,14 +1,12 @@
 <?php
 namespace App\Http\Controllers;
-/**
- * Class MapController
- * @package App\Http\Controllers
- */
+
 class MapController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex() {
+	public function getIndex()
+	{
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('maps.title'));
 		return $this->view('map.index');
@@ -17,7 +15,8 @@ class MapController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getMembers() {
+	public function getMembers()
+	{
 		$this->bc(['map' => trans('maps.title')]);
 		$this->nav('navbar.social.social');
 		$this->title(trans('maps.members.title'));
@@ -27,7 +26,8 @@ class MapController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getRunescape() {
+	public function getRunescape()
+	{
 		$this->bc(['map' => trans('maps.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('maps.rs.title'));
@@ -37,7 +37,8 @@ class MapController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getRS3() {
+	public function getRS3()
+	{
 		$this->bc(['map' => 'Maps', 'map/runescape' => trans('maps.rs.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('maps.rs.rs3'));
@@ -47,7 +48,8 @@ class MapController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getOS() {
+	public function getOS()
+	{
 		$this->bc(['map' => trans('maps.title'), 'map/runescape' => trans('maps.rs.title')]);
 		$this->nav('navbar.runescape.runescape');
 		$this->title(trans('maps.rs.osrs'));

@@ -49,10 +49,11 @@ class DJ extends Command {
 	public function fire()
 	{
 		$currentDJ = \Cache::get('radio.dj.current');
-		if(empty($currentDJ) || $currentDJ <= 0)
+		if(empty($currentDJ) || $currentDJ <= 0) {
 			$this->info("Auto DJ");
-		else
+		} else {
 			$this->info($this->users->getById($currentDJ)->display_name);
+		}
 	}
 
 	/**

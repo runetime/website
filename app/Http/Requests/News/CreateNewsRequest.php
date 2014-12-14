@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\News;
+<?php
+namespace App\Http\Requests\News;
 
 use App\Http\Requests\Request;
 

@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\Messenger;
+<?php
+namespace App\Http\Requests\Messenger;
 
 use App\Http\Requests\Request;
 

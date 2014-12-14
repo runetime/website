@@ -1,10 +1,7 @@
-<?php namespace App\Http\Requests\Staff;
+<?php
+namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
-/**
- * Class AdminUserChangeRequest
- * @package App\Http\Requests
- */
 class AdminUserChangeRequest extends Request {
 
 	/**

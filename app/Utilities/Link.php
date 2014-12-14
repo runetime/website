@@ -1,16 +1,18 @@
 <?php
 namespace App\Utilities;
+
 use App\Runis\Accounts\Role;
 use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\User;
-use App\Runis\Accounts\UserRepository;
-class Link {
+
+class Link
+{
 	/**
 	 * Outputs an encoded and parsed URL
 	 * @param  string $url The URL
 	 * @return string      The URL-encoded and parsed URL
 	 */
-	public static function URL($url = "") {
+	public static function URL($url = "")
+	{
 		return "/" . str_replace(" ", "-", $url);
 	}
 
@@ -19,12 +21,16 @@ class Link {
 	 *
 	 * @return string
 	 */
-	public static function name($userId) {
+	public static function name($userId)
+	{
 		$users = \App::make('App\Runis\Accounts\UserRepository');
 		$user = $users->getById((int) $userId);
-		if($user)
+		if($user) {
 			return "<a href='/profile/" . \String::slugEncode($user->id, $user->display_name) . "' class='members-" . $user->importantRole()->class_name . "' title'='" . $user->display_name . "&#39;s profile'>" . $user->display_name . "</a>";
+		}
+
 		\Log::warning('Utilities\Link::name - ' . $userId . ' does not exist.');
+
 		return "unknown";
 	}
 
@@ -33,11 +39,13 @@ class Link {
 	 *
 	 * @return string
 	 */
-	public static function colorRole($roleId) {
+	public static function colorRole($roleId)
+	{
 		$roles = new RoleRepository(new Role);
 		$role = $roles->getById($roleId);
-		if($role)
+		if($role) {
 			return "<span class='members-" . $role->class_name . "' title='" . $role->name . "'>" . $role->name . "</span>";
+		}
 		\Log::warning('Utilities\Link::colorRole - ' . $roleId . ' does not exist.');
 		return "unknown";
 	}
@@ -49,15 +57,21 @@ class Link {
 	 *
 	 * @return string
 	 */
-	public static function color($str, $roleInfo, $displayImage = true) {
+	public static function color($str, $roleInfo, $displayImage = true)
+	{
 		$roles = new RoleRepository(new Role);
-		if(is_numeric($roleInfo))
+
+		if(is_numeric($roleInfo)) {
 			$role = $roles->getById($roleInfo);
-		else
+		} else {
 			$role = $roles->getByName($roleInfo);
-		if($role)
+		}
+		if($role) {
 			return "<span class='members-" . $role->class_name . ($displayImage ? "" : "-no-img") . "'>" . $str . "</a>";
+		}
+
 		\Log::warning('Utilities\Link::color - ' . $roleInfo . ' does not exist.');
+
 		return $str;
 	}
 }

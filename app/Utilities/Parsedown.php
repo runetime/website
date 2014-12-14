@@ -1,6 +1,8 @@
 <?php
 namespace App\Utilities;
-class Parsedown {
+
+class Parsedown
+{
     function text($text)
     {
         # make sure no definitions are set

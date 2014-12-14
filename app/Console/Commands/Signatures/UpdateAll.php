@@ -38,11 +38,13 @@ class UpdateAll extends Command {
 		$paths = \File::allFiles(\base_path() . '/public/img/signatures/generated/');
 		foreach($paths as $path) {
 			$file = explode("/generated/", $path)[1];
-			if($file === ".gitignore")
+			if($file === ".gitignore") {
 				continue;
+			}
 			$this->info($file);
-			if(file_exists($path))
+			if(file_exists($path)) {
 				unlink($path);
+			}
 			$slug = str_replace(".png", "", $file);
 			$this->line(\App::make('App\Http\Controllers\SignatureController')->createSignature($slug));
 		}

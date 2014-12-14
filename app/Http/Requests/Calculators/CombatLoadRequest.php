@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\Calculators;
+<?php
+namespace App\Http\Requests\Calculators;
 
 use App\Http\Requests\Request;
 

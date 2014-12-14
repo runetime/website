@@ -1,12 +1,18 @@
 <?php
 namespace App\Http\Controllers;
-class LegalController extends BaseController {
-	public function getLegal($language) {
-		if($language == "english")
+
+class LegalController extends BaseController
+{
+	public function getLegal($language)
+	{
+		if($language == "english") {
 			$lang = "en";
-		else
+		} else {
 			$lang = "en";
+		}
+
 		\Lang::setLocale($lang);
+
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('legal.title'));
 		return $this->view('legal.legal');
@@ -14,7 +20,8 @@ class LegalController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getPrivacy() {
+	public function getPrivacy()
+	{
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('legal.privacy.title'));
 		return $this->view('legal.privacy');
@@ -23,7 +30,8 @@ class LegalController extends BaseController {
 	/**
 	 * @return \Illuminate\View\View
 	 */
-	public function getTerms() {
+	public function getTerms()
+	{
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('legal.terms.title'));
 		return $this->view('legal.terms');

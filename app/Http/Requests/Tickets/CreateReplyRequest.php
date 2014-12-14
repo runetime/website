@@ -1,4 +1,5 @@
-<?php namespace App\Http\Requests\Tickets;
+<?php
+namespace App\Http\Requests\Tickets;
 
 use App\Http\Requests\Request;
 

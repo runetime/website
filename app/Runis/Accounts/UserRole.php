@@ -3,7 +3,8 @@ namespace App\Runis\Accounts;
 
 use App\Runis\Core\Entity;
 
-class UserRole extends Entity {
+class UserRole extends Entity
+{
 	protected $table = 'role_user';
 	protected $hidden = [];
 	protected $fillable = ['user_id', 'role_id', 'important'];
@@ -13,14 +14,16 @@ class UserRole extends Entity {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function user() {
+	public function user()
+	{
 		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function role() {
+	public function role()
+	{
 		return $this->belongsTo('App\Runis\Accounts\Role', 'role_id');
 	}
 }
