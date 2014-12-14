@@ -10,6 +10,7 @@ class LanguageController extends BaseController
 	{
 		$languagesDone = ['en', 'no'];
 		$languagesWIP = ['es'];
+
 		$this->nav('navbar.runetime.runetime');
 		$this->title(trans('language.set.title'));
 		return $this->view('language.set', compact('languagesDone', 'languagesWIP'));
@@ -30,6 +31,7 @@ class LanguageController extends BaseController
 		if(array_key_exists($initials, $languagesDone)) {
 			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', $initials);
 		}
+
 		return \redirect()->to('/' . $redirect);
 	}
 }
