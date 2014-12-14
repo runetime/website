@@ -92,8 +92,9 @@ class SettingsController extends BaseController
 		$birthday = $user->birthday;
 		$user->timezone = (float) $form->timezone;
 		$user->dst = $form->dst ? true : false;
-		if($form->gender >= 0 && $form->gender <= 2)
+		if($form->gender >= 0 && $form->gender <= 2) {
 			$user->gender = $form->gender;
+		}
 
 		$user->location = $form->location;
 		$user->interests = $form->interests;
