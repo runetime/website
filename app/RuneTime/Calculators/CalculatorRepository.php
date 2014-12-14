@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Calculators;
+
 use App\Runis\Core\EloquentRepository;
+
 class CalculatorRepository extends EloquentRepository
 {
 	public function __construct(Calculator $model)
