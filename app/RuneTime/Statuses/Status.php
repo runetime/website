@@ -1,7 +1,9 @@
 <?php
 namespace App\RuneTime\Statuses;
+
 use App\RuneTime\Forum\Threads\Post;
 use App\Runis\Core\Entity;
+
 class Status extends Entity
 {
 	protected $table = 'statuses';

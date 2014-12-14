@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\News;
+
 use App\Runis\Core\Entity;
+
 class News extends Entity
 {
 	protected $table = 'news';

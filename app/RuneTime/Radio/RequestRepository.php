@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Radio;
+
 use App\Runis\Core\EloquentRepository;
-/**
- * Class RequestRepository
- * @package App\RuneTime\Radio
- */
+
 class RequestRepository extends EloquentRepository
 {
 	/**

@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Guides;
+
 use App\Runis\Core\Entity;
-/**
- * Class Quest
- * @package App\RuneTime\Guides
- */
+
 class Quest extends Entity
 {
 	protected $table = 'guides_quests';

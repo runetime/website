@@ -1,9 +1,8 @@
 <?php
 namespace App\RuneTime\Messenger;
+
 use App\Runis\Core\EloquentRepository;
-/**
- * Class MessageRepository
- */
+
 class MessageRepository extends EloquentRepository
 {
 	/**

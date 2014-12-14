@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Guides;
+
 use App\Runis\Core\EloquentRepository;
-/**
- * Class QuestRepository
- * @package App\RuneTime\Guides
- */
+
 class QuestRepository extends EloquentRepository
 {
 	/**

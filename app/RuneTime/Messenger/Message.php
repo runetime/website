@@ -1,12 +1,10 @@
 <?php
 namespace App\RuneTime\Messenger;
+
 use App\Runis\Core\Entity;
 use App\RuneTime\Forum\Threads\Post;
 use App\Runis\Accounts\User;
-/**
- * Class Message
- * @package App\RuneTime\Messenger
- */
+
 class Message extends Entity
 {
 	protected $table = 'messages';

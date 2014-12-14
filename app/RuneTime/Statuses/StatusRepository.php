@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Statuses;
 use App\Runis\Core\EloquentRepository;
+
+
 class StatusRepository extends EloquentRepository
 {
 	/**

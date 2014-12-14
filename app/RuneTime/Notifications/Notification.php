@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Notifications;
+
 use App\Runis\Core\Entity;
+
 class Notification extends Entity
 {
 	protected $table = 'notifications';

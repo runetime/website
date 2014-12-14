@@ -1,10 +1,8 @@
 <?php
 namespace App\RuneTime\Radio;
+
 use App\Runis\Core\Entity;
-/**
- * Class Message
- * @package App\RuneTime\Radio
- */
+
 class Message extends Entity
 {
 	protected $table = 'radio_messages';

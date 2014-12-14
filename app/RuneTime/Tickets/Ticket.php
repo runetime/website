@@ -1,8 +1,10 @@
 <?php
 namespace App\RuneTime\Tickets;
+
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\Runis\Core\Entity;
+
 class Ticket extends Entity
 {
 	protected $table = 'tickets';

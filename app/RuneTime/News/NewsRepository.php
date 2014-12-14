@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\News;
+
 use App\Runis\Core\EloquentRepository;
+
 class NewsRepository extends EloquentRepository
 {
 	/**

@@ -1,6 +1,8 @@
 <?php
 namespace App\RuneTime\Notifications;
+
 use App\Runis\Core\EloquentRepository;
+
 class NotificationRepository extends EloquentRepository
 {
 	/**
