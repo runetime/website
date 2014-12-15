@@ -9,6 +9,7 @@ class Utilities {
         });
     }
     postAJAX(path: string, data: any) {
+        data._token = $('meta[name="_token"]').attr('content');
         return $.ajax({
             url: path,
             type: 'post',
