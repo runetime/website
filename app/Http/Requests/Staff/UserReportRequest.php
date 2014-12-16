@@ -1,11 +1,10 @@
-<?php namespace App\Http\Requests\Staff;
+<?php
+namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
-/**
- * Class UserReportRequest
- * @package App\Http\Requests
- */
-class UserReportRequest extends Request {
+
+class UserReportRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.

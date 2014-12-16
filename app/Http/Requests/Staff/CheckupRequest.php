@@ -1,11 +1,10 @@
-<?php namespace App\Http\Requests\Staff;
+<?php
+namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
-/**
- * Class CheckupRequest
- * @package App\Http\Requests
- */
-class CheckupRequest extends Request {
+
+class CheckupRequest extends Request
+{
 
 	/**
 	 * Get the validation rules that apply to the request.
