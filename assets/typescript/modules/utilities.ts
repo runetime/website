@@ -17,7 +17,7 @@ class Utilities {
             async: true
         });
     }
-    public static timeAgo(ts: number) {
+    public timeAgo(ts: number) {
         var nowTs = Math.floor(Date.now() / 1000),
             seconds = nowTs - ts;
         if(seconds > 2 * 24 * 3600) {
@@ -38,7 +38,7 @@ class Utilities {
             return "1 second ago";
         }
     }
-    public static currentTime() {
+    public currentTime() {
         return Math.floor(Date.now() / 1000);
     }
     public JSONDecode(json: string) {
