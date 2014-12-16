@@ -53,8 +53,8 @@
 								{!! \Link::name($status->author->id) !!}
 								<br />
 								<p class='inline'>{!! $status->posts[0]->contents_parsed !!}</p>
-								<a href='/forums/statuses/{{ \String::slugEncode($status->id, 'by-', $status->author->display_name) }}#comments' title='View {{ $status->reply_count }}'>
-									@lang('utilities.read_comments_amount', ['amount' => $status->reply_count])
+								<a href='/forums/statuses/{{ \String::slugEncode($status->id, 'by-', $status->author->display_name) }}#comments'>
+									@lang('utilities.read_comments_amount', ['amount' => $status->reply_count - 1])
 								</a>
 							</div>
 						</div>
