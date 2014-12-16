@@ -7,11 +7,6 @@
 	.navbar-brand{
 		margin-top:-7px;
 	}
-	@media (min-width:$screen-xs){
-		.dropdown:hover .dropdown-menu{
-			display:block;
-		}
-	}
 	.dropdown-menu{
 		background:#222;
 		color:#ababab !important;
@@ -43,5 +38,8 @@
 				border-bottom:1px solid $border;
 			}
 		}
+	}
+	.open > a {
+		background-color:transparent !important;
 	}
 }
