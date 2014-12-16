@@ -7066,10 +7066,6 @@ body {
     border-bottom: 1px solid #33B5E5; }
   .navbar .navbar-brand {
     margin-top: -7px; }
-  @media (min-width: 480px) {
-    .navbar .dropdown:hover .dropdown-menu {
-      display: block; }
- }
   .navbar .dropdown-menu {
     background: #222;
     color: #ababab !important; }
@@ -7090,6 +7086,8 @@ body {
     border-bottom: 1px solid transparent; }
     .navbar > div > div > ul > li > a:hover {
       border-bottom: 1px solid #2991B8; }
+  .navbar .open > a {
+    background-color: transparent !important; }
 
 .wrapper, .wrapper-dark, .wrapper-small, .wrapper-holo, .wrapper-xs, .wrapper-none {
   margin: 0 auto;
