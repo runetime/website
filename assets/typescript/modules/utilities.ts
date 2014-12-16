@@ -17,7 +17,7 @@ class Utilities {
             async: true
         });
     }
-    timeAgo(ts: number) {
+    public static timeAgo(ts: number) {
         var nowTs = Math.floor(Date.now() / 1000),
             seconds = nowTs - ts;
         if(seconds > 2 * 24 * 3600) {
@@ -38,16 +38,21 @@ class Utilities {
             return "1 second ago";
         }
     }
-    currentTime() {
+    public static currentTime() {
         return Math.floor(Date.now() / 1000);
     }
-    JSONDecode(json: string) {
+    public JSONDecode(json: string) {
         return $.parseJSON(json);
     }
-    scrollTo(element: any, time: number) {
+    public scrollTo(element: any, time: number) {
         $('html, body').animate({
             scrollTop: $(element).offset().top
         }, time);
+    }
+
+    public formToken(token: string) {
+        token = atob(token);
+        $('form').append("<input type='hidden' name='_token' value='" + token + "' />");
     }
 }
 utilities = new Utilities();

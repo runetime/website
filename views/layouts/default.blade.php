@@ -251,6 +251,6 @@ $current = $nav;
 			</a>
 		</div>
 		<div id='loading'></div>
-		<script>$(function(){$('form').append("<input type='hidden' name='_token' value='{!! csrf_token() !!}' />")});</script>
+		<script>$(function(){utilities.formToken('{{ base64_encode(csrf_token()) }}');});</script>
 	</body>
 </html>
