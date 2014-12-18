@@ -2,10 +2,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Staff\AdminIPBanRequest;
+use App\Http\Requests\Staff\UserChatboxRemoveRequest;
+use App\Http\Requests\Staff\UserForumPostsRequest;
+use App\Http\Requests\Staff\UserSearchRequest;
 use App\RuneTime\Bans\IP;
 use App\RuneTime\Bans\IPRepository;
+use App\RuneTime\Chat\Chat;
+use App\RuneTime\Chat\ChatRepository;
 use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Checkup\CheckupRepository;
+use App\RuneTime\Forum\Threads\Post;
+use App\RuneTime\Forum\Threads\PostRepository;
 use App\Runis\Accounts\RoleRepository;
 use App\Runis\Accounts\UserRepository;
 use App\Runis\Accounts\UserRole;
@@ -14,6 +21,10 @@ use App\Runis\Accounts\UserRoleRepository;
 class StaffAdminController extends BaseController
 {
 	/**
+	 * @var ChatRepository
+	 */
+	private $chatbox;
+	/**
 	 * @var CheckupRepository
 	 */
 	private $checkups;
@@ -21,6 +32,10 @@ class StaffAdminController extends BaseController
 	 * @var IPRepository
 	 */
 	private $ips;
+	/**
+	 * @var PostRepository
+	 */
+	private $posts;
 	/**
 	 * @var RoleRepository
 	 */
@@ -35,16 +50,27 @@ class StaffAdminController extends BaseController
 	private $users;
 
 	/**
+	 * @param ChatRepository     $chatbox
 	 * @param CheckupRepository  $checkups
 	 * @param IPRepository       $ips
+	 * @param PostRepository     $posts
 	 * @param RoleRepository     $roles
 	 * @param UserRoleRepository $userRoles
 	 * @param UserRepository     $users
 	 */
-	public function __construct(CheckupRepository $checkups, IPRepository $ips, RoleRepository $roles, UserRoleRepository $userRoles, UserRepository $users)
-	{
+	public function __construct(
+		ChatRepository $chatbox,
+		CheckupRepository $checkups,
+		IPRepository $ips,
+		PostRepository $posts,
+		RoleRepository $roles,
+		UserRoleRepository $userRoles,
+		UserRepository $users
+	) {
+		$this->chatbox = $chatbox;
 		$this->checkups = $checkups;
 		$this->ips = $ips;
+		$this->posts = $posts;
 		$this->roles = $roles;
 		$this->userRoles = $userRoles;
 		$this->users = $users;
@@ -99,9 +125,12 @@ class StaffAdminController extends BaseController
 	 *
 	 * @return string
 	 */
-	public function postIPBan(AdminIPBanRequest $form)
+	public function postIpBan(AdminIPBanRequest $form)
 	{
-		$response = ['done' => false];
+		$response = [
+			'done'       => false,
+			'ip_address' => $form->ip,
+		];
 		$ban = with(new IP)->saveNew(\Auth::user()->id, \String::encodeIP($form->ip), $form->contents, IP::STATUS_ACTIVE);
 
 		if(!empty($ban)) {
@@ -167,6 +196,43 @@ class StaffAdminController extends BaseController
 	}
 
 	/**
+	 * @param UserChatboxRemoveRequest $form
+	 *
+	 * @return string
+	 */
+	public function postUserChatboxRemove(UserChatboxRemoveRequest $form)
+	{
+		$response = ['done' => false];
+
+		$user = $this->users->getByDisplayName($form->username);
+		$this->chatbox->setStatusByUserId(Chat::STATUS_INVISIBLE, $user->id);
+
+		$response['done'] = true;
+		$response['name'] = $form->username;
+
+		return json_encode($response);
+	}
+
+	/**
+	 * @param UserForumPostsRequest $form
+	 *
+	 * @return string
+	 */
+	public function postUserForumPosts(UserForumPostsRequest $form)
+	{
+		$response = ['done' => false];
+
+		$user = $this->users->getByDisplayName($form->username);
+
+		$this->posts->setStatusByUser(Post::STATUS_INVISIBLE, $user->id);
+
+		$response['done'] = true;
+		$response['name'] = $form->username;
+
+		return json_encode($response);
+	}
+
+	/**
 	 * @param int $page
 	 *
 	 * @return \Illuminate\View\View
@@ -185,21 +251,27 @@ class StaffAdminController extends BaseController
 	}
 
 	/**
-	 * @param $id
+	 * @param UserSearchRequest $form
 	 *
-	 * @return \Illuminate\View\View
+	 * @return string
 	 */
+	public function postUserSearch(UserSearchRequest $form)
+	{
+		$response = $this->users->getWildcardByName($form->name);
+
+		return json_encode($response);
+	}
+
 	public function getUserView($id)
 	{
-		$user = $this->users->getById($id);
+		$user = $this->users->getByid($id);
 		if(empty($user)) {
 			return \Error::abort(404);
 		}
 
-		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title'), 'staff/administrator/users' => trans('staff.admin.users.title')]);
+		$this->nav('runetime.staff.staff');
 		$this->title(trans('utilities.name', ['name' => $user->display_name]));
-
 		return $this->view('staff.administrator.users.view', compact('user'));
 	}
 }
