@@ -207,4 +207,19 @@ class UserRepository extends EloquentRepository
 		return $this->model->
 			count();
 	}
+
+	/**
+	 * @param $name
+	 *
+	 * @return mixed
+	 */
+	public function getWildcardByName($name)
+	{
+		return $this->model->
+			where('display_name', '=', $name)->
+			orWhere('display_name', 'LIKE', '%' . $name)->
+			orWhere('display_name', 'like', '%' . $name)->
+			orWhere('display_name', 'LIKE', '%' . $name . '%')->
+			get();
+	}
 }

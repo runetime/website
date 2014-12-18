@@ -82,4 +82,17 @@ class PostRepository extends EloquentRepository
 			take($amount)->
 			get();
 	}
+
+	/**
+	 * @param $statusId
+	 * @param $userId
+	 */
+	public function setStatusByUser($statusId, $userId)
+	{
+		$this->model->
+			where('author_id', '=', $userId)->
+			update([
+				'status' => $statusId,
+			]);
+	}
 }

@@ -1,6 +1,6 @@
 var utilities;
 class Utilities {
-    getAJAX(path: string) {
+    public getAJAX(path: string) {
         return $.ajax({
             url: path,
             type: 'get',
@@ -8,7 +8,7 @@ class Utilities {
             async: true
         });
     }
-    postAJAX(path: string, data: any) {
+    public postAJAX(path: string, data: any) {
         data._token = $('meta[name="_token"]').attr('content');
         return $.ajax({
             url: path,

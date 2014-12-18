@@ -25,9 +25,9 @@
                         </label>
                         <div class='col-lg-10'>
                             <input id='mute-time' class='form-control' type='text' placeholder='ex: 3, 7, 48' required />
-										<span class='help-block'>
-											Type "infinite" for a permanent mute.
-										</span>
+                            <span class='help-block'>
+                                Type "infinite" for a permanent mute.
+                            </span>
                         </div>
                     </div>
                     <div class='form-group'>

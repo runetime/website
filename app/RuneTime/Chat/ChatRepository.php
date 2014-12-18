@@ -123,6 +123,25 @@ class ChatRepository extends EloquentRepository
 		}
 	}
 
+	/**
+	 * @param $statusId
+	 * @param $userId
+	 */
+	public function setStatusByUserId($statusId, $userId)
+	{
+		$this->model->
+			where('author_id', '=', $userId)->
+			update([
+				'status' => $statusId,
+			]);
+	}
+
+	/**
+	 * @param        $status
+	 * @param string $op
+	 *
+	 * @return mixed
+	 */
 	public function getByStatus($status, $op = '=')
 	{
 		return $this->model->
