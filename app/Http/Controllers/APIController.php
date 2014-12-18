@@ -22,7 +22,7 @@ class APIController extends BaseController
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getUser(UserRequest $form)
+	public function postUser(UserRequest $form)
 	{
 		$user = $this->users->getById($form->id);
 
