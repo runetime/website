@@ -140,6 +140,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'laravel\Socialite\SocialiteServiceProvider',
 
 		/*
 		 * Extras
@@ -214,6 +215,7 @@ return [
 		'Img'        => 'Intervention\Image\Facades\Image',
 		'HTMLMin'    => 'GrahamCampbell\HTMLMin\Facades\HTMLMin',
 		'Error'      => 'App\Utilities\Error',
+		'Socialite'  => 'Laravel\Socialite\Facades\Socialite',
 
 	],
 

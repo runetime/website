@@ -62,6 +62,14 @@ class AuthController extends BaseController
 	}
 
 	/**
+	 *
+	 */
+	public function getLoginTwitter()
+	{
+		\Socialite::with('twitter')->redirect();
+	}
+
+	/**
 	 * @param LoginRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
