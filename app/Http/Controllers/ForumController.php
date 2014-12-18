@@ -160,7 +160,10 @@ class ForumController extends BaseController
 		if(!\Auth::check() || !\Auth::user()->isCommunity()) {
 			$posts = $posts->where('status', '=', Post::STATUS_VISIBLE);
 			$posts = $posts->skip(($page - 1) * Thread::POSTS_PER_PAGE)->take(Thread::POSTS_PER_PAGE)->get();
+		} else {
+			$posts = $posts->get();
 		}
+
 
 		// Breadcrumbs
 		$bc = [];
