@@ -3,6 +3,18 @@
 get('about', 'AboutController@getIndex');
 
 /**
+ * API
+ */
+Route::group(['prefix' => 'api'], function() {
+	/**
+	 * V1
+	 */
+	Route::group(['prefix' => 'v1'], function() {
+		post('users', 'APIController@postUser');
+	});
+});
+
+/**
  * Auth
  */
 Route::group([], function() {
