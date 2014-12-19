@@ -7,9 +7,33 @@
 }
 
 .pagination{
-	li a{
-		background-color:rgba(65, 65, 65, 1) !important;
-		border:1px solid rgba(51, 181, 229, 1) !important;
+	$pagination-height: 37px;
+	background:rgba(69, 69, 69, 1);
+	border-radius:0em !important;
+	height: $pagination-height;
+	margin-bottom:0px;
+	padding:0em !important;
+	li{
+		color:$linkColor !important;
+		height: $pagination-height;
+		&.active {
+			color: rgba(112, 112, 112, 1) !important;
+		}
+		&::before {
+			content: none !important;
+			padding: 0em 0em;
+		}
+		&:not(.active):hover {
+			background: rgba(61, 61, 61, 1);
+		}
+		a,
+		span{
+			align-items: center;
+			display: flex;
+			height: $pagination-height;
+			justify-content: center;
+			padding:0em 1em !important;
+		}
 	}
 }
 .breadcrumb{
@@ -349,4 +373,10 @@ tbody.rowlink tr {
 	label {
 		color: rgba(221, 221, 221, 1);
 	}
+}
+
+
+// Row override
+.row {
+	margin: 0 !important;
 }

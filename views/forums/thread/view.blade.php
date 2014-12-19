@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper'>
+			<div class='wrapper wrapper-none'>
 				<div class='thread'>
 					<div class='row'>
 						<div class='col-xs-4 col-sm-3 col-md-2 col-lg-1'>

@@ -1,11 +1,15 @@
-					<ul class='pagination'>
+					<ol class='breadcrumb'>
 						<li>
 							<a href='{{ $url }}'>
 								<i class='fa fa-angle-double-left'></i>
 							</a>
 						</li>
 @for($pageX = 1; $pageX <= $pages; $pageX++)
-						<li{!! $pageX !== $page ? "" : " class='current'" !!}>
+	@if($pageX === $page)
+						<li class='current'>
+	@else
+						<li>
+	@endif
 							<a href='{{ $url }}/page={{ $pageX }}'>
 								{{ $pageX }}
 							</a>
@@ -16,4 +20,4 @@
 								<i class='fa fa-angle-double-right'></i>
 							</a>
 						</li>
-					</ul>
+					</ol>

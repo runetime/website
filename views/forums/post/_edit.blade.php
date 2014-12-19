@@ -8,8 +8,8 @@ if(!isset($contents)) $contents = '';
 		<div class='hidden-xs col-sm-3 col-md-2 col-lg-1'>
 			{!! \Image::userPhoto(\Auth::user()->id, ['img-rounded']) !!}
 		</div>
-		<div class='col-xs-12 col-sm-9 col-md-10 col-lg-11'>
-			<textarea name='contents' id='contents' rows='15' class='form-control' rt-data='post.edit'>{{ $contents }}</textarea>
+		<div class='col-xs-12 col-sm-9 col-md-10 col-lg-11 padding-none'>
+			<textarea name='contents' id='contents' rows='15' class='form-control padding-none' rt-data='post.edit'>{{ $contents }}</textarea>
 			<p>
 				<ul class='list-inline'>
 					<li>
