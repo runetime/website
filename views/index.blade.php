@@ -1,25 +1,27 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper'>
-				<div class='row'>
+			<div class='wrapper wrapper-none'>
+				<div class='row row-flat'>
 					<div class='col-xs-12 col-sm-8 col-md-9'>
 						<h2>
 							@lang('news.title')
 						</h2>
 @foreach($news as $newsPiece)
 						<div class='news'>
-							<div class='holo-box-dark'>
+							<div class='item'>
 @if($newsPiece->hasImage())
 								<img src='/img/news/thumbnail/{{ $newsPiece->id }}.png' alt='{{ $newsPiece->title }}' class='pull-right img-news img-responsive' />
 @endif
-								<h3>
-									{{ $newsPiece->title }}
-								</h3>
-								<span class='text-muted'>{{ \Time::long($newsPiece->created_at) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
-								<p>
-									{!! $newsPiece->contents_parsed !!}
-								</p>
-								<ul class='list-inline'>
+								<div class='body'>
+									<h3>
+										{{ $newsPiece->title }}
+									</h3>
+									<span class='text-muted'>{{ \Time::long($newsPiece->created_at) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
+									<p>
+										{!! $newsPiece->contents_parsed !!}
+									</p>
+								</div>
+								<ul class='list-inline material-bar'>
 									<li>
 										<a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}' title='{{ $newsPiece->title }}'>
 											@lang('utilities.read_more')
@@ -35,7 +37,7 @@
 						</div>
 @endforeach
 					</div>
-					<div class='col-xs-12 col-sm-4 col-md-3'>
+					<div class='col-xs-12 col-sm-4 col-md-3 section-light'>
 						<h3>
 							@lang('home.status_updates')
 						</h3>
