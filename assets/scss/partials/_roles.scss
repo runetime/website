@@ -1,277 +1,277 @@
-.members{
+.members {
 }
-.members-administrator{
+.members-administrator {
 	@extend .members;
-	color:$roles-administrator-color !important;
-	&::before{
-		content:url($roles-administrator-image);
+	color: $roles-administrator-color !important;
+	&::before {
+		content: url($roles-administrator-image);
 	}
 }
-.members-administrator-no-img{
+.members-administrator-no-img {
 	@extend .members;
-	color:$roles-administrator-color !important;
+	color: $roles-administrator-color !important;
 }
-.members-radio-team-leader{
+.members-radio-team-leader {
 	@extend .members;
-	color:$roles-radio-team-color !important;
-	&::before{
-		content:url($roles-radio-team-leader-image);
-		top:8px;
+	color: $roles-radio-team-color !important;
+	&::before {
+		content: url($roles-radio-team-leader-image);
+		top: 8px;
 	}
 }
-.members-radio-team-leader-no-img{
+.members-radio-team-leader-no-img {
 	@extend .members;
-	color:$roles-radio-team-color !important;
+	color: $roles-radio-team-color !important;
 }
-.members-radio-dj{
+.members-radio-dj {
 	@extend .members;
-	color:$roles-radio-team-color !important;
-	&::before{
-		content:url($roles-radio-team-image);
+	color: $roles-radio-team-color !important;
+	&::before {
+		content: url($roles-radio-team-image);
 	}
 }
-.members-radio-dj-no-img{
+.members-radio-dj-no-img {
 	@extend .members;
-	color:$roles-radio-team-color !important;
+	color: $roles-radio-team-color !important;
 }
-.members-media-team-leader{
+.members-media-team-leader {
 	@extend .members;
-	color:$roles-radio-team-color !important;
-	&::before{
-		content:url($roles-media-team-leader-image);
+	color: $roles-radio-team-color !important;
+	&::before {
+		content: url($roles-media-team-leader-image);
 	}
 }
-.members-media-team-leader-no-img{
+.members-media-team-leader-no-img {
 	@extend .members;
-	color:$roles-radio-team-color !important;
+	color: $roles-radio-team-color !important;
 }
-.members-media-team{
+.members-media-team {
 	@extend .members;
-	color:$roles-radio-team-color !important;
-	&::before{
-		content:url($roles-media-team-image);
+	color: $roles-radio-team-color !important;
+	&::before {
+		content: url($roles-media-team-image);
 	}
 }
-.members-media-team-no-img{
+.members-media-team-no-img {
 	@extend .members;
-	color:$roles-radio-team-color !important;
+	color: $roles-radio-team-color !important;
 }
-.members-web-developer-leader{
+.members-web-developer-leader {
 	@extend .members;
-	color:$roles-web-developer-color !important;
-	left:1px;
-	&::before{
-		content:url($roles-web-developer-leader-image);
+	color: $roles-web-developer-color !important;
+	left: 1px;
+	&::before {
+		content: url($roles-web-developer-leader-image);
 	}
 }
-.members-web-developer-leader-no-img{
+.members-web-developer-leader-no-img {
 	@extend .members;
-	color:$roles-web-developer-color !important;
+	color: $roles-web-developer-color !important;
 }
-.members-web-developer{
+.members-web-developer {
 	@extend .members;
-	color:$roles-web-developer-color !important;
-	&::before{
-		content:url($roles-web-developer-image);
+	color: $roles-web-developer-color !important;
+	&::before {
+		content: url($roles-web-developer-image);
 	}
 }
-.members-web-developer-no-img{
+.members-web-developer-no-img {
 	@extend .members;
-	color:$roles-web-developer-color !important;
+	color: $roles-web-developer-color !important;
 }
-.members-content-team-leader{
+.members-content-team-leader {
 	@extend .members;
-	color:$roles-content-team-color !important;
-	&::before{
-		content:url($roles-content-team-leader-image);
+	color: $roles-content-team-color !important;
+	&::before {
+		content: url($roles-content-team-leader-image);
 	}
 }
-.members-content-team-leader-no-img{
+.members-content-team-leader-no-img {
 	@extend .members;
-	color:$roles-content-team-color !important;
+	color: $roles-content-team-color !important;
 }
-.members-content-team{
+.members-content-team {
 	@extend .members;
-	color:$roles-content-team-color !important;
-	&::before{
-		content:url($roles-content-team-image);
+	color: $roles-content-team-color !important;
+	&::before {
+		content: url($roles-content-team-image);
 	}
 }
-.members-content-team-no-img{
+.members-content-team-no-img {
 	@extend .members;
-	color:$roles-content-team-color !important;
+	color: $roles-content-team-color !important;
 }
-.members-community-team-leader{
+.members-community-team-leader {
 	@extend .members;
-	color:$roles-community-team-color !important;
-	&::before{
-		content:url($roles-community-team-leader-image);
+	color: $roles-community-team-color !important;
+	&::before {
+		content: url($roles-community-team-leader-image);
 	}
 }
-.members-community-team-leader-no-img{
+.members-community-team-leader-no-img {
 	@extend .members;
-	color:$roles-community-team-color !important;
+	color: $roles-community-team-color !important;
 }
-.members-community-team{
+.members-community-team {
 	@extend .members;
-	color:$roles-community-team-color !important;
-	&::before{
-		content:url($roles-community-team-image);
+	color: $roles-community-team-color !important;
+	&::before {
+		content: url($roles-community-team-image);
 	}
 }
-.members-community-team-no-img{
+.members-community-team-no-img {
 	@extend .members;
-	color:$roles-community-team-color !important;
+	color: $roles-community-team-color !important;
 }
-.members-events-team-leader{
+.members-events-team-leader {
 	@extend .members;
-	color:$roles-events-team-color !important;
-	&::before{
-		content:url($roles-events-team-leader-image);
+	color: $roles-events-team-color !important;
+	&::before {
+		content: url($roles-events-team-leader-image);
 	}
 }
-.members-events-team-leader-no-img{
+.members-events-team-leader-no-img {
 	@extend .members;
-	color:$roles-events-team-color !important;
+	color: $roles-events-team-color !important;
 }
-.members-events-team{
+.members-events-team {
 	@extend .members;
-	color:$roles-events-team-color !important;
-	&::before{
-		content:url($roles-events-team-image);
+	color: $roles-events-team-color !important;
+	&::before {
+		content: url($roles-events-team-image);
 	}
 }
-.members-events-team-no-img{
+.members-events-team-no-img {
 	@extend .members;
-	color:$roles-events-team-color !important;
+	color: $roles-events-team-color !important;
 }
-.members-donator{
+.members-donator {
 	@extend .members;
-	color:$roles-donator-color !important;
-	&::before{
-		content:url($roles-donator-image);
+	color: $roles-donator-color !important;
+	&::before {
+		content: url($roles-donator-image);
 	}
 }
-.members-donator-no-img{
+.members-donator-no-img {
 	@extend .members;
-	color:$roles-donator-color !important;
+	color: $roles-donator-color !important;
 }
 // Colors
 $barColor: darkgoldenrod;
 $overlayColor: #fffde8;
 $backColor: #2f3439;
-@mixin badge{
+@mixin badge {
 	@extend .center-block;
-	float:none;
-	position:relative;
-	width:52px;
-	height:52px;
-	border-radius:50%;
-	border:2px solid $backColor !important;
-	background-color:$barColor !important;
+	float: none;
+	position: relative;
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	border: 2px solid $backColor !important;
+	background-color: $barColor !important;
 	display: block;
-	>div{
-		background:{
-			color:#373737 !important;
-			position:center center !important;
-			repeat:no-repeat !important;
+	>div {
+		background: {
+			color: #373737 !important;
+			position: center center !important;
+			repeat: no-repeat !important;
 		}
-		border-radius:50%;
-		font-size:16px;
-		height:40px;
-		line-height:40px;
-		margin:{
-			left:4px;
-			top:4px;
+		border-radius: 50%;
+		font-size: 16px;
+		height: 40px;
+		line-height: 40px;
+		margin: {
+			left: 4px;
+			top: 4px;
 		}
-		position:absolute;
-		text-align:center;
-		width:40px;
+		position: absolute;
+		text-align: center;
+		width: 40px;
 	}
 }
-@mixin badge-progress($number){
-	$step:10;
-	$maximum:10;
-	$percentage:$number * $step;
-	$increment:360 / $maximum;
+@mixin badge-progress($number) {
+	$step: 10;
+	$maximum: 10;
+	$percentage: $number * $step;
+	$increment: 360 / $maximum;
 	$radial: $increment * $number;
-	$half:round($maximum / 2);
-	@if $number < $half{
-		$nextdeg:90deg + $increment * $number;
-		background-image:linear-gradient(90deg, $backColor 50%, transparent 50%, transparent), linear-gradient($nextdeg, $barColor 50%, $backColor 50%, $backColor);
+	$half: round($maximum / 2);
+	@if $number < $half {
+		$nextdeg: 90deg + $increment * $number;
+		background-image: linear-gradient(90deg, $backColor 50%, transparent 50%, transparent), linear-gradient($nextdeg, $barColor 50%, $backColor 50%, $backColor);
 	}
-	@else{
-		$nextdeg:-90deg + $increment * ($number - $half);
+	@else {
+		$nextdeg: -90deg + $increment * ($number - $half);
 		background-image:linear-gradient($nextdeg, $barColor 50%, transparent 50%, transparent), linear-gradient(270deg, $barColor 50%, $backColor 50%, $backColor);
 	}
 }
-.badge-novice-member{
+.badge-novice-member {
 	@include badge;
 	@include badge-progress(1);
-	>div{
-		background-image:url('/img/forums/roles/badge/opal.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/opal.png');
 	}
 }
-.badge-opal-member{
+.badge-opal-member {
 	@include badge;
 	@include badge-progress(2);
-	>div{
-		background-image:url('/img/forums/roles/badge/opal.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/opal.png');
 	}
 }
-.badge-jade-member{
+.badge-jade-member {
 	@include badge;
 	@include badge-progress(3);
-	>div{
-		background-image:url('/img/forums/roles/badge/jade.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/jade.png');
 	}
 }
-.badge-topaz-member{
+.badge-topaz-member {
 	@include badge;
 	@include badge-progress(4);
-	>div{
-		background-image:url('/img/forums/roles/badge/topaz.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/topaz.png');
 	}
 }
-.badge-sapphire-member{
+.badge-sapphire-member {
 	@include badge;
 	@include badge-progress(5);
-	>div{
-		background-image:url('/img/forums/roles/badge/sapphire.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/sapphire.png');
 	}
 }
-.badge-emerald-member{
+.badge-emerald-member {
 	@include badge;
 	@include badge-progress(6);
-	>div{
-		background-image:url('/img/forums/roles/badge/emerald.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/emerald.png');
 	}
 }
-.badge-ruby-member{
+.badge-ruby-member {
 	@include badge;
 	@include badge-progress(7);
-	>div{
-		background-image:url('/img/forums/roles/badge/ruby.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/ruby.png');
 	}
 }
-.badge-diamond-member{
+.badge-diamond-member {
 	@include badge;
 	@include badge-progress(8);
-	>div{
-		background-image:url('/img/forums/roles/badge/diamond.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/diamond.png');
 	}
 }
-.badge-dragonstone-member{
+.badge-dragonstone-member {
 	@include badge;
 	@include badge-progress(9);
-	>div{
-		background-image:url('/img/forums/roles/badge/dragonstone.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/dragonstone.png');
 	}
 }
-.badge-onyx-member{
+.badge-onyx-member {
 	@include badge;
 	@include badge-progress(10);
-	>div{
-		background-image:url('/img/forums/roles/badge/onyx.png');
+	>div {
+		background-image: url('/img/forums/roles/badge/onyx.png');
 	}
 }

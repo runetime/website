@@ -9,9 +9,9 @@ class ChatTest extends TestCase {
 	public function testStart()
 	{
 		$channel = Channel::orderBy('created_at', 'desc')->first();
-		$form = [
+		$form = $this->form([
 			'channel' => $channel->name_trim,
-		];
+		]);
 		$response = $this->call('POST', 'chat/start', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -26,9 +26,9 @@ class ChatTest extends TestCase {
 		$id = 0;
 		if(!empty($chat))
 			$id = $chat->id;
-		$form = [
+		$form = $this->form([
 			'id' => $id,
-		];
+		]);
 		$response = $this->call('POST', 'chat/update', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -41,10 +41,10 @@ class ChatTest extends TestCase {
 	{
 		$this->login();
 		$channel = Channel::orderBy('created_at', 'desc')->first();
-		$data = [
+		$data = $this->form([
 			'channel' => $channel->name_trim,
 			'contents' => '**test**',
-		];
+		]);
 		$response = $this->call('POST', 'chat/post/message', $data);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -66,9 +66,9 @@ class ChatTest extends TestCase {
 	public function testCheckChannel()
 	{
 		$channel = Channel::orderBy('created_at', 'desc')->first();
-		$data = [
+		$data = $this->form([
 			'channel' => $channel->id,
-		];
+		]);
 		$response = $this->call('POST', 'chat/channels/check', $data);
 
 		$this->assertEquals(200, $response->getStatusCode());

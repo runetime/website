@@ -6787,7 +6787,7 @@ body {
   padding-top: 50px; }
 
 #portfolio {
-  margin: 0px; }
+  margin: 0; }
   #portfolio .title h2 {
     text-align: center; }
   #portfolio #portfolio-about p {
@@ -6806,7 +6806,7 @@ body {
 
 .page-header {
   margin-top: 0.2em !important;
-  margin-bottom: 0em !important; }
+  margin-bottom: 0 !important; }
 
 #copyright {
   background: #111;
@@ -6850,11 +6850,11 @@ body {
   border: 1px solid #222222; }
   .box > h3 {
     background: #111111;
-    margin: 0em;
+    margin: 0;
     padding: 0.25em 0.5em; }
 
 #chatbox-holder {
-  padding: 0em !important; }
+  padding: 0 !important; }
 
 #chatbox {
   width: 100%; }
@@ -6872,7 +6872,7 @@ body {
         color: #AA66CC; }
       #chatbox #chatbox-messages .msg p {
         display: inline;
-        margin-bottom: 0em; }
+        margin-bottom: 0; }
       #chatbox #chatbox-messages .msg:nth-child(even) {
         background: #121212; }
       #chatbox #chatbox-messages .msg:nth-child(odd) {
@@ -7055,10 +7055,10 @@ body {
   padding: 2em 2em;
   width: 100%; }
 
-.wrapper a, .wrapper-dark a, .wrapper-small a, .wrapper-holo a, .wrapper-xs a, .wrapper-none a, .wrapper-flat a {
+.wrapper, .wrapper-dark, .wrapper-small, .wrapper-holo, .wrapper-xs, .wrapper-none, .wrapper-flat a {
   color: #fff;
   text-decoration: none; }
-  .wrapper a:hover, .wrapper-dark a:hover, .wrapper-small a:hover, .wrapper-holo a:hover, .wrapper-xs a:hover, .wrapper-none a:hover, .wrapper-flat a:hover {
+  .wrapper:hover, .wrapper-dark:hover, .wrapper-small:hover, .wrapper-holo:hover, .wrapper-xs:hover, .wrapper-none:hover, .wrapper-flat a:hover {
     text-decoration: none; }
 
 .wrapper-dark {
@@ -7073,21 +7073,21 @@ body {
 
 .wrapper-xs {
   padding-top: 0.1em;
-  padding-left: 0em;
-  padding-right: 0em;
+  padding-left: 0;
+  padding-right: 0;
   padding-bottom: 0.1em; }
 
 .wrapper-none {
   padding-top: 0.1em;
-  padding-left: 0em;
-  padding-right: 0em;
-  padding-bottom: 0em; }
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0; }
 
 .wrapper-none-res {
   padding-top: 0.1em;
-  padding-left: 0em;
-  padding-right: 0em;
-  padding-bottom: 0em; }
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0; }
 
 #top {
   bottom: 15px;
@@ -7481,14 +7481,14 @@ body {
   margin: 0 auto; }
 
 .row-margin {
-  margin: 0em !important; }
+  margin: 0 !important; }
 
 .pagination {
   background: #454545;
-  border-radius: 0em !important;
+  border-radius: 0 !important;
   height: 37px;
-  margin-bottom: 0px;
-  padding: 0em !important; }
+  margin-bottom: 0;
+  padding: 0 !important; }
   .pagination li {
     color: #fff !important;
     height: 37px; }
@@ -7496,7 +7496,7 @@ body {
       color: #707070 !important; }
     .pagination li::before {
       content: none !important;
-      padding: 0em 0em; }
+      padding: 0 0; }
     .pagination li:not(.active):hover {
       background: #3d3d3d; }
     .pagination li a, .pagination li span {
@@ -7504,14 +7504,14 @@ body {
       display: flex;
       height: 37px;
       justify-content: center;
-      padding: 0em 1em !important; }
+      padding: 0 1em !important; }
 
 .breadcrumb {
   background: #454545;
-  border-radius: 0em !important;
+  border-radius: 0 !important;
   height: 37px;
-  margin-bottom: 0px;
-  padding: 0em !important; }
+  margin-bottom: 0;
+  padding: 0 !important; }
   .breadcrumb li {
     color: #fff !important;
     height: 37px; }
@@ -7519,7 +7519,7 @@ body {
       color: #707070 !important; }
     .breadcrumb li::before {
       content: none !important;
-      padding: 0em 0em; }
+      padding: 0 0; }
     .breadcrumb li:not(.active):hover {
       background: #3d3d3d; }
     .breadcrumb li a, .breadcrumb li span {
@@ -7527,7 +7527,7 @@ body {
       display: flex;
       height: 37px;
       justify-content: center;
-      padding: 0em 1em !important; }
+      padding: 0 1em !important; }
 
 ::-webkit-scrollbar {
   background: #191919;
@@ -7548,8 +7548,8 @@ body {
   width: 100%; }
 
 .row-flat {
-  margin-left: 0em !important;
-  margin-right: 0em !important; }
+  margin-left: 0 !important;
+  margin-right: 0 !important; }
   .row-flat > div {
     padding: 0 !important; }
 
@@ -7561,7 +7561,7 @@ body {
     border-color: #616161; }
 
 .padding-none {
-  padding: 0em !important; }
+  padding: 0 !important; }
 
 /* entire container, keeps perspective */
 .flip-container {
@@ -7769,7 +7769,7 @@ tbody.rowlink tr:hover {
       color: #707070 !important; }
     .material-bar li::before {
       content: none !important;
-      padding: 0em 0em; }
+      padding: 0 0; }
     .material-bar li:not(.active):hover {
       background: #3d3d3d; }
     .material-bar li a, .material-bar li span {

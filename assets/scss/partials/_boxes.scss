@@ -1,27 +1,27 @@
-.holo-line-block{
-	border-bottom:1px solid #1b5e78;
+.holo-line-block {
+	border-bottom: 1px solid #1b5e78;
 }
-.holo-box{
-	background:#515151;
-	padding:1em;
-	text-decoration:none;
+.holo-box {
+	background: #515151;
+	padding: 1em;
+	text-decoration: none;
 }
-.holo-box-dark{
+.holo-box-dark {
 	@extend .holo-box;
-	background:#282828;
-	.holo-box-in{
-		background:#1a1a1a;
-		margin-bottom:1em;
-		padding:0.25em;
+	background: #282828;
+	.holo-box-in {
+		background: #1a1a1a;
+		margin-bottom: 1em;
+		padding: 0.25em;
 	}
 }
-.box{
-	background:#252525;
-	margin-bottom:.5em;
-	border:1px solid #222222;
-	>h3{
-		background:#111111;
-		margin:0em;
-		padding:.25em .5em;
+.box {
+	background: #252525;
+	margin-bottom: .5em;
+	border: 1px solid #222222;
+	>h3 {
+		background: #111111;
+		margin: 0;
+		padding: .25em .5em;
 	}
 }

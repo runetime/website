@@ -37,12 +37,12 @@ class ForumTest extends TestCase {
 	public function testThreadPostCreate()
 	{
 		$this->login();
-		$data = [
+		$data = $this->form([
 			'title'    => 'title',
 			'questions' => [],
 			'answers'   => [],
 			'contents' => 'contents',
-		];
+		]);
 		$response = $this->call('POST', 'forums/create/10-test', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -74,9 +74,9 @@ class ForumTest extends TestCase {
 	public function testThreadReply()
 	{
 		$this->login();
-		$data = [
+		$data = $this->form([
 			'contents' => 'test',
-		];
+		]);
 		$response = $this->call('POST', 'forums/thread/1-test/reply', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -111,9 +111,9 @@ class ForumTest extends TestCase {
 	{
 		$this->login();
 		$post = \App\RuneTime\Forum\Threads\Post::orderBy('created_at', 'desc')->first();
-		$data = [
+		$data = $this->form([
 			'contents' => 'bad post',
-		];
+		]);
 		$response = $this->call('POST', 'forums/post/' . $post->id . '/report', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -126,9 +126,9 @@ class ForumTest extends TestCase {
 	{
 		$this->login();
 		$post = \App\RuneTime\Forum\Threads\Post::orderBy('created_at', 'desc')->first();
-		$data = [
+		$data = $this->form([
 			'vote' => 'up',
-		];
+		]);
 		$response = $this->call('POST', 'forums/post/' . $post->id . '/report', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());

@@ -17,12 +17,12 @@ class AuthTest extends TestCase {
 	 */
 	public function testSignupPost()
 	{
-		$credentials = [
+		$credentials = $this->form([
 			'email'        => 'test' . time() . '@example.net',
 			'display_name' => 'test' . time(),
 			'password'     => 'test',
 			'password2'    => 'test',
-		];
+		]);
 		$response = $this->action('POST', 'AuthController@postSignupForm', null, $credentials);
 
 		$user = User::orderBy('created_at', 'desc')->first();
@@ -40,6 +40,7 @@ class AuthTest extends TestCase {
 	public function testLoginIndex()
 	{
 		$response = $this->call('GET', 'login');
+
 		$this->assertEquals(200, $response->getStatusCode());
 	}
 
@@ -55,9 +56,10 @@ class AuthTest extends TestCase {
 			'password'     => 'test',
 			'password2'    => 'test',
 		];
-		if(\Auth::validate($credentials))
+		if(\Auth::validate($credentials)) {
 			$this->assertTrue(true);
-		else
+		} else {
 			$this->assertFalse(true);
+		}
 	}
 }

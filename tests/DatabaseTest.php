@@ -38,14 +38,14 @@ class DatabaseTest extends TestCase {
 	public function testItemPostCreate()
 	{
 		$this->login();
-		$data = [
+		$data = $this->form([
 			'name'        => 'name',
 			'examine'     => 'examine',
 			'description' => 'description',
 			'membership'  => 1,
 			'tradable'    => 0,
 			'quest_item'  => 1,
-		];
+		]);
 		$response = $this->call('POST', 'databases/items/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -88,7 +88,7 @@ class DatabaseTest extends TestCase {
 	public function testMonsterPostCreate()
 	{
 		$this->login();
-		$data = [
+		$data = $this->form([
 			'name'              => 'name',
 			'examine'           => 'examine',
 			'stats'             => 'stats',
@@ -96,7 +96,7 @@ class DatabaseTest extends TestCase {
 			'drops'             => 'drops',
 			'membership'        => 1,
 			'other_information' => 'test_yes',
-		];
+		]);
 		$response = $this->call('POST', 'databases/monsters/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());

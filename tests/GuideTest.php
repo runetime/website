@@ -38,10 +38,10 @@ class GuideTest extends TestCase {
 	public function testLocationPostCreate()
 	{
 		$this->login();
-		$data = [
+		$data = $this->form([
 			'name'     => 'test name',
 			'contents' => 'test contents',
-		];
+		]);
 		$response = $this->call('POST', 'guides/locations/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -84,7 +84,7 @@ class GuideTest extends TestCase {
 	public function testQuestPostCreate()
 	{
 		$this->login();
-		$data = [
+		$data = $this->form([
 			'name'               => 'name',
 			'difficulty'         => 5,
 			'length'             => 6,
@@ -99,7 +99,7 @@ class GuideTest extends TestCase {
 			'rewards'            => 'rewards',
 			'starting_point'     => 'starting point',
 			'contents'           => 'contents',
-		];
+		]);
 		$response = $this->call('POST', 'guides/quests/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());

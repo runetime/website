@@ -1,201 +1,201 @@
-.center-block{
-	display:block;
-	margin:0 auto;
+.center-block {
+	display: block;
+	margin: 0 auto;
 }
-.row-margin{
-	margin:0em !important;
+.row-margin {
+	margin:0 !important;
 }
 
-.pagination{
+.pagination {
 	$pagination-height: 37px;
-	background:rgba(69, 69, 69, 1);
-	border-radius:0em !important;
+	background: rgba(69, 69, 69, 1);
+	border-radius: 0 !important;
 	height: $pagination-height;
-	margin-bottom:0px;
-	padding:0em !important;
+	margin-bottom: 0;
+	padding: 0 !important;
 	li{
-		color:$linkColor !important;
+		color: $linkColor !important;
 		height: $pagination-height;
 		&.active {
 			color: rgba(112, 112, 112, 1) !important;
 		}
 		&::before {
 			content: none !important;
-			padding: 0em 0em;
+			padding: 0 0;
 		}
 		&:not(.active):hover {
 			background: rgba(61, 61, 61, 1);
 		}
 		a,
-		span{
+		span {
 			align-items: center;
 			display: flex;
 			height: $pagination-height;
 			justify-content: center;
-			padding:0em 1em !important;
+			padding:0 1em !important;
 		}
 	}
 }
-.breadcrumb{
+.breadcrumb {
 	$breadcrumbHeight: 37px;
-	background:rgba(69, 69, 69, 1);
-	border-radius:0em !important;
+	background: rgba(69, 69, 69, 1);
+	border-radius: 0 !important;
 	height: $breadcrumbHeight;
-	margin-bottom:0px;
-	padding:0em !important;
-	li{
-		color:$linkColor !important;
+	margin-bottom: 0;
+	padding: 0 !important;
+	li {
+		color: $linkColor !important;
 		height: $breadcrumbHeight;
 		&.active {
 			color: rgba(112, 112, 112, 1) !important;
 		}
 		&::before {
 			content: none !important;
-			padding: 0em 0em;
+			padding: 0 0;
 		}
 		&:not(.active):hover {
 			background: rgba(61, 61, 61, 1);
 		}
 		a,
-		span{
+		span {
 			align-items: center;
 			display: flex;
 			height: $breadcrumbHeight;
 			justify-content: center;
-			padding:0em 1em !important;
+			padding:0 1em !important;
 		}
 	}
 }
 
-::-webkit-scrollbar{
-	background:rgba(25, 25, 25, 1);
-	width:.75em;
+::-webkit-scrollbar {
+	background: rgba(25, 25, 25, 1);
+	width: .75em;
 }
-::-webkit-scrollbar-thumb{
-	border-radius:10px;
-	background:rgba(41,145,184,0.8);
-	box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: rgba(41, 145, 184, 0.8);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
-::-webkit-scrollbar-thumb:window-inactive{
-	background:rgba(41,145,184,0.8);
+::-webkit-scrollbar-thumb:window-inactive {
+	background:rgba(41, 145, 184, 0.8);
 }
-.inline{
-	display:inline;
+.inline {
+	display: inline;
 }
-.full-width{
-	width:100%;
+.full-width {
+	width: 100%;
 }
 .row-flat {
-	margin-left:0em !important;
-	margin-right:0em !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 	> div {
 		padding: 0 !important;
 	}
 }
-.panel-dark{
-	background:rgba(41, 41, 41, 1);
-	border-color:rgba(49, 49, 49, 1);
-	.panel-heading{
-		background-color:rgba(88, 88, 88, 1);
-		border-color:rgba(97, 97, 97, 1);
+.panel-dark {
+	background: rgba(41, 41, 41, 1);
+	border-color: rgba(49, 49, 49, 1);
+	.panel-heading {
+		background-color: rgba(88, 88, 88, 1);
+		border-color: rgba(97, 97, 97, 1);
 	}
 }
-.padding-none{
-	padding:0em !important;
+.padding-none {
+	padding:0 !important;
 }
 
 
 
-$cardHeight:200px;
-$cardWidth:200px;
+$cardHeight: 200px;
+$cardWidth: 200px;
 /* entire container, keeps perspective */
-.flip-container{
-	perspective:1000;
-	.flipper{
-		transform-style:preserve-3d;
-		transition:0.6s;
-		position:relative;
-		.front{
-			background:{
-				color:rgba(23, 23, 23, 1);
-				size:$cardWidth $cardHeight !important;
+.flip-container {
+	perspective: 1000;
+	.flipper {
+		transform-style: preserve-3d;
+		transition: 0.6s;
+		position: relative;
+		.front {
+			background: {
+				color: rgba(23, 23, 23, 1);
+				size: $cardWidth $cardHeight !important;
 			}
-			transform:rotateY(0deg);
-			z-index:2;
+			transform: rotateY(0deg);
+			z-index: 2;
 		}
-		.back{
-			transform:rotateY(180deg);
-			.back-logo >img{
-				max-height:8em;
-				max-width:$cardWidth;
+		.back {
+			transform: rotateY(180deg);
+			.back-logo >img {
+				max-height: 8em;
+				max-width: $cardWidth;
 			}
-			.back-title{
-				left:0;
-				position:absolute;
-				right:0;
-				text-align:center;
-				top:80px;
-				width:100%;
+			.back-title {
+				left: 0;
+				position: absolute;
+				right: 0;
+				text-align: center;
+				top: 80px;
+				width: 100%;
 			}
 		}
-		>div{
-			background:rgba(23, 23, 23, 1);
-			border-radius:1em;
-			backface-visibility:hidden;
-			left:0;
-			position:absolute;
-			top:0;
+		>div {
+			background: rgba(23, 23, 23, 1);
+			border-radius: 1em;
+			backface-visibility: hidden;
+			left: 0;
+			position: absolute;
+			top: 0;
 		}
 	}
 	&:hover,
-	.hover{
-		.flipper{
-			transform:rotateY(180deg);
+	.hover {
+		.flipper {
+			transform: rotateY(180deg);
 		}
 	}
 }
 .flip-container,
 .front,
-.back{
-	height:$cardHeight;
-	width:$cardWidth;
+.back {
+	height: $cardHeight;
+	width: $cardWidth;
 }
 
-.card{
-	background:rgba(23, 23, 23, 1);
-	border-left:{
-		style:solid;
-		width:4px;
-		color:transparent;
+.card {
+	background: rgba(23, 23, 23, 1);
+	border-left:  {
+		style: solid;
+		width: 4px;
+		color: transparent;
 	}
-	padding:.5em .3em;
-	&:hover{
+	padding: .5em .3em;
+	&:hover {
 		background:rgba(33, 33, 33, 1);
 	}
 }
 .card-bad {
-	border-left-color:rgba(153, 0, 0, 1);
+	border-left-color: rgba(153, 0, 0, 1);
 }
 .card-good {
-	border-left-color:rgba(0, 153, 0, 1);
+	border-left-color: rgba(0, 153, 0, 1);
 }
 .card-read {
-	border-left-color:rgba(11, 11, 11, 1);
+	border-left-color: rgba(11, 11, 11, 1);
 }
 .card-unread {
-	border-left-color:rgba(170, 170, 170, 1);
+	border-left-color: rgba(170, 170, 170, 1);
 }
 .card-hidden {
-	border-left-color:rgba(25, 255, 255, 1);
+	border-left-color: rgba(25, 255, 255, 1);
 }
 .card-locked {
-	border-left-color:rgba(86, 0, 158, 1);
+	border-left-color: rgba(86, 0, 158, 1);
 }
 .card-pinned {
-	border-left-color:rgba(237, 119, 16, 1);
+	border-left-color: rgba(237, 119, 16, 1);
 }
 .card-poll {
-	border-left-color:rgba(237, 210, 16, 1);
+	border-left-color: rgba(237, 210, 16, 1);
 }
 .card-open {
 	@extend .card-good;
@@ -214,24 +214,24 @@ $cardWidth:200px;
 .list-group {
 	.list-group-item {
 		background: rgba(31, 31, 31, 1);
-		border:1px solid rgba(23, 23, 23, 0.7);
+		border: 1px solid rgba(23, 23, 23, 0.7);
 		&:hover {
 			background: rgba(39, 39, 39, 1);
-			color:rgba(255, 255, 255, 1);
+			color: rgba(255, 255, 255, 1);
 		}
 		&.active {
 			background: rgba(37, 37, 37, 1);
-			border:1px solid rgba(37, 37, 37, 1);
+			border: 1px solid rgba(37, 37, 37, 1);
 			&:hover {
-				background:rgba(43, 43, 43, 1);
-				border:1px solid rgba(189, 189, 189, .5);
+				background: rgba(43, 43, 43, 1);
+				border: 1px solid rgba(189, 189, 189, .5);
 			}
 		}
 	}
 }
 .well {
 	background: rgba(23, 23, 23, 1) !important;
-	border:1px solid rgba(31, 31, 31, 1) !important;
+	border: 1px solid rgba(31, 31, 31, 1) !important;
 }
 .btn-group-dark {
 	>button {
@@ -259,7 +259,7 @@ $cardWidth:200px;
 pre {
 	background: #2a2a2a;
 	border: 1px solid #1f1f1f;
-	color:#9a9a9a;
+	color: #9a9a9a;
 }
 
 .blocks {
@@ -283,11 +283,11 @@ pre {
 			justify-content: center;
 			align-items: center;
 			font-size: 3em !important;
-			height:100%;
-			width:100%;
+			height: 100%;
+			width: 100%;
 		}
 		&:hover {
-			background:#515151;
+			background: #515151;
 		}
 	}
 }
@@ -405,7 +405,7 @@ tbody.rowlink tr {
 	height: inherit;
 
 	li{
-		color:$linkColor !important;
+		color: $linkColor !important;
 		height: inherit;
 
 		&.active {
@@ -414,7 +414,7 @@ tbody.rowlink tr {
 
 		&::before {
 			content: none !important;
-			padding: 0em 0em;
+			padding: 0 0;
 		}
 
 		&:not(.active):hover {
