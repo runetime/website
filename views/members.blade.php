@@ -67,9 +67,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class='wrapper'>
+			<div class='wrapper-none'>
 @include('partials._paginator', ['url' => '/members/role=' . $searchRole . '/prefix=' . $searchPrefix . '/order=' . $searchOrder])
-				<div class='row'>
+				<div class='row row-flat'>
 @foreach($members as $member)
 					<div class='col-xs-12 row row-flat'>
 						<div class='col-xs-3 col-md-2 col-lg-1'>
