@@ -7761,11 +7761,7 @@ tbody.rowlink tr:hover {
 
 .material-bar {
   background: #474747;
-  height: inherit;
-  padding-top: 0.25em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-bottom: 0.25em; }
+  height: inherit; }
   .material-bar li {
     color: #fff !important;
     height: inherit; }
@@ -7781,7 +7777,10 @@ tbody.rowlink tr:hover {
       display: flex;
       height: inherit;
       justify-content: center;
-      padding: 0em 1em !important; }
+      padding-top: 0.25em;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      padding-bottom: 0.25em; }
 
 a {
   cursor: pointer; }
