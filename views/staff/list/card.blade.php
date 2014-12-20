@@ -12,7 +12,7 @@
 										</h3>
 									</a>
 									<p class='text-center'>
-										{!! $member->title !!}
+										{!! \String::color($member->importantRole()->name, $member->importantRole()->id) !!}
 										<br />
 @if(\Auth::check())
 										<a href='/messenger/compose/to={{ \String::slugEncode($member->id, $member->display_name) }}' class='holo-text-secondary' title='@lang('messenger.message')'>
