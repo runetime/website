@@ -211,115 +211,12 @@ $cardWidth: 200px;
 		cursor:pointer;
 	}
 }
-.list-group {
-	.list-group-item {
-		background: rgba(31, 31, 31, 1);
-		border: 1px solid rgba(23, 23, 23, 0.7);
-		&:hover {
-			background: rgba(39, 39, 39, 1);
-			color: rgba(255, 255, 255, 1);
-		}
-		&.active {
-			background: rgba(37, 37, 37, 1);
-			border: 1px solid rgba(37, 37, 37, 1);
-			&:hover {
-				background: rgba(43, 43, 43, 1);
-				border: 1px solid rgba(189, 189, 189, .5);
-			}
-		}
-	}
-}
-.well {
-	background: rgba(23, 23, 23, 1) !important;
-	border: 1px solid rgba(31, 31, 31, 1) !important;
-}
-.btn-group-dark {
-	>button {
-		background: rgba(32, 32, 32, 1);
-		border-color: rgba(21, 21, 21, 1);
-		color: rgba(245, 245, 245, 1);
-		&:hover {
-			background: rgba(26, 26, 26, 1);
-			color: rgba(255, 255, 255, 1);
-		}
-	}
-	>ul {
-		background: rgba(41, 41, 41, 1);
-		li {
-			background: rgba(41, 41, 41, 1);
-			a {
-				color: rgba(245, 245, 245, 1) !important;
-				&:hover {
-					background: rgba(35, 35, 35, 1);
-				}
-			}
-		}
-	}
-}
 pre {
 	background: #2a2a2a;
 	border: 1px solid #1f1f1f;
 	color: #9a9a9a;
 }
 
-// Markdown
-table {
-	border: {
-		color: #bbb;
-		spacing: 0;
-		style: solid;
-		width: 1px 0 0 1px;
-	}
-	td,
-	th {
-		padding: 10px;
-		border: {
-			color: #bbb;
-			style: solid;
-			width: 1px 0 0 1px;
-		}
-	}
-	&.no-border {
-		border: none !important;
-		td,
-		th {
-			border: none !important;
-		}
-	}
-}
-
-// Jasney
-tbody.rowlink tr {
-	&:hover {
-		cursor: pointer;
-	}
-}
-
-// Modals
-.modal {
-	.modal-content {
-		background: rgba(37, 37, 37, 1);
-	}
-	.modal-header{
-		border-bottom: rgba(78, 78, 78, 1) 1px solid !important;
-	}
-	.modal-body {
-		border-bottom: none !important;
-	}
-	.modal-footer {
-		border-top: rgba(78, 78, 78, 1) 1px solid !important;
-	}
-	h4,
-	label {
-		color: rgba(221, 221, 221, 1);
-	}
-}
-
-
-// Row override
-.row {
-	margin: 0 !important;
-}
 .section-light {
 	background: rgb(76, 76, 76);
 }
