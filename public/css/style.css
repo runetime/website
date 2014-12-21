@@ -6794,6 +6794,9 @@ button.close {
 /**
  * Roles
  */
+/**
+ * Wrappers
+ */
 .badge-important {
   background-color: #820000 !important; }
 
@@ -7849,7 +7852,4 @@ a {
   background: #212121; }
 
 .wrapper-flat {
-  padding-top: 0.1em;
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0; }
+  padding: 0.1em 0 0 0; }

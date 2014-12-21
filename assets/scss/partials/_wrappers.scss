@@ -1,22 +1,17 @@
 .wrapper {
-	margin: 0 auto;
-	padding: 2em 2em;
-	width: 100%;
+	margin: $wrapper-normal-margin;
+	padding: $wrapper-normal-padding;
+	width: $wrapper-normal-width;
 }
 .wrapper-dark {
 	@extend .wrapper;
-	background: #282828;
+	background: $wrapper-dark-background;
 }
 .wrapper-holo {
 	@extend .wrapper;
-	box-shadow: inset 0 20px 20px -20px rgba(41, 145, 184, 0.8);
-	background: #212121;
+	box-shadow: $wrapper-holo-shadow;
+	background: $wrapper-holo-background;
 }
 .wrapper-flat {
-	padding: {
-		top: .1em;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
+	padding: $wrapper-flat-padding;
 }

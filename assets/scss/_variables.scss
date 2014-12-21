@@ -87,7 +87,6 @@ $chatbox-width:                  100%;
 /**
  * Images
  */
-
 $images-photo-sm-width: 3em;
 $images-photo-border:   1em;
 
@@ -127,3 +126,19 @@ $roles-events-team-image: '/img/forums/roles/13.png';
 $roles-events-team-color: rgba(0, 128, 128, 1);
 $roles-donator-image: '/img/forums/roles/14.png';
 $roles-donator-color: rgba(35, 206, 226, 1);
+
+/**
+ * Wrappers
+ */
+// Normal
+$wrapper-normal-margin:   0 auto;
+$wrapper-normal-padding:  2em 2em;
+$wrapper-normal-width:    100%;
+
+// Holo
+$wrapper-dark-background: rgba(40, 40, 40, 1);
+$wrapper-holo-shadow:     inset 0 20px 20px -20px rgba(41, 145, 184, 0.8);
+$wrapper-holo-background: rgba(33, 33, 33, 1);
+
+// Flat
+$wrapper-flat-padding: 0.1em 0 0 0;
