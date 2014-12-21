@@ -1,23 +1,18 @@
-.label-rt {
-	background: rgba(69, 0, 107, 1) !important;
-}
-
-.label-locked {
-	background: rgba(86, 0, 158, 1)
-}
-
-.label-poll {
-	background: rgba(89, 79, 6, 1);
-}
-
-.label-hidden {
-	background: rgba(7, 76, 76, 1)
-}
-
-.label-pinned {
-	background: rgba(127, 52, 0, 1);
-}
-
 .label-dark {
-	background: rgba(21, 21, 21, 1);
+	background: $label-dark;
+}
+.label-hidden {
+	background: $label-hidden;
+}
+.label-locked {
+	background: $label-locked;
+}
+.label-pinned {
+	background: $label-pinned;
+}
+.label-poll {
+	background: $label-poll;
+}
+.label-rt {
+	background: $label-rt;
 }

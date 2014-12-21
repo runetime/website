@@ -84,6 +84,18 @@ $chatbox-width:                  100%;
 
 $images-photo-sm-width: 3em;
 $images-photo-border:   1em;
+
+/**
+ * Labels
+ */
+$label-dark:   rgba(21, 21, 21, 1);
+$label-hidden: rgba(7, 76, 76, 1);
+$label-locked: rgba(86, 0, 158, 1);
+$label-pinned: rgba(127, 52, 0, 1);
+$label-poll:   rgba(89, 79, 6, 1);
+$label-rt:     rgba(69, 0, 107, 1) !important;
+
+
 /**
  * Roles
  */

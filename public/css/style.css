@@ -6783,8 +6783,20 @@ button.close {
  * Chatbox
  */
 /**
+ * Images
+ */
+/**
+ * Labels
+ */
+/**
  * Roles
  */
+.badge-important {
+  background-color: #820000 !important; }
+
+.badge-info {
+  background-color: #45006b !important; }
+
 .holo-line-block {
   border-bottom: 1px solid #1b5e78; }
 
@@ -6897,7 +6909,7 @@ button.close {
       height: 2.2em;
       width: 100%; }
       #chatbox-holder #chatbox #chatbox-actions > a {
-        color: #2991b8;
+        color: #299ab8;
         display: inline-block;
         height: 100%;
         line-height: 2.2em;
@@ -7001,32 +7013,26 @@ button.close {
         background: #375c5c; }
 
 .photo-sm {
-  max-width: 3em;
-  border-radius: 1em; }
+  border-radius: 1em;
+  max-width: 3em; }
 
-.badge-important {
-  background-color: #820000 !important; }
-
-.badge-info {
-  background-color: #45006b !important; }
-
-.label-rt {
-  background: #45006b !important; }
-
-.label-locked {
-  background: #56009e; }
-
-.label-poll {
-  background: #594f06; }
+.label-dark {
+  background: #151515; }
 
 .label-hidden {
   background: #074c4c; }
 
+.label-locked {
+  background: #56009e; }
+
 .label-pinned {
   background: #7f3400; }
 
-.label-dark {
-  background: #151515; }
+.label-poll {
+  background: #594f06; }
+
+.label-rt {
+  background: #45006b !important; }
 
 .navbar {
   color: #b8b8b8 !important; }
