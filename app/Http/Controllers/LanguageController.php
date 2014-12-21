@@ -65,7 +65,7 @@ class LanguageController extends BaseController
 				}
 			}
 		}
-		
+
 		return $langs;
 	}
 
