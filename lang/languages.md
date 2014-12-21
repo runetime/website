@@ -1,0 +1,21 @@
+- af: Afrikaans `Afrikaans`
+- bg: Bulgarian `български език`
+- cs: Czech `čeština`
+- cy: Welsh `Cymraeg`
+- da: Danish `dansk`
+- de: German `Deutsch`
+- el: Greek `ελληνικά`
+- en: English `English`
+- es: Spanish `español`
+- fi: Finnish `suomi`
+- fr: French `français`
+- it: Italian `italiano`
+- ja: Japanese `日本語 (にほんご)`
+- my: Burmese `?`
+- nl: Dutch `Nederlands`
+- no: Norwegian `Norsk`
+- pl: Polish `język polski`
+- pt: Portuguese `português`
+- ru: Russian `Русский`
+- sv: Swedish `Svenska`
+- zh: Chinese `中文`
