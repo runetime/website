@@ -3,25 +3,55 @@ $bcLinkColor: #33B5E5;
 $linkColor: #fff;
 $linkColor2: #33B5E5 !important;
 
+/**
+ * Boxes
+ */
+$boxes-box-bg:          rgba(71, 71, 71, 1);
+$boxes-box-bg-hover:    rgba(81, 81, 81, 1);
+$boxes-box-size:        300px;
+$boxes-holo-box-bg:     rgba(81, 81, 81, 1);
+$boxes-holo-line-block: 1px solid rgba(27, 94, 120, 1);
+
+/**
+ * Cards
+ */
+$card-bg:       rgba(23, 23, 23, 1);
+$card-border:   transparent solid 4px;
+$card-padding:  0.5em 0.3em;
+$card-hover-bg: rgba(33, 33, 33, 1);
+// Styles
+$card-bad:      rgba(153, 0, 0, 1);
+$card-good:     rgba(0, 153, 0, 1);
+$card-hidden:   rgba(25, 255, 255, 1);
+$card-locked:   rgba(86, 0, 158, 1);
+$card-pinned:   rgba(237, 119, 16, 1);
+$card-poll:     rgba(237, 210, 16, 1);
+$card-read:     rgba(11, 11, 11, 1);
+$card-unread:   rgba(170, 170, 170, 1);
+
+
+/**
+ * Roles
+ */
 $roles-administrator-image: '/img/forums/roles/1.png';
-$roles-administrator-color: rgba(255,255,0,1);
+$roles-administrator-color: rgba(255, 255, 0, 1);
 $roles-radio-team-leader-image: '/img/forums/roles/2.png';
 $roles-radio-team-image: '/img/forums/roles/3.png';
-$roles-radio-team-color: rgba(128,0,128,1);
+$roles-radio-team-color: rgba(128, 0, 128, 1);
 $roles-media-team-leader-image: '/img/forums/roles/4.png';
 $roles-media-team-image: '/img/forums/roles/5.png';
-$roles-media-team-color: rgba(128,0,128,1);
+$roles-media-team-color: rgba(128, 0, 128, 1);
 $roles-web-developer-leader-image: '/img/forums/roles/6.png';
 $roles-web-developer-image: '/img/forums/roles/7.png';
-$roles-web-developer-color: rgba(0,128,0,1);
+$roles-web-developer-color: rgba(0, 128, 0, 1);
 $roles-content-team-leader-image: '/img/forums/roles/8.png';
 $roles-content-team-image: '/img/forums/roles/9.png';
-$roles-content-team-color: rgba(0,128,0,1);
+$roles-content-team-color: rgba(0, 128, 0, 1);
 $roles-community-team-leader-image: '/img/forums/roles/10.png';
 $roles-community-team-image: '/img/forums/roles/11.png';
-$roles-community-team-color: rgba(0,128,128,1);
+$roles-community-team-color: rgba(0, 128, 128, 1);
 $roles-events-team-leader-image: '/img/forums/roles/12.png';
 $roles-events-team-image: '/img/forums/roles/13.png';
-$roles-events-team-color: rgba(0,128,128,1);
+$roles-events-team-color: rgba(0, 128, 128, 1);
 $roles-donator-image: '/img/forums/roles/14.png';
-$roles-donator-color: rgba(35,206,226,1);
+$roles-donator-color: rgba(35, 206, 226, 1);
