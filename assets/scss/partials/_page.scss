@@ -61,3 +61,15 @@ body {
 		}
 	}
 }
+::-webkit-scrollbar {
+	background: rgba(25, 25, 25, 1);
+	width: .75em;
+}
+::-webkit-scrollbar-thumb {
+	background: rgba(41, 145, 184, 0.8);
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background:rgba(41, 145, 184, 0.8);
+}
