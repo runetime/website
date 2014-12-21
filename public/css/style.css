@@ -7055,11 +7055,12 @@ body {
   padding: 2em 2em;
   width: 100%; }
 
-.wrapper, .wrapper-dark, .wrapper-small, .wrapper-holo, .wrapper-xs, .wrapper-none, .wrapper-flat a {
+a {
   color: #fff;
   text-decoration: none; }
-  .wrapper:hover, .wrapper-dark:hover, .wrapper-small:hover, .wrapper-holo:hover, .wrapper-xs:hover, .wrapper-none:hover, .wrapper-flat a:hover {
-    text-decoration: none; }
+  a:hover, a:active, a:visited {
+    color: #fff;
+    text-decoration: underline; }
 
 .wrapper-dark {
   background: #282828; }
