@@ -29,7 +29,7 @@ class LanguageController extends BaseController
 	{
 		$languageList = $this->languages();
 		$langs = $this->languageSort($languageList);
-		
+
 		if(in_array($initials, $langs['done'])) {
 			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', $initials);
 		}
@@ -65,6 +65,7 @@ class LanguageController extends BaseController
 				}
 			}
 		}
+		
 		return $langs;
 	}
 
