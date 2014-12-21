@@ -6773,6 +6773,18 @@ button.close {
 .table-hover.rowlink tr:hover td, .table-hover .rowlink tr:hover td {
   background-color: #cfcfcf; }
 
+/**
+ * Boxes
+ */
+/**
+ * Cards
+ */
+/**
+ * Chatbox
+ */
+/**
+ * Roles
+ */
 .holo-line-block {
   border-bottom: 1px solid #1b5e78; }
 
@@ -6806,9 +6818,7 @@ button.close {
 
 .card {
   background: #171717;
-  border-left-style: solid;
-  border-left-width: 4px;
-  border-left-color: transparent;
+  border-left: transparent solid 4px;
   padding: 0.5em 0.3em; }
   .card:hover {
     background: #212121; }
@@ -6819,14 +6829,11 @@ button.close {
 .card-good, .card-open {
   border-left-color: #009900; }
 
-.card-read {
-  border-left-color: #0b0b0b; }
-
-.card-unread {
-  border-left-color: #aaaaaa; }
-
 .card-hidden {
   border-left-color: #19ffff; }
+
+.card-link:hover {
+  cursor: pointer; }
 
 .card-locked {
   border-left-color: #56009e; }
@@ -6837,8 +6844,11 @@ button.close {
 .card-poll {
   border-left-color: #edd210; }
 
-.card-link:hover {
-  cursor: pointer; }
+.card-read {
+  border-left-color: #0b0b0b; }
+
+.card-unread {
+  border-left-color: #aaaaaa; }
 
 #chatbox-holder {
   padding: 0 !important; }
@@ -6855,7 +6865,7 @@ button.close {
         padding-bottom: 0.25em;
         width: 100%; }
         #chatbox-holder #chatbox #chatbox-messages .msg time {
-          color: #AA66CC; }
+          color: #aa66cc; }
         #chatbox-holder #chatbox #chatbox-messages .msg p {
           display: inline;
           margin-bottom: 0; }
