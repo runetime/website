@@ -147,63 +147,11 @@ $cardWidth: 200px;
 	height: $cardHeight;
 	width: $cardWidth;
 }
-
-.card {
-	background: rgba(23, 23, 23, 1);
-	border-left:  {
-		style: solid;
-		width: 4px;
-		color: transparent;
-	}
-	padding: .5em .3em;
-	&:hover {
-		background:rgba(33, 33, 33, 1);
-	}
-}
-.card-bad {
-	border-left-color: rgba(153, 0, 0, 1);
-}
-.card-good {
-	border-left-color: rgba(0, 153, 0, 1);
-}
-.card-read {
-	border-left-color: rgba(11, 11, 11, 1);
-}
-.card-unread {
-	border-left-color: rgba(170, 170, 170, 1);
-}
-.card-hidden {
-	border-left-color: rgba(25, 255, 255, 1);
-}
-.card-locked {
-	border-left-color: rgba(86, 0, 158, 1);
-}
-.card-pinned {
-	border-left-color: rgba(237, 119, 16, 1);
-}
-.card-poll {
-	border-left-color: rgba(237, 210, 16, 1);
-}
-.card-open {
-	@extend .card-good;
-}
-.card-bad {
-	@extend .card-bad;
-}
-.card-escalated {
-	@extend .card-pinned;
-}
-.card-link {
-	&:hover {
-		cursor:pointer;
-	}
-}
 pre {
 	background: #2a2a2a;
 	border: 1px solid #1f1f1f;
 	color: #9a9a9a;
 }
-
 .section-light {
 	background: rgb(76, 76, 76);
 }

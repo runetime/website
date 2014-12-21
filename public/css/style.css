@@ -6804,6 +6804,42 @@ button.close {
     .blocks > div:hover {
       background: #515151; }
 
+.card {
+  background: #171717;
+  border-left-style: solid;
+  border-left-width: 4px;
+  border-left-color: transparent;
+  padding: 0.5em 0.3em; }
+  .card:hover {
+    background: #212121; }
+
+.card-bad {
+  border-left-color: #990000; }
+
+.card-good, .card-open {
+  border-left-color: #009900; }
+
+.card-read {
+  border-left-color: #0b0b0b; }
+
+.card-unread {
+  border-left-color: #aaaaaa; }
+
+.card-hidden {
+  border-left-color: #19ffff; }
+
+.card-locked {
+  border-left-color: #56009e; }
+
+.card-pinned, .card-escalated {
+  border-left-color: #ed7710; }
+
+.card-poll {
+  border-left-color: #edd210; }
+
+.card-link:hover {
+  cursor: pointer; }
+
 #chatbox-holder {
   padding: 0 !important; }
   #chatbox-holder #chatbox {
@@ -6957,6 +6993,30 @@ button.close {
 .photo-sm {
   max-width: 3em;
   border-radius: 1em; }
+
+.badge-important {
+  background-color: #820000 !important; }
+
+.badge-info {
+  background-color: #45006b !important; }
+
+.label-rt {
+  background: #45006b !important; }
+
+.label-locked {
+  background: #56009e; }
+
+.label-poll {
+  background: #594f06; }
+
+.label-hidden {
+  background: #074c4c; }
+
+.label-pinned {
+  background: #7f3400; }
+
+.label-dark {
+  background: #151515; }
 
 .navbar {
   color: #b8b8b8 !important; }
@@ -7595,42 +7655,6 @@ body {
   height: 200px;
   width: 200px; }
 
-.card {
-  background: #171717;
-  border-left-style: solid;
-  border-left-width: 4px;
-  border-left-color: transparent;
-  padding: 0.5em 0.3em; }
-  .card:hover {
-    background: #212121; }
-
-.card-bad {
-  border-left-color: #990000; }
-
-.card-good, .card-open {
-  border-left-color: #009900; }
-
-.card-read {
-  border-left-color: #0b0b0b; }
-
-.card-unread {
-  border-left-color: #aaaaaa; }
-
-.card-hidden {
-  border-left-color: #19ffff; }
-
-.card-locked {
-  border-left-color: #56009e; }
-
-.card-pinned, .card-escalated {
-  border-left-color: #ed7710; }
-
-.card-poll {
-  border-left-color: #edd210; }
-
-.card-link:hover {
-  cursor: pointer; }
-
 pre {
   background: #2a2a2a;
   border: 1px solid #1f1f1f;
@@ -7778,30 +7802,6 @@ blockquote {
     font-size: 0.5em; }
   blockquote.spoiler:hover > * {
     opacity: 1; }
-
-.badge-important {
-  background-color: #820000 !important; }
-
-.badge-info {
-  background-color: #45006b !important; }
-
-.label-rt {
-  background: #45006b !important; }
-
-.label-locked {
-  background: #56009e; }
-
-.label-poll {
-  background: #594f06; }
-
-.label-hidden {
-  background: #074c4c; }
-
-.label-pinned {
-  background: #7f3400; }
-
-.label-dark {
-  background: #151515; }
 
 .text-muted {
   color: #777777 !important; }
