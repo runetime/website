@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper wrapper-none-res'>
+			<div class='wrapper wrapper-flat'>
 				<h1>
 					@lang('news.title')
 				</h1>

@@ -3,7 +3,7 @@
 			<div class='wrapper'>
 				<img src='/img/radio/header.png' alt='RuneTime Radio' class='img-responsive center-block' />
 			</div>
-			<div id='radio' class='wrapper-dark wrapper-none-res row row-flat'>
+			<div id='radio' class='wrapper-dark wrapper-flat row row-flat'>
 				<div id='radio-pull' class='col-xs-12 col-md-0 hidden'>
 					<button id='pull-close' type='button' class='close'>
 						<span aria-hidden='true'>
@@ -75,7 +75,7 @@
 					</div>
 				</div>
 			</div>
-			<div class='wrapper-none-res wrapper-dark'>
+			<div class=' wrapper-dark wrapper-flat'>
 				<div id='chatbox-holder'>
 @include('partials.chat')
 				</div>

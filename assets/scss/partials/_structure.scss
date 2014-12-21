@@ -262,36 +262,6 @@ pre {
 	color: #9a9a9a;
 }
 
-.blocks {
-	@extend .clearfix;
-	width: 100%;
-	>div {
-		background:#474747;
-		width: 300px;
-		height: 300px;
-		text-align: center;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		float: left;
-		margin: {
-			right: 1em;
-			bottom: 1em;
-		}
-		>a {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 3em !important;
-			height: 100%;
-			width: 100%;
-		}
-		&:hover {
-			background: #515151;
-		}
-	}
-}
-
 // Markdown
 table {
 	border: {
@@ -325,39 +295,6 @@ tbody.rowlink tr {
 	}
 }
 
-.pretty-row {
-	$e: 0.25em;
-	@extend .row;
-	background: #474747;
-	padding-bottom: 0 - $e;
-	> div {
-		padding: {
-			left: 0;
-			right: 0;
-		}
-		> div:nth-child(1) {
-			background: #595959;
-			margin: {
-				top: 0;
-			}
-			> h3 {
-				margin-top: 0;
-			}
-		}
-		padding-bottom: $e;
-	}
-	> div:nth-child(odd) {
-		> div {
-			margin-right: $e;
-		}
-	}
-	> div:nth-child(even) {
-		> div {
-			margin-left: $e;
-		}
-	}
-}
-
 // Modals
 .modal {
 	.modal-content {
@@ -383,27 +320,12 @@ tbody.rowlink tr {
 .row {
 	margin: 0 !important;
 }
-
-.item {
-	background: rgb(40, 40, 40);
-	margin-bottom: .5em;
-	width: 100%;
-	.body {
-		margin: {
-			left: 1em;
-			right: 1em;
-		}
-		width: 100%;
-	}
-}
 .section-light {
 	background: rgb(76, 76, 76);
 }
-
 .material-bar {
 	background: rgb(71, 71, 71);
 	height: inherit;
-
 	li{
 		color: $linkColor !important;
 		height: inherit;

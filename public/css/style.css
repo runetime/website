@@ -1241,13 +1241,13 @@ pre {
   .container-fluid:after {
     clear: both; }
 
-.row, .row-pretty, .pretty-row {
+.row {
   margin-left: -15px;
   margin-right: -15px; }
-  .row:before, .row-pretty:before, .pretty-row:before, .row:after, .row-pretty:after, .pretty-row:after {
+  .row:before, .row:after {
     content: " ";
     display: table; }
-  .row:after, .row-pretty:after, .pretty-row:after {
+  .row:after {
     clear: both; }
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
@@ -6730,14 +6730,14 @@ button.close {
   border: 1px solid #ddd;
   border-right-color: transparent; }
 
-.row > .nav-tabs-left, .row-pretty > .nav-tabs-left, .pretty-row > .nav-tabs-left {
+.row > .nav-tabs-left {
   padding-right: 0;
   padding-left: 15px;
   margin-right: -1px;
   position: relative;
   z-index: 1; }
 
-.row > .nav-tabs-left + .tab-content, .row-pretty > .nav-tabs-left + .tab-content, .pretty-row > .nav-tabs-left + .tab-content {
+.row > .nav-tabs-left + .tab-content {
   border-left: 1px solid #ddd; }
 
 .nav-tabs-right {
@@ -6758,7 +6758,7 @@ button.close {
   border: 1px solid #ddd;
   border-left-color: transparent; }
 
-.row > .nav-tabs-right, .row-pretty > .nav-tabs-right, .pretty-row > .nav-tabs-right {
+.row > .nav-tabs-right {
   padding-left: 0;
   padding-right: 15px; }
 
@@ -6804,54 +6804,36 @@ body {
     #portfolio #portfolio-social img:hover {
       opacity: 1; }
 
-.page-header {
-  margin-top: 0.2em !important;
-  margin-bottom: 0 !important; }
-
-#copyright {
-  background: #111;
-  box-shadow: inset 0 -10px 10px -10px rgba(41, 145, 184, 0.8); }
-
-#loading {
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 283px;
-  height: 283px;
-  background: url('/img/loading.gif');
-  z-index: 9000;
-  opacity: 0;
-  display: none; }
-
-.patched-bg {
-  background: url('/img/background.png') center repeat; }
-
 .holo-line-block {
   border-bottom: 1px solid #1b5e78; }
 
-.holo-box, .holo-box-dark {
+.holo-box {
   background: #515151;
   padding: 1em;
   text-decoration: none; }
 
-.holo-box-dark {
-  background: #282828; }
-  .holo-box-dark .holo-box-in {
-    background: #1a1a1a;
-    margin-bottom: 1em;
-    padding: 0.25em; }
-
-.box {
-  background: #252525;
-  margin-bottom: 0.5em;
-  border: 1px solid #222222; }
-  .box > h3 {
-    background: #111111;
-    margin: 0;
-    padding: 0.25em 0.5em; }
+.blocks {
+  width: 100%; }
+  .blocks > div {
+    background: #474747;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em; }
+    .blocks > div > a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3em !important;
+      height: 100%;
+      width: 100%; }
+    .blocks > div:hover {
+      background: #515151; }
 
 #chatbox-holder {
   padding: 0 !important; }
@@ -7011,16 +6993,6 @@ body {
   max-width: 3em;
   border-radius: 1em; }
 
-.image-heading {
-  height: 200px; }
-  .image-heading h3 {
-    color: black;
-    font-size: 3em;
-    position: relative;
-    text-align: center;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    margin-top: -100px; }
-
 .navbar {
   color: #b8b8b8 !important; }
   .navbar li.active > a {
@@ -7050,41 +7022,19 @@ body {
   .navbar .open > a {
     background-color: transparent !important; }
 
-.wrapper, .wrapper-dark, .wrapper-small, .wrapper-holo, .wrapper-xs, .wrapper-none {
+.wrapper, .wrapper-dark, .wrapper-holo {
   margin: 0 auto;
   padding: 2em 2em;
   width: 100%; }
 
-a {
-  color: #fff;
-  text-decoration: none; }
-  a:hover, a:active, a:visited {
-    color: #fff;
-    text-decoration: underline; }
-
 .wrapper-dark {
   background: #282828; }
-
-.wrapper-small {
-  padding: 1em 2em !important; }
 
 .wrapper-holo {
   box-shadow: inset 0 20px 20px -20px rgba(41, 145, 184, 0.8);
   background: #212121; }
 
-.wrapper-xs {
-  padding-top: 0.1em;
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0.1em; }
-
-.wrapper-none {
-  padding-top: 0.1em;
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0; }
-
-.wrapper-none-res {
+.wrapper-flat {
   padding-top: 0.1em;
   padding-left: 0;
   padding-right: 0;
@@ -7676,29 +7626,6 @@ pre {
   border: 1px solid #1f1f1f;
   color: #9a9a9a; }
 
-.blocks {
-  width: 100%; }
-  .blocks > div {
-    background: #474747;
-    width: 300px;
-    height: 300px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    margin-right: 1em;
-    margin-bottom: 1em; }
-    .blocks > div > a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 3em !important;
-      height: 100%;
-      width: 100%; }
-    .blocks > div:hover {
-      background: #515151; }
-
 table {
   border-color: #bbb;
   border-spacing: 0;
@@ -7717,23 +7644,6 @@ table {
 tbody.rowlink tr:hover {
   cursor: pointer; }
 
-.pretty-row {
-  background: #474747;
-  padding-bottom: -0.25em; }
-  .pretty-row > div {
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0.25em; }
-    .pretty-row > div > div:nth-child(1) {
-      background: #595959;
-      margin-top: 0; }
-      .pretty-row > div > div:nth-child(1) > h3 {
-        margin-top: 0; }
-  .pretty-row > div:nth-child(odd) > div {
-    margin-right: 0.25em; }
-  .pretty-row > div:nth-child(even) > div {
-    margin-left: 0.25em; }
-
 .modal .modal-content {
   background: #252525; }
 .modal .modal-header {
@@ -7745,17 +7655,8 @@ tbody.rowlink tr:hover {
 .modal h4, .modal label {
   color: #dddddd; }
 
-.row, .row-pretty, .pretty-row {
+.row {
   margin: 0 !important; }
-
-.item {
-  background: #282828;
-  margin-bottom: 0.5em;
-  width: 100%; }
-  .item .body {
-    margin-left: 1em;
-    margin-right: 1em;
-    width: 100%; }
 
 .section-light {
   background: #4c4c4c; }
@@ -7782,9 +7683,6 @@ tbody.rowlink tr:hover {
       padding-left: 0.5em;
       padding-right: 0.5em;
       padding-bottom: 0.25em; }
-
-a {
-  cursor: pointer; }
 
 .input-inline {
   display: inline !important; }
@@ -7932,3 +7830,11 @@ blockquote {
 
 .hover-pointer:hover {
   cursor: pointer; }
+
+a {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none; }
+  a:hover, a:active, a:visited {
+    color: #fff;
+    text-decoration: underline; }

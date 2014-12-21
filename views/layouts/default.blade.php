@@ -178,7 +178,7 @@ $current = $nav;
 			</div>
 		</nav>
 @if($displayPageHeader&&!empty($title))
-		<div class='wrapper-none'>
+		<div class='wrapper wrapper-flat'>
 			<ol class='breadcrumb'>
 				<li data-toggle='tooltip' data-placement='bottom' title='Home'>
 					<a href='/' title='Home'>

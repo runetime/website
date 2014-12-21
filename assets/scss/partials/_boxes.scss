@@ -6,22 +6,32 @@
 	padding: 1em;
 	text-decoration: none;
 }
-.holo-box-dark {
-	@extend .holo-box;
-	background: #282828;
-	.holo-box-in {
-		background: #1a1a1a;
-		margin-bottom: 1em;
-		padding: 0.25em;
-	}
-}
-.box {
-	background: #252525;
-	margin-bottom: .5em;
-	border: 1px solid #222222;
-	>h3 {
-		background: #111111;
-		margin: 0;
-		padding: .25em .5em;
+.blocks {
+	@extend .clearfix;
+	width: 100%;
+	>div {
+		background:#474747;
+		width: 300px;
+		height: 300px;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		float: left;
+		margin: {
+			right: 1em;
+			bottom: 1em;
+		}
+		>a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 3em !important;
+			height: 100%;
+			width: 100%;
+		}
+		&:hover {
+			background: #515151;
+		}
 	}
 }

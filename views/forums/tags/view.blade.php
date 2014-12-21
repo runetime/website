@@ -8,7 +8,7 @@
 					@lang('news.title')
 				</h3>
 @foreach($news as $newsPiece)
-                <div class='holo-box-dark'>
+                <div>
                     <h3>
                         {{ $newsPiece->title }}
                     </h3>
