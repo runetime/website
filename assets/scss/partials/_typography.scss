@@ -167,10 +167,8 @@ blockquote {
 	color: #777777 !important;
 }
 
-.hover-pointer {
-	&:hover {
-		cursor: pointer;
-	}
+.hover-pointer:hover {
+	cursor: pointer;
 }
 a {
 	color: $linkColor;

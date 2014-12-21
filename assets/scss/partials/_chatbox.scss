@@ -1,117 +1,117 @@
 #chatbox-holder {
 	padding: 0 !important;
-}
-#chatbox {
-	width: 100%;
-	#chatbox-messages {
-		overflow-y: scroll;
-		height: 20em;
+	#chatbox {
 		width: 100%;
-		.msg {
-			$paddingW: .5em;
-			$paddingH: .25em;
-			padding: {
-				top: $paddingH;
-				left: $paddingW;
-				right: $paddingW;
-				bottom: $paddingH;
-			}
+		#chatbox-messages {
+			overflow-y: scroll;
+			height: 20em;
 			width: 100%;
-			time {
-				color: #AA66CC;
+			.msg {
+				$paddingW: .5em;
+				$paddingH: .25em;
+				padding: {
+					top: $paddingH;
+					left: $paddingW;
+					right: $paddingW;
+					bottom: $paddingH;
+				}
+				width: 100%;
+				time {
+					color: #AA66CC;
+				}
+				p {
+					display: inline;
+					margin-bottom: 0;
+				}
+				&:nth-child(even) {
+					background: #121212;
+				}
+				&:nth-child(odd) {
+					background: #1b1b1b;
+				}
 			}
-			p {
-				display: inline;
-				margin-bottom: 0;
+			.msg-hidden {
+				&:nth-child(even) {
+					background: rgba(0, 36, 30, 1) !important;
+				}
+				&:nth-child(odd) {
+					background: rgba(0, 43, 36, 1) !important;
+				}
 			}
-			&:nth-child(even) {
-				background: #121212;
+			.msg-pinned {
+				&:nth-child(even) {
+					background: rgba(79, 39, 0, 1) !important;
+				}
+				&:nth-child(odd) {
+					background: rgba(94, 46, 0, 1) !important;
+				}
 			}
-			&:nth-child(odd) {
-				background: #1b1b1b;
+			.msg-pinhid {
+				&:nth-child(even) {
+					background: rgba(31, 4, 94, 1) !important;
+				}
+				&:nth-child(odd) {
+					background: rgba(26, 3, 79, 1) !important;
+				}
 			}
-		}
-		.msg-hidden {
-			&:nth-child(even) {
-				background: rgba(0, 36, 30, 1) !important;
+			&::-webkit-scrollbar {
+				width: .75em;
 			}
-			&:nth-child(odd) {
-				background: rgba(0, 43, 36, 1) !important;
-			}
-		}
-		.msg-pinned {
-			&:nth-child(even) {
-				background: rgba(79, 39, 0, 1) !important;
-			}
-			&:nth-child(odd) {
-				background: rgba(94, 46, 0, 1) !important;
-			}
-		}
-		.msg-pinhid {
-			&:nth-child(even) {
-				background: rgba(31, 4, 94, 1) !important;
-			}
-			&:nth-child(odd) {
-				background: rgba(26, 3, 79, 1) !important;
-			}
-		}
-		&::-webkit-scrollbar {
-			width: .75em;
-		}
-		&::-webkit-scrollbar-thumb {
-			border-radius: 10px;
-			background: rgba(115,11,115,0.8);
-			box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-			&:window-inactive {
+			&::-webkit-scrollbar-thumb {
+				border-radius: 10px;
 				background: rgba(115,11,115,0.8);
+				box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+				&:window-inactive {
+					background: rgba(115,11,115,0.8);
+				}
 			}
 		}
-	}
-	#chatbox-actions {
-		$actions-h: 2.2em;
-		height: $actions-h;
-		width: 100%;
-		>a {
-			$border: 1px solid rgba(181,181,181,0.9);
-			color: #2991b8;
-			display: inline-block;
-			height: 100%;
-			line-height: $actions-h;
-			text-align: center;
-			width: 50%;
-			&:nth-child(1) {
-				border-right: $border;
-			}
-			&:nth-child(2) {
-				border-left: $border;
-				border-right: $border;
-			}
-			&:nth-child(3) {
-				border-left: $border;
-			}
-			&:hover {
-				background: #303030;
+		#chatbox-actions {
+			$actions-h: 2.2em;
+			height: $actions-h;
+			width: 100%;
+			>a {
+				$border: 1px solid rgba(181,181,181,0.9);
+				color: #2991b8;
+				display: inline-block;
+				height: 100%;
+				line-height: $actions-h;
+				text-align: center;
+				width: 50%;
+				&:nth-child(1) {
+					border-right: $border;
+				}
+				&:nth-child(2) {
+					border-left: $border;
+					border-right: $border;
+				}
+				&:nth-child(3) {
+					border-left: $border;
+				}
+				&:hover {
+					background: #303030;
+				}
 			}
 		}
-	}
-	#chatbox-message {
-		width: 100%;
-		height: 2.2em;
-		&.message-sent {
-			border-color: rgba(60, 118, 61, 1);
-			box-shadow: inset 1px 1px 1px rgba(60, 118, 61, 0.775);
-		}
-		&.message-sent:focus {
-			border-color: rgba(60, 118, 61, 1);
-			outline: none;
-		}
-		&.message-bad {
-			border-color: rgba(148, 0, 0, 1);
-			box-shadow: inset 1px 1px 1px rgba(148, 0, 0, 0.775);
-		}
-		&.message-bad:focus {
-			border-color: rgba(148, 0, 0, 1);
-			outline: none;
+		#chatbox-message {
+			width: 100%;
+			height: 2.2em;
+			&.message-sent {
+				border-color: rgba(60, 118, 61, 1);
+				box-shadow: inset 1px 1px 1px rgba(60, 118, 61, 0.775);
+			}
+			&.message-sent:focus {
+				border-color: rgba(60, 118, 61, 1);
+				outline: none;
+			}
+			&.message-bad {
+				border-color: rgba(148, 0, 0, 1);
+				box-shadow: inset 1px 1px 1px rgba(148, 0, 0, 0.775);
+			}
+			&.message-bad:focus {
+				border-color: rgba(148, 0, 0, 1);
+				outline: none;
+			}
 		}
 	}
 }
