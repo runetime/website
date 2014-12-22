@@ -181,7 +181,7 @@ $current = $nav;
 		<div class='wrapper-none'>
 			<ol class='breadcrumb'>
 				<li data-toggle='tooltip' data-placement='bottom' title='Home'>
-					<a href='/' title='Home'>
+					<a href='/'>
 						@lang('navbar.home')
 					</a>
 				</li>
