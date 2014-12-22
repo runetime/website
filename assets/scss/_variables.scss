@@ -124,28 +124,30 @@ $rank-topaz:       $rank-base-prefix + 'topaz' + $rank-base-suffix;
 /**
  * Roles
  */
-$roles-administrator-image: '/img/forums/roles/1.png';
-$roles-administrator-color: rgba(255, 255, 0, 1);
-$roles-radio-team-leader-image: '/img/forums/roles/2.png';
-$roles-radio-team-image: '/img/forums/roles/3.png';
-$roles-radio-team-color: rgba(128, 0, 128, 1);
-$roles-media-team-leader-image: '/img/forums/roles/4.png';
-$roles-media-team-image: '/img/forums/roles/5.png';
-$roles-media-team-color: rgba(128, 0, 128, 1);
-$roles-web-developer-leader-image: '/img/forums/roles/6.png';
-$roles-web-developer-image: '/img/forums/roles/7.png';
-$roles-web-developer-color: rgba(0, 128, 0, 1);
-$roles-content-team-leader-image: '/img/forums/roles/8.png';
-$roles-content-team-image: '/img/forums/roles/9.png';
-$roles-content-team-color: rgba(0, 128, 0, 1);
-$roles-community-team-leader-image: '/img/forums/roles/10.png';
-$roles-community-team-image: '/img/forums/roles/11.png';
-$roles-community-team-color: rgba(0, 128, 128, 1);
-$roles-events-team-leader-image: '/img/forums/roles/12.png';
-$roles-events-team-image: '/img/forums/roles/13.png';
-$roles-events-team-color: rgba(0, 128, 128, 1);
-$roles-donator-image: '/img/forums/roles/14.png';
-$roles-donator-color: rgba(35, 206, 226, 1);
+$roles-base-prefix: '/img/forums/roles/';
+$roles-base-suffix: '.png';
+$roles-administrator-image:         $roles-base-prefix + '1' + $roles-base-suffix;
+$roles-administrator-color:         rgba(255, 255, 0, 1);
+$roles-radio-team-leader-image:     $roles-base-prefix + '2' + $roles-base-suffix;
+$roles-radio-team-image:            $roles-base-prefix + '3' + $roles-base-suffix;
+$roles-radio-team-color:            rgba(128, 0, 128, 1);
+$roles-media-team-leader-image:     $roles-base-prefix + '4' + $roles-base-suffix;
+$roles-media-team-image:            $roles-base-prefix + '5' + $roles-base-suffix;
+$roles-media-team-color:            rgba(128, 0, 128, 1);
+$roles-web-developer-leader-image:  $roles-base-prefix + '6' + $roles-base-suffix;
+$roles-web-developer-image:         $roles-base-prefix + '7' + $roles-base-suffix;
+$roles-web-developer-color:         rgba(0, 128, 0, 1);
+$roles-content-team-leader-image:   $roles-base-prefix + '8' + $roles-base-suffix;
+$roles-content-team-image:          $roles-base-prefix + '9' + $roles-base-suffix;
+$roles-content-team-color:          rgba(0, 128, 0, 1);
+$roles-community-team-leader-image: $roles-base-prefix + '10' + $roles-base-suffix;
+$roles-community-team-image:        $roles-base-prefix + '11' + $roles-base-suffix;
+$roles-community-team-color:        rgba(0, 128, 128, 1);
+$roles-events-team-leader-image:    $roles-base-prefix + '12' + $roles-base-suffix;
+$roles-events-team-image:           $roles-base-prefix + '13' + $roles-base-suffix;
+$roles-events-team-color:           rgba(0, 128, 128, 1);
+$roles-donator-image:               $roles-base-prefix + '14' + $roles-base-suffix;
+$roles-donator-color:               rgba(35, 206, 226, 1);
 
 /**
  * Wrappers
