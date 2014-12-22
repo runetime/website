@@ -4,132 +4,138 @@
 input[type=text],
 input[type=password],
 input[type=email] {
-	background-color: transparent !important;
-	border: 1px solid rgba(51, 181, 229, 0.7);
-	color: #fff !important;
+	background-color: $typography-input-text-bg;
+	border: $typography-input-text-border;
+	color: $typography-input-text-color;
 	display: block !important;
 }
 input[type=range] {
-	-webkit-appearance: none;
-	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-	width: 100%;
-	height: 20px;
-	margin: 0;
+	background: $typography-input-range-bg;
 	border: none;
-	padding: 1px 2px;
-	border-radius: 14px;
-	background: #232528;
-	box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-	-webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-	outline: none; /* no focus outline */
+	border-radius: $typography-input-range-radius;
+	box-shadow: $typography-input-range-shadow;
+	-webkit-box-shadow: $typography-input-range-shadow;
+	height: $typography-input-range-height;
+	margin: 0;
+	outline: none;
+	padding: $typography-input-range-padding;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: $typography-input-range-highlight;
+	width: 100%;
+
 	&::-moz-range-track {
-		border: inherit;
 		background: transparent;
+		border: inherit;
 	}
+
 	&::-ms-track {
-		border: inherit;
-		color: transparent; /* don't drawn vertical reference line */
 		background: transparent;
+		border: inherit;
+		color: transparent;
 	}
+	
 	&::-ms-fill-lower,
 	&::-ms-fill-upper {
 		background: transparent;
 	}
+
 	&::-ms-tooltip {
 		display: none;
 	}
+
 	&::-webkit-slider-thumb {
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f));
+		background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%);
+		background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+		border: none;
+		border-radius: 12px;
+		height: 18px;
 		-webkit-appearance: none;
 		width: 40px;
-		height: 18px;
-		border: none;
-		border-radius: 12px;
-		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f)); /* android <= 2.2 */
-		background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%); /* older mobile safari and android > 2.2 */;
-		background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
 	}
+
 	&::-moz-range-thumb {
-		width: 40px;
-		height: 18px;
+		background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 		border: none;
 		border-radius: 12px;
-		background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
-	}
-	&::-ms-thumb {
-		width: 40px;
 		height: 18px;
-		border-radius: 12px;
+		width: 40px;
+	}
+
+	&::-ms-thumb {
+		background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 		border: 0;
-		background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
+		border-radius: 12px;
+		height: 18px;
+		width: 40px;
 	}
 }
 input[type=file] {
-	background: transparent !important;
-	border: 1px solid #555;
-	color: #ccc;
+	background: $typography-input-file-bg;
+	border: $typography-input-file-border;
+	color: $typography-input-file-color;
 }
 textarea {
-	background: transparent !important;
-	border: 1px solid rgba(51, 181, 229, 0.7) !important;
-	color: #ccc !important;
+	background: $typography-textarea-bg;
+	border: $typography-textarea-border;
+	color: $typography-textarea-color;
 	&.width-full {
 		width: 100% !important;
 	}
 }
 select {
-	background: transparent;
-	border: 1px solid rgba(51, 181, 229, 0.7);
+	background: $typography-select-bg;
+	border: $typography-select-border;
 	option {
-		background: rgb(41, 41, 41);
+		background: $typography-select-option-bg;
 	}
+
 	&::-webkit-scrollbar {
-		width: .75em;
+		width: $typography-select-scrollbar-width;
 	}
+
 	&::-webkit-scrollbar-thumb {
-		border-radius: 10px;
-		background: rgba(115, 11, 115, 0.8);
-		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+		border-radius: $typography-select-thumb-radius;
+		background: $typography-select-thumb-bg;
+		box-shadow: $typography-select-thumb-shadow;
 		&:window-inactive {
-			background: rgba(115, 11, 115, 0.8);
+			background: $typography-select-thumb-inactive-bg;
 		}
 	}
 }
 .holo-text {
-	$c: #2991B8 !important;
-	color: $c;
+	color: $typography-holo-text-color;
 	>a {
-		color: $c;
+		color: $typography-holo-text-color;
 	}
 }
 .holo-text-secondary {
-	$c: #AA66CC !important;
-	color: $c;
+	color: $typography-holo-text2-color;
 	a:link,
 	a:visited {
-		color: $c;
+		color: $typography-holo-text2-color;
 	}
 }
 .holo-text-third {
-	$c: rgba(168, 47, 10, 1) !important;
-	color: $c;
+	color: $typography-holo-text3-color;
 	a:link,
 	a:visited{
-		color: $c;
+		color: $typography-holo-text3-color;
 	}
 }
 blockquote {
-	background: transparent;
-	border-left: 0.25em solid rgba(204, 204, 204, 1);
-	margin: 1.5em 0.25em;
-	padding: 0.1em 0.15em;
+	background: $typography-quote-bg;
+	border-left: $typography-quote-border-left;
+	margin: $typography-quote-margin;
+	padding: $typography-quote-padding;
 	&.spoiler {
 		> * {
 			opacity: 0;
-			transition: opacity 0.5s ease-in;
+			transition: $typography-quote-spoiler-transition;
 		}
 		&:before {
-			content: "(This is a spoiler.  Hover to show it.)";
-			font-size: 0.5em;
+			content: $typography-quote-spoiler-content;
+			font-size: $typography-quote-spoiler-font-size;
 		}
 		&:hover {
 			> * {
@@ -139,11 +145,11 @@ blockquote {
 	}
 }
 .text-muted {
-	color: #777777 !important;
+	color: $typography-text-muted-color;
 }
 
 .hover-pointer:hover {
-	cursor: pointer;
+	cursor: $typography-hover-pointer-cursor;
 }
 a {
 	color: $linkColor;

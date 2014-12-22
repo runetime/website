@@ -185,6 +185,54 @@ $roles-donator-color:               rgba(35, 206, 226, 1);
 
 
 /**
+ * Typography
+ */
+$typography-hover-pointer-cursor:     pointer;
+
+// Elements
+$typography-quote-bg:                 transparent;
+$typography-quote-border-left:        0.25em solid rgba(204, 204, 204, 1);
+$typography-quote-margin:             1.5em 0.25em;
+$typography-quote-padding:            0.1em 0.15em;
+$typography-quote-spoiler-transition: opacity 0.5s ease-in;
+$typography-quote-spoiler-content:    "(This is a spoiler.  Hover to show it.)";
+$typography-quote-spoiler-font-size:  0.5em;
+$typography-select-bg:                transparent;
+$typography-select-border:            1px solid rgba(51, 181, 229, 0.7);
+$typography-select-option-bg:         rgba(41, 41, 41, 1);
+$typography-select-scrollbar-width:   0.75em;
+$typography-select-thumb-radius:      10px;
+$typography-select-thumb-bg:          rgba(115, 11, 115, 0.8);
+$typography-select-thumb-shadow:      inset 0 0 6px rgba(0, 0, 0, 0.5);
+$typography-select-thumb-inactive-bg: rgba(115, 11, 115, 0.8);
+$typography-textarea-bg:              transparent !important;
+$typography-textarea-border:          1px solid rgba(51, 181, 229, 0.7) !important;
+$typography-textarea-color:           rgba(204, 204, 204, 1) !important;
+
+// Holo
+$typography-holo-text-color:          rgba(41, 145, 184, 1) !important;
+$typography-holo-text2-color:         rgba(170, 102, 204, 1) !important;
+$typography-holo-text3-color:         rgba(168, 47, 10, 1) !important;
+
+// Inputs
+$typography-input-file-bg:            transparent !important;
+$typography-input-file-border:        1px solid rgba(85, 85, 85, 1);
+$typography-input-file-color:         rgba(204, 204, 204, 1);
+$typography-input-text-bg:            transparent !important;
+$typography-input-text-border:        1px solid rgba(51, 181, 229, 0.7);
+$typography-input-text-color:         rgba(255, 255, 255, 1) !important;
+$typography-input-range-bg:           rgba(35, 37, 40, 1);
+$typography-input-range-height:       20px;
+$typography-input-range-padding:      1px 2px;
+$typography-input-range-radius:       14px;
+$typography-input-range-shadow:       inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+$typography-input-range-highlight:    rgba(255, 255, 255, 0);
+
+// Text
+$typography-text-muted-color:         rgba(119, 119, 119, 1) !important;
+
+
+/**
  * Wrappers
  */
 // Normal
