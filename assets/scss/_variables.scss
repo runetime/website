@@ -105,6 +105,40 @@ $label-rt:     rgba(69, 0, 107, 1) !important;
 
 
 /**
+ * Page
+ */
+// Body
+$page-body-bg:                        rgba(55, 55, 55, 1) !important;
+$page-body-color:                     $textColor !important;
+$page-body-font-family:               "Proxima Nova Regular", "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+$page-body-font-size:                 1.5em !important;
+$page-body-padding:                   50px;
+
+// Portfolio
+$page-portfolio-social-opacity:       0.5;
+$page-portfolio-social-opacity-hover: 1.0;
+$page-portfolio-social-padding:       5px;
+$page-portfolio-social-transition:    opacity 0.5s;
+
+// Scrollbar
+$page-scrollbar-main-bg:              rgba(25, 25, 25, 1);
+$page-scrollbar-main-width:           0.75em;
+$page-scrollbar-thumb-bg:             rgba(41, 145, 184, 0.8);
+$page-scrollbar-thumb-br:             10px;
+$page-scrollbar-thumb-inactive-bg:    rgba(41, 145, 184, 0.8);
+$page-scrollbar-thumb-shadow:         inset 0 0 6px rgba(0, 0, 0, 0.5);
+
+// Top
+$page-top-bg:                         rgba(18, 18, 18, 0.7);
+$page-top-bottom:                     15px;
+$page-top-border-radius:              3px;
+$page-top-color:                      rgba(255, 255, 255, 1);
+$page-top-font-size:                  14px;
+$page-top-padding:                    8px 9px 5px;
+$page-top-right:                      25px;
+
+
+/**
  * Ranks
  */
 $rank-base-prefix: '/img/forums/roles/badge/';
@@ -148,6 +182,7 @@ $roles-events-team-image:           $roles-base-prefix + '13' + $roles-base-suff
 $roles-events-team-color:           rgba(0, 128, 128, 1);
 $roles-donator-image:               $roles-base-prefix + '14' + $roles-base-suffix;
 $roles-donator-color:               rgba(35, 206, 226, 1);
+
 
 /**
  * Wrappers

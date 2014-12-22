@@ -6792,6 +6792,9 @@ button.close {
  * Labels
  */
 /**
+ * Page
+ */
+/**
  * Ranks
  */
 /**
@@ -7177,7 +7180,7 @@ body {
   #top a i {
     background: rgba(18, 18, 18, 0.7);
     border-radius: 3px;
-    color: #fff;
+    color: white;
     font-size: 14px;
     padding: 8px 9px 5px; }
 
