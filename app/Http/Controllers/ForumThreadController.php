@@ -158,11 +158,13 @@ class ForumThreadController extends BaseController
 					$percentage = round(($answer->votes / $question['votes']) * 100);
 				}
 
-				$voted = $this->pollVotes->getByAllData(
-					\Auth::user()->id,
-					$answer->id,
-					$question['id']
-				);
+				$voted = false;
+				if(\Auth::check()) {
+					$voted = $this->pollVotes->getByAllData(
+						\Auth::user()->id,
+						$answer->id,
+						$question['id']);
+				}
 
 				array_push($question['answers'], [
 					'contents'   => $answer->contents,
