@@ -18,7 +18,7 @@ class APIController extends BaseController
 	{
 		$this->users = $users;
 	}
-	
+
 	/**
 	 * @param UserRequest $form
 	 *
