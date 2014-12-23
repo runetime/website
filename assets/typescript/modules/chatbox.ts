@@ -234,7 +234,7 @@ class Chatbox {
 		});
 	}
 
-	public switchChannel() {
+	public switchChannel(name: string) {
 		var data,
 			response;
 		data = {
