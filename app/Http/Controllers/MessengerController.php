@@ -105,7 +105,7 @@ class MessengerController extends BaseController
 		$this->bc(['messenger' => trans('messenger.title')]);
 		$this->nav(trans('forums.title'));
 		$this->title('messenger.create.title');
-		return $this->view('messenger.compose.index', compact('to'));
+		return $this->view('messenger.compose', compact('to'));
 	}
 
 	/**
