@@ -150,21 +150,23 @@ Route::group(['prefix' => 'forums'], function() {
 	 * Thread
 	 */
 	Route::group(['prefix' => 'thread/{id}-{name}'], function() {
-		get('/', 'ForumController@getThread');
-		get('last-post', 'ForumController@getThreadLastPost');
-		get('page={page}', 'ForumController@getThread');
+		get('/', 'ForumThreadController@getThread');
+		get('last-post', 'ForumThreadController@getThreadLastPost');
+		get('page={page}', 'ForumThreadController@getThread');
 		Route::group(['middleware' => 'auth'], function() {
-			get('edit', 'ForumController@getThreadEdit');
-			post('reply', 'ForumController@postReply');
+			get('edit', 'ForumThreadController@getThreadEdit');
+			post('reply', 'ForumPostController@postReply');
 		});
 	});
+
 	/**
 	 * Create Thread
 	 */
 	Route::group(['middleware' => 'auth', 'prefix' => 'create/{id}-{name}'], function() {
-		get('/', 'ForumController@getThreadCreate');
-		post('/', 'ForumController@postThreadCreate');
+		get('/', 'ForumThreadController@getCreate');
+		post('/', 'ForumThreadController@postCreate');
 	});
+
 	get('tag/{name}', 'ForumController@getTagSearch');
 	/**
 	 * Poll
@@ -172,6 +174,7 @@ Route::group(['prefix' => 'forums'], function() {
 	Route::group(['prefix' => 'poll'], function() {
 		post('vote', 'ForumController@postPollVote');
 	});
+
 	/**
 	 * Posts
 	 */
@@ -180,30 +183,31 @@ Route::group(['prefix' => 'forums'], function() {
 		 * Reporting a post
 		 */
 		Route::group(['prefix' => 'report'], function() {
-			get('/', 'ForumController@getPostReport');
-			post('/', 'ForumController@postPostReport');
+			get('/', 'ForumPostController@getReport');
+			post('/', 'ForumPostController@postReport');
 		});
 		/**
 		 * Editing a post
 		 */
 		Route::group(['prefix' => 'edit'], function() {
-			get('/', 'ForumController@getPostEdit');
-			post('/', 'ForumController@postPostEdit');
+			get('/', 'ForumPostController@getEdit');
+			post('/', 'ForumPostController@postEdit');
 		});
 		/**
 		 * Post voting
 		 */
 		Route::group(['prefix' => 'vote'], function() {
-			post('/', 'ForumController@postPostVote');
+			post('/', 'ForumPostController@postVote');
 		});
 
 		/**
 		 * Deleting a post
 		 */
 		Route::group(['middleware' => 'staff.moderator'], function() {
-			get('delete', 'ForumController@getPostDelete');
+			get('delete', 'ForumPostController@getDelete');
 		});
 	});
+
 	/**
 	 * Statuses
 	 */
