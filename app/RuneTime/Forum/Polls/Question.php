@@ -7,7 +7,7 @@ class Question extends Entity
 {
 	protected $table = 'forum_poll_questions';
 	protected $with = [];
-	protected $fillable = ['poll_id', 'contents'];
+	protected $fillable = ['poll_id', 'contents', 'votes'];
 	protected $dates = [];
 	protected $softDelete = true;
 

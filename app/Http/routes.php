@@ -167,6 +167,12 @@ Route::group(['prefix' => 'forums'], function() {
 	});
 	get('tag/{name}', 'ForumController@getTagSearch');
 	/**
+	 * Poll
+	 */
+	Route::group(['prefix' => 'poll'], function() {
+		post('vote', 'ForumController@postPollVote');
+	});
+	/**
 	 * Posts
 	 */
 	Route::group(['middleware' => 'auth', 'prefix' => 'post/{id}'], function() {

@@ -137,7 +137,7 @@ class Thread extends Entity
 	 */
 	public function isPoll()
 	{
-		if($this->poll > -1) {
+		if($this->poll_id > 0) {
 			return true;
 		}
 		return false;

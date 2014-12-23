@@ -12,4 +12,27 @@ class VoteRepository extends EloquentRepository
 	{
 		$this->model = $model;
 	}
+
+	/**
+	 * @param $authorId
+	 * @param $questionId
+	 *
+	 * @return mixed
+	 */
+	public function getByData($authorId, $questionId)
+	{
+		return $this->model->
+			where('author_id', '=', $authorId)->
+			where('question_id', '=', $questionId)->
+			first();
+	}
+
+	public function getByAllData($authorId, $answerId, $questionId)
+	{
+		return $this->model->
+			where('author_id', '=', $authorId)->
+			where('answer_id', '=', $answerId)->
+			where('question_id', '=', $questionId)->
+			first();
+	}
 }

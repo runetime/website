@@ -17,6 +17,7 @@ class CreateForumPollQuestionsTable extends Migration {
 			$table->increments('id');
 			$table->integer('poll_id');
 			$table->string('contents');
+			$table->integer('votes');
 			$table->timestamps();
 			$table->softDeletes();
 		});
