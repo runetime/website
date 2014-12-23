@@ -54,7 +54,7 @@ class ProfileController extends BaseController
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
 
-		$this->bc(['forums/' => trans('forums.name')]);
+		$this->bc(['forums/' => trans('forums.title')]);
 		$this->nav('navbar.forums');
 		$this->title('profile.title', ['name' => $profile->display_name]);
 		return $this->view('forums.profile.index', compact('profile', 'status'));
