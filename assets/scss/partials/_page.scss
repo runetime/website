@@ -1,74 +1,74 @@
-.wrapper {
-	margin: 0 auto;
-	padding: 2em 2em;
-	width: 100%;
+* {
+	margin: 0;
+	padding: 0;
 }
-a {
-	color: $linkColor;
-	text-decoration: none;
-	&:hover,
-	&:active,
-	&:visited {
-		color: $linkColor;
-		text-decoration: underline;
+body {
+	background: $page-body-bg;
+	color: $page-body-color;
+	cursor: default;
+	font: {
+		family: $page-body-font-family;
+		style: normal;
+		size: $page-body-font-size;
 	}
+	padding-top: $page-body-padding;
 }
-.wrapper-dark {
-	@extend .wrapper;
-	background: #282828;
-}
-.wrapper-small {
-	@extend .wrapper;
-	padding: 1em 2em !important;
-}
-.wrapper-holo {
-	@extend .wrapper;
-	box-shadow: inset 0 20px 20px -20px rgba(41, 145, 184, 0.8);
-	background: #212121;
-}
-.wrapper-xs {
-	@extend .wrapper;
-	padding: {
-		top:.1em;
-		left: 0;
-		right: 0;
-		bottom: .1em;
+#portfolio {
+	margin: 0;
+	.title {
+		h2 {
+			text-align: center;
+		}
 	}
-}
-.wrapper-none {
-	@extend .wrapper;
-	padding: {
-		top: .1em;
-		left: 0;
-		right: 0;
-		bottom: 0;
+	#portfolio-about {
+		p {
+			line-height: 1;
+			font-size: .6em;
+			img {
+				margin: 0 5px 0;
+			}
+		}
 	}
-}
-.wrapper-none-res {
-	padding: {
-		top: .1em;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
-}
-
-#top {
-	bottom: 15px;
-	display: none;
-	position: fixed;
-	right: 25px;
-	z-index: 9999;
-	a {
-		i {
-			background: rgba(18, 18, 18, 0.7);
-			border-radius: 3px;
-			color: #fff;
-			font-size: 14px;
-			padding: 8px 9px 5px;
+	#portfolio-social {
+		img {
+			opacity: $page-portfolio-social-opacity;
+			padding: {
+				left: $page-portfolio-social-padding;
+				right: $page-portfolio-social-padding;
+			}
+			-webkit-transition: $page-portfolio-social-transition;
+			transition: $page-portfolio-social-transition;
+			&:hover {
+				opacity: $page-portfolio-social-opacity-hover;
+			}
 		}
 	}
 }
-.row-pretty {
-	@extend .row;
+#top {
+	bottom: $page-top-bottom;
+	display: none;
+	position: fixed;
+	right: $page-top-right;
+	z-index: 9999;
+	a {
+		i {
+			background: $page-top-bg;
+			border-radius: $page-top-border-radius;
+			color: $page-top-color;
+			font-size: $page-top-font-size;
+			padding: $page-top-padding;
+		}
+	}
+}
+::-webkit-scrollbar {
+	background: $page-scrollbar-main-bg;
+	width: $page-scrollbar-main-width;
+}
+::-webkit-scrollbar-thumb {
+	background: $page-scrollbar-thumb-bg;
+	border-radius: $page-scrollbar-thumb-br;
+	box-shadow: $page-scrollbar-thumb-shadow;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: $page-scrollbar-thumb-inactive-bg;
 }

@@ -3,25 +3,247 @@ $bcLinkColor: #33B5E5;
 $linkColor: #fff;
 $linkColor2: #33B5E5 !important;
 
-$roles-administrator-image: '/img/forums/roles/1.png';
-$roles-administrator-color: rgba(255,255,0,1);
-$roles-radio-team-leader-image: '/img/forums/roles/2.png';
-$roles-radio-team-image: '/img/forums/roles/3.png';
-$roles-radio-team-color: rgba(128,0,128,1);
-$roles-media-team-leader-image: '/img/forums/roles/4.png';
-$roles-media-team-image: '/img/forums/roles/5.png';
-$roles-media-team-color: rgba(128,0,128,1);
-$roles-web-developer-leader-image: '/img/forums/roles/6.png';
-$roles-web-developer-image: '/img/forums/roles/7.png';
-$roles-web-developer-color: rgba(0,128,0,1);
-$roles-content-team-leader-image: '/img/forums/roles/8.png';
-$roles-content-team-image: '/img/forums/roles/9.png';
-$roles-content-team-color: rgba(0,128,0,1);
-$roles-community-team-leader-image: '/img/forums/roles/10.png';
-$roles-community-team-image: '/img/forums/roles/11.png';
-$roles-community-team-color: rgba(0,128,128,1);
-$roles-events-team-leader-image: '/img/forums/roles/12.png';
-$roles-events-team-image: '/img/forums/roles/13.png';
-$roles-events-team-color: rgba(0,128,128,1);
-$roles-donator-image: '/img/forums/roles/14.png';
-$roles-donator-color: rgba(35,206,226,1);
+/**
+ * Badges
+ */
+$badge-important: rgba(130, 0, 0, 1) !important;
+$badge-info: rgba(69, 0, 107, 1) !important;
+
+
+/**
+ * Boxes
+ */
+$boxes-box-bg:          rgba(71, 71, 71, 1);
+$boxes-box-bg-hover:    rgba(81, 81, 81, 1);
+$boxes-box-size:        300px;
+$boxes-holo-box-bg:     rgba(81, 81, 81, 1);
+$boxes-holo-line-block: 1px solid rgba(27, 94, 120, 1);
+
+
+/**
+ * Cards
+ */
+$card-bg:       rgba(23, 23, 23, 1);
+$card-border:   transparent solid 4px;
+$card-padding:  0.5em 0.3em;
+$card-hover-bg: rgba(33, 33, 33, 1);
+
+// Styles
+$card-bad:      rgba(153, 0, 0, 1);
+$card-good:     rgba(0, 153, 0, 1);
+$card-hidden:   rgba(25, 255, 255, 1);
+$card-locked:   rgba(86, 0, 158, 1);
+$card-pinned:   rgba(237, 119, 16, 1);
+$card-poll:     rgba(237, 210, 16, 1);
+$card-read:     rgba(11, 11, 11, 1);
+$card-unread:   rgba(170, 170, 170, 1);
+
+
+/**
+ * Chatbox
+ */
+// Actions
+$chatbox-action-border:          1px solid rgba(181, 181, 181, 0.9);
+$chatbox-action-color:           rgba(41, 154, 184, 1);
+$chatbox-action-height:          2.2em;
+$chatbox-action-hover-bg:        rgba(48, 48, 48, 1);
+$chatbox-action-width:           50%;
+
+// The chatbox holder
+$chatbox-holder-padding:         0 !important;
+
+// Input
+$chatbox-input-height:           2.2em;
+$chatbox-input-bad-border:       rgba(148, 0, 0, 1);
+$chatbox-input-bad-shadow:       inset 1px 1px 1px rgba(148, 0, 0, 0.775);
+$chatbox-input-sent-border:      rgba(60, 118, 61, 1);
+$chatbox-input-sent-shadow:      inset 1px 1px 1px rgba(60, 118, 61, 0.775);
+
+// Messages
+$chatbox-msg-paddingHeight:      .25em;
+$chatbox-msg-paddingWidth:       .5em;
+$chatbox-msg-hidden-even:        rgba(0, 36, 30, 1) !important;
+$chatbox-msg-hidden-odd:         rgba(0, 43, 36, 1) !important;
+$chatbox-msg-normal-even:        rgba(18, 18, 18, 1);
+$chatbox-msg-normal-odd:         rgba(27, 27, 27, 1);
+$chatbox-msg-pinhid-even:        rgba(31, 4, 94, 1) !important;
+$chatbox-msg-pinhid-odd:         rgba(26, 3, 79, 1) !important;
+$chatbox-msg-pinned-even:        rgba(79, 39, 0, 1) !important;
+$chatbox-msg-pinned-odd:         rgba(94, 46, 0, 1) !important;
+$chatbox-msg-time:               rgba(170, 102, 204, 1);
+
+// Messages holder
+$chatbox-msgs-height:            20em;
+$chatbox-msgs-width:             100%;
+
+// Scrollbar
+$chatbox-scrollbar:              0.75em;
+$chatbox-scrollbar-inactive:     rgba(115, 11, 115, 0.8);
+$chatbox-scrollbar-thumb-bg:     rgba(115, 11, 115, 0.8);
+$chatbox-scrollbar-thumb-border: 10px;
+$chatbox-scrollbar-thumb-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+
+$chatbox-width:                  100%;
+
+
+/**
+ * Images
+ */
+$images-photo-sm-width: 3em;
+$images-photo-border:   1em;
+
+
+/**
+ * Labels
+ */
+$label-dark:   rgba(21, 21, 21, 1);
+$label-hidden: rgba(7, 76, 76, 1);
+$label-locked: rgba(86, 0, 158, 1);
+$label-pinned: rgba(127, 52, 0, 1);
+$label-poll:   rgba(89, 79, 6, 1);
+$label-rt:     rgba(69, 0, 107, 1) !important;
+
+
+/**
+ * Page
+ */
+// Body
+$page-body-bg:                        rgba(55, 55, 55, 1) !important;
+$page-body-color:                     $textColor !important;
+$page-body-font-family:               "Proxima Nova Regular", "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+$page-body-font-size:                 1.5em !important;
+$page-body-padding:                   50px;
+
+// Portfolio
+$page-portfolio-social-opacity:       0.5;
+$page-portfolio-social-opacity-hover: 1.0;
+$page-portfolio-social-padding:       5px;
+$page-portfolio-social-transition:    opacity 0.5s;
+
+// Scrollbar
+$page-scrollbar-main-bg:              rgba(25, 25, 25, 1);
+$page-scrollbar-main-width:           0.75em;
+$page-scrollbar-thumb-bg:             rgba(41, 145, 184, 0.8);
+$page-scrollbar-thumb-br:             10px;
+$page-scrollbar-thumb-inactive-bg:    rgba(41, 145, 184, 0.8);
+$page-scrollbar-thumb-shadow:         inset 0 0 6px rgba(0, 0, 0, 0.5);
+
+// Top
+$page-top-bg:                         rgba(18, 18, 18, 0.7);
+$page-top-bottom:                     15px;
+$page-top-border-radius:              3px;
+$page-top-color:                      rgba(255, 255, 255, 1);
+$page-top-font-size:                  14px;
+$page-top-padding:                    8px 9px 5px;
+$page-top-right:                      25px;
+
+
+/**
+ * Ranks
+ */
+$rank-base-prefix: '/img/forums/roles/badge/';
+$rank-base-suffix: '.png';
+$rank-diamond:     $rank-base-prefix + 'diamond' + $rank-base-suffix;
+$rank-dragonstone: $rank-base-prefix + 'dragonstone' + $rank-base-suffix;
+$rank-emerald:     $rank-base-prefix + 'emerald' + $rank-base-suffix;
+$rank-jade:        $rank-base-prefix + 'jade' + $rank-base-suffix;
+$rank-novice:      $rank-base-prefix + 'opal' + $rank-base-suffix;
+$rank-onyx:        $rank-base-prefix + 'onyx' + $rank-base-suffix;
+$rank-opal:        $rank-base-prefix + 'opal' + $rank-base-suffix;
+$rank-ruby:        $rank-base-prefix + 'ruby' + $rank-base-suffix;
+$rank-sapphire:    $rank-base-prefix + 'sapphire' + $rank-base-suffix;
+$rank-topaz:       $rank-base-prefix + 'topaz' + $rank-base-suffix;
+
+
+/**
+ * Roles
+ */
+$roles-base-prefix: '/img/forums/roles/';
+$roles-base-suffix: '.png';
+$roles-administrator-image:         $roles-base-prefix + '1' + $roles-base-suffix;
+$roles-administrator-color:         rgba(255, 255, 0, 1);
+$roles-radio-team-leader-image:     $roles-base-prefix + '2' + $roles-base-suffix;
+$roles-radio-team-image:            $roles-base-prefix + '3' + $roles-base-suffix;
+$roles-radio-team-color:            rgba(128, 0, 128, 1);
+$roles-media-team-leader-image:     $roles-base-prefix + '4' + $roles-base-suffix;
+$roles-media-team-image:            $roles-base-prefix + '5' + $roles-base-suffix;
+$roles-media-team-color:            rgba(128, 0, 128, 1);
+$roles-web-developer-leader-image:  $roles-base-prefix + '6' + $roles-base-suffix;
+$roles-web-developer-image:         $roles-base-prefix + '7' + $roles-base-suffix;
+$roles-web-developer-color:         rgba(0, 128, 0, 1);
+$roles-content-team-leader-image:   $roles-base-prefix + '8' + $roles-base-suffix;
+$roles-content-team-image:          $roles-base-prefix + '9' + $roles-base-suffix;
+$roles-content-team-color:          rgba(0, 128, 0, 1);
+$roles-community-team-leader-image: $roles-base-prefix + '10' + $roles-base-suffix;
+$roles-community-team-image:        $roles-base-prefix + '11' + $roles-base-suffix;
+$roles-community-team-color:        rgba(0, 128, 128, 1);
+$roles-events-team-leader-image:    $roles-base-prefix + '12' + $roles-base-suffix;
+$roles-events-team-image:           $roles-base-prefix + '13' + $roles-base-suffix;
+$roles-events-team-color:           rgba(0, 128, 128, 1);
+$roles-donator-image:               $roles-base-prefix + '14' + $roles-base-suffix;
+$roles-donator-color:               rgba(35, 206, 226, 1);
+
+
+/**
+ * Typography
+ */
+$typography-hover-pointer-cursor:     pointer;
+
+// Elements
+$typography-quote-bg:                 transparent;
+$typography-quote-border-left:        0.25em solid rgba(204, 204, 204, 1);
+$typography-quote-margin:             1.5em 0.25em;
+$typography-quote-padding:            0.1em 0.15em;
+$typography-quote-spoiler-transition: opacity 0.5s ease-in;
+$typography-quote-spoiler-content:    "(This is a spoiler.  Hover to show it.)";
+$typography-quote-spoiler-font-size:  0.5em;
+$typography-select-bg:                transparent;
+$typography-select-border:            1px solid rgba(51, 181, 229, 0.7);
+$typography-select-option-bg:         rgba(41, 41, 41, 1);
+$typography-select-scrollbar-width:   0.75em;
+$typography-select-thumb-radius:      10px;
+$typography-select-thumb-bg:          rgba(115, 11, 115, 0.8);
+$typography-select-thumb-shadow:      inset 0 0 6px rgba(0, 0, 0, 0.5);
+$typography-select-thumb-inactive-bg: rgba(115, 11, 115, 0.8);
+$typography-textarea-bg:              transparent !important;
+$typography-textarea-border:          1px solid rgba(51, 181, 229, 0.7) !important;
+$typography-textarea-color:           rgba(204, 204, 204, 1) !important;
+
+// Holo
+$typography-holo-text-color:          rgba(41, 145, 184, 1) !important;
+$typography-holo-text2-color:         rgba(170, 102, 204, 1) !important;
+$typography-holo-text3-color:         rgba(168, 47, 10, 1) !important;
+
+// Inputs
+$typography-input-file-bg:            transparent !important;
+$typography-input-file-border:        1px solid rgba(85, 85, 85, 1);
+$typography-input-file-color:         rgba(204, 204, 204, 1);
+$typography-input-text-bg:            transparent !important;
+$typography-input-text-border:        1px solid rgba(51, 181, 229, 0.7);
+$typography-input-text-color:         rgba(255, 255, 255, 1) !important;
+$typography-input-range-bg:           rgba(35, 37, 40, 1);
+$typography-input-range-height:       20px;
+$typography-input-range-padding:      1px 2px;
+$typography-input-range-radius:       14px;
+$typography-input-range-shadow:       inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+$typography-input-range-highlight:    rgba(255, 255, 255, 0);
+
+// Text
+$typography-text-muted-color:         rgba(119, 119, 119, 1) !important;
+
+
+/**
+ * Wrappers
+ */
+// Normal
+$wrapper-normal-margin:   0 auto;
+$wrapper-normal-padding:  2em 2em;
+$wrapper-normal-width:    100%;
+
+// Holo
+$wrapper-dark-background: rgba(40, 40, 40, 1);
+$wrapper-holo-shadow:     inset 0 20px 20px -20px rgba(41, 145, 184, 0.8);
+$wrapper-holo-background: rgba(33, 33, 33, 1);
+
+// Flat
+$wrapper-flat-padding: 0.1em 0 0 0;

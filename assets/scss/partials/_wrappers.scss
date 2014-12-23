@@ -1,0 +1,17 @@
+.wrapper {
+	margin: $wrapper-normal-margin;
+	padding: $wrapper-normal-padding;
+	width: $wrapper-normal-width;
+}
+.wrapper-dark {
+	@extend .wrapper;
+	background: $wrapper-dark-background;
+}
+.wrapper-holo {
+	@extend .wrapper;
+	box-shadow: $wrapper-holo-shadow;
+	background: $wrapper-holo-background;
+}
+.wrapper-flat {
+	padding: $wrapper-flat-padding;
+}

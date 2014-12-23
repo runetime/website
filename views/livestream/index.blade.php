@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper wrapper-none-res'>
+			<div class='wrapper wrapper-flat'>
 @if(\Auth::check() && \Auth::user()->isStaff())
 				<ul class='list-inline pull-right'>
 					<li>

@@ -1,0 +1,122 @@
+// Colors
+$barColor: darkgoldenrod;
+$overlayColor: #fffde8;
+$backColor: #2f3439;
+@mixin badge {
+	@extend .center-block;
+	background-color: $barColor !important;
+	border: 2px solid $backColor !important;
+	border-radius: 50%;
+	display: block;
+	float: none;
+	height: 52px;
+	position: relative;
+	width: 52px;
+
+	>div {
+		background: {
+			color: #373737 !important;
+			position: center center !important;
+			repeat: no-repeat !important;
+		}
+
+		border-radius: 50%;
+		font-size: 16px;
+		height: 40px;
+		line-height: 40px;
+		margin: {
+			left: 4px;
+			top: 4px;
+		}
+
+		position: absolute;
+		text-align: center;
+		width: 40px;
+	}
+}
+@mixin badge-progress($number) {
+	$step: 10;
+	$maximum: 10;
+	$percentage: $number * $step;
+	$increment: 360 / $maximum;
+	$radial: $increment * $number;
+	$half: round($maximum / 2);
+	@if $number < $half {
+		$nextdeg: 90deg + $increment * $number;
+		background-image: linear-gradient(90deg, $backColor 50%, transparent 50%, transparent), linear-gradient($nextdeg, $barColor 50%, $backColor 50%, $backColor);
+	}
+	@else {
+		$nextdeg: -90deg + $increment * ($number - $half);
+		background-image:linear-gradient($nextdeg, $barColor 50%, transparent 50%, transparent), linear-gradient(270deg, $barColor 50%, $backColor 50%, $backColor);
+	}
+}
+.badge-novice-member {
+	@include badge;
+	@include badge-progress(1);
+	>div {
+		background-image: url($rank-novice);
+	}
+}
+.badge-opal-member {
+	@include badge;
+	@include badge-progress(2);
+	>div {
+		background-image: url($rank-opal);
+	}
+}
+.badge-jade-member {
+	@include badge;
+	@include badge-progress(3);
+	>div {
+		background-image: url($rank-jade);
+	}
+}
+.badge-topaz-member {
+	@include badge;
+	@include badge-progress(4);
+	>div {
+		background-image: url($rank-topaz);
+	}
+}
+.badge-sapphire-member {
+	@include badge;
+	@include badge-progress(5);
+	>div {
+		background-image: url($rank-sapphire);
+	}
+}
+.badge-emerald-member {
+	@include badge;
+	@include badge-progress(6);
+	>div {
+		background-image: url($rank-emerald);
+	}
+}
+.badge-ruby-member {
+	@include badge;
+	@include badge-progress(7);
+	>div {
+		background-image: url($rank-ruby);
+	}
+}
+.badge-diamond-member {
+	@include badge;
+	@include badge-progress(8);
+	>div {
+		background-image: url($rank-diamond);
+	}
+}
+.badge-dragonstone-member {
+	@include badge;
+	@include badge-progress(9);
+	>div {
+		background-image: url($rank-dragonstone);
+	}
+}
+.badge-onyx-member {
+	@include badge;
+	@include badge-progress(10);
+	>div {
+		background-image: url($rank-onyx);
+	}
+}

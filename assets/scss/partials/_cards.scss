@@ -1,0 +1,43 @@
+.card {
+	background: $card-bg;
+	border-left: $card-border;
+	padding: $card-padding;
+	&:hover {
+		background:$card-hover-bg;
+	}
+}
+.card-bad {
+	border-left-color: $card-bad;
+}
+.card-escalated {
+	@extend .card-pinned;
+}
+.card-good {
+	border-left-color: $card-good;
+}
+.card-hidden {
+	border-left-color: $card-hidden;
+}
+.card-link {
+	&:hover {
+		cursor:pointer;
+	}
+}
+.card-locked {
+	border-left-color: $card-locked;
+}
+.card-open {
+	@extend .card-good;
+}
+.card-pinned {
+	border-left-color: $card-pinned;
+}
+.card-poll {
+	border-left-color: $card-poll;
+}
+.card-read {
+	border-left-color: $card-read;
+}
+.card-unread {
+	border-left-color: $card-unread;
+}
