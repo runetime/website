@@ -1,0 +1,9 @@
+.progress-bar-dark {
+	background: $progressbar-dark-bg;
+	border: $progressbar-dark-border;
+	border-radius: $progressbar-dark-br;
+	height: $progressbar-dark-height;
+	.progress-bar {
+		background: $progressbar-dark-bar-bg;
+	}
+}

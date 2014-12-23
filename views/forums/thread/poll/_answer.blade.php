@@ -8,8 +8,8 @@
             <a class='fa fa-check text-danger' rt-data='{!! $answer['json'] !!}' rt-hook='forum:poll.vote'></a>
 @endif
     </span>
-    <div class='progress'>
-        <div class='progress-bar progress-bar-dark' role='progressbar' area-valuenow='{{ $answer['percentage'] }}' area-valuemin='0' area-valuemax='100' style='width: {{ $answer['percentage'] }}%;'>
+    <div class='progress progress-bar-dark'>
+        <div class='progress-bar' role='progressbar' area-valuenow='{{ $answer['percentage'] }}' area-valuemin='0' area-valuemax='100' style='width: {{ $answer['percentage'] }}%;'>
             {{ $answer['percentage'] }}%
             <small>[{{ $answer['votes'] }}/{{ $question['votes'] }} votes]</small>
         </div>
