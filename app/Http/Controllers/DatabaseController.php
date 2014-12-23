@@ -35,7 +35,7 @@ class DatabaseController extends BaseController
 	public function getIndex()
 	{
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('database.title'));
+		$this->title('database.title');
 		return $this->view('databases.index');
 	}
 
@@ -55,7 +55,7 @@ class DatabaseController extends BaseController
 
 		$this->bc(['databases' => trans('database.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('database.items.title'));
+		$this->title('database.items.title');
 		return $this->view('databases.items.index', compact('items', 'searchMembership', 'searchTradable', 'searchQuestItem', 'memberships', 'tradables', 'questItems'));
 	}
 
@@ -73,7 +73,7 @@ class DatabaseController extends BaseController
 
 		$this->bc(['databases' => trans('database.title'), 'databases/items' => trans('database.items.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('database.items.view.title', ['name' => $item->name]));
+		$this->title('database.items.view.title', ['name' => $item->name]);
 		return $this->view('databases.items.view', compact('item'));
 	}
 
@@ -84,7 +84,7 @@ class DatabaseController extends BaseController
 	{
 		$this->bc(['databases' => trans('database.title'), 'databases/items' => trans('database.items.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('database.items.create.title'));
+		$this->title('database.items.create.title');
 		return $this->view('databases.items.create');
 	}
 
@@ -120,7 +120,7 @@ class DatabaseController extends BaseController
 
 		$this->bc(['databases' => trans('database.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('database.monsters.title'));
+		$this->title('database.monsters.title');
 		return $this->view('databases.monsters.index', compact('monsters', 'searchMembership', 'memberships'));
 	}
 
@@ -138,7 +138,7 @@ class DatabaseController extends BaseController
 
 		$this->bc(['databases' => trans('database.title'), 'databases/monsters' => trans('database.monsters.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('database.monsters.view.title', ['name' => $monster->name]));
+		$this->title('database.monsters.view.title', ['name' => $monster->name]);
 		return $this->view('databases.monsters.view', compact('monster', 'editList'));
 	}
 
@@ -149,7 +149,7 @@ class DatabaseController extends BaseController
 	{
 		$this->bc(['databases' => trans('database.title'), 'databases/monsters' => trans('database.monsters.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('database.monsters.create.title'));
+		$this->title('database.monsters.create.title');
 		return $this->view('databases.monsters.create');
 	}
 

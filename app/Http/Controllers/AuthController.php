@@ -57,7 +57,7 @@ class AuthController extends BaseController
 	public function getLoginForm()
 	{
 		$this->nav('navbar.logged.out.login');
-		$this->title(trans('navbar.logged.out.login'));
+		$this->title('navbar.logged.out.login');
 		return $this->view('auth.login');
 	}
 
@@ -66,7 +66,7 @@ class AuthController extends BaseController
 	 */
 	public function getLoginTwitter()
 	{
-		\Socialite::with('twitter')->redirect();
+
 	}
 
 	/**
@@ -92,7 +92,7 @@ class AuthController extends BaseController
 	public function getSignupForm()
 	{
 		$this->nav('navbar.logged.out.signup');
-		$this->title(trans('navbar.logged.out.signup'));
+		$this->title('navbar.logged.out.signup');
 		return $this->view('auth.signup');
 	}
 
@@ -137,7 +137,7 @@ class AuthController extends BaseController
 	public function getPasswordEmail()
 	{
 		$this->nav('navbar.logged.out.login');
-		$this->title(trans('auth.reset.title'));
+		$this->title('auth.reset.title');
 		return $this->view('auth.password.email');
 	}
 
@@ -172,7 +172,7 @@ class AuthController extends BaseController
 		}
 
 		$this->nav('navbar.logged.out.login');
-		$this->title(trans('auth.reset.title'));
+		$this->title('auth.reset.title');
 
 		return $this->view('auth.password.reset', compact('reset'));
 	}

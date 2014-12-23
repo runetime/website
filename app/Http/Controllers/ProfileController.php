@@ -56,7 +56,7 @@ class ProfileController extends BaseController
 
 		$this->bc(['forums/' => trans('forums.name')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('profile.title', ['name' => $profile->display_name]));
+		$this->title('profile.title', ['name' => $profile->display_name]);
 		return $this->view('forums.profile.index', compact('profile', 'status'));
 	}
 
@@ -76,7 +76,7 @@ class ProfileController extends BaseController
 
 		$this->bc(['forums/' => trans('forums.title'), 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
 		$this->nav('navbar.forums');
-		$this->title(trans('profile.feed.title', ['name' => $profile->display_name]));
+		$this->title('profile.feed.title', ['name' => $profile->display_name]);
 		return $this->view('forums.profile.feed', compact('profile', 'status', 'threads'));
 	}
 

@@ -38,7 +38,7 @@ class TicketController extends BaseController
 		}
 
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('tickets.title'));
+		$this->title('tickets.title');
 		return $this->view('tickets.index', compact('ticketList'));
 	}
 
@@ -66,7 +66,7 @@ class TicketController extends BaseController
 
 		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('tickets.view.title', ['name' => $ticket->name]));
+		$this->title('tickets.view.title', ['name' => $ticket->name]);
 		return $this->view('tickets.view', compact('ticket', 'posts'));
 	}
 
@@ -77,7 +77,7 @@ class TicketController extends BaseController
 	{
 		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('tickets.create.title'));
+		$this->title('tickets.create.title');
 		return $this->view('tickets.create');
 	}
 
@@ -136,7 +136,7 @@ class TicketController extends BaseController
 
 		$this->bc(['tickets' => trans('tickets.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('tickets.manage.title'));
+		$this->title('tickets.manage.title');
 		return $this->view('tickets.manage.index', compact('ticketsOpen', 'ticketsClosed', 'ticketsEscalated'));
 	}
 

@@ -8,7 +8,7 @@ class MapController extends BaseController {
 	public function getIndex()
 	{
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('maps.title'));
+		$this->title('maps.title');
 		return $this->view('map.index');
 	}
 
@@ -19,7 +19,7 @@ class MapController extends BaseController {
 	{
 		$this->bc(['map' => trans('maps.title')]);
 		$this->nav('navbar.social.social');
-		$this->title(trans('maps.members.title'));
+		$this->title('maps.members.title');
 		return $this->view('map.members');
 	}
 
@@ -30,7 +30,7 @@ class MapController extends BaseController {
 	{
 		$this->bc(['map' => trans('maps.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('maps.rs.title'));
+		$this->title('maps.rs.title');
 		return $this->view('map.runescape.index');
 	}
 
@@ -41,7 +41,7 @@ class MapController extends BaseController {
 	{
 		$this->bc(['map' => 'Maps', 'map/runescape' => trans('maps.rs.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('maps.rs.rs3'));
+		$this->title('maps.rs.rs3');
 		return $this->view('map.runescape.3');
 	}
 
@@ -52,7 +52,7 @@ class MapController extends BaseController {
 	{
 		$this->bc(['map' => trans('maps.title'), 'map/runescape' => trans('maps.rs.title')]);
 		$this->nav('navbar.runescape.runescape');
-		$this->title(trans('maps.rs.osrs'));
+		$this->title('maps.rs.osrs');
 		return $this->view('map.runescape.old');
 	}
 }

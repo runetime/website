@@ -66,7 +66,7 @@ class StaffRadioController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.radio.title'));
+		$this->title('staff.radio.title');
 		return $this->view('staff.radio.index', compact('live', 'messages'));
 	}
 
@@ -79,7 +79,7 @@ class StaffRadioController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.radio.live.title'));
+		$this->title('staff.radio.live.title');
 		return $this->view('staff.radio.live', compact('messages'));
 	}
 
@@ -208,7 +208,7 @@ class StaffRadioController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.radio.timetable.title'));
+		$this->title('staff.radio.timetable.title');
 		return $this->view('staff.radio.timetable', compact('days'));
 	}
 

@@ -11,7 +11,7 @@ class SignatureController extends BaseController
 	public function getIndex()
 	{
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('signature.title'));
+		$this->title('signature.title');
 		return $this->view('signatures.index');
 	}
 
@@ -29,7 +29,7 @@ class SignatureController extends BaseController
 
 		$this->bc(['signatures' => trans('signature.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('signature.type.title'));
+		$this->title('signature.type.title');
 		return $this->view('signatures.type', compact('username'));
 	}
 
@@ -50,7 +50,7 @@ class SignatureController extends BaseController
 
 		$this->bc(['signatures' => trans('signature.title'), '#1' => $username]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('signature.style.title'));
+		$this->title('signature.style.title');
 		return $this->view('signatures.style', compact('username', 'type', 'imgs'));
 	}
 
@@ -73,7 +73,7 @@ class SignatureController extends BaseController
 
 		$this->bc(['signatures' => trans('signature.title'), '#1' => $username, 'signatures/username=' . $username . '/type=' . $type => ucwords($type)]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('signature.final.title'));
+		$this->title('signature.final.title');
 		return $this->view('signatures.final', compact('username', 'hash', 'location'));
 	}
 

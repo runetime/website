@@ -49,7 +49,7 @@ class NewsController extends BaseController
 		$news = $this->news->getRecentNews(5);
 
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('news.title'));
+		$this->title('news.title');
 		return $this->view('news.index', compact('news', 'canAdd'));
 	}
 
@@ -71,7 +71,7 @@ class NewsController extends BaseController
 
 		$this->bc(['news' => trans('news.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('news.view.title', ['name' => $news->title]));
+		$this->title('news.view.title', ['name' => $news->title]);
 		return $this->view('news.view', compact('news', 'posts', 'tags'));
 	}
 
@@ -82,7 +82,7 @@ class NewsController extends BaseController
 	{
 		$this->bc(['news' => trans('news.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('news.create_newspiece'));
+		$this->title('news.create_newspiece');
 		return $this->view('news.create');
 	}
 
@@ -115,6 +115,7 @@ class NewsController extends BaseController
 			} else {
 				$tag = $this->tags->getByName($tagName);
 			}
+
 			$news->addTag($tag);
 		}
 

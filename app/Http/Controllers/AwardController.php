@@ -24,7 +24,7 @@ class AwardController extends BaseController
 		$awards = $this->awards->getByStatus(Award::STATUS_AVAILABLE);
 
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('awards.title'));
+		$this->title('awards.title');
 		return $this->view('awards.index', compact('awards'));
 	}
 
@@ -39,7 +39,7 @@ class AwardController extends BaseController
 
 		$this->bc(['awards' => trans('awards.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('awards.view.title', ['name' => $award->name]));
+		$this->title('awards.view.title', ['name' => $award->name]);
 		return $this->view('awards.view', compact('award', 'awardees'));
 	}
 }

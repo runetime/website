@@ -9,7 +9,7 @@ class TransparencyController extends BaseController
 	public function getIndex()
 	{
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('transparency.title'));
+		$this->title('transparency.title');
 		return $this->view('transparency.index');
 	}
 
@@ -36,7 +36,7 @@ class TransparencyController extends BaseController
 
 		$this->bc(['transparency' => trans('transparency.title')]);
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('transparency.markdown.title'));
+		$this->title('transparency.markdown.title');
 		return $this->view('transparency.markdown', compact('files', 'renderedFiles'));
 	}
 }

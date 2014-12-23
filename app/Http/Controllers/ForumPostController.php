@@ -131,7 +131,7 @@ class ForumPostController extends BaseController
 		$thread = $this->threads->getById($post->thread[0]->id);
 
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.post.edit.title', ['thread' => $thread->title]));
+		$this->title('forums.post.edit.title', ['thread' => $thread->title]);
 		return $this->view('forums.post.edit', compact('post', 'thread'));
 	}
 
@@ -207,7 +207,7 @@ class ForumPostController extends BaseController
 		$thread = $this->threads->getById($post->thread[0]->id);
 
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.post.report.title', ['author' => $post->author->display_name, 'thread' => $thread->title]));
+		$this->title('forums.post.report.title', ['author' => $post->author->display_name, 'thread' => $thread->title]);
 		return $this->view('forums.post.report', compact('post', 'thread'));
 	}
 

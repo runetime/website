@@ -32,7 +32,7 @@ class StatusController extends BaseController
 
 		$this->bc(['forums' => trans('forums.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.statuses.title'));
+		$this->title('forums.statuses.title');
 		return $this->view('forums.statuses.index', compact('statusList'));
 	}
 
@@ -50,7 +50,7 @@ class StatusController extends BaseController
 
 		$this->bc(['forums' => trans('forums.title'), 'forums/statuses' => trans('forums.statuses.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.statuses.view.title', ['author' => $status->author->display_name]));
+		$this->title('forums.statuses.view.title', ['author' => $status->author->display_name]);
 		return $this->view('forums.statuses.view', compact('status'));
 	}
 
@@ -88,7 +88,7 @@ class StatusController extends BaseController
 	{
 		$this->bc(['forums' => trans('forums.title'), 'forums/statuses' => trans('forums.statuses.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.statuses.create.title'));
+		$this->title('forums.statuses.create.title');
 		return $this->view('forums.statuses.create');
 	}
 

@@ -55,7 +55,7 @@ class StaffTeamLeaderController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.team_leader');
-		$this->title(trans('staff.team_leader.title'));
+		$this->title('staff.team_leader.title');
 		return $this->view('staff.team_leader.index', compact('members'));
 	}
 

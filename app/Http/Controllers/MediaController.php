@@ -9,7 +9,7 @@ class MediaController extends BaseController
 	public function getIndex()
 	{
 		$this->nav('navbar.social.social');
-		$this->title(trans('media.title'));
+		$this->title('media.title');
 		return $this->view('media');
 	}
 }

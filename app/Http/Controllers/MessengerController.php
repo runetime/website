@@ -37,7 +37,7 @@ class MessengerController extends BaseController
 		$messages = \Auth::user()->messages;
 
 		$this->nav('navbar.forums');
-		$this->title(trans('messenger.title'));
+		$this->title('messenger.title');
 		return $this->view('messenger.index', compact('messages'));
 	}
 
@@ -57,7 +57,7 @@ class MessengerController extends BaseController
 
 		$this->bc(['messenger' => trans('messenger.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('messenger.view.title', ['name' => $message->title]));
+		$this->title('messenger.view.title', ['name' => $message->title]);
 		return $this->view('messenger.view', compact('message', 'posts'));
 	}
 
@@ -104,7 +104,7 @@ class MessengerController extends BaseController
 		}
 		$this->bc(['messenger' => trans('messenger.title')]);
 		$this->nav(trans('forums.title'));
-		$this->title(trans('messenger.create.title'));
+		$this->title('messenger.create.title');
 		return $this->view('messenger.compose.index', compact('to'));
 	}
 
@@ -128,6 +128,7 @@ class MessengerController extends BaseController
 				with(new Notification)->saveNew($participant->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);
 			}
 		}
+
 		return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
 	}
 }

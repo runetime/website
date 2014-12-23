@@ -53,11 +53,12 @@ class BaseController extends Controller
 	}
 
 	/**
-	 * @param $newTitle
+	 * @param       $lang
+	 * @param array $data
 	 */
-	protected function title($newTitle)
+	protected function title($lang, $data = [])
 	{
-		$this->title = $newTitle;
+		$this->title = trans($lang, $data);
 	}
 
 	/**

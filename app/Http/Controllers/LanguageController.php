@@ -15,7 +15,7 @@ class LanguageController extends BaseController
 		$langs = $this->languageSort($languageList);
 
 		$this->nav('navbar.runetime.runetime');
-		$this->title(trans('language.set.title'));
+		$this->title('language.set.title');
 		return $this->view('language.set', compact('langs'));
 	}
 

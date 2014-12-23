@@ -184,7 +184,7 @@ class ForumThreadController extends BaseController
 
 		$this->bc(array_reverse($bc));
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.thread.view.title', ['name' => $thread->title]));
+		$this->title('forums.thread.view.title', ['name' => $thread->title]);
 		return $this->view('forums.thread.view', compact('thread', 'poll', 'posts', 'page', 'pages'));
 	}
 
@@ -214,7 +214,7 @@ class ForumThreadController extends BaseController
 
 		$this->bc($bc);
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.thread.create.name', ['subforum' => $subforum->name]));
+		$this->title('forums.thread.create.name', ['subforum' => $subforum->name]);
 		return $this->view('forums.thread.create', compact('subforum'));
 	}
 

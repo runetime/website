@@ -55,7 +55,7 @@ class RadioController extends BaseController
 	public function getIndex()
 	{
 		$this->nav('navbar.radio');
-		$this->title(trans('radio.title'));
+		$this->title('radio.title');
 		return $this->view('radio');
 	}
 

@@ -83,7 +83,7 @@ class StaffAdminController extends BaseController
 	{
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.admin.title'));
+		$this->title('staff.admin.title');
 
 		return $this->view('staff.administrator.index');
 	}
@@ -97,7 +97,7 @@ class StaffAdminController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.checkup.title'));
+		$this->title('staff.checkup.title');
 
 		return $this->view('staff.checkup.list', compact('checkups'));
 	}
@@ -115,7 +115,7 @@ class StaffAdminController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.checkup.view.title', ['author' => $displayName]));
+		$this->title('staff.checkup.view.title', ['author' => $displayName]);
 
 		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
 	}
@@ -245,7 +245,7 @@ class StaffAdminController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trans('staff.admin.users.title'));
+		$this->title('staff.admin.users.title');
 
 		return $this->view('staff.administrator.users.index', compact('users'));
 	}
@@ -271,7 +271,7 @@ class StaffAdminController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title'), 'staff/administrator/users' => trans('staff.admin.users.title')]);
 		$this->nav('runetime.staff.staff');
-		$this->title(trans('utilities.name', ['name' => $user->display_name]));
+		$this->title('utilities.name', ['name' => $user->display_name]);
 		return $this->view('staff.administrator.users.view', compact('user'));
 	}
 }

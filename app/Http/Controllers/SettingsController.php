@@ -30,7 +30,7 @@ class SettingsController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$h = \Lang::get('settings.profile.timezone.hours');
+		$h = trans('settings.profile.timezone.hours');
 		$timezoneOptions = [
 			'-12'   => '(UTC-12:00 ' . $h . ') Enitwetok, Kwajalien',
 			'-11'   => '(UTC-11:00 ' . $h . ') Midway Island, Samoa',
@@ -76,7 +76,7 @@ class SettingsController extends BaseController
 		$thisURL = '/settings/';
 
 		$this->nav('navbar.forums');
-		$this->title(trans('settings.profile.title'));
+		$this->title('settings.profile.title');
 		return $this->view('settings.index', compact('timezoneOptions', 'thisURL'));
 	}
 
@@ -113,7 +113,7 @@ class SettingsController extends BaseController
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('settings.photo.title'));
+		$this->title('settings.photo.title');
 		return $this->view('settings.photo', compact('thisURL'));
 	}
 
@@ -147,7 +147,7 @@ class SettingsController extends BaseController
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('settings.password.title'));
+		$this->title('settings.password.title');
 		return $this->view('settings.password', compact('thisURL'));
 	}
 
@@ -178,7 +178,7 @@ class SettingsController extends BaseController
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('settings.about.title'));
+		$this->title('settings.about.title');
 		return $this->view('settings.about', compact('thisURL'));
 	}
 
@@ -206,7 +206,7 @@ class SettingsController extends BaseController
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('settings.signature.title'));
+		$this->title('settings.signature.title');
 		return $this->view('settings.signature', compact('thisURL'));
 	}
 
@@ -234,7 +234,7 @@ class SettingsController extends BaseController
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('settings.social.title'));
+		$this->title('settings.social.title');
 		return $this->view('settings.social', compact('thisURL'));
 	}
 
@@ -281,7 +281,7 @@ class SettingsController extends BaseController
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('settings.runescape.title'));
+		$this->title('settings.runescape.title');
 		return $this->view('settings.runescape', compact('thisURL', 'versions', 'allegiances'));
 	}
 

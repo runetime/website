@@ -116,7 +116,7 @@ class ForumController extends BaseController
 		$activity = \Cache::get('activity.users');
 
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.title'));
+		$this->title('forums.title');
 		return $this->view('forums.index', compact('subforumList', 'recentThreads', 'recentPosts', 'forumInfo', 'activity'));
 	}
 
@@ -173,7 +173,7 @@ class ForumController extends BaseController
 
 		$this->bc(['forums' => trans('navbar.forums')]);
 		$this->nav('navbar.forums');
-		$this->title(trans('forums.tags.title', ['name' => $name]));
+		$this->title('forums.tags.title', ['name' => $name]);
 		return $this->view('forums.tags.view', compact('tag', 'news', 'threads', 'name'));
 	}
 
