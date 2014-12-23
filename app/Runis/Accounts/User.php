@@ -16,7 +16,35 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	use Authenticatable, CanResetPassword;
 	protected $table = 'users';
 	protected $hidden = [];
-	protected $fillable = ['display_name', 'email', 'password', 'title', 'about', 'about_parsed', 'signature', 'signature_parsed', 'posts_active', 'posts_total', 'profile_views', 'birthday', 'gender', 'referred_by', 'timezone', 'dst', 'reputation', 'rank_id', 'social_twitter', 'social_facebook', 'social_youtube', 'social_website', 'social_skype', 'runescape_version', 'runescape_rsn', 'runescape_clan', 'runescape_allegiance', 'location', 'interests'];
+	protected $fillable = [
+		'about',
+		'about_parsed',
+		'birthday',
+		'display_name',
+		'dst',
+		'email',
+		'gender',
+		'password',
+		'profile_views',
+		'posts_active',
+		'posts_total',
+		'social_facebook',
+		'social_skype',
+		'social_twitter',
+		'social_website',
+		'social_youtube',
+		'rank_id',
+		'referred_by',
+		'reputation',
+		'runescape_allegiance',
+		'runescape_clan',
+		'runescape_rsn',
+		'runescape_version',
+		'signature',
+		'signature_parsed',
+		'timezone',
+		'title',
+	];
 	protected $softDelete = true;
 	private $rolesCache;
 	const PER_MEMBERS_PAGE = 20;
