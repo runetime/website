@@ -1,14 +1,12 @@
 <?php
-use App\RuneTime\Notifications\NotificationRepository;
-use App\RuneTime\Notifications\Notification;
-
-$messages = 0;
-$notifications = 0;
+$messageCount = 0;
+$notificationCount = 0;
 if(\Auth::check()) {
-	$notificationRepository = new NotificationRepository(new Notification);
-	$messages = $notificationRepository->getCountByUser(\Auth::user()->id, 'Messenger');
-	$notifications = $notificationRepository->getCountByUser(\Auth::user()->id);
+	$notifications = \App::make('App\RuneTime\Notifications\NotificationRepository');
+	$messageCount = $notifications->getCountByUser(\Auth::user()->id, 'Messenger');
+	$notificationCount = $notifications->getCountByUser(\Auth::user()->id);
 }
+
 $navs = [
 	''       => trans('navbar.home'),
 	'forums' => trans('navbar.forums'),
@@ -39,34 +37,44 @@ $navs = [
 		'clan'        => trans('navbar.social.our_clan'),
 	],
 ];
+
 if(\Auth::check() && \Auth::user()->isStaff()) {
 	$navs[trans('navbar.staff.staff')] = [
-		'staff'          => trans('navbar.staff.staff_panel'),
+		'staff' => trans('navbar.staff.staff_panel'),
 	];
-	if(\Auth::user()->hasOneOfRoles(1))
-		$navs[trans('navbar.staff.staff')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . Lang::get('navbar.staff.administrator') . "</span>";
-	if(\Auth::user()->hasOneOfRoles(1, 2, 3))
-		$navs[trans('navbar.staff.staff')]['staff/radio'] = "<span class='members-radio-dj-no-img'>" . Lang::get('navbar.staff.radio') . "</span>";
-	if(\Auth::user()->isLeader() && !\Auth::user()->isAdmin())
+	if(\Auth::user()->hasOneOfRoles(1)) {
+		$navs[trans('navbar.staff.staff')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . trans('navbar.staff.administrator') . "</span>";
+	}
+
+	if(\Auth::user()->hasOneOfRoles(1, 2, 3)) {
+		$navs[trans('navbar.staff.staff')]['staff/radio'] = "<span class='members-radio-dj-no-img'>" . trans('navbar.staff.radio') . "</span>";
+	}
+
+	if(\Auth::user()->isLeader() && !\Auth::user()->isAdmin()) {
 		$navs[trans('navbar.staff.staff')]['staff/leader'] = \Link::color(trans('navbar.staff.team_leader'), \Auth::user()->importantRole()->id, false);
-	$navs[trans('navbar.staff.staff')]['tickets/manage'] = Lang::get('navbar.staff.ticket');
-	$navs[trans('navbar.staff.staff')]['staff/checkup']  = Lang::get('navbar.staff.checkup');
+	}
+
+	$navs[trans('navbar.staff.staff')]['tickets/manage'] = trans('navbar.staff.ticket');
+	$navs[trans('navbar.staff.staff')]['staff/checkup'] = trans('navbar.staff.checkup');
 }
-if(!Auth::check())
+
+if(!Auth::check()) {
 	$navLogged = [
-		'login'  => Lang::get('navbar.logged.out.login'),
-		'signup' => Lang::get('navbar.logged.out.signup'),
+		'login'  => trans('navbar.logged.out.login'),
+		'signup' => trans('navbar.logged.out.signup'),
 	];
-else
+} else {
 	$navLogged = [
 		\Link::name(Auth::user()->id) => [
-			'profile/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => Lang::get('navbar.logged.in.my_profile'),
-			'settings'  => Lang::get('navbar.logged.in.my_settings'),
-			'messenger' => Lang::get('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messages.'</span>',
-			'notifications'   => Lang::get('navbar.logged.in.notifications').'<span class=\'badge badge-info pull-right\'>'.$notifications.'</span>',
+			'profile/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => trans('navbar.logged.in.my_profile'),
+			'settings'  => trans('navbar.logged.in.my_settings'),
+			'messenger' => trans('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messageCount.'</span>',
+			'notifications'   => trans('navbar.logged.in.notifications').'<span class=\'badge badge-info pull-right\'>'.$notificationCount.'</span>',
 		],
-		'logout' => Lang::get('navbar.logged.in.logout'),
+		'logout' => trans('navbar.logged.in.logout'),
 	];
+}
+
 if(!isset($nav))               $nav = "Home";
 if(!isset($bc))                $bc = [];
 if(!isset($displayPageHeader)) $displayPageHeader = true;
@@ -79,7 +87,7 @@ $current = $nav;
 	<head>
 		<base href='/' />
 		<title>
-			{{!empty($title)?$title." | ":""}}RuneTime
+			{{ !empty($title) ? $title . " | " : "" }}RuneTime
 		</title>
 		<meta charset='UTF-8' />
 		<meta http-equiv='Content-Type' content='text/html;charset=iso-8859-1' />
@@ -152,7 +160,13 @@ $current = $nav;
 	@if(is_array($name))
 						<li class='dropdown{{ $url == $current ? " active" : "" }}'>
 							<a href='#' class='dropdown-toggle members-{{ \Auth::user()->importantRole()->class_name }}' data-toggle='dropdown'>
-								{{ \Auth::user()->display_name }} {!! $notifications > 0 ? "<span class='badge badge-important'>" . $notifications . "</span>" : "" !!}<span class='caret'></span>
+								{{ \Auth::user()->display_name }}
+		@if($notificationCount > 0)
+								<span class='badge badge-important'>
+									{{ $notificationCount }}
+								</span>
+		@endif
+								<span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
 		@foreach($name as $url2 => $name2)
