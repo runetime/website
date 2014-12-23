@@ -32,7 +32,7 @@ class ContactController extends BaseController
 
 		\Mail::send('emails.contact', $data, function($message) {
 			$message->to('stntlr@gmail.com');
-			$message->subject('Contact message on runetime.net');
+			$message->subject(trans('contact.submit.contact_message', ['website' => 'runetime.net']));
 		});
 
 		return json_encode($response);
