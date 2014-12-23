@@ -104,9 +104,6 @@ $current = $nav;
 		<link rel='index' href='/sitemap/' />
 		<link rel='stylesheet' href='/css/style.css' />
 		<script src='/js/vendor.js'></script>
-@foreach($js as $jsFile)
-		<script src='/js/{{ $jsFile }}.js'></script>
-@endforeach
 		<script src='/js/modules.js'></script>
 @if(\Auth::check() && \Auth::user()->isStaff())
 		<script src='/js/admin.js'></script>

@@ -11,7 +11,6 @@ class BaseController extends Controller
 {
 	protected $bc = [];
 	protected $displayPageHeader = true;
-	protected $js = [];
 	protected $nav = '';
 	protected $title = '';
 
@@ -25,14 +24,6 @@ class BaseController extends Controller
 		} else {
 			$this->bc = $breadcrumbs;
 		}
-	}
-
-	/**
-	 * @param $js
-	 */
-	protected function js($js)
-	{
-		$this->js = $js;
 	}
 
 	/**
@@ -79,7 +70,6 @@ class BaseController extends Controller
 	{
 		$data['bc'] = $this->bc;
 		$data['displayPageHeader'] = $this->displayPageHeader;
-		$data['js'] = $this->js;
 		$data['nav'] = $this->nav;
 		$data['title'] = $this->title;
 		$data['url'] = \Request::getPathInfo();
