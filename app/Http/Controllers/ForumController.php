@@ -187,7 +187,7 @@ class ForumController extends BaseController
 		$response = ['done' => false];
 		$question = $this->questions->getById($form->question);
 		$answer = $this->answers->getByid($form->answer);
-		if(empty($question) || empty($answer)) {
+		if(empty($question) || empty($answer) || !\Auth::check()) {
 			$response['error'] = -1;
 
 			return json_encode($response);
