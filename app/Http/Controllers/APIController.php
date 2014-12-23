@@ -14,9 +14,11 @@ class APIController extends BaseController
 	/**
 	 * @param UserRepository $users
 	 */
-	public function __construct(UserRepository $users) {
+	public function __construct(UserRepository $users)
+	{
 		$this->users = $users;
 	}
+	
 	/**
 	 * @param UserRequest $form
 	 *
