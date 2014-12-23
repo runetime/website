@@ -27,7 +27,6 @@ class Utilities {
     public JSONDecode(json: string) {
         return $.parseJSON(json);
     }
-
     public postAJAX(path: string, data: any) {
         data._token = $('meta[name="_token"]').attr('content');
         return $.ajax({

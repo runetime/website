@@ -5,9 +5,16 @@ var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var uglifyjs = require('gulp-uglifyjs');
 var rename = require('gulp-rename');
-var sass = require('gulp-sass');
+var sass = require('gulp-ruby-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var ts = require('gulp-typescript');
+
+
+var tsProject = {
+	declarationFiles: true,
+	noExternalResolve: true,
+	sortOutput: true
+};
 
 var paths = {
 	'assets': {
@@ -23,7 +30,13 @@ var paths = {
 // Sass Compile Task
 gulp.task('scss', function() {
 	return gulp.src(paths.assets.scss)
-		.pipe(sass({ style: 'compressed' }))
+		.pipe(sass({
+			sourcemap: false,
+			style: 'compressed'
+		}))
+		.on('error', function(err) {
+			console.log(err.message);
+		})
 		.pipe(gulp.dest(paths.public.css));
 });
 
@@ -47,9 +60,7 @@ gulp.task('scripts-admin', function() {
 gulp.task('scripts-modules', function() {
 	var tsResult = gulp.src('./assets/typescript/modules/*.ts')
 		.pipe(sourcemaps.init())
-		.pipe(ts({
-			sortOutput: true
-		}));
+		.pipe(ts(tsProject));
 
 	return tsResult.js
 		.pipe(concat('modules.js'))
