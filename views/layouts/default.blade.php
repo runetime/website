@@ -277,7 +277,7 @@ $current = $nav;
 				</a>
 			</p>
 		</div>
-		<div id='top' class='hidden-xs'>+
+		<div id='top' class='hidden-xs'>
 			<a data-toggle='tooltip' data-placement='top' title='Back to Top'>
 				<i class='fa fa-chevron-up'></i>
 			</a>
