@@ -1,5 +1,20 @@
 var utilities;
 class Utilities {
+    public currentTime() {
+        return Math.floor(Date.now() / 1000);
+    }
+
+    public formToken(token: string) {
+        token = atob(token);
+        $('form').append("<input type='hidden' name='_token' value='" + token + "' />");
+
+        var meta = document.createElement('meta');
+        meta.name = '_token';
+        meta.content = token;
+
+        document.getElementsByTagName('head')[0].appendChild(meta);
+    }
+
     public getAJAX(path: string) {
         return $.ajax({
             url: path,
@@ -8,6 +23,11 @@ class Utilities {
             async: true
         });
     }
+
+    public JSONDecode(json: string) {
+        return $.parseJSON(json);
+    }
+
     public postAJAX(path: string, data: any) {
         data._token = $('meta[name="_token"]').attr('content');
         return $.ajax({
@@ -17,6 +37,13 @@ class Utilities {
             async: true
         });
     }
+
+    public scrollTo(element: any, time: number) {
+        $('html, body').animate({
+            scrollTop: $(element).offset().top
+        }, time);
+    }
+
     public timeAgo(ts: number) {
         var nowTs = Math.floor(Date.now() / 1000),
             seconds = nowTs - ts;
@@ -37,22 +64,6 @@ class Utilities {
         } else {
             return "1 second ago";
         }
-    }
-    public currentTime() {
-        return Math.floor(Date.now() / 1000);
-    }
-    public JSONDecode(json: string) {
-        return $.parseJSON(json);
-    }
-    public scrollTo(element: any, time: number) {
-        $('html, body').animate({
-            scrollTop: $(element).offset().top
-        }, time);
-    }
-
-    public formToken(token: string) {
-        token = atob(token);
-        $('form').append("<input type='hidden' name='_token' value='" + token + "' />");
     }
 }
 utilities = new Utilities();
