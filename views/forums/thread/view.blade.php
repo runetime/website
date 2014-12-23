@@ -16,8 +16,9 @@
 @if(count($poll) > 0)
 	@include('forums.thread.poll._show', ['poll' => $poll])
 @endif
-@if(!empty($thread->tags))
-					<ul class='list-inline'>
+@if(count($thread->tags) > 0)
+					Tagged as
+					<ul class='inline list-inline'>
 	@foreach($thread->tags as $tag)
 						<li>
 							<a href='/forums/tag/{{ $tag->name }}' class='label label-rt' title='{{ $tag->name }}'>
