@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateForumPollAnswersTable extends Migration {
+class CreateForumPollVotesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,13 @@ class CreateForumPollAnswersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forum_poll_answers', function(Blueprint $table)
+		Schema::create('forum_poll_votes', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('answer_id');
+			$table->integer('author_id');
+			$table->integer('poll_id');
 			$table->integer('question_id');
-			$table->mediumtext('contents');
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -29,7 +31,7 @@ class CreateForumPollAnswersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('forum_poll_answers');
+		Schema::drop('forum_poll_votes');
 	}
 
 }

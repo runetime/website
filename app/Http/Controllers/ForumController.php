@@ -6,7 +6,9 @@ use App\Http\Requests\Forums\PostReportRequest;
 use App\Http\Requests\Forums\PostVoteRequest;
 use App\Http\Requests\Forums\ReplyRequest;
 use App\Http\Requests\Forums\ThreadCreateRequest;
+use App\RuneTime\Forum\Polls\Answer;
 use App\RuneTime\Forum\Polls\Poll;
+use App\RuneTime\Forum\Polls\Question;
 use App\RuneTime\Forum\Reports\Report;
 use App\RuneTime\Forum\Subforums\SubforumRepository;
 use App\RuneTime\Forum\Tags\Tag;
@@ -246,17 +248,19 @@ class ForumController extends BaseController
 			abort(404);
 		}
 
-		$poll = [];
-		if(!empty($form->questions)) {
+		$poll = -1;
+		if(strlen($form->poll_title) > 0) {
 			foreach($form->questions as $key => $question) {
-				if(!empty($question)) {
-					$poll[$key] = [];
-				}
-			}
-			foreach($form->answers as $questionKey => $answerToQuestion) {
-				foreach($answerToQuestion as $answerKey => $answer) {
-					if(!empty($answer)) {
-						$poll[$questionKey][$answerKey] = $answer;
+				if(!empty($question) && count($form->answers[$key]) > 0) {
+					if($poll === -1) {
+						$poll = with(new Poll)->saveNew(1, $form->poll_title);
+					}
+
+					$question = with(new Question)->saveNew($poll->id, $question);
+					foreach($form->answers[$key] as $answer) {
+						if(strlen($answer) > 0) {
+							with(new Answer)->saveNew($question->id, $answer);
+						}
 					}
 				}
 			}
@@ -277,8 +281,9 @@ class ForumController extends BaseController
 			$thread->addTag($tag);
 		}
 
-		if(!empty($poll)) {
-			$poll = with(new Poll)->saveNew($thread->id, json_encode($poll));
+		if($poll !== -1) {
+			$poll->thread_id = $thread->id;
+			$poll->save();
 			$thread->poll_id = $poll->id;
 			$thread->save();
 		}

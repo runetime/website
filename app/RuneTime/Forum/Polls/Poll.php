@@ -7,11 +7,9 @@ class Poll extends Entity
 {
 	protected $table = 'forum_polls';
 	protected $with = [];
-	protected $fillable = ['thread_id', 'questions'];
+	protected $fillable = ['thread_id', 'title'];
 	protected $dates = [];
 	protected $softDelete = true;
-	const STATUS_INVISIBLE = 0;
-	const STATUS_VISIBLE = 1;
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -24,8 +22,8 @@ class Poll extends Entity
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function answers()
+	public function questions()
 	{
-		return $this->hasMany('App\RuneTime\Forum\Polls\Answer');
+		return $this->hasMany('App\RuneTime\Forum\Polls\Question');
 	}
 }

@@ -21,6 +21,14 @@ class Thread extends Entity
 	const POSTS_PER_PAGE  = 20;
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function poll()
+	{
+		return $this->belongsTo('App\RuneTime\Forum\Polls\Poll', 'poll_id');
+	}
+
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function posts()
