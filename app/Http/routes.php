@@ -100,6 +100,14 @@ Route::group(['prefix' => 'chat'], function() {
 get('clan', 'ClanController@getIndex');
 
 /**
+ * Contact
+ */
+Route::group(['prefix' => 'contact'], function() {
+	get('/', 'ContactController@getIndex');
+	post('submit', 'ContactController@postSubmit');
+});
+
+/**
  * Databases
  */
 Route::group(['prefix' => 'databases'], function() {
