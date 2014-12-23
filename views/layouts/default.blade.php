@@ -127,11 +127,15 @@ $current = $nav;
 				</div>
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 					<ul class='nav navbar-nav'>
-@foreach($navs as $url=>$name)
+@foreach($navs as $url => $name)
 	@if(is_array($name))
-						<li class='dropdown{{$url==$current?" active":""}}'>
+		@if($url === $current)
+						<li class='dropdown active'>
+		@else
+						<li class='dropdown'>
+		@endif
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-								{{$url}} <span class='caret'></span>
+								{{ $url }} <span class='caret'></span>
 							</a>
 							<ul class='dropdown-menu' role='menu'>
 		@foreach($name as $url2 => $name2)
@@ -144,8 +148,12 @@ $current = $nav;
 							</ul>
 						</li>
 	@else
-						<li{{ $name == $current ? " class=active" : "" }}>
-							<a href='{{ $url }}' title='{{$name}}'>
+		@if($name === $current)
+						<li class='active'>
+		@else
+						<li>
+		@endif
+							<a href='{{ $url }}' title='{{ $name }}'>
 								{!! $name !!}
 							</a>
 						</li>
@@ -155,7 +163,11 @@ $current = $nav;
 					<ul class='nav navbar-nav navbar-right'>
 @foreach($navLogged as $url => $name)
 	@if(is_array($name))
-						<li class='dropdown{{ $url == $current ? " active" : "" }}'>
+		@if($url === $current)
+						<li class='dropdown active'>
+		@else
+						<li class='dropdown'>
+		@endif
 							<a href='#' class='dropdown-toggle members-{{ \Auth::user()->importantRole()->class_name }}' data-toggle='dropdown'>
 								{{ \Auth::user()->display_name }}
 		@if($notificationCount > 0)
@@ -176,7 +188,11 @@ $current = $nav;
 							</ul>
 						</li>
 	@else
-						<li{{$name == $current?" class=active":""}}>
+		@if($name === $current)
+			<li class='active'>
+		@else
+			<li>
+		@endif
 							<a href='{{ $url }}' title='{{ $name }}'>
 								{!! $name !!}
 							</a>
@@ -187,7 +203,7 @@ $current = $nav;
 				</div>
 			</div>
 		</nav>
-@if($displayPageHeader&&!empty($title))
+@if($displayPageHeader && !empty($title))
 		<div class='wrapper wrapper-flat'>
 			<ol class='breadcrumb'>
 				<li data-toggle='tooltip' data-placement='bottom' title='Home'>
@@ -223,13 +239,13 @@ $current = $nav;
 				</p>
 				<div id='portfolio-about'>
 					<p>
-						@lang('footer.copyright') &copy; {{date('Y')}} &mdash; <a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
+						@lang('footer.copyright') &copy; {{ date('Y') }} &mdash; <a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
 					</p>
 					<p>
 						<a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
 					</p>
 					<p>
-						<a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{date('Y')}}
+						<a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{ date('Y') }}
 					</p>
 					<p>
 						@lang('footer.images')
@@ -244,9 +260,15 @@ $current = $nav;
 					@lang('footer.follow_us')
 				</p>
 				<div id='portfolio-social'>
-					<a href='https://www.facebook.com/RuneTimeOfficial' title='@lang('footer.facebook')'><img src='/img/fb.png' alt='Facebook' /></a>
-					<a href='https://twitter.com/Rune_Time' title='@lang('footer.twitter')'><img src='/img/tw.png' alt='Twitter' /></a>
-					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'><img src='/img/yt.png' alt='YouTube' /></a>
+					<a href='https://www.facebook.com/RuneTimeOfficial' title='@lang('footer.facebook')'>
+						<img src='/img/fb.png' alt='Facebook' />
+					</a>
+					<a href='https://twitter.com/Rune_Time' title='@lang('footer.twitter')'>
+						<img src='/img/tw.png' alt='Twitter' />
+					</a>
+					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'>
+						<img src='/img/yt.png' alt='YouTube' />
+					</a>
 				</div>
 			</div>
 			<p class='pull-right'>
@@ -255,7 +277,7 @@ $current = $nav;
 				</a>
 			</p>
 		</div>
-		<div id='top' class='hidden-xs'>
+		<div id='top' class='hidden-xs'>+
 			<a data-toggle='tooltip' data-placement='top' title='Back to Top'>
 				<i class='fa fa-chevron-up'></i>
 			</a>
