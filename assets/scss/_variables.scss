@@ -139,6 +139,15 @@ $page-top-right:                      25px;
 
 
 /**
+ * Progressbars
+ */
+$progressbar-dark-bg:     rgba(21, 21, 21, 1);
+$progressbar-dark-border: 0;
+$progressbar-dark-br:     0;
+$progressbar-dark-height: 1.25em;
+$progressbar-dark-bar-bg: rgba(41, 0, 48, 1);
+
+/**
  * Ranks
  */
 $rank-base-prefix: '/img/forums/roles/badge/';

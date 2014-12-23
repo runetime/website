@@ -6795,6 +6795,9 @@ button.close {
  * Page
  */
 /**
+ * Progressbars
+ */
+/**
  * Ranks
  */
 /**
@@ -7198,6 +7201,14 @@ body {
 
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(41, 145, 184, 0.8); }
+
+.progress-bar-dark {
+  background: #151515;
+  border: 0;
+  border-radius: 0;
+  height: 1.25em; }
+  .progress-bar-dark .progress-bar {
+    background: #290030; }
 
 .badge-novice-member {
   background-color: darkgoldenrod !important;
