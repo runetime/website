@@ -24,6 +24,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		'dst',
 		'email',
 		'gender',
+		'last_active',
 		'password',
 		'profile_views',
 		'posts_active',

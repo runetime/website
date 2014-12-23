@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
 			$table->boolean('dst');
 			$table->string('email');
 			$table->integer('gender');
+			$table->integer('last_active');
 			$table->string('password');
 			$table->integer('profile_views');
 			$table->integer('posts_active');

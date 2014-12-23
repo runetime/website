@@ -24,7 +24,12 @@
 								</h1>
 								@lang('profile.overview.member_since', ['date' => \Time::DMY($profile->created_at)])
 								<br />
-								<span class='label label-success'>@lang('profile.status.online')</span> @lang('profile.overview.last_active')
+@if($profile->last_active > time() - (60 * 30))
+								<span class='label label-success'>@lang('profile.status.online')</span>
+@else
+								<span class='label label-danger'>@lang('profile.status.offline')</span>
+@endif
+								@lang('profile.overview.last_active', ['date' => \Time::shortReadable($profile->last_active)])
 							</div>
 							<div class='col-xs-6 col-sm-7 col-md-9'>
 								<div class='well well-sm'>

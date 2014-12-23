@@ -121,6 +121,7 @@ class AuthController extends BaseController
 			1,
 			$form->email,
 			0,
+			time(),
 			$hash,
 			0,
 			0,

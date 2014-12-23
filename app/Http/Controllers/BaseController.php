@@ -75,6 +75,11 @@ class BaseController extends Controller
 		$data['title'] = $this->title;
 		$data['url'] = \Request::getPathInfo();
 		if(\Auth::check()) {
+			\Auth::user()->last_active = time();
+			\Auth::user()->save();
+		}
+
+		if(\Auth::check()) {
 			$bans = new BanRepository(new Ban);
 			$ban = $bans->getByUserId(\Auth::user()->id);
 			if(!empty($ban)) {
