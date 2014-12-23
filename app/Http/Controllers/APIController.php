@@ -24,7 +24,21 @@ class APIController extends BaseController
 	 */
 	public function postUser(UserRequest $form)
 	{
-		$user = $this->users->getById($form->id);
+		$u = $this->users->getById($form->id);
+
+		$user = (object) [
+			'id'               => $u->id,
+			'display_name'     => $u->display_name,
+			'title'            => $u->title,
+			'about'            => $u->about,
+			'about_parsed'     => $u->about_parsed,
+			'signature'        => $u->signature,
+			'signature_parsed' => $u->signature_parsed,
+			'posts_active'     => $u->posts_active,
+			'posts_total'      => $u->posts_total,
+			'profile_views'    => $u->profile_views,
+			'reputation'       => $u->reputation,
+		];
 
 		return json_encode($user);
 	}
