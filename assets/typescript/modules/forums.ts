@@ -1,6 +1,7 @@
 var forums;
 class Forums {
 	public elements: any = {};
+	public hooks: any = {};
 	public paths: any = {};
 	public post: Post = null;
 	public threadCreate: ForumsThreadCreate = null;
@@ -8,8 +9,16 @@ class Forums {
 		this.elements = {
 			'postEditor': "[rt-data='post.edit']"
 		};
+		this.hooks = {
+			poll: {
+				vote: "[rt-hook='forum:poll.vote']"
+			}
+		};
 		this.paths = {
-			'vote': function(id: number) { return '/forums/post/' + id + '/vote'; }
+			poll: {
+				vote: '/forums/poll/vote'
+			},
+			vote: function(id: number) { return '/forums/post/' + id + '/vote'; }
 		};
 		this.post = new Post();
 		$('.upvote').bind('click', function(e: any) {
@@ -23,6 +32,11 @@ class Forums {
 		$("[rt-hook='forums.thread.post:quote']").bind('click', function(e: any) {
 			var id = $(e.target).attr('rt-data');
 			forums.post.quote(id);
+		});
+		$(this.hooks.poll.vote).click(function(e: any) {
+			var data = $(e.target).attr('rt-data');
+			data = $.parseJSON(data);
+			forums.pollVote(data.question, data.answer);
 		});
 	}
 
@@ -43,6 +57,27 @@ class Forums {
 		var vote = utilities.postAJAX(this.paths.vote(postId), data);
 		vote.done(function(data) {
 			data = $.parseJSON(data);
+		});
+	}
+
+	public pollVote(questionId: number, answerId: number) {
+		var data = {
+			answer: answerId,
+			question: questionId
+		};
+		var results = utilities.postAJAX(this.paths.poll.vote, data);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			if(results.done === true) {
+				window.location.replace(window.location.pathname);
+			} else {
+				if(results.error === -1) {
+					// The user was not logged in
+				} else {
+					// Unknown error
+				}
+				// TODO: Make an error div
+			}
 		});
 	}
 
