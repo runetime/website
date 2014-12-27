@@ -37,6 +37,7 @@ Route::group([], function() {
 			get('/', 'AuthController@getLoginForm');
 			post('/', 'AuthController@postLoginForm');
 		});
+
 		/**
 		 * Signup
 		 */
@@ -44,6 +45,7 @@ Route::group([], function() {
 			get('/', 'AuthController@getSignupForm');
 			post('/', 'AuthController@postSignupForm');
 		});
+
 		/**
 		 * Password Reset
 		 */
@@ -145,7 +147,7 @@ Route::group(['prefix' => 'databases'], function() {
 	});
 });
 
-# Donate
+# Donate TODO: WIP, make this Stripe-friendly and allow subscription donations with perks
 get('donate', 'DonateController@getIndex');
 
 /**
@@ -161,6 +163,9 @@ Route::group(['prefix' => 'forums'], function() {
 		get('/', 'ForumThreadController@getThread');
 		get('last-post', 'ForumThreadController@getThreadLastPost');
 		get('page={page}', 'ForumThreadController@getThread');
+		/**
+		 * User-only
+		 */
 		Route::group(['middleware' => 'auth'], function() {
 			get('edit', 'ForumThreadController@getThreadEdit');
 			post('reply', 'ForumPostController@postReply');
@@ -175,7 +180,13 @@ Route::group(['prefix' => 'forums'], function() {
 		post('/', 'ForumThreadController@postCreate');
 	});
 
-	get('tag/{name}', 'ForumController@getTagSearch');
+	/**
+	 * Tags
+	 */
+	Route::group(['prefix' => 'tag'], function() {
+		get('{name}', 'ForumController@getTagSearch');
+	});
+
 	/**
 	 * Poll
 	 */
@@ -194,6 +205,7 @@ Route::group(['prefix' => 'forums'], function() {
 			get('/', 'ForumPostController@getReport');
 			post('/', 'ForumPostController@postReport');
 		});
+
 		/**
 		 * Editing a post
 		 */
@@ -201,6 +213,7 @@ Route::group(['prefix' => 'forums'], function() {
 			get('/', 'ForumPostController@getEdit');
 			post('/', 'ForumPostController@postEdit');
 		});
+
 		/**
 		 * Post voting
 		 */
@@ -221,6 +234,9 @@ Route::group(['prefix' => 'forums'], function() {
 	 */
 	Route::group(['prefix' => 'statuses'], function() {
 		get('/', 'StatusController@getIndex');
+		/**
+		 * Status routes
+		 */
 		Route::group(['prefix' => '{id}-by{name}'], function() {
 			get('/', 'StatusController@getView');
 			/**
@@ -230,6 +246,7 @@ Route::group(['prefix' => 'forums'], function() {
 				post('reply', 'StatusController@postReply');
 			});
 		});
+
 		/**
 		 * Create
 		 */
@@ -269,6 +286,7 @@ Route::group(['prefix' => 'guides'], function() {
 			post('/', 'GuideController@postQuestCreate');
 		});
 	});
+
 	/**
 	 * Locations
 	 */
@@ -301,6 +319,7 @@ Route::group(['prefix' => 'language'], function() {
 		get('{initials}', 'LanguageController@getChange');
 	});
 });
+
 /**
  * Legal
  */
@@ -318,12 +337,16 @@ Route::group(['prefix' => 'livestream'], function() {
 	get('reset', 'LivestreamController@getReset');
 	post('reset', 'LivestreamController@postReset');
 });
+
 /**
  * Maps
  */
 Route::group(['prefix' => 'map'], function() {
 	get('/', 'MapController@getIndex');
 	get('members', 'MapController@getMembers');
+	/**
+	 * RuneScape maps
+	 */
 	Route::group(['prefix' => 'runescape'], function() {
 		get('/', 'MapController@getRunescape');
 		get('3', 'MapController@getRS3');
@@ -426,10 +449,14 @@ Route::group(['prefix' => 'radio'], function() {
 	get('timetable', 'RadioController@getTimetable');
 	get('request/song', 'RadioController@getRequest');
 	get('update', 'RadioController@getUpdate');
+	/**
+	 * TODO: Make song requests guest-usable
+	 */
 	Route::group(['middleware' => 'auth'], function() {
 		post('request/song', 'RadioController@postRequest');
 	});
 });
+
 /**
  * Settings
  */
@@ -481,7 +508,9 @@ Route::group(['prefix' => 'staff'], function() {
 		 */
 		Route::group(['middleware' => 'staff.admin', 'prefix' => 'administrator'], function() {
 			get('/', 'StaffAdminController@getIndex');
-
+			/**
+			 * Checkup Viewing
+			 */
 			Route::group(['prefix' => 'checkups'], function() {
 				get('/', 'StaffAdminController@getCheckupList');
 				get('{id}/view', 'StaffAdminController@getCheckupView');
@@ -491,7 +520,9 @@ Route::group(['prefix' => 'staff'], function() {
 			post('ip-ban', 'StaffAdminController@postIPBan');
 			post('radio-stop', 'StaffAdminController@postRadioStop');
 			post('staff-demote', 'StaffAdminController@postStaffDemote');
-
+			/**
+			 * User List
+			 */
 			Route::group(['prefix' => 'users'], function() {
 				get('/', 'StaffAdminController@getUserList');
 				get('{id}-{name}', 'StaffAdminController@getUserView');
@@ -541,7 +572,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 	 */
 	Route::group(['prefix' => '{id}-{name}'], function() {
 		get('/', 'TicketController@getView');
-
 		/**
 		 * Must be logged in
 		 */
@@ -556,6 +586,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 			get('status/switch={status}', 'TicketController@getStatusSwitch');
 		});
 	});
+
 	/**
 	 * Create
 	 */
@@ -563,6 +594,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 		get('/', 'TicketController@getCreate');
 		post('/', 'TicketController@postCreate');
 	});
+
 	/**
 	 * Manage: staff only
 	 */
