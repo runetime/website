@@ -174,7 +174,7 @@ class SettingsController extends BaseController
 	 */
 	public function getAbout()
 	{
-		$thisURL = '/settings/about/me';
+		$thisURL = '/settings/about-me';
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
@@ -194,7 +194,7 @@ class SettingsController extends BaseController
 		$user->about_parsed = with(new \Parsedown)->text($form->contents);
 		$user->save();
 
-		return \redirect()->to('/settings/about/me');
+		return \redirect()->to('/settings/about-me');
 	}
 
 	/**

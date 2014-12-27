@@ -97,7 +97,7 @@ class SettingsTest extends TestCase
 	{
 		$this->login();
 
-		$response = $this->call('GET', 'settings/about/me');
+		$response = $this->call('GET', 'settings/about-me');
 
 		$this->assertEquals(200, $response->getStatusCode());
 	}
@@ -113,7 +113,7 @@ class SettingsTest extends TestCase
 			'contents' => '**about me**',
 		]);
 
-		$response = $this->call('POST', 'settings/about/me', $data);
+		$response = $this->call('POST', 'settings/about-me', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
 	}

@@ -464,8 +464,8 @@ Route::group(['prefix' => 'radio'], function() {
 Route::group(['middleware' => 'auth', 'prefix' => 'settings'], function() {
 	get('/', 'SettingsController@getIndex');
 	post('/', 'SettingsController@postIndex');
-	get('about/me', 'SettingsController@getAbout');
-	post('about/me', 'SettingsController@postAbout');
+	get('about-me', 'SettingsController@getAbout');
+	post('about-me', 'SettingsController@postAbout');
 	get('password', 'SettingsController@getPassword');
 	post('password', 'SettingsController@postPassword');
 	get('photo', 'SettingsController@getPhoto');
