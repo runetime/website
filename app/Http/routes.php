@@ -562,6 +562,7 @@ Route::group(['prefix' => 'staff'], function() {
 		});
 	});
 });
+
 /**
  * Tickets
  */
