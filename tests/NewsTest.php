@@ -28,11 +28,13 @@ class NewsTest extends TestCase {
 	public function testPostCreate()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'contents' => 'test_contents',
 			'name'     => 'test_name',
 			'tags'     => 'test, phpunit',
-		];
+		]);
+
 		$response = $this->call('POST', 'news/create', $data);
 
 		switch($response->getStatusCode()) {
