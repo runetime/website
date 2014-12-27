@@ -24,4 +24,16 @@ class RequestRepository extends EloquentRepository
 			where('author_id', '=', $id)->
 			get();
 	}
+
+	/**
+	 * @param $since
+	 *
+	 * @return mixed
+	 */
+	public function getByTime($since)
+	{
+		return $this->model->
+			where('created_at', '>=', $since)->
+			get();
+	}
 }

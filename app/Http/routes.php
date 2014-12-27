@@ -538,15 +538,33 @@ Route::group(['prefix' => 'staff'], function() {
 		 */
 		Route::group(['middleware' => 'staff.radio', 'prefix' => 'radio'], function() {
 			get('/', 'StaffRadioController@getRadioIndex');
-			get('live', 'StaffRadioController@getRadioLive');
-			post('live', 'StaffRadioController@postRadioLive');
-			post('live/message', 'StaffRadioController@postRadioLiveMessage');
-			get('live/update', 'StaffRadioController@getRadioLiveUpdate');
-			get('live/stop', 'StaffRadioController@getRadioLiveStop');
-			get('messages', 'StaffRadioController@getRadioMessages');
-			post('messages', 'StaffRadioController@postRadioMessages');
-			get('timetable', 'StaffRadioController@getRadioTimetable');
-			post('timetable', 'StaffRadioController@postRadioTimetable');
+			/**
+			 * Live
+			 */
+			Route::group(['prefix' => 'live'], function() {
+				get('/', 'StaffRadioController@getRadioLive');
+				post('/', 'StaffRadioController@postRadioLive');
+				post('message', 'StaffRadioController@postRadioLiveMessage');
+				post('request', 'StaffRadioController@postRadioRequest');
+				get('update', 'StaffRadioController@getRadioLiveUpdate');
+				get('stop', 'StaffRadioController@getRadioLiveStop');
+			});
+
+			/**
+			 * Messages
+			 */
+			Route::group(['prefix' => 'message'], function() {
+				get('/', 'StaffRadioController@getRadioMessages');
+				post('/', 'StaffRadioController@postRadioMessages');
+			});
+
+			/**
+			 * Timetable
+			 */
+			Route::group(['prefix' => 'timetable'], function() {
+				get('/', 'StaffRadioController@getRadioTimetable');
+				post('/', 'StaffRadioController@postRadioTimetable');
+			});
 		});
 
 		/**

@@ -1,22 +1,18 @@
-class Admin {
-	radio: AdminRadio = null;
+class RadioPanel {
+	live: RadioPanelLive = null;
+	timetable: RadioPanelTimetable = null;
 }
-class AdminRadio {
-	live: AdminLive = null;
-	timetable: AdminTimetable = null;
-}
-class AdminTimetable {
+class RadioPanelTimetable {
 	paths: any = {};
 	constructor() {
 		this.paths = {
 			claim: '/staff/radio/timetable'
 		};
 		$("[rt-data='radio.panel.timetable:update.hour']").bind('click', function(e: any) {
-			admin.radio.timetable.claim(e);
+			radioPanel.timetable.claim(e);
 		});
 	}
 	claim(e: any) {
-		alert(1);
 		var src = $(e.target).attr('rt-data2');
 		var src2 = src.split(":");
 		var day = src2[0],
@@ -25,17 +21,20 @@ class AdminTimetable {
 			day: day,
 			hour: hour
 		};
-		var claim = utilities.PostAJAX(this.paths.claim, data);
+		var claim = utilities.postAJAX(this.paths.claim, data);
 		claim.done(function(claim: any) {
 			claim = $.parseJSON(claim);
 			if(claim.valid === true) {
 				$("[rt-data2='" + claim.day + ":" + claim.hour + "']").html(claim.name);
+			} else {
+				console.log('error');
 			}
 		});
 	}
 }
-class AdminLive {
+class RadioPanelLive {
 	elements: any = {};
+	hooks: any = {};
 	paths: any = {};
 	constructor() {
 		this.elements = {
@@ -45,36 +44,98 @@ class AdminLive {
 			currentMessage: "[rt-data='radio.panel:current.message']",
 			requests: "[rt-data='radio.panel:requests']"
 		};
+		this.hooks = {
+			accept: "[rt-hook='radio.panel:request.accept']",
+			decline: "[rt-hook='radio.panel:request.decline']"
+		};
 		this.paths = {
 			message: '/staff/radio/live/message',
+			request: '/staff/radio/live/request',
 			update: '/staff/radio/live/update'
 		};
 		this.update();
 		$("[rt-data='radio.panel:message.update']").bind('click', function(e: any) {
-			admin.radio.live.updateMessage($(e.target).attr('rt-data2'));
+			radioPanel.live.updateMessage($(e.target).attr('rt-data2'));
 		});
 	}
-	update() {
+
+	public accept(id: number) {
+		var data = {
+			id: id,
+			status: 1
+		};
+		var results = utilities.postAJAX(this.paths.request, data);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			if(results.done === true) {
+				radioPanel.live.update();
+			} else {
+				console.log('error');
+			}
+		});
+	}
+
+	public decline(id: number) {
+		var data = {
+			id: id,
+			status: 2
+		};
+		var results = utilities.postAJAX(this.paths.request, data);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			if(results.done === true) {
+				radioPanel.live.update();
+			} else {
+				console.log('error');
+			}
+		});
+	}
+
+	public update() {
 		var data = utilities.getAJAX(this.paths.update);
 		data.done(function(data: any) {
 			data = $.parseJSON(data);
-			$(admin.radio.live.elements.songName).html(data.song.name);
-			$(admin.radio.live.elements.songArtist).html(data.song.artist);
-			$(admin.radio.live.elements.currentMessage).html(data.song.message);
+			$(radioPanel.live.elements.songName).html(data.song.name);
+			$(radioPanel.live.elements.songArtist).html(data.song.artist);
+			$(radioPanel.live.elements.currentMessage).html(data.song.message);
+			var html = "";
+			$.each(data.requests, function(index: number, value: any) {
+				if(value.status === 0) {
+					html += "<p title='" + value.author_name + "' rt-data='" + value.id + "'>";
+					html += "<a class='fa fa-check text-success' rt-hook='radio.panel:request.accept'></a>";
+					html += "<a class='fa fa-close text-danger' rt-hook='radio.panel:request.decline'></a>";
+				} else if(value.status === 1) {
+					html += "<p class='text-success' title='" + value.author_name + "'>";
+				} else if(value.status === 2) {
+					html += "<p class='text-danger' title='" + value.author_name + "'>";
+				}
+				html += value.song_name;
+				html += " - ";
+				html += value.song_artist;
+			});
+			$(radioPanel.live.elements.requests).html(html);
+			$(radioPanel.live.hooks.accept).click(function(e: any) {
+				var id = $(e.target).parent().attr('rt-data');
+				radioPanel.live.accept(id);
+			});
+			$(radioPanel.live.hooks.decline).click(function(e: any) {
+				var id = $(e.target).parent().attr('rt-data');
+				radioPanel.live.decline(id);
+			});
 		});
 		setTimeout(function() {
-			admin.radio.live.update();
+			radioPanel.live.update();
 		}, 30000);
 	}
-	updateMessage(id: number) {
+	public updateMessage(id: number) {
 		var data = {
 			id: id
 		};
 		var load = utilities.postAJAX(this.paths.message, data);
 		load.done(function(load: any) {
 			load = $.parseJSON(load);
-			$(admin.radio.live.elements.currentMessage).html(load.message);
+			$(radioPanel.live.elements.currentMessage).html(load.message);
 		});
 	}
 }
-var admin = new Admin();
+var radioPanel = new RadioPanel();

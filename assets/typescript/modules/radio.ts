@@ -215,7 +215,7 @@ class Radio {
 				} else if(request.status == 1) {
 					requestsHTML += "<p class='text-success'>";
 				} else if(request.status == 2) {
-					requestsHTML += "<p class='text-warning'>";
+					requestsHTML += "<p class='text-danger'>";
 				}
 				requestsHTML += request.song_name + " by " + request.song_artist;
 				requestsHTML += "</p>";

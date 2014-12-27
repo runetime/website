@@ -38,8 +38,7 @@
 			</div>
 			<script>
 				$(function() {
-                    admin.radio = new Radio();
-                    admin.radio.live = new Live();
+                    radioPanel.live = new RadioPanelLive();
                 });
 			</script>
 @stop

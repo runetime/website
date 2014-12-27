@@ -124,8 +124,15 @@ class RadioController extends BaseController
 	 */
 	public function postRequest(RequestSong $form)
 	{
-		with(new Request)->saveNew(\Auth::user()->id, $form->artist, $form->name, \Request::getClientIp(true), Request::STATUS_NEUTRAL);
-		return json_encode(['sent' => true]);
+		$response = ['sent' => false];
+
+		$request = with(new Request)->saveNew(\Auth::user()->id, $form->artist, $form->name, \Request::getClientIp(true), Request::STATUS_NEUTRAL);
+
+		if($request) {
+			$response['sent'] = true;
+		}
+
+		return json_encode($response);
 	}
 
 	/**

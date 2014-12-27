@@ -2,12 +2,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Staff\RadioMessageRequest;
+use App\Http\Requests\Staff\RadioRequestAnswerRequest;
 use App\Http\Requests\Staff\RadioTimetableRequest;
 use App\Http\Requests\Staff\RadioLiveMessage;
 use App\Http\Requests\Staff\RadioLiveRequest;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Message;
 use App\RuneTime\Radio\MessageRepository;
+use App\RuneTime\Radio\RequestRepository;
 use App\RuneTime\Radio\Session;
 use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
@@ -24,6 +26,10 @@ class StaffRadioController extends BaseController
 	 */
 	private $messages;
 	/**
+	 * @var RequestRepository
+	 */
+	private $requests;
+	/**
 	 * @var SessionRepository
 	 */
 	private $sessions;
@@ -39,14 +45,22 @@ class StaffRadioController extends BaseController
 	/**
 	 * @param HistoryRepository   $history
 	 * @param MessageRepository   $messages
+	 * @param RequestRepository   $requests
 	 * @param SessionRepository   $sessions
 	 * @param TimetableRepository $timetable
 	 * @param UserRepository      $users
 	 */
-	public function __construct(HistoryRepository $history, MessageRepository $messages, SessionRepository $sessions, TimetableRepository $timetable, UserRepository $users)
+	public function __construct(
+		HistoryRepository $history,
+		MessageRepository $messages,
+		RequestRepository $requests,
+		SessionRepository $sessions,
+		TimetableRepository $timetable,
+		UserRepository $users)
 	{
 		$this->history = $history;
 		$this->messages = $messages;
+		$this->requests = $requests;
 		$this->sessions = $sessions;
 		$this->timetable = $timetable;
 		$this->users = $users;
@@ -124,7 +138,14 @@ class StaffRadioController extends BaseController
 	 */
 	public function getRadioLiveUpdate()
 	{
-		$update = ['song' => ['name' => '', 'artist' => ''], 'message' => '', 'requests' => []];
+		$update = [
+			'song' => [
+				'name' => '',
+				'artist' => ''
+			],
+			'message' => '',
+			'requests' => []
+		];
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		if($session->message_id !== -1) {
 			$update['message'] = $session->message->contents_parsed;
@@ -133,6 +154,20 @@ class StaffRadioController extends BaseController
 		$song = $this->history->getLatest();
 		if($song) {
 			$update['song'] = ['name' => $song->song, 'artist' => $song->artist];
+		}
+
+		$since = $session->created_at->timestamp;
+		$requests = $this->requests->getByTime($since);
+		foreach($requests as $request) {
+			if($request->created_at->timestamp > $since) {
+				$rData = new \stdClass;
+				$rData->author_name = $request->author->display_name;
+				$rData->id = $request->id;
+				$rData->song_artist = $request->song_artist;
+				$rData->song_name = $request->song_name;
+				$rData->status = $request->status;
+				array_push($update['requests'], $rData);
+			}
 		}
 
 		header('Content-Type: application/json');
@@ -169,7 +204,7 @@ class StaffRadioController extends BaseController
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
 		$this->nav('navbar.staff.staff');
-		$this->title(trnas('staff.radio.messages.title'));
+		$this->title('staff.radio.messages.title');
 		return $this->view('staff.radio.messages', compact('messages'));
 	}
 
@@ -184,6 +219,20 @@ class StaffRadioController extends BaseController
 		with(new Message)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed);
 
 		return \redirect()->to('/staff/radio/messages');
+	}
+	public function postRadioRequest(RadioRequestAnswerRequest $form)
+	{
+		$response = ['done' => false];
+
+		$request = $this->requests->getById($form->id);
+		$request->status = $form->status;
+		$request->save();
+
+		if($request->status === $form->status) {
+			$response['done'] = true;
+		}
+
+		return json_encode($response);
 	}
 
 	/**

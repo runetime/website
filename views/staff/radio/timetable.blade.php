@@ -57,8 +57,7 @@
 			</div>
 			<script>
 				$(function() {
-					admin.radio = new AdminRadio();
-					admin.radio.timetable = new AdminTimetable();
+					radioPanel.timetable = new RadioPanelTimetable();
 				});
 			</script>
 @stop
