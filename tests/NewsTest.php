@@ -58,7 +58,7 @@ class NewsTest extends TestCase
 	public function testView()
 	{
 		$news = News::first();
-		
+
 		$response = $this->call('GET', $news->toSlug());
 
 		$this->assertEquals(200, $response->getStatusCode());
