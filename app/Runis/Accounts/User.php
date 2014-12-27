@@ -406,4 +406,12 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	{
 		return url('profile/' . \String::slugEncode($this->id, $this->display_name) . (!empty($path) ? '/' . $path : ''));
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function awards()
+	{
+		return $this->hasMany('App\RuneTime\Awards\Awardee', 'user_id');
+	}
 }

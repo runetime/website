@@ -11,8 +11,8 @@
 							<a href='/profile/{{ \String::slugEncode($profile->id, $profile->display_name) }}/feed' class='list-group-item'>
 								@lang('profile.nav.profile_feed')
 							</a>
-							<a href='/profile/{{\String::slugEncode($profile->id, $profile->display_name) }}/friends' class='list-group-item'>
-								@lang('profile.nav.friends')
+							<a href='/profile/{{\String::slugEncode($profile->id, $profile->display_name) }}/awards' class='list-group-item'>
+								@lang('profile.nav.awards')
 							</a>
 						</ul>
 					</div>

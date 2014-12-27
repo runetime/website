@@ -436,6 +436,7 @@ Route::group(['prefix' => 'play'], function() {
  */
 Route::group(['prefix' => 'profile/{id}-{name}'], function() {
 	get('/', 'ProfileController@getProfileIndex');
+	get('awards', 'ProfileController@getProfileAwards');
 	get('feed', 'ProfileController@getProfileFeed');
 	get('friends', 'ProfileController@getProfileFriends');
 });

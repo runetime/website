@@ -1,6 +1,9 @@
 <?php
 return [
-	'title' => ':name',
+	'title'  => ':name',
+	'awards' => [
+		'title' => ":name's Awards",
+	],
 	'feed'  => [
 		'title'          => ":name's Profile Feed",
 		'recent_threads' => 'Recent Threads by :name',
@@ -11,6 +14,7 @@ return [
 		'not_telling' => 'Not Telling',
 	],
 	'nav' => [
+		'awards'       => 'Awards',
 		'friends'      => 'Friends',
 		'overview'     => 'Overview',
 		'profile_feed' => 'Profile Feed',

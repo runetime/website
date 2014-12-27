@@ -56,8 +56,26 @@ class ProfileController extends BaseController
 
 		$this->bc(['forums/' => trans('forums.title')]);
 		$this->nav('navbar.forums');
-		$this->title('profile.title', ['name' => $profile->display_name]);
+		$this->title('utilities.name', ['name' => $profile->display_name]);
 		return $this->view('forums.profile.index', compact('profile', 'status'));
+	}
+
+	/**
+	 * @param $id
+	 */
+	public function getProfileAwards($id)
+	{
+		$profile = $this->users->getbyId($id);
+		if(!$profile) {
+			return \Error::abort(404);
+		}
+
+		$awards = $profile->awards;
+
+		$this->bc(['forums/' => trans('forums.title'), 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
+		$this->nav('navbar.forums');
+		$this->title('utilities.name', ['name' => $profile->display_name]);
+		return $this->view('forums.profile.awards', compact('profile', 'awards'));
 	}
 
 	/**
