@@ -9,14 +9,14 @@ class ChatChannelsTableSeeder extends Seeder{
 		DB::table('chat_channels')->
 			insert([
 				[
-					'name'     =>'Radio',
-					'name_trim'=>'radio',
-					'messages' =>0,
+					'name'      => 'Radio',
+					'name_trim' => 'radio',
+					'messages'  => 0,
 				],
 				[
-					'name'     =>'Livestream',
-					'name_trim'=>'livestream',
-					'messages' =>0,
+					'name'      => 'Livestream',
+					'name_trim' => 'livestream',
+					'messages'  => 0,
 				],
 			]);
 	}

@@ -1,10 +1,14 @@
 <?php
+
 use Illuminate\Database\Seeder;
-/**
- * Class CalculatorsTableSeeder
- */
-class CalculatorsTableSeeder extends Seeder{
-	public function run(){
+
+class CalculatorsTableSeeder extends Seeder
+{
+	/**
+	 *
+	 */
+	public function run()
+	{
 		DB::table('calculators')->delete();
 		DB::table('calculators')->
 			insert([

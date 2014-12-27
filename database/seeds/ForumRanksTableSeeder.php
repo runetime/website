@@ -1,10 +1,14 @@
 <?php
+
 use Illuminate\Database\Seeder;
-class ForumRanksTableSeeder extends Seeder{
+
+class ForumRanksTableSeeder extends Seeder
+{
 	/**
 	 *
 	 */
-	public function run(){
+	public function run()
+	{
 		DB::table('forum_ranks')->delete();
 		DB::table('forum_ranks')->
 		insert([

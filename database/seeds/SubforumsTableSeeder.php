@@ -1,7 +1,14 @@
 <?php
+
 use Illuminate\Database\Seeder;
-class SubforumsTableSeeder extends Seeder{
-	public function run(){
+
+class SubforumsTableSeeder extends Seeder
+{
+	/**
+	 *
+	 */
+	public function run()
+	{
 		DB::table('forum_subforums')->delete();
 		DB::table('forum_subforums')->
 			insert([
@@ -63,7 +70,7 @@ class SubforumsTableSeeder extends Seeder{
 					'last_post'     => -1,
 					'position'      => 0,
 					'parent'        => -1,
-					'roles'         => json_encode([1,2,4,6,8,10,12]),
+					'roles'         => json_encode([1, 2, 4, 6, 8, 10, 12]),
 				],
 				[
 					'name'          => 'Staff Only',
@@ -75,7 +82,9 @@ class SubforumsTableSeeder extends Seeder{
 					'last_post'     => -1,
 					'position'      => 0,
 					'parent'        => -1,
-					'roles'         => json_encode([1,2,3,4,5,6,7,8,9,10,11,12,13]),
+					'roles'         => json_encode(
+						[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+					),
 				],
 				[
 					'name'          => 'RuneTime News & Updates',
@@ -543,7 +552,7 @@ class SubforumsTableSeeder extends Seeder{
 					'last_post'     => -1,
 					'position'      => 6,
 					'parent'        => 6,
-					'roles'         => json_encode([1,2,3]),
+					'roles'         => json_encode([1, 2, 3]),
 				],
 			]);
 	}
