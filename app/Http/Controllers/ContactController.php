@@ -31,7 +31,7 @@ class ContactController extends BaseController
 		];
 
 		\Mail::send('emails.contact', $data, function($message) {
-			$message->to('stntlr@gmail.com');
+			$message->to(getenv('APP_CONTACT_EMAIL'));
 			$message->subject(trans('contact.submit.contact_message', ['website' => 'runetime.net']));
 		});
 
