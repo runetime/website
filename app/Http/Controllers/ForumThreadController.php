@@ -141,45 +141,49 @@ class ForumThreadController extends BaseController
 		$pages = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
 		$bc['forums'] = trans('navbar.forums');
 
-		$poll = [
-			'title'     => $thread->poll->title,
-			'questions' => []
-		];
-		foreach($thread->poll->questions as $key => $pollQuestion) {
-			$question = [
-				'answers' => [],
-				'id'      => $pollQuestion->id,
-				'name'    => $pollQuestion->contents,
-				'votes'   => $pollQuestion->votes
+		$poll = false;
+
+		if($thread->poll > 0) {
+			$poll = [
+				'title'     => $thread->poll->title,
+				'questions' => []
 			];
-			foreach($pollQuestion->answers as $answer) {
-				$percentage = 0;
-				if($question['votes'] > 0) {
-					$percentage = round(($answer->votes / $question['votes']) * 100);
+			foreach($thread->poll->questions as $key => $pollQuestion) {
+				$question = [
+					'answers' => [],
+					'id'      => $pollQuestion->id,
+					'name'    => $pollQuestion->contents,
+					'votes'   => $pollQuestion->votes
+				];
+				foreach($pollQuestion->answers as $answer) {
+					$percentage = 0;
+					if($question['votes'] > 0) {
+						$percentage = round(($answer->votes / $question['votes']) * 100);
+					}
+
+					$voted = false;
+					if(\Auth::check()) {
+						$voted = $this->pollVotes->getByAllData(
+							\Auth::user()->id,
+							$answer->id,
+							$question['id']);
+					}
+
+					array_push($question['answers'], [
+						'contents'   => $answer->contents,
+						'id'         => $answer->id,
+						'json'       => json_encode([
+							'answer'   => $answer->id,
+							'question' => $question['id'],
+						]),
+						'percentage' => $percentage,
+						'voted'      => !empty($voted),
+						'votes'      => $answer->votes,
+					]);
 				}
 
-				$voted = false;
-				if(\Auth::check()) {
-					$voted = $this->pollVotes->getByAllData(
-						\Auth::user()->id,
-						$answer->id,
-						$question['id']);
-				}
-
-				array_push($question['answers'], [
-					'contents'   => $answer->contents,
-					'id'         => $answer->id,
-					'json'       => json_encode([
-						'answer'   => $answer->id,
-						'question' => $question['id'],
-					]),
-					'percentage' => $percentage,
-					'voted'      => !empty($voted),
-					'votes'      => $answer->votes,
-				]);
+				array_push($poll['questions'], $question);
 			}
-
-			array_push($poll['questions'], $question);
 		}
 
 		$this->bc(array_reverse($bc));

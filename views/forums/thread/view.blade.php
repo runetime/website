@@ -13,7 +13,7 @@
 							@lang('utilities.by') {!! \Link::name($thread->author_id) !!}, {{ \Time::shortReadable($thread->created_at) }}
 						</div>
 					</div>
-@if(count($poll) > 0)
+@if($poll !== false && count($poll) > 0)
 	@include('forums.thread.poll._show', ['poll' => $poll])
 @endif
 @if(count($thread->tags) > 0)
