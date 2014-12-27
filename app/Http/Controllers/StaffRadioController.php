@@ -9,6 +9,7 @@ use App\Http\Requests\Staff\RadioLiveRequest;
 use App\RuneTime\Radio\HistoryRepository;
 use App\RuneTime\Radio\Message;
 use App\RuneTime\Radio\MessageRepository;
+use App\RuneTime\Radio\Request;
 use App\RuneTime\Radio\RequestRepository;
 use App\RuneTime\Radio\Session;
 use App\RuneTime\Radio\SessionRepository;
@@ -178,15 +179,10 @@ class StaffRadioController extends BaseController
 	public function getRadioLiveStop()
 	{
 		$live = \Cache::get('radio.dj.current');
-		if($live) {
-			if($live === \Auth::user()->id || \Auth::user()->isAdmin()) {
-				\Cache::forever('radio.dj.current', null);
-				$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
-				if($session) {
-					$session->status = Session::STATUS_DONE;
-					$session->save();
-				}
-			}
+		if($live && ($live === \Auth::user()->id || \Auth::user()->isAdmin())) {
+			\Cache::forever('radio.dj.current', null);
+			Session::truncate();
+			Request::truncate();
 		}
 
 		return \redirect()->to('/staff/radio');
