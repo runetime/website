@@ -15,9 +15,10 @@ class NameCheckerTest extends TestCase {
 	 */
 	public function testPost()
 	{
-		$data = [
+		$data = $this->form([
 			'rsn' => 'zezima',
-		];
+		]);
+
 		$response = $this->call('POST', 'name/check', $data);
 
 		$this->assertEquals(200, $response->getStatusCode());
