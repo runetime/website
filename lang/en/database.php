@@ -39,7 +39,7 @@ return [
 	'monsters' => [
 		'title'  => 'Monsters Database',
 		'create' => [
-			'title' => 'Create a Monster',
+			'title'  => 'Create a Monster',
 			'submit' => 'Create Monster',
 		],
 		'create_monster' => 'Create Monster',
@@ -47,14 +47,14 @@ return [
 			'clear' => 'Clear Search',
 		],
 		'view' => [
-			'title' => ':name',
-			'drops' => 'Drops',
-			'examine' => 'Examine',
-			'location' => 'Location',
-			'membership' => 'Membership?',
-			'name' => 'Name',
+			'title'             => ':name',
+			'drops'             => 'Drops',
+			'examine'           => 'Examine',
+			'location'          => 'Location',
+			'membership'        => 'Membership?',
+			'name'              => 'Name',
 			'other_information' => 'Other Information',
-			'stats'   => 'Stats',
+			'stats'             => 'Stats',
 		],
 	],
 ];
