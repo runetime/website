@@ -15,7 +15,6 @@
 					</ul>
 				</div>
 @endif
-			</div>
 @foreach($news as $newsPiece)
 	@include('news._show', ['news' => $newsPiece])
 @endforeach
