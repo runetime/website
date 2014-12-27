@@ -2,13 +2,13 @@
 @section('contents')
 <?php
 $settingsNav = [
-	'/settings/'          => Lang::get('settings.nav.profile_settings'),
-	'/settings/photo'     => Lang::get('settings.nav.photo'),
-	'/settings/password'  => Lang::get('settings.nav.password'),
-	'/settings/about-me'  => Lang::Get('settings.nav.about_me'),
-	'/settings/signature' => Lang::get('settings.nav.signature'),
-	'/settings/social'    => Lang::get('settings.nav.social'),
-	'/settings/runescape' => Lang::get('settings.nav.runescape'),
+	'/settings/'          => trans('settings.nav.profile_settings'),
+	'/settings/photo'     => trans('settings.nav.photo'),
+	'/settings/password'  => trans('settings.nav.password'),
+	'/settings/about-me'  => trans('settings.nav.about_me'),
+	'/settings/signature' => trans('settings.nav.signature'),
+	'/settings/social'    => trans('settings.nav.social'),
+	'/settings/runescape' => trans('settings.nav.runescape'),
 ];
 ?>
 			<div class='wrapper'>
