@@ -18,7 +18,8 @@ class SettingsTest extends TestCase {
 	public function testPostIndex()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'referred_by' => 'Zezima',
 			'birthday'    => 'now',
 			'timezone'    => '14',
@@ -26,7 +27,7 @@ class SettingsTest extends TestCase {
 			'gender'      => 2,
 			'location'    => 'RuneTime',
 			'interests'   => 'Development',
-		];
+		]);
 		$response = $this->call('POST', 'settings', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -49,8 +50,9 @@ class SettingsTest extends TestCase {
 	public function testPostPhoto()
 	{
 		$this->login();
-		$data = [
-		];
+
+		$data = $this->form([
+		]);
 		$response = $this->call('POST', 'settings/photo', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -73,9 +75,10 @@ class SettingsTest extends TestCase {
 	public function testPostPassword()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'new' => 'test',
-		];
+		]);
 		$response = $this->call('POST', 'settings/password', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -98,9 +101,10 @@ class SettingsTest extends TestCase {
 	public function testPostAbout()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'contents' => '**about me**',
-		];
+		]);
 		$response = $this->call('POST', 'settings/about/me', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -123,9 +127,10 @@ class SettingsTest extends TestCase {
 	public function testPostSignature()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'contents' => '_my signature_',
-		];
+		]);
 		$response = $this->call('POST', 'settings/signature', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -148,13 +153,14 @@ class SettingsTest extends TestCase {
 	public function testPostSocial()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'twitter'  => 'Rune_Time',
 			'facebook' => 'RuneTimeOfficial',
 			'youtube'  => 'RuneTimeOfficial',
 			'website'  => 'http://runetime.com',
 			'skype'    => 'N/A',
-		];
+		]);
 		$response = $this->call('POST', 'settings/social', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -177,12 +183,13 @@ class SettingsTest extends TestCase {
 	public function testPostRunescape()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'version'    => 'RuneScape 3',
 			'allegiance' => 'Zamorak',
 			'rsn'        => 'zezima',
 			'clan'       => 'urface',
-		];
+		]);
 		$response = $this->call('POST', 'settings/runescape', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
