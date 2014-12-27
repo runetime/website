@@ -39,7 +39,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	 */
 	public function form($form)
 	{
-		$form['_token'] = csrf_token();
+		$form['_token'] = \Session::token();
 
 		return $form;
 	}
