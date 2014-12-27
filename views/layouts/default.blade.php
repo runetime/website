@@ -28,7 +28,7 @@ $navs = [
 		'map/runescape'       => trans('navbar.runescape.world_map'),
 		'calculators'         => trans('navbar.runescape.calculators'),
 		'play'                => trans('navbar.runescape.play'),
-		'name/check'  => trans('navbar.runescape.name_checker'),
+		'name-check'          => trans('navbar.runescape.name_checker'),
 		'calculators/combat'  => trans('navbar.runescape.combat_calculator'),
 	],
 	trans('navbar.social.social') => [

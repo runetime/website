@@ -10,7 +10,7 @@ class NameChecker {
 		};
 		this.notAllowed = ['ZnVjaw==', 'c2hpdA=='];
 		this.paths = {
-			check: '/name/check'
+			check: '/name-check'
 		};
 		$("[rt-hook='name.checker:submit']").bind('click', function(value: any) {
 			nameChecker.check();
@@ -55,7 +55,7 @@ class NameChecker {
 			});
 	}
 
-	checkName(name: string) {
+	checkName(name: any) {
 		if(typeof(name) === "undefined") {
 			return 0;
 		} else {
