@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Forums\PollVoteRequest;
 use App\RuneTime\Forum\Polls\AnswerRepository;
 use App\RuneTime\Forum\Polls\QuestionRepository;
+use App\RuneTime\Forum\Polls\Vote;
 use App\RuneTime\Forum\Subforums\SubforumRepository;
 use App\RuneTime\Forum\Tags\TagRepository;
 use App\RuneTime\Forum\Threads\PostRepository;
@@ -194,10 +195,7 @@ class ForumController extends BaseController
 		}
 
 		$poll = $question->poll;
-		$vote = $this->pollVotes->getByData(
-			\Auth::user()->id,
-			$question->id
-		);
+		$vote = $this->pollVotes->getByData(\Auth::user()->id, $question->id);
 		if(!empty($vote)) {
 			$voteAnswer = $vote->answer;
 			$voteAnswer->decrement('votes');
@@ -207,7 +205,7 @@ class ForumController extends BaseController
 			$vote->delete();
 		}
 
-		$vote = with(new \App\RuneTime\Forum\Polls\Vote)->saveNew(
+		$vote = with(new Vote)->saveNew(
 			$answer->id,
 			\Auth::user()->id,
 			$poll->id,
