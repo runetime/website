@@ -40,10 +40,10 @@
 					</div>
 					<div id='signup-password2' class='form-group has-feedback'>
 						<label class='col-lg-2 control-label' for='message'>
-							@lang('auth.signup.confirm_password')
+							@lang('auth.signup.password_confirm')
 						</label>
 						<div class='col-lg-10'>
-							<input id='password2' class='form-control' type='password' name='password2' placeholder='@lang('auth.signup.confirm_password')' required='' />
+							<input id='password2' class='form-control' type='password' name='password2' placeholder='@lang('auth.signup.password_confirm')' required='' />
 							<i class='glyphicon glyphicon-ok form-control-feedback hidden'></i>
 							<i class='glyphicon glyphicon-remove form-control-feedback hidden'></i>
 							<span class='help-block hidden text-danger'>
