@@ -152,15 +152,23 @@ pre {
 	border: 1px solid #1f1f1f;
 	color: #9a9a9a;
 }
+.item {
+	background: rgba(23, 23, 23, 1);
+	.body {
+		h3 {
+		}
+	}
+}
 .section-light {
-	background: rgb(76, 76, 76);
+	background: rgba(76, 76, 76, 1);
 }
 .material-bar {
-	background: rgb(71, 71, 71);
+	background: rgba(71, 71, 71, 1);
 	height: inherit;
-	li{
+	li {
 		color: $linkColor !important;
 		height: inherit;
+		padding: 0 !important;
 
 		&.active {
 			color: rgba(112, 112, 112, 1) !important;
@@ -176,7 +184,7 @@ pre {
 		}
 
 		a,
-		span{
+		span {
 			align-items: center;
 			display: flex;
 			height: inherit;
@@ -189,4 +197,7 @@ pre {
 			}
 		}
 	}
+}
+.tags {
+	margin-bottom: .25em !important;
 }
