@@ -152,8 +152,13 @@ class ForumTest extends TestCase {
 	public function testPostPostEdit()
 	{
 		$this->login();
-		$post = \App\RuneTime\Forum\Threads\Post::orderBy('created_at', 'desc')->first();
-		$response = $this->call('POST', 'forums/post/' . $post->id . '/edit');
+		$thread = \App\RuneTime\Forum\Threads\Thread::find(1);
+		$post = $thread->lastPost();
+
+		$data = $this->form([
+			'contents' => 'test edit',
+		]);
+		$response = $this->call('POST', 'forums/post/' . $post->id . '/edit', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
 	}
