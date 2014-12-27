@@ -16,9 +16,9 @@ class SignatureTest extends TestCase {
 	 */
 	public function testPostUsername()
 	{
-		$form = [
+		$form = $this->form([
 			'username' => 'zezima',
-		];
+		]);
 		$response = $this->call('POST', 'signatures', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());
