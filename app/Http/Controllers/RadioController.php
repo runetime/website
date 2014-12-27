@@ -141,21 +141,33 @@ class RadioController extends BaseController
 	public function getUpdate()
 	{
 		$song = $this->history->getLatest();
-		$update = ['requests' => [], 'song' => ['name' => '', 'artist' => ''], 'dj' => '', 'message' => '', 'online' => true];
+		$update = [
+			'requests' => [],
+			'song' => [
+				'name' => '',
+				'artist' => ''
+			],
+			'dj' => '',
+			'message' => '',
+			'online' => true
+		];
 		if(!empty($song)) {
 			$update['song']['name'] = $song->song;
 			$update['song']['artist'] = $song->artist;
 		}
+
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		if($session) {
 			if($session->message) {
 				$update['message'] = $session->message->contents_parsed;
 			}
+
 			$user = $this->users->getById($session->dj->id);
 			if($user) {
 				$update['dj'] = $user->display_name;
 			}
 		}
+
 		if(empty($session->message)) {
 			$update['message'] = -1;
 		}
