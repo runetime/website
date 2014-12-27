@@ -161,7 +161,7 @@ Route::group(['prefix' => 'forums'], function() {
 	 */
 	Route::group(['prefix' => 'thread/{id}-{name}'], function() {
 		get('/', 'ForumThreadController@getThread');
-		get('last-post', 'ForumThreadController@getThreadLastPost');
+		get('last-post', 'ForumThreadController@getLastPost');
 		get('page={page}', 'ForumThreadController@getThread');
 		/**
 		 * User-only

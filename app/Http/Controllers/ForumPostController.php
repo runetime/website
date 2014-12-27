@@ -153,7 +153,7 @@ class ForumPostController extends BaseController
 		$post->contents_parsed = with(new \Parsedown)->text($form->contents);
 		$post->save();
 
-		return $this->getThreadLastPost($thread->id);
+		return \App::make('App\Http\Controllers\ForumThreadController')->getThreadLastPost($thread->id);
 	}
 
 	/**
@@ -189,7 +189,7 @@ class ForumPostController extends BaseController
 			$notification->saveNew($thread->author->id, 'Threads', $contents, Notification::STATUS_UNREAD);
 		}
 
-		return $this->getThreadLastPost($thread->id);
+		return \App::make('App\Http\Controllers\ForumThreadController')->getLastPost($thread->id);
 	}
 
 	/**
