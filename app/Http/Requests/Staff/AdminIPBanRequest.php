@@ -14,7 +14,8 @@ class AdminIPBanRequest extends Request
 	public function rules()
 	{
 		return [
-			'ip' => 'required',
+			'ip'       => 'required',
+			'contents' => 'required',
 		];
 	}
 
