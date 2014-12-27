@@ -1,5 +1,6 @@
 <?php
-class MembersTest extends TestCase {
+class MembersTest extends TestCase
+{
 	/**
 	 *
 	 */

@@ -1,5 +1,6 @@
 <?php
-class MapTest extends TestCase {
+class MapTest extends TestCase
+{
 	/**
 	 *
 	 */

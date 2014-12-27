@@ -1,6 +1,6 @@
 <?php
-
-class SignatureTest extends TestCase {
+class SignatureTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -19,6 +19,7 @@ class SignatureTest extends TestCase {
 		$form = $this->form([
 			'username' => 'zezima',
 		]);
+
 		$response = $this->call('POST', 'signatures', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());

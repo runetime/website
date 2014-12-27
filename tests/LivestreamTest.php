@@ -1,5 +1,6 @@
 <?php
-class LivestreamTest extends TestCase {
+class LivestreamTest extends TestCase
+{
 	/**
 	 *
 	 */

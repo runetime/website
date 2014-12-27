@@ -1,5 +1,6 @@
 <?php
-class ClanTest extends TestCase {
+class ClanTest extends TestCase
+{
 	/**
 	 *
 	 */

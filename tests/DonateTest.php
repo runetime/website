@@ -1,5 +1,6 @@
 <?php
-class DonateTest extends TestCase {
+class DonateTest extends TestCase
+{
 	/**
 	 *
 	 */

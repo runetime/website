@@ -2,13 +2,15 @@
 
 use \App\RuneTime\Messenger\Message;
 
-class MessengerTest extends TestCase {
+class MessengerTest extends TestCase
+{
 	/**
 	 *
 	 */
 	public function testIndex()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'messenger');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -20,6 +22,7 @@ class MessengerTest extends TestCase {
 	public function testGetCreate()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'messenger/compose');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -49,7 +52,9 @@ class MessengerTest extends TestCase {
 	public function testView()
 	{
 		$this->login();
+
 		$message = Message::orderBy('created_at', 'desc')->first();
+
 		$response = $this->call('GET', $message->toSlug());
 
 		$this->assertEquals(200, $response->getStatusCode());

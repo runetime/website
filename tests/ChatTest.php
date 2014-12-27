@@ -1,8 +1,10 @@
 <?php
+
 use App\RuneTime\Chat\Channel;
 use App\RuneTime\Chat\Chat;
 
-class ChatTest extends TestCase {
+class ChatTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -12,6 +14,7 @@ class ChatTest extends TestCase {
 		$form = $this->form([
 			'channel' => $channel->name_trim,
 		]);
+
 		$response = $this->call('POST', 'chat/start', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -24,11 +27,14 @@ class ChatTest extends TestCase {
 	{
 		$chat = Chat::find(1);
 		$id = 0;
-		if(!empty($chat))
+		if(!empty($chat)) {
 			$id = $chat->id;
+		}
+
 		$form = $this->form([
 			'id' => $id,
 		]);
+
 		$response = $this->call('POST', 'chat/update', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -40,11 +46,13 @@ class ChatTest extends TestCase {
 	public function testMessage()
 	{
 		$this->login();
+
 		$channel = Channel::orderBy('created_at', 'desc')->first();
 		$data = $this->form([
 			'channel' => $channel->name_trim,
 			'contents' => '**test**',
 		]);
+
 		$response = $this->call('POST', 'chat/post/message', $data);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -69,6 +77,7 @@ class ChatTest extends TestCase {
 		$data = $this->form([
 			'channel' => $channel->id,
 		]);
+
 		$response = $this->call('POST', 'chat/channels/check', $data);
 
 		$this->assertEquals(200, $response->getStatusCode());

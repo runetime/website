@@ -1,5 +1,6 @@
 <?php
-class TransparencyTest extends TestCase {
+class TransparencyTest extends TestCase
+{
 	/**
 	 *
 	 */

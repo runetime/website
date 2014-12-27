@@ -1,7 +1,8 @@
 <?php
 use App\RuneTime\News\News;
 
-class NewsTest extends TestCase {
+class NewsTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -15,9 +16,12 @@ class NewsTest extends TestCase {
 	/**
 	 *
 	 */
-	public function testGetCreate() {
+	public function testGetCreate()
+	{
 		$this->login();
+
 		$response = $this->call('GET', 'news/create');
+
 		$this->assertEquals(200, $response->getStatusCode());
 	}
 

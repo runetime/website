@@ -1,5 +1,6 @@
 <?php
-class LanguageTest extends TestCase {
+class LanguageTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -15,6 +16,7 @@ class LanguageTest extends TestCase {
 		$form = [
 			'initials' => 'en',
 		];
+
 		$response = $this->call('GET', 'language/set', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());

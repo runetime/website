@@ -1,6 +1,6 @@
 <?php
-
-class DatabaseTest extends TestCase {
+class DatabaseTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -27,6 +27,7 @@ class DatabaseTest extends TestCase {
 	public function testItemGetCreate()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'databases/items/create');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -46,6 +47,7 @@ class DatabaseTest extends TestCase {
 			'tradable'    => 0,
 			'quest_item'  => 1,
 		]);
+
 		$response = $this->call('POST', 'databases/items/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -97,6 +99,7 @@ class DatabaseTest extends TestCase {
 			'membership'        => 1,
 			'other_information' => 'test_yes',
 		]);
+
 		$response = $this->call('POST', 'databases/monsters/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());

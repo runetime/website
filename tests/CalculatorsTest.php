@@ -1,6 +1,9 @@
 <?php
+
 use App\RuneTime\Calculators\Calculator;
-class CalculatorsTest extends TestCase {
+
+class CalculatorsTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -17,6 +20,7 @@ class CalculatorsTest extends TestCase {
 	public function testCalculatorsView()
 	{
 		$calculator = Calculator::find(1);
+
 		$response = $this->call('GET', 'calculators/' . $calculator->name_trim);
 
 		$this->assertEquals(200, $response->getStatusCode());

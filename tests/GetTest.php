@@ -1,5 +1,6 @@
 <?php
-class GetTest extends TestCase {
+class GetTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -8,6 +9,7 @@ class GetTest extends TestCase {
 		$form = $this->form([
 			'email' => 'test' . microtime(true),
 		]);
+
 		$response = $this->action('POST', 'GetController@postEmail', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -18,6 +20,7 @@ class GetTest extends TestCase {
 		$form = $this->form([
 			'display_name' => 'test' . microtime(true),
 		]);
+
 		$response = $this->action('POST', 'GetController@postDisplayName', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());

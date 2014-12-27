@@ -1,5 +1,6 @@
 <?php
-class NameCheckerTest extends TestCase {
+class NameCheckerTest extends TestCase
+{
 	/**
 	 *
 	 */

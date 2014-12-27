@@ -1,5 +1,6 @@
 <?php
-class PlayTest extends TestCase {
+class PlayTest extends TestCase
+{
 	/**
 	 *
 	 */

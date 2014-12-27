@@ -1,6 +1,6 @@
 <?php
-
-class GuideTest extends TestCase {
+class GuideTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -27,6 +27,7 @@ class GuideTest extends TestCase {
 	public function testLocationGetCreate()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'guides/locations/create');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -38,10 +39,12 @@ class GuideTest extends TestCase {
 	public function testLocationPostCreate()
 	{
 		$this->login();
+
 		$data = $this->form([
 			'name'     => 'test name',
 			'contents' => 'test contents',
 		]);
+
 		$response = $this->call('POST', 'guides/locations/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -73,6 +76,7 @@ class GuideTest extends TestCase {
 	public function testQuestGetCreate()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'guides/quests/create');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -84,6 +88,7 @@ class GuideTest extends TestCase {
 	public function testQuestPostCreate()
 	{
 		$this->login();
+
 		$data = $this->form([
 			'name'               => 'name',
 			'difficulty'         => 5,
@@ -100,6 +105,7 @@ class GuideTest extends TestCase {
 			'starting_point'     => 'starting point',
 			'contents'           => 'contents',
 		]);
+
 		$response = $this->call('POST', 'guides/quests/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());

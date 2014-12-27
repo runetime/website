@@ -1,11 +1,13 @@
 <?php
-class NotificationsTest extends TestCase {
+class NotificationsTest extends TestCase
+{
 	/**
 	 *
 	 */
 	public function testIndex()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'notifications');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -17,6 +19,7 @@ class NotificationsTest extends TestCase {
 	public function testView()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'notifications/1-at-123');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -25,6 +28,7 @@ class NotificationsTest extends TestCase {
 	public function testSetAllRead()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'notifications/set-all-read');
 
 		$this->assertEquals(302, $response->getStatusCode());

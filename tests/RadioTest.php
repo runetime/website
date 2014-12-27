@@ -1,6 +1,7 @@
 <?php
 
-class RadioTest extends TestCase {
+class RadioTest extends TestCase
+{
 	/**
 	 *
 	 */

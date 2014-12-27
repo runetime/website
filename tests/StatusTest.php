@@ -1,7 +1,8 @@
 <?php
 use App\RuneTime\Statuses\Status;
 
-class StatusTest extends TestCase {
+class StatusTest extends TestCase
+{
 	/**
 	 *
 	 */
@@ -18,6 +19,7 @@ class StatusTest extends TestCase {
 	public function testGetCreate()
 	{
 		$this->login();
+
 		$response = $this->call('GET', 'forums/statuses/create');
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -29,9 +31,11 @@ class StatusTest extends TestCase {
 	public function testPostCreate()
 	{
 		$this->login();
+
 		$data = $this->form([
 			'contents' => 'contents',
 		]);
+
 		$response = $this->call('POST', 'forums/statuses/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -43,6 +47,7 @@ class StatusTest extends TestCase {
 	public function testView()
 	{
 		$status = Status::orderBy('created_at', 'desc')->first();
+
 		$response = $this->call('GET', 'forums/statuses/' . $status->id . '-by-' . $status->author->display_name);
 
 		$this->assertEquals(200, $response->getStatusCode());
