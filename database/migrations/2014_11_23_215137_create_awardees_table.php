@@ -17,7 +17,6 @@ class CreateAwardeesTable extends Migration {
 			$table->increments('id');
 			$table->integer('award_id');
 			$table->integer('user_id');
-			$table->integer('status');
 			$table->timestamps();
 			$table->softDeletes();
 		});
