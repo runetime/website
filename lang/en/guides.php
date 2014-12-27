@@ -2,6 +2,8 @@
 return [
 	'title'     => 'Guides',
 	'create_note' => "All textareas on RuneTime, including the ones in this guide, use <a href='/transparency/markdown'>Markdown</a> for styling.",
+	'edited_by'    => 'Edited by :users',
+	'last_updated' => 'Last updated on :date',
 	'locations' => [
 		'title'  => 'Location Guides',
 		'create' => [
@@ -11,7 +13,7 @@ return [
 			'submit'   => 'Submit',
 		],
 		'create_location' => 'Create Location',
-		'view' => [
+		'view'            => [
 			'title' => ':name',
 		],
 	],
@@ -45,21 +47,19 @@ return [
 		],
 		'view' => [
 			'title'              => ':name',
-			'membership'         => 'Membership?',
-			'quest_points'       => 'Quest Points',
 			'completed'          => 'Completed',
 			'description'        => 'Description',
-			'quest_requirements' => 'Quest Requirements',
-			'skill_requirements' => 'Skill Requirements',
-			'items_required'     => 'Items Required',
+			'guide'              => 'Guide',
 			'items_recommended'  => 'Items Recommended',
+			'items_required'     => 'Items Required',
+			'membership'         => 'Membership?',
+			'skill_requirements' => 'Skill Requirements',
+			'quest_points'       => 'Quest Points',
+			'quest_requirements' => 'Quest Requirements',
 			'reward'             => 'Reward',
 			'starting_point'     => 'Starting Point',
-			'guide'              => 'Guide',
 		],
 	],
-	'edited_by'    => 'Edited by :users',
-	'last_updated' => 'Last updated on :date',
 	'step'         => 'Step :number',
 	'written_by'   => 'Written by :name on :date',
 ];
