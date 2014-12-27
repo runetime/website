@@ -71,6 +71,7 @@ class News extends Entity
 		if(file_exists('./' . $path)) {
 			return $path;
 		}
+
 		return false;
 	}
 
@@ -81,6 +82,11 @@ class News extends Entity
 	 */
 	public function toSlug($path = '')
 	{
-		return url('news/' . \String::slugEncode($this->id, $this->title) . (!empty($path) ? '/' . $path : ''));
+		$condition = "";
+		if(!empty($path)) {
+			$condition = "/" . $path;
+		}
+
+		return url('news/' . \String::slugEncode($this->id, $this->title) . $condition);
 	}
 }
