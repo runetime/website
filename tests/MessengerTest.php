@@ -31,11 +31,13 @@ class MessengerTest extends TestCase {
 	public function testPostCreate()
 	{
 		$this->login();
-		$data = [
+
+		$data = $this->form([
 			'title'        => 'test title',
 			'participants' => \Auth::user()->display_name,
 			'contents'     => 'test contents',
-		];
+		]);
+
 		$response = $this->call('POST', 'messenger/compose', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -59,8 +61,11 @@ class MessengerTest extends TestCase {
 	public function testReply()
 	{
 		$this->login();
+
 		$message = Message::orderBy('created_at', 'desc')->first();
-		$response = $this->call('POST', $message->toSlug() . '/reply');
+		$data = $this->form();
+
+		$response = $this->call('POST', $message->toSlug() . '/reply', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
 	}
