@@ -1,22 +1,19 @@
 <?php
 return [
-	'title'  => 'Calculators',
+	'title'      => 'Calculators',
 	'calculator' => ':name Calculator',
-	'combat' => [
+	'combat'     => [
 		'title' => 'Combat Calculator',
 		'level' => 'Combat Level',
 	],
 	'current' => 'Current Experience',
-	'skills'  => [
-
-	],
 	'submit'  => 'Grab Experience',
-	'target'  => 'Target Level',
 	'table'   => [
 		'name'           => 'Name',
+		'amount_needed'  => 'Amount Needed',
 		'level_required' => 'Level Required',
 		'xp_per'         => 'Experience Per',
-		'amount_needed'  => 'Amount Needed',
 	],
+	'target'   => 'Target Level',
 	'username' => 'Username',
 ];
