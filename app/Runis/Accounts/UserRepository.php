@@ -2,7 +2,6 @@
 namespace App\Runis\Accounts;
 
 use App\Runis\Core\EloquentRepository;
-use App\Runis\Core\Exceptions\EntityNotFoundException;
 
 class UserRepository extends EloquentRepository
 {
@@ -26,7 +25,6 @@ class UserRepository extends EloquentRepository
 	 * @param $name
 	 *
 	 * @return mixed
-	 * @throws EntityNotFoundException
 	 */
 	public function requireByName($name){
 		$model = $this->getByName($name);

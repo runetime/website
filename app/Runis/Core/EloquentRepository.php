@@ -2,7 +2,6 @@
 namespace App\Runis\Core;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Runis\Core\Exceptions\EntityNotFoundException;
 
 abstract class EloquentRepository
 {
@@ -61,23 +60,6 @@ abstract class EloquentRepository
 	public function getById($id)
 	{
 		return $this->model->find($id);
-	}
-
-	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 * @throws EntityNotFoundException
-	 */
-	public function requireById($id)
-	{
-		$model = $this->getById($id);
-
-		if(!$model) {
-			throw new EntityNotFoundException;
-		}
-
-		return $model;
 	}
 
 	/**
