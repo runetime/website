@@ -29,9 +29,9 @@ class StatusTest extends TestCase {
 	public function testPostCreate()
 	{
 		$this->login();
-		$data = [
+		$data = $this->form([
 			'contents' => 'contents',
-		];
+		]);
 		$response = $this->call('POST', 'forums/statuses/create', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
@@ -55,7 +55,10 @@ class StatusTest extends TestCase {
 	public function testReply()
 	{
 		$status = Status::orderBy('created_at', 'desc')->first();
-		$response = $this->call('POST', 'forums/statuses/' . $status->id . '-by-' . $status->author->display_name . '/reply');
+
+		$data = $this->form();
+
+		$response = $this->call('POST', 'forums/statuses/' . $status->id . '-by-' . $status->author->display_name . '/reply', $data);
 
 		$this->assertEquals(302, $response->getStatusCode());
 	}
