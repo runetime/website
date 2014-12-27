@@ -123,7 +123,7 @@ class Radio {
 			width: '50%'
 		});
 	}
-	
+
 	public radioClose() {
 		if(this.popup) {
 			this.popup.close();
@@ -217,7 +217,7 @@ class Radio {
 
 			if(update['message'] !== '' && update['message'] !== -1) {
 				$("[rt-data='radio:message.contents']").html(update['message']);
-			} else if(update['message'] === -1) {
+			} else if(update['message'] === -1 && update['dj'] !== null && update['dj'] !== '') {
 				$("[rt-data='radio:message.contents']").html("DJ " + update['dj'] + " is currently on air!");
 			} else {
 				$("[rt-data='radio:message.contents']").html("Auto DJ is currently on air");

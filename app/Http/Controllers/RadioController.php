@@ -114,7 +114,7 @@ class RadioController extends BaseController
 			$response['response'] = 1;
 		}
 
-		return $response;
+		return json_encode($response);
 	}
 
 	/**
@@ -173,7 +173,14 @@ class RadioController extends BaseController
 		}
 
 		if(\Auth::check()) {
-			$update['requests'] = $this->requests->getByUser(\Auth::user()->id);
+			$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
+			if($session) {
+				$update['requests'] = $this->requests->getByUserAndTime(
+					\Auth::user()->id,
+					$session->created_at->timestamp,
+					'>='
+				);
+			}
 		}
 
 		$online = \Cache::get('radio.online');
