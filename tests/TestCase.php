@@ -33,11 +33,11 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	}
 
 	/**
-	 * @param $form
+	 * @param array $form
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	public function form($form)
+	public function form(Array $form = [])
 	{
 		$form['_token'] = \Session::token();
 
