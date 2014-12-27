@@ -7,34 +7,7 @@
 							@lang('news.title')
 						</h2>
 @foreach($news as $newsPiece)
-						<div class='news'>
-							<div class='item'>
-@if($newsPiece->hasImage())
-								<img src='/img/news/thumbnail/{{ $newsPiece->id }}.png' alt='{{ $newsPiece->title }}' class='pull-right img-news img-responsive' />
-@endif
-								<div class='body'>
-									<h3>
-										{{ $newsPiece->title }}
-									</h3>
-									<span class='text-muted'>{{ \Time::long($newsPiece->created_at) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
-									<p>
-										{!! $newsPiece->contents_parsed !!}
-									</p>
-								</div>
-								<ul class='list-inline material-bar'>
-									<li>
-										<a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}' title='{{ $newsPiece->title }}'>
-											@lang('utilities.read_more')
-										</a>
-									</li>
-									<li>
-										<a href='{{ $newsPiece->toSlug('#comments') }}'>
-											@lang('utilities.comments_amount', ['amount' => $newsPiece->post_count])
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+	@include('news._show', ['newsPiece' => $newsPiece])
 @endforeach
 					</div>
 					<div class='col-xs-12 col-sm-4 col-md-3 section-light'>

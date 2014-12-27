@@ -1,24 +1,42 @@
 			<div class='news'>
-				<h1>
-					{{ $news->title }}
-				</h1>
-				<p class='text-muted'>
-					{{ \Time::shortTime($news->created_at) }} @lang('utilities.by') {!! \Link::name($news->author_id) !!}
-				</p>
-				<div class='clearfix'>
-@if($news->hasImage())
-					<img src='/img/news/thumbnail/{{ $news->id }}.png' alt='{{ $news->title }}' class='pull-right img-news img-responsive' />
+				<div class='item'>
+					@if($newsPiece->hasImage())
+						<img src='/img/news/thumbnail/{{ $newsPiece->id }}.png' alt='{{ $newsPiece->title }}' class='pull-right img-news img-responsive' />
+					@endif
+					<div class='body'>
+						<h3>
+							{{ $newsPiece->title }}
+						</h3>
+						<span class='text-muted'>{{ \Time::long($newsPiece->created_at) }}</span> by {!! \Link::Name($newsPiece->author_id) !!}
+						<p>
+							{!! $newsPiece->contents_parsed !!}
+						</p>
+					</div>
+					<div class='tags'>
+					@lang('tags.tagged_as')
+						<ul class='list-inline inline'>
+@if(count($newsPiece->tags) > 0)
+	@foreach($newsPiece->tags as $tag)
+							<li>
+								<a href='/forums/tag/{{ $tag->name }}' class='label label-rt' title='{{ $tag->name }}'>
+									{{ $tag->name }}
+								</a>
+							</li>
+	@endforeach
 @endif
+						</ul>
+					</div>
+					<ul class='list-inline material-bar'>
+						<li>
+							<a href='/news/{{ \String::slugEncode($newsPiece->id, $newsPiece->title) }}' title='{{ $newsPiece->title }}'>
+								@lang('utilities.read_more')
+							</a>
+						</li>
+						<li>
+							<a href='{{ $newsPiece->toSlug('#comments') }}'>
+								@lang('utilities.comments_amount', ['amount' => $newsPiece->post_count])
+							</a>
+						</li>
+					</ul>
 				</div>
-				{!! $news->contents_parsed !!}
-				@lang('tags.tagged_as')
-				<ul class='list-inline inline'>
-@foreach($news->tags as $tag)
-					<li>
-						<a href='/forums/tag/{{ $tag->name }}' class='label label-rt' title='{{ $tag->name }}'>
-							{{ $tag->name }}
-						</a>
-					</li>
-@endforeach
-				</ul>
 			</div>
