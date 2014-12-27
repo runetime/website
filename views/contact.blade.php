@@ -8,6 +8,9 @@
 					@lang('contact.form.respond')
 				</p>
 				<form class='form-horizontal' role='form'>
+@if(\Auth::check())
+					<input type='hidden' name='username' value='{{ \Auth::user()->display_name }}' readonly disabled />
+@endif
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='rsn-check-field'>
 							@lang('fields.email_address')
