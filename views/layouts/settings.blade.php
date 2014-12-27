@@ -19,8 +19,8 @@ $settingsNav = [
 					<div class='col-xs-12 col-sm-4 col-md-2'>
 						<ul class='list-group'>
 @foreach($settingsNav as $settingsNavURL => $settingsNavText)
-							<a href='{{$settingsNavURL}}' class='list-group-item{{$settingsNavURL == $thisURL ? ' active':''}}'>
-								{{$settingsNavText}}
+							<a href='{{ $settingsNavURL }}' class='list-group-item{{ $settingsNavURL === $thisURL ? ' active':'' }}'>
+								{{ $settingsNavText }}
 							</a>
 @endforeach
 						</ul>
