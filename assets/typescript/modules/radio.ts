@@ -23,9 +23,9 @@ class Radio {
 		};
 		$('#radio-link').click(function() {
 			if(!radio.status) {
-				radio.openRadio();
+				radio.radioOpen();
 			} else {
-				radio.closeRadio();
+				radio.radioClose();
 			}
 		});
 
@@ -34,7 +34,7 @@ class Radio {
 		});
 
 		$('#radio-request').click(function() {
-			radio.openRequest();
+			radio.requestOpen();
 		});
 
 		$('#radio-timetable').click(function() {
@@ -45,40 +45,8 @@ class Radio {
 		});
 
 		$('#pull-close').click(function() {
-			radio.hidePull();
+			radio.pullHide();
 		});
-	}
-	public closeRadio() {
-		if(this.popup) {
-			this.popup.close();
-		}
-
-		$(this.varMessage).html(this.statusClosed);
-		this.status = false;
-		$(this.varStatus)
-			.removeClass('text-success')
-			.addClass('text-danger')
-			.html("<i id='power-button' class='fa fa-power-off'></i>Off");
-	}
-
-	public openRadio() {
-		if(this.online !== true) {
-			return false;
-		}
-
-		this.popup = window.open(this.URL, 'RuneTime Radio', 'width=389,height=359');
-		this.status = true;
-		$(this.varMessage).html(this.statusOpen);
-		$(this.varStatus).
-			removeClass('text-danger').
-			addClass('text-success').
-			html("<i id='power-button' class='fa fa-power-off'></i>On");
-		var pollTimer = window.setInterval(function () {
-			if(radio.popup.closed !== false) {
-				window.clearInterval(pollTimer);
-				radio.closeRadio();
-			}
-		}, 1000);
 	}
 
 	public openHistory() {
@@ -93,7 +61,7 @@ class Radio {
 			}
 
 			html += "</tbody></table>";
-			radio.openPull(html);
+			radio.pullOpen(html);
 		});
 	}
 
@@ -119,66 +87,20 @@ class Radio {
 			}
 
 			html += "</tbody></table>";
-			radio.openPull(html);
+			radio.pullOpen(html);
 		});
 	}
 
-	public openRequest() {
-		var request = utilities.getAJAX('radio/request/song');
-		request.done(function(request: string) {
-			request = $.parseJSON(request);
-			var html = "";
-			if(request.response === 2) {
-				html += "<form role='form'><div class='form-group'><label for='request-artist'>Artist Name</label><input type='text' id='request-artist' class='form-control' name='request-artist' placeholder='Artist Name' required /></div><div class='form-group'><label for='request-name'>Song Name</label><input type='text' id='request-name' class='form-control' name='request-name' placeholder='Song Name' required /></div><div class='form-group'><p id='request-button' class='btn btn-primary'>Request</p></div></form>";
-			} else if(request.response === 1) {
-				html += "<p class='text-warning'>Auto DJ currently does not accept song requests, sorry!";
-			} else {
-				html += "<p class='text-danger'>You must be logged in to request a song from the DJ.</p>";
-			}
-
-			radio.openPull(html);
-		});
-
-		setTimeout(function () {
-			$('#request-button').click(function () {
-				radio.sendRequest();
-			});
-		}, 3000);
+	public onlineSettings() {
+		if(this.online !== true) {
+			this.radioClose();
+			$(this.elements.statusMessage).html("The radio has been set offline.");
+		} else {
+			$(this.elements.statusMessage).html("");
+		}
 	}
 
-	public sendRequest() {
-		var data = {
-				'artist': document.getElementById('request-artist').value,
-				'name': document.getElementById('request-name').value
-			};
-		var contents = utilities.postAJAX('radio/request/song', data);
-		contents.done(function(contents: string) {
-			contents = $.parseJSON(contents);
-			var html = "";
-			if(contents.sent === true) {
-				html = "<p class='text-success'>Your request has been sent to the DJ</p>";
-			} else {
-				html = "<p class='text-danger'>There was an error while processing your request.  Try again?";
-			}
-
-			$('#pull-contents').html(html);
-		});
-		this.hidePull();
-		this.update();
-	}
-
-	public openPull(contents: string) {
-		$('#pull-contents').html(contents);
-		$('#radio-pull').removeClass('hidden').
-			css({
-				width: '50%'
-			});
-		$('#radio-options').css({
-			width: '50%'
-		});
-	}
-
-	public hidePull() {
+	public pullHide() {
 		$('#pull-contents').html('&nbsp;');
 		$('#radio-pull').width('').
 			addClass('hidden').
@@ -191,13 +113,92 @@ class Radio {
 			});
 	}
 
-	public onlineSettings() {
-		if(this.online !== true) {
-			this.closeRadio();
-			$(this.elements.statusMessage).html("The radio has been set offline.");
-		} else {
-			$(this.elements.statusMessage).html("");
+	public pullOpen(contents: string) {
+		$('#pull-contents').html(contents);
+		$('#radio-pull').removeClass('hidden').
+			css({
+				width: '50%'
+			});
+		$('#radio-options').css({
+			width: '50%'
+		});
+	}
+	
+	public radioClose() {
+		if(this.popup) {
+			this.popup.close();
 		}
+
+		$(this.varMessage).html(this.statusClosed);
+		this.status = false;
+		$(this.varStatus)
+			.removeClass('text-success')
+			.addClass('text-danger')
+			.html("<i id='power-button' class='fa fa-power-off'></i>Off");
+	}
+
+	public radioOpen() {
+		if(this.online !== true) {
+			return false;
+		}
+
+		this.popup = window.open(this.URL, 'RuneTime Radio', 'width=389,height=359');
+		this.status = true;
+		$(this.varMessage).html(this.statusOpen);
+		$(this.varStatus).
+			removeClass('text-danger').
+			addClass('text-success').
+			html("<i id='power-button' class='fa fa-power-off'></i>On");
+		var pollTimer = window.setInterval(function () {
+			if(radio.popup.closed !== false) {
+				window.clearInterval(pollTimer);
+				radio.radioClose();
+			}
+		}, 1000);
+	}
+
+	public requestOpen() {
+		var request = utilities.getAJAX('radio/request/song');
+		request.done(function(request: string) {
+			request = $.parseJSON(request);
+			var html = "";
+			if(request.response === 2) {
+				html += "<form role='form'><div class='form-group'><label for='request-artist'>Artist Name</label><input type='text' id='request-artist' class='form-control' name='request-artist' placeholder='Artist Name' required /></div><div class='form-group'><label for='request-name'>Song Name</label><input type='text' id='request-name' class='form-control' name='request-name' placeholder='Song Name' required /></div><div class='form-group'><p id='request-button' class='btn btn-primary'>Request</p></div></form>";
+			} else if(request.response === 1) {
+				html += "<p class='text-warning'>Auto DJ currently does not accept song requests, sorry!";
+			} else {
+				html += "<p class='text-danger'>You must be logged in to request a song from the DJ.</p>";
+			}
+
+			radio.pullOpen(html);
+		});
+
+		setTimeout(function () {
+			$('#request-button').click(function () {
+				radio.requestSend();
+			});
+		}, 3000);
+	}
+
+	public requestSend() {
+		var data = {
+			'artist': document.getElementById('request-artist').value,
+			'name': document.getElementById('request-name').value
+		};
+		var contents = utilities.postAJAX('radio/request/song', data);
+		contents.done(function(contents: string) {
+			contents = $.parseJSON(contents);
+			var html = "";
+			if(contents.sent === true) {
+				html = "<p class='text-success'>Your request has been sent to the DJ</p>";
+			} else {
+				html = "<p class='text-danger'>There was an error while processing your request.  Try again?";
+			}
+
+			$('#pull-contents').html(html);
+		});
+		this.pullHide();
+		this.update();
 	}
 
 	public update() {
