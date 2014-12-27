@@ -2,6 +2,7 @@ var radio;
 var chatbox;
 class Radio {
 	elements: any = {};
+	online: boolean = true;
 	popup: any = null;
 	status: boolean = false;
 	statusClosed: string = '';
@@ -10,8 +11,7 @@ class Radio {
 	varMessage: string = '';
 	varStatus: string = '';
 
-	online: boolean = true;
-	constructor() {
+	public constructor() {
 		this.URL = 'http://apps.streamlicensing.com/player-popup.php?sid=2579&stream_id=4386';
 		this.statusClosed = 'to listen to RuneTime Radio!';
 		this.statusOpen = 'to close RuneTime Radio';
@@ -28,25 +28,31 @@ class Radio {
 				radio.closeRadio();
 			}
 		});
+
 		$('#radio-history').click(function() {
 			radio.openHistory();
 		});
+
 		$('#radio-request').click(function() {
 			radio.openRequest();
 		});
+
 		$('#radio-timetable').click(function() {
 			radio.openTimetable();
 		});
+
 		$('#request-button').click(function() {
 		});
+
 		$('#pull-close').click(function() {
 			radio.hidePull();
 		});
 	}
-	closeRadio() {
+	public closeRadio() {
 		if(this.popup) {
 			this.popup.close();
 		}
+
 		$(this.varMessage).html(this.statusClosed);
 		this.status = false;
 		$(this.varStatus)
@@ -55,11 +61,11 @@ class Radio {
 			.html("<i id='power-button' class='fa fa-power-off'></i>Off");
 	}
 
-	openRadio() {
+	public openRadio() {
 		if(this.online !== true) {
 			return false;
-			this.onlineSettings();
 		}
+
 		this.popup = window.open(this.URL, 'RuneTime Radio', 'width=389,height=359');
 		this.status = true;
 		$(this.varMessage).html(this.statusOpen);
@@ -75,9 +81,9 @@ class Radio {
 		}, 1000);
 	}
 
-	openHistory() {
+	public openHistory() {
 		var history = utilities.getAJAX('radio/history');
-		history.done(function(history) {
+		history.done(function(history: string) {
 			history = $.parseJSON(history);
 			var music = null,
 				html = "<table class='table'><thead><tr><td>Time</td><td>Artist</td><td>Name</td></tr></thead><tbody>";
@@ -85,14 +91,15 @@ class Radio {
 				music = history[x];
 				html += "<tr><td>" + utilities.timeAgo(music.created_at) + "</td><td> " + music.artist + "</td><td>" + music.song + "</td></tr>";
 			}
+
 			html += "</tbody></table>";
 			radio.openPull(html);
 		});
 	}
 
-	openTimetable() {
+	public openTimetable() {
 		var timetable = utilities.getAJAX('radio/timetable');
-		timetable.done(function(timetable) {
+		timetable.done(function(timetable: string) {
 			timetable = $.parseJSON(timetable);
 			var html = "<table class='table text-center'><thead><tr><td>&nbsp;</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr></thead><tbody>";
 			for(var x = 0, y = 23; x <= y; x++) {
@@ -104,18 +111,21 @@ class Radio {
 					} else {
 						html += "&nbsp;";
 					}
+
 					html += "</td>";
 				}
+
 				html += "</tr>";
 			}
+
 			html += "</tbody></table>";
 			radio.openPull(html);
 		});
 	}
 
-	openRequest() {
+	public openRequest() {
 		var request = utilities.getAJAX('radio/request/song');
-		request.done(function(request) {
+		request.done(function(request: string) {
 			request = $.parseJSON(request);
 			var html = "";
 			if(request.response === 2) {
@@ -125,8 +135,10 @@ class Radio {
 			} else {
 				html += "<p class='text-danger'>You must be logged in to request a song from the DJ.</p>";
 			}
+
 			radio.openPull(html);
 		});
+
 		setTimeout(function () {
 			$('#request-button').click(function () {
 				radio.sendRequest();
@@ -134,14 +146,13 @@ class Radio {
 		}, 3000);
 	}
 
-	sendRequest() {
+	public sendRequest() {
 		var data = {
 				'artist': document.getElementById('request-artist').value,
 				'name': document.getElementById('request-name').value
-			},
-			contents;
-		contents = utilities.postAJAX('radio/request/song', data);
-		contents.done(function(contents) {
+			};
+		var contents = utilities.postAJAX('radio/request/song', data);
+		contents.done(function(contents: string) {
 			contents = $.parseJSON(contents);
 			var html = "";
 			if(contents.sent === true) {
@@ -149,13 +160,14 @@ class Radio {
 			} else {
 				html = "<p class='text-danger'>There was an error while processing your request.  Try again?";
 			}
+
 			$('#pull-contents').html(html);
 		});
 		this.hidePull();
 		this.update();
 	}
 
-	openPull(contents: string) {
+	public openPull(contents: string) {
 		$('#pull-contents').html(contents);
 		$('#radio-pull').removeClass('hidden').
 			css({
@@ -166,7 +178,7 @@ class Radio {
 		});
 	}
 
-	hidePull() {
+	public hidePull() {
 		$('#pull-contents').html('&nbsp;');
 		$('#radio-pull').width('').
 			addClass('hidden').
@@ -188,7 +200,7 @@ class Radio {
 		}
 	}
 
-	update() {
+	public update() {
 		$('#requests-user-current').html('');
 		var update = utilities.getAJAX('radio/update');
 		update.done(function(update) {
@@ -201,6 +213,7 @@ class Radio {
 			} else {
 				$('#radio-dj').html("Auto DJ");
 			}
+
 			if(update['message'] !== '' && update['message'] !== -1) {
 				$("[rt-data='radio:message.contents']").html(update['message']);
 			} else if(update['message'] === -1) {
@@ -208,6 +221,7 @@ class Radio {
 			} else {
 				$("[rt-data='radio:message.contents']").html("Auto DJ is currently on air");
 			}
+
 			for(var x = 0, y = update['requests'].length; x < y; x++) {
 				var request = update['requests'][x];
 				if(request.status == 0) {
@@ -217,9 +231,11 @@ class Radio {
 				} else if(request.status == 2) {
 					requestsHTML += "<p class='text-danger'>";
 				}
+
 				requestsHTML += request.song_name + " by " + request.song_artist;
 				requestsHTML += "</p>";
 			}
+
 			$('#requests-user-current').html(requestsHTML);
 
 			radio.online = update.online;
