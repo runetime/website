@@ -37,10 +37,12 @@ class RadioTest extends TestCase {
 	public function testPostRequest()
 	{
 		$this->login();
-		$form = [
+
+		$form = $this->form([
 			'artist' => 'test_artist',
 			'name' => 'test_name',
-		];
+		]);
+
 		$response = $this->call('POST', 'radio/request/song', $form);
 
 		$this->assertEquals(200, $response->getStatusCode());
