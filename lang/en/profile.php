@@ -1,12 +1,9 @@
 <?php
 return [
 	'title' => ':name',
-	'feed' => [
-		'title' => ":name's Profile Feed",
+	'feed'  => [
+		'title'          => ":name's Profile Feed",
 		'recent_threads' => 'Recent Threads by :name',
-	],
-	'friends' => [
-
 	],
 	'gender' => [
 		'female'      => 'Female',
@@ -14,12 +11,11 @@ return [
 		'not_telling' => 'Not Telling',
 	],
 	'nav' => [
+		'friends'      => 'Friends',
 		'overview'     => 'Overview',
 		'profile_feed' => 'Profile Feed',
-		'friends'      => 'Friends',
 	],
 	'overview' => [
-		'member_since' => 'Member since :date',
 		'about'        => [
 			'empty' => ':name has not written about themselves yet.',
 			'name'  => 'About Me',
@@ -43,13 +39,14 @@ return [
 			'title'         => 'Title',
 		],
 		'last_active'  => 'Last Active :date',
+		'member_since' => 'Member since :date',
 		'social' => [
 			'name'     => 'Social Information',
 			'facebook' => 'Facebook',
 			'skype'    => 'Skype',
 			'twitter'  => 'Twitter',
-			'youtube'  => 'YouTube',
 			'website'  => 'Website',
+			'youtube'  => 'YouTube',
 		],
 		'runescape' => [
 			'name'           => 'RuneScape Information',
