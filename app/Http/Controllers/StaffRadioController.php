@@ -128,7 +128,6 @@ class StaffRadioController extends BaseController
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		$session->message_id = $form->id;
 		$session->save();
-		header('Content-Type: application/json');
 
 		return json_encode(['message' => $session->message->contents_parsed]);
 	}
@@ -169,8 +168,6 @@ class StaffRadioController extends BaseController
 				array_push($update['requests'], $rData);
 			}
 		}
-
-		header('Content-Type: application/json');
 
 		return json_encode($update);
 	}
@@ -220,6 +217,12 @@ class StaffRadioController extends BaseController
 
 		return \redirect()->to('/staff/radio/messages');
 	}
+
+	/**
+	 * @param RadioRequestAnswerRequest $form
+	 *
+	 * @return string
+	 */
 	public function postRadioRequest(RadioRequestAnswerRequest $form)
 	{
 		$response = ['done' => false];
@@ -286,8 +289,6 @@ class StaffRadioController extends BaseController
 		} else {
 			$response = ['valid' => false];
 		}
-
-		header('Content-Type: application/json');
 
 		return json_encode($response);
 	}

@@ -60,7 +60,6 @@ class CalculatorController extends BaseController
 			'magic' => $scores[7][1],
 			'summoning' => $scores[24][1],
 		];
-		header('Content-Type: application/json');
 
 		return json_encode($skills);
 	}
@@ -123,8 +122,6 @@ class CalculatorController extends BaseController
 				}
 			}
 		}
-
-		header('Content-Type: application/json');
 
 		return json_encode($itemListNumbered);
 	}
