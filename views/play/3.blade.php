@@ -5,7 +5,7 @@
 					<iframe class='embed-responsive-item' src='http://www.runescape.com/game' scrolling='no'></iframe>
 				</div>
 				<div id='chatbox-holder'>
-@include('partials.chat')
+@include('partials._chat')
 				</div>
 			</div>
 			<script>

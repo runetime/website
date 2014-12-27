@@ -25,7 +25,7 @@
 					</div>
 					<div class='col-xs-12 col-sm-4 col-md-3 padding-none'>
 						<div id='chatbox-holder' class='col-xs-12'>
-	@include('partials.chat')
+	@include('partials._chat')
 						</div>
 					</div>
 				</div>
@@ -44,7 +44,7 @@
 					@lang('livestream.not_streaming')
 				</h2>
 				<div id='chatbox-holder' class='col-xs-12'>
-@include('partials.chat')
+@include('partials._chat')
 				</div>
 @endif
 			</div>

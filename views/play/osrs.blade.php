@@ -5,7 +5,7 @@
 					<iframe class='embed-responsive-item' src='http://oldschool82.runescape.com/j1'></iframe>
 				</div>
 				<div id='chatbox-holder'>
-@include('partials.chat')
+@include('partials._chat')
 				</div>
 			</div>
 			<script>
