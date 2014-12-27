@@ -25,7 +25,9 @@ class LivestreamTest extends TestCase {
 	 */
 	public function testPostReset()
 	{
-		$response = $this->call('POST', 'livestream/reset');
+		$data = $this->form();
+
+		$response = $this->call('POST', 'livestream/reset', $data);
 
 		$this->assertEquals(200, $response->getStatusCode());
 	}
