@@ -112,16 +112,17 @@ class Subforum extends Entity
 
 		if($good) {
 			$parent = Subforum::find($this->parent);
-			while(true) {
+			$continue = true;
+			while($continue === true) {
 				if(!empty($parent)) {
 					if($parent->canView()) {
-						$parent = Subforum::find($parent->id);
+						$parent = Subforum::find($parent->parent);
 					} else {
 						$good = false;
-						break;
+						$continue = false;
 					}
 				} else {
-					break;
+					$continue = false;
 				}
 			}
 		}
