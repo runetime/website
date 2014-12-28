@@ -13,7 +13,7 @@
 						</p>
 					</div>
 					<div class='tags'>
-					@lang('tags.tagged_as')
+						@lang('tags.tagged_as')
 						<ul class='list-inline inline'>
 @if(count($newsPiece->tags) > 0)
 	@foreach($newsPiece->tags as $tag)
