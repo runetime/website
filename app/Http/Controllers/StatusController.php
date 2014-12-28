@@ -45,13 +45,30 @@ class StatusController extends BaseController
 	{
 		$status = $this->statuses->getById($id);
 		if(!$status) {
-			\Error::abort(404);
+			return \Error::abort(404);
+		}
+
+		if(!$status->canView()) {
+			return \Error::abort(403);
 		}
 
 		$this->bc(['forums' => trans('forums.title'), 'forums/statuses' => trans('forums.statuses.title')]);
 		$this->nav('navbar.forums');
 		$this->title('forums.statuses.view.title', ['author' => $status->author->display_name]);
 		return $this->view('forums.statuses.view', compact('status'));
+	}
+
+	public function getStatusSwitch($id, $newStatus)
+	{
+		$status = $this->statuses->getById($id);
+		if(!$status) {
+			\Error::abort(404);
+		}
+
+		$status->status = $newStatus;
+		$status->save();
+
+		return \redirect()->to($status->toSlug());
 	}
 
 	/**

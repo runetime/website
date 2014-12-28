@@ -246,6 +246,13 @@ Route::group(['prefix' => 'forums'], function() {
 			Route::group(['middleware' => 'auth'], function() {
 				post('reply', 'StatusController@postReply');
 			});
+
+			/**
+			 * Switch Status
+			 */
+			Route::group(['middleware' => 'staff.moderator'], function() {
+				get('status={newStatus}', 'StatusController@getStatusSwitch');
+			});
 		});
 
 		/**

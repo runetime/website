@@ -60,4 +60,18 @@ class Status extends Entity
 		}
 		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name) . $url;
 	}
+
+	public function canView()
+	{
+		$can = false;
+		if($this->status == Status::STATUS_PUBLISHED) {
+			$can = true;
+		} else {
+			if(\Auth::check() && \Auth::user()->isCommunity()) {
+				$can = true;
+			}
+		}
+
+		return $can;
+	}
 }

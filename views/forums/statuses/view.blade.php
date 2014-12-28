@@ -16,6 +16,19 @@
 							<span class='text-muted'>
 								{{ \Time::shortReadable($status->created_at) }}
 							</span>
+							<ul class='list-inline'>
+								<li>
+@if($status->status === 0)
+									<a href='{{ $status->toSlug('status=1') }}' title='Unhide'>
+										Unhide
+									</a>
+@else
+									<a href='{{ $status->toSlug('status=0') }}' title='Hide'>
+										Hide
+									</a>
+@endif
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
