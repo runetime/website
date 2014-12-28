@@ -228,6 +228,20 @@ class Thread extends Entity
 	public function canView()
 	{
 		$can = true;
+		switch($this->status) {
+			case Thread::STATUS_INVISIBLE:
+			case Thread::STATUS_INVISIBLE_LOCKED:
+			case Thread::STATUS_INVISIBLE_LOCKED_PINNED:
+			case Thread::STATUS_INVISIBLE_PINNED:
+				if(\Auth::check()) {
+					if(!\Auth::user()->isCommunity()) {
+						$can = false;
+					}
+				} else {
+					$can = false;
+				}
+				break;
+		}
 		$subforum = Subforum::find($this->subforum_id);
 		while(true) {
 			if(!empty($subforum)) {

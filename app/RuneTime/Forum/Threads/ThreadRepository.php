@@ -93,7 +93,6 @@ class ThreadRepository extends EloquentRepository
 		foreach($models as $model) {
 			if($model->canView()) {
 				array_push($modelList, $model);
-
 			} else {
 				$x++;
 			}
@@ -105,6 +104,10 @@ class ThreadRepository extends EloquentRepository
 				skip($amount)->
 				take(1)->
 				first();
+			if(empty($model)) {
+				return $modelList;
+			}
+
 			if($model->canView()) {
 				array_push($modelList, $model);
 			} else {

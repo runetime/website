@@ -95,8 +95,13 @@ class PostRepository extends EloquentRepository
 		for($i = 0; $i < $x; $i++) {
 			$model = \DB::table('post_thread')->
 				orderBy('id', $order)->
+				skip($amount)->
 				take(1)->
 				first();
+			if(empty($model)) {
+				return $modelList;
+			}
+
 			$thread = $threads->getById($model->thread_id);
 			if($thread->canView()) {
 				$post = $this->getById($model->post_id);

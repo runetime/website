@@ -112,8 +112,8 @@ class ForumController extends BaseController
 		$forumInfo->members = $this->users->getCount();
 		$forumInfo->latest = $this->users->getLatest();
 		$forumInfo->mostOnline = \Cache::get('activity.most');
-		$recentThreads = $this->threads->getX(5);
-		$recentPosts = $this->posts->hasThread(5);
+		$recentThreads = $this->threads->getXCanView(5);
+		$recentPosts = $this->posts->hasThreadCanView(5);
 		$activity = \Cache::get('activity.users');
 
 		$this->nav('navbar.forums');
