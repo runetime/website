@@ -416,6 +416,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		return $this->hasMany('App\RuneTime\Awards\Awardee', 'user_id');
 	}
 
+	/**
+	 * @return null|string
+	 */
 	public function status()
 	{
 		if($this->cacheStatus !== null) {
