@@ -1,9 +1,9 @@
 			<div class='news'>
 				<div class='item'>
-					@if($newsPiece->hasImage())
+					<div class='body clearfix'>
+@if($newsPiece->hasImage())
 						<img src='/img/news/thumbnail/{{ $newsPiece->id }}.png' alt='{{ $newsPiece->title }}' class='pull-right img-news img-responsive' />
-					@endif
-					<div class='body'>
+@endif
 						<h3>
 							{{ $newsPiece->title }}
 						</h3>
