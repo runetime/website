@@ -56,16 +56,59 @@ class PostRepository extends EloquentRepository
 	 */
 	public function hasThread($amount = 5)
 	{
-		$postRepository = new PostRepository(new Post);
 		$postList = [];
 		$posts = \DB::table('post_thread')->
 			orderBy('id', 'desc')->
 			take($amount)->
 			get();
 		foreach($posts as $post) {
-			array_push($postList, $postRepository->getById($post->post_id));
+			array_push($postList, $this->getById($post->post_id));
 		}
 		return (object) $postList;
+	}
+
+	/**
+	 * @param        $amount
+	 * @param string $order
+	 *
+	 * @return array
+	 */
+	public function hasThreadCanView($amount, $order = 'desc')
+	{
+		$threads = \App::make('App\RuneTime\Forum\Threads\ThreadRepository');
+		$models = \DB::table('post_thread')->
+			orderBy('id', $order)->
+			take($amount)->
+			get();
+		$modelList = [];
+		$x = 0;
+		foreach($models as $model) {
+			$thread = $threads->getByid($model->thread_id);
+			if($thread->canView()) {
+				$post = $this->getByid($model->post_id);
+				array_push($modelList, $post);
+			} else {
+				$x++;
+			}
+		}
+
+		for($i = 0; $i < $x; $i++) {
+			$model = \DB::table('post_thread')->
+				orderBy('id', $order)->
+				take(1)->
+				first();
+			$thread = $threads->getById($model->thread_id);
+			if($thread->canView()) {
+				$post = $this->getById($model->post_id);
+				array_push($modelList, $post);
+			} else {
+				$i--;
+			}
+
+			$amount++;
+		}
+
+		return $modelList;
 	}
 
 	/**

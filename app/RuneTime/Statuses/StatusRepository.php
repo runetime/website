@@ -14,14 +14,16 @@ class StatusRepository extends EloquentRepository
 	}
 
 	/**
-	 * @param int $count
+	 * @param int    $count
+	 * @param string $op
+	 * @param int    $status
 	 *
 	 * @return mixed
 	 */
-	public function getLatest($count = 5)
+	public function getLatest($count = 5, $op = '=', $status = Status::STATUS_PUBLISHED)
 	{
 		return $this->model->
-			where('status', '=', Status::STATUS_PUBLISHED)->
+			where('status', $op, $status)->
 			orderBy('created_at', 'desc')->
 			take($count)->
 			get();

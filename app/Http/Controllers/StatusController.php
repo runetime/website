@@ -28,7 +28,11 @@ class StatusController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$statusList = $this->statuses->getLatest(10);
+		if(\Auth::check() && \Auth::user()->isCommunity()) {
+			$statusList = $this->statuses->getLatest(10, '<=', 1);
+		} else {
+			$statusList = $this->statuses->getLatest(10, '=', Status::STATUS_PUBLISHED);
+		}
 
 		$this->bc(['forums' => trans('forums.title')]);
 		$this->nav('navbar.forums');

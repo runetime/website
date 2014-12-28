@@ -69,12 +69,52 @@ class ThreadRepository extends EloquentRepository
 	 *
 	 * @return mixed
 	 */
-	public function getX($amount, $order='desc')
+	public function getX($amount, $order = 'desc')
 	{
 		return $this->model->
 			orderBy('id', $order)->
 			take($amount)->
 			get();
+	}
+
+	/**
+	 * @param        $amount
+	 * @param string $order
+	 *
+	 * @return array
+	 */
+	public function getXCanView($amount, $order = 'desc')
+	{
+		$models = $this->model->
+			orderBy('id', $order)->
+			take($amount)->get();
+		$modelList = [];
+		$x = 0;
+		foreach($models as $model) {
+			if($model->canView()) {
+				array_push($modelList, $model);
+
+			} else {
+				$x++;
+			}
+		}
+
+		for($i = 0; $i < $x; $i++) {
+			$model = $this->model->
+				orderBy('id', $order)->
+				skip($amount)->
+				take(1)->
+				first();
+			if($model->canView()) {
+				array_push($modelList, $model);
+			} else {
+				$i--;
+			}
+
+			$amount++;
+		}
+
+		return $modelList;
 	}
 
 	/**

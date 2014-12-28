@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\News\NewsRepository;
+use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 
@@ -45,9 +46,13 @@ class HomeController extends BaseController
 	public function getIndex()
 	{
 		$news = $this->news->getRecentNews(3);
-		$statuses = $this->statuses->getLatest(5);
-		$threads = $this->threads->getX(5, 'desc');
-		$posts = $this->posts->hasThread(5);
+		if(\Auth::check() && \Auth::user()->isCommunity()) {
+			$statuses = $this->statuses->getLatest(5, '<=', 1);
+		} else {
+			$statuses = $this->statuses->getLatest(5, '=', Status::STATUS_PUBLISHED);
+		}
+		$threads = $this->threads->getXCanView(5, 'desc');
+		$posts = $this->posts->hasThreadCanView(5);
 
 		$this->bc(false);
 		$this->nav('navbar.home');
