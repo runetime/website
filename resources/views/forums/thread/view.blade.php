@@ -16,7 +16,7 @@
 @if($poll !== false && count($poll) > 0)
 	@include('forums.thread.poll._show', ['poll' => $poll])
 @endif
-@if(count($thread->tags) > 0)
+@if(count($thread->tags) > 0 && $thread->tags[0]->name !== '')
 					Tagged as
 					<ul class='inline list-inline'>
 	@foreach($thread->tags as $tag)
