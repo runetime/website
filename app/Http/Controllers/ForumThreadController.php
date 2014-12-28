@@ -263,8 +263,10 @@ class ForumThreadController extends BaseController
 		// Tags
 		foreach(explode(",", str_replace(", ", ",", $form->tags)) as $tagName) {
 			$tag = $this->tags->getByName($tagName);
-			if(empty($tag))
+			if(empty($tag)) {
 				$tag = with(new Tag)->saveNew(\Auth::user()->id, $tagName);
+			}
+
 			$thread->addTag($tag);
 		}
 
