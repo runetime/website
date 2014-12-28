@@ -2,21 +2,46 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\API\UserRequest;
+use App\RuneTime\Awards\Award;
+use App\RuneTime\Awards\AwardRepository;
 use App\Runis\Accounts\UserRepository;
 
 class APIController extends BaseController
 {
+	/**
+	 * @var AwardRepository
+	 */
+	private $awards;
 	/**
 	 * @var UserRepository
 	 */
 	private $users;
 
 	/**
-	 * @param UserRepository $users
+	 * @param AwardRepository $awards
+	 * @param UserRepository  $users
 	 */
-	public function __construct(UserRepository $users)
+	public function __construct(AwardRepository $awards, UserRepository $users)
 	{
+		$this->awards = $awards;
 		$this->users = $users;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAwards()
+	{
+		$response = [];
+		$awards = $this->awards->getByStatus(Award::STATUS_AVAILABLE);
+		foreach($awards as $award) {
+			$set = new \stdClass;
+			$set->id = $award->id;
+			$set->name = $award->name;
+			array_push($response, $set);
+		}
+
+		return json_encode($response);
 	}
 
 	/**

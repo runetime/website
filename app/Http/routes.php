@@ -10,6 +10,7 @@ Route::group(['prefix' => 'api'], function() {
 	 * V1
 	 */
 	Route::group(['prefix' => 'v1'], function() {
+		get('awards', 'APIController@getAwards');
 		post('user', 'APIController@postUser');
 	});
 });
@@ -527,6 +528,7 @@ Route::group(['prefix' => 'staff'], function() {
 			Route::group(['prefix' => 'users'], function() {
 				get('/', 'StaffAdminController@getUserList');
 				get('{id}-{name}', 'StaffAdminController@getUserView');
+				post('award-add', 'StaffAdminController@postAward');
 				post('chatbox-remove', 'StaffAdminController@postUserChatboxRemove');
 				post('forum-posts', 'StaffAdminController@postUserForumPosts');
 				post('ip-ban', 'StaffAdminController@postIpBan');

@@ -5,6 +5,10 @@ class AdminUserPanel {
 	paths: any = {};
 	public constructor() {
 		this.elements = {
+			award: {
+				id: "#award-add-id",
+				username: "#award-add-username"
+			},
 			ban: {
 				// WIP
 			},
@@ -17,6 +21,7 @@ class AdminUserPanel {
 				username: "#chatbox-remove-username"
 			},
 			modals: {
+				award: "#modal-award-add",
 				ban: "#modal-ban",
 				chatboxRemove: "#modal-chatbox-remove",
 				ipBan: "#modal-ip-ban",
@@ -43,6 +48,7 @@ class AdminUserPanel {
 		};
 		this.hooks = {
 			listing: {
+				awardAdd: "[rt-hook='admin.panel:user.award.add']",
 				chatboxRemove: "[rt-hook='admin.panel:user.chatbox.remove']",
 				postsRemove: "[rt-hook='admin.panel:user.posts.remove']",
 				userBan: "[rt-hook='admin.panel:user.ban']",
@@ -59,6 +65,7 @@ class AdminUserPanel {
 				submit: "[rt-hook='admin.panel:user.search']"
 			},
 			submit: {
+				award: "[rt-hook='admin.panel:user.award.add.confirm']",
 				chatbox: "[rt-hook='admin.panel:user.chatbox.remove.confirm']",
 				ip: "[rt-hook='admin.panel:ip.ban.confirm']",
 				mute: "[rt-hook='leader.panel:mute.submit']",
@@ -66,6 +73,8 @@ class AdminUserPanel {
 			}
 		};
 		this.paths = {
+			award: '/staff/administrator/users/award-add',
+			awardList: '/api/v1/awards',
 			chatboxRemove: '/staff/administrator/users/chatbox-remove',
 			ip: '/staff/administrator/ip-ban',
 			mute: '/staff/leader/mute',
@@ -73,26 +82,44 @@ class AdminUserPanel {
 			search: '/staff/administrator/users/search',
 			username: '/api/v1/user'
 		};
+
 		$(this.hooks.search.submit).click(function() {
 			userPanel.search();
+		});
+
+		$(this.hooks.submit.award).click(function() {
+			userPanel.awardSubmit();
 		});
 
 		$(this.hooks.submit.chatbox).click(function() {
 			userPanel.chatboxSubmit();
 		});
-		$("[rt-hook='admin.panel:ip.ban.confirm']").click(function() {
+
+		$(this.hooks.submit.ip).click(function() {
 			userPanel.banIpSubmit();
 		});
+
 		$(this.hooks.submit.posts).click(function() {
 			userPanel.postsSubmit();
 		});
+
 		$(this.hooks.submit.mute).click(function() {
-			console.log(1);
 			userPanel.muteSubmit();
 		});
 	}
 
 	public addEvents() {
+		$(this.hooks.listing.awardAdd).click(function(e: any) {
+			var id = $(e.target).parent().parent().parent().attr('rt-data');
+			var user = userPanel.getUsernameById(id);
+			user.done(function(user: string) {
+				user = $.parseJSON(user);
+				$(userPanel.elements.award.username).val(user.display_name);
+			});
+			userPanel.getAwards();
+
+			$(userPanel.elements.modals.award).modal('show');
+		});
 		$(this.hooks.listing.chatboxRemove).click(function(e: any) {
 			var id = $(e.target).parent().parent().parent().attr('rt-data');
 			var user = userPanel.getUsernameById(id);
@@ -138,6 +165,27 @@ class AdminUserPanel {
 		});
 	}
 
+	public awardSubmit() {
+		var id = $(this.elements.award.id).val(),
+			username = $(this.elements.award.username).val();
+		if(username.length === 0) {
+			return this.error("You must fill out the username field.");
+		}
+		var data = {
+			id: id,
+			username: username
+		};
+		var results = utilities.postAJAX(this.paths.award, data);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			if(results.done === true) {
+				userPanel.done("The award " + results.name + " has been adding to the account <b>" + results.user + "</b>.")
+			} else {
+				userPanel.error("There was an unknown error while adding an award to that user's account.");
+			}
+		});
+	}
+
 	public banIpSubmit() {
 		var address = $(this.elements.banIp.address).val(),
 			reason = $(this.elements.banIp.reason).val();
@@ -152,9 +200,9 @@ class AdminUserPanel {
 		results.done(function(results: string) {
 			results = $.parseJSON(results);
 			if(results.done === true) {
-				this.done("The IP " + results.ip_address + " was successfully banned.");
+				userPanel.done("The IP " + results.ip_address + " was successfully banned.");
 			} else {
-				this.error("There was an unknown error banning the IP " + results.ip_address);
+				userPanel.error("There was an unknown error banning the IP " + results.ip_address);
 			}
 		});
 	}
@@ -195,6 +243,18 @@ class AdminUserPanel {
 		});
 		$(this.elements.modalResults.bad).modal('show');
 		$(this.hooks.modals.results.bad).html(message);
+	}
+
+	public getAwards() {
+		var results = utilities.getAJAX(this.paths.awardList);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			$.each(results, function(index: number, value: string) {
+				var html = "<option value='" + value.id + "'>" + value.name + "</option";
+				$(userPanel.elements.award.id).append(html);
+			});
+			$(userPanel.elements.award.id).children().first().attr('selected', 'selected');
+		});
 	}
 
 	public getUsernameById(id: number) {
@@ -284,6 +344,7 @@ class AdminUserPanel {
 					html += "<li><a rt-hook='admin.panel:user.mute' title='Mute User'><i class='fa fa-comments fa-2x holo-text-secondary'></i></a></li>";
 					html += "<li><a rt-hook='admin.panel:user.ban' title='Ban User'><i class='fa fa-remove fa-2x text-warning'></i></a></li>";
 					html += "<li><a rt-hook='admin.panel:user.ban.permanent' title='IP Ban User'><i class='fa fa-remove fa-2x text-danger'></i></a></li>";
+					html += "<li><a rt-hook='admin.panel:user.award.add' title='Add Award'><i class='fa fa-thumbs-o-up fa-2x text-info'></i></a></li>";
 					html += "<li><a href='/staff/administrator/users/" + user.id + "-view' title='Edit User'><i class='fa fa-search fa-2x text-info'></i></a></li>";
 					html += "</div>";
 					html += "</div>";

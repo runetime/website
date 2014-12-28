@@ -22,6 +22,7 @@
 				<div class='row' id='admin-user-list'>
 				</div>
 			</div>
+			@include('staff.administrator.modals.user.award_add', ['id' => 'award-add'])
 			@include('staff.administrator.modals.user.ban', ['id' => 'ban'])
 			@include('staff.administrator.modals.user.chatbox_remove', ['id' => 'chatbox-remove'])
 			@include('staff.administrator.modals.user.posts_remove', ['id' => 'posts-remove'])

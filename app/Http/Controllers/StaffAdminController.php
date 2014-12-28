@@ -1,10 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Staff\AdminAwardAddRequest;
 use App\Http\Requests\Staff\AdminIPBanRequest;
 use App\Http\Requests\Staff\UserChatboxRemoveRequest;
 use App\Http\Requests\Staff\UserForumPostsRequest;
 use App\Http\Requests\Staff\UserSearchRequest;
+use App\RuneTime\Awards\Awardee;
+use App\RuneTime\Awards\AwardRepository;
 use App\RuneTime\Bans\IP;
 use App\RuneTime\Bans\IPRepository;
 use App\RuneTime\Chat\Chat;
@@ -20,6 +23,10 @@ use App\Runis\Accounts\UserRoleRepository;
 
 class StaffAdminController extends BaseController
 {
+	/**
+	 * @var AwardRepository
+	 */
+	private $awards;
 	/**
 	 * @var ChatRepository
 	 */
@@ -50,6 +57,7 @@ class StaffAdminController extends BaseController
 	private $users;
 
 	/**
+	 * @param AwardRepository    $awards
 	 * @param ChatRepository     $chatbox
 	 * @param CheckupRepository  $checkups
 	 * @param IPRepository       $ips
@@ -59,6 +67,7 @@ class StaffAdminController extends BaseController
 	 * @param UserRepository     $users
 	 */
 	public function __construct(
+		AwardRepository $awards,
 		ChatRepository $chatbox,
 		CheckupRepository $checkups,
 		IPRepository $ips,
@@ -67,6 +76,7 @@ class StaffAdminController extends BaseController
 		UserRoleRepository $userRoles,
 		UserRepository $users
 	) {
+		$this->awards = $awards;
 		$this->chatbox = $chatbox;
 		$this->checkups = $checkups;
 		$this->ips = $ips;
@@ -86,6 +96,31 @@ class StaffAdminController extends BaseController
 		$this->title('staff.admin.title');
 
 		return $this->view('staff.administrator.index');
+	}
+
+	/**
+	 * @param AdminAwardAddRequest $form
+	 *
+	 * @return string
+	 */
+	public function postAward(AdminAwardAddRequest $form)
+	{
+		$response = ['done' => false];
+
+		$award = $this->awards->getById($form->id);
+		$user = $this->users->getByDisplayName($form->username);
+		if($award && $user) {
+			$awardee = with(new Awardee)->saveNew($award->id, $user->id);
+			if($awardee) {
+				$response['done'] = true;
+				$response['name'] = $award->name;
+				$response['user'] = $user->display_name;
+			}
+		} else {
+			$response['error'] = -1;
+		}
+
+		return json_encode($response);
 	}
 
 	/**
