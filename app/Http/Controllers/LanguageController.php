@@ -48,7 +48,7 @@ class LanguageController extends BaseController
 			'done' => [],
 			'wip' => [],
 		];
-		$path = base_path('lang');
+		$path = base_path('resources/lang');
 		$englishFiles = $this->filesInDirectory($path . '/en');
 		foreach(new DirectoryIterator($path) as $file) {
 			$iso = $file->getFilename();
@@ -88,7 +88,7 @@ class LanguageController extends BaseController
 	 */
 	private function languages()
 	{
-		$path = base_path('lang/languages.md');
+		$path = base_path('resources/lang/languages.md');
 		$checksum = md5_file($path);
 		$cache = \Cache::get('languages.file.iso.checksum');
 		if($cache === $checksum) {
@@ -99,7 +99,7 @@ class LanguageController extends BaseController
 
 		$languageArray = [];
 
-		$languageFile = file_get_contents(base_path('lang/languages.md'));
+		$languageFile = file_get_contents(base_path('resources/lang/languages.md'));
 		$languages = explode("\n", $languageFile);
 		foreach($languages as $language) {
 			$language = str_replace("- ", "", $language);

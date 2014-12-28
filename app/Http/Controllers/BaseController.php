@@ -119,7 +119,7 @@ class BaseController extends Controller
 		if(\Request::getClientIp() === "127.0.0.1") {
 			return;
 		}
-		
+
 		$current = [
 			'url'    => \Request::url(),
 			'time'   => \Carbon::createFromTimestamp(time()),
