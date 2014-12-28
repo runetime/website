@@ -61,6 +61,9 @@ class Status extends Entity
 		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name) . $url;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function canView()
 	{
 		$can = false;
