@@ -24,8 +24,10 @@
 								</h1>
 								@lang('profile.overview.member_since', ['date' => \Time::DMY($profile->created_at)])
 								<br />
-@if($profile->last_active > time() - (60 * 30))
+@if($profile->status() == "online")
 								<span class='label label-success'>@lang('profile.status.online')</span>
+@elseif($profile->status() == "away")
+								<span class='label label-poll'>@lang('profile.status.away')</span>
 @else
 								<span class='label label-danger'>@lang('profile.status.offline')</span>
 @endif

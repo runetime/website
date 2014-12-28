@@ -61,6 +61,7 @@ return [
 		],
 	],
 	'status' => [
+		'away'    => 'Away',
 		'offline' => 'Offline',
 		'online'  => 'Online',
 	],

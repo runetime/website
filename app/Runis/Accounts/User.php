@@ -48,6 +48,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	];
 	protected $softDelete = true;
 	private $rolesCache;
+	private $cacheStatus = null;
 	const PER_MEMBERS_PAGE = 20;
 
 	/**
@@ -413,5 +414,24 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	public function awards()
 	{
 		return $this->hasMany('App\RuneTime\Awards\Awardee', 'user_id');
+	}
+
+	public function status()
+	{
+		if($this->cacheStatus !== null) {
+			return $this->cacheStatus;
+		}
+
+		$lastOnline = time() - $this->last_active;
+
+		if($lastOnline > 60 * 30) { // 30 minutes
+			$this->cacheStatus = "offline";
+		} elseif($lastOnline > 60 * 5) { // 5 minutes
+			$this->cacheStatus = "away";
+		} else {
+			$this->cacheStatus = "online";
+		}
+
+		return $this->cacheStatus;
 	}
 }
