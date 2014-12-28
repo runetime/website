@@ -27,7 +27,7 @@
 @if($profile->status() == "online")
 								<span class='label label-success'>@lang('profile.status.online')</span>
 @elseif($profile->status() == "away")
-								<span class='label label-poll'>@lang('profile.status.away')</span>
+								<span class='label label-away'>@lang('profile.status.away')</span>
 @else
 								<span class='label label-danger'>@lang('profile.status.offline')</span>
 @endif
