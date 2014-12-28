@@ -1,6 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
 
+use App\RuneTime\Forum\Subforums\Subforum;
 use App\Runis\Core\Entity;
 
 class Thread extends Entity
@@ -219,5 +220,28 @@ class Thread extends Entity
 	public function toSlug($path = '')
 	{
 		return '/forums/thread/' . \String::slugEncode($this->id, $this->title) . (!empty($path) ? '/' . $path : '');
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function canView()
+	{
+		$can = true;
+		$subforum = Subforum::find($this->subforum_id);
+		while(true) {
+			if(!empty($subforum)) {
+				if($subforum->canView()) {
+					$subforum = Subforum::find($subforum->parent);
+				} else {
+					$can = false;
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+
+		return $can;
 	}
 }

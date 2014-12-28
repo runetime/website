@@ -111,6 +111,10 @@ class ForumThreadController extends BaseController
 			\App::abort(404);
 		}
 
+		if(!$thread->canView()) {
+			return \Error::abort(403);
+		}
+
 		if(\Auth::check()) {
 			\Cache::forever('user' . \Auth::user()->id . '.thread#' . $id . '.read', time() + 1);
 		}
