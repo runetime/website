@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-@include('news._show', ['news' => $news])
+@include('news._show', ['newsPiece' => $news])
 				<h2 id='comments'>
 					@lang('utilities.comments')
 				</h2>
