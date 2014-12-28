@@ -24,6 +24,6 @@ class Awardee extends Entity
 	 */
 	public function user()
 	{
-		return $this->belongsToMany('App\Runis\Accounts\User', 'user_id');
+		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
 	}
 }

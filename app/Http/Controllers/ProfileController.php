@@ -62,6 +62,8 @@ class ProfileController extends BaseController
 
 	/**
 	 * @param $id
+	 *
+	 * @return \Illuminate\View\View
 	 */
 	public function getProfileAwards($id)
 	{
@@ -74,7 +76,7 @@ class ProfileController extends BaseController
 
 		$this->bc(['forums/' => trans('forums.title'), 'profile/' . \String::slugEncode($profile->id, $profile->display_name) => $profile->display_name]);
 		$this->nav('navbar.forums');
-		$this->title('utilities.name', ['name' => $profile->display_name]);
+		$this->title('profile.awards.title', ['name' => $profile->display_name]);
 		return $this->view('forums.profile.awards', compact('profile', 'awards'));
 	}
 
