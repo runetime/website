@@ -75,7 +75,7 @@
 					</div>
 				</div>
 			</div>
-			<div class=' wrapper-dark wrapper-flat'>
+			<div class='wrapper-dark wrapper-flat'>
 				<div id='chatbox-holder'>
 @include('partials._chat')
 				</div>
