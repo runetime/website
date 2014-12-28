@@ -1,18 +1,23 @@
-# RuneTime Website
+## Laravel PHP Framework
 
-Source code for the [RuneTime website](http://runetime.com).  This project is currently closed-source but will be open-source in the future.
+[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+
+Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+
+## Official Documentation
+
+Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
 ## Contributing
 
-RuneTime uses many tools for fast code completion, automation, and equivilant local environments.  The following are a list of required tools and are elaborated on below with instructions to getting started:
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
 
-* [VirtualBox](https://virtualbox.org)
-* [Vagrant](https://www.vagrantup.com/)
-* [Git](http://git-scm.com/)
-* [GulpJS](http://gulpjs.com/)
-* [Bower](http://bower.io/)
-* [NPM](https://www.npmjs.com/)
+### License
 
-The development team at RuneTime uses the IDE [PHPStorm](https://www.jetbrains.com/phpstorm/) as well as the text editors [Sublime Text](http://www.sublimetext.com/), [Brackets.io](http://brackets.io/), and [Atom.io](http://atom.io).
-
-### WIP Instructions
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

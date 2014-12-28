@@ -28,10 +28,8 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('radio:update')->
-			cron('*/1 * * * * *');
-		$schedule->command('signatures:update')->
-			daily();
+		$schedule->command('inspire')
+				 ->hourly();
 	}
 
 }

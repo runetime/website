@@ -116,6 +116,7 @@ class BaseController extends Controller
 	 */
 	private function updateCache()
 	{
+
 		$current = [
 			'url'    => \Request::url(),
 			'time'   => \Carbon::createFromTimestamp(time()),
