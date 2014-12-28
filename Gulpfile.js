@@ -2,7 +2,6 @@ var gulp = require('gulp');
 
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
 var uglifyjs = require('gulp-uglifyjs');
 var rename = require('gulp-rename');
 var sass = require('gulp-ruby-sass');
