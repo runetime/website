@@ -46,7 +46,7 @@ class NewsController extends BaseController
 			$canAdd = true;
 		}
 
-		$news = $this->news->getRecentNews(5);
+		$news = $this->news->getRecentCanView(5);
 
 		$this->nav('navbar.runetime.runetime');
 		$this->title('news.title');

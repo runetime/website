@@ -45,7 +45,7 @@ class HomeController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$news = $this->news->getRecentNews(3);
+		$news = $this->news->getRecentCanView(5);
 		if(\Auth::check() && \Auth::user()->isCommunity()) {
 			$statuses = $this->statuses->getLatest(5, '<=', 1);
 		} else {

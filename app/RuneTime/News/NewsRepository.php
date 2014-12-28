@@ -26,4 +26,22 @@ class NewsRepository extends EloquentRepository
 			take($count)->
 			get();
 	}
+
+	/**
+	 * @param int $count
+	 *
+	 * @return mixed
+	 */
+	public function getRecentCanView($count = 5)
+	{
+		$q = $this->model;
+		if(!\Auth::check() || !(\Auth::check() && \Auth::user()->isCommunity())) {
+			$q = $q->where('status', '=', News::STATUS_PUBLISHED);
+		}
+
+		return $q->
+			orderBy('created_at', 'desc')->
+			take($count)->
+			get();
+	}
 }
