@@ -45,7 +45,7 @@ class StatusController extends BaseController
 	{
 		$status = $this->statuses->getById($id);
 		if(!$status) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$this->bc(['forums' => trans('forums.title'), 'forums/statuses' => trans('forums.statuses.title')]);
@@ -64,7 +64,7 @@ class StatusController extends BaseController
 	{
 		$status = $this->statuses->getById($id);
 		if(!$status) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$contentsParsed = with(new \Parsedown)->text($form->contents);

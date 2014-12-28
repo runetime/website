@@ -50,7 +50,7 @@ class MessengerController extends BaseController
 	{
 		$message = $this->messages->getById($id);
 		if(!$message) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$posts = $message->posts;
@@ -71,7 +71,7 @@ class MessengerController extends BaseController
 	{
 		$message = $this->messages->getById($id);
 		if(!$message) {
-			return \App::abort(404);
+			return \Error::abort(404);
 		}
 
 		$contentsParsed = with(new \Parsedown)->text($form->contents);

@@ -150,7 +150,7 @@ class GuideController extends BaseController
 
 		$guide->editors = json_decode($guide->editors);
 		if(!$guide) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$editList = "";

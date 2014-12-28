@@ -72,7 +72,7 @@ class CalculatorController extends BaseController
 	{
 		$calculator = $this->calculators->getByNameTrim($type);
 		if(!$calculator) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$items = json_decode($calculator->items);

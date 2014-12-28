@@ -106,7 +106,7 @@ class StaffRadioController extends BaseController
 	public function postRadioLive(RadioLiveRequest $form)
 	{
 		if($form->live !== "go") {
-			return \App::abort(404);
+			return \Error::abort(404);
 		}
 
 		$live = \Cache::get('radio.dj.current');

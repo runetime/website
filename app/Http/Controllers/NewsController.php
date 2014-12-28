@@ -132,7 +132,7 @@ class NewsController extends BaseController
 	{
 		$news = $this->news->getById($id);
 		if(empty($news)) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$parsedContents = with(new \Parsedown)->text($form->contents);

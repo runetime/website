@@ -48,7 +48,7 @@ class ProfileController extends BaseController
 	{
 		$profile = $this->users->getById($id);
 		if(!$profile) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$profile->incrementProfileViews();
@@ -87,7 +87,7 @@ class ProfileController extends BaseController
 	{
 		$profile = $this->users->getById($id);
 		if(!$profile) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$profile->incrementProfileViews();
@@ -107,7 +107,7 @@ class ProfileController extends BaseController
 	{
 		$profile = $this->users->getById($id);
 		if(!$profile) {
-			\App::abort(404);
+			\Error::abort(404);
 		}
 
 		$profile->incrementProfileViews();
