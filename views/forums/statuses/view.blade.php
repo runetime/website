@@ -16,19 +16,21 @@
 							<span class='text-muted'>
 								{{ \Time::shortReadable($status->created_at) }}
 							</span>
+@if(\Auth::check() && \Auth::user()->isCommunity())
 							<ul class='list-inline'>
 								<li>
-@if($status->status === 0)
+	@if($status->status === 0)
 									<a href='{{ $status->toSlug('status=1') }}' title='Unhide'>
 										Unhide
 									</a>
-@else
+	@else
 									<a href='{{ $status->toSlug('status=0') }}' title='Hide'>
 										Hide
 									</a>
-@endif
+	@endif
 								</li>
 							</ul>
+@endif
 						</div>
 					</div>
 				</div>
