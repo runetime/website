@@ -68,7 +68,7 @@ class DatabaseController extends BaseController
 	{
 		$item = $this->items->getById($id);
 		if(!$item) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$this->bc(['databases' => trans('database.title'), 'databases/items' => trans('database.items.title')]);
@@ -133,7 +133,7 @@ class DatabaseController extends BaseController
 	{
 		$monster = $this->monsters->getById($id);
 		if(!$monster) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$this->bc(['databases' => trans('database.title'), 'databases/monsters' => trans('database.monsters.title')]);

@@ -62,7 +62,7 @@ class StatusController extends BaseController
 	{
 		$status = $this->statuses->getById($id);
 		if(!$status) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$status->status = $newStatus;
@@ -81,7 +81,7 @@ class StatusController extends BaseController
 	{
 		$status = $this->statuses->getById($id);
 		if(!$status) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$contentsParsed = with(new \Parsedown)->text($form->contents);

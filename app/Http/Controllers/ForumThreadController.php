@@ -108,7 +108,7 @@ class ForumThreadController extends BaseController
 	{
 		$thread = $this->threads->getById($id);
 		if(!$thread) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		if(!$thread->canView()) {
@@ -204,7 +204,7 @@ class ForumThreadController extends BaseController
 	public function getCreate($id) {
 		$subforum = $this->subforums->getById($id);
 		if(!$subforum) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		if($subforum->posts_enabled == false) {

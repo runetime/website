@@ -106,7 +106,7 @@ class ForumPostController extends BaseController
 	public function getDelete($id) {
 		$post = $this->posts->getById($id);
 		if(!$post) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$thread = $this->threads->getById($post->thread[0]->id);
@@ -125,7 +125,7 @@ class ForumPostController extends BaseController
 	{
 		$post = $this->posts->getById($id);
 		if(!$post) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$thread = $this->threads->getById($post->thread[0]->id);
@@ -145,7 +145,7 @@ class ForumPostController extends BaseController
 	{
 		$post = $this->posts->getById($id);
 		if(empty($post)) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$thread = $this->threads->getById($post->thread[0]->id);
@@ -166,7 +166,7 @@ class ForumPostController extends BaseController
 	{
 		$thread = $this->threads->getById($id);
 		if(empty($thread)) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$parsedContents = with(new \Parsedown)->text($form->contents);
@@ -201,7 +201,7 @@ class ForumPostController extends BaseController
 	{
 		$post = $this->posts->getById($id);
 		if(empty($post)) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$thread = $this->threads->getById($post->thread[0]->id);
@@ -236,11 +236,11 @@ class ForumPostController extends BaseController
 	{
 		$post = $this->posts->getById($id);
 		if(!$post) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		if(!$post->thread) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$vote = $this->votes->getByPost($id);

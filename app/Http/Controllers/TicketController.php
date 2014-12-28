@@ -150,7 +150,7 @@ class TicketController extends BaseController
 	{
 		$ticket = $this->tickets->getById($id);
 		if(!$ticket) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$ticket->status = $status;

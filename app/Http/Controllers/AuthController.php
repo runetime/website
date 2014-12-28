@@ -197,7 +197,7 @@ class AuthController extends BaseController
 	{
 		$reset = $this->resets->getByToken($token);
 		if(!$reset) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$this->nav('navbar.logged.out.login');
@@ -216,7 +216,7 @@ class AuthController extends BaseController
 	{
 		$reset = $this->resets->getByToken($token);
 		if(!$reset) {
-			\Error::abort(404);
+			return \Error::abort(404);
 		}
 
 		$user = $this->users->getByEmail($reset->email);
