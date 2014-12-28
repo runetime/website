@@ -130,6 +130,10 @@ class ForumController extends BaseController
 	public function getSubforum($id, $page = 1)
 	{
 		$subforum = $this->subforums->getById($id);
+		if(empty($subforum)) {
+			return \Error::abort(404);
+		}
+
 		if(!$subforum->canView()) {
 			return \Error::abort(403);
 		}
