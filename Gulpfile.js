@@ -17,8 +17,8 @@ var tsProject = {
 
 var paths = {
 	'assets': {
-		scss: './assets/scss/*.scss',
-		typescript: './assets/typescript/modules/*.ts'
+		scss: './resources/assets/scss/*.scss',
+		typescript: './resources/assets/typescript/modules/*.ts'
 	},
 	'public': {
 		css: './public/css',
@@ -41,7 +41,7 @@ gulp.task('scss', function() {
 
 // Scripts-Admin Task
 gulp.task('scripts-admin', function() {
-	var tsResult = gulp.src('./assets/typescript/admin/*.ts')
+	var tsResult = gulp.src('./resources/assets/typescript/admin/*.ts')
 		.pipe(sourcemaps.init())
 		.pipe(ts({
 			sortOutput: true
@@ -57,7 +57,7 @@ gulp.task('scripts-admin', function() {
 
 // Scripts-Modules Task
 gulp.task('scripts-modules', function() {
-	var tsResult = gulp.src('./assets/typescript/modules/*.ts')
+	var tsResult = gulp.src('./resources/assets/typescript/modules/*.ts')
 		.pipe(sourcemaps.init())
 		.pipe(ts(tsProject));
 
@@ -70,10 +70,10 @@ gulp.task('scripts-modules', function() {
 // Scripts-Admin Task
 gulp.task('scripts-vendor', function() {
 	var src = [
-		'./assets/typescript/vendor/jquery.js',
-		'./assets/typescript/vendor/jquery-ui.js',
-		'./assets/typescript/vendor/bootstrap.js',
-		'./assets/typescript/vendor/jasny-bootstrap.js'
+		'./resources/assets/typescript/vendor/jquery.js',
+		'./resources/assets/typescript/vendor/jquery-ui.js',
+		'./resources/assets/typescript/vendor/bootstrap.js',
+		'./resources/assets/typescript/vendor/jasny-bootstrap.js'
 	];
 	gulp.src(src)
 		.pipe(uglifyjs('vendor.js', {
@@ -84,12 +84,12 @@ gulp.task('scripts-vendor', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch('./assets/typescript/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
-	gulp.watch('./assets/typescript/admin/*.ts', ['scripts-admin']);
-	gulp.watch('./assets/typescript/modules/*.ts', ['scripts-modules']);
-	gulp.watch('./assets/typescript/vendor/*.ts', ['scripts-vendor']);
-	gulp.watch('./assets/scss/*.scss', ['scss']);
-	gulp.watch('./assets/scss/partials/*.scss', ['scss']);
+	gulp.watch('./resources/assets/typescript/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
+	gulp.watch('./resources/assets/typescript/admin/*.ts', ['scripts-admin']);
+	gulp.watch('./resources/assets/typescript/modules/*.ts', ['scripts-modules']);
+	gulp.watch('./resources/assets/typescript/vendor/*.ts', ['scripts-vendor']);
+	gulp.watch('./resources/assets/scss/*.scss', ['scss']);
+	gulp.watch('./resources/assets/scss/partials/*.scss', ['scss']);
 });
 
 gulp.task('default', ['scss', 'scripts-admin', 'scripts-modules', 'scripts-vendor']);
