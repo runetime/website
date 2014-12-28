@@ -58,6 +58,6 @@ class Status extends Entity
 		if(strlen($path) > 0) {
 			$url = '/' . $path;
 		}
-		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name) . $path;
+		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name) . $url;
 	}
 }
