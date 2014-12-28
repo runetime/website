@@ -54,13 +54,33 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => getenv('APP_DATABASE'),
-			'username'  => getenv('APP_DATABASE_USERNAME'),
-			'password'  => getenv('APP_DATABASE_PASSWORD'),
+			'host'      => env('DB_HOST') ?: 'localhost',
+			'database'  => env('DB_DATABASE') ?: 'forge',
+			'username'  => env('DB_USERNAME') ?: 'forge',
+			'password'  => env('DB_PASSWORD') ?: '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
+		],
+
+		'pgsql' => [
+			'driver'   => 'pgsql',
+			'host'      => env('DB_HOST') ?: 'localhost',
+			'database'  => env('DB_DATABASE') ?: 'forge',
+			'username'  => env('DB_USERNAME') ?: 'forge',
+			'password'  => env('DB_PASSWORD') ?: '',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+			'schema'   => 'public',
+		],
+
+		'sqlsrv' => [
+			'driver'   => 'sqlsrv',
+			'host'      => env('DB_HOST') ?: 'localhost',
+			'database'  => env('DB_DATABASE') ?: 'forge',
+			'username'  => env('DB_USERNAME') ?: 'forge',
+			'password'  => env('DB_PASSWORD') ?: '',
+			'prefix'   => '',
 		],
 
 	],
