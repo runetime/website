@@ -16,7 +16,8 @@ class ForumTest extends TestCase
 	 */
 	public function testSubforum()
 	{
-		$response = $this->call('GET', 'forums/10-test');
+		$subforum = \App\RuneTime\Forum\Subforums\Subforum::first();
+		$response = $this->call('GET', $subforum->toSlug());
 
 		$this->assertEquals(200, $response->getStatusCode());
 	}
