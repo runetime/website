@@ -16,7 +16,7 @@ class Awardee extends Entity
 	 */
 	public function award()
 	{
-		return $this->belongsTo('Award', 'author_id');
+		return $this->belongsTo('App\RuneTime\Awards\Award', 'award_id');
 	}
 
 	/**
