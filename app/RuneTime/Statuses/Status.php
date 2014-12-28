@@ -47,8 +47,17 @@ class Status extends Entity
 		$this->save();
 	}
 
-	public function toSlug()
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
+	public function toSlug($path = '')
 	{
-		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name);
+		$url = '';
+		if(strlen($path) > 0) {
+			$url = '/' . $path;
+		}
+		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name) . $path;
 	}
 }
