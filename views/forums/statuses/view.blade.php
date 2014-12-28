@@ -54,7 +54,7 @@
 					@lang('utilities.comment')
 				</h3>
 @if(\Auth::check())
-		@include('forums.post._edit', ['url' => '/forums/statuses/' . \String::slugEncode($status->id, 'by', $status->author->display_name) . '/reply'])
+	@include('forums.post._edit', ['url' => '/forums/statuses/' . \String::slugEncode($status->id, 'by', $status->author->display_name) . '/reply'])
 @else
 	@include('forums.post._auth')
 @endif
