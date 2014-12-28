@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Statuses;
-use App\Runis\Core\EloquentRepository;
 
+use App\Runis\Core\EloquentRepository;
 
 class StatusRepository extends EloquentRepository
 {
@@ -44,6 +44,13 @@ class StatusRepository extends EloquentRepository
 			take($amount)->
 			get();
 	}
+
+	/**
+	 * @param        $authorId
+	 * @param string $order
+	 *
+	 * @return mixed
+	 */
 	public function getLatestByAuthor($authorId, $order = 'desc')
 	{
 		return $this->model->
