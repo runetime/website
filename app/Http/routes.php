@@ -544,6 +544,13 @@ Route::group(['prefix' => 'staff'], function() {
 		});
 
 		/**
+		 * Moderation Panel
+		 */
+		Route::group(['middleware' => 'staff.moderator', 'prefix' => 'moderation'], function() {
+			get('thread/{id}-{name}/status={status}', 'StaffModerationController@getThreadStatusSwitch');
+		});
+
+		/**
 		 * Radio Panel
 		 */
 		Route::group(['middleware' => 'staff.radio', 'prefix' => 'radio'], function() {
