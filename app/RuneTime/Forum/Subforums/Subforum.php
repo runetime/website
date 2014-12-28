@@ -88,4 +88,44 @@ class Subforum extends Entity
 		}
 		return false;
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function canView()
+	{
+		$good = false;
+		$roles = json_decode($this->roles);
+		if(\Auth::check()) {
+			$userRole = \Auth::user()->importantRole()->id;
+		} else {
+			$userRole = -1;
+		}
+
+		if(!empty($roles)) {
+			if(\Auth::check() && in_array($userRole, $roles)) {
+				$good = true;
+			}
+		} else {
+			$good = true;
+		}
+
+		if($good) {
+			$parent = Subforum::find($this->parent);
+			while(true) {
+				if(!empty($parent)) {
+					if($parent->canView()) {
+						$parent = Subforum::find($parent->id);
+					} else {
+						$good = false;
+						break;
+					}
+				} else {
+					break;
+				}
+			}
+		}
+
+		return $good;
+	}
 }

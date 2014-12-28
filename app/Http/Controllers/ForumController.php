@@ -130,6 +130,10 @@ class ForumController extends BaseController
 	public function getSubforum($id, $page = 1)
 	{
 		$subforum = $this->subforums->getById($id);
+		if(!$subforum->canView()) {
+			return \Error::abort(403);
+		}
+
 		if(\Auth::check()) {
 			\Cache::forever('user' . \Auth::user()->id . '.subforum#' . $id . '.read', time() + 1);
 		}
@@ -137,6 +141,7 @@ class ForumController extends BaseController
 		$subforums = $this->subforums->getByParent($id);
 		$threads = $this->threads->getBySubforum($subforum->id, $page, 'last_post', false);
 		$threadsPinned = $this->threads->getBySubforum($subforum->id, $page, 'last_post', true);
+
 		// Breadcrumbs
 		$bc = [];
 		$parent = $this->subforums->getById($subforum->parent);
