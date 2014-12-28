@@ -144,7 +144,7 @@ class AdminPanel {
 			if(results.done === true) {
 				adminPanel.done("The radio will successfully stop within 30 seconds.");
 			} else {
-				adminPanel.error("There was an unknown error while stopping the radio.");
+				adminPanel.error("The radio has been switched on.");
 			}
 		});
 	}

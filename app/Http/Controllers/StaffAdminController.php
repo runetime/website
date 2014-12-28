@@ -188,7 +188,13 @@ class StaffAdminController extends BaseController
 	{
 		$response = ['done' => false];
 
-		\Cache::forever('radio.online', false);
+		$online = \Cache::get('radio.online');
+		if($online === true) {
+			\Cache::forever('radio.online', false);
+		} else {
+			\Cache::forever('radio.online', true);
+		}
+
 		$online = \Cache::get('radio.online');
 		if($online === false) {
 			$response['done'] = true;

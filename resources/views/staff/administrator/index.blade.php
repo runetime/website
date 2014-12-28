@@ -12,7 +12,7 @@
 					</div>
 					<div>
 						<a rt-hook='admin.panel:radio.stop.open'>
-							Stop Radio
+							Switch Radio Status
 						</a>
 					</div>
 					<div>
