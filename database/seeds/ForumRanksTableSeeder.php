@@ -45,7 +45,7 @@ class ForumRanksTableSeeder extends Seeder
 					'posts_required' => 1000,
 				],
 				[
-					'name'           => 'DragonStone Member',
+					'name'           => 'Dragonstone Member',
 					'posts_required' => 2500,
 				],
 				[
