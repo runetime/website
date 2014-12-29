@@ -89,11 +89,17 @@ class SettingsController extends BaseController
 		$bMonth = \Auth::user()->birthday_month;
 		$bYear = \Auth::user()->birthday_year;
 
+		$genders = [
+			0 => trans('profile.gender.not_telling'),
+			1 => trans('profile.gender.female'),
+			2 => trans('profile.gender.male'),
+		];
+
 		$thisURL = '/settings/';
 
 		$this->nav('navbar.forums');
 		$this->title('settings.profile.title');
-		return $this->view('settings.index', compact('timezoneOptions', 'thisURL', 'bDay', 'bMonth', 'bYear'));
+		return $this->view('settings.index', compact('timezoneOptions', 'thisURL', 'bDay', 'bMonth', 'bYear', 'genders'));
 	}
 
 	/**

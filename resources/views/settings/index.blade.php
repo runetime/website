@@ -85,15 +85,16 @@
 								</label>
 								<div class='col-lg-10'>
 									<select id='gender' name='gender'>
-										<option value='0'>
-											@lang('profile.gender.not_telling')
+@foreach($genders as $genderId => $genderName)
+	@if($genderId === \Auth::user()->gender)
+										<option value='{{ $genderId }}' selected='selected'>
+	@else
+										<option value='{{ $genderId }}'>
+	@endif
+
+											{{ $genderName }}
 										</option>
-										<option value='1'>
-											@lang('profile.gender.female')
-										</option>
-										<option value='2'>
-											@lang('profile.gender.male')
-										</option>
+@endforeach
 									</select>
 								</div>
 							</div>
