@@ -184,7 +184,7 @@ class ForumController extends BaseController
 		$this->bc(['forums' => trans('navbar.forums')]);
 		$this->nav('navbar.forums');
 		$this->title('forums.tags.title', ['name' => $name]);
-		return $this->view('forums.tags.view', compact('tag', 'news', 'threads', 'name'));
+		return $this->view('forums.tag', compact('news', 'threads', 'name'));
 	}
 
 	/**
