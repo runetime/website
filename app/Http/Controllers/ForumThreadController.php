@@ -147,7 +147,7 @@ class ForumThreadController extends BaseController
 
 		$poll = false;
 
-		if($thread->poll > 0) {
+		if($thread->poll) {
 			$poll = [
 				'title'     => $thread->poll->title,
 				'questions' => []
