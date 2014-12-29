@@ -8,13 +8,13 @@
 					<ul class='list-inline holo-text-secondary'>
 @foreach($memberships as $membership)
 						<li>
-							<a href='/databases/items/membership={{$membership}}/tradable={{$searchTradable}}/questItem={{$searchQuestItem}}' title='{{ucwords($membership)}}'>
+							<a href='/databases/items/membership={{ $membership }}/tradable={{ $searchTradable }}/questItem={{ $searchQuestItem }}' title='{{ ucwords($membership) }}'>
 @if($searchMembership == $membership)
 								<b>
-									{{ucwords($membership)}}
+									{{ ucwords($membership) }}
 								</b>
 @else
-							{{ucwords($membership)}}
+							{{ ucwords($membership) }}
 @endif
 							</a>
 						</li>
@@ -28,13 +28,13 @@
 					<ul class='list-inline holo-text-secondary'>
 @foreach($tradables as $tradable)
 						<li>
-							<a href='/databases/items/membership={{$searchMembership}}/tradable={{$tradable}}/questItem={{$searchQuestItem}}' title='{{ucwords($tradable)}}'>
+							<a href='/databases/items/membership={{ $searchMembership }}/tradable={{ $tradable }}/questItem={{ $searchQuestItem }}' title='{{ ucwords($tradable) }}'>
 @if($searchTradable == $tradable)
 								<b>
-									{{ucwords($tradable)}}
+									{{ ucwords($tradable) }}
 								</b>
 @else
-							{{ucwords($tradable)}}
+							{{ ucwords($tradable) }}
 @endif
 							</a>
 						</li>
@@ -48,13 +48,13 @@
 					<ul class='list-inline holo-text-secondary'>
 @foreach($questItems as $questItem)
 						<li>
-							<a href='/databases/items/membership={{$searchMembership}}/tradable={{$searchTradable}}/questItem={{$questItem}}' title='{{ucwords($questItem)}}'>
+							<a href='/databases/items/membership={{ $searchMembership }}/tradable={{ $searchTradable }}/questItem={{ $questItem }}' title='{{ ucwords($questItem) }}'>
 @if($searchQuestItem == $questItem)
 								<b>
-									{{ucwords($questItem)}}
+									{{ ucwords($questItem) }}
 								</b>
 @else
-							{{ucwords($questItem)}}
+							{{ ucwords($questItem) }}
 @endif
 							</a>
 						</li>
