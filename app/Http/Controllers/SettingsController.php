@@ -73,11 +73,27 @@ class SettingsController extends BaseController
 			'13'    => '(UTC+13:00 ' . $h . ') Enderbury Kiribati',
 			'14'    => '(UTC+14:00 ' . $h . ') Kiritimati',
 		];
+		$birthday = "";
+		if(\Auth::user()->birthday_day) {
+			$birthday .= \Time::day(\Auth::user()->birthday_day);
+		}
+
+		if(\Auth::user()->birthday_month) {
+			if($birthday) {
+				$birthday .= \Time::month(\Auth::user()->birthday_day, true);
+			} else {
+				$birthday .= \Time::month(\Auth::user()->birthday_day);
+			}
+		}
+		$bDay = \Auth::user()->birthday_day;
+		$bMonth = \Auth::user()->birthday_month;
+		$bYear = \Auth::user()->birthday_year;
+
 		$thisURL = '/settings/';
 
 		$this->nav('navbar.forums');
 		$this->title('settings.profile.title');
-		return $this->view('settings.index', compact('timezoneOptions', 'thisURL'));
+		return $this->view('settings.index', compact('timezoneOptions', 'thisURL', 'bDay', 'bMonth', 'bYear'));
 	}
 
 	/**
@@ -89,7 +105,21 @@ class SettingsController extends BaseController
 	{
 		$user = $this->users->getById(\Auth::user()->id);
 		$referred = $this->users->getByDisplayName($form->referred_by);
-		$birthday = $user->birthday;
+		$year = $form->birthday_year;
+		$month = $form->birthday_month;
+		$day = $form->birthday_day;
+		if($year) {
+			$user->birthday_year = $year;
+		}
+
+		if($month) {
+			$user->birthday_month = $month;
+		}
+
+		if($day) {
+			$user->birthday_day = $day;
+		}
+
 		$user->timezone = (float) $form->timezone;
 		$user->dst = $form->dst ? true : false;
 		if($form->gender >= 0 && $form->gender <= 2) {

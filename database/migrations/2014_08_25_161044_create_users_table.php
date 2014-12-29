@@ -16,7 +16,9 @@ class CreateUsersTable extends Migration
 			$table->increments('id');
 			$table->mediumtext('about');
 			$table->mediumtext('about_parsed');
-			$table->string('birthday');
+			$table->integer('birthday_day');
+			$table->integer('birthday_month');
+			$table->integer('birthday_year');
 			$table->string('display_name');
 			$table->boolean('dst');
 			$table->string('email');

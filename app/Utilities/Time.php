@@ -142,6 +142,16 @@ class Time
 	}
 
 	/**
+	 * @param $time
+	 *
+	 * @return bool|string
+	 */
+	public static function DMYFull($time)
+	{
+		return self::carbon($time)->format('jS \of F Y');
+	}
+
+	/**
 	 * @param $i
 	 *
 	 * @return string
@@ -149,5 +159,54 @@ class Time
 	public static function monthDay($i)
 	{
 		return self::carbon($i)->format('M d');
+	}
+
+	/**
+	 * @param $day
+	 *
+	 * @return string
+	 */
+	public static function day($day)
+	{
+		$time = strtotime($day . "-01-2014");
+
+		return self::carbon($time)->format('jS');
+	}
+
+	/**
+	 * @param $i
+	 *
+	 * @return string
+	 */
+	public static function month($month, $of = false)
+	{
+		if($of) {
+			$of = "\of ";
+		} else {
+			$of = "";
+		}
+
+		$time = strtotime("01-" . $month . "-2014");
+
+		return self::carbon($time)->format($of . 'F');
+	}
+
+	/**
+	 * @param      $year
+	 * @param bool $comma
+	 *
+	 * @return string
+	 */
+	public static function year($year, $comma = false)
+	{
+		if($comma) {
+			$comma = "\, ";
+		} else {
+			$comma = "";
+		}
+
+		$time = strtotime("01-01-" . $year);
+
+		return self::carbon($time)->format($comma . 'Y');
 	}
 }

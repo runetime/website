@@ -50,14 +50,14 @@
 								</dd>
 @endif
 								<dt>
-									@lang('profile.overview.community_statistics.age.name')
+									@lang('profile.overview.community_statistics.birthday.name')
 								</dt>
 								<dd>
-@if($profile->birthday > 0)
-									{{$profile->birthday}} 
+@if(isset($birthday) && !empty($birthday))
+									{{ $birthday }}
 @else
 									<em>
-										@lang('profile.overview.community_statistics.age.unknown')
+										@lang('profile.overview.community_statistics.birthday.unknown')
 									</em>
 @endif
 								</dd>

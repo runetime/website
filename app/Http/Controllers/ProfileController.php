@@ -54,10 +54,31 @@ class ProfileController extends BaseController
 		$profile->incrementProfileViews();
 		$status = $this->statuses->getLatestByAuthor($profile->id);
 
+		$birthday = "";
+		if(\Auth::user()->birthday_day) {
+			$birthday .= \Time::day(\Auth::user()->birthday_day) . " ";
+		}
+
+		if(\Auth::user()->birthday_month) {
+			if($birthday) {
+				$birthday .= \Time::month(\Auth::user()->birthday_day, true);
+			} else {
+				$birthday .= \Time::month(\Auth::user()->birthday_day);
+			}
+		}
+
+		if(\Auth::user()->birthday_year) {
+			if($birthday) {
+				$birthday .= \Time::year(\Auth::user()->birthday_year, true);
+			} else {
+				$birthday .= \Time::year(\Auth::user()->birthday_year);
+			}
+		}
+
 		$this->bc(['forums/' => trans('forums.title')]);
 		$this->nav('navbar.forums');
 		$this->title('utilities.name', ['name' => $profile->display_name]);
-		return $this->view('forums.profile.index', compact('profile', 'status'));
+		return $this->view('forums.profile.index', compact('profile', 'status', 'birthday'));
 	}
 
 	/**

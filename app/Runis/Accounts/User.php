@@ -19,7 +19,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	protected $fillable = [
 		'about',
 		'about_parsed',
-		'birthday',
+		'birthday_day',
+		'birthday_month',
+		'birthday_year',
 		'display_name',
 		'dst',
 		'email',

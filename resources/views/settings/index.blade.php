@@ -8,7 +8,11 @@
 								<div class='col-lg-10'>
 									<select id='timezone' name='timezone'>
 @foreach($timezoneOptions as $timezoneHour => $timezoneName)
-										<option value='{{$timezoneHour}}'{!! $timezoneHour == \Auth::user()->timezone ? " selected='selected'" : ""  !!}>
+	@if($timezoneHour == \Auth::user()->timezone)
+										<option value='{{ $timezoneHour }}' selected='selected'>
+	@else
+										<option value='{{ $timezoneHour }}'>
+	@endif
 											{{$timezoneName}}
 										</option>
 @endforeach
@@ -32,9 +36,13 @@
 										<option value='0'>
 											--
 										</option>
-@foreach(range(1900, date('Y')) as $year)
-										<option value='{{$year}}'>
-											{{$year}}
+@foreach(range(1900, date('Y') - 13) as $year)
+	@if($bYear === $year)
+										<option value='{{ $year }}' selected='selected'>
+	@else
+										<option value='{{ $year }}'>
+	@endif
+											{{ $year }}
 										</option>
 @endforeach
 									</select>
@@ -43,7 +51,11 @@
 											--
 										</option>
 @foreach(range(1, 12) as $month)
-										<option value='{{$month}}'>
+	@if($bMonth === $month)
+										<option value='{{ $month }}' selected='selected'>
+	@else
+										<option value='{{ $month }}'>
+	@endif
 											@lang('settings.profile.birthday.months.' . $month)
 										</option>
 @endforeach
@@ -53,8 +65,12 @@
 											--
 										</option>
 @foreach(range(1, 31) as $day)
-										<option value='{{$day}}'>
-											{{$day}}
+	@if($bDay === $day)
+										<option value='{{ $day }}' selected='selected'>
+	@else
+										<option value='{{ $day }}'>
+	@endif
+											{{ $day }}
 										</option>
 @endforeach
 									</select>

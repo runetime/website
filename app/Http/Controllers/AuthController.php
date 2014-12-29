@@ -108,7 +108,9 @@ class AuthController extends BaseController
 		$user = with(new User)->saveNew(
 			'',
 			'',
-			'',
+			0,
+			0,
+			0,
 			$form->display_name,
 			1,
 			$form->email,
