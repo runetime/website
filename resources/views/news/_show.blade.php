@@ -17,11 +17,13 @@
 						<ul class='list-inline inline'>
 @if(count($newsPiece->tags) > 0)
 	@foreach($newsPiece->tags as $tag)
+		@if($tag->name !== '')
 							<li>
 								<a href='/forums/tag/{{ $tag->name }}' class='label label-rt' title='{{ $tag->name }}'>
 									{{ $tag->name }}
 								</a>
 							</li>
+		@endif
 	@endforeach
 @endif
 						</ul>
