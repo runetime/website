@@ -12,8 +12,10 @@
 						<div class='col-xs-12 post-data row row-flat'>
 							<div class='col-xs-12 col-sm-3 col-md-2 text-center'>
 								{!! \Image::userPhoto($post->author->id, ['center-block']) !!}
+@if(strlen($post->author->title) > 0)
 								{!! \String::color($post->author->title, $post->author->importantRole()->id, false) !!}
 								<br />
+@endif
 								{!! \Link::colorRole($post->author->importantRole()->id) !!}
 								<br />
 								{{ $post->author->posts_active }} posts
