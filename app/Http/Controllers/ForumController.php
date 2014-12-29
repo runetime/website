@@ -197,6 +197,12 @@ class ForumController extends BaseController
 		$response = ['done' => false];
 		$question = $this->questions->getById($form->question);
 		$answer = $this->answers->getByid($form->answer);
+
+		$thread = $question->poll->thread;
+		if($thread->isLocked() || !$thread->canView()) {
+			return json_encode($response);
+		}
+
 		if(empty($question) || empty($answer) || !\Auth::check()) {
 			$response['error'] = -1;
 
