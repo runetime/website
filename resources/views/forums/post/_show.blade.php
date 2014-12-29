@@ -11,9 +11,8 @@
 						</div>
 						<div class='col-xs-12 post-data row row-flat'>
 							<div class='col-xs-12 col-sm-3 col-md-2 text-center'>
-								{!! $post->author->title !!}
-								<br />
-								{!! \Image::userPhoto($post->author->id) !!}
+								{!! \Image::userPhoto($post->author->id, ['center-block']) !!}
+								{!! \String::color($post->author->title, $post->author->importantRole()->id, false) !!}
 								<br />
 								{!! \Link::colorRole($post->author->importantRole()->id) !!}
 								<br />

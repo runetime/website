@@ -139,7 +139,7 @@ class String
 		}
 
 		if($role) {
-			return "<span class='members-" . $role->class_name . "" . ($img ? "" : "-no-img") . "'>" . $str . "</a>";
+			return "<span class='members-" . $role->class_name . "" . ($img ? "" : "-no-img") . "'>" . $str . "</span>";
 		} else {
 			\Log::warning('Utilities\Link::color - ' . $roleInfo . ' does not exist.');
 		}
