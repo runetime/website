@@ -142,11 +142,12 @@ class TicketController extends BaseController
 
 	/**
 	 * @param $id
+	 * @param $name
 	 * @param $status
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function getStatusSwitch($id, $status)
+	public function getStatusSwitch($id, $name, $status)
 	{
 		$ticket = $this->tickets->getById($id);
 		if(!$ticket) {
