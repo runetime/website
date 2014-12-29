@@ -240,10 +240,7 @@ $current = $nav;
 				</p>
 				<div id='portfolio-about'>
 					<p>
-						<a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
-					</p>
-					<p>
-						<a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
+						<a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a> &mdash; <a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
 					</p>
 					<p>
 						<a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{ date('Y') }}
