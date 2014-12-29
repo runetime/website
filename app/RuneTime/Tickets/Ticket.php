@@ -76,4 +76,14 @@ class Ticket extends Entity
 				break;
 		}
 	}
+
+	public function toSlug($path = '')
+	{
+		$url = '';
+		if(strlen($path) > 0) {
+			$url = '/' . $path;
+		}
+
+		return '/tickets/' . \String::slugEncode($this->id, $this->name) . $url;
+	}
 }

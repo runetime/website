@@ -4,21 +4,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Tickets\CreateReplyRequest;
 use App\Http\Requests\Tickets\CreateTicketRequest;
 use App\RuneTime\Forum\Threads\Post;
+use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Tickets\TicketRepository;
+use App\Runis\Accounts\RoleRepository;
 
 class TicketController extends BaseController
 {
+	/**
+	 * @var RoleRepository
+	 */
+	private $roles;
 	/**
 	 * @var TicketRepository
 	 */
 	private $tickets;
 
 	/**
+	 * @param RoleRepository   $roles
 	 * @param TicketRepository $tickets
 	 */
-	public function __construct(TicketRepository $tickets)
+	public function __construct(RoleRepository $roles, TicketRepository $tickets)
 	{
+		$this->roles = $roles;
 		$this->tickets = $tickets;
 	}
 
@@ -154,8 +162,28 @@ class TicketController extends BaseController
 			return \Error::abort(404);
 		}
 
-		$ticket->status = $status;
-		$ticket->save();
+		if($ticket->status !== $status) {
+			$ticket->status = $status;
+			$ticket->save();
+			if($status == Ticket::STATUS_ESCALATED) {
+				$role = $this->roles->getByName("Administrator");
+				$data = [
+					'user'   => \Link::name(\Auth::user()->id),
+					'name'   => "<a href='" . $ticket->toSlug() . "'>" . $ticket->name . "</a>",
+					'author' => \Link::name($ticket->author->id),
+				];
+
+				$message = trans('notifications.tickets.escalated', $data);
+				foreach($role->users as $user) {
+					with(new Notification)->saveNew(
+						$user->id,
+						'Tickets',
+						$message,
+						Notification::STATUS_UNREAD
+					);
+				}
+			}
+		}
 
 		return \redirect()->to('/tickets/manage');
 	}
