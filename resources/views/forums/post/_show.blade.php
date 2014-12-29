@@ -1,7 +1,7 @@
-					<div id='post{{ $post->id }}' class='post row{{$post->status == 0 ? " post-hidden" : ""}} {{ $post->userVote() }}' rt-data='post#{{ $post->id }}'>
+					<div id='post{{ $post->id }}' class='post row{{ $post->status == 0 ? " post-hidden" : "" }} {{ $post->userVote() }}' rt-data='post#{{ $post->id }}'>
 						<div class='post-info col-xs-12'>
 							<div class='pull-left'>
-								{!!\Link::name($post->author->id)!!} <span class='text-muted'>{{ \Time::shortReadable($post->created_at) }}</span>
+								{!! \Link::name($post->author->id) !!} <span class='text-muted'>{{ \Time::shortReadable($post->created_at) }}</span>
 							</div>
 							<div class='pull-right'>
 								{{ \Auth::check() && \Auth::user()->isCommunity() ? "(IP: " . \String::decodeIP($post->ip) . ") " : "" }}<a href='{{ $url }}#post{{ $post->id }}'>#{{ $post->id }}</a>
@@ -11,28 +11,30 @@
 						</div>
 						<div class='col-xs-12 post-data row row-flat'>
 							<div class='col-xs-12 col-sm-3 col-md-2 text-center'>
-								{!!$post->author->title!!}
+								{!! $post->author->title !!}
 								<br />
-								{!!\Image::userPhoto($post->author->id)!!}
+								{!! \Image::userPhoto($post->author->id) !!}
 								<br />
-								{!!\Link::colorRole($post->author->importantRole()->id)!!}
+								{!! \Link::colorRole($post->author->importantRole()->id) !!}
 								<br />
-								{{$post->author->posts_active}} posts
+								{{ $post->author->posts_active }} posts
+								<br />
+								{{ $post->author->rank->name }}
 								<div class='badge-{{ $post->author->rank->toClassName() }}'>
 									<div>
 									</div>
 								</div>
 	@if(!empty($post->author_info->location))
 								<br />
-								<span class='text-muted'>:</span> {{$post->author_info->location}}
+								<span class='text-muted'>:</span> {{ $post->author_info->location }}
 	@endif
 	@if(!empty($post->author_info->rsn))
 								<br />
-								<span class='text-muted'>:</span> {{$post->author_info->rsn}}
+								<span class='text-muted'>:</span> {{ $post->author_info->rsn }}
 	@endif
 	@if(!empty($post->author_info->allegiance))
 								<br />
-								<span class='text-muted'>:</span> {{$post->author_info->allegiance}}
+								<span class='text-muted'>:</span> {{ $post->author_info->allegiance }}
 	@endif
 							</div>
 							<div class='col-xs-12 col-sm-9 col-md-10'>
@@ -49,26 +51,26 @@
 	@if(\Auth::check())
 		@if(\Auth::user()->id != $post->author_id)
 										<li>
-											<a href='/forums/post/{{$post->id}}/report' title='@lang('forums.post.show.bar.report')'>
+											<a href='/forums/post/{{ $post->id }}/report' title='@lang('forums.post.show.bar.report')'>
 												@lang('forums.post.show.bar.report')
 											</a>
 										</li>
 		@endif
 		@if(\Auth::user()->isCommunity() || \Auth::user()->id == $post->author_id)
 										<li>
-											<a href='/forums/post/{{$post->id}}/edit' title='@lang('forums.post.show.bar.edit')'>
+											<a href='/forums/post/{{ $post->id }}/edit' title='@lang('forums.post.show.bar.edit')'>
 												@lang('forums.post.show.bar.edit')
 											</a>
 										</li>
 		@endif
 		@if(\Auth::user()->isCommunity())
 										<li>
-											<a href='/forums/post/{{$post->id}}/status=0' title='@lang('forums.post.show.bar.hide')'>
+											<a href='/forums/post/{{ $post->id }}/status=0' title='@lang('forums.post.show.bar.hide')'>
 												@lang('forums.post.show.bar.hide')
 											</a>
 										</li>
 										<li>
-											<a href='/forums/post/{{$post->id}}/delete' title='@lang('forums.post.show.bar.delete')'>
+											<a href='/forums/post/{{ $post->id }}/delete' title='@lang('forums.post.show.bar.delete')'>
 												@lang('forums.post.show.bar.delete')
 											</a>
 										</li>
