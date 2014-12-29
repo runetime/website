@@ -13,7 +13,7 @@
 @else
 <div class='card card-unread row'>
 @endif
-	<div class='col-xs-12 col-sm-6 col-md-8'>
+	<div class='col-xs-12 col-sm-6 col-md-7'>
 		<div class='pull-left'>
 @if($thread->isPinned())
 			<span class='label label-pinned'>@lang('forums.thread.label.pinned')</span>
@@ -73,7 +73,7 @@
 		</div>
 		<div class='clearfix'></div>
 	</div>
-	<div class='col-xs-12 col-sm-6 col-md-1'>
+	<div class='col-xs-12 col-sm-6 col-md-2'>
 		@lang('forums.posts', ['amount' => $thread->posts_count])
 		<br />
 		@lang('utilities.views', ['amount' => $thread->views_count])
