@@ -13,7 +13,7 @@
 	@else
 										<option value='{{ $timezoneHour }}'>
 	@endif
-											{{$timezoneName}}
+											{{ $timezoneName }}
 										</option>
 @endforeach
 									</select>
@@ -24,7 +24,11 @@
 									@lang('settings.profile.timezone.dst')
 								</label>
 								<div class='col-lg-10'>
-									<input type='checkbox' name='timezone_dst' id='timezone_dst'{{\Auth::user()->dst ? " checked='checked" : ""}} />
+@if(\Auth::user()->dst)
+									<input type='checkbox' name='timezone_dst' id='timezone_dst' checked='checked' />
+@else
+										<input type='checkbox' name='timezone_dst' id='timezone_dst' />
+@endif
 								</div>
 							</div>
 							<div class='form-group'>
