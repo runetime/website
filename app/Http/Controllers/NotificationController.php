@@ -27,7 +27,7 @@ class NotificationController extends BaseController
 		$notificationsUnread = $this->notifications->getStatusByUser(\Auth::user()->id, Notification::STATUS_UNREAD);
 		$notificationsRead = $this->notifications->getStatusByUser(\Auth::user()->id, Notification::STATUS_READ);
 
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('notifications.title');
 		return $this->view('notifications.index', compact('notificationsUnread', 'notificationsRead'));
 	}
@@ -47,7 +47,7 @@ class NotificationController extends BaseController
 		$notification->setRead();
 
 		$this->bc(['notifications' => trans('notifications.title')]);
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('notifications.title');
 		return $this->view('notifications.view', compact('notification'));
 	}

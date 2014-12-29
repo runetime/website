@@ -13,7 +13,7 @@ class LegalController extends BaseController
 
 		\Lang::setLocale($lang);
 
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('legal.title');
 		return $this->view('legal.legal');
 	}
@@ -22,7 +22,7 @@ class LegalController extends BaseController
 	 */
 	public function getPrivacy()
 	{
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('legal.privacy.title');
 		return $this->view('legal.privacy');
 	}
@@ -32,7 +32,7 @@ class LegalController extends BaseController
 	 */
 	public function getTerms()
 	{
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('legal.terms.title');
 		return $this->view('legal.terms');
 	}

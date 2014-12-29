@@ -34,7 +34,7 @@ class GuideController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('guides.title');
 		return $this->view('guides.index');
 	}
@@ -54,7 +54,7 @@ class GuideController extends BaseController
 		$guides = $this->quests->getByOptions($searchDifficulty, $searchLength, $searchMembership);
 
 		$this->bc(['guides' => trans('guides.title')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('guides.quests.title');
 		return $this->view('guides.quests.index', compact('difficulties', 'lengths', 'memberships', 'guides', 'searchDifficulty', 'searchLength', 'searchMembership'));
 	}
@@ -82,7 +82,7 @@ class GuideController extends BaseController
 		}
 
 		$this->bc(['guides' => trans('guides.title'), 'guides/quests' => trans('guides.quests.title')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('guides.quests.view.title', ['name' => $guide->name]);
 		return $this->view('guides.quests.view', compact('guide', 'difficulty', 'length', 'editList'));
 	}
@@ -93,7 +93,7 @@ class GuideController extends BaseController
 	public function getQuestCreate()
 	{
 		$this->bc(['guides' => trans('guides.title'), 'guides/quests' => trans('guides.quests.title')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('guides.quests.create.title');
 		return $this->view('guides.quests.create');
 	}
@@ -131,7 +131,7 @@ class GuideController extends BaseController
 		$guides = $this->locations->getAll();
 
 		$this->bc(['guides' => trans('guides.title')]);
-		$this->nav(trans('navbar.runescape.runescape'));
+		$this->nav(trans('navbar.runescape.title'));
 		$this->title('guides.locations.title');
 		return $this->view('guides.locations.index', compact('guides'));
 	}
@@ -161,7 +161,7 @@ class GuideController extends BaseController
 		}
 
 		$this->bc(['guides' => trans('guides.title'), 'guides/locations' => trans('guides.locations.title')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('guides.locations.view.title', ['name' => $guide->name]);
 		return $this->view('guides.locations.view', compact('guide', 'editList'));
 	}
@@ -172,7 +172,7 @@ class GuideController extends BaseController
 	public function getLocationCreate()
 	{
 		$this->bc(['guides' => trans('guides.title'), 'guides/locations' => trans('guides.locations.title')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('guides.locations.create.title');
 		return $this->view('guides.locations.create');
 	}

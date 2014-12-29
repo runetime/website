@@ -80,7 +80,7 @@ class StaffRadioController extends BaseController
 		$messages = $this->messages->getByUser(\Auth::user()->id);
 
 		$this->bc(['staff' => trans('staff.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.radio.title');
 		return $this->view('staff.radio.index', compact('live', 'messages'));
 	}
@@ -93,7 +93,7 @@ class StaffRadioController extends BaseController
 		$messages = $this->messages->getByUser(\Auth::user()->id);
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.radio.live.title');
 		return $this->view('staff.radio.live', compact('messages'));
 	}
@@ -196,7 +196,7 @@ class StaffRadioController extends BaseController
 		$messages = $this->messages->getByUser(\Auth::user()->id);
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.radio.messages.title');
 		return $this->view('staff.radio.messages', compact('messages'));
 	}
@@ -255,7 +255,7 @@ class StaffRadioController extends BaseController
 		}
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/radio' => trans('staff.radio.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.radio.timetable.title');
 		return $this->view('staff.radio.timetable', compact('days'));
 	}

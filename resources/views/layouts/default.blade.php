@@ -11,7 +11,7 @@ $navs = [
 	''       => trans('navbar.home'),
 	'forums' => trans('navbar.forums'),
 	'radio'  => trans('navbar.radio'),
-	trans('navbar.runetime.runetime') => [
+	trans('navbar.runetime.title') => [
 		'news'       => trans('navbar.runetime.news'),
 		'awards'     => trans('navbar.runetime.awards'),
 		'signatures' => trans('navbar.runetime.signatures'),
@@ -20,7 +20,7 @@ $navs = [
 		'about'      => trans('navbar.runetime.about_us'),
 		'tickets'    => trans('navbar.runetime.tickets'),
 	],
-	trans('navbar.runescape.runescape') => [
+	trans('navbar.runescape.title') => [
 		'guides/quests'       => trans('navbar.runescape.guides.quests'),
 		'guides/locations'    => trans('navbar.runescape.guides.locations'),
 		'databases/items/'    => trans('navbar.runescape.databases.items'),
@@ -31,7 +31,7 @@ $navs = [
 		'name-check'          => trans('navbar.runescape.name_checker'),
 		'calculators/combat'  => trans('navbar.runescape.combat_calculator'),
 	],
-	trans('navbar.social.social') => [
+	trans('navbar.social.title') => [
 		'livestream'  => trans('navbar.social.livestream'),
 		'media'       => trans('navbar.social.social_media'),
 		'clan'        => trans('navbar.social.our_clan'),
@@ -39,23 +39,23 @@ $navs = [
 ];
 
 if(\Auth::check() && \Auth::user()->isStaff()) {
-	$navs[trans('navbar.staff.staff')] = [
+	$navs[trans('navbar.staff.title')] = [
 		'staff' => trans('navbar.staff.staff_panel'),
 	];
 	if(\Auth::user()->hasOneOfRoles(1)) {
-		$navs[trans('navbar.staff.staff')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . trans('navbar.staff.administrator') . "</span>";
+		$navs[trans('navbar.staff.title')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . trans('navbar.staff.administrator') . "</span>";
 	}
 
 	if(\Auth::user()->hasOneOfRoles(1, 2, 3)) {
-		$navs[trans('navbar.staff.staff')]['staff/radio'] = "<span class='members-radio-dj-no-img'>" . trans('navbar.staff.radio') . "</span>";
+		$navs[trans('navbar.staff.title')]['staff/radio'] = "<span class='members-radio-dj-no-img'>" . trans('navbar.staff.radio') . "</span>";
 	}
 
 	if(\Auth::user()->isLeader() && !\Auth::user()->isAdmin()) {
-		$navs[trans('navbar.staff.staff')]['staff/leader'] = \Link::color(trans('navbar.staff.team_leader'), \Auth::user()->importantRole()->id, false);
+		$navs[trans('navbar.staff.title')]['staff/leader'] = \Link::color(trans('navbar.staff.team_leader'), \Auth::user()->importantRole()->id, false);
 	}
 
-	$navs[trans('navbar.staff.staff')]['tickets/manage'] = trans('navbar.staff.ticket');
-	$navs[trans('navbar.staff.staff')]['staff/checkup'] = trans('navbar.staff.checkup');
+	$navs[trans('navbar.staff.title')]['tickets/manage'] = trans('navbar.staff.ticket');
+	$navs[trans('navbar.staff.title')]['staff/checkup'] = trans('navbar.staff.checkup');
 }
 
 if(!Auth::check()) {

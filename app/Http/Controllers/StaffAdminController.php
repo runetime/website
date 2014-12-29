@@ -92,7 +92,7 @@ class StaffAdminController extends BaseController
 	public function getIndex()
 	{
 		$this->bc(['staff' => trans('staff.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.admin.title');
 
 		return $this->view('staff.administrator.index');
@@ -133,7 +133,7 @@ class StaffAdminController extends BaseController
 		$checkups = $this->checkups->getByStatus(Checkup::STATUS_UNCOMPLETED);
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.checkup.title');
 
 		return $this->view('staff.checkup.list', compact('checkups'));
@@ -153,7 +153,7 @@ class StaffAdminController extends BaseController
 		$displayName = $displayName->display_name;
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.checkup.view.title', ['author' => $displayName]);
 
 		return $this->view('staff.checkup.view', compact('checkup', 'displayName'));
@@ -289,7 +289,7 @@ class StaffAdminController extends BaseController
 		$users = $this->users->getX($from, $to);
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.admin.users.title');
 
 		return $this->view('staff.administrator.users.index', compact('users'));

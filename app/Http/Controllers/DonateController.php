@@ -8,7 +8,7 @@ class DonateController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('donate.title');
 		return $this->view('donate');
 	}

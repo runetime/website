@@ -48,7 +48,7 @@ class NewsController extends BaseController
 
 		$news = $this->news->getRecentCanView(5);
 
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('news.title');
 		return $this->view('news.index', compact('news', 'canAdd'));
 	}
@@ -70,7 +70,7 @@ class NewsController extends BaseController
 		$posts = $posts->get();
 
 		$this->bc(['news' => trans('news.title')]);
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('news.view.title', ['name' => $news->title]);
 		return $this->view('news.view', compact('news', 'posts', 'tags'));
 	}
@@ -81,7 +81,7 @@ class NewsController extends BaseController
 	public function getCreate()
 	{
 		$this->bc(['news' => trans('news.title')]);
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('news.create_newspiece');
 		return $this->view('news.create');
 	}

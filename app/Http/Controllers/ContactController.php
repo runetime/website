@@ -10,7 +10,7 @@ class ContactController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('contact.title');
 		return $this->view('contact');
 	}

@@ -13,7 +13,7 @@ class LivestreamController extends BaseController
 		}
 
 		$status = \Cache::get('livestream.status');
-		$this->nav('navbar.social.social');
+		$this->nav('navbar.social.title');
 		$this->title('livestream.title');
 		return $this->view('livestream.index', compact('status'));
 	}
@@ -24,7 +24,7 @@ class LivestreamController extends BaseController
 	public function getReset()
 	{
 		$this->bc(['livestream' => trans('livestream.title')]);
-		$this->nav('navbar.social.social');
+		$this->nav('navbar.social.title');
 		$this->title('livestream.reset.title');
 		return $this->view('livestream.reset');
 	}

@@ -43,7 +43,7 @@ class MembersController extends BaseController
 		$orders = ['ascending', 'descending'];
 		$pages = ceil($this->users->getAmount() / User::PER_MEMBERS_PAGE);
 
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('members.title');
 		return $this->view('members', compact('members', 'roles', 'prefixes', 'orders', 'memberRoles', 'searchRole', 'searchPrefix', 'searchOrder', 'page', 'pages'));
 	}

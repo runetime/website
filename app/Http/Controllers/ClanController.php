@@ -9,7 +9,7 @@ class ClanController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$this->nav('navbar.social.social');
+		$this->nav('navbar.social.title');
 		$this->title('clan.title');
 		return $this->view('clan');
 	}

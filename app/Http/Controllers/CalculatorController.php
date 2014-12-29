@@ -27,7 +27,7 @@ class CalculatorController extends BaseController
 	{
 		$calculators = $this->calculators->getAll();
 
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('calculator.title');
 		return $this->view('calculators.index', compact('calculators'));
 	}
@@ -37,7 +37,7 @@ class CalculatorController extends BaseController
 	 */
 	public function getCombat() {
 		$this->bc(['calculators' => trans('calculator.title')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('calculator.combat.title');
 		return $this->view('calculators.combat');
 	}
@@ -80,7 +80,7 @@ class CalculatorController extends BaseController
 		$xp = json_decode($calculator->xp);
 
 		$this->bc(['calculators' => trans('calculator.title')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('calculator.calculator', ['name' => $calculator->name]);
 		return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
 	}

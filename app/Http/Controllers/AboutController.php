@@ -8,7 +8,7 @@ class AboutController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('about.name');
 		return $this->view('about');
 	}

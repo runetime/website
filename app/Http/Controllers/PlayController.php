@@ -8,7 +8,7 @@ class PlayController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('play.index.play_runescape');
 		return $this->view('play.index');
 	}
@@ -19,7 +19,7 @@ class PlayController extends BaseController
 	public function get3()
 	{
 		$this->bc(['play' => trans('play.index.play_runescape')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('play.index.3');
 		return $this->view('play.3');
 	}
@@ -30,7 +30,7 @@ class PlayController extends BaseController
 	public function getOSRS()
 	{
 		$this->bc(['play' => trans('play.index.play_runescape')]);
-		$this->nav('navbar.runescape.runescape');
+		$this->nav('navbar.runescape.title');
 		$this->title('play.index.osrs');
 		return $this->view('play.osrs');
 	}

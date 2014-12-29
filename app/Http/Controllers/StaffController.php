@@ -44,7 +44,7 @@ class StaffController extends BaseController
 	 */
 	public function getIndex()
 	{
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.index.title');
 
 		return $this->view('staff.index');
@@ -109,7 +109,7 @@ class StaffController extends BaseController
 		$date = \Time::long(\Carbon::now());
 
 		$this->bc(['staff' => trans('staff.title')]);
-		$this->nav('navbar.staff.staff');
+		$this->nav('navbar.staff.title');
 		$this->title('staff.checkup.title');
 		return $this->view('staff.checkup.form', compact('date'));
 	}
@@ -141,7 +141,7 @@ class StaffController extends BaseController
 		$community = $this->roles->getUsersById(10, 11);
 		$events = $this->roles->getUsersById(12, 13);
 
-		$this->nav('navbar.runetime.runetime');
+		$this->nav('navbar.runetime.title');
 		$this->title('staff.list.title');
 		return $this->view('staff.list', compact('admins', 'radio', 'media', 'webDev', 'content', 'community', 'events'));
 	}
