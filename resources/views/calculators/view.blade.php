@@ -53,9 +53,6 @@
 				</table>
 			</div>
 			<script>
-                $(function() {
-                    "use strict";
-                    calculator = new Calculator({{ $calculator->id }});
-                });
+				calculator = new Calculator({{ $calculator->id }});
 			</script>
 @stop
