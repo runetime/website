@@ -240,7 +240,7 @@ $current = $nav;
 				</p>
 				<div id='portfolio-about'>
 					<p>
-						@lang('footer.copyright') &copy; {{ date('Y') }} &mdash; <a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
+						<a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a>
 					</p>
 					<p>
 						<a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
