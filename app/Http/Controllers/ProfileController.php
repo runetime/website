@@ -55,23 +55,23 @@ class ProfileController extends BaseController
 		$status = $this->statuses->getLatestByAuthor($profile->id);
 
 		$birthday = "";
-		if(\Auth::user()->birthday_day) {
-			$birthday .= \Time::day(\Auth::user()->birthday_day) . " ";
+		if($profile->birthday_day) {
+			$birthday .= \Time::day($profile->birthday_day) . " ";
 		}
 
-		if(\Auth::user()->birthday_month) {
+		if($profile->birthday_month) {
 			if($birthday) {
-				$birthday .= \Time::month(\Auth::user()->birthday_day, true);
+				$birthday .= \Time::month($profile->birthday_day, true);
 			} else {
-				$birthday .= \Time::month(\Auth::user()->birthday_day);
+				$birthday .= \Time::month($profile->birthday_day);
 			}
 		}
 
-		if(\Auth::user()->birthday_year) {
+		if($profile->birthday_year) {
 			if($birthday) {
-				$birthday .= \Time::year(\Auth::user()->birthday_year, true);
+				$birthday .= \Time::year($profile->birthday_year, true);
 			} else {
-				$birthday .= \Time::year(\Auth::user()->birthday_year);
+				$birthday .= \Time::year($profile->birthday_year);
 			}
 		}
 
