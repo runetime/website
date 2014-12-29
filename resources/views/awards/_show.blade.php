@@ -3,7 +3,7 @@
 		<img src='/img/awards/{{ $award->id }}.png' alt='{{ $award->name }}' class='img-responsive' />
 @if(isset($at))
 		<p>
-			Awarded on {{ \Time::DMY($at) }}
+			@lang('awards.awarded_on', ['date' => \Time::DMY($at)])
 		</p>
 @endif
 	</div>
