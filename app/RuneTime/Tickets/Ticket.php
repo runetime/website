@@ -40,12 +40,18 @@ class Ticket extends Entity
 		$this->posts()->attach([$post->id]);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function lastPost()
 	{
 		$posts = new PostRepository(new Post);
 		return $posts->getById($this->last_post);
 	}
 
+	/**
+	 *
+	 */
 	public function statusSwitch()
 	{
 		switch($this->status) {
@@ -61,6 +67,9 @@ class Ticket extends Entity
 		$this->save();
 	}
 
+	/**
+	 * @return string
+	 */
 	public function readableStatus()
 	{
 		switch($this->status) {
@@ -77,6 +86,11 @@ class Ticket extends Entity
 		}
 	}
 
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
 	public function toSlug($path = '')
 	{
 		$url = '';
