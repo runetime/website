@@ -10,6 +10,6 @@ class DonateController extends BaseController
 	{
 		$this->nav('navbar.runetime.runetime');
 		$this->title('donate.title');
-		return $this->view('donate.index');
+		return $this->view('donate');
 	}
 }
