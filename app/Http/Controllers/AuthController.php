@@ -62,14 +62,6 @@ class AuthController extends BaseController
 	}
 
 	/**
-	 *
-	 */
-	public function getLoginTwitter()
-	{
-
-	}
-
-	/**
 	 * @param LoginRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
