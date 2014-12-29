@@ -4,8 +4,8 @@
 $layoutSubforumRepository = \App::make('App\RuneTime\Forum\Subforums\SubforumRepository');
 $layoutSubforumList = $layoutSubforumRepository->getByParent(-1);
 ?>
-			<div class='wrapper'>
-				<div class='row'>
+			<div class='wrapper wrapper-flat'>
+				<div class='row row-flat'>
 					<div class='col-xs-12 col-md-3 col-lg-2'>
 						<div class='subforum-list'>
 @foreach($layoutSubforumList as $layoutSubforum)
