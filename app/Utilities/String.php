@@ -195,7 +195,12 @@ class String
 				break;
 		}
 
-		return "<img src='/img/forums/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
+		$ret = "";
+		if($image === true) {
+			$ret .= "<img src='/img/forums/gender/" . $genderId . ".png' alt='" . $name . "' /> ";
+		}
+
+		return $ret . $name;
 	}
 
 	/**
