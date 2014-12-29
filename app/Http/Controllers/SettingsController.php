@@ -8,6 +8,7 @@ use App\Http\Requests\Settings\ProfileRequest;
 use App\Http\Requests\Settings\RuneScapeRequest;
 use App\Http\Requests\Settings\SignatureRequest;
 use App\Http\Requests\Settings\SocialRequest;
+use App\Runis\Accounts\User;
 use App\Runis\Accounts\UserRepository;
 
 class SettingsController extends BaseController
@@ -90,9 +91,9 @@ class SettingsController extends BaseController
 		$bYear = \Auth::user()->birthday_year;
 
 		$genders = [
-			0 => trans('profile.gender.not_telling'),
-			1 => trans('profile.gender.female'),
-			2 => trans('profile.gender.male'),
+			User::GENDER_NOT_TELLING => trans('profile.gender.not_telling'),
+			User::GENDER_FEMALE      => trans('profile.gender.female'),
+			User::GENDER_MALE        => trans('profile.gender.male'),
 		];
 
 		$thisURL = '/settings/';

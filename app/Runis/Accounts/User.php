@@ -52,6 +52,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	private $rolesCache;
 	private $cacheStatus = null;
 	const PER_MEMBERS_PAGE = 20;
+	const GENDER_NOT_TELLING = 0;
+	const GENDER_FEMALE = 1;
+	const GENDER_MALE = 2;
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

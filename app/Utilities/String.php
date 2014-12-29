@@ -183,14 +183,16 @@ class String
 	public static function gender($genderId, $image = true)
 	{
 		switch($genderId) {
-			case 1:
+			case User::GENDER_FEMALE:
 				$name = "Female";
 				break;
-			case 2:
+			case User::GENDER_MALE:
 				$name = "Male";
 				break;
+			case User::GENDER_NOT_TELLING:
 			default:
 				$name = "Not Telling";
+				break;
 		}
 
 		return "<img src='/img/forums/gender/" . $genderId . ".png' alt='" . $name . "' /> " . $name;
