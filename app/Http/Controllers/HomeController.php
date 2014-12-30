@@ -46,11 +46,7 @@ class HomeController extends Controller
 	public function getIndex()
 	{
 		$news = $this->news->getRecentCanView(5);
-		if(\Auth::check() && \Auth::user()->isCommunity()) {
-			$statuses = $this->statuses->getLatest(5, '<=', 1);
-		} else {
-			$statuses = $this->statuses->getLatest(5, '=', Status::STATUS_PUBLISHED);
-		}
+		$statuses = $this->statuses->getXCanView(5);
 		$threads = $this->threads->getXCanView(5, 'desc');
 		$posts = $this->posts->hasThreadCanView(5);
 

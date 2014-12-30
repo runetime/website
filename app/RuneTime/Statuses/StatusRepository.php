@@ -29,6 +29,17 @@ class StatusRepository extends EloquentRepository
 			get();
 	}
 
+	public function getXCanView($amount)
+	{
+		if(\Auth::check() && \Auth::user()->isCommunity()) {
+			$statuses = $this->getLatest($amount, '<=', 1);
+		} else {
+			$statuses = $this->getLatest($amount, '=', Status::STATUS_PUBLISHED);
+		}
+
+		return $statuses;
+	}
+
 	/**
 	 * @param        $authorId
 	 * @param int    $amount
