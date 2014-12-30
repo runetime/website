@@ -174,7 +174,8 @@ class Time
 	}
 
 	/**
-	 * @param $i
+	 * @param      $month
+	 * @param bool $of
 	 *
 	 * @return string
 	 */

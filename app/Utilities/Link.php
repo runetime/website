@@ -7,16 +7,6 @@ use App\Runis\Accounts\RoleRepository;
 class Link
 {
 	/**
-	 * Outputs an encoded and parsed URL
-	 * @param  string $url The URL
-	 * @return string      The URL-encoded and parsed URL
-	 */
-	public static function URL($url = "")
-	{
-		return "/" . str_replace(" ", "-", $url);
-	}
-
-	/**
 	 * @param $userId
 	 *
 	 * @return string

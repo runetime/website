@@ -148,23 +148,6 @@ class String
 	}
 
 	/**
-	 * @param $id
-	 *
-	 * @return int
-	 */
-	public static function importantRole($id)
-	{
-		$user = User::find($id);
-		$roles = $user->getRoles();
-
-		if(!empty($roles)) {
-			return $roles[rand(0, count($roles) - 1)];
-		}
-
-		return -1;
-	}
-
-	/**
 	 * @param        $string
 	 * @param string $placement
 	 *
