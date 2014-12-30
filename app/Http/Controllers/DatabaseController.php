@@ -67,7 +67,7 @@ class DatabaseController extends BaseController
 	public function getItemsView($id)
 	{
 		$item = $this->items->getById($id);
-		if(!$item) {
+		if(empty($item)) {
 			return \Error::abort(404);
 		}
 
@@ -132,7 +132,7 @@ class DatabaseController extends BaseController
 	public function getMonstersView($id)
 	{
 		$monster = $this->monsters->getById($id);
-		if(!$monster) {
+		if(empty($monster)) {
 			return \Error::abort(404);
 		}
 

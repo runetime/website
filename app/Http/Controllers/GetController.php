@@ -27,7 +27,8 @@ class GetController extends BaseController
 	public function postEmail(Request $form)
 	{
 		$available = true;
-		if($this->users->getByEmail($form->email)) {
+		$user = $this->users->getByEmail($form->email);
+		if(!empty($user)) {
 			$available = false;
 		}
 
@@ -42,7 +43,8 @@ class GetController extends BaseController
 	public function postDisplayName(Request $form)
 	{
 		$available = true;
-		if($this->users->getByDisplayName($form->display_name) || $this->users->getByDisplayName($form->display_name)) {
+		$user = $this->users->getByDisplayName($form->display_name);
+		if(!empty($user)) {
 			$available = false;
 		}
 

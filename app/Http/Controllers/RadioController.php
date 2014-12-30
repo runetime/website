@@ -128,7 +128,7 @@ class RadioController extends BaseController
 
 		$request = with(new Request)->saveNew(\Auth::user()->id, $form->artist, $form->name, \Request::getClientIp(true), Request::STATUS_NEUTRAL);
 
-		if($request) {
+		if(!empty($request)) {
 			$response['sent'] = true;
 		}
 
@@ -157,13 +157,13 @@ class RadioController extends BaseController
 		}
 
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
-		if($session) {
-			if($session->message) {
+		if(!empty($session)) {
+			if(!empty($session->message)) {
 				$update['message'] = $session->message->contents_parsed;
 			}
 
 			$user = $this->users->getById($session->dj->id);
-			if($user) {
+			if(!empty($user)) {
 				$update['dj'] = $user->display_name;
 			}
 		}

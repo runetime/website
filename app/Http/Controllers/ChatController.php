@@ -61,10 +61,11 @@ class ChatController extends BaseController
 		$channelList = [];
 		foreach($channels as $channel) {
 			$message = $this->chat->getLatestByChannel($channel->id);
-			$channelCurrent = new \stdClass;
-			$channelCurrent->name = $channel->name_trim;
-			$channelCurrent->messages = $channel->messages;
-			$channelCurrent->last_message = strtotime($message['created_at']);
+			$channelCurrent = (object) [
+				'name'         => $channel->name_trim,
+				'messages'     => $channel->messages,
+				'last_message' => strtotime($message['created_at']),
+			];
 			array_push($channelList, $channelCurrent);
 		}
 
@@ -80,7 +81,7 @@ class ChatController extends BaseController
 	{
 		$channel = $this->channels->getByNameTrim($form->channel);
 		$response = ['valid' => false];
-		if($channel) {
+		if(!empty($channel)) {
 			$response['valid'] = true;
 		}
 
@@ -187,11 +188,10 @@ class ChatController extends BaseController
 		}
 
 		$pinnedList = $this->sortMessages($pinned);
-		$res = [
+		$res = (object) [
 			'messages' => $messageList,
 			'pinned'   => $pinnedList,
 		];
-		$res = (object) $res;
 
 		return json_encode($res);
 	}
@@ -248,18 +248,19 @@ class ChatController extends BaseController
 		$messageList = [];
 		$users = [];
 		foreach($messages as $message) {
-			$messageCurrent = new \stdClass;
 			if(!isset($users[$message->author_id])) {
 				$users[$message->author_id] = $this->users->getById($message->author_id);
 			}
 
-			$messageCurrent->id = $message->id;
-			$messageCurrent->author_name = $users[$message->author_id]->display_name;
-			$messageCurrent->class_name = $message->author->importantRole()->class_name;
-			$messageCurrent->contents_parsed = $message->contents_parsed;
-			$messageCurrent->created_at = strtotime($message->created_at);
-			$messageCurrent->uuid = uniqid(md5(microtime(true)), true);
-			$messageCurrent->status = $message->status;
+			$messageCurrent = (object) [
+				'id'              => $message->id,
+				'author_name'     => $users[$message->author_id]->display_name,
+				'class_name'      => $message->author->importantRole()->class_name,
+				'contents_parsed' => $message->contents_parsed,
+				'created_at'      => strtotime($message->created_at),
+				'uuid'            => uniqid(md5(microtime(true)), true),
+				'status'          => $message->status,
+			];
 			array_push($messageList, $messageCurrent);
 		}
 

@@ -71,7 +71,7 @@ class CalculatorController extends BaseController
 	public function getView($type)
 	{
 		$calculator = $this->calculators->getByNameTrim($type);
-		if(!$calculator) {
+		if(empty($calculator)) {
 			return \Error::abort(404);
 		}
 
@@ -93,7 +93,7 @@ class CalculatorController extends BaseController
 	public function postLoad(PostRequest $form)
 	{
 		$calculator = $this->calculators->getById($form->id);
-		if(!$calculator) {
+		if(empty($calculator)) {
 			return json_encode([]);
 		}
 

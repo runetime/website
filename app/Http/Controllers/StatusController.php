@@ -48,7 +48,7 @@ class StatusController extends BaseController
 	public function getView($id)
 	{
 		$status = $this->statuses->getById($id);
-		if(!$status) {
+		if(empty($status)) {
 			return \Error::abort(404);
 		}
 
@@ -65,7 +65,7 @@ class StatusController extends BaseController
 	public function getStatusSwitch($id, $newStatus)
 	{
 		$status = $this->statuses->getById($id);
-		if(!$status) {
+		if(empty($status)) {
 			return \Error::abort(404);
 		}
 
@@ -84,7 +84,7 @@ class StatusController extends BaseController
 	public function postReply($id, StatusReplyRequest $form)
 	{
 		$status = $this->statuses->getById($id);
-		if(!$status) {
+		if(empty($status)) {
 			return \Error::abort(404);
 		}
 

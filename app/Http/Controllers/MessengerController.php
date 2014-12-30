@@ -49,7 +49,7 @@ class MessengerController extends BaseController
 	public function getView($id)
 	{
 		$message = $this->messages->getById($id);
-		if(!$message) {
+		if(empty($message)) {
 			return \Error::abort(404);
 		}
 
@@ -70,7 +70,7 @@ class MessengerController extends BaseController
 	public function postReply($id, ReplyRequest $form)
 	{
 		$message = $this->messages->getById($id);
-		if(!$message) {
+		if(empty($message)) {
 			return \Error::abort(404);
 		}
 
@@ -98,7 +98,7 @@ class MessengerController extends BaseController
 		$to = '';
 		if($id > 0) {
 			$to = $this->users->getById($id);
-			if(!$to) {
+			if(empty($to)) {
 				$to = '';
 			}
 		}
@@ -122,7 +122,7 @@ class MessengerController extends BaseController
 		$message->addUser(\Auth::user());
 		foreach(explode(", ", $form->participants) as $participant) {
 			$participant = $this->users->getByDisplayName(($participant));
-			if($participant) {
+			if(!empty($participant)) {
 				$message->addUser($participant);
 				$contents = \Link::name(\Auth::user()->id) . " has sent you a private message titled <a href='" . $message->toSlug() . "'>" . $message->title . "</a>.";
 				with(new Notification)->saveNew($participant->id, trans('messenger.title'), $contents, Notification::STATUS_UNREAD);

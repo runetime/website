@@ -23,7 +23,8 @@ class SignatureController extends BaseController
 	public function postUsername(RSNRequest $form)
 	{
 		$username = $form->username;
-		if(!\Cache::get('hiscores.' . $username)) {
+		$cache = \Cache::get('hiscores.' . $username);
+		if(empty($cache)) {
 			\String::getHiscore($username);
 		}
 

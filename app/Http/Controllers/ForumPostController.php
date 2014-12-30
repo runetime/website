@@ -105,7 +105,7 @@ class ForumPostController extends BaseController
 	 */
 	public function getDelete($id) {
 		$post = $this->posts->getById($id);
-		if(!$post) {
+		if(empty($post)) {
 			return \Error::abort(404);
 		}
 
@@ -124,7 +124,7 @@ class ForumPostController extends BaseController
 	public function getEdit($id)
 	{
 		$post = $this->posts->getById($id);
-		if(!$post) {
+		if(empty($post)) {
 			return \Error::abort(404);
 		}
 
@@ -235,18 +235,18 @@ class ForumPostController extends BaseController
 	public function postVote($id, PostVoteRequest $form)
 	{
 		$post = $this->posts->getById($id);
-		if(!$post) {
+		if(empty($post)) {
 			return \Error::abort(404);
 		}
 
-		if(!$post->thread) {
+		if(empty($post->thread)) {
 			return \Error::abort(404);
 		}
 
 		$vote = $this->votes->getByPost($id);
 		$newStatus = $form->vote == "up" ? Vote::STATUS_UP : Vote::STATUS_DOWN;
 		$rep = $newStatus == Vote::STATUS_UP ? 1 : -1;
-		if($vote) {
+		if(!empty($vote)) {
 			if($newStatus == Vote::STATUS_UP) {
 				if($vote->status == Vote::STATUS_UP) {
 					$rep = -1;
@@ -268,7 +268,7 @@ class ForumPostController extends BaseController
 
 		$post->rep += $rep;
 		$post->save();
-		if($vote) {
+		if(!empty($vote)) {
 			$vote->status = $newStatus;
 			$vote->save();
 		} else {

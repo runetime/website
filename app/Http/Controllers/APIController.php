@@ -35,9 +35,10 @@ class APIController extends BaseController
 		$response = [];
 		$awards = $this->awards->getByStatus(Award::STATUS_AVAILABLE);
 		foreach($awards as $award) {
-			$set = new \stdClass;
-			$set->id = $award->id;
-			$set->name = $award->name;
+			$set = (object) [
+				'id'   => $award->id,
+				'name' => $award->name,
+			];
 			array_push($response, $set);
 		}
 

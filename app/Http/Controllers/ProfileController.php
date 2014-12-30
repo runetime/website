@@ -47,7 +47,7 @@ class ProfileController extends BaseController
 	public function getProfileIndex($id)
 	{
 		$profile = $this->users->getById($id);
-		if(!$profile) {
+		if(empty($profile)) {
 			return \Error::abort(404);
 		}
 
@@ -89,7 +89,7 @@ class ProfileController extends BaseController
 	public function getProfileAwards($id)
 	{
 		$profile = $this->users->getbyId($id);
-		if(!$profile) {
+		if(empty($profile)) {
 			return \Error::abort(404);
 		}
 
@@ -107,7 +107,7 @@ class ProfileController extends BaseController
 	public function getProfileFeed($id)
 	{
 		$profile = $this->users->getById($id);
-		if(!$profile) {
+		if(empty($profile)) {
 			return \Error::abort(404);
 		}
 
@@ -127,7 +127,7 @@ class ProfileController extends BaseController
 	public function getProfileFriends($id)
 	{
 		$profile = $this->users->getById($id);
-		if(!$profile) {
+		if(empty($profile)) {
 			return \Error::abort(404);
 		}
 

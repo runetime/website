@@ -40,7 +40,7 @@ class NotificationController extends BaseController
 	public function getView($id)
 	{
 		$notification = $this->notifications->getById($id);
-		if(!$notification) {
+		if(empty($notification)) {
 			return \Error::abort(404);
 		}
 

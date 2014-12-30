@@ -115,15 +115,15 @@ class SettingsController extends BaseController
 		$year = $form->birthday_year;
 		$month = $form->birthday_month;
 		$day = $form->birthday_day;
-		if($year) {
+		if($year != 0) {
 			$user->birthday_year = $year;
 		}
 
-		if($month) {
+		if($month != 0) {
 			$user->birthday_month = $month;
 		}
 
-		if($day) {
+		if($day != 0) {
 			$user->birthday_day = $day;
 		}
 

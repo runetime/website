@@ -111,7 +111,7 @@ class StaffRadioController extends BaseController
 
 		$live = \Cache::get('radio.dj.current');
 		$user = $this->users->getById($live);
-		if(!$user) {
+		if(empty($user)) {
 			\Cache::forever('radio.dj.current', \Auth::user()->id);
 			with(new Session)->saveNew(\Auth::user()->id, -1, Session::STATUS_PLAYING);
 		}
@@ -152,7 +152,7 @@ class StaffRadioController extends BaseController
 		}
 
 		$song = $this->history->getLatest();
-		if($song) {
+		if(!empty($song)) {
 			$update['song'] = ['name' => $song->song, 'artist' => $song->artist];
 		}
 
@@ -271,7 +271,7 @@ class StaffRadioController extends BaseController
 		$dayStart = date('z', $timeStart);
 		$dayStart += $form->day;
 		$hour = $this->timetable->getByHourDay($form->hour, $dayStart);
-		if($hour) {
+		if(!empty($hour)) {
 			$response = ['valid' => true, 'hour' => $form->hour, 'day' => $form->day];
 			if($hour->dj_id == -1) {
 				$response['name'] = \Auth::user()->display_name;

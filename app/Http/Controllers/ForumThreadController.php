@@ -107,7 +107,7 @@ class ForumThreadController extends BaseController
 	public function getThread($id, $page = 1)
 	{
 		$thread = $this->threads->getById($id);
-		if(!$thread) {
+		if(empty($thread)) {
 			return \Error::abort(404);
 		}
 
@@ -147,7 +147,7 @@ class ForumThreadController extends BaseController
 
 		$poll = false;
 
-		if($thread->poll) {
+		if(!empty($thread->poll)) {
 			$poll = [
 				'title'     => $thread->poll->title,
 				'questions' => []
@@ -203,7 +203,7 @@ class ForumThreadController extends BaseController
 	 */
 	public function getCreate($id) {
 		$subforum = $this->subforums->getById($id);
-		if(!$subforum) {
+		if(empty($subforum)) {
 			return \Error::abort(404);
 		}
 
@@ -236,7 +236,7 @@ class ForumThreadController extends BaseController
 	{
 		$subforum = $this->subforums->getById($id);
 		if(empty($subforum)) {
-			abort(404);
+			\Error::abort(404);
 		}
 
 		$poll = -1;

@@ -109,7 +109,7 @@ class StaffAdminController extends BaseController
 
 		$award = $this->awards->getById($form->id);
 		$user = $this->users->getByDisplayName($form->username);
-		if($award && $user) {
+		if(!empty($award) && !empty($user)) {
 			$awardee = with(new Awardee)->saveNew($award->id, $user->id);
 			if($awardee) {
 				$response['done'] = true;

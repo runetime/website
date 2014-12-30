@@ -58,7 +58,7 @@ class TicketController extends BaseController
 	public function getView($id)
 	{
 		$ticket = $this->tickets->getById($id);
-		if(!$ticket) {
+		if(empty($ticket)) {
 			return \Error::abort(404);
 		}
 
@@ -115,7 +115,7 @@ class TicketController extends BaseController
 	public function postReply($id, CreateReplyRequest $form)
 	{
 		$ticket = $this->tickets->getById($id);
-		if(!$ticket) {
+		if(empty($ticket)) {
 			return \Error::abort(404);
 		}
 
@@ -158,7 +158,7 @@ class TicketController extends BaseController
 	public function getStatusSwitch($id, $name, $status)
 	{
 		$ticket = $this->tickets->getById($id);
-		if(!$ticket) {
+		if(empty($ticket)) {
 			return \Error::abort(404);
 		}
 

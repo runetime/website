@@ -20,7 +20,7 @@ class StaffModerationController extends BaseController
 	public function getThreadStatusSwitch($id, $status)
 	{
 		$thread = $this->threads->getById($id);
-		if(!$thread) {
+		if(empty($thread)) {
 			return \redirect()->to('/');
 		}
 

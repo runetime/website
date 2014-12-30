@@ -19,7 +19,7 @@ class BaseController extends Controller
 	 */
 	protected function bc($breadcrumbs = [])
 	{
-		if($breadcrumbs == false) {
+		if($breadcrumbs === false) {
 			$this->displayPageHeader = false;
 		} else {
 			$this->bc = $breadcrumbs;
@@ -47,7 +47,7 @@ class BaseController extends Controller
 	 */
 	protected function setupLayout()
 	{
-		if(!is_null($this->layout)) {
+		if(is_null($this->layout) === false) {
 			$this->layout = \View::make($this->layout);
 		}
 	}
