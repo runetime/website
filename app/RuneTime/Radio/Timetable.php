@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Radio;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Timetable extends Entity
 {
@@ -16,6 +16,6 @@ class Timetable extends Entity
 	 */
 	public function dj()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'dj_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'dj_id');
 	}
 }

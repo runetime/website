@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'model' => 'App\Runis\Accounts\User',
+	'model' => 'App\RuneTime\Accounts\User',
 
 	/*
 	|--------------------------------------------------------------------------

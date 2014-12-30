@@ -20,7 +20,7 @@ class StaffPanelTest extends TestCase
 	{
 		$this->login();
 
-		$user = \App\Runis\Accounts\User::find(1);
+		$user = \App\RuneTime\Accounts\User::find(1);
 		$data = $this->form([
 			'username' => $user->display_name,
 			'reason'   => 'Staff Panel User Report Test',
@@ -38,7 +38,7 @@ class StaffPanelTest extends TestCase
 	{
 		$this->login();
 
-		$user = \App\Runis\Accounts\User::find(1);
+		$user = \App\RuneTime\Accounts\User::find(1);
 		$data = $this->form([
 			'username' => $user->display_name,
 			'reason'   => 'Staff Panel User Mute Test',

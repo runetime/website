@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Guides;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class LocationRepository extends EloquentRepository
 {

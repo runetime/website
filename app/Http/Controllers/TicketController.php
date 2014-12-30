@@ -7,7 +7,7 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Tickets\TicketRepository;
-use App\Runis\Accounts\RoleRepository;
+use App\RuneTime\Accounts\RoleRepository;
 
 class TicketController extends BaseController
 {

@@ -2,7 +2,7 @@
 namespace App\RuneTime\Statuses;
 
 use App\RuneTime\Forum\Threads\Post;
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Status extends Entity
 {
@@ -18,7 +18,7 @@ class Status extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 
 	/**

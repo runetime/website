@@ -5,11 +5,11 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
 use App\Http\Requests\Auth\PasswordEmailRequest;
 use App\Http\Requests\Auth\PasswordResetRequest;
-use App\Runis\Accounts\RankRepository;
-use App\Runis\Accounts\ResetRepository;
-use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\User;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\RankRepository;
+use App\RuneTime\Accounts\ResetRepository;
+use App\RuneTime\Accounts\RoleRepository;
+use App\RuneTime\Accounts\User;
+use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
 class AuthController extends BaseController

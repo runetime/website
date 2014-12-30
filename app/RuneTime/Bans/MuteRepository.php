@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Bans;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class MuteRepository extends EloquentRepository
 {

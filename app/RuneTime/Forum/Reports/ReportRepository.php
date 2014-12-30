@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Reports;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class ReportRepository extends EloquentRepository
 {

@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Checkup;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class CheckupRepository extends EloquentRepository
 {

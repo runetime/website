@@ -9,8 +9,8 @@ use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Tickets\Ticket;
-use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\RoleRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class StaffController extends BaseController
 {

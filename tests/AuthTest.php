@@ -1,6 +1,6 @@
 <?php
 
-use App\Runis\Accounts\User;
+use App\RuneTime\Accounts\User;
 
 class AuthTest extends TestCase
 {
@@ -31,7 +31,7 @@ class AuthTest extends TestCase
 		$user = User::orderBy('created_at', 'desc')->first();
 		$user->roleRemove($user->importantRole());
 
-		$roles = \App::make('App\Runis\Accounts\RoleRepository');
+		$roles = \App::make('App\RuneTime\Accounts\RoleRepository');
 		$role = $roles->getByName("Administrator");
 
 		$user->roleAdd($role, true);

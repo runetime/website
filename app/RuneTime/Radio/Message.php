@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Radio;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Message extends Entity
 {
@@ -16,6 +16,6 @@ class Message extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 }

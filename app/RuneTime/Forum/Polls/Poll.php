@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Polls;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Poll extends Entity
 {

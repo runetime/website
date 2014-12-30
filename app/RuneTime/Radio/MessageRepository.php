@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Radio;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class MessageRepository extends EloquentRepository
 {

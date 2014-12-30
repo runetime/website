@@ -1,7 +1,7 @@
 <?php
-namespace App\Runis\Accounts;
+namespace App\RuneTime\Accounts;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Rank extends Entity
 {
@@ -15,7 +15,7 @@ class Rank extends Entity
 	 */
 	public function users()
 	{
-		return $this->hasMany('App\Runis\Accounts\User', 'rank_id');
+		return $this->hasMany('App\RuneTime\Accounts\User', 'rank_id');
 	}
 
 	/**

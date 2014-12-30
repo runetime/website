@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Http\Request;
 
 class GetController extends BaseController

@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\User;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\RoleRepository;
+use App\RuneTime\Accounts\User;
+use App\RuneTime\Accounts\UserRepository;
 
 class MembersController extends BaseController
 {

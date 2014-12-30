@@ -14,7 +14,7 @@ use App\RuneTime\Radio\RequestRepository;
 use App\RuneTime\Radio\Session;
 use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class StaffRadioController extends BaseController
 {

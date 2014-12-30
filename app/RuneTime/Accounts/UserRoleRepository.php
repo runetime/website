@@ -1,7 +1,7 @@
 <?php
-namespace App\Runis\Accounts;
+namespace App\RuneTime\Accounts;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class UserRoleRepository extends EloquentRepository
 {

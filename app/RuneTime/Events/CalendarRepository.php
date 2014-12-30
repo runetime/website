@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Event;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class CalendarRepository extends EloquentRepository
 {

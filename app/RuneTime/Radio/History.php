@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Radio;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class History extends Entity
 {
@@ -17,6 +17,6 @@ class History extends Entity
 	 */
 	public function user()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'user_id');
 	}
 }

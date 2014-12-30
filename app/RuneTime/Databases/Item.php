@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Databases;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Item extends Entity
 {

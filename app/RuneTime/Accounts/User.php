@@ -1,15 +1,15 @@
 <?php
-namespace App\Runis\Accounts;
+namespace App\RuneTime\Accounts;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 /**
  * Class User
- * @package App\Runis\Accounts
+ * @package App\RuneTime\Accounts
  */
 class User extends Entity implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -61,7 +61,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function roles()
 	{
-		return $this->belongsToMany('App\Runis\Accounts\Role');
+		return $this->belongsToMany('App\RuneTime\Accounts\Role');
 	}
 
 	/**
@@ -70,7 +70,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	public function getRoles()
 	{
 		if(!isset($this->rolesCache)) {
-			$this->rolesCache = $this->belongsToMany('App\Runis\Accounts\Role');
+			$this->rolesCache = $this->belongsToMany('App\RuneTime\Accounts\Role');
 		}
 		return $this->rolesCache;
 	}
@@ -92,7 +92,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function hasRoles($roleNames = [])
 	{
-		$roleList = \App::make('App\Runis\Accounts\RoleRepository')->
+		$roleList = \App::make('App\RuneTime\Accounts\RoleRepository')->
 			getRoleList();
 		foreach((array) $roleNames as $allowedRole) {
 			if(!in_array($allowedRole, $roleList)) {
@@ -123,9 +123,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function importantRole()
 	{
-		$userRoles = \App::make('App\Runis\Accounts\UserRoleRepository');
+		$userRoles = \App::make('App\RuneTime\Accounts\UserRoleRepository');
 		$important = $userRoles->getImportantByUser($this->id);
-		$roles = \App::make('App\Runis\Accounts\RoleRepository');
+		$roles = \App::make('App\RuneTime\Accounts\RoleRepository');
 		$role = $roles->getById($important->role_id);
 		return $role;
 	}
@@ -154,7 +154,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function setRole($name)
 	{
-		$role = \App::make('App\Runis\Accounts\RoleRepository')->
+		$role = \App::make('App\RuneTime\Accounts\RoleRepository')->
 			getByName($name);
 		$assigned_roles = [];
 		if($role) {
@@ -168,7 +168,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function roleRemove(Role $role)
 	{
-		$roles = \App::make('App\Runis\Accounts\UserRoleRepository');
+		$roles = \App::make('App\RuneTime\Accounts\UserRoleRepository');
 		$role = $roles->selectByUserAndRole($this->id, $role->id);
 		$role->delete();
 	}
@@ -371,12 +371,12 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	 */
 	public function referredBy()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'referred_by');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'referred_by');
 	}
 
 	public function rank()
 	{
-		return $this->belongsTo('App\Runis\Accounts\Rank', 'rank_id');
+		return $this->belongsTo('App\RuneTime\Accounts\Rank', 'rank_id');
 	}
 
 	/**

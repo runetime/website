@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Chat;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Channel extends Entity
 {

@@ -7,7 +7,7 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Messenger\Message;
 use App\RuneTime\Messenger\MessageRepository;
 use App\RuneTime\Notifications\Notification;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class MessengerController extends BaseController
 {

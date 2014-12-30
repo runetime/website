@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Calculators;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Calculator extends Entity
 {

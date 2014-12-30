@@ -3,7 +3,7 @@ namespace App\RuneTime\Tickets;
 
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Ticket extends Entity
 {
@@ -21,7 +21,7 @@ class Ticket extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 
 	/**

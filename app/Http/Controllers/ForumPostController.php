@@ -17,7 +17,7 @@ use App\RuneTime\Forum\Threads\Vote;
 use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\StatusRepository;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class ForumPostController extends BaseController
 {

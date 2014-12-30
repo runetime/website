@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Calculators;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class CalculatorRepository extends EloquentRepository
 {

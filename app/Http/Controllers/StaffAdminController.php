@@ -16,10 +16,10 @@ use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
-use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\UserRepository;
-use App\Runis\Accounts\UserRole;
-use App\Runis\Accounts\UserRoleRepository;
+use App\RuneTime\Accounts\RoleRepository;
+use App\RuneTime\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRole;
+use App\RuneTime\Accounts\UserRoleRepository;
 
 class StaffAdminController extends BaseController
 {

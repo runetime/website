@@ -11,7 +11,7 @@ use App\RuneTime\Chat\ActionRepository;
 use App\RuneTime\Chat\ChannelRepository;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class ChatController extends BaseController
 {

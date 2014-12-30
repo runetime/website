@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Guides;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Quest extends Entity
 {

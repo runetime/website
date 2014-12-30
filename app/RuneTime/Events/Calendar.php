@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Event;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Calendar extends Entity
 {

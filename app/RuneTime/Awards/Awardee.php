@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Awards;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Awardee extends Entity
 {
@@ -24,6 +24,6 @@ class Awardee extends Entity
 	 */
 	public function user()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'user_id');
 	}
 }

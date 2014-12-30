@@ -1,7 +1,7 @@
 <?php
-namespace App\Runis\Accounts;
+namespace App\RuneTime\Accounts;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class UserRole extends Entity
 {
@@ -16,7 +16,7 @@ class UserRole extends Entity
 	 */
 	public function user()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'user_id');
 	}
 
 	/**
@@ -24,6 +24,6 @@ class UserRole extends Entity
 	 */
 	public function role()
 	{
-		return $this->belongsTo('App\Runis\Accounts\Role', 'role_id');
+		return $this->belongsTo('App\RuneTime\Accounts\Role', 'role_id');
 	}
 }

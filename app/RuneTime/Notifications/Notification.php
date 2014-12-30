@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Notifications;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Notification extends Entity
 {

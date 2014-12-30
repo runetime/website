@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Post extends Entity
 {
@@ -39,7 +39,7 @@ class Post extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 
 	public function userVote()

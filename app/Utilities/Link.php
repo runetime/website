@@ -1,8 +1,8 @@
 <?php
 namespace App\Utilities;
 
-use App\Runis\Accounts\Role;
-use App\Runis\Accounts\RoleRepository;
+use App\RuneTime\Accounts\Role;
+use App\RuneTime\Accounts\RoleRepository;
 
 class Link
 {
@@ -13,7 +13,7 @@ class Link
 	 */
 	public static function name($userId)
 	{
-		$users = \App::make('App\Runis\Accounts\UserRepository');
+		$users = \App::make('App\RuneTime\Accounts\UserRepository');
 		$user = $users->getById((int) $userId);
 		if($user) {
 			return "<a href='/profile/" . \String::slugEncode($user->id, $user->display_name) . "' class='members-" . $user->importantRole()->class_name . "' title'='" . $user->display_name . "&#39;s profile'>" . $user->display_name . "</a>";

@@ -1,9 +1,9 @@
 <?php
 namespace App\RuneTime\Messenger;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 use App\RuneTime\Forum\Threads\Post;
-use App\Runis\Accounts\User;
+use App\RuneTime\Accounts\User;
 
 class Message extends Entity
 {
@@ -55,7 +55,7 @@ class Message extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User');
+		return $this->belongsTo('App\RuneTime\Accounts\User');
 	}
 
 	/**
@@ -63,7 +63,7 @@ class Message extends Entity
 	 */
 	public function users()
 	{
-		return $this->belongsToMany('App\Runis\Accounts\User');
+		return $this->belongsToMany('App\RuneTime\Accounts\User');
 	}
 
 	/**

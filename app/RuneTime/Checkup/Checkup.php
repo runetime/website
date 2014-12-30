@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Checkup;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Checkup extends Entity
 {
@@ -18,7 +18,7 @@ class Checkup extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsToMany('App\Runis\Accounts\User');
+		return $this->belongsToMany('App\RuneTime\Accounts\User');
 	}
 
 	/**

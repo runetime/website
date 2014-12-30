@@ -8,9 +8,9 @@ use App\RuneTime\Bans\Ban;
 use App\RuneTime\Bans\Mute;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
-use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\UserRepository;
-use App\Runis\Accounts\UserRoleRepository;
+use App\RuneTime\Accounts\RoleRepository;
+use App\RuneTime\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRoleRepository;
 
 class StaffTeamLeaderController extends BaseController
 {

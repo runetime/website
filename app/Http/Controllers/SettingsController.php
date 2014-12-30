@@ -8,8 +8,8 @@ use App\Http\Requests\Settings\ProfileRequest;
 use App\Http\Requests\Settings\RuneScapeRequest;
 use App\Http\Requests\Settings\SignatureRequest;
 use App\Http\Requests\Settings\SocialRequest;
-use App\Runis\Accounts\User;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\User;
+use App\RuneTime\Accounts\UserRepository;
 
 class SettingsController extends BaseController
 {

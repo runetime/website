@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Threads;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class VoteRepository extends EloquentRepository
 {

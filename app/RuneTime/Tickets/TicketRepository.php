@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Tickets;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class TicketRepository extends EloquentRepository
 {

@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Chat;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Chat extends Entity
 {
@@ -20,6 +20,6 @@ class Chat extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Bans;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class IP extends Entity
 {
@@ -17,6 +17,6 @@ class IP extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 }

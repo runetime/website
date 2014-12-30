@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Tags;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class TagRepository extends EloquentRepository
 {

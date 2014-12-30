@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Polls;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class QuestionRepository extends EloquentRepository
 {

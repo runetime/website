@@ -1,9 +1,9 @@
 <?php
 namespace App\Utilities;
 
-use App\Runis\Accounts\Role;
-use App\Runis\Accounts\RoleRepository;
-use App\Runis\Accounts\User;
+use App\RuneTime\Accounts\Role;
+use App\RuneTime\Accounts\RoleRepository;
+use App\RuneTime\Accounts\User;
 
 class String
 {

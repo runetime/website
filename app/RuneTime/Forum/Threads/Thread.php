@@ -2,7 +2,7 @@
 namespace App\RuneTime\Forum\Threads;
 
 use App\RuneTime\Forum\Subforums\Subforum;
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Thread extends Entity
 {
@@ -63,7 +63,7 @@ class Thread extends Entity
 
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 
 	/**

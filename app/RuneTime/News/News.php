@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\News;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class News extends Entity
 {

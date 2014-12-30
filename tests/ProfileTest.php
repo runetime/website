@@ -1,5 +1,5 @@
 <?php
-use App\Runis\Accounts\User;
+use App\RuneTime\Accounts\User;
 
 class ProfileTest extends TestCase
 {

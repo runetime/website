@@ -1,5 +1,5 @@
 <?php
-namespace App\Runis\Core;
+namespace App\RuneTime\Core;
 
 use Illuminate\Database\Eloquent\Model;
 

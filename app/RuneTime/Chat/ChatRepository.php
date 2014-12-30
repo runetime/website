@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Chat;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class ChatRepository extends EloquentRepository
 {

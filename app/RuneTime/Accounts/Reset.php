@@ -1,7 +1,7 @@
 <?php
-namespace App\Runis\Accounts;
+namespace App\RuneTime\Accounts;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Reset extends Entity
 {

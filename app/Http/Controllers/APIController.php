@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\API\UserRequest;
 use App\RuneTime\Awards\Award;
 use App\RuneTime\Awards\AwardRepository;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class APIController extends BaseController
 {

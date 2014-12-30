@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Statuses\StatusRepository;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class ProfileController extends BaseController
 {

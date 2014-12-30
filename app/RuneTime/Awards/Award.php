@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Awards;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Award extends Entity
 {

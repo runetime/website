@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Bans;
 
-use App\Runis\Core\Entity;
+use App\RuneTime\Core\Entity;
 
 class Ban extends Entity
 {
@@ -15,7 +15,7 @@ class Ban extends Entity
 	 */
 	public function author()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'author_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 
 	/**
@@ -23,6 +23,6 @@ class Ban extends Entity
 	 */
 	public function user()
 	{
-		return $this->belongsTo('App\Runis\Accounts\User', 'user_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'user_id');
 	}
 }

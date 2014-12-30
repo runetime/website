@@ -17,7 +17,7 @@ use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Forum\Threads\Vote;
 use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Statuses\StatusRepository;
-use App\Runis\Accounts\UserRepository;
+use App\RuneTime\Accounts\UserRepository;
 
 class ForumThreadController extends BaseController
 {

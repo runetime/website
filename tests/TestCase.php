@@ -1,5 +1,5 @@
 <?php
-use App\Runis\Accounts\User;
+use App\RuneTime\Accounts\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {

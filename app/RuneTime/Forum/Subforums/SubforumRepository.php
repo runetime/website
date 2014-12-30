@@ -1,7 +1,7 @@
 <?php
 namespace App\RuneTime\Forum\Subforums;
 
-use App\Runis\Core\EloquentRepository;
+use App\RuneTime\Core\EloquentRepository;
 
 class SubforumRepository extends EloquentRepository
 {

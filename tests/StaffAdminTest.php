@@ -58,7 +58,7 @@ class StaffAdminTest extends TestCase
 	{
 		$this->login();
 
-		$user = \App\Runis\Accounts\User::first();
+		$user = \App\RuneTime\Accounts\User::first();
 		$data = $this->form([
 			'username' => $user->display_name,
 		]);
@@ -79,7 +79,7 @@ class StaffAdminTest extends TestCase
 	{
 		$this->login();
 
-		$user = \App\Runis\Accounts\User::first();
+		$user = \App\RuneTime\Accounts\User::first();
 		$data = $this->form([
 			'username' => $user->display_name,
 		]);
