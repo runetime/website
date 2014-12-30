@@ -8,7 +8,7 @@ use App\RuneTime\Guides\LocationRepository;
 use App\RuneTime\Guides\Quest;
 use App\RuneTime\Guides\QuestRepository;
 
-class GuideController extends BaseController
+class GuideController extends Controller
 {
 	/**
 	 * @var LocationRepository

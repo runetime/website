@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class ClanController extends BaseController
+class ClanController extends Controller
 {
 
 	/**

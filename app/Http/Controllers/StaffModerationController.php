@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\RuneTime\Forum\Threads\ThreadRepository;
 
-class StaffModerationController extends BaseController
+class StaffModerationController extends Controller
 {
 	/**
 	 * @var ThreadRepository

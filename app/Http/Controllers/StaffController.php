@@ -12,7 +12,7 @@ use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class StaffController extends BaseController
+class StaffController extends Controller
 {
 	/**
 	 * @var CheckupRepository

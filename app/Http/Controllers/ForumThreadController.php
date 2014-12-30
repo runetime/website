@@ -19,7 +19,7 @@ use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class ForumThreadController extends BaseController
+class ForumThreadController extends Controller
 {
 	/**
 	 * @var AnswerRepository

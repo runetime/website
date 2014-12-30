@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class PlayController extends BaseController
+class PlayController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

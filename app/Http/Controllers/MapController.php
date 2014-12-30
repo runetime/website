@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class MapController extends BaseController {
+class MapController extends Controller {
 	/**
 	 * @return \Illuminate\View\View
 	 */

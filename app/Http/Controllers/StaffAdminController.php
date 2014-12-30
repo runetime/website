@@ -21,7 +21,7 @@ use App\RuneTime\Accounts\UserRepository;
 use App\RuneTime\Accounts\UserRole;
 use App\RuneTime\Accounts\UserRoleRepository;
 
-class StaffAdminController extends BaseController
+class StaffAdminController extends Controller
 {
 	/**
 	 * @var AwardRepository

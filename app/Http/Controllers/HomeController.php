@@ -7,7 +7,7 @@ use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 
-class HomeController extends BaseController
+class HomeController extends Controller
 {
 	/**
 	 * @var NewsRepository

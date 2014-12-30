@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NameCheck\CheckRequest;
 
-class NameCheckerController extends BaseController
+class NameCheckerController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

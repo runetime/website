@@ -8,7 +8,7 @@ use App\RuneTime\Databases\ItemRepository;
 use App\RuneTime\Databases\Monster;
 use App\RuneTime\Databases\MonsterRepository;
 
-class DatabaseController extends BaseController
+class DatabaseController extends Controller
 {
 	/**
 	 * @var ItemRepository

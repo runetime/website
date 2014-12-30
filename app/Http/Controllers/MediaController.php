@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class MediaController extends BaseController
+class MediaController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class LivestreamController extends BaseController
+class LivestreamController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

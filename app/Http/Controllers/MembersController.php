@@ -5,7 +5,7 @@ use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
 
-class MembersController extends BaseController
+class MembersController extends Controller
 {
 	/**
 	 * @var RoleRepository

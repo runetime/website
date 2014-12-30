@@ -6,7 +6,7 @@ use App\RuneTime\Awards\Award;
 use App\RuneTime\Awards\AwardRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class APIController extends BaseController
+class APIController extends Controller
 {
 	/**
 	 * @var AwardRepository

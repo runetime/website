@@ -12,7 +12,7 @@ use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
-class AuthController extends BaseController
+class AuthController extends Controller
 {
 	/**
 	 * @var PasswordBroker

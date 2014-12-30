@@ -9,7 +9,7 @@ use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
 
-class StatusController extends BaseController
+class StatusController extends Controller
 {
 	/**
 	 * @var StatusRepository

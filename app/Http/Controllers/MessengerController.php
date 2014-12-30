@@ -9,7 +9,7 @@ use App\RuneTime\Messenger\MessageRepository;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Accounts\UserRepository;
 
-class MessengerController extends BaseController
+class MessengerController extends Controller
 {
 	/**
 	 * @var MessageRepository

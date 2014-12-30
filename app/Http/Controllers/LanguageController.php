@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use DirectoryIterator;
 use FilesystemIterator;
 
-class LanguageController extends BaseController
+class LanguageController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

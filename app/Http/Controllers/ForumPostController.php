@@ -19,7 +19,7 @@ use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class ForumPostController extends BaseController
+class ForumPostController extends Controller
 {
 	/**
 	 * @var AnswerRepository

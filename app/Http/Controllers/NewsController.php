@@ -10,7 +10,7 @@ use App\RuneTime\News\News;
 use App\RuneTime\News\NewsRepository;
 use Illuminate\Contracts\Auth\Guard;
 
-class NewsController extends BaseController
+class NewsController extends Controller
 {
 	/**
 	 * @var Guard

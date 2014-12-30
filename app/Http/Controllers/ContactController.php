@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Contact\ContactRequest;
 
-class ContactController extends BaseController
+class ContactController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

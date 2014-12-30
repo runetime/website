@@ -9,7 +9,7 @@ use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Tickets\TicketRepository;
 use App\RuneTime\Accounts\RoleRepository;
 
-class TicketController extends BaseController
+class TicketController extends Controller
 {
 	/**
 	 * @var RoleRepository

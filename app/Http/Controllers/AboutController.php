@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class AboutController extends BaseController
+class AboutController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

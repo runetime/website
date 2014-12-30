@@ -11,7 +11,7 @@ use App\Http\Requests\Settings\SocialRequest;
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
 
-class SettingsController extends BaseController
+class SettingsController extends Controller
 {
 	/**
 	 * @var UserRepository

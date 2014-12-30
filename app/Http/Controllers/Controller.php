@@ -5,9 +5,9 @@ use App\RuneTime\Bans\Ban;
 use App\RuneTime\Bans\BanRepository;
 use App\RuneTime\Bans\IP;
 use App\RuneTime\Bans\IPRepository;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Controller as RouterController;
 
-class BaseController extends Controller
+class Controller extends RouterController
 {
 	protected $bc = [];
 	protected $displayPageHeader = true;

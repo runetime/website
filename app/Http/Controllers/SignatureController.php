@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Signatures\RSNRequest;
 
-class SignatureController extends BaseController
+class SignatureController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

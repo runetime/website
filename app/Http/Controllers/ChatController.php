@@ -13,7 +13,7 @@ use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class ChatController extends BaseController
+class ChatController extends Controller
 {
 	/**
 	 * @var ActionRepository

@@ -16,7 +16,7 @@ use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class StaffRadioController extends BaseController
+class StaffRadioController extends Controller
 {
 	/**
 	 * @var HistoryRepository

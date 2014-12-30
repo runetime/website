@@ -12,7 +12,7 @@ use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\UserRepository;
 use App\RuneTime\Accounts\UserRoleRepository;
 
-class StaffTeamLeaderController extends BaseController
+class StaffTeamLeaderController extends Controller
 {
 	/**
 	 * @var ChatRepository

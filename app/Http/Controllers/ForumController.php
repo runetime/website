@@ -13,7 +13,7 @@ use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class ForumController extends BaseController
+class ForumController extends Controller
 {
 	/**
 	 * @var AnswerRepository

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Http\Request;
 
-class GetController extends BaseController
+class GetController extends Controller
 {
 	/**
 	 * @var UserRepository

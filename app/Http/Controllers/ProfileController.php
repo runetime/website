@@ -6,7 +6,7 @@ use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Accounts\UserRepository;
 
-class ProfileController extends BaseController
+class ProfileController extends Controller
 {
 	/**
 	 * @var PostRepository

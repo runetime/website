@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Notifications\NotificationRepository;
 
-class NotificationController extends BaseController
+class NotificationController extends Controller
 {
 	/**
 	 * @var NotificationRepository
