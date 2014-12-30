@@ -95,7 +95,7 @@ class AuthController extends BaseController
 	 */
 	public function postSignupForm(SignupRequest $form)
 	{
-		if(!$form->password == $form->password2) {
+		if($form->password != $form->password2) {
 			return $this->view('errors.signup.passwords');
 		}
 
@@ -190,7 +190,7 @@ class AuthController extends BaseController
 	public function getPasswordReset($token)
 	{
 		$reset = $this->resets->getByToken($token);
-		if(!$reset) {
+		if(empty($reset)) {
 			return \Error::abort(404);
 		}
 
@@ -214,7 +214,7 @@ class AuthController extends BaseController
 		}
 
 		$user = $this->users->getByEmail($reset->email);
-		if($user) {
+		if(!empty($user)) {
 			$user->password = \Hash::make($form->password);
 			$user->save();
 			\Auth::logout();
