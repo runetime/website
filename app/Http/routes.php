@@ -414,7 +414,7 @@ Route::group(['prefix' => 'news'], function() {
 		 * Comment on an article
 		 */
 		Route::group(['middleware' => 'auth'], function() {
-			post('{id}-{name}/reply', 'NewsController@postReply');
+			post('reply', 'NewsController@postReply');
 		});
 	});
 
