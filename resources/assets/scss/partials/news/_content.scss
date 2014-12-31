@@ -1,0 +1,122 @@
+.js {
+	.pages {
+		position: absolute;
+		top: 100%;
+		height: 0;
+		width: 100%;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+		-webkit-transition: height 0s 0.6s;
+		transition: height 0s 0.6s;
+
+		.content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 0;
+			width: 100%;
+			overflow: hidden;
+			-webkit-transition: height 0s 0.6s;
+			transition: height 0s 0.6s;
+
+			h2,
+			p {
+				-webkit-transform: translate3d(0,200px,0);
+				transform: translate3d(0,200px,0);
+				-webkit-transition-property: opacity;
+				transition-property: opacity;
+				-webkit-transition-duration: 0.3s;
+				transition-duration: 0.3s;
+				-webkit-transition-timing-function: cubic-bezier(.7,0,.3,1);
+				transition-timing-function: cubic-bezier(.7,0,.3,1);
+			}
+		}
+	}
+
+	.show-content {
+		.pages {
+			-webkit-transition: none;
+			transition: none;
+			height: 100%;
+		}
+	}
+}
+
+.pages {
+	.content {
+		background: #dfe3e3;
+		text-align: center;
+		color: #545b61;
+		font-size: 1.5em;
+
+		&.show {
+			height: auto;
+			-webkit-transition: none;
+			transition: none;
+
+			a {
+				color: #3c89d5;
+				display: block;
+			}
+
+			h2 {
+
+			}
+
+			p {
+				-webkit-transition-delay: 0.1s;
+				transition-delay: 0.1s;
+			}
+
+			h2,
+			p {
+				-webkit-transition-duration: 1s;
+				transition-duration: 1s;
+				-webkit-transition-property: -webkit-transform, opacity;
+				transition-property: transform, opacity;
+				-webkit-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+		}
+
+		a:hover {
+			color: #545b61;
+		}
+
+		h2 {
+			font-size: 5em;
+			max-width: 70%;
+			color: #34495e;
+			padding: 2.25em 10px 1em;
+
+			span {
+				color: #95a5a6;
+			}
+		}
+
+		p {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 0.5em 2em;
+			line-height: 1.5;
+			text-align: left;
+			font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif;
+
+			&:last-child {
+				padding: 5em 1em 8em;
+				text-align: center;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+.no-js {
+	.pages {
+		.content {
+			h2 {
+				padding-top: 1em;
+			}
+		}
+	}
+}

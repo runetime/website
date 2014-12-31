@@ -1,0 +1,17 @@
+.switch-min .img-dragger-large .slide > *:not(.img-wrap),
+.switch-max .img-dragger-small .slide > *:not(.img-wrap)  {
+	opacity: 0;
+	-webkit-transition: none;
+	transition: none;
+}
+
+.switch-min .img-dragger-large,
+.switch-max .img-dragger-small {
+	-webkit-transition: -webkit-transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+	transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.img-dragger-small button.content-switch {
+	opacity: 0;
+	pointer-events: none;
+}

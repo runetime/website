@@ -1,0 +1,26 @@
+button.slider-switch {
+	background: url('/img/news/switchmin.svg') no-repeat center center;
+	background-size: 90%;
+	border: none;
+	color: transparent;
+	float: right;
+	font-size: 0;
+	height: 80px;
+	outline: none;
+	overflow: hidden;
+	opacity: 0.7;
+	padding: 0;
+	pointer-events: auto;
+	position: relative;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+	width: 80px;
+
+	&.view-maxi {
+		background-image: url('/img/news/switchmax.svg');
+	}
+
+	&:hover {
+		opacity: 1;
+	}
+}
