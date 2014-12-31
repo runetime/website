@@ -97,7 +97,7 @@ class NewsController extends Controller
 		$contentsParsed = with(new \Parsedown)->text($form->contents);
 		$news = with(new News)->saveNew(\Auth::user()->id, $form->name, $form->contents, $contentsParsed, 0, News::STATUS_PUBLISHED);
 		if(\Request::hasFile('image')) {
-			\Img::make($form->file('image'))->save();
+			\Img::make($form->file('image'))->save('./img/news/' . $news->id . '.png');
 			$thumbnail = \Img::make($form->file('image'));
 			$h = $thumbnail->height();
 			$w = $thumbnail->width();

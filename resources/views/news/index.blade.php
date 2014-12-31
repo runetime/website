@@ -40,10 +40,10 @@
 			<div id='slideshow' class='dragslider'>
 				<section class='img-dragger img-dragger-large dragdealer'>
 					<div class='handle'>
-@foreach($news as $x => $newsPiece)
-						<div class='slide' data-content='content-{{ $x + 1 }}'>
+@foreach($news as $newsPiece)
+						<div class='slide' data-content='content-{{ $newsPiece->id }}'>
 							<div class='img-wrap'>
-								<img src='/img/news/{{ $x + 1 }}.png' alt='img{{ $x + 1 }}'/>
+								<img src='/img/news/{{ $newsPiece->id }}.png' alt='img{{ $newsPiece->id }}'/>
 							</div>
 							<h2>
 								{{ $newsPiece->title }}
@@ -59,8 +59,8 @@
 					</div>
 				</section>
 				<section class='pages'>
-@foreach($news as $x => $newsPiece)
-					<div class='content' data-content='content-{{ $x + 1 }}'>
+@foreach($news as $newsPiece)
+					<div class='content' data-content='content-{{ $newsPiece->id }}'>
 						<h2 class='article-header'>
 							{{ $newsPiece->title }}
 							<span>
@@ -90,7 +90,7 @@
 							</li>
 						</ul>
 						<p class='related'>
-							Recently the article <a href='{{ $newsPiece->toSlug() }}'>{{ $newsPiece->title }}</a> was tagged in <a href='{{ $newsPiece->tags[0]->toSlug() }}'>{{ $newsPiece->tags[0]->name }}</a>
+							This article was wwritten by <a href='{{ $newsPiece->author->toSlug() }}'>{{ $newsPiece->author->display_name }}</a> on {{ \Time::DMYFull($newsPiece->created_at) }}
 						</p>
 						<p>
 							Comments
