@@ -4,7 +4,7 @@
 				<form class='form-horizontal' method='post' action='' role='form' enctype='multipart/form-data'>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='name'>
-							@lang('news.create.image')
+							@lang('news.create.name')
 						</label>
 						<div class='col-lg-10'>
 							<input id='name' class='form-control' type='text' name='name' placeholder='Name' required />
