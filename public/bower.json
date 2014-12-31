@@ -1,0 +1,11 @@
+{
+  "name": "RuneTime",
+  "version": "0.0.0",
+  "authors": [
+    "Runis <runisaltair@gmail.com>"
+  ],
+  "description": "RuneTime website",
+  "license": "MIT",
+  "homepage": "http://runetime.com",
+  "private": true
+}
