@@ -121,5 +121,8 @@
 		</div>
 		<script>
 			var news = new News();
+@if(isset($comments) && $comments == true)
+			news.toComments({{ $id }});
+@endif
 		</script>
 @stop

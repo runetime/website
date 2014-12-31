@@ -101,4 +101,8 @@ class News {
 			}
 		})
 	}
+
+	public toComments(id: number) {
+		$("[data-content='content-" + id +"'] button.content-switch").trigger('click');
+	}
 }

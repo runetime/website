@@ -44,4 +44,11 @@ class NewsRepository extends EloquentRepository
 			take($count)->
 			get();
 	}
+
+	public function getXSkipFrom($amount, $id) {
+		return $this->model->
+			where('id', '>=', ($id - $amount))->
+			take(($amount * 2) + 1)->
+			get();
+	}
 }

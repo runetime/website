@@ -73,18 +73,16 @@ class NewsController extends Controller
 			return \Error::abort(404);
 		}
 
+		$news = $this->news->getXSkipFrom(5, $id);
+
 		$canAdd = false;
 		if(\Auth::check() && \Auth::user()->isLeader()) {
 			$canAdd = true;
 		}
 
-		$news = [
-			0 => $news,
-		];
-
 		$this->nav('navbar.runetime.title');
 		$this->title('news.title');
-		return $this->view('news.index', compact('news', 'comments', 'canAdd'));
+		return $this->view('news.index', compact('news', 'comments', 'canAdd', 'id'));
 	}
 
 	/**
