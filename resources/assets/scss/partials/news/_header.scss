@@ -13,17 +13,25 @@
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
 	width: 70%;
+}
 
-	h1 {
-		float: left;
-		font-weight: 700;
-		font-size: 2em;
-		letter-spacing: 1px;
-		line-height: 1.3;
-		margin: 0;
-		padding: 1.5em 0 0.25em;
-		text-transform: uppercase;
-	}
+.news-header h1,
+#can-add h2 {
+	float: left;
+	font-weight: 700;
+	font-size: 2em;
+	letter-spacing: 1px;
+	line-height: 1.3;
+	margin: 0;
+	padding: 1.5em 0 0.25em;
+	text-transform: uppercase;
+}
+
+#can-add {
+	position: absolute;
+	z-index: 1002;
+	right: -10.5%;
+	top: 60%;
 }
 
 .message {

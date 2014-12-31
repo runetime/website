@@ -200,8 +200,8 @@ button.content-switch::before {
 }
 
 .show-content .current button.content-switch {
-	border-color: #c5d3d6;
-	color: #c5d3d6;
+	border-color: rgba(0, 0, 0, 0.9);
+	color: rgba(0, 0, 0, 0.9);
 	-webkit-transform: translate3d(-50%,100%,0);
 	transform: translate3d(-50%,100%,0);
 }

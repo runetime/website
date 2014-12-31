@@ -1,6 +1,7 @@
 var news;
 class News {
 	public constructor() {
+
 		var overlay = document.getElementById('overlay');
 		var overlayClose = overlay.querySelector('button');
 		var header = document.getElementById('header');
@@ -41,5 +42,22 @@ class News {
 		switchBtnn.addEventListener('click', toggleSlideshow);
 		// close overlay
 		overlayClose.addEventListener('click', closeOverlay);
+
+		if(localStorage) {
+			var showed = localStorage.getItem('news.info.showed');
+			if(showed === 'true') {
+				closeOverlay();
+			}
+		}
+
+		this.setupActions();
+	}
+
+	public setupActions() {
+		$("div.info button").click(function() {
+			if(localStorage) {
+				localStorage.setItem('news.info.showed', 'true');
+			}
+		})
 	}
 }

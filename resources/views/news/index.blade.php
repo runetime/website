@@ -17,6 +17,15 @@
 				<button class='slider-switch'>
 					Switch view
 				</button>
+@if($canAdd)
+				<div id='can-add'>
+					<h2>
+						<a href='/news/create'>
+							Create Article
+						</a>
+					</h2>
+				</div>
+@endif
 			</header>
 			<div id='overlay' class='overlay'>
 				<div class='info'>
@@ -65,11 +74,30 @@
 							{{ $newsPiece->title }}
 							<span>
 								Tagged in @include('partials._tagged', ['tags' => $newsPiece->tags])
+								<br />
+								Written by <a href='{{ $newsPiece->author->toSlug() }}'>{{ $newsPiece->author->display_name }}</a>
 							</span>
 						</h2>
 						<p>
 							{!! $newsPiece->contents_parsed !!}
 						</p>
+						<ul class='inline list-inline'>
+							<li>
+								<a href='{{ $newsPiece->toSlug() }}'>
+									<i class='fa fa-link'></i>
+								</a>
+							</li>
+							<li>
+								<a href='{{ $newsPiece->author->toSlug() }}'>
+									<i class='fa fa-user'></i>
+								</a>
+							</li>
+							<li>
+								<a href='{{ $newsPiece->toSlug('comments') }}'>
+									<i class='fa fa-comments'></i>
+								</a>
+							</li>
+						</ul>
 						<p class='related'>
 							Recently the article <a href='{{ $newsPiece->toSlug() }}'>{{ $newsPiece->title }}</a> was tagged in <a href='{{ $newsPiece->tags[0]->toSlug() }}'>{{ $newsPiece->tags[0]->name }}</a>
 						</p>
