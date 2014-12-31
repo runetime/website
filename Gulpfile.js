@@ -69,10 +69,15 @@ gulp.task('scripts-modules', function() {
 
 // Scripts-Admin Task
 gulp.task('scripts-vendor', function() {
+	// It's in this order due to dependencies ;_; Please do not change this order
 	var src = [
 		'./resources/assets/typescript/vendor/jquery.js',
 		'./resources/assets/typescript/vendor/jquery-ui.js',
 		'./resources/assets/typescript/vendor/bootstrap.js',
+		'./resources/assets/typescript/vendor/modernizr.custom.js',
+		'./resources/assets/typescript/vendor/classie.js',
+		'./resources/assets/typescript/vendor/dragdealer.js',
+		'./resources/assets/typescript/vendor/dragslideshow.js',
 		'./resources/assets/typescript/vendor/jasny-bootstrap.js'
 	];
 	gulp.src(src)
@@ -87,9 +92,10 @@ gulp.task('watch', function() {
 	gulp.watch('./resources/assets/typescript/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
 	gulp.watch('./resources/assets/typescript/admin/*.ts', ['scripts-admin']);
 	gulp.watch('./resources/assets/typescript/modules/*.ts', ['scripts-modules']);
-	gulp.watch('./resources/assets/typescript/vendor/*.ts', ['scripts-vendor']);
+	gulp.watch('./resources/assets/typescript/vendor/*.js', ['scripts-vendor']);
 	gulp.watch('./resources/assets/scss/*.scss', ['scss']);
 	gulp.watch('./resources/assets/scss/partials/*.scss', ['scss']);
+	gulp.watch('./resources/assets/scss/partials/*/*.scss', ['scss']);
 });
 
 gulp.task('default', ['scss', 'scripts-admin', 'scripts-modules', 'scripts-vendor']);
