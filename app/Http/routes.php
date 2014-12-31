@@ -403,10 +403,8 @@ Route::group(['prefix' => 'name-check'], function() {
  * News
  */
 Route::group(['prefix' => 'news'], function() {
-	get('/', 'NewsController@getIndex');
-	get('{id}-{name}', 'NewsController@getView');
+	get('/', 'NewsController@getView');
 	post('{id}-{name}/reply', 'NewsController@postReply');
-	get('search/{searchSlug}', 'NewsController@getSearch');
 	/**
 	 * Staff only
 	 */
@@ -419,6 +417,8 @@ Route::group(['prefix' => 'news'], function() {
 			post('/', 'NewsController@postCreate');
 		});
 	});
+
+	get('{tag}', 'NewsController@getView');
 });
 
 /**

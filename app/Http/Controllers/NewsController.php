@@ -37,42 +37,27 @@ class NewsController extends Controller
 	}
 
 	/**
+	 * @param $id
+	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getIndex()
+	public function getView($tag = '')
 	{
 		$canAdd = false;
 		if(\Auth::check() && \Auth::user()->isLeader()) {
 			$canAdd = true;
 		}
 
-		$news = $this->news->getRecentCanView(5);
+		if(strlen($tag) > 0) {
+			$tag = $this->tags->getByName($tag);
+			$news = $tag->news;
+		} else {
+			$news = $this->news->getRecentCanView(5);
+		}
 
 		$this->nav('navbar.runetime.title');
 		$this->title('news.title');
-		return $this->view('news.index', compact('news', 'canAdd'));
-	}
-
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getView($id)
-	{
-		$news = $this->news->getById($id);
-		$tags = $news->tags;
-		$posts = $news->posts();
-		if(!\Auth::check() || !\Auth::user()->isCommunity()) {
-			$posts = $posts->where('status', '=', Post::STATUS_VISIBLE);
-		}
-
-		$posts = $posts->get();
-
-		$this->bc(['news' => trans('news.title')]);
-		$this->nav('navbar.runetime.title');
-		$this->title('news.view.title', ['name' => $news->title]);
-		return $this->view('news.view', compact('news', 'posts', 'tags'));
+		return $this->view('news.index', compact('news', 'canAdd', 'tag'));
 	}
 
 	/**
@@ -119,7 +104,11 @@ class NewsController extends Controller
 			$news->addTag($tag);
 		}
 
-		return \redirect()->to($news->toSlug());
+		if(!empty($tag)) {
+			return \redirect()->to($tag->toNews());
+		} else {
+			return \redirect()->to('news');
+		}
 	}
 
 	/**

@@ -2,30 +2,34 @@
 @section('app')
 		<div id='news'>
 			<link href='http://fonts.googleapis.com/css?family=Playfair+Display:900,400|Lato:300,400,700' rel='stylesheet' type='text/css'>
-			<link rel="stylesheet" type="text/css" href="/css/news.css" />
-			<header id="header" class="news-header">
+			<link rel='stylesheet' type='text/css' href='/css/news.css' />
+			<header id='header' class='news-header'>
 				<h1>
+@if(isset($tag))
+					{{ $tag->name }} News on RuneTime
+@else
 					RuneTime News
+@endif
 				</h1>
-				<span class="message">
+				<span class='message'>
 					Your mobile device does not support the slideshow feature.
 				</span>
-				<button class="slider-switch">
+				<button class='slider-switch'>
 					Switch view
 				</button>
 			</header>
-			<div id="overlay" class="overlay">
-				<div class="info">
+			<div id='overlay' class='overlay'>
+				<div class='info'>
 					<h2>
 						News Interactions
 					</h2>
-					<span class="info-drag">
+					<span class='info-drag'>
 						Drag Sliders
 					</span>
-					<span class="info-keys">
+					<span class='info-keys'>
 						Use Arrows
 					</span>
-					<span class="info-switch">
+					<span class='info-switch'>
 						Switch view
 					</span>
 					<button>
@@ -33,44 +37,44 @@
 					</button>
 				</div>
 			</div>
-			<div id="slideshow" class="dragslider">
-				<section class="img-dragger img-dragger-large dragdealer">
-					<div class="handle">
-@for($i = 1; $i <= 5; $i++)
-						<div class="slide" data-content="content-{{ $i }}">
-							<div class="img-wrap">
-								<img src="/img/news/{{ $i }}.png" alt="img{{ $i }}"/>
+			<div id='slideshow' class='dragslider'>
+				<section class='img-dragger img-dragger-large dragdealer'>
+					<div class='handle'>
+@foreach($news as $x => $newsPiece)
+						<div class='slide' data-content='content-{{ $x + 1 }}'>
+							<div class='img-wrap'>
+								<img src='/img/news/{{ $x + 1 }}.png' alt='img{{ $x + 1 }}'/>
 							</div>
 							<h2>
-								Article {{ $i }}
+								{{ $newsPiece->title }}
 								<span>
-									In News Section <a href='/news/runetime'>RuneTime</a>
+									Tagged in @include('partials._tagged', ['tags' => $newsPiece->tags])
 								</span>
 							</h2>
-							<button class="content-switch">
+							<button class='content-switch'>
 								Read more
 							</button>
 						</div>
-@endfor
+@endforeach
 					</div>
 				</section>
-				<section class="pages">
-@for($i = 1; $i <= 5; $i++)
-					<div class="content" data-content="content-{{ $i }}">
+				<section class='pages'>
+@foreach($news as $x => $newsPiece)
+					<div class='content' data-content='content-{{ $x + 1 }}'>
 						<h2>
-							Article {{ $i }}
+							{{ $newsPiece->title }}
 							<span>
-								Description here
+								Tagged in @include('partials._tagged', ['tags' => $newsPiece->tags])
 							</span>
 						</h2>
 						<p>
-							Text
+							{!! $newsPiece->contents_parsed !!}
 						</p>
-						<p class="related">
-							You might also like <a href="http://tympanus.net/Development/ArticleIntroEffects/">Inspiration for Article Intro Effects</a>
+						<p class='related'>
+							Recently the article <a href='{{ $newsPiece->toSlug() }}'>{{ $newsPiece->title }}</a> was tagged in <a href='{{ $newsPiece->tags[0]->toSlug() }}'>{{ $newsPiece->tags[0]->name }}</a>
 						</p>
 					</div>
-@endfor
+@endforeach
 				</section>
 			</div>
 		</div>

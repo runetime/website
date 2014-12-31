@@ -53,4 +53,9 @@ class Tag extends Entity
 
 		return '/forums/tag/' . \String::slugEncode($this->name) . $url;
 	}
+
+	public function toNews()
+	{
+		return '/news/' . \String::slugEncode($this->name) . $url;
+	}
 }
