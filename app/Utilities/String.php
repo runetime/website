@@ -79,6 +79,10 @@ class String
 			}
 		}
 
+		if(\String::endsWith('-', $slug)) {
+			$slug = substr($slug, 0, -1);
+		}
+
 		return $slug;
 	}
 
