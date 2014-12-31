@@ -1,0 +1,13 @@
+.news-editor {
+	margin: 0 auto;
+	padding-left: 4.25em;
+	textarea {
+		border: 1px solid rgba(158, 166, 159, 1) !important;
+		border-radius: .3em;
+		width: 15em;
+	}
+
+	button {
+		display: block;
+	}
+}

@@ -70,7 +70,7 @@
 				<section class='pages'>
 @foreach($news as $x => $newsPiece)
 					<div class='content' data-content='content-{{ $x + 1 }}'>
-						<h2>
+						<h2 class='article-header'>
 							{{ $newsPiece->title }}
 							<span>
 								Tagged in @include('partials._tagged', ['tags' => $newsPiece->tags])
@@ -81,25 +81,38 @@
 						<p>
 							{!! $newsPiece->contents_parsed !!}
 						</p>
-						<ul class='inline list-inline'>
+						<ul class='inline list-inline article-links'>
 							<li>
-								<a href='{{ $newsPiece->toSlug() }}'>
+								<a href='{{ $newsPiece->toSlug() }}' title='Link to Article'>
 									<i class='fa fa-link'></i>
 								</a>
 							</li>
 							<li>
-								<a href='{{ $newsPiece->author->toSlug() }}'>
+								<a href='{{ $newsPiece->author->toSlug() }}' title="Author's Profile">
 									<i class='fa fa-user'></i>
 								</a>
 							</li>
 							<li>
-								<a href='{{ $newsPiece->toSlug('comments') }}'>
+								<a href='{{ $newsPiece->toSlug('comments') }}' title='Article Comments'>
 									<i class='fa fa-comments'></i>
 								</a>
 							</li>
 						</ul>
 						<p class='related'>
 							Recently the article <a href='{{ $newsPiece->toSlug() }}'>{{ $newsPiece->title }}</a> was tagged in <a href='{{ $newsPiece->tags[0]->toSlug() }}'>{{ $newsPiece->tags[0]->name }}</a>
+						</p>
+						<p>
+							Comments
+						</p>
+	@if(\Auth::check())
+		@include('news._editor', ['news' => $newsPiece])
+	@endif
+
+	@foreach($newsPiece->posts as $post)
+		@include('news._comment', ['post' => $post])
+	@endforeach
+						<p>
+
 						</p>
 					</div>
 @endforeach

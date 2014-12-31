@@ -61,6 +61,33 @@ class NewsController extends Controller
 	}
 
 	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getArticle($id, $comments = false)
+	{
+		$news = $this->news->getById($id);
+
+		if(empty($news)) {
+			return \Error::abort(404);
+		}
+
+		$canAdd = false;
+		if(\Auth::check() && \Auth::user()->isLeader()) {
+			$canAdd = true;
+		}
+
+		$news = [
+			0 => $news,
+		];
+
+		$this->nav('navbar.runetime.title');
+		$this->title('news.title');
+		return $this->view('news.index', compact('news', 'comments', 'canAdd'));
+	}
+
+	/**
 	 * @return \Illuminate\View\View
 	 */
 	public function getCreate()
@@ -119,16 +146,23 @@ class NewsController extends Controller
 	 */
 	public function postReply($id, ReplyRequest $form)
 	{
+		$response = ['done' => false];
+
 		$news = $this->news->getById($id);
 		if(empty($news)) {
 			return \Error::abort(404);
 		}
 
 		$parsedContents = with(new \Parsedown)->text($form->contents);
-		$post = with(new Post)->saveNew(\Auth::user()->id, 0, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
+		$post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, $parsedContents);
 		$news->addPost($post);
 		$news->incrementPosts();
 
-		return \redirect()->to($news->toSlug('#comments'));
+		if(!empty($news)) {
+			$response['done'] = true;
+			$response['url'] = $news->toSlug('comments');
+		}
+
+		return json_encode($response);
 	}
 }

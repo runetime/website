@@ -404,7 +404,20 @@ Route::group(['prefix' => 'name-check'], function() {
  */
 Route::group(['prefix' => 'news'], function() {
 	get('/', 'NewsController@getView');
-	post('{id}-{name}/reply', 'NewsController@postReply');
+	/**
+	 * Article
+	 */
+	Route::group(['prefix' => '{id}-{name}'], function() {
+		get('/', 'NewsController@getArticle');
+		get('comments', 'NewsController@getArticle', ['comments' => true]);
+		/**
+		 * Comment on an article
+		 */
+		Route::group(['middleware' => 'auth'], function() {
+			post('{id}-{name}/reply', 'NewsController@postReply');
+		});
+	});
+
 	/**
 	 * Staff only
 	 */

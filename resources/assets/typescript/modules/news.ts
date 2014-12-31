@@ -1,6 +1,24 @@
 var news;
 class News {
+	elements: any = {};
+	hooks: any = {};
+	paths: any = {};
 	public constructor() {
+		this.elements = {
+			comment: {
+				contents: "#news-comment-textarea"
+			}
+		};
+		this.hooks = {
+			comment: {
+				submit: "[rt-hook='news.article:comment.submit']"
+			}
+		};
+		this.paths = {
+			comment: function(id: any) {
+				return "/news/" + id + "-name/reply"
+			}
+		};
 
 		var overlay = document.getElementById('overlay');
 		var overlayClose = overlay.querySelector('button');
@@ -57,6 +75,29 @@ class News {
 		$("div.info button").click(function() {
 			if(localStorage) {
 				localStorage.setItem('news.info.showed', 'true');
+			}
+		});
+		$(this.hooks.comment.submit).click(function(e: any) {
+			var id = $(e.target).parent().attr('rt-data');
+			var contents = $(e.target).parent().find('textarea').val();
+			news.submitComment(id, contents);
+		});
+	}
+
+	public submitComment(id, contents) {
+		if(contents.length == 0) {
+			return 0;
+		}
+		var data = {
+			contents: contents
+		};
+		var results = utilities.postAJAX(this.paths.comment(id), data);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			if(results.done === true) {
+				window.location.href = results.url;
+			} else {
+				// error
 			}
 		})
 	}
