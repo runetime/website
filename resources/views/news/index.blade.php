@@ -5,7 +5,7 @@
 			<link rel='stylesheet' type='text/css' href='/css/news.css' />
 			<header id='header' class='news-header'>
 				<h1>
-@if(isset($tag))
+@if(isset($tag) && !empty($tag))
 					{{ $tag->name }} News on RuneTime
 @else
 					RuneTime News
@@ -17,15 +17,6 @@
 				<button class='slider-switch'>
 					Switch view
 				</button>
-@if($canAdd)
-				<div id='can-add'>
-					<h2>
-						<a href='/news/create'>
-							Create Article
-						</a>
-					</h2>
-				</div>
-@endif
 			</header>
 			<div id='overlay' class='overlay'>
 				<div class='info'>

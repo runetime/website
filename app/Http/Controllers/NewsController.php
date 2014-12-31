@@ -43,10 +43,6 @@ class NewsController extends Controller
 	 */
 	public function getView($tag = '')
 	{
-		$canAdd = false;
-		if(\Auth::check() && \Auth::user()->isLeader()) {
-			$canAdd = true;
-		}
 
 		if(strlen($tag) > 0) {
 			$tag = $this->tags->getByName($tag);
@@ -57,7 +53,7 @@ class NewsController extends Controller
 
 		$this->nav('navbar.runetime.title');
 		$this->title('news.title');
-		return $this->view('news.index', compact('news', 'canAdd', 'tag'));
+		return $this->view('news.index', compact('news', 'tag'));
 	}
 
 	/**
@@ -75,14 +71,9 @@ class NewsController extends Controller
 
 		$news = $this->news->getXSkipFrom(5, $id);
 
-		$canAdd = false;
-		if(\Auth::check() && \Auth::user()->isLeader()) {
-			$canAdd = true;
-		}
-
 		$this->nav('navbar.runetime.title');
 		$this->title('news.title');
-		return $this->view('news.index', compact('news', 'comments', 'canAdd', 'id'));
+		return $this->view('news.index', compact('news', 'comments', 'id'));
 	}
 
 	/**
