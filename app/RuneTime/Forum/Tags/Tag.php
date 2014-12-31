@@ -43,4 +43,14 @@ class Tag extends Entity
 	{
 		$this->threads()->attach([$this->id, $threadId]);
 	}
+
+	public function toSlug($path = '')
+	{
+		$url = '';
+		if(strlen($path) > 0) {
+			$url = '/' . $path;
+		}
+
+		return '/forums/tag/' . \String::slugEncode($this->name) . $url;
+	}
 }
