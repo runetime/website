@@ -56,6 +56,6 @@ class Tag extends Entity
 
 	public function toNews()
 	{
-		return '/news/' . \String::slugEncode($this->name) . $url;
+		return '/news/' . \String::slugEncode($this->name);
 	}
 }
