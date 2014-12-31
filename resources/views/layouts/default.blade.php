@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('app')
-@if($displayPageHeader && !empty($title))
+@if(isset($displayPageHeader) && $displayPageHeader && !empty($title))
 		<div class='wrapper wrapper-flat'>
 			<ol class='breadcrumb'>
 				<li data-toggle='tooltip' data-placement='bottom' title='Home'>
