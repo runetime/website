@@ -64,5 +64,32 @@ class Utilities {
             return "1 second ago";
         }
     }
+
+    public post(path: string, params: any, method: string) {
+        method = method || 'post';
+        var form = document.createElement('form');
+        form.setAttribute('method', method);
+        form.setAttribute('action', path);
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', key);
+                hiddenField.setAttribute('value', params[key]);
+
+                form.appendChild(hiddenField);
+            }
+        }
+        var tokenVal = $("meta[name='_token']").attr('content');
+        var tokenField = document.createElement('input');
+        tokenField.setAttribute('type', 'hidden');
+        tokenField.setAttribute('name', '_token');
+        tokenField.setAttribute('value', tokenVal);
+
+        form.appendChild(tokenField);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
 }
 utilities = new Utilities();
