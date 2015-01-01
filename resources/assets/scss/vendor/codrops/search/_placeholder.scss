@@ -1,0 +1,20 @@
+.morphsearch-input::-webkit-input-placeholder {
+	color: #c2c2c2;
+}
+
+.morphsearch-input:-moz-placeholder {
+	color: #c2c2c2;
+}
+
+.morphsearch-input::-moz-placeholder {
+	color: #c2c2c2;
+}
+
+.morphsearch-input:-ms-input-placeholder {
+	color: #c2c2c2;
+}
+
+/* hide placeholder when active in Chrome */
+.gn-search:focus::-webkit-input-placeholder {
+	color: transparent;
+}

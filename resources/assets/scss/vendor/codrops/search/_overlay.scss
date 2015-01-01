@@ -1,0 +1,18 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	opacity: 0;
+	pointer-events: none;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.morphsearch.open ~ .overlay {
+	opacity: 1;
+}
