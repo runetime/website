@@ -76,8 +76,6 @@ if(!Auth::check()) {
 }
 
 if(!isset($nav))               $nav = "Home";
-if(!isset($bc))                $bc = [];
-if(!isset($displayPageHeader)) $displayPageHeader = true;
 if(!isset($js))                $js = [];
 if(!empty($title))             $bc['#'] = $title;
 $current = $nav;

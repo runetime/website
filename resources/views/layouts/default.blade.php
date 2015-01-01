@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('app')
-@if(isset($displayPageHeader) && $displayPageHeader && !empty($title))
+@if(isset($displayPageHeader) && $displayPageHeader && isset($title))
 		<div class='wrapper wrapper-flat'>
 			<ol class='breadcrumb'>
 				<li data-toggle='tooltip' data-placement='bottom' title='Home'>
@@ -23,6 +23,11 @@
 				</li>
 		@endif
 	@endforeach
+				<li class='active'>
+					<span data-toggle='tooltip' data-placement='bottom' title='{{ $title }}'>
+						{{ $title }}
+					</span>
+				</li>
 			</ol>
 		</div>
 @endif
