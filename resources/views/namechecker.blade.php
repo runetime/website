@@ -1,26 +1,35 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper'>
+			<div class='container container-dark'>
 				<h1>
 					@lang('namechecker.title')
 				</h1>
-				<form class='form-horizontal' role='form'>
-					<div class='form-group'>
-						<label class='col-lg-2 control-label' for='rsn-check-field'>
-							@lang('namechecker.enter_rsn')
-						</label>
-						<div class='col-lg-10'>
-							<input id='rsn-check-field' class='form-control' type='text' placeholder='@lang('namechecker.rsn')' required />
-							<p id='rsn-availability'></p>
+				<form id='namechecker-form' class='simform' autocomplete='off'>
+					<div class='simform-inner'>
+						<ol class='questions'>
+							<li>
+								<span>
+									<label for='q1' class='text-center'>
+										@lang('namechecker.enter_rsn')
+									</label>
+								</span>
+								<input id='q1' name='q1' type='text' />
+							</li>
+						</ol>
+						<button class='submit' type='submit'>
+							Send answers
+						</button>
+						<div class='controls'>
+							<button class='next'></button>
+							<div class='progress'></div>
+							<span class='number'>
+								<span class='number-current'></span>
+								<span class='number-total'></span>
+							</span>
+							<span class='error-message'></span>
 						</div>
 					</div>
-					<div class='form-group'>
-						<div class='col-lg-10 col-lg-offset-2'>
-							<button type='button' class='btn btn-info' rt-hook='name.checker:submit'>
-								@lang('namechecker.check')
-							</button>
-						</div>
-					</div>
+					<span class='final-message'></span>
 				</form>
 			</div>
 			<script>
