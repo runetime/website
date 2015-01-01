@@ -11,6 +11,16 @@ $badge-info: rgba(69, 0, 107, 1) !important;
 
 
 /**
+ * Buttons
+ */
+$button-padding:           1em 2em;
+
+// Specific buttons
+$button-orange-background: rgba(201, 78, 80, 1);
+$button-orange-color:      rgba(255, 255, 255, 1);
+
+
+/**
  * Boxes
  */
 $boxes-box-bg:          rgba(71, 71, 71, 1);
@@ -102,6 +112,7 @@ $container-darkblue:           rgba(9, 111, 143, 1);
 $container-hero:               rgba(9, 111, 143, 1);
 $container-lightgreen:         rgba(47, 96, 133, 1);
 $container-red:                rgba(135, 21, 20, 1);
+$container-silver:             rgba(133, 133, 133, 1);
 
 
 /**

@@ -1,0 +1,11 @@
+button.dialog-button {
+	border: none;
+	font-weight: 600;
+	outline: none;
+	padding: $button-padding;
+}
+
+button.dialog-orange {
+	background: $button-orange-background;
+	color: $button-orange-color;
+}

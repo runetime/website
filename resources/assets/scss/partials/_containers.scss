@@ -23,6 +23,7 @@
 	h4,
 	h5,
 	h6 {
+		margin-bottom: 1.5em;
 		text-align: center;
 		small {
 			color: $container-color;
@@ -31,18 +32,22 @@
 	}
 }
 
+.container-darkblue {
+	background: $container-darkblue;
+}
+
 .container-hero {
 	background: $container-hero;
 }
 
-.container-darkblue {
-	background: $container-darkblue;
+.container-lightgreen {
+	background: $container-lightgreen;
 }
 
 .container-red {
 	background: $container-red;
 }
 
-.container-lightgreen {
-	background: $container-lightgreen;
+.container-silver {
+	background: $container-silver;
 }
