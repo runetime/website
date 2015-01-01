@@ -1,7 +1,9 @@
 @font-face {
-	font-weight: normal;
-	font-style: normal;
-	font-family: 'icomoon';
+	font: {
+		family: 'icomoon';
+		style: normal;
+		weight: normal;
+	}
 	src:url('/fonts/icomoon/icomoon.eot?-9heso');
 	src:url('/fonts/icomoon/icomoon.eot?#iefix-9heso') format('embedded-opentype'),
 	url('/fonts/icomoon/icomoon.woff?-9heso') format('woff'),
@@ -10,26 +12,27 @@
 }
 
 .simform {
-	position: relative;
-	margin: 0 auto;
-	padding: 2em 0;
-	max-width: 860px;
-	width: 100%;
-	text-align: left;
 	font-size: 2.5em;
-}
+	margin: 0 auto;
+	max-width: 860px;
+	padding: 2em 0;
+	position: relative;
+	text-align: left;
+	width: 100%;
 
-.simform .submit {
-	display: none;
+	.submit {
+		display: none;
+	}
 }
-
 
 /* Final hiding of form / showing message */
-.simform-inner.hide {
-	visibility: hidden;
-	opacity: 0;
-	-webkit-transition: opacity 0.3s, visibility 0s 0.3s;
-	transition: opacity 0.3s, visibility 0s 0.3s;
+.simform-inner {
+	.hide {
+		opacity: 0;
+		-webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+		transition: opacity 0.3s, visibility 0s 0.3s;
+		visibility: hidden;
+	}
 }
 
 /* Remove IE clear cross */

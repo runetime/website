@@ -1,45 +1,51 @@
-.simform .number {
-	position: absolute;
-	right: 0;
-	overflow: hidden;
-	margin: 0.4em 0;
-	width: 3em;
-	font-weight: 700;
-	font-size: 0.4em;
-}
+.simform {
+	&.show-next {
+		.number-current {
+			-webkit-transform: translateY(-100%);
+			transform: translateY(-100%);
+			-webkit-transition: -webkit-transform 0.4s;
+			transition: transform 0.4s;
+		}
 
-.simform .number:after {
-	position: absolute;
-	left: 50%;
-	content: '/';
-	opacity: 0.4;
-	-webkit-transform: translateX(-50%);
-	transform: translateX(-50%);
-}
+		.number-next {
+			-webkit-animation: moveUpFromDown 0.4s both;
+			animation: moveUpFromDown 0.4s both;
+		}
+	}
 
-.simform .number span {
-	float: right;
-	width: 40%;
-	text-align: center;
-}
+	.number {
+		font: {
+			size: 0.4em;
+			weight: 700;
+		}
+		margin: 0.4em 0;
+		overflow: hidden;
+		position: absolute;
+		right: 0;
+		width: 3em;
 
-.simform .number .number-current {
-	float: left;
-}
+		&:after {
+			content: '/';
+			left: 50%;
+			opacity: 0.4;
+			position: absolute;
+			-webkit-transform: translateX(-50%);
+			transform: translateX(-50%);
+		}
 
-.simform .number-next {
-	position: absolute;
-	left: 0;
-}
+		span {
+			float: right;
+			text-align: center;
+			width: 40%;
+		}
 
-.simform.show-next .number-current {
-	-webkit-transition: -webkit-transform 0.4s;
-	transition: transform 0.4s;
-	-webkit-transform: translateY(-100%);
-	transform: translateY(-100%);
-}
+		.number-current {
+			float: left;
+		}
+	}
 
-.simform.show-next .number-next {
-	-webkit-animation: moveUpFromDown 0.4s both;
-	animation: moveUpFromDown 0.4s both;
+	.number-next {
+		left: 0;
+		position: absolute;
+	}
 }

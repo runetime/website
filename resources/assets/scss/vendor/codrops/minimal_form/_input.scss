@@ -1,16 +1,16 @@
 .questions input {
-	display: block;
-	margin: 0.3em 0 0 0;
-	padding: 0.5em 1em 0.5em 0.7em;
-	width: calc(100% - 2em);
-	border: none;
 	background: transparent;
-	color: rgba(0,0,0,0.8);
+	border: none;
+	color: rgba(0, 0, 0, 0.8);
+	display: block;
 	font-size: 1em;
 	line-height: 1;
+	margin: 0.3em 0 0 0;
 	opacity: 0;
+	padding: 0.5em 1em 0.5em 0.7em;
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
+	width: calc(100% - 2em);
 }
 
 .questions .current input,

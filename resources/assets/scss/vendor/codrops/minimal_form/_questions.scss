@@ -1,35 +1,39 @@
-.simform ol {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	position: relative;
-	-webkit-transition: height 0.4s;
-	transition: height 0.4s;
+.simform {
+	ol {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		-webkit-transition: height 0.4s;
+		transition: height 0.4s;
+
+		&:before {
+			background-color: rgba(0, 0, 0, 0.1);
+			bottom: 0;
+			content: '';
+			height: 2.35em;
+			left: 0;
+			position: absolute;
+			width: 100%;
+		}
+	}
 }
 
-.simform ol:before {
-	content: '';
-	background-color: rgba(0,0,0,0.1);
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 2.35em;
-}
-
-.questions li {
-	z-index: 100;
-	position: relative;
-	visibility: hidden;
-	height: 0;
-	-webkit-transition: visibility 0s 0.4s, height 0s 0.4s;
-	transition: visibility 0s 0.4s, height 0s 0.4s;
+.questions {
+	li {
+		height: 0;
+		position: relative;
+		-webkit-transition: visibility 0s 0.4s, height 0s 0.4s;
+		transition: visibility 0s 0.4s, height 0s 0.4s;
+		visibility: hidden;
+		z-index: 100;
+	}
 }
 
 .questions li.current,
 .no-js .questions li {
-	visibility: visible;
 	height: auto;
 	-webkit-transition: none;
 	transition: none;
+	visibility: visible;
 }

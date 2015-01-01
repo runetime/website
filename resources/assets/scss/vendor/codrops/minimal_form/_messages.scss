@@ -1,34 +1,38 @@
-.simform .error-message,
-.simform .final-message {
-	position: absolute;
-	visibility: hidden;
-	opacity: 0;
-	-webkit-transition: opacity 0.4s;
-	transition: opacity 0.4s;
-}
+.simform {
+	.error-message {
+		color: rgba(0,0,0,0.7);
+		font: {
+			size: 0.4em;
+			style: italic;
+		}
+		padding: 0.4em 3.5em 0 0;
+		width: 100%;
+	}
 
-.simform .error-message {
-	padding: 0.4em 3.5em 0 0;
-	width: 100%;
-	color: rgba(0,0,0,0.7);
-	font-style: italic;
-	font-size: 0.4em;
+	.error-message,
+	.final-message {
+		opacity: 0;
+		position: absolute;
+		-webkit-transition: opacity 0.4s;
+		transition: opacity 0.4s;
+		visibility: hidden;
+	}
 }
 
 .final-message {
-	top: 50%;
 	left: 0;
 	padding: 0.5em;
-	width: 100%;
 	text-align: center;
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
+	top: 50%;
+	width: 100%;
 }
 
 .error-message.show,
 .final-message.show {
-	visibility: visible;
 	opacity: 1;
+	visibility: visible;
 }
 
 .final-message.show {
