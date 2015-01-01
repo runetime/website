@@ -90,7 +90,7 @@
 							</li>
 						</ul>
 						<p class='related'>
-							This article was written by <a href='{{ $newsPiece->author->toSlug() }}'>{{ $newsPiece->author->display_name }}</a> on {{ \Time::DMYFull($newsPiece->created_at) }}
+							This article was written by <a href='{{ $newsPiece->author->toSlug() }}'>{{ $newsPiece->author->display_name }}</a> on the {{ \Time::DMYFull($newsPiece->created_at) }}
 						</p>
 						<p>
 							Comments
