@@ -160,6 +160,11 @@ $current = $nav;
 @endforeach
 					</ul>
 					<ul class='nav navbar-nav navbar-right'>
+						<li id='search-glass'>
+							<a class='fa fa-search'>
+
+							</a>
+						</li>
 @foreach($navLogged as $url => $name)
 	@if(is_array($name))
 		@if($url === $current)
@@ -203,6 +208,7 @@ $current = $nav;
 			</div>
 		</nav>
 @yield('app')
+@include('partials/_search')
 		<script>$(function(){utilities.formToken('{{ base64_encode(csrf_token()) }}');});</script>
 	</body>
 </html>

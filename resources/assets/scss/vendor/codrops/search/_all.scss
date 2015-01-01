@@ -1,4 +1,5 @@
 .morphsearch {
+	display: none;
 	width: 200px;
 	min-height: 40px;
 	background: #f1f1f1;
@@ -91,7 +92,7 @@ input[type="search"] { /* reset normalize */
 	overflow: hidden;
 	right: 0;
 	top: 50%;
-	background: transparent url(../img/magnifier.svg) no-repeat center center;
+	background: transparent url('../fonts/magnifier.svg') no-repeat center center;
 	background-size: 100%;
 	border: none;
 	pointer-events: none;
