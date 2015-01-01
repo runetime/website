@@ -1,0 +1,48 @@
+.container {
+	color: $container-color;
+	padding: {
+		top: $container-padding-vertical;
+		left: $container-padding-horizontal;
+		right: $container-padding-horizontal;
+		bottom: $container-padding-vertical;
+	}
+	text-align: center;
+	width: $container-width;
+
+	h1 {
+		font-size: $container-h1-size;
+	}
+
+	h3 {
+		font-size: $container-h3-size;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		text-align: center;
+		small {
+			color: $container-color;
+			display: block;
+		}
+	}
+}
+
+.container-hero {
+	background: $container-hero;
+}
+
+.container-darkblue {
+	background: $container-darkblue;
+}
+
+.container-red {
+	background: $container-red;
+}
+
+.container-lightgreen {
+	background: $container-lightgreen;
+}

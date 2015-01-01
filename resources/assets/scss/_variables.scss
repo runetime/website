@@ -87,6 +87,24 @@ $chatbox-width:                  100%;
 
 
 /**
+ * Containers
+ */
+// Base Container
+$container-color:              rgba(255, 255, 255, 1);
+$container-h1-size:            400%;
+$container-h3-size:            250%;
+$container-padding-horizontal: 2em;
+$container-padding-vertical:   3em;
+$container-width:              100%;
+
+// Specific Containers
+$container-darkblue:           rgba(9, 111, 143, 1);
+$container-hero:               rgba(9, 111, 143, 1);
+$container-lightgreen:         rgba(47, 96, 133, 1);
+$container-red:                rgba(135, 21, 20, 1);
+
+
+/**
  * Images
  */
 $images-photo-sm-width: 3em;
