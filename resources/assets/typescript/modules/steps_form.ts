@@ -10,7 +10,6 @@
  */
 ;( function( window ) {
 	'use strict';
-	console.log('asdasdasda');
 	var transEndEventNames = {
 			'WebkitTransition': 'webkitTransitionEnd',
 			'MozTransition': 'transitionend',
