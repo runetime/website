@@ -1,25 +1,35 @@
 @extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
-				<form action='' method='post' class='form-horizontal' role='form'>
-					<div class='form-group'>
-						<label for='username' class='col-lg-2 control-label'>
-							@lang('signature.name.question1')
-						</label>
-						<div class='col-lg-10'>
-							<input type='text' id='username' name='username' class='form-control' placeholder="{{Lang::get('signature.name.question1')}}" required />
+				<form id='signature-form' class='simform' autocomplete='off'>
+					<div class='simform-inner'>
+						<ol class='questions'>
+							<li>
+								<span>
+									<label for='q1'>
+										@lang('signature.name.question1')
+									</label>
+								</span>
+								<input id='q1' name='q1' type='text' />
+							</li>
+						</ol>
+						<button class='submit' type='submit'>
+							Send answers
+						</button>
+						<div class='controls'>
+							<button class='next'></button>
+							<div class='progress'></div>
+							<span class='number'>
+								<span class='number-current'></span>
+								<span class='number-total'></span>
+							</span>
+							<span class='error-message'></span>
 						</div>
 					</div>
-					<div class='form-group'>
-						<div class='col-lg-offset-2 col-lg-10'>
-							<button class='btn btn-primary' type='submit'>
-								@lang('signature.name.continue')
-							</button>
-						</div>
-					</div>
+					<span class='final-message'></span>
 				</form>
-				<p class='text-warning'>
-					@lang('signature.name.note')
-				</p>
 			</div>
+	<script>
+		signature = new Signature();
+	</script>
 @stop
