@@ -1,0 +1,20 @@
+.no-js .simform {
+	font-size: 1.75em;
+}
+
+.no-js .questions li {
+	padding: 0 0 2em;
+}
+
+.no-js .simform .submit {
+	display: block;
+	float: right;
+	padding: 10px 20px;
+	border: none;
+	background: rgba(0,0,0,0.3);
+	color: rgba(0,0,0,0.4);
+}
+
+.no-js .simform .controls {
+	display: none;
+}

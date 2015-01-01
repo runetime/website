@@ -1,0 +1,24 @@
+.questions input {
+	display: block;
+	margin: 0.3em 0 0 0;
+	padding: 0.5em 1em 0.5em 0.7em;
+	width: calc(100% - 2em);
+	border: none;
+	background: transparent;
+	color: rgba(0,0,0,0.8);
+	font-size: 1em;
+	line-height: 1;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.questions .current input,
+.no-js .questions input {
+	opacity: 1;
+}
+
+.questions input:focus,
+.simform button:focus {
+	outline: none;
+}

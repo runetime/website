@@ -1,0 +1,52 @@
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'icomoon';
+	src:url('/fonts/icomoon/icomoon.eot?-9heso');
+	src:url('/fonts/icomoon/icomoon.eot?#iefix-9heso') format('embedded-opentype'),
+	url('/fonts/icomoon/icomoon.woff?-9heso') format('woff'),
+	url('/fonts/icomoon/icomoon.ttf?-9heso') format('truetype'),
+	url('/fonts/icomoon/icomoon.svg?-9heso#icomoon') format('svg');
+}
+
+.simform {
+	position: relative;
+	margin: 0 auto;
+	padding: 2em 0;
+	max-width: 860px;
+	width: 100%;
+	text-align: left;
+	font-size: 2.5em;
+}
+
+.simform .submit {
+	display: none;
+}
+
+
+/* Final hiding of form / showing message */
+.simform-inner.hide {
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+	transition: opacity 0.3s, visibility 0s 0.3s;
+}
+
+/* Remove IE clear cross */
+input[type=text]::-ms-clear {
+	display: none;
+}
+
+
+/* Adjust form for smaller screens */
+@media screen and (max-width: 44.75em) {
+	.simform {
+		font-size: 1.8em;
+	}
+}
+
+@media screen and (max-width: 33.5625em) {
+	.simform {
+		font-size: 1.2em;
+	}
+}

@@ -1,0 +1,35 @@
+.questions li > span {
+	display: block;
+	overflow: hidden;
+}
+
+.questions li > span label {
+	display: block;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+
+.questions li.current > span label,
+.no-js .questions li > span label {
+	-webkit-transition: none;
+	transition: none;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+}
+
+.show-next .questions li.current > span label {
+	-webkit-animation: moveUpFromDown 0.4s both;
+	animation: moveUpFromDown 0.4s both;
+}
+
+@-webkit-keyframes moveUpFromDown {
+	from { -webkit-transform: translateY(100%); }
+	to { -webkit-transform: translateY(0); }
+}
+
+@keyframes moveUpFromDown {
+	from { -webkit-transform: translateY(100%); transform: translateY(100%); }
+	to { -webkit-transform: translateY(0); transform: translateY(0); }
+}
