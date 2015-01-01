@@ -1,6 +1,9 @@
 @extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
+				<p class='text-warning'>
+					@lang('signature.name.note')
+				</p>
 				<form id='signature-form' class='simform' autocomplete='off'>
 					<div class='simform-inner'>
 						<ol class='questions'>
