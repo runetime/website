@@ -67,8 +67,8 @@ class News extends Entity
 	 */
 	public function hasImage()
 	{
-		$path = 'img/news/thumbnail/' . $this->id . '.png';
-		if(file_exists('./' . $path)) {
+		$path = '/img/news/thumbnail/' . $this->id . '.png';
+		if(file_exists('.' . $path)) {
 			return $path;
 		}
 
