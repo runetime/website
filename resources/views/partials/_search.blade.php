@@ -6,10 +6,10 @@
         </button>
 	</form>
 	<div class='morphsearch-content'>
-		<div class='dummy-column'>
+		<div class='column'>
 			<h2>People</h2>
 @for($i = 1; $i <= 6; $i++)
-			<a class='dummy-media-object' href='/{{ $i }}'>
+			<a class='media-object' href='/{{ $i }}'>
 				<img class='round' src='/img/forums/photos/1.png' />
 				<h3>
                     Person {{ $i }}
@@ -17,10 +17,10 @@
 			</a>
 @endfor
 		</div>
-		<div class='dummy-column'>
+		<div class='column'>
 			<h2>Threads</h2>
 @for($i = 1; $i <= 6; $i++)
-			<a class='dummy-media-object' href='/{{ $i }}'>
+			<a class='media-object' href='/{{ $i }}'>
 				<img src='/img/forums/photos/1.png' />
 				<h3>
                     Thread {{ $i }}
@@ -28,10 +28,10 @@
 			</a>
 @endfor
 		</div>
-		<div class='dummy-column'>
+		<div class='column'>
 			<h2>News</h2>
 @for($i = 1; $i <= 6; $i++)
-			<a class='dummy-media-object' href='/{{ $i }}'>
+			<a class='media-object' href='/{{ $i }}'>
 				<img src='/img/forums/photos/1.png' />
 				<h3>
                     News {{ $i }}
