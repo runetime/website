@@ -2,7 +2,7 @@
 	display: none;
 	width: 200px;
 	min-height: 40px;
-	background: #f1f1f1;
+	background: rgba(56, 56, 56, 1);
 	position: absolute;
 	z-index: 10000;
 	top: 50px;
@@ -13,51 +13,53 @@
 	transition-property: min-height, width, top, right;
 	-webkit-transition-duration: 0.5s;
 	transition-duration: 0.5s;
-	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .morphsearch.open {
-	width: 100%;
 	min-height: 100%;
-	top: 0;
 	right: 0;
+	top: 0;
+	width: 100%;
 }
 
 .morphsearch-form {
-	width: 100%;
 	height: 40px;
 	margin: 0 auto;
 	position: relative;
-	-webkit-transition-property: width, height, -webkit-transform;
-	transition-property: width, height, transform;
 	-webkit-transition-duration: 0.5s;
 	transition-duration: 0.5s;
-	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	-webkit-transition-property: width, height, -webkit-transform;
+	transition-property: width, height, transform;
+	-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	width: 100%;
 }
 
 .morphsearch.open .morphsearch-form {
-	width: 80%;
 	height: 160px;
-	-webkit-transform: translate3d(0,3em,0);
-	transform: translate3d(0,3em,0);
+	-webkit-transform: translate3d(0, 3em, 0);
+	transform: translate3d(0, 3em, 0);
+	width: 80%;
 }
 
 .morphsearch-input {
-	width: 100%;
+	background: rgba(65, 65, 65, 1);
+	border: none;
+	color: rgba(236, 90, 99, 1);
+	font: {
+		size: 0.8em;
+		weight: 700;
+	}
 	height: 100%;
 	padding: 0 10% 0 10px;
-	font-weight: 700;
-	border: none;
-	background: transparent;
-	font-size: 0.8em;
-	color: #ec5a62;
 	-webkit-transition: font-size 0.5s cubic-bezier(0.7,0,0.3,1);
 	transition: font-size 0.5s cubic-bezier(0.7,0,0.3,1);
+	width: 100%;
 }
 
-.morphsearch-input::-ms-clear { /* remove cross in IE */
+.morphsearch-input::-ms-clear {
 	display: none;
 }
 
@@ -174,7 +176,7 @@ input[type="search"] { /* reset normalize */
 	height: 0;
 	overflow: hidden;
 	padding: 0 10.5%;
-	background: #f1f1f1;
+	background: rgba(56, 56, 56, 1);
 	position: absolute;
 	pointer-events: none;
 	opacity: 0;

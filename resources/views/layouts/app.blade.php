@@ -162,7 +162,6 @@ $current = $nav;
 					<ul class='nav navbar-nav navbar-right'>
 						<li id='search-glass'>
 							<a class='fa fa-search'>
-
 							</a>
 						</li>
 @foreach($navLogged as $url => $name)
