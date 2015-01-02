@@ -42,50 +42,51 @@ var toggleSearch;
  * Morph search
  */
 $(function() {
-	var morphSearch = document.getElementById( 'morphsearch' ),
-		input = morphSearch.querySelector( 'input.morphsearch-input' ),
-		ctrlClose = morphSearch.querySelector( 'span.morphsearch-close' ),
+	var morphSearch = document.getElementById('morphsearch'),
+		input = morphSearch.querySelector('input.morphsearch-input'),
+		ctrlClose = morphSearch.querySelector('span.morphsearch-close'),
 		isOpen = false;
 	// show/hide search area
 	toggleSearch = function(action) {
 			var offsets = morphsearch.getBoundingClientRect();
-			if( action === 'close' ) {
-				classie.remove( morphSearch, 'open' );
+			if(action === 'close') {
+				classie.remove(morphSearch, 'open');
 
 				// trick to hide input text once the search overlay closes
 				// todo: hardcoded times, should be done after transition ends
-				if( input.value !== '' ) {
+				if(input.value !== '') {
 					setTimeout(function() {
-						classie.add( morphSearch, 'hideInput' );
+						classie.add(morphSearch, 'hideInput');
 						setTimeout(function() {
-							classie.remove( morphSearch, 'hideInput' );
+							classie.remove(morphSearch, 'hideInput');
 							input.value = '';
-						}, 300 );
+						}, 300);
 					}, 500);
 				}
 
 				input.blur();
+			} else {
+				classie.add(morphSearch, 'open');
 			}
-			else {
-				classie.add( morphSearch, 'open' );
-			}
+
 			isOpen = !isOpen;
 		};
 
 	// events
-	ctrlClose.addEventListener( 'click', toggleSearch );
+	ctrlClose.addEventListener('click', toggleSearch);
 	// esc key closes search overlay
 	// keyboard navigation events
-	document.addEventListener( 'keydown', function( ev ) {
+	document.addEventListener('keydown', function(ev) {
 		var keyCode = ev.keyCode || ev.which;
-		if( keyCode === 27 && isOpen ) {
+		if(keyCode === 27 && isOpen) {
 			toggleSearch(ev);
 		}
-	} );
+	});
 
-
-	/***** for demo purposes only: don't allow to submit the form *****/
-	morphSearch.querySelector( 'button[type="submit"]' ).addEventListener( 'click', function(ev) { ev.preventDefault(); } );
+	var submit = morphSearch.querySelector('button[type="submit"]');
+	submit.addEventListener('click', function(ev) {
+		ev.preventDefault();
+	});
 });
 
 $(function() {
