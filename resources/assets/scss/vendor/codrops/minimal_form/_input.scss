@@ -13,6 +13,10 @@
 	width: calc(100% - 2em);
 }
 
+.simform-inner .current input {
+	border: transparent !important;
+}
+
 .questions .current input,
 .no-js .questions input {
 	opacity: 1;

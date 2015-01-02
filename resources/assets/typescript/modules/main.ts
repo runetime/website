@@ -82,10 +82,60 @@ $(function() {
 			toggleSearch(ev);
 		}
 	});
+	var searchSubmit = function() {
+		var search = $("input.morphsearch-input").val();
+		if(search.length === 0) {
+			return;
+		}
+
+		var data = {
+			contents: search
+		};
+		var results = utilities.postAJAX('/search', data);
+		results.done(function(results: string) {
+			results = $.parseJSON(results);
+			$('#search-people').html('<h2>People</h2>');
+			$('#search-threads').html('<h2>Threads</h2>');
+			$('#search-news').html('<h2>News</h2>');
+
+			$.each(results.users, function() {
+				var obj = mediaObject(this.img, this.name, this.url);
+				$('#search-people').append(obj);
+			});
+
+			$.each(results.threads, function() {
+				var obj = mediaObject(this.img, this.name, this.url);
+				$('#search-threads').append(obj);
+			});
+
+			$.each(results.news, function() {
+				var obj = mediaObject(this.img, this.name, this.url);
+				$('#search-news').append(obj);
+			});
+		});
+	};
 
 	var submit = morphSearch.querySelector('button[type="submit"]');
+	function mediaObject(img: string, name: string, url: string) {
+		var html = "<a class='media-object' href='" + url + "'>";
+		if(img.length > 0) {
+			html += "<img src='" + img + "' />";
+		}
+
+		html += "<h3>" + name + "</h3>";
+		html += "</a>";
+		return html;
+	}
 	submit.addEventListener('click', function(ev) {
 		ev.preventDefault();
+		searchSubmit();
+	});
+
+	$('.morphsearch-input').bind('keydown', function(e) {
+		if(e.keyCode === 13) {
+			e.preventDefault();
+			searchSubmit();
+		}
 	});
 });
 

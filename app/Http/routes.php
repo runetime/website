@@ -479,6 +479,9 @@ Route::group(['prefix' => 'radio'], function() {
 	});
 });
 
+# Search
+post('search', 'SearchController@postSubmit');
+
 /**
  * Settings
  */
