@@ -442,4 +442,17 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 
 		return $this->cacheStatus;
 	}
+
+	/**
+	 * @return bool|string
+	 */
+	public function hasImage()
+	{
+		$path = '/img/forums/photos/' . $this->id . '.png';
+		if(file_exists('.' . $path)) {
+			return $path;
+		}
+
+		return false;
+	}
 }
