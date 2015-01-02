@@ -155,4 +155,21 @@ class ThreadRepository extends EloquentRepository
 			take($amount)->
 			get();
 	}
+
+	/**
+	 * @param     $name
+	 * @param int $amount
+	 *
+	 * @return mixed
+	 */
+	public function getLikeName($name, $amount = 5)
+	{
+		return $this->model->
+			where('title', '=', $name)->
+			orWhere('title', 'LIKE', '%' . $name)->
+			orWhere('title', 'LIKE', '%' . $name . '%')->
+			orWhere('title', 'LIKE', '%' . $name)->
+			take($amount)->
+			get();
+	}
 }

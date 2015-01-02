@@ -220,4 +220,21 @@ class UserRepository extends EloquentRepository
 			orWhere('display_name', 'LIKE', '%' . $name . '%')->
 			get();
 	}
+
+	/**
+	 * @param     $name
+	 * @param int $amount
+	 *
+	 * @return mixed
+	 */
+	public function getLikeDisplayName($name, $amount = 5)
+	{
+		return $this->model->
+		where('display_name', '=', $name)->
+		orWhere('display_name', 'LIKE', '%' . $name)->
+		orWhere('display_name', 'LIKE', '%' . $name . '%')->
+		orWhere('display_name', 'LIKE', '%' . $name)->
+		take($amount)->
+		get();
+	}
 }
