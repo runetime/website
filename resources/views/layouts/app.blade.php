@@ -40,7 +40,8 @@ $navs = [
 
 if(\Auth::check() && \Auth::user()->isStaff()) {
 	$navs[trans('navbar.staff.title')] = [
-		'staff' => trans('navbar.staff.staff_panel'),
+		'staff'       => trans('navbar.staff.staff_panel'),
+		'news/create' => trans('news.create_newspiece'),
 	];
 	if(\Auth::user()->hasOneOfRoles(1)) {
 		$navs[trans('navbar.staff.title')]['staff/administrator'] = "<span class='members-administrator-no-img'>" . trans('navbar.staff.administrator') . "</span>";
