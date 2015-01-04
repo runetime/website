@@ -122,7 +122,7 @@ class Controller extends RouterController
 
 		$current = [
 			'url'    => \Request::url(),
-			'time'   => \Carbon::createFromTimestamp(time()),
+			'time'   => time(),
 			'title'  => $this->title,
 			'logged' => \Auth::check()
 		];
