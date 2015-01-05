@@ -69,7 +69,7 @@ class AuthController extends Controller
 	public function postLoginForm(LoginRequest $form)
 	{
 		$user = $this->users->getByEmail($form->email);
-		if(empty($user)) {
+		if(!empty($user)) {
 			$credentials = [
 				'email'    => $form->email,
 				'password' => $form->password,
