@@ -16,6 +16,7 @@ class TimetableRepository extends EloquentRepository
 	public function getByHourDay($hour, $day)
 	{
 		return $this->model->
+			where('year', '=', date('Y'))->
 			where('hour', '=', $hour)->
 			where('day', '=', $day)->
 			first();

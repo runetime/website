@@ -16,7 +16,7 @@ class RadioPanelTimetable {
 		var src = $(e.target).attr('rt-data2');
 		var src2 = src.split(":");
 		var day = src2[0],
-			hour = src[1];
+			hour = src2[1];
 		var data = {
 			day: day,
 			hour: hour
@@ -25,6 +25,7 @@ class RadioPanelTimetable {
 		claim.done(function(claim: any) {
 			claim = $.parseJSON(claim);
 			if(claim.valid === true) {
+				console.log(claim);
 				$("[rt-data2='" + claim.day + ":" + claim.hour + "']").html(claim.name);
 			} else {
 				console.log('error');
