@@ -143,7 +143,7 @@ class AuthController extends Controller
 		);
 		$role = $this->roles->getByName("Members");
 		$user->roleAdd($role, true);
-		\Auth::loginUsingId($user->id);
+		\Auth::loginUsingId($user->id, true);
 
 		return \redirect()->to('/');
 	}
