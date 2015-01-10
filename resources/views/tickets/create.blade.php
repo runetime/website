@@ -7,7 +7,7 @@
 				<form class='form-horizontal' method='post' action='' role='form'>
 					<div class='form-group'>
 						<label class='col-lg-2 control-label' for='name'>
-							@lang('tickets.create.name')
+							@lang('fields.subject')
 						</label>
 						<div class='col-lg-10'>
 							<input type='text' id='name' name='name' class='form-control' required />
