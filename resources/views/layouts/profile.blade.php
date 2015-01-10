@@ -1,5 +1,10 @@
 @extends('layouts.default')
 @section('contents')
+<?php
+if(!isset($profile)) $profile = new \stdClass;
+$statuses = \App::make('App\RuneTime\Statuses\StatusRepository');
+$status = $statuses->getLatestByAuthor($profile->id);
+?>
 			<div class='wrapper'>
 				<div class='row'>
 					<div class='col-xs-12 col-sm-3 col-md-2'>
