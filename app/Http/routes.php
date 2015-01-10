@@ -586,7 +586,7 @@ Route::group(['prefix' => 'staff'], function() {
 			/**
 			 * Messages
 			 */
-			Route::group(['prefix' => 'message'], function() {
+			Route::group(['prefix' => 'messages'], function() {
 				get('/', 'StaffRadioController@getRadioMessages');
 				post('/', 'StaffRadioController@postRadioMessages');
 			});
