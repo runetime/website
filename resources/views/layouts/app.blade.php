@@ -69,6 +69,7 @@ if(!Auth::check()) {
 		\Link::name(Auth::user()->id) => [
 			'profile/'.String::slugEncode(Auth::user()->id, Auth::user()->display_name) => trans('navbar.logged.in.my_profile'),
 			'settings'  => trans('navbar.logged.in.my_settings'),
+			'/forums/statuses/create' => trans('forums.statuses.update'),
 			'messenger' => trans('navbar.logged.in.messenger').'<span class=\'badge badge-important pull-right\'>'.$messageCount.'</span>',
 			'notifications'   => trans('navbar.logged.in.notifications').'<span class=\'badge badge-info pull-right\'>'.$notificationCount.'</span>',
 		],
