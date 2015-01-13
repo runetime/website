@@ -3,7 +3,7 @@
 			<div class='wrapper-dark'>
 				<img src='/img/clan/header.png' class='img-responsive center-block' alt='RuneTime Clan' />
 			</div>
-			<div class='container container-darkblue'>
+			<div class='container container-dark'>
 				<h3>
 					@lang('clan.join.header')
 				</h3>
@@ -11,7 +11,7 @@
 					@lang('clan.join.text')
 				</p>
 			</div>
-			<div class='container container-lightgreen'>
+			<div class='container container-dark'>
 				<h3>
 					@lang('clan.info.header')
 				</h3>
