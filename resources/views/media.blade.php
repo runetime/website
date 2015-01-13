@@ -4,8 +4,8 @@
 				<h3>
 					@lang('media.facebook.name')
 				</h3>
-				<iframe src='http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FRuneTimeOfficial&width=292
-&colorscheme=dark&connections=10&stream=true&header=true' scrolling='yes' frameborder='0' style='border:none; overflow:hidden;width:292px;height:571px;' allowTransparency='true'>
+				<iframe src='http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FRuneTimeOfficial&width=400
+&colorscheme=dark&connections=10&stream=true&header=true' scrolling='yes' frameborder='0' style='border:none; overflow:hidden;width:400px;height:571px;' allowTransparency='true'>
 				</iframe>
 			</div>
 			<div class='container container-red'>
@@ -14,11 +14,15 @@
 					<small>
 						@lang('media.youtube.promotion')
 					</small>
-					<div class='embed-responsive embed-responsive-16by9'>
-						<iframe allowfullscreen class='embed-responsive-item' height='315' frameborder='0' src='//www.youtube.com/embed/videoseries?list=UUdQ6FGjcwwvg-67g-lGa15Q' width='560'>
-						</iframe>
-					</div>
 				</h3>
+				<div class='row'>
+					<div class='col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3'>
+						<div class='embed-responsive embed-responsive-16by9'>
+							<iframe allowfullscreen class='embed-responsive-item' height='315' frameborder='0' src='//www.youtube.com/embed/videoseries?list=UUdQ6FGjcwwvg-67g-lGa15Q' width='560'>
+							</iframe>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class='container container-lightgreen'>
 				<h3>
