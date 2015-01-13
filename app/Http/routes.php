@@ -468,6 +468,7 @@ Route::group(['prefix' => 'profile/{id}-{name}'], function() {
 Route::group(['prefix' => 'radio'], function() {
 	get('/', 'RadioController@getIndex');
 	get('history', 'RadioController@getHistory');
+	get('open', 'RadioController@getOpen');
 	get('timetable', 'RadioController@getTimetable');
 	get('request/song', 'RadioController@getRequest');
 	get('update', 'RadioController@getUpdate');

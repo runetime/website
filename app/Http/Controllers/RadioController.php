@@ -56,7 +56,7 @@ class RadioController extends Controller
 	{
 		$this->nav('navbar.radio');
 		$this->title('radio.title');
-		return $this->view('radio');
+		return $this->view('radio.index');
 	}
 
 	/**
@@ -74,6 +74,16 @@ class RadioController extends Controller
 		}
 
 		return json_encode($history);
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function getOpen()
+	{
+		$this->nav('navbar.radio');
+		$this->title('radio.open.title');
+		return $this->view('radio.open');
 	}
 
 	/**

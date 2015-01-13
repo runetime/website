@@ -21,13 +21,6 @@ class Radio {
 		this.elements = {
 			statusMessage: '#radio-status-message'
 		};
-		$('#radio-link').click(function() {
-			if(!radio.status) {
-				radio.radioOpen();
-			} else {
-				radio.radioClose();
-			}
-		});
 
 		$('#radio-history').click(function() {
 			radio.openHistory();
@@ -122,39 +115,6 @@ class Radio {
 		$('#radio-options').css({
 			width: '50%'
 		});
-	}
-
-	public radioClose() {
-		if(this.popup) {
-			this.popup.close();
-		}
-
-		$(this.varMessage).html(this.statusClosed);
-		this.status = false;
-		$(this.varStatus)
-			.removeClass('text-success')
-			.addClass('text-danger')
-			.html("<i id='power-button' class='fa fa-power-off'></i>Off");
-	}
-
-	public radioOpen() {
-		if(this.online !== true) {
-			return false;
-		}
-
-		this.popup = window.open(this.URL, 'RuneTime Radio', 'width=389,height=359');
-		this.status = true;
-		$(this.varMessage).html(this.statusOpen);
-		$(this.varStatus).
-			removeClass('text-danger').
-			addClass('text-success').
-			html("<i id='power-button' class='fa fa-power-off'></i>On");
-		var pollTimer = window.setInterval(function () {
-			if(radio.popup.closed !== false) {
-				window.clearInterval(pollTimer);
-				radio.radioClose();
-			}
-		}, 1000);
 	}
 
 	public requestOpen() {
