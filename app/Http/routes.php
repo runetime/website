@@ -110,6 +110,9 @@ Route::group(['prefix' => 'contact'], function() {
 	post('submit', 'ContactController@postSubmit');
 });
 
+# Cookies
+get('cookies', 'CookieController@getIndex');
+
 /**
  * Databases
  */
