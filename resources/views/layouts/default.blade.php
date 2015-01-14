@@ -59,13 +59,13 @@
 					@lang('footer.follow_us')
 				</p>
 				<div id='portfolio-social'>
-					<a href='https://www.facebook.com/RuneTimeOfficial' title='@lang('footer.facebook')'>
+					<a href='https://www.facebook.com/RuneTimeOfficial' target='_blank' title='@lang('footer.facebook')'>
 						<img src='/img/fb.png' alt='Facebook' />
 					</a>
-					<a href='https://twitter.com/Rune_Time' title='@lang('footer.twitter')'>
+					<a href='https://twitter.com/Rune_Time' target='_blank' title='@lang('footer.twitter')'>
 						<img src='/img/tw.png' alt='Twitter' />
 					</a>
-					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'>
+					<a href='https://www.youtube.com/user/RuneTimeOfficial' target='_blank' title='@lang('footer.youtube')'>
 						<img src='/img/yt.png' alt='YouTube' />
 					</a>
 				</div>
