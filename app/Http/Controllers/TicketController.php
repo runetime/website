@@ -83,6 +83,28 @@ class TicketController extends Controller
 	}
 
 	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function getClose($id)
+	{
+		$ticket = $this->tickets->getById($id);
+		if(empty($ticket)) {
+			return \Error::abort(404);
+		}
+
+		if(!($ticket->author->id === \Auth::user()->id || \Auth::user()->isStaff())) {
+			return \Error::abort(403);
+		}
+
+		$ticket->status = Ticket::STATUS_CLOSED;
+		$ticket->save();
+
+		return \redirect()->to($ticket->toSlug());
+	}
+
+	/**
 	 * @return \Illuminate\View\View
 	 */
 	public function getCreate()

@@ -627,12 +627,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
 	 */
 	Route::group(['prefix' => '{id}-{name}'], function() {
 		get('/', 'TicketController@getView');
-		/**
-		 * Must be logged in
-		 */
-		Route::group(['middleware' => 'auth'], function() {
-			post('reply', 'TicketController@postReply');
-		});
+		get('close', 'TicketController@getClose');
+		post('reply', 'TicketController@postReply');
 
 		/**
 		 * Must be a staff member
