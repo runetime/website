@@ -21,7 +21,7 @@
 								{{ $post->author->posts_active }} posts
 								<br />
 								{{ $post->author->rank->name }}
-								<div class='badge-{{ $post->author->rank->toClassName() }}'>
+								<div class='badge-{{ $post->author->rank->toClassName() }}' {!! \String::tooltip(trans('forums.post.rank.achieved', ['amount' => $post->author->rank->posts_required])) !!}'>
 									<div>
 									</div>
 								</div>
