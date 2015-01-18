@@ -5,9 +5,11 @@
 					<h1 class='pull-left'>
 						{{ $ticket->name }}
 					</h1>
+@if(!$ticket->isClosed())
 					<a href='{{ $ticket->toSlug('close') }}' class='btn btn-primary pull-right'>
 						@lang('tickets.view.close_ticket')
 					</a>
+@endif
 				</div>
 				<p>
 @if($ticket->status === 0)

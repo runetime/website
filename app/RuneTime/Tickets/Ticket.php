@@ -100,4 +100,28 @@ class Ticket extends Entity
 
 		return '/tickets/' . \String::slugEncode($this->id, $this->name) . $url;
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function isClosed()
+	{
+		return $this->status === Ticket::STATUS_CLOSED;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isOpen()
+	{
+		return $this->status === Ticket::STATUS_OPEN;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEscalated()
+	{
+		return $this->status === Ticket::STATUS_ESCALATED;
+	}
 }
