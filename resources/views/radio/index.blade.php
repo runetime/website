@@ -20,7 +20,7 @@
 							@lang('radio.player.title')
 						</h3>
 						<h4>
-							<a href='/radio/open' title='Click here'>@lang('radio.player.click')</a>
+							<a href='http://www.streamlicensing.com/stations/runetime/listen.html' title='Click here'>@lang('radio.player.click')</a>
 						</h4>
 						<p id='radio-message'>
 							@lang('radio.player.message')

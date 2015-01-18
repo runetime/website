@@ -84,11 +84,19 @@ class Radio {
 		});
 	}
 
-	public onlineSettings() {
-		if(this.online !== true) {
+	public onlineSettings(online: boolean) {
+		this.online = online;
+
+		if(online !== true) {
 			$(this.elements.statusMessage).html("The radio has been set offline.");
+			$(this.varStatus).removeClass().
+				addClass('text-danger').
+				html("<i id='power-button' class='fa fa-power-off'></i>Off");
 		} else {
 			$(this.elements.statusMessage).html("");
+			$(this.varStatus).removeClass().
+				addClass('text-success').
+				html("<i id='power-button' class='fa fa-power-off'></i>On");
 		}
 	}
 
@@ -198,11 +206,11 @@ class Radio {
 
 			$('#requests-user-current').html(requestsHTML);
 
-			radio.online = update.online;
+			radio.onlineSettings(update.online);
+
 			setTimeout(function() {
 				radio.update();
 			}, 30000);
-			radio.onlineSettings();
 		});
 	}
 }
