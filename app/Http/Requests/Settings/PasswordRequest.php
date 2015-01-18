@@ -14,8 +14,9 @@ class PasswordRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'current' => 'required',
-			'new'     => 'required',
+			'current'     => 'required',
+			'new'         => 'required',
+			'new_confirm' => 'required',
 		];
 	}
 
