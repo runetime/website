@@ -36,7 +36,11 @@ class TicketController extends Controller
 	public function getIndex()
 	{
 		$tickets = $this->tickets->getByAuthor(\Auth::user()->id);
-		$ticketList = [Ticket::STATUS_OPEN => [], Ticket::STATUS_CLOSED => [], Ticket::STATUS_ESCALATED => []];
+		$ticketList = [
+			Ticket::STATUS_OPEN => [],
+			Ticket::STATUS_CLOSED => [],
+			Ticket::STATUS_ESCALATED => []
+		];
 		foreach($tickets as $ticket) {
 			if($ticket->status === Ticket::STATUS_CLOSED) {
 				array_push($ticketList[$ticket->status], $ticket);
