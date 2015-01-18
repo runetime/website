@@ -6,6 +6,7 @@ class Chatbox {
 	messages: any = [];
 	moderator: boolean = false;
 	pinned: any = [];
+	spam: any = {};
 	times: any = {};
 	timeoutPinned: any = null;
 	timeoutUpdate: any = null;
@@ -13,12 +14,13 @@ class Chatbox {
 
 	pinnedDisplayed: any = [];
 
-	constructor(public channel: string) {
+	public constructor(channel: string) {
 		this.channel = channel;
 		this.elements = {
 			actions: '#chatbox-actions',
 			channels: '#chatbox-channels',
 			chatbox: '#chatbox',
+			error: "#chatbox-error",
 			message: '#chatbox-message',
 			messages: '#chatbox-messages'
 		};
@@ -27,6 +29,11 @@ class Chatbox {
 			getUpdate: '/chat/update',
 			postMessage: '/chat/post/message',
 			postStatusChange: '/chat/post/status/change'
+		};
+		this.spam = {
+			first: 0,
+			second: 0,
+			third: 0
 		};
 		this.times = {
 			lastActivity: utilities.currentTime(),
@@ -107,8 +114,17 @@ class Chatbox {
 		chatbox.pinnedDisplayed = [];
 	}
 
-	public static error(message: string) {
-		console.log(message);
+	public error(message: string) {
+		$(this.elements.error).html(message).
+			fadeTo(1000, 1);
+		var self = this;
+		setTimeout(function() {
+			$(self.elements.error).
+				fadeTo(1000, 0);
+			setTimeout(function() {
+				$(self.elements.error).html("");
+			}, 1500);
+		}, 3500);
 	}
 
 	public getStart() {
@@ -119,13 +135,14 @@ class Chatbox {
 			channel: this.channel
 		};
 		var results = utilities.postAJAX('chat/start', data);
+		var self = this;
 		results.done(function(results) {
 			results = $.parseJSON(results);
 			$.each(results.messages, function (index, value) {
-				chatbox.addMessage(value);
+				self.addMessage(value);
 			});
-			chatbox.pinned = results.pinned;
-			chatbox.displayMessages();
+			self.pinned = results.pinned;
+			self.displayMessages();
 		});
 	}
 
@@ -187,6 +204,7 @@ class Chatbox {
 
 	public panelChat() {
 		var contents = "";
+		contents += "<div id='chatbox-error'></div>";
 		contents += "<div id='chatbox-messages'></div>";
 		contents += "<div id='chatbox-actions'>";
 		contents += "<a href='/transparency/markdown' target='_blank' id='chatbox-markdown'>Markdown</a>";
@@ -208,27 +226,40 @@ class Chatbox {
 			contents: contents,
 			channel: this.channel
 		};
+		if((Date.now() / 1000) - 30 < this.spam.third) {
+			var diff = ((Date.now() / 1000) - this.spam.third);
+			var time = Math.round(30 - diff);
+			this.error('You must wait another ' + time + ' seconds before sending another message.');
+			return;
+		} else {
+			this.spam.third = this.spam.second;
+			this.spam.second = this.spam.first;
+			this.spam.first = Date.now() / 1000;
+		}
+
 		response = utilities.postAJAX(this.URL.postMessage, message);
+		var self = this;
+
 		response.done(function(response) {
 			response = $.parseJSON(response);
-			chatbox.update();
+			self.update();
 			if(response.done === true) {
-				$(chatbox.elements.message).val('');
-				$(chatbox.elements.message).toggleClass('message-sent');
+				$(self.elements.message).val('');
+				$(self.elements.message).toggleClass('message-sent');
 				setTimeout(function () {
-					$(chatbox.elements.message).toggleClass('message-sent');
+					$(self.elements.message).toggleClass('message-sent');
 				}, 1500);
 			} else {
 				if(response.error === -1) {
-					$(chatbox.elements.message).val('You are not logged in and can not send messages.');
+					$(self.elements.message).val('You are not logged in and can not send messages.');
 				} else if(response.error === -2) {
-					$(chatbox.elements.message).val('You were muted for one hour by a staff member and can not send messages.');
+					$(self.elements.message).val('You were muted for one hour by a staff member and can not send messages.');
 				} else {
-					$(chatbox.elements.message).val('There was an unknown error.  Please try again.');
+					$(self.elements.message).val('There was an unknown error.  Please try again.');
 				}
-				$(chatbox.elements.message).toggleClass('message-bad');
+				$(self.elements.message).toggleClass('message-bad');
 				setTimeout(function () {
-					$(chatbox.elements.message).toggleClass('message-bad');
+					$(self.elements.message).toggleClass('message-bad');
 				}, 2500);
 			}
 		});

@@ -59,7 +59,12 @@ $chatbox-action-height:          2.2em;
 $chatbox-action-hover-bg:        rgba(48, 48, 48, 1);
 $chatbox-action-width:           50%;
 
-// The chatbox holder
+// Error
+$chatbox-error-background:       rgba(48, 4, 6, 1);
+$chatbox-error-padding:          1em;
+$chatbox-error-z-index:          9001;
+
+// Chatbox holder
 $chatbox-holder-padding:         0 !important;
 
 // Input

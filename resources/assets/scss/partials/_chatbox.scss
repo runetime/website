@@ -1,7 +1,24 @@
 #chatbox-holder {
 	padding: $chatbox-holder-padding;
 	#chatbox {
+		position: relative;
 		width: $chatbox-width;
+
+		#chatbox-error {
+			background: $chatbox-error-background;
+			opacity: 0;
+			padding: {
+				top: $chatbox-error-padding;
+				left: $chatbox-error-padding;
+				right: $chatbox-error-padding;
+				bottom: $chatbox-error-padding;
+			}
+			position: absolute;
+			top: 0;
+			width: $chatbox-width;
+			z-index: $chatbox-error-z-index;
+		}
+
 		#chatbox-messages {
 			overflow-y: scroll;
 			height: $chatbox-msgs-height;
