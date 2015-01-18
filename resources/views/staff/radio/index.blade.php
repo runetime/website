@@ -4,7 +4,7 @@
 				<h1>
 					@lang('staff.radio.title')
 				</h1>
-				<div class='row row-flat'>
+				<div class='row row-flat text-center'>
 					<div class='col-xs-12 col-sm-4'>
 						<h3 class='holo-text text-center'>
 							@lang('staff.radio.index.currently_live.title')
