@@ -62,7 +62,8 @@ class AdminUserPanel {
 				}
 			},
 			search: {
-				submit: "[rt-hook='admin.panel:user.search']"
+				submit: "[rt-hook='admin.panel:user.search']",
+				submitAll: "[rt-hook='admin.panel:user.search.all']",
 			},
 			submit: {
 				award: "[rt-hook='admin.panel:user.award.add.confirm']",
@@ -80,11 +81,16 @@ class AdminUserPanel {
 			mute: '/staff/leader/mute',
 			posts: '/staff/administrator/users/forum-posts',
 			search: '/staff/administrator/users/search',
+			searchAll: '/staff/administrator/users/search-all',
 			username: '/api/v1/user'
 		};
 
 		$(this.hooks.search.submit).click(function() {
 			userPanel.search();
+		});
+
+		$(this.hooks.search.submitAll).click(function() {
+			userPanel.searchAll();
 		});
 
 		$(this.hooks.submit.award).click(function() {
@@ -324,36 +330,56 @@ class AdminUserPanel {
 				name: name
 			};
 			var results = utilities.postAJAX(this.paths.search, data);
+			var self = this;
 			results.done(function(results: string) {
 				$('#admin-user-list').html('');
 				results = $.parseJSON(results);
 				$.each(results, function(index: number, user: any) {
-					var html = "<div class='col-xs-12 row'>";
-					html += "<div class='col-xs-3 col-md-2 col-lg-1'>";
-					html += "<img src='/img/forums/photos/" + user.id + ".png' class='img-responsive img-center' />";
-					html += "</div>";
-					html += "<div class='col-xs-9 col-mg-10 col-lg-11'>";
-					html += "<div class='clearfix'>";
-					html += "<div class='pull-left'>";
-					html += "<a href='/profile/" + user.id + "-user'>" + user.display_name + "</a>";
-					html += "</div>";
-					html += "<div class='pull-right'>";
-					html += "<ul class='list-inline' rt-data='" + user.id + "'>";
-					html += "<li><a rt-hook='admin.panel:user.posts.remove' title='Remove Forum Posts'><i class='fa fa-folder fa-2x text-warning'></i></a></li>";
-					html += "<li><a rt-hook='admin.panel:user.chatbox.remove' title='Remove Chatbox Messages'><i class='fa fa-comments fa-2x text-warning'></i></a></li>";
-					html += "<li><a rt-hook='admin.panel:user.mute' title='Mute User'><i class='fa fa-comments fa-2x holo-text-secondary'></i></a></li>";
-					html += "<li><a rt-hook='admin.panel:user.ban' title='Ban User'><i class='fa fa-remove fa-2x text-warning'></i></a></li>";
-					html += "<li><a rt-hook='admin.panel:user.ban.permanent' title='IP Ban User'><i class='fa fa-remove fa-2x text-danger'></i></a></li>";
-					html += "<li><a rt-hook='admin.panel:user.award.add' title='Add Award'><i class='fa fa-thumbs-o-up fa-2x text-info'></i></a></li>";
-					html += "<li><a href='/staff/administrator/users/" + user.id + "-view' title='Edit User'><i class='fa fa-search fa-2x text-info'></i></a></li>";
-					html += "</div>";
-					html += "</div>";
-					html += "</div>";
-					html += "</div>";
+					var html = self.result(user);
 					$('#admin-user-list').append(html);
 				});
 				userPanel.addEvents();
 			});
 		}
+	}
+
+	public searchAll() {
+		var results = utilities.getAJAX(this.paths.searchAll);
+		var self = this;
+		results.done(function(results: string) {
+			$('#admin-user-list').html('');
+			results = $.parseJSON(results);
+			$.each(results, function(index: number, user: any) {
+				var html = self.result(user);
+				$('#admin-user-list').append(html);
+			});
+			userPanel.addEvents();
+		});
+	}
+
+	public result(user: any) {
+		var html = "<div class='col-xs-12 row'>";
+		html += "<div class='col-xs-3 col-md-2 col-lg-1'>";
+		html += "<img src='/img/forums/photos/" + user.id + ".png' class='img-responsive img-center' />";
+		html += "</div>";
+		html += "<div class='col-xs-9 col-mg-10 col-lg-11'>";
+		html += "<div class='clearfix'>";
+		html += "<div class='pull-left'>";
+		html += "<a href='/profile/" + user.id + "-user'>" + user.display_name + "</a>";
+		html += "</div>";
+		html += "<div class='pull-right'>";
+		html += "<ul class='list-inline' rt-data='" + user.id + "'>";
+		html += "<li><a rt-hook='admin.panel:user.posts.remove' title='Remove Forum Posts'><i class='fa fa-folder fa-2x text-warning'></i></a></li>";
+		html += "<li><a rt-hook='admin.panel:user.chatbox.remove' title='Remove Chatbox Messages'><i class='fa fa-comments fa-2x text-warning'></i></a></li>";
+		html += "<li><a rt-hook='admin.panel:user.mute' title='Mute User'><i class='fa fa-comments fa-2x holo-text-secondary'></i></a></li>";
+		html += "<li><a rt-hook='admin.panel:user.ban' title='Ban User'><i class='fa fa-remove fa-2x text-warning'></i></a></li>";
+		html += "<li><a rt-hook='admin.panel:user.ban.permanent' title='IP Ban User'><i class='fa fa-remove fa-2x text-danger'></i></a></li>";
+		html += "<li><a rt-hook='admin.panel:user.award.add' title='Add Award'><i class='fa fa-thumbs-o-up fa-2x text-info'></i></a></li>";
+		html += "<li><a href='/staff/administrator/users/" + user.id + "-view' title='Edit User'><i class='fa fa-search fa-2x text-info'></i></a></li>";
+		html += "</div>";
+		html += "</div>";
+		html += "</div>";
+		html += "</div>";
+		return html;
 	}
 }

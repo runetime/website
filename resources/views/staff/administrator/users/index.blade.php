@@ -10,9 +10,17 @@
 					</label>
 					<input type='text' id='admin-user-search' placeholder='Username' class='center-block' />
 					<br />
-					<a rt-hook='admin.panel:user.search'>
-						Search
-					</a>
+					<p>
+						<a rt-hook='admin.panel:user.search'>
+							Search
+						</a>
+					</p>
+					<br />
+					<p>
+						<a rt-hook='admin.panel:user.search.all'>
+							Search All Users
+						</a>
+					</p>
 				</div>
 			</div>
 			<div class='wrapper'>

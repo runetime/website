@@ -307,6 +307,21 @@ class StaffAdminController extends Controller
 		return json_encode($response);
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getUserSearchAll()
+	{
+		$response = $this->users->getAll();
+
+		return json_encode($response);
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getUserView($id)
 	{
 		$user = $this->users->getByid($id);
