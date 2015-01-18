@@ -168,7 +168,7 @@ class RadioController extends Controller
 
 		$session = $this->sessions->getByStatus(Session::STATUS_PLAYING);
 		if(!empty($session)) {
-			if(!empty($session->message)) {
+			if($session->message_id > 0) {
 				$update['message'] = $session->message->contents_parsed;
 			}
 

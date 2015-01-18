@@ -1,15 +1,17 @@
 @extends('layouts.settings')
 @section('settings')
-						<h3>
-							@lang('settings.password.note')
-						</h3>
+@if(!empty($error))
+						<p class='text-warning'>
+							{{ $error }}
+						</p>
+@endif
 						<form action='' class='form-horizontal' method='post' role='form'>
 							<div class='form-group'>
 								<label class='col-lg-2 control-label' for='current'>
 									@lang('settings.password.current')
 								</label>
 								<div class='col-lg-10'>
-									<input type='password' id='current' name='current' />
+									<input type='password' id='current' name='current' value='{{ $current }}' required />
 								</div>
 							</div>
 							<div class='form-group'>
@@ -17,7 +19,15 @@
 									@lang('settings.password.new')
 								</label>
 								<div class='col-lg-10'>
-									<input type='password' id='new' name='new' />
+									<input type='password' id='new' name='new' value='{{ $new }}' required />
+								</div>
+							</div>
+							<div class='form-group'>
+								<label class='col-lg-2 control-label' for='new_confirm'>
+									@lang('settings.password.confirm_new')
+								</label>
+								<div class='col-lg-10'>
+									<input type='password' id='new_confirm' name='new_confirm' value='{{ $newConfirm }}' required />
 								</div>
 							</div>
 							<div class='form-group'>

@@ -56,9 +56,11 @@ class AuthController extends Controller
 	 */
 	public function getLoginForm()
 	{
+		$incorrect = \Session::pull('login.incorrect');
+
 		$this->nav('navbar.logged.out.login');
 		$this->title('navbar.logged.out.login');
-		return $this->view('auth.login');
+		return $this->view('auth.login', compact('incorrect'));
 	}
 
 	/**
@@ -78,6 +80,8 @@ class AuthController extends Controller
 				return \redirect()->to('/');
 			}
 		}
+
+		\Session::put('login.incorrect', true);
 
 		return \redirect()->to('login');
 	}

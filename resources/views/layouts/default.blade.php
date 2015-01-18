@@ -41,10 +41,10 @@
 				</p>
 				<div id='portfolio-about'>
 					<p>
-						<a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a> &mdash; <a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a>
+						<a href='/privacy' title='@lang('footer.privacy')'>@lang('footer.privacy')</a> &mdash; <a href='/terms' title='@lang('footer.terms')'>@lang('footer.terms')</a> &mdash; <a href='/contact' title='@lang('footer.contact')'>@lang('footer.contact')</a> &mdash; <a href='/cookies' title='@lang('footer.cookies')'>{{ strtolower(trans('footer.cookies')) }}</a>
 					</p>
 					<p>
-						<a href='http://runescape.com/community' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{ date('Y') }}
+						<a href='http://runescape.com/community' target='_blank' title='Runescape'>Runescape</a>&reg; @lang('footer.and') <a href='http://jagex.com/' target='_blank' title='Jagex'>Jagex</a>&reg; @lang('footer.trademarks') Jagex Ltd &copy; 1999-{{ date('Y') }}
 					</p>
 					<p>
 						@lang('footer.images')
@@ -59,13 +59,13 @@
 					@lang('footer.follow_us')
 				</p>
 				<div id='portfolio-social'>
-					<a href='https://www.facebook.com/RuneTimeOfficial' title='@lang('footer.facebook')'>
+					<a href='https://www.facebook.com/RuneTimeOfficial' target='_blank' title='@lang('footer.facebook')'>
 						<img src='/img/fb.png' alt='Facebook' />
 					</a>
-					<a href='https://twitter.com/Rune_Time' title='@lang('footer.twitter')'>
+					<a href='https://twitter.com/Rune_Time' target='_blank' title='@lang('footer.twitter')'>
 						<img src='/img/tw.png' alt='Twitter' />
 					</a>
-					<a href='https://www.youtube.com/user/RuneTimeOfficial' title='@lang('footer.youtube')'>
+					<a href='https://www.youtube.com/user/RuneTimeOfficial' target='_blank' title='@lang('footer.youtube')'>
 						<img src='/img/yt.png' alt='YouTube' />
 					</a>
 				</div>

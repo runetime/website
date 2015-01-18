@@ -36,7 +36,11 @@ class TicketController extends Controller
 	public function getIndex()
 	{
 		$tickets = $this->tickets->getByAuthor(\Auth::user()->id);
-		$ticketList = [Ticket::STATUS_OPEN => [], Ticket::STATUS_CLOSED => [], Ticket::STATUS_ESCALATED => []];
+		$ticketList = [
+			Ticket::STATUS_OPEN => [],
+			Ticket::STATUS_CLOSED => [],
+			Ticket::STATUS_ESCALATED => []
+		];
 		foreach($tickets as $ticket) {
 			if($ticket->status === Ticket::STATUS_CLOSED) {
 				array_push($ticketList[$ticket->status], $ticket);
@@ -76,6 +80,28 @@ class TicketController extends Controller
 		$this->nav('navbar.runetime.title');
 		$this->title('tickets.view.title', ['name' => $ticket->name]);
 		return $this->view('tickets.view', compact('ticket', 'posts'));
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function getClose($id)
+	{
+		$ticket = $this->tickets->getById($id);
+		if(empty($ticket)) {
+			return \Error::abort(404);
+		}
+
+		if(!($ticket->author->id === \Auth::user()->id || \Auth::user()->isStaff())) {
+			return \Error::abort(403);
+		}
+
+		$ticket->status = Ticket::STATUS_CLOSED;
+		$ticket->save();
+
+		return \redirect()->to($ticket->toSlug());
 	}
 
 	/**

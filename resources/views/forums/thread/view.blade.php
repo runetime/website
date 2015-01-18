@@ -33,6 +33,7 @@
 	@include('forums.post._show')
 @endforeach
 				</div>
+				<br />
 @if(\Auth::check())
 	@if(!$thread->isLocked())
 		@include('forums.post._edit', ['url' => $thread->toSlug('reply')])

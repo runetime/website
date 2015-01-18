@@ -94,11 +94,12 @@ class RadioPanelLive {
 
 	public update() {
 		var data = utilities.getAJAX(this.paths.update);
+		var self = this;
 		data.done(function(data: any) {
 			data = $.parseJSON(data);
-			$(radioPanel.live.elements.songName).html(data.song.name);
-			$(radioPanel.live.elements.songArtist).html(data.song.artist);
-			$(radioPanel.live.elements.currentMessage).html(data.song.message);
+			$(self.elements.songName).html(data.song.name);
+			$(self.elements.songArtist).html(data.song.artist);
+			$(self.elements.currentMessage).html(data.message);
 			var html = "";
 			$.each(data.requests, function(index: number, value: any) {
 				if(value.status === 0) {

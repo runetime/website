@@ -1,6 +1,11 @@
 @extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
+@if($incorrect == true)
+				<p class='text-warning'>
+					@lang('auth.login.incorrect')
+				</p>
+@endif
 				<form class='form-horizontal' method='post' action='' role='form'>
 					<div id='signup-username' class='form-group has-feedback'>
 						<label class='col-lg-2 control-label' for='email'>

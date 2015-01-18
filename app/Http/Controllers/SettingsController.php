@@ -74,18 +74,7 @@ class SettingsController extends Controller
 			'13'    => '(UTC+13:00 ' . $h . ') Enderbury Kiribati',
 			'14'    => '(UTC+14:00 ' . $h . ') Kiritimati',
 		];
-		$birthday = "";
-		if(\Auth::user()->birthday_day) {
-			$birthday .= \Time::day(\Auth::user()->birthday_day);
-		}
 
-		if(\Auth::user()->birthday_month) {
-			if($birthday) {
-				$birthday .= \Time::month(\Auth::user()->birthday_day, true);
-			} else {
-				$birthday .= \Time::month(\Auth::user()->birthday_day);
-			}
-		}
 		$bDay = \Auth::user()->birthday_day;
 		$bMonth = \Auth::user()->birthday_month;
 		$bYear = \Auth::user()->birthday_year;
@@ -180,12 +169,16 @@ class SettingsController extends Controller
 	 */
 	public function getPassword()
 	{
+		$error = \Session::pull('settings.error', '');
+		$current = \Session::pull('settings.current', '');
+		$new = \Session::pull('settings.new', '');
+		$newConfirm = \Session::pull('settings.new_confirm', '');
 		$thisURL = '/settings/password';
 
 		$this->bc(['settings' => trans('settings.title')]);
 		$this->nav('navbar.forums');
 		$this->title('settings.password.title');
-		return $this->view('settings.password', compact('thisURL'));
+		return $this->view('settings.password', compact('error', 'current', 'new', 'newConfirm', 'thisURL'));
 	}
 
 	/**
@@ -196,12 +189,20 @@ class SettingsController extends Controller
 	public function postPassword(PasswordRequest $form)
 	{
 		$user = $this->users->getById(\Auth::user()->id);
-		if(\Auth::validate(['email' => \Auth::user()->email, 'password' => $form->current])) {
+		if($form->new !== $form->new_confirm) {
+			\Session::put('settings.error', trans('settings.password.error.not_match'));
+		} elseif(\Auth::validate(['email' => \Auth::user()->email, 'password' => $form->current])) {
 			$user->password = \Hash::make($form->new);
 			$user->save();
+
+			return \redirect()->to('/settings/password');
 		} else {
-			dd("There was an error");
+			\Session::put('settings.error', trans('settings.password.error.incorrect'));
 		}
+
+		\Session::put('settings.current', $form->current);
+		\Session::put('settings.new', $form->new);
+		\Session::put('settings.new_confirm', $form->new_confirm);
 
 		return \redirect()->to('/settings/password');
 	}

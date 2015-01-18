@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='container container-silver'>
+			<div class='container container-dark'>
 				<h1>
 					@lang('about.name')
 				</h1>
@@ -53,7 +53,7 @@
 					</div>
 				</div>
 			</div>
-			<div class='container container-darkpurple'>
+			<div class='container container-dark'>
 				<h3>
 					@lang('about.b2.name')
 				</h3>
@@ -65,7 +65,7 @@
 					@lang('about.b2.p2')
 				</p>
 			</div>
-			<div class='container container-darkblue'>
+			<div class='container container-dark'>
 				<h3>
 					@lang('about.b3.name')
 				</h3>

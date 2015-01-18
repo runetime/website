@@ -115,7 +115,7 @@
 									@lang('settings.profile.interests')
 								</label>
 								<div class='col-lg-10'>
-									<input type='text' id='interests' name='interests' value='{{ \Auth::user()->interests }}' />
+									<textarea name='interests' id='interests' rows='5' class='form-control'>{{ \Auth::user()->interests }}</textarea>
 								</div>
 							</div>
 							<div class='form-group'>
