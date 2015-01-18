@@ -149,6 +149,16 @@ class AuthController extends Controller
 		$user->roleAdd($role, true);
 		\Auth::loginUsingId($user->id, true);
 
+		$data = [
+			'id'   => $user->id,
+			'name' => $user->display_name,
+		];
+
+		\Mail::send('emails.auth.register', $data, function($message) use ($user) {
+			$message->to($user->email);
+			$message->subject(trans('auth.register.email.subject'));
+		});
+
 		return \redirect()->to('/');
 	}
 
