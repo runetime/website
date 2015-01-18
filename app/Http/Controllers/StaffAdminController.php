@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Staff\AdminAwardAddRequest;
 use App\Http\Requests\Staff\AdminIPBanRequest;
+use App\Http\Requests\Staff\AdminUserViewRequest;
 use App\Http\Requests\Staff\UserChatboxRemoveRequest;
 use App\Http\Requests\Staff\UserForumPostsRequest;
 use App\Http\Requests\Staff\UserSearchRequest;
@@ -329,9 +330,50 @@ class StaffAdminController extends Controller
 			return \Error::abort(404);
 		}
 
+		$roles = $this->roles->getAll();
+
 		$this->bc(['staff' => trans('staff.title'), 'staff/administrator' => trans('staff.admin.title'), 'staff/administrator/users' => trans('staff.admin.users.title')]);
 		$this->nav('runetime.staff.staff');
 		$this->title('utilities.name', ['name' => $user->display_name]);
-		return $this->view('staff.administrator.users.view', compact('user'));
+		return $this->view('staff.administrator.users.view', compact('user', 'roles'));
+	}
+
+	/**
+	 * @param                      $id
+	 * @param AdminUserViewRequest $form
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postUserView($id, AdminUserViewRequest $form)
+	{
+		$user = $this->users->getByid($id);
+		if(empty($user)) {
+			return \Error::abort(404);
+		}
+
+		if(!in_array($form->important, $form->role)) {
+			return \Error::abort(403);
+		}
+
+		$userRoles = $this->userRoles->getByUser($user->id);
+
+		foreach($userRoles as $userRole) {
+			$user->roleRemove($userRole->role);
+		}
+
+		foreach($form->role as $roleId) {
+			$role = $this->roles->getById($roleId);
+
+			if(!empty($role)) {
+				$important = false;
+				if($role->id == $form->important) {
+					$important = true;
+				}
+
+				$user->roleAdd($role, $important);
+			}
+		}
+
+		return \redirect()->to('/staff/administrator');
 	}
 }

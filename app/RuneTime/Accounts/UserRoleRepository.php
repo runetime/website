@@ -69,4 +69,16 @@ class UserRoleRepository extends EloquentRepository
 
 		return $q->get();
 	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function getByUser($id)
+	{
+		return $this->model->
+			where('user_id', '=', $id)->
+			get();
+	}
 }

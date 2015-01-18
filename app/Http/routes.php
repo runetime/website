@@ -556,6 +556,7 @@ Route::group(['prefix' => 'staff'], function() {
 				get('/', 'StaffAdminController@getUserList');
 				get('search-all', 'StaffAdminController@getUserSearchAll');
 				get('{id}-{name}', 'StaffAdminController@getUserView');
+				post('{id}-{name}', 'StaffAdminController@postUserView');
 				post('award-add', 'StaffAdminController@postAward');
 				post('chatbox-remove', 'StaffAdminController@postUserChatboxRemove');
 				post('forum-posts', 'StaffAdminController@postUserForumPosts');
