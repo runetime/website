@@ -23,6 +23,6 @@ class Session extends Entity
 
 	public function dj()
 	{
-		return $this->belongsTO('App\RuneTime\Accounts\User', 'dj_id');
+		return $this->belongsTo('App\RuneTime\Accounts\User', 'dj_id');
 	}
 }
