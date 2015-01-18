@@ -74,7 +74,7 @@ class SettingsController extends Controller
 			'13'    => '(UTC+13:00 ' . $h . ') Enderbury Kiribati',
 			'14'    => '(UTC+14:00 ' . $h . ') Kiritimati',
 		];
-		
+
 		$bDay = \Auth::user()->birthday_day;
 		$bMonth = \Auth::user()->birthday_month;
 		$bYear = \Auth::user()->birthday_year;
