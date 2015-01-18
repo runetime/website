@@ -1,9 +1,16 @@
 @extends('layouts.default')
 @section('contents')
 			<div class='wrapper'>
-				<h1>
-					@lang('forums.statuses.index.title')
-				</h1>
+				<div class='clearfix'>
+					<h1 class='pull-left'>
+						@lang('forums.statuses.index.title')
+					</h1>
+@if(\Auth::check())
+					<a href='/forums/statuses/create' class='btn btn-sm btn-primary pull-right'>
+						@lang('forums.statuses.create.title')
+					</a>
+@endif
+				</div>
 @foreach($statusList as $status)
 				<div class='card row row-flat'>
 					<div class='col-xs-3 col-sm-2 col-md-1 padding-none'>
