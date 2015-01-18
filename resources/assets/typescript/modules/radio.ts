@@ -86,7 +86,6 @@ class Radio {
 
 	public onlineSettings() {
 		if(this.online !== true) {
-			this.radioClose();
 			$(this.elements.statusMessage).html("The radio has been set offline.");
 		} else {
 			$(this.elements.statusMessage).html("");
