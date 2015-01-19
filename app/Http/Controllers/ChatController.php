@@ -19,7 +19,7 @@ class ChatController extends Controller
 	/**
 	 * @var FilterRepository
 	 */
-	private $filter;
+	private $filters;
 	/**
 	 * @var ActionRepository
 	 */
@@ -147,6 +147,7 @@ class ChatController extends Controller
 				$channel = $this->channels->getByNameTrim($form->channel);
 				$channel->messages = $channel->messages + 1;
 				$channel->save();
+
 				$response['done'] = true;
 			}
 		} else {
