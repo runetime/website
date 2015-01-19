@@ -12,9 +12,14 @@ use App\RuneTime\Chat\ChannelRepository;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
 use App\RuneTime\Accounts\UserRepository;
+use App\RuneTime\Chat\FilterRepository;
 
 class ChatController extends Controller
 {
+	/**
+	 * @var FilterRepository
+	 */
+	private $filter;
 	/**
 	 * @var ActionRepository
 	 */
@@ -40,14 +45,22 @@ class ChatController extends Controller
 	 * @param ActionRepository  $actions
 	 * @param ChannelRepository $channels
 	 * @param ChatRepository    $chat
+	 * @param FilterRepository  $filter
 	 * @param MuteRepository    $mutes
 	 * @param UserRepository    $users
 	 */
-	public function __construct(ActionRepository $actions, ChannelRepository $channels, ChatRepository $chat, MuteRepository $mutes, UserRepository $users)
-	{
+	public function __construct(
+		ActionRepository $actions,
+		ChannelRepository $channels,
+		ChatRepository $chat,
+		FilterRepository $filters,
+		MuteRepository $mutes,
+		UserRepository $users
+	) {
 		$this->actions = $actions;
 		$this->channels = $channels;
 		$this->chat = $chat;
+		$this->filters = $filters;
 		$this->mutes = $mutes;
 		$this->users = $users;
 	}
@@ -123,6 +136,13 @@ class ChatController extends Controller
 				}
 
 				$contentsParsed = with(new \Parsedown)->text($contents);
+
+				$filters = $this->filters->getAll();
+				foreach($filters as $filter) {
+					$asterisks = str_repeat('*', strlen($filter->text));
+					$contentsParsed = str_ireplace($filter->text, $asterisks, $contentsParsed);
+				}
+
 				with(new Chat)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed, $status, $this->channels->getByNameTrim($form->channel)->id);
 				$channel = $this->channels->getByNameTrim($form->channel);
 				$channel->messages = $channel->messages + 1;

@@ -19,5 +19,60 @@ class ChatChannelsTableSeeder extends Seeder{
 					'messages'  => 0,
 				],
 			]);
+
+		DB::table('chat_filters')->
+		insert([
+			[
+				'text' => 'bastard',
+			],
+			[
+				'text' => 'bitch',
+			],
+			[
+				'text' => 'cunt',
+			],
+			[
+				'text' => 'fag',
+			],
+			[
+				'text' => 'faggot',
+			],
+			[
+				'text' => 'fuck',
+			],
+			[
+				'text' => 'fucka',
+			],
+			[
+				'text' => 'fucker',
+			],
+			[
+				'text' => 'fuckin',
+			],
+			[
+				'text' => 'fucking',
+			],
+			[
+				'text' => 'nigga',
+			],
+			[
+				'text' => 'nigger',
+			],
+			[
+				'text' => 'pussy',
+			],
+			[
+				'text' => 'pu$$y',
+			],
+			[
+				'text' => 'shit',
+			],
+			[
+				'text' => 'slag',
+			],
+			[
+				'text' => 'slut',
+			],
+		]);
 	}
 }
