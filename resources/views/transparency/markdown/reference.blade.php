@@ -2,13 +2,10 @@
 @section('contents')
 			<div class='wrapper'>
 				<h1>
-					@lang('transparency.markdown.title')
+					@lang('transparency.markdown.reference.title')
 				</h1>
-				<p class='text-info'>
-					@lang('transparency.markdown.note')
-				</p>
-				<p class='text-info'>
-					@lang('transparency.markdown.source')
+				<p class='text-primary'>
+					@lang('transparency.markdown.reference.note')
 				</p>
 				<h3>
 					@lang('transparency.markdown.table_of_contents')
@@ -22,7 +19,7 @@
 					</li>
 @endforeach
 				</ul>
-	@foreach($files as $name => $markdown)
+@foreach($files as $name => $markdown)
 				<div id='markdown-set-{{ str_replace(" ", "-", $name) }}' class='well'>
 					<h3 class='text-center'>
 						{{ $name }}
@@ -32,9 +29,7 @@
 							<h4 class='text-center'>
 								@lang('transparency.markdown.title')
 							</h4>
-							<pre>
-{{$markdown}}
-							</pre>
+<pre>{{ $markdown }}</pre>
 						</div>
 						<div class='col-xs-12 col-sm-6'>
 							<h4 class='text-center'>
@@ -46,6 +41,6 @@
 						</div>
 					</div>
 				</div>
-	@endforeach
+@endforeach
 			</div>
 @stop

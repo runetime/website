@@ -1,0 +1,1 @@
+Double tildes causes a ~~strikethrough~~.

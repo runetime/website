@@ -1,0 +1,1 @@
+Underscores causes _italicized text_.  You can also use *single asterisks*.

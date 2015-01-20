@@ -662,5 +662,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'tickets'], function() {
  */
 Route::group(['prefix' => 'transparency'], function() {
 	get('/', 'TransparencyController@getIndex');
-	get('markdown', 'TransparencyController@getMarkdown');
+	get('markdown', 'TransparencyController@getMarkdownIndex');
+	get('markdown/reference', 'TransparencyController@getMarkdownReference');
 });
