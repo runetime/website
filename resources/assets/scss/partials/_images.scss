@@ -1,4 +1,5 @@
 .photo-sm {
 	border-radius: $images-photo-border;
+	max-height: $images-photo-sm-height;
 	max-width: $images-photo-sm-width;
 }

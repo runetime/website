@@ -219,4 +219,26 @@ class String
 
 		return $results;
 	}
+
+	/**
+	 * @param $directory
+	 * @param $name
+	 *
+	 * @return string
+	 */
+	public static function uploaded($directory, $name)
+	{
+		return public_path('img/uploaded/' . $directory . '/' . $name);
+	}
+
+	/**
+	 * @param $directory
+	 * @param $name
+	 *
+	 * @return string
+	 */
+	public static function generated($directory, $name)
+	{
+		return public_path('img/generated/' . $directory . '/' . $name);
+	}
 }
