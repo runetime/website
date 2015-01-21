@@ -39,7 +39,23 @@ class CalculatorController extends Controller
 		$this->bc(['calculators' => trans('calculator.title')]);
 		$this->nav('navbar.runescape.title');
 		$this->title('calculator.combat.title');
-		return $this->view('calculators.combat');
+		return $this->view('calculators.combat.index');
+	}
+
+	public function getCombat3()
+	{
+		$this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
+		$this->nav('navbar.runescape.title');
+		$this->title('calculator.combat.title');
+		return $this->view('calculators.combat.3');
+	}
+
+	public function getCombatOSRS()
+	{
+		$this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
+		$this->nav('navbar.runescape.title');
+		$this->title('calculator.combat.title');
+		return $this->view('calculators.combat.osrs');
 	}
 
 	/**

@@ -201,7 +201,7 @@ class String
 			return \Cache::get('hiscores.' . $rsn);
 		}
 
-		$url='http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $rsn;
+		$url = 'http://services.runescape.com/m=hiscore/index_lite.ws?player=' . $rsn;
 		$results = \String::CURL($url);
 
 		if(substr($results, 0, 6) == "<html>") {
@@ -216,6 +216,62 @@ class String
 		}
 
 		\Cache::put('hiscores.' . $rsn, $results, \Carbon::now()->addDay());
+
+		return $results;
+	}
+
+	/**
+	 * @param $rsn
+	 *
+	 * @return array|bool|mixed
+	 */
+	public function getHiscoreOSRS($rsn)
+	{
+		/**
+		 * Rank, Level, XP
+		 * Attack
+		 * Defence
+		 * Strength
+		 * Hitpoints
+		 * Ranged
+		 * Prayer
+		 * Magic
+		 * Cooking
+		 * Woodcutting
+		 * Fletching
+		 * Fishing
+		 * Firemaking
+		 * Crafting
+		 * Smithing
+		 * Mining
+		 * Herblore
+		 * Agility
+		 * Thieving
+		 * Slayer
+		 * Farming
+		 * Runecraft
+		 * Hunter
+		 * Construction
+		 */
+		if(\Cache::get('hiscoresOld.' . $rsn)) {
+			return \Cache::get('hiscoresOld.' . $rsn);
+		}
+
+		$url = 'view-source:services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=' . $rsn;
+		$results = \String::CURL($url);
+
+		if(substr($results, 0, 6) == "<html>") {
+			$results = false;
+		} else {
+			$scores = explode("\n", $results);
+			foreach($scores as $key => $text) {
+				$scores[$key] = explode(",", $text);
+			}
+
+			$results = $scores;
+		}
+
+		\Cache::put('hiscoresOld.' . $rsn, $results, \Carbon::now()->addDay());
 
 		return $results;
 	}

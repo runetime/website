@@ -72,8 +72,12 @@ Route::group(['prefix' => 'awards'], function() {
  */
 Route::group(['prefix' => 'calculators'], function() {
 	get('/', 'CalculatorController@getIndex');
-	get('combat', 'CalculatorController@getCombat');
-	post('combat/load', 'CalculatorController@getCombatLoad');
+	Route::group(['prefix' => 'combat'], function() {
+		get('/', 'CalculatorController@getCombat');
+		get('3', 'CalculatorController@getCombat3');
+		get('old-school', 'CalculatorController@getCombatOSRS');
+		post('/load', 'CalculatorController@getCombatLoad');
+	});
 	get('{type}', 'CalculatorController@getView');
 	post('load', 'CalculatorController@postLoad');
 });
