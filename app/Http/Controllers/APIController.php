@@ -6,6 +6,10 @@ use App\RuneTime\Awards\Award;
 use App\RuneTime\Awards\AwardRepository;
 use App\RuneTime\Accounts\UserRepository;
 
+/**
+ * Class APIController
+ * @package App\Http\Controllers
+ */
 class APIController extends Controller
 {
 	/**
@@ -28,6 +32,8 @@ class APIController extends Controller
 	}
 
 	/**
+	 * Returns all of the awards' id and name.
+	 *
 	 * @return string
 	 */
 	public function getAwards()
@@ -39,6 +45,7 @@ class APIController extends Controller
 				'id'   => $award->id,
 				'name' => $award->name,
 			];
+
 			array_push($response, $set);
 		}
 
@@ -46,28 +53,30 @@ class APIController extends Controller
 	}
 
 	/**
+	 * Returns basic non-sensitive information about a user,
+	 * posted over a REST API, giving the user's ID.
 	 * @param UserRequest $form
 	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function postUser(UserRequest $form)
 	{
-		$u = $this->users->getById($form->id);
+		$user = $this->users->getById($form->id);
 
-		$user = (object) [
-			'id'               => $u->id,
-			'display_name'     => $u->display_name,
-			'title'            => $u->title,
-			'about'            => $u->about,
-			'about_parsed'     => $u->about_parsed,
-			'signature'        => $u->signature,
-			'signature_parsed' => $u->signature_parsed,
-			'posts_active'     => $u->posts_active,
-			'posts_total'      => $u->posts_total,
-			'profile_views'    => $u->profile_views,
-			'reputation'       => $u->reputation,
+		$userDetails = (object) [
+			'id'               => $user->id,
+			'display_name'     => $user->display_name,
+			'title'            => $user->title,
+			'about'            => $user->about,
+			'about_parsed'     => $user->about_parsed,
+			'signature'        => $user->signature,
+			'signature_parsed' => $user->signature_parsed,
+			'posts_active'     => $user->posts_active,
+			'posts_total'      => $user->posts_total,
+			'profile_views'    => $user->profile_views,
+			'reputation'       => $user->reputation,
 		];
 
-		return json_encode($user);
+		return json_encode($userDetails);
 	}
 }

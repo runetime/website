@@ -12,6 +12,10 @@ use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
+/**
+ * Class AuthController
+ * @package App\Http\Controllers
+ */
 class AuthController extends Controller
 {
 	/**
@@ -52,6 +56,9 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * Returns the Login page, and if the user had failed to
+	 * login then it also displays the appropriate error.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getLoginForm()
@@ -64,6 +71,11 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * Checks if the user's login credentials are correct.
+	 * If they are correct then it logs them into their
+	 * account, and if not, it redirects them to the
+	 * login page with a translated error message.
+	 *
 	 * @param LoginRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -72,21 +84,27 @@ class AuthController extends Controller
 	{
 		$user = $this->users->getByEmail($form->email);
 		if(!empty($user)) {
+			// The account exists
 			$credentials = [
 				'email'    => $form->email,
 				'password' => $form->password,
 			];
+
+			// Check if the user's credentials are correct
 			if(\Auth::attempt($credentials, true)) {
 				return \redirect()->to('/');
 			}
 		}
 
+		// Supply the user with an error message
 		\Session::put('login.incorrect', true);
 
 		return \redirect()->to('login');
 	}
 
 	/**
+	 * Returns the Signup page
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getSignupForm()
@@ -97,22 +115,31 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * Checks if the user's credentials are appropriate, and
+	 * if so - and there is not an account with the email
+	 * address and/or username - it creates their new
+	 * account and signs the user into the account.
+	 *
 	 * @param SignupRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postSignupForm(SignupRequest $form)
 	{
+		// Check if the two given passwords match
 		if($form->password != $form->password2) {
 			return $this->view('errors.signup.passwords');
 		}
 
+		// Check if the display name has been taken
 		if($this->users->getByDisplayName($form->display_name)) {
 			return $this->view('errors.signup.taken');
 		}
 
 		$hash = \Hash::make($form->password);
 		$rank = $this->ranks->getByPostCount(0);
+
+		// The list of columns of what this is, is in the User model
 		$user = with(new User)->saveNew(
 			'',
 			'',
@@ -147,6 +174,8 @@ class AuthController extends Controller
 		);
 		$role = $this->roles->getByName("Members");
 		$user->roleAdd($role, true);
+
+		// Logs the user into their new account.
 		\Auth::loginUsingId($user->id, true);
 
 		$data = [
@@ -154,6 +183,7 @@ class AuthController extends Controller
 			'name' => $user->display_name,
 		];
 
+		// Mails the user about their new account.
 		\Mail::send('emails.auth.register', $data, function($message) use ($user) {
 			$message->to($user->email);
 			$message->subject(trans('auth.register.email.subject'));
@@ -163,6 +193,9 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * Logs the user out of their account and
+	 * redirects the user to the homepage.
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function getLogout()
@@ -173,6 +206,8 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * Returns the password reset page.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getPasswordEmail()
@@ -183,24 +218,31 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * Emails the user a link to reset their password.
+	 *
 	 * @param PasswordEmailRequest $request
 	 *
 	 * @return \Illuminate\Http\RedirectResponse|int
 	 */
 	public function postPasswordEmail(PasswordEmailRequest $request)
 	{
-		switch ($response = $this->passwords->sendResetLink($request->only('email')))
-		{
+		switch ($response = $this->passwords->sendResetLink($request->only('email'))) {
 			case PasswordBroker::INVALID_USER:
 				return redirect()->back()->with('error', trans($response));
+				break;
 			case PasswordBroker::RESET_LINK_SENT:
 				return redirect()->back()->with('status', trans($response));
+				break;
 		}
 
 		return 1;
 	}
 
 	/**
+	 * Allows the user to reset their password if they have
+	 * an appropriate reset token that was emailed to
+	 * them after filling out the password reset.
+	 *
 	 * @param $token
 	 *
 	 * @return \Illuminate\View\View
@@ -219,6 +261,9 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * This resets the user's password to the one
+	 * they chose if they used a valid token.
+	 *
 	 * @param                      $token
 	 * @param PasswordResetRequest $form
 	 *
@@ -243,6 +288,11 @@ class AuthController extends Controller
 		return 1;
 	}
 
+	/**
+	 * Redirects the user to the login form.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function getRedirect()
 	{
 		return \redirect()->to('login');

@@ -9,12 +9,28 @@ use Illuminate\Routing\Controller as RouterController;
 
 class Controller extends RouterController
 {
+	/**
+	 * @var array
+	 */
 	protected $bc = [];
+	/**
+	 * @var bool
+	 */
 	protected $displayPageHeader = true;
+	/**
+	 * @var string
+	 */
 	protected $nav = '';
+	/**
+	 * @var string
+	 */
 	protected $title = '';
 
 	/**
+	 * Sets the breadcrumbs for the current page.  If an array,
+	 * then it is assumed there is a breadcrumbs.  If false,
+	 * then it is assumed that there are no breadcrumbs.
+	 *
 	 * @param array $breadcrumbs
 	 */
 	protected function bc($breadcrumbs = [])
@@ -27,23 +43,31 @@ class Controller extends RouterController
 	}
 
 	/**
-	 * @param $nav
+	 * A method that sets which section in the navigation bar is used.
+	 * For example, if the current page is a Calculator, then the
+	 * RuneScape section in the navbar will be highlighted.
+	 *
+	 * @param string $nav
 	 */
 	protected function nav($nav)
 	{
+		// Set the locale of the page
 		$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
 
+		// If the user does not have a cookie for their locale, set default
 		if(empty($locale)) {
 			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', 'en');
 			$locale = \Cache::get('ip.' . \Request::getClientIp() . '.lang');
 		}
 
 		\Lang::setLocale($locale);
+
 		$this->nav = trans($nav);
 	}
 
 	/**
-	 *
+	 * Filler method for future versions that may
+	 * be used as part of the View rendering.
 	 */
 	protected function setupLayout()
 	{
@@ -53,8 +77,11 @@ class Controller extends RouterController
 	}
 
 	/**
-	 * @param       $lang
-	 * @param array $data
+	 * Sets the title of the page with a translated version
+	 * of the string that is given from the Lang files.
+	 *
+	 * @param string $lang
+	 * @param array  $data
 	 */
 	protected function title($lang, $data = [])
 	{
@@ -62,6 +89,10 @@ class Controller extends RouterController
 	}
 
 	/**
+	 * Renders the View given by $path, sets the user in the
+	 * recent activity, checks if the user is banned or IP
+	 * banned, and if so returns the appropriate view.
+	 *
 	 * @param       $path
 	 * @param array $data
 	 *
@@ -82,6 +113,8 @@ class Controller extends RouterController
 		if(\Auth::check()) {
 			$bans = new BanRepository(new Ban);
 			$ban = $bans->getByUserId(\Auth::user()->id);
+
+			// Checks if the user is banned
 			if(!empty($ban)) {
 				$data['ban'] = $ban;
 				$data['bc'] = false;
@@ -89,30 +122,36 @@ class Controller extends RouterController
 				$data['nav'] = 'navbar.home';
 				$data['time'] = \Carbon::createFromTimestamp($ban->time_ends)->diffForHumans();
 				$data['title'] = trans('navbar.home');
+
 				return \View::make('errors.banned', $data);
 			}
 		}
 
+		// Checks if the user is IP banned
 		$ipBans = new IPRepository(new IP);
 		$ipBan = $ipBans->getByIPActive(\Request::getClientIp());
 		if(!empty($ipBan)) {
 			if(\Auth::check()) {
 				\Auth::logout();
 			}
+
 			$data['ban'] = $ipBan;
 			$data['bc'] = false;
 			$data['displayPageHeader'] = false;
 			$data['nav'] = 'navbar.home';
 			$data['title'] = trans('navbar.home');
+
 			return \View::make('errors.ip_banned', $data);
 		}
 
 		$this->updateCache();
+
 		return \View::make($path, $data);
 	}
 
 	/**
-	 *
+	 * Updates the recent user activity cache with the current
+	 * user and the current time, pushing out old activity.
 	 */
 	private function updateCache()
 	{

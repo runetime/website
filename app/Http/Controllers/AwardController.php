@@ -4,8 +4,15 @@ namespace App\Http\Controllers;
 use App\RuneTime\Awards\Award;
 use App\RuneTime\Awards\AwardRepository;
 
+/**
+ * Class AwardController
+ * @package App\Http\Controllers
+ */
 class AwardController extends Controller
 {
+	/**
+	 * @var \App\RuneTime\Awards\AwardRepository
+	 */
 	private $awards;
 
 	/**
@@ -17,6 +24,8 @@ class AwardController extends Controller
 	}
 
 	/**
+	 * Returns the About page
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex()
@@ -29,7 +38,11 @@ class AwardController extends Controller
 	}
 
 	/**
+	 * Displays information about an Award
+	 * and who has achieved that award.
+	 *
 	 * @param $slug
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($slug)
