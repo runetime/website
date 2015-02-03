@@ -1,5 +1,11 @@
+/**
+ * Require the main Gulp package
+ */
 var gulp = require('gulp');
 
+/**
+ * Gulp dependencies
+ */
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
 var uglifyjs = require('gulp-uglifyjs');
@@ -8,13 +14,20 @@ var sass = require('gulp-ruby-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var ts = require('gulp-typescript');
 
-
+/**
+ * Abstracted TypeScript settings
+ * @type {{declarationFiles: boolean, noExternalResolve: boolean, sortOutput: boolean}}
+ */
 var tsProject = {
 	declarationFiles: true,
 	noExternalResolve: true,
 	sortOutput: true
 };
 
+/**
+ * Directories of the various assets and public output.
+ * @type {{assets: {scss: string, typescript: string}, public: {css: string, js: string}}}
+ */
 var paths = {
 	'assets': {
 		scss: './resources/assets/scss/*.scss',
@@ -26,7 +39,9 @@ var paths = {
 	}
 };
 
-// Sass Compile Task
+/**
+ * Sass compile task
+ */
 gulp.task('scss', function() {
 	return gulp.src(paths.assets.scss)
 		.pipe(sass({
@@ -39,7 +54,9 @@ gulp.task('scss', function() {
 		.pipe(gulp.dest(paths.public.css));
 });
 
-// Scripts-Admin Task
+/**
+ * Admin TypeScript compile task
+ */
 gulp.task('scripts-admin', function() {
 	var tsResult = gulp.src('./resources/assets/typescript/admin/*.ts')
 		.pipe(sourcemaps.init())
@@ -55,7 +72,9 @@ gulp.task('scripts-admin', function() {
 		.pipe(gulp.dest('./public/js/'));
 });
 
-// Scripts-Modules Task
+/**
+ * Modules TypeScript compile task
+ */
 gulp.task('scripts-modules', function() {
 	var tsResult = gulp.src('./resources/assets/typescript/modules/*.ts')
 		.pipe(sourcemaps.init())
@@ -67,7 +86,9 @@ gulp.task('scripts-modules', function() {
 		.pipe(gulp.dest('./public/js'));
 });
 
-// Scripts-Admin Task
+/**
+ * Vendor JavaScript minfications and concatenations
+ */
 gulp.task('scripts-vendor', function() {
 	// It's in this order due to dependencies ;_; Please do not change this order
 	var src = [
@@ -88,6 +109,9 @@ gulp.task('scripts-vendor', function() {
 		.pipe(gulp.dest('./public/js'))
 });
 
+/**
+ * A task that watches directories' files for changes and runs the appropriate Gulp task
+ */
 gulp.task('watch', function() {
 	gulp.watch('./resources/assets/typescript/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
 	gulp.watch('./resources/assets/typescript/admin/*.ts', ['scripts-admin']);
@@ -98,4 +122,7 @@ gulp.task('watch', function() {
 	gulp.watch('./resources/assets/scss/partials/*/*.scss', ['scss']);
 });
 
+/**
+ * Runs all of the compilations on the default Gulp command
+ */
 gulp.task('default', ['scss', 'scripts-admin', 'scripts-modules', 'scripts-vendor']);
