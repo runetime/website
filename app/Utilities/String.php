@@ -5,6 +5,10 @@ use App\RuneTime\Accounts\Role;
 use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\User;
 
+/**
+ * Class String
+ * @package App\Utilities
+ */
 class String
 {
 	/**

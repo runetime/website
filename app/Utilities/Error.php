@@ -1,6 +1,10 @@
 <?php
 namespace App\Utilities;
 
+/**
+ * Class Error
+ * @package App\Utilities
+ */
 class Error
 {
 	/**

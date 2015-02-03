@@ -1,6 +1,10 @@
 <?php
 namespace App\Utilities;
 
+/**
+ * Class Image
+ * @package App\Utilities
+ */
 class Image
 {
 	/**

@@ -3,6 +3,10 @@ namespace App\Utilities;
 
 use Carbon\Carbon;
 
+/**
+ * Class Time
+ * @package App\Utilities
+ */
 class Time
 {
 	/**

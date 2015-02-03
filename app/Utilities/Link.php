@@ -4,6 +4,10 @@ namespace App\Utilities;
 use App\RuneTime\Accounts\Role;
 use App\RuneTime\Accounts\RoleRepository;
 
+/**
+ * Class Link
+ * @package App\Utilities
+ */
 class Link
 {
 	/**
