@@ -34,8 +34,7 @@ class MembersController extends Controller
 	 * @param string $searchRole
 	 * @param string $searchPrefix
 	 * @param string $searchOrder
-	 *
-	 * @internal param int $page
+	 * @param int    $page
 	 *
 	 * @return \Illuminate\View\View
 	 */

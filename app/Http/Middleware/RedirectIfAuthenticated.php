@@ -17,8 +17,7 @@ class RedirectIfAuthenticated implements Middleware {
 	/**
 	 * Create a new filter instance.
 	 *
-	 * @param  Guard  $auth
-	 * @return void
+	 * @param \Illuminate\Contracts\Auth\Guard $auth
 	 */
 	public function __construct(Guard $auth)
 	{

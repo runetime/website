@@ -1370,9 +1370,12 @@ class Parsedown
     #
     # Deprecated Methods
     #
-
-    /**
+	/**
+     * @param $text
+     *
      * @deprecated in favor of "text"
+     *
+     * @return string
      */
     function parse($text)
     {

@@ -46,12 +46,12 @@ class ChatController extends Controller
 	private $users;
 
 	/**
-	 * @param ActionRepository  $actions
-	 * @param ChannelRepository $channels
-	 * @param ChatRepository    $chat
-	 * @param FilterRepository  $filter
-	 * @param MuteRepository    $mutes
-	 * @param UserRepository    $users
+	 * @param \App\RuneTime\Chat\ActionRepository   $actions
+	 * @param \App\RuneTime\Chat\ChannelRepository  $channels
+	 * @param \App\RuneTime\Chat\ChatRepository     $chat
+	 * @param \App\RuneTime\Chat\FilterRepository   $filters
+	 * @param \App\RuneTime\Bans\MuteRepository     $mutes
+	 * @param \App\RuneTime\Accounts\UserRepository $users
 	 */
 	public function __construct(
 		ActionRepository $actions,

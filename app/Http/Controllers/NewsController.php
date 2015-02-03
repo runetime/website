@@ -41,7 +41,7 @@ class NewsController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param string $tag
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -61,7 +61,8 @@ class NewsController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param      $id
+	 * @param bool $comments
 	 *
 	 * @return \Illuminate\View\View
 	 */

@@ -215,6 +215,8 @@ class Thread extends Entity
 	}
 
 	/**
+	 * @param string $path
+	 *
 	 * @return string
 	 */
 	public function toSlug($path = '')
