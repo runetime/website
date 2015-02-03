@@ -65,7 +65,7 @@ class Time
 	/**
 	 * @param int $i
 	 *
-	 * @return bool|string
+	 * @return bool|string|Carbon
 	 */
 	public static function long($i = 0)
 	{

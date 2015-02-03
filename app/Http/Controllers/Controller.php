@@ -35,7 +35,7 @@ class Controller extends RouterController
 	 * then it is assumed there is a breadcrumbs.  If false,
 	 * then it is assumed that there are no breadcrumbs.
 	 *
-	 * @param array $breadcrumbs
+	 * @param array|false $breadcrumbs
 	 */
 	protected function bc($breadcrumbs = [])
 	{
