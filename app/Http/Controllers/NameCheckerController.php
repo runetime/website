@@ -3,6 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NameCheck\CheckRequest;
 
+/**
+ * Class NameCheckerController
+ * @package App\Http\Controllers
+ */
 class NameCheckerController extends Controller
 {
 	/**

@@ -5,6 +5,10 @@ use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
 
+/**
+ * Class MembersController
+ * @package App\Http\Controllers
+ */
 class MembersController extends Controller
 {
 	/**

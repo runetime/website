@@ -13,6 +13,10 @@ use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Accounts\UserRepository;
 
+/**
+ * Class ForumController
+ * @package App\Http\Controllers
+ */
 class ForumController extends Controller
 {
 	/**

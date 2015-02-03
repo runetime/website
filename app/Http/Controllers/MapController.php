@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class MapController
+ * @package App\Http\Controllers
+ */
 class MapController extends Controller {
 	/**
 	 * @return \Illuminate\View\View

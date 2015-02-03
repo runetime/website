@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class ClanController
+ * @package App\Http\Controllers
+ */
 class ClanController extends Controller
 {
 

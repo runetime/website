@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class MediaController
+ * @package App\Http\Controllers
+ */
 class MediaController extends Controller
 {
 	/**

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use DirectoryIterator;
 use FilesystemIterator;
 
+/**
+ * Class LanguageController
+ * @package App\Http\Controllers
+ */
 class LanguageController extends Controller
 {
 	/**

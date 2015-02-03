@@ -8,6 +8,10 @@ use App\RuneTime\Databases\ItemRepository;
 use App\RuneTime\Databases\Monster;
 use App\RuneTime\Databases\MonsterRepository;
 
+/**
+ * Class DatabaseController
+ * @package App\Http\Controllers
+ */
 class DatabaseController extends Controller
 {
 	/**

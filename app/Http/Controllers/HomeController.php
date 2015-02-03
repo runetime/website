@@ -7,6 +7,10 @@ use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 
+/**
+ * Class HomeController
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
 	/**

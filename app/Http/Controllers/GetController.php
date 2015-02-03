@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Http\Request;
 
+/**
+ * Class GetController
+ * @package App\Http\Controllers
+ */
 class GetController extends Controller
 {
 	/**

@@ -3,6 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Contact\ContactRequest;
 
+/**
+ * Class ContactController
+ * @package App\Http\Controllers
+ */
 class ContactController extends Controller
 {
 	/**

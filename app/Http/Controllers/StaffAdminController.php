@@ -22,6 +22,10 @@ use App\RuneTime\Accounts\UserRepository;
 use App\RuneTime\Accounts\UserRole;
 use App\RuneTime\Accounts\UserRoleRepository;
 
+/**
+ * Class StaffAdminController
+ * @package App\Http\Controllers
+ */
 class StaffAdminController extends Controller
 {
 	/**

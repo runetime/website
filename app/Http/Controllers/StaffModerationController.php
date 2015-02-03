@@ -3,6 +3,10 @@ namespace App\Http\Controllers;
 
 use App\RuneTime\Forum\Threads\ThreadRepository;
 
+/**
+ * Class StaffModerationController
+ * @package App\Http\Controllers
+ */
 class StaffModerationController extends Controller
 {
 	/**

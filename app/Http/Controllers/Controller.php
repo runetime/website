@@ -7,6 +7,10 @@ use App\RuneTime\Bans\IP;
 use App\RuneTime\Bans\IPRepository;
 use Illuminate\Routing\Controller as RouterController;
 
+/**
+ * Class Controller
+ * @package App\Http\Controllers
+ */
 class Controller extends RouterController
 {
 	/**

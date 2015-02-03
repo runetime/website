@@ -6,6 +6,10 @@ use App\RuneTime\Accounts\UserRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\News\NewsRepository;
 
+/**
+ * Class SearchController
+ * @package App\Http\Controllers
+ */
 class SearchController extends Controller {
 	/**
 	 * @var NewsRepository

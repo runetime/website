@@ -9,6 +9,10 @@ use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
 
+/**
+ * Class StatusController
+ * @package App\Http\Controllers
+ */
 class StatusController extends Controller
 {
 	/**

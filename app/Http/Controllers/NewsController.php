@@ -10,6 +10,10 @@ use App\RuneTime\News\News;
 use App\RuneTime\News\NewsRepository;
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Class NewsController
+ * @package App\Http\Controllers
+ */
 class NewsController extends Controller
 {
 	/**

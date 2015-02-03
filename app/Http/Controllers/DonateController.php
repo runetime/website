@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class DonateController
+ * @package App\Http\Controllers
+ */
 class DonateController extends Controller
 {
 	/**

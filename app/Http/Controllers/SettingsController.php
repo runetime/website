@@ -11,6 +11,10 @@ use App\Http\Requests\Settings\SocialRequest;
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
 
+/**
+ * Class SettingsController
+ * @package App\Http\Controllers
+ */
 class SettingsController extends Controller
 {
 	/**

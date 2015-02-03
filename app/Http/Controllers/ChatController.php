@@ -14,6 +14,10 @@ use App\RuneTime\Chat\ChatRepository;
 use App\RuneTime\Accounts\UserRepository;
 use App\RuneTime\Chat\FilterRepository;
 
+/**
+ * Class ChatController
+ * @package App\Http\Controllers
+ */
 class ChatController extends Controller
 {
 	/**

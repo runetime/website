@@ -8,6 +8,10 @@ use App\RuneTime\Guides\LocationRepository;
 use App\RuneTime\Guides\Quest;
 use App\RuneTime\Guides\QuestRepository;
 
+/**
+ * Class GuideController
+ * @package App\Http\Controllers
+ */
 class GuideController extends Controller
 {
 	/**

@@ -9,6 +9,10 @@ use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Tickets\TicketRepository;
 use App\RuneTime\Accounts\RoleRepository;
 
+/**
+ * Class TicketController
+ * @package App\Http\Controllers
+ */
 class TicketController extends Controller
 {
 	/**

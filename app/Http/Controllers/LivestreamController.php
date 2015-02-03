@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class LivestreamController
+ * @package App\Http\Controllers
+ */
 class LivestreamController extends Controller
 {
 	/**

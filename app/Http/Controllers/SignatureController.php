@@ -3,6 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Signatures\RSNRequest;
 
+/**
+ * Class SignatureController
+ * @package App\Http\Controllers
+ */
 class SignatureController extends Controller
 {
 	/**

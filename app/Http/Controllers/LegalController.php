@@ -1,8 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class LegalController
+ * @package App\Http\Controllers
+ */
 class LegalController extends Controller
 {
+	/**
+	 * @param $language
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getLegal($language)
 	{
 		if($language == "english") {

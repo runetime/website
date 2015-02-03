@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class PlayController
+ * @package App\Http\Controllers
+ */
 class PlayController extends Controller
 {
 	/**

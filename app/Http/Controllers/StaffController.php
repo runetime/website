@@ -12,6 +12,10 @@ use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\UserRepository;
 
+/**
+ * Class StaffController
+ * @package App\Http\Controllers
+ */
 class StaffController extends Controller
 {
 	/**

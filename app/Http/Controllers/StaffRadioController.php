@@ -16,6 +16,10 @@ use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
 use App\RuneTime\Accounts\UserRepository;
 
+/**
+ * Class StaffRadioController
+ * @package App\Http\Controllers
+ */
 class StaffRadioController extends Controller
 {
 	/**

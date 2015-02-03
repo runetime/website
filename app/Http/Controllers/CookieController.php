@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+/**
+ * Class CookieController
+ * @package App\Http\Controllers
+ */
 class CookieController extends Controller {
 	/**
 	 *

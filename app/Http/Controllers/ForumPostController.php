@@ -19,6 +19,10 @@ use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Accounts\UserRepository;
 
+/**
+ * Class ForumPostController
+ * @package App\Http\Controllers
+ */
 class ForumPostController extends Controller
 {
 	/**
