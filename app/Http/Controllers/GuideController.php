@@ -34,6 +34,8 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Returns the Guides index page.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex()
@@ -44,6 +46,8 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Returns the Quest Guides index page.
+	 *
 	 * @param int $searchDifficulty
 	 * @param int $searchLength
 	 * @param int $searchMembership
@@ -64,6 +68,8 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Returns a page for a Quest given by its ID.
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View|int
@@ -92,6 +98,8 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Returns a page for creating a quest.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getQuestCreate()
@@ -103,6 +111,9 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Posts the information given for creating a quest and creates
+	 * the quest, redirecting the user to the new quest's page.
+	 *
 	 * @param QuestCreateRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -128,6 +139,8 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Returns the Location Guides index page.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getLocations()
@@ -141,6 +154,8 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Returns a page for a Location given by its ID.
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View|int
@@ -171,6 +186,8 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Returns a page for creating a location.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getLocationCreate()
@@ -182,6 +199,9 @@ class GuideController extends Controller
 	}
 
 	/**
+	 * Posts the information given for creating a location and creates
+	 * the location, redirecting the user to the new location's page.
+	 *
 	 * @param LocationCreateRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse

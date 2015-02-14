@@ -45,5 +45,7 @@ class ReportRepository extends EloquentRepository
 					break;
 			}
 		}
+
+		return 'unknown';
 	}
 }

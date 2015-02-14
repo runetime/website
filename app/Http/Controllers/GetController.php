@@ -24,6 +24,8 @@ class GetController extends Controller
 	}
 
 	/**
+	 * Checks to see if an email address has already been used on the site.
+	 *
 	 * @param Request $form
 	 *
 	 * @return string
@@ -40,6 +42,8 @@ class GetController extends Controller
 	}
 
 	/**
+	 * Checks to see if a display name has already been used on the site.
+	 *
 	 * @param Request $form
 	 *
 	 * @return string
@@ -56,6 +60,8 @@ class GetController extends Controller
 	}
 
 	/**
+	 * Returns a JSON string of a RuneScape Name's hiscores.
+	 *
 	 * @param $rsn
 	 *
 	 * @return string

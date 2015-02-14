@@ -25,6 +25,8 @@ class CalculatorController extends Controller
 	}
 
 	/**
+	 * Returns the index of the calculators.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex()
@@ -37,6 +39,8 @@ class CalculatorController extends Controller
 	}
 
 	/**
+	 * Returns the combat calculator.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getCombat() {
@@ -46,6 +50,11 @@ class CalculatorController extends Controller
 		return $this->view('calculators.combat.index');
 	}
 
+	/**
+	 * Returns the combat calculator for RS3.
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getCombat3()
 	{
 		$this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
@@ -54,6 +63,11 @@ class CalculatorController extends Controller
 		return $this->view('calculators.combat.3');
 	}
 
+	/**
+	 * Returns the combat calculator for OSRS.
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getCombatOSRS()
 	{
 		$this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
@@ -63,6 +77,9 @@ class CalculatorController extends Controller
 	}
 
 	/**
+	 * Receives a display name and retrieves hiscores
+	 * for the combat portions of their skills.
+	 *
 	 * @param CombatLoadRequest $form
 	 *
 	 * @return string
@@ -85,7 +102,10 @@ class CalculatorController extends Controller
 	}
 
 	/**
+	 * Returns the page for a specific calculator, given by name.
+	 *
 	 * @param $type
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getView($type)
@@ -106,6 +126,8 @@ class CalculatorController extends Controller
 	}
 
 	/**
+	 * Returns a JSON string of the given display name's skills.
+	 *
 	 * @param PostRequest $form
 	 *
 	 * @return string
@@ -117,11 +139,13 @@ class CalculatorController extends Controller
 			return json_encode([]);
 		}
 
+		// Setup details for all of the skills' methods of XP gains
 		$itemList = [];
 		$items = json_decode($calculator->items);
 		$levelsRequired = json_decode($calculator->levels_required);
 		$xp = json_decode($calculator->xp);
 
+		// Cycle through and build an array of skills' data
 		foreach($levelsRequired as $x => $level) {
 			if(!isset($itemList[$level])) {
 				$itemList[$level] = [];
@@ -134,6 +158,7 @@ class CalculatorController extends Controller
 			];
 		}
 
+		// Order the items by required level
 		$itemListNumbered = [];
 		for($x = 0; $x <= 99; $x++) {
 			if(!empty($itemList[$x][0])) {

@@ -55,6 +55,7 @@ class APIController extends Controller
 	/**
 	 * Returns basic non-sensitive information about a user,
 	 * posted over a REST API, giving the user's ID.
+	 *
 	 * @param UserRequest $form
 	 *
 	 * @return \Illuminate\View\View

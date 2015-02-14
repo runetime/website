@@ -24,7 +24,7 @@ class AwardController extends Controller
 	}
 
 	/**
-	 * Returns the About page
+	 * Returns the About page.
 	 *
 	 * @return \Illuminate\View\View
 	 */

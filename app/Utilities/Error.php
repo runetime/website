@@ -8,6 +8,8 @@ namespace App\Utilities;
 class Error
 {
 	/**
+	 * Returns a view for an error based on the HTTP Status given.
+	 *
 	 * @param $status
 	 *
 	 * @return \Illuminate\View\View
@@ -19,10 +21,9 @@ class Error
 				return view('errors.forbidden');
 				break;
 			case 404:
+			default:
 				return view('errors.missing');
 				break;
 		}
-
-		return view('errors.missing');
 	}
 }

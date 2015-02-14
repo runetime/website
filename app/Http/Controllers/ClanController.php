@@ -7,8 +7,9 @@ namespace App\Http\Controllers;
  */
 class ClanController extends Controller
 {
-
 	/**
+	 * Returns the clan page, giving it an array of translated strings.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex()

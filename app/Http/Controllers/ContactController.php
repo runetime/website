@@ -10,6 +10,8 @@ use App\Http\Requests\Contact\ContactRequest;
 class ContactController extends Controller
 {
 	/**
+	 * Returns the Contact page.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex()
@@ -20,6 +22,9 @@ class ContactController extends Controller
 	}
 
 	/**
+	 * Posts the message that a user has and mails
+	 * it off to RuneTime's email address.
+	 *
 	 * @param ContactRequest $form
 	 *
 	 * @return string
@@ -34,6 +39,7 @@ class ContactController extends Controller
 			'username' => $form->username,
 		];
 
+		// Mail off the message
 		\Mail::send('emails.contact', $data, function($message) {
 			$message->to(getenv('CONTACT_EMAIL'));
 			$message->subject(trans('contact.submit.contact_message', ['website' => 'runetime.net']));

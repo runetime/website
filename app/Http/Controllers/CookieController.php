@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
  */
 class CookieController extends Controller {
 	/**
-	 *
+	 * Returns the Cookie page.
 	 */
 	public function getIndex()
 	{

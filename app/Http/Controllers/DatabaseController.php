@@ -34,6 +34,8 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Returns the Database index page.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex()
@@ -44,6 +46,8 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Returns the Items Database index page.
+	 *
 	 * @param string $searchMembership
 	 * @param string $searchTradable
 	 * @param string $searchQuestItem
@@ -64,6 +68,8 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Returns a page for an Item given by its ID.
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -82,6 +88,8 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Returns a page for creating an item.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getItemsCreate()
@@ -93,6 +101,9 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Posts the information given for creating an item and creates
+	 * the item, redirecting the user to the new item's page.
+	 *
 	 * @param ItemCreateRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -113,6 +124,8 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Returns the Monsters Database index page.
+	 *
 	 * @param string $searchMembership
 	 *
 	 * @return \Illuminate\View\View
@@ -129,6 +142,8 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Returns a page for a Monster given by its ID.
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View
@@ -147,6 +162,8 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Returns a page for creating a monster.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getMonstersCreate()
@@ -158,6 +175,9 @@ class DatabaseController extends Controller
 	}
 
 	/**
+	 * Posts the information given for creating a Monster and creates
+	 * the monster, redirecting the user to the new Monster's page.
+	 *
 	 * @param MonsterCreateRequest $form
 	 *
 	 * @return \Illuminate\Http\RedirectResponse

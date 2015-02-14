@@ -8,6 +8,8 @@ namespace App\Http\Controllers;
 class DonateController extends Controller
 {
 	/**
+	 * Returns the Donate page.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getIndex()

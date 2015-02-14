@@ -8,7 +8,7 @@ namespace App\Http\Controllers;
 class AboutController extends Controller
 {
 	/**
-	 * Returns the About page
+	 * Returns the About page.
 	 *
 	 * @return \Illuminate\View\View
 	 */

@@ -70,12 +70,17 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Returns a JSON string of the name, number of messages,
+	 * and Unix timestamp of last message of channels.
+	 *
 	 * @return string
 	 */
 	public function getChannels()
 	{
 		$channels = $this->channels->getAll();
 		$channelList = [];
+
+		// Cycle through all of the channels and setup data for them
 		foreach($channels as $channel) {
 			$message = $this->chat->getLatestByChannel($channel->id);
 			$channelCurrent = (object) [
@@ -83,6 +88,7 @@ class ChatController extends Controller
 				'messages'     => $channel->messages,
 				'last_message' => strtotime($message['created_at']),
 			];
+
 			array_push($channelList, $channelCurrent);
 		}
 
@@ -90,6 +96,9 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Returns a boolean of whether or
+	 * not a channel name is valid.
+	 *
 	 * @param CheckChannelRequest $form
 	 *
 	 * @return array
@@ -106,6 +115,11 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Posts a message to a channel given the contents
+	 * and the channel name.  This requires that
+	 * the user has permission to post a chat
+	 * message, or else it returns false.
+	 *
 	 * @param MessageRequest $form
 	 *
 	 * @return string
@@ -115,12 +129,15 @@ class ChatController extends Controller
 		$response = ['done' => false];
 		if(\Auth::check()){
 			$mute = $this->mutes->getByUserActive(\Auth::user()->id);
+
 			if(!empty($mute)) {
+				// The user is muted, return an error
 				$response['error'] = -2;
 			} else {
 				$status = Chat::STATUS_VISIBLE;
 				$contents = $form->contents;
 				if(\Auth::user()->isStaff()) {
+					// The user is a staff member, enable commands
 					if(\String::startsWith("/pin ", $contents)) {
 						$contents = \String::replaceFirst("/pin ", $contents);
 						$status = Chat::STATUS_PINNED;
@@ -139,8 +156,10 @@ class ChatController extends Controller
 					}
 				}
 
+				// Parse the contents into Markdown
 				$contentsParsed = with(new \Parsedown)->text($contents);
 
+				// Filter out words that are censored
 				$filters = $this->filters->getAll();
 				foreach($filters as $filter) {
 					$asterisks = str_repeat('*', strlen($filter->text));
@@ -155,6 +174,7 @@ class ChatController extends Controller
 				$response['done'] = true;
 			}
 		} else {
+			// The user is not logged in
 			$response['error'] = -1;
 		}
 
@@ -162,6 +182,9 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Returns a boolean of whether or not the
+	 * user is a moderator on the website.
+	 *
 	 * @return string
 	 */
 	public function getModerator()
@@ -175,11 +198,15 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Returns a collection of all of the pinned messages,
+	 * getting them based on their moderator status.
+	 *
 	 * @return mixed
 	 */
 	public function getPinned()
 	{
 		if(\Auth::check() && \Auth::user()->isStaff()) {
+			// The user is a moderator, get invisible messages as well
 			$messages = $this->chat->getByStatus(Chat::STATUS_PINNED, '>=');
 		} else {
 			$messages = $this->chat->getByStatus(Chat::STATUS_PINNED);
@@ -190,6 +217,8 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Returns normal and pinned messages based on the given channel.
+	 *
 	 * @param StartRequest $form
 	 *
 	 * @return string
@@ -222,6 +251,9 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * For moderators only, it changes the status of a message.
+	 * Say from visible to hidden, the status is changed.
+	 *
 	 * @param StatusChangeRequest $form
 	 *
 	 * @return string
@@ -242,6 +274,11 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Checks to see if any messages have been sent on
+	 * a given channel since the message that the
+	 * user last has seen.  Basically it
+	 * checks for new messages.
+	 *
 	 * @param UpdateRequest $form
 	 *
 	 * @return string
@@ -264,6 +301,10 @@ class ChatController extends Controller
 	}
 
 	/**
+	 * Sorts the messages, returning an array of messages
+	 * with only the information we want users to
+	 * be able to receive from the server.
+	 *
 	 * @param $messages
 	 *
 	 * @return array

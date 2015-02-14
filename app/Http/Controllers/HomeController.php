@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\News\NewsRepository;
-use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 

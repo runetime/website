@@ -7,7 +7,7 @@ get('about', 'AboutController@getIndex');
  */
 Route::group(['prefix' => 'api'], function() {
 	/**
-	 * V1
+	 * Version 1 of the API.
 	 */
 	Route::group(['prefix' => 'v1'], function() {
 		get('awards', 'APIController@getAwards');

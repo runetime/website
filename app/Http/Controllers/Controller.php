@@ -40,6 +40,7 @@ class Controller extends RouterController
 	protected function bc($breadcrumbs = [])
 	{
 		if($breadcrumbs === false) {
+			// The breadcrumbs are meant to be hidden
 			$this->displayPageHeader = false;
 		} else {
 			$this->bc = $breadcrumbs;
@@ -110,6 +111,7 @@ class Controller extends RouterController
 		$data['title'] = $this->title;
 		$data['url'] = \Request::getPathInfo();
 		if(\Auth::check()) {
+			// The user is logged in, so set the last_active time of their account.
 			\Auth::user()->last_active = time();
 			\Auth::user()->save();
 		}
@@ -120,6 +122,7 @@ class Controller extends RouterController
 
 			// Checks if the user is banned
 			if(!empty($ban)) {
+				// The user is currently banned, so show them the banned page.
 				$data['ban'] = $ban;
 				$data['bc'] = false;
 				$data['displayPageHeader'] = false;
@@ -135,6 +138,7 @@ class Controller extends RouterController
 		$ipBans = new IPRepository(new IP);
 		$ipBan = $ipBans->getByIPActive(\Request::getClientIp());
 		if(!empty($ipBan)) {
+			// The user is IP banned, so show them the IP banned page.
 			if(\Auth::check()) {
 				\Auth::logout();
 			}
@@ -160,6 +164,7 @@ class Controller extends RouterController
 	private function updateCache()
 	{
 		if(\Request::getClientIp() === "127.0.0.1") {
+			// The user is localhost - so probably running tests - ignore adding.
 			return;
 		}
 
@@ -171,6 +176,7 @@ class Controller extends RouterController
 		];
 		$activity = \Cache::get('activity.users');
 		if(empty($activity)) {
+			// There is absolutely no recent activity, so create an empty array.
 			$activity = [];
 		}
 
@@ -181,6 +187,8 @@ class Controller extends RouterController
 		}
 
 		$ago = \Carbon::now()->subMinutes(30)->timestamp;
+
+		// Remove old activity
 		foreach($activity as $key => $value) {
 			if(ceil($key / 1000) <= $ago) {
 				unset($activity[$key]);
@@ -194,6 +202,8 @@ class Controller extends RouterController
 		$activity[microtime(true) * 1000] = $current;
 		$most = \Cache::get('activity.most');
 		$activeCount = count($activity);
+
+		// If the current number of users is greater than before, set a new record.
 		if($activeCount > $most) {
 			\Cache::forever('activity.most', $activeCount);
 		}
