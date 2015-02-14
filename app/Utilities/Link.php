@@ -11,6 +11,9 @@ use App\RuneTime\Accounts\RoleRepository;
 class Link
 {
 	/**
+	 * Returns a link to a user's profile, with
+	 * their role being taken into account.
+	 *
 	 * @param $userId
 	 *
 	 * @return string
@@ -29,6 +32,8 @@ class Link
 	}
 
 	/**
+	 * Outputs a colorized string of a role.
+	 *
 	 * @param $roleId
 	 *
 	 * @return string
@@ -45,6 +50,8 @@ class Link
 	}
 
 	/**
+	 * Colors a string according to a role.
+	 *
 	 * @param      $str
 	 * @param      $roleInfo
 	 * @param bool $displayImage

@@ -12,7 +12,8 @@ use App\RuneTime\Accounts\User;
 class String
 {
 	/**
-	 * Determines whether a string begins with a substring
+	 * Determines whether a string begins with a substring.
+	 *
 	 * @param  string $needle    The substring to search a larger string for
 	 * @param  string $haystack  The larger string to search within
 	 * @return boolean           Whether a string begins with a substring
@@ -23,7 +24,8 @@ class String
 	}
 
 	/**
-	 * Determines whether a string ends with a substring
+	 * Determines whether a string ends with a substring.
+	 *
 	 * @param  string $needle    The substring to search a larger string for
 	 * @param  string $haystack  The larger string to search within
 	 *
@@ -34,6 +36,8 @@ class String
 	}
 
 	/**
+	 * Replaces the first instance of a string with another.
+	 *
 	 * @param        $needle
 	 * @param        $haystack
 	 * @param string $with
@@ -52,6 +56,8 @@ class String
 	}
 
 	/**
+	 * Returns the string results of a CURL request to a URL.
+	 *
 	 * @param $url
 	 *
 	 * @return mixed
@@ -67,6 +73,8 @@ class String
 	}
 
 	/**
+	 * Encodes an array into a string slug.
+	 *
 	 * @return string
 	 */
 	public static function slugEncode()
@@ -91,6 +99,8 @@ class String
 	}
 
 	/**
+	 * Decodes a string slug into an array.
+	 *
 	 * @param $slug
 	 *
 	 * @return array
@@ -106,6 +116,8 @@ class String
 	}
 
 	/**
+	 * Encodes an IP into an integer.
+	 *
 	 * @param string $ip
 	 *
 	 * @return int
@@ -120,6 +132,8 @@ class String
 	}
 
 	/**
+	 * Decodes an IP integer into a string.
+	 *
 	 * @param $ip
 	 *
 	 * @return string
