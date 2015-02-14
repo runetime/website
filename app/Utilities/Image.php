@@ -16,20 +16,17 @@ class Image
 	 */
 	public static function userPhoto($userId, array $classes = [])
 	{
-		$str = "<img src='/img/forums/photos/";
+		// Add img-responsive to classes
+		$classes[] .= 'img-responsive';
 
+		$path = 'no_photo';
 		if(file_exists('./img/forums/photos/' . $userId . '.png')) {
-			$str .= $userId;
-		} else {
-			$str .= 'no_photo';
+			$path = $userId;
 		}
 
-		$str .= ".png' alt='Photo' class='img-responsive";
+		// Implode classes into a string
+		$classList = implode(' ', $classes);
 
-		foreach($classes as $class) {
-			$str .= " " . $class;
-		}
-
-		return $str . "' />";
+		return view('image.user_photo', compact('path', 'classList'));
 	}
 }
