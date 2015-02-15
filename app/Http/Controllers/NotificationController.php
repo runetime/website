@@ -56,6 +56,9 @@ class NotificationController extends Controller
 		return $this->view('notifications.view', compact('notification'));
 	}
 
+	/**
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function getSetAllRead()
 	{
 		$notifications = $this->notifications->getStatusByUser(\Auth::user()->id, Notification::STATUS_UNREAD);

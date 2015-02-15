@@ -66,6 +66,12 @@ class StatusController extends Controller
 		return $this->view('forums.statuses.view', compact('status'));
 	}
 
+	/**
+	 * @param $id
+	 * @param $newStatus
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function getStatusSwitch($id, $newStatus)
 	{
 		$status = $this->statuses->getById($id);

@@ -21,6 +21,12 @@ class StaffModerationController extends Controller
 		$this->threads = $threads;
 	}
 
+	/**
+	 * @param $id
+	 * @param $status
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function getThreadStatusSwitch($id, $status)
 	{
 		$thread = $this->threads->getById($id);
