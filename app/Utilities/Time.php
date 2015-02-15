@@ -10,6 +10,9 @@ use Carbon\Carbon;
 class Time
 {
 	/**
+	 * Returns a Carbon class of the current time,
+	 * DST being adjusted in the Unix time.
+	 *
 	 * @param $time
 	 *
 	 * @return Carbon
@@ -34,7 +37,8 @@ class Time
 	}
 
 	/**
-	 * Returns whether or not it is currently DST for the user
+	 * Returns whether or not it is currently DST for the user.
+	 *
 	 * @return boolean    Whether or not it is currently DST
 	 */
 	public static function isDST()
@@ -43,6 +47,8 @@ class Time
 	}
 
 	/**
+	 * Returns a string of a short display of the time.
+	 *
 	 * @param int $i
 	 *
 	 * @return bool|string
@@ -53,6 +59,9 @@ class Time
 	}
 
 	/**
+	 * Pretty much a short way of giving the full
+	 * time, seconds included in the string.
+	 *
 	 * @param int $i
 	 *
 	 * @return bool|string
@@ -63,6 +72,9 @@ class Time
 	}
 
 	/**
+	 * Returns the longest declaration for the time,
+	 * printing out an "of" in there as well.
+	 *
 	 * @param int $i
 	 *
 	 * @return bool|string|Carbon
@@ -73,6 +85,9 @@ class Time
 	}
 
 	/**
+	 * Returns the number of seconds since the Epoch
+	 * on the 1st of January, 1970 at midnight.
+	 *
 	 * @param $str
 	 *
 	 * @return int
@@ -83,6 +98,9 @@ class Time
 	}
 
 	/**
+	 * Formats the time into what is ACTUALLY PROPER ISO STANDARD.
+	 * >:C Best display of time ok
+	 *
 	 * @param $unix
 	 *
 	 * @return bool|string
@@ -93,6 +111,10 @@ class Time
 	}
 
 	/**
+	 * Returns a string to a relative time ago, such as
+	 * "10 seconds ago", "15 minutes ago", "3 hours
+	 * ago", "1 day ago", "a few days ago", etc.
+	 *
 	 * @param $time
 	 *
 	 * @return string
@@ -103,6 +125,11 @@ class Time
 	}
 
 	/**
+	 * Basically the same as self::shortReadable.
+	 * Not sure why I have both, but I do
+	 * for a reason I guess.  Maybe work
+	 * on deprecating this?
+	 *
 	 * @param $time
 	 *
 	 * @return string
@@ -136,6 +163,8 @@ class Time
 	}
 
 	/**
+	 * An alterative way of formatting the time.
+	 *
 	 * @param $time
 	 *
 	 * @return bool|string
@@ -146,6 +175,8 @@ class Time
 	}
 
 	/**
+	 * Another alternative way of formatting the time.
+	 *
 	 * @param $time
 	 *
 	 * @return bool|string
@@ -156,6 +187,8 @@ class Time
 	}
 
 	/**
+	 * Wow, so many alternatives.  Look up "date" on php.net.
+	 * 
 	 * @param $i
 	 *
 	 * @return string
@@ -166,6 +199,9 @@ class Time
 	}
 
 	/**
+	 * Formats the numeric day (1-31) with its suffix,
+	 * i.e. the suffixes "st", "nd", "rd", "th".
+	 *
 	 * @param $day
 	 *
 	 * @return string
@@ -178,6 +214,8 @@ class Time
 	}
 
 	/**
+	 * Formats the month from a numeric value to...
+	 * the same thing, with "of" if you choose.
 	 * @param      $month
 	 * @param bool $of
 	 *
@@ -197,6 +235,9 @@ class Time
 	}
 
 	/**
+	 * Formats the year from a numeric value to... the same
+	 * thing, with a comma if you want for some reason.
+	 *
 	 * @param      $year
 	 * @param bool $comma
 	 *
