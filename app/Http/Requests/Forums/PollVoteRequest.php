@@ -3,6 +3,10 @@ namespace App\Http\Requests\Forums;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class PollVoteRequest
+ * @package App\Http\Requests\Forums
+ */
 class PollVoteRequest extends FormRequest
 {
 

@@ -7,7 +7,12 @@ namespace App\Utilities;
  */
 class Parsedown
 {
-    function text($text)
+	/**
+	 * @param $text
+	 *
+	 * @return string
+	 */
+	function text($text)
     {
         # make sure no definitions are set
         $this->Definitions = [];
@@ -40,7 +45,12 @@ class Parsedown
 
     private $breaksEnabled;
 
-    function setBreaksEnabled($breaksEnabled)
+	/**
+	 * @param $breaksEnabled
+	 *
+	 * @return $this
+	 */
+	function setBreaksEnabled($breaksEnabled)
     {
         $this->breaksEnabled = $breaksEnabled;
 
@@ -49,7 +59,12 @@ class Parsedown
 
     private $markupEscaped = true;
 
-    function setMarkupEscaped($markupEscaped)
+	/**
+	 * @param $markupEscaped
+	 *
+	 * @return $this
+	 */
+	function setMarkupEscaped($markupEscaped)
     {
         $this->markupEscaped = $markupEscaped;
 
