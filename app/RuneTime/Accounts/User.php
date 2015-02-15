@@ -386,6 +386,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'referred_by');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function rank()
 	{
 		return $this->belongsTo('App\RuneTime\Accounts\Rank', 'rank_id');
