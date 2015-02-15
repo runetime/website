@@ -129,6 +129,9 @@ class StaffAdminController extends Controller
 	}
 
 	/**
+	 * TODO: The controller code is done I think but the view
+	 * needs work.  There is also no link to access this.
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getCheckupList()
@@ -145,6 +148,9 @@ class StaffAdminController extends Controller
 	}
 
 	/**
+	 * TODO: The controller code is done I think but the view
+	 * needs work.  There is also no link to access this.
+	 *
 	 * @param $id
 	 *
 	 * @return \Illuminate\View\View

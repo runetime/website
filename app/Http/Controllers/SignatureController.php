@@ -51,6 +51,7 @@ class SignatureController extends Controller
 			$imgs[] = $filename;
 		}
 
+		// Unset . and .. directories
 		unset($imgs[0], $imgs[1]);
 
 		$this->bc(['signatures' => trans('signature.title'), '#1' => $username]);
@@ -388,6 +389,7 @@ class SignatureController extends Controller
 			'divination'    => 'divination',
 			'overall'       => 'overall',
 		];
+
 		foreach($skills as $name => $dir) {
 			$skills[$name] = \Img::make(public_path('img/skills/' . $dir . '.png'))->resize(20, 20);
 		}
