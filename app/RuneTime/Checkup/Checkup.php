@@ -10,7 +10,11 @@ use App\RuneTime\Core\Entity;
 class Checkup extends Entity
 {
 	protected $table = 'staff_checkup';
-	protected $fillable = ['active', 'hours_active', 'team'];
+	protected $fillable = [
+		'active',
+		'hours_active',
+		'team'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const PER_PAGE = 20;

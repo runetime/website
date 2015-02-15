@@ -10,7 +10,12 @@ use App\RuneTime\Core\Entity;
 class Ban extends Entity
 {
 	protected $table = 'bans';
-	protected $fillable = ['author_id', 'user_id', 'reason', 'time_ends'];
+	protected $fillable = [
+		'author_id',
+		'user_id',
+		'reason',
+		'time_ends'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 

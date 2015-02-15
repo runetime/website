@@ -72,6 +72,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		if(!isset($this->rolesCache)) {
 			$this->rolesCache = $this->belongsToMany('App\RuneTime\Accounts\Role');
 		}
+
 		return $this->rolesCache;
 	}
 
@@ -98,10 +99,12 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 			if(!in_array($allowedRole, $roleList)) {
 				\Log::error("Unidentified role: " . $allowedRole);
 			}
+
 			if(!$this->roleCollectionHasRole($allowedRole)) {
 				return false;
 			}
 		}
+
 		return true;
 	}
 
@@ -115,6 +118,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -125,8 +129,10 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	{
 		$userRoles = \App::make('App\RuneTime\Accounts\UserRoleRepository');
 		$important = $userRoles->getImportantByUser($this->id);
+
 		$roles = \App::make('App\RuneTime\Accounts\RoleRepository');
 		$role = $roles->getById($important->role_id);
+
 		return $role;
 	}
 
@@ -141,11 +147,13 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		if(!$roles) {
 			return false;
 		}
+
 		foreach($roles as $role) {
 			if(strtolower($role->name) == strtolower($allowedRole)) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -160,6 +168,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		if($role) {
 			$assigned_roles[] = $role->id;
 		}
+
 		$this->roles()->attach($assigned_roles);
 	}
 
@@ -269,12 +278,15 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 	{
 		$rank = $this->rank;
 		$rankRepository = new RankRepository(new Rank);
+
 		$this->increment('posts_total');
 		$this->increment('posts_active');
+
 		$rankAtPosts = $rankRepository->getByPostCount($this->posts_active);
 		if($rankAtPosts->id !== $rank->id) {
 			$this->rank_id = $rankAtPosts->id;
 		}
+
 		$this->save();
 	}
 

@@ -10,7 +10,14 @@ use App\RuneTime\Core\Entity;
 class Mute extends Entity
 {
 	protected $table = 'mutes';
-	protected $fillable = ['author_id', 'user_id', 'reason', 'reason_parsed', 'time_start', 'time_end'];
+	protected $fillable = [
+		'author_id',
+		'user_id',
+		'reason',
+		'reason_parsed',
+		'time_start',
+		'time_end'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 

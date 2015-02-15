@@ -10,7 +10,11 @@ use App\RuneTime\Core\Entity;
 class Channel extends Entity
 {
 	protected $table = 'chat_channels';
-	protected $fillable = ['name','name_trim','messages'];
+	protected $fillable = [
+		'name',
+		'name_trim',
+		'messages'
+	];
 	protected $dates = [];
 	protected $softDelete = false;
 	const PER_PAGE = 20;

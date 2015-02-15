@@ -90,6 +90,7 @@ class ChatRepository extends EloquentRepository
 		$message = $this->model->
 			where('id', '=', $id)->
 			first();
+
 		return $this->model->
 			where('id', '>', $id)->
 			where('channel', '=', $message->channel)->
@@ -108,6 +109,7 @@ class ChatRepository extends EloquentRepository
 		$message = $this->model->
 			where('id', '=', $id)->
 			first();
+
 		return $this->model->
 			where('id', '>', $id)->
 			where('channel', '=', $message->channel)->

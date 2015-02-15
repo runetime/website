@@ -10,7 +10,13 @@ use App\RuneTime\Core\Entity;
 class Chat extends Entity
 {
 	protected $table = 'chat_messages';
-	protected $fillable = ['author_id', 'contents', 'contents_parsed', 'status', 'channel'];
+	protected $fillable = [
+		'author_id',
+		'contents',
+		'contents_parsed',
+		'status',
+		'channel'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const PER_PAGE = 20;

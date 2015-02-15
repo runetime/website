@@ -26,19 +26,31 @@ class ItemRepository extends EloquentRepository
 	 */
 	public function getByOptions($membership, $tradable, $questItem)
 	{
-		if($membership == 'none') $membership = '';
-		if($tradable == 'none')   $tradable = '';
-		if($questItem == 'none')  $questItem = '';
+		if($membership == 'none') {
+			$membership = '';
+		}
+
+		if($tradable == 'none') {
+			$tradable = '';
+		}
+
+		if($questItem == 'none') {
+			$questItem = '';
+		}
+
 		$query = $this->model;
 		if(!empty($membership)) {
 			$query = $query->where('membership', '=', $membership == 'yes' ? true : false);
 		}
+
 		if(!empty($tradable)) {
 			$query = $query->where('tradable', '=', $tradable == 'yes' ? true : false);
 		}
+
 		if(!empty($questItem)) {
 			$query = $query->where('quest_item', '=', $questItem == 'yes' ? true : false);
 		}
+
 		return $query->get();
 	}
 }

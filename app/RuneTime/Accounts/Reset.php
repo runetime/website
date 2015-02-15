@@ -11,7 +11,10 @@ class Reset extends Entity
 {
 	protected $table = 'password_resets';
 	protected $with = [];
-	protected $fillable = ['email', 'token'];
+	protected $fillable = [
+		'email',
+		'token'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;

@@ -25,8 +25,8 @@ class MuteRepository extends EloquentRepository
 	public function getByUser($id)
 	{
 		return $this->model->
-		where('user_id', '=', $id)->
-		get();
+			where('user_id', '=', $id)->
+			get();
 	}
 
 	/**

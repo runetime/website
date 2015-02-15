@@ -10,7 +10,12 @@ use App\RuneTime\Core\Entity;
 class IP extends Entity
 {
 	protected $table = 'bans_ip';
-	protected $fillable = ['author_id', 'ip', 'reason', 'status'];
+	protected $fillable = [
+		'author_id',
+		'ip',
+		'reason',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_DISABLED = 0;

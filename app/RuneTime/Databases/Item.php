@@ -10,7 +10,16 @@ use App\RuneTime\Core\Entity;
 class Item extends Entity
 {
 	protected $table = 'database_items';
-	protected $fillable = ['author_id', 'editors', 'name', 'examine', 'examine_parsed', 'membership', 'tradable', 'quest_item'];
+	protected $fillable = [
+		'author_id',
+		'editors',
+		'name',
+		'examine',
+		'examine_parsed',
+		'membership',
+		'tradable',
+		'quest_item'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
@@ -28,6 +37,7 @@ class Item extends Entity
 				$editList .= \Link::name($editor) . ($x < count($editors) - 1 ? ", " : "");
 			}
 		}
+
 		return $editList;
 	}
 }

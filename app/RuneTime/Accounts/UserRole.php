@@ -11,7 +11,11 @@ class UserRole extends Entity
 {
 	protected $table = 'role_user';
 	protected $hidden = [];
-	protected $fillable = ['user_id', 'role_id', 'important'];
+	protected $fillable = [
+		'user_id',
+		'role_id',
+		'important'
+	];
 	protected $softDelete = true;
 	const PER_MEMBERS_PAGE = 20;
 

@@ -165,9 +165,18 @@ class UserRepository extends EloquentRepository
 	 */
 	public function getByOptions($role, $prefix, $order, $page)
 	{
-		if($role == 'none')   $role='';
-		if($prefix == 'none') $prefix = '';
-		if($order == 'none')  $order = '';
+		if($role == 'none'){
+			$role='';
+		}
+
+		if($prefix == 'none') {
+			$prefix = '';
+		}
+
+		if($order == 'none') {
+			$order = '';
+		}
+
 		$query = $this->model->where('display_name', '!=', '-1asda');
 
 		if(!empty($prefix)) {
@@ -234,11 +243,11 @@ class UserRepository extends EloquentRepository
 	public function getLikeDisplayName($name, $amount = 5)
 	{
 		return $this->model->
-		where('display_name', '=', $name)->
-		orWhere('display_name', 'LIKE', '%' . $name)->
-		orWhere('display_name', 'LIKE', '%' . $name . '%')->
-		orWhere('display_name', 'LIKE', '%' . $name)->
-		take($amount)->
-		get();
+			where('display_name', '=', $name)->
+			orWhere('display_name', 'LIKE', '%' . $name)->
+			orWhere('display_name', 'LIKE', '%' . $name . '%')->
+			orWhere('display_name', 'LIKE', '%' . $name)->
+			take($amount)->
+			get();
 	}
 }

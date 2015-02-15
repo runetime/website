@@ -11,7 +11,13 @@ class Award extends Entity
 {
 	protected $table = 'awards';
 	protected $with = [];
-	protected $fillable = ['name', 'name_trim', 'description', 'last_awarded', 'status'];
+	protected $fillable = [
+		'name',
+		'name_trim',
+		'description',
+		'last_awarded',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_UNAVAILABLE = 0;

@@ -11,7 +11,10 @@ class Rank extends Entity
 {
 	protected $table = 'forum_ranks';
 	protected $hidden = [];
-	protected $fillable = ['name', 'posts_required'];
+	protected $fillable = [
+		'name',
+		'posts_required'
+	];
 	protected $softDelete = true;
 
 	/**

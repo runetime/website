@@ -11,7 +11,10 @@ class Awardee extends Entity
 {
 	protected $table = 'awardees';
 	protected $with = [];
-	protected $fillable = ['award_id', 'user_id'];
+	protected $fillable = [
+		'award_id',
+		'user_id'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 

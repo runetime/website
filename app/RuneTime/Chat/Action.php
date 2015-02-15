@@ -10,7 +10,11 @@ use App\RuneTime\Core\Entity;
 class Action extends Entity
 {
 	protected $table = 'chat_actions';
-	protected $fillable = ['author_id','action','message_id'];
+	protected $fillable = [
+		'author_id',
+		'action',
+		'message_id'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
