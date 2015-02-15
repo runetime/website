@@ -4,6 +4,10 @@ use App\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
+/**
+ * Class Registrar
+ * @package App\Services
+ */
 class Registrar implements RegistrarContract {
 
 	/**

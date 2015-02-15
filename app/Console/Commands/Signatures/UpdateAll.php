@@ -5,6 +5,10 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class UpdateAll
+ * @package App\Console\Commands\Signatures
+ */
 class UpdateAll extends Command
 {
 	/**
