@@ -1,15 +1,16 @@
-<?php namespace App\Services;
+<?php
+namespace App\Services;
 
-use App\User;
-use Validator;
+use App\RuneTime\Accounts\User;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use Validator;
 
 /**
  * Class Registrar
  * @package App\Services
  */
-class Registrar implements RegistrarContract {
-
+class Registrar implements RegistrarContract
+{
 	/**
 	 * Get a validator for an incoming registration request.
 	 *
@@ -39,5 +40,4 @@ class Registrar implements RegistrarContract {
 			'password' => bcrypt($data['password']),
 		]);
 	}
-
 }
