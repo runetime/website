@@ -188,7 +188,7 @@ class Time
 
 	/**
 	 * Wow, so many alternatives.  Look up "date" on php.net.
-	 * 
+	 *
 	 * @param $i
 	 *
 	 * @return string
