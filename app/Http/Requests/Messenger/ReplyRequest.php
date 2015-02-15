@@ -3,6 +3,10 @@ namespace App\Http\Requests\Messenger;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class ReplyRequest
+ * @package App\Http\Requests\Messenger
+ */
 class ReplyRequest extends Request
 {
 

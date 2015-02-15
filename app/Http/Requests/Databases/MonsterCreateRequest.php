@@ -3,6 +3,10 @@ namespace App\Http\Requests\Databases;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class MonsterCreateRequest
+ * @package App\Http\Requests\Databases
+ */
 class MonsterCreateRequest extends Request
 {
 

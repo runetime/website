@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class LeaderMuteUserRequest
+ * @package App\Http\Requests\Staff
+ */
 class LeaderMuteUserRequest extends Request
 {
 

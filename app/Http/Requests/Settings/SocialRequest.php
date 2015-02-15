@@ -3,6 +3,10 @@ namespace App\Http\Requests\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SocialRequest
+ * @package App\Http\Requests\Settings
+ */
 class SocialRequest extends FormRequest
 {
 

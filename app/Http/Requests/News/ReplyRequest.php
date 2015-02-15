@@ -3,6 +3,10 @@ namespace App\Http\Requests\News;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class ReplyRequest
+ * @package App\Http\Requests\News
+ */
 class ReplyRequest extends Request
 {
 

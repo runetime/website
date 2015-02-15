@@ -3,6 +3,10 @@ namespace App\Http\Requests\Statuses;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class StatusReplyRequest
+ * @package App\Http\Requests\Statuses
+ */
 class StatusReplyRequest extends Request
 {
 

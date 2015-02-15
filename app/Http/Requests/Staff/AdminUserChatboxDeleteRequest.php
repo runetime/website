@@ -2,6 +2,11 @@
 namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
+
+/**
+ * Class AdminUserChatboxDeleteRequest
+ * @package App\Http\Requests\Staff
+ */
 class AdminUserChatboxDeleteRequest extends Request
 {
 

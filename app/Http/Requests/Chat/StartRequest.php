@@ -3,6 +3,10 @@ namespace App\Http\Requests\Chat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class StartRequest
+ * @package App\Http\Requests\Chat
+ */
 class StartRequest extends FormRequest
 {
 

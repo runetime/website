@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class RadioTimetableRequest
+ * @package App\Http\Requests\Staff
+ */
 class RadioTimetableRequest extends Request
 {
 

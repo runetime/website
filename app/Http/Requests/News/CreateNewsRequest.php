@@ -3,6 +3,10 @@ namespace App\Http\Requests\News;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class CreateNewsRequest
+ * @package App\Http\Requests\News
+ */
 class CreateNewsRequest extends Request
 {
 

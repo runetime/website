@@ -3,6 +3,10 @@ namespace App\Http\Requests\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SignatureRequest
+ * @package App\Http\Requests\Settings
+ */
 class SignatureRequest extends FormRequest
 {
 

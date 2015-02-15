@@ -3,6 +3,10 @@ namespace App\Http\Requests\Search;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class SearchRequest
+ * @package App\Http\Requests\Search
+ */
 class SearchRequest extends Request
 {
 

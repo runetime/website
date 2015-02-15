@@ -2,6 +2,11 @@
 namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
+
+/**
+ * Class AdminStaffDemoteRequest
+ * @package App\Http\Requests\Staff
+ */
 class AdminStaffDemoteRequest extends Request
 {
 

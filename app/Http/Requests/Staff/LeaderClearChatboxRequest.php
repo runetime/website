@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class LeaderClearChatboxRequest
+ * @package App\Http\Requests\Staff
+ */
 class LeaderClearChatboxRequest extends Request
 {
 

@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class AdminAwardAddRequest
+ * @package App\Http\Requests\Staff
+ */
 class AdminAwardAddRequest extends Request
 {
 

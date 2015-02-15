@@ -3,6 +3,10 @@ namespace App\Http\Requests\Statuses;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class StatusCreateRequest
+ * @package App\Http\Requests\Statuses
+ */
 class StatusCreateRequest extends Request
 {
 

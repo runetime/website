@@ -3,6 +3,10 @@ namespace App\Http\Requests\Chat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CheckChannelRequest
+ * @package App\Http\Requests\Chat
+ */
 class CheckChannelRequest extends FormRequest
 {
 

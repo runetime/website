@@ -3,6 +3,10 @@ namespace App\Http\Requests\Guides;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class LocationCreateRequest
+ * @package App\Http\Requests\Guides
+ */
 class LocationCreateRequest extends Request
 {
 

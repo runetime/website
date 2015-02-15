@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class CheckupRequest
+ * @package App\Http\Requests\Staff
+ */
 class CheckupRequest extends Request
 {
 

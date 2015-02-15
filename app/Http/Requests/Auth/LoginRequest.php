@@ -3,6 +3,10 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class LoginRequest
+ * @package App\Http\Requests\Auth
+ */
 class LoginRequest extends FormRequest
 {
 	/**

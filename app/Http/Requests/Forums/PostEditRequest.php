@@ -3,6 +3,10 @@ namespace App\Http\Requests\Forums;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class PostEditRequest
+ * @package App\Http\Requests\Forums
+ */
 class PostEditRequest extends FormRequest
 {
 

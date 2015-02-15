@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class StaffMessagesRequest
+ * @package App\Http\Requests\Staff
+ */
 class StaffMessagesRequest extends Request
 {
 

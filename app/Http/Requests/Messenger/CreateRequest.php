@@ -3,6 +3,10 @@ namespace App\Http\Requests\Messenger;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CreateRequest
+ * @package App\Http\Requests\Messenger
+ */
 class CreateRequest extends FormRequest
 {
 

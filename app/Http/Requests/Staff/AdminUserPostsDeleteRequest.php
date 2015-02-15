@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class AdminUserPostsDeleteRequest
+ * @package App\Http\Requests\Staff
+ */
 class AdminUserPostsDeleteRequest extends Request
 {
 

@@ -3,6 +3,10 @@ namespace App\Http\Requests\Tickets;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class CreateReplyRequest
+ * @package App\Http\Requests\Tickets
+ */
 class CreateReplyRequest extends Request
 {
 

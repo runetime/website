@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class AdminIPBanRequest
+ * @package App\Http\Requests\Staff
+ */
 class AdminIPBanRequest extends Request
 {
 

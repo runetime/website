@@ -3,6 +3,10 @@ namespace App\Http\Requests\Guides;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class QuestCreateRequest
+ * @package App\Http\Requests\Guides
+ */
 class QuestCreateRequest extends Request
 {
 

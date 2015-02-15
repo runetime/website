@@ -3,6 +3,10 @@ namespace App\Http\Requests\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class EmailRequest
+ * @package App\Http\Requests\Settings
+ */
 class EmailRequest extends FormRequest
 {
 

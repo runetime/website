@@ -3,6 +3,10 @@ namespace App\Http\Requests\Staff;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class RadioLiveMessage
+ * @package App\Http\Requests\Staff
+ */
 class RadioLiveMessage extends Request
 {
 

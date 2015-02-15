@@ -3,6 +3,10 @@ namespace App\Http\Requests\Calculators;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class CombatLoadRequest
+ * @package App\Http\Requests\Calculators
+ */
 class CombatLoadRequest extends Request
 {
 

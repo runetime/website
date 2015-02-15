@@ -3,6 +3,10 @@ namespace App\Http\Requests\Tickets;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class CreateTicketRequest
+ * @package App\Http\Requests\Tickets
+ */
 class CreateTicketRequest extends Request
 {
 

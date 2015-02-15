@@ -3,6 +3,10 @@ namespace App\Http\Requests\NameCheck;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CheckRequest
+ * @package App\Http\Requests\NameCheck
+ */
 class CheckRequest extends FormRequest
 {
 

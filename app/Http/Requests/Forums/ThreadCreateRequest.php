@@ -3,6 +3,10 @@ namespace App\Http\Requests\Forums;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class ThreadCreateRequest
+ * @package App\Http\Requests\Forums
+ */
 class ThreadCreateRequest extends FormRequest
 {
 

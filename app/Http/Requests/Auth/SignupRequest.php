@@ -3,6 +3,10 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SignupRequest
+ * @package App\Http\Requests\Auth
+ */
 class SignupRequest extends FormRequest
 {
 	/**

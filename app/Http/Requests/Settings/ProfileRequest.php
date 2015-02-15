@@ -3,6 +3,10 @@ namespace App\Http\Requests\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class ProfileRequest
+ * @package App\Http\Requests\Settings
+ */
 class ProfileRequest extends FormRequest
 {
 

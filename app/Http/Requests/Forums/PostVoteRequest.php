@@ -3,6 +3,10 @@ namespace App\Http\Requests\Forums;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class PostVoteRequest
+ * @package App\Http\Requests\Forums
+ */
 class PostVoteRequest extends Request
 {
 
