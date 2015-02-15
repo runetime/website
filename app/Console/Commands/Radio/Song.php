@@ -50,7 +50,9 @@ class Song extends Command
 	 */
 	public function fire()
 	{
-		$this->info($this->history->getCurrent()->song);
+		$currentSong = $this->history->getCurrent()->song;
+
+		$this->info($currentSong);
 	}
 
 	/**

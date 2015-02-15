@@ -50,7 +50,10 @@ class UpdateAll extends Command
 			}
 
 			$slug = str_replace(".png", "", $file);
-			$this->line(\App::make('App\Http\Controllers\SignatureController')->createSignature($slug));
+
+			$signature = \App::make('App\Http\Controllers\SignatureController')->
+				createSignature($slug);
+			$this->line($signature);
 		}
 	}
 

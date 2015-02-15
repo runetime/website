@@ -50,9 +50,14 @@ class Artist extends Command {
 	public function fire()
 	{
 		$this->info(\Cache::get('radio.artisan.lastUpdated'));
+
 		$this->info(time());
+
 		$this->info(time() - \Cache::get('radio.artisan.lastUpdated'));
-		$this->info("last ran: " . (time() - \Cache::get('radio.artisan.lastRan')));
+
+		$lastRan = time() - \Cache::get('radio.artisan.lastRan');
+		$this->info("Last ran: " . $lastRan);
+
 		$this->info($this->history->getCurrent()->artist);
 	}
 

@@ -54,13 +54,16 @@ class Update extends Command
 		$lastUpdated = \Cache::get('radio.artisan.lastUpdated');
 		if(time() - $lastUpdated >= 240) {
 			$this->info("Pulling data from Primcast servers");
+
 			$path = 'runetime.primcast.com';
 			$port = 6582;
 			$results = $this->radioInfo($path, $port);
 			$song = explode(" - ", $results[6]);
 			$artist = $song[0];
 			$name = $song[1];
+
 			$this->info("Pulled data from Primcast servers");
+
 			$currentDJ = \Cache::get('radio.dj.current');
 			if(empty($currentDJ)) {
 				$currentDJ = -1;
