@@ -1,15 +1,17 @@
-<?php namespace App\Console\Commands\Radio;
+<?php
+namespace App\Console\Commands\Radio;
 
 use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+
 /**
  * Class DJ
  * @package App\Console\Commands\Radio
  */
-class DJ extends Command {
-
+class DJ extends Command
+{
 	/**
 	 * The console command name.
 	 *
@@ -79,5 +81,4 @@ class DJ extends Command {
 			['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
 		];
 	}
-
 }

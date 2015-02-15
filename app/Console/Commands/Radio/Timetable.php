@@ -1,13 +1,16 @@
-<?php namespace App\Console\Commands\Radio;
+<?php
+namespace App\Console\Commands\Radio;
+
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+
 /**
  * Class Timetable
  * @package App\Console\Commands\Radio
  */
-class Timetable extends Command {
-
+class Timetable extends Command
+{
 	/**
 	 * The console command name.
 	 *
@@ -63,5 +66,4 @@ class Timetable extends Command {
 			['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
 		];
 	}
-
 }

@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputArgument;
  * Class RadioUpdate
  * @package App\Console\Commands
  */
-class Update extends Command {
-
+class Update extends Command
+{
 	/**
 	 * The console command name.
 	 *
@@ -49,6 +49,7 @@ class Update extends Command {
 			$this->info('Local: not running');
 			return;
 		}
+
 		\Cache::forever('radio.artisan.lastRan', time());
 		$lastUpdated = \Cache::get('radio.artisan.lastUpdated');
 		if(time() - $lastUpdated >= 240) {
@@ -64,6 +65,7 @@ class Update extends Command {
 			if(empty($currentDJ)) {
 				$currentDJ = -1;
 			}
+
 			$currentHistory = $this->history->getCurrent();
 			if(empty($currentHistory) || ($currentHistory->song != $name && $currentHistory->artist != $artist)) {
 				with(new History)->saveNew($currentDJ, $artist, $name);
@@ -88,12 +90,14 @@ class Update extends Command {
 			while(!feof($sh)) {
 				$results .= fgets($sh, 1000);
 			}
+
 			fclose($sh);
 			$results = strstr($results, "<body>");
 			$results = str_replace("</body></html>", "", $results);
 			$results = str_replace("<body>", "", $results);
 			return explode(",", $results);
 		}
+
 		return -1;
 	}
 
@@ -120,5 +124,4 @@ class Update extends Command {
 			['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
 		];
 	}
-
 }

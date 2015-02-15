@@ -1,11 +1,12 @@
-<?php namespace App\Console\Commands\Signatures;
+<?php
+namespace App\Console\Commands\Signatures;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class UpdateAll extends Command {
-
+class UpdateAll extends Command
+{
 	/**
 	 * The console command name.
 	 *
@@ -41,10 +42,13 @@ class UpdateAll extends Command {
 			if($file === ".gitignore") {
 				continue;
 			}
+
 			$this->info($file);
+
 			if(file_exists($path)) {
 				unlink($path);
 			}
+
 			$slug = str_replace(".png", "", $file);
 			$this->line(\App::make('App\Http\Controllers\SignatureController')->createSignature($slug));
 		}
@@ -73,5 +77,4 @@ class UpdateAll extends Command {
 			['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
 		];
 	}
-
 }

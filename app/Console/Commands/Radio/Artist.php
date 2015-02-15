@@ -1,15 +1,16 @@
-<?php namespace App\Console\Commands\Radio;
+<?php
+namespace App\Console\Commands\Radio;
 
 use App\RuneTime\Radio\HistoryRepository;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+
 /**
  * Class Artist
  * @package App\Console\Commands\Radio
  */
 class Artist extends Command {
-
 	/**
 	 * The console command name.
 	 *
@@ -78,5 +79,4 @@ class Artist extends Command {
 			['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
 		];
 	}
-
 }
