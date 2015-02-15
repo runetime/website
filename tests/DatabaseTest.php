@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the DatabaseController.
+ *
+ * Class DatabaseTest
+ */
 class DatabaseTest extends TestCase
 {
 	/**

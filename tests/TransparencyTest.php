@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the TransparencyController.
+ *
+ * Class TransparencyTest
+ */
 class TransparencyTest extends TestCase
 {
 	/**

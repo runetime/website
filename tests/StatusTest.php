@@ -1,6 +1,12 @@
 <?php
+
 use App\RuneTime\Statuses\Status;
 
+/**
+ * Tests HTTP routes for the StatusController.
+ *
+ * Class StatusTest
+ */
 class StatusTest extends TestCase
 {
 	/**

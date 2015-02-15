@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the HomeController.
+ *
+ * Class HomeTest
+ */
 class HomeTest extends TestCase
 {
 	/**

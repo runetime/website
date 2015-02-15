@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the staff list.
+ *
+ * Class StaffListTest
+ */
 class StaffListTest extends TestCase
 {
 	/**

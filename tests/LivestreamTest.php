@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the LivestreamController.
+ *
+ * Class LivestreamTest
+ */
 class LivestreamTest extends TestCase
 {
 	/**

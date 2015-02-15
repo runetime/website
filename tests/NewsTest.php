@@ -1,6 +1,11 @@
 <?php
+
 use App\RuneTime\News\News;
 
+/**
+ * Tests HTTP routes for the NewsController.
+ * Class NewsTest
+ */
 class NewsTest extends TestCase
 {
 	/**

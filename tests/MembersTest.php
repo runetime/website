@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the MembersController.
+ *
+ * Class MembersTest
+ */
 class MembersTest extends TestCase
 {
 	/**

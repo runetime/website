@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the ContactController.
+ *
+ * Class ContactTest
+ */
 class ContactTest extends TestCase
 {
 	/**

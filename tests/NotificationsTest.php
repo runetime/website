@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the NotificationController.
+ *
+ * Class NotificationsTest
+ */
 class NotificationsTest extends TestCase
 {
 	/**

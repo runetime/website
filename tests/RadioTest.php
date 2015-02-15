@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Tests HTTP routes for the RadioController.
+ *
+ * Class RadioTest
+ */
 class RadioTest extends TestCase
 {
 	/**

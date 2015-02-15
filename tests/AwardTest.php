@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the AwardController.
+ *
+ * Class AwardTest
+ */
 class AwardTest extends TestCase
 {
 	/**

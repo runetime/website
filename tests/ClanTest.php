@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the ClanController.
+ *
+ * Class ClanTest
+ */
 class ClanTest extends TestCase
 {
 	/**

@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the TicketController.
+ *
+ * Class TicketTest
+ */
 class TicketTest extends TestCase
 {
 	/**

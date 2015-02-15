@@ -1,6 +1,12 @@
 <?php
+
 use App\RuneTime\Accounts\User;
 
+/**
+ * The base class for HTTP tests.
+ *
+ * Class TestCase
+ */
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
 	/**

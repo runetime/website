@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Tests HTTP routes for the controllers: ForumController,
+ * ForumPostController, and the ForumThreadController.
+ *
+ * Class ForumTest
+ */
 class ForumTest extends TestCase
 {
 	/**

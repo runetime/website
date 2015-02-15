@@ -1,6 +1,12 @@
 <?php
+
 use App\RuneTime\Accounts\User;
 
+/**
+ * Tests HTTP routes for the ProfileController.
+ *
+ * Class ProfileTest
+ */
 class ProfileTest extends TestCase
 {
 	/**

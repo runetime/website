@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the GetController.
+ *
+ * Class GetTest
+ */
 class GetTest extends TestCase
 {
 	/**

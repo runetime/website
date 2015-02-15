@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the MediaController.
+ *
+ * Class MediaTest
+ */
 class MediaTest extends TestCase
 {
 	/**

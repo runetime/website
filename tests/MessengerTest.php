@@ -2,6 +2,11 @@
 
 use \App\RuneTime\Messenger\Message;
 
+/**
+ * Tests HTTP routes for the MessengerController.
+ *
+ * Class MessengerTest
+ */
 class MessengerTest extends TestCase
 {
 	/**

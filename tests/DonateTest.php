@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the DonateController.
+ *
+ * Class DonateTest
+ */
 class DonateTest extends TestCase
 {
 	/**

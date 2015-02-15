@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Tests HTTP routes for the SettingsController.
+ *
+ * Class SettingsTest
+ */
 class SettingsTest extends TestCase
 {
 	/**

@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the LanguageController.
+ *
+ * Class LanguageTest
+ */
 class LanguageTest extends TestCase
 {
 	/**

@@ -2,6 +2,11 @@
 
 use App\RuneTime\Calculators\Calculator;
 
+/**
+ * Tests HTTP routes for the CalculatorController.
+ *
+ * Class CalculatorsTest
+ */
 class CalculatorsTest extends TestCase
 {
 	/**

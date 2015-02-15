@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the MapController.
+ *
+ * Class MapTest
+ */
 class MapTest extends TestCase
 {
 	/**

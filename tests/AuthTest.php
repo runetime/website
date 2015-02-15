@@ -2,6 +2,11 @@
 
 use App\RuneTime\Accounts\User;
 
+/**
+ * Tests HTTP routes for the AuthController.
+ *
+ * Class AuthTest
+ */
 class AuthTest extends TestCase
 {
 	/**

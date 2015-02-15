@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the SignatureController.
+ *
+ * Class SignatureTest
+ */
 class SignatureTest extends TestCase
 {
 	/**

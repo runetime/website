@@ -3,6 +3,11 @@
 use App\RuneTime\Chat\Channel;
 use App\RuneTime\Chat\Chat;
 
+/**
+ * Tests HTTP routes for the ChatController.
+ *
+ * Class ChatTest
+ */
 class ChatTest extends TestCase
 {
 	/**

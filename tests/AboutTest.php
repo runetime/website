@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the AboutController.
+ *
+ * Class AboutTest
+ */
 class AboutTest extends TestCase
 {
 	/**

@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the NameCheckerController.
+ *
+ * Class NameCheckerTest
+ */
 class NameCheckerTest extends TestCase
 {
 	/**

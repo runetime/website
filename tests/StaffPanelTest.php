@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Tests HTTP routes for the StaffController.
+ *
+ * Class StaffPanelTest
+ */
 class StaffPanelTest extends TestCase
 {
 	/**
