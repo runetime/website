@@ -11,7 +11,13 @@ class Request extends Entity
 {
 	protected $table = 'radio_requests';
 	protected $with = [];
-	protected $fillable = ['author_id', 'song_artist', 'song_name', 'ip_address', 'status'];
+	protected $fillable = [
+		'author_id',
+		'song_artist',
+		'song_name',
+		'ip_address',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_NEUTRAL = 0;

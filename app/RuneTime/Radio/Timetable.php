@@ -11,7 +11,12 @@ class Timetable extends Entity
 {
 	protected $table = 'radio_timetables';
 	protected $with = [];
-	protected $fillable = ['dj_id', 'year', 'day', 'hour'];
+	protected $fillable = [
+		'dj_id',
+		'year',
+		'day',
+		'hour'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 

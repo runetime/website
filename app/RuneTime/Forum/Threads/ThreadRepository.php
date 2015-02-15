@@ -45,11 +45,13 @@ class ThreadRepository extends EloquentRepository
 				orWhere('status', '=', 5);
 			});
 		}
+
 		$q = $q->
 			orderBy($orderBy, 'desc')->
 			skip(($page-1)*Subforum::THREADS_PER_PAGE)->
 			take(Subforum::THREADS_PER_PAGE)->
 			get();
+
 		return $q;
 	}
 

@@ -11,7 +11,12 @@ class Notification extends Entity
 {
 	protected $table = 'notifications';
 	protected $with = [];
-	protected $fillable = ['user_id', 'section', 'contents_parsed', 'status'];
+	protected $fillable = [
+		'user_id',
+		'section',
+		'contents_parsed',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_READ = 0;

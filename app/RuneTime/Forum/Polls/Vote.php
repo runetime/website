@@ -11,7 +11,12 @@ class Vote extends Entity
 {
 	protected $table = 'forum_poll_votes';
 	protected $with = [];
-	protected $fillable = ['answer_id', 'author_id', 'poll_id', 'question_id'];
+	protected $fillable = [
+		'answer_id',
+		'author_id',
+		'poll_id',
+		'question_id'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 

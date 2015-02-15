@@ -11,7 +11,11 @@ class Message extends Entity
 {
 	protected $table = 'radio_messages';
 	protected $with = [];
-	protected $fillable = ['author_id', 'contents', 'contents_parsed'];
+	protected $fillable = [
+		'author_id',
+		'contents',
+		'contents_parsed'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 

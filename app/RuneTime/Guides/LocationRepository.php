@@ -23,6 +23,6 @@ class LocationRepository extends EloquentRepository
 	public function getAll()
 	{
 		return $this->model->
-		get();
+			get();
 	}
 }

@@ -37,8 +37,8 @@ class RequestRepository extends EloquentRepository
 	public function getByUser($id)
 	{
 		return $this->model->
-		where('author_id', '=', $id)->
-		get();
+			where('author_id', '=', $id)->
+			get();
 	}
 
 	public function getByUserAndTime($userId, $time, $op = '>=')

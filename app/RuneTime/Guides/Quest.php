@@ -10,7 +10,25 @@ use App\RuneTime\Core\Entity;
 class Quest extends Entity
 {
 	protected $table = 'guides_quests';
-	protected $fillable = ['name', 'author_id', 'editors', 'difficulty', 'length', 'qp', 'membership', 'completed', 'description', 'quest_requirements', 'skill_requirements', 'items_required', 'items_recommended', 'rewards', 'starting_point', 'contents', 'contents_parsed'];
+	protected $fillable = [
+		'name',
+		'author_id',
+		'editors',
+		'difficulty',
+		'length',
+		'qp',
+		'membership',
+		'completed',
+		'description',
+		'quest_requirements',
+		'skill_requirements',
+		'items_required',
+		'items_recommended',
+		'rewards',
+		'starting_point',
+		'contents',
+		'contents_parsed'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
@@ -58,6 +76,7 @@ class Quest extends Entity
 		$option = \DB::table('guide_info')->
 			where('id', '=', $id)->
 			first();
+
 		return $option->name;
 	}
 }

@@ -12,7 +12,16 @@ class Thread extends Entity
 {
 	protected $table = 'forum_threads';
 	protected $with = [];
-	protected $fillable = ['author_id', 'subforum_id', 'title', 'views_count', 'posts_count', 'last_post', 'poll_id', 'status'];
+	protected $fillable = [
+		'author_id',
+		'subforum_id',
+		'title',
+		'views_count',
+		'posts_count',
+		'last_post',
+		'poll_id',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
@@ -121,9 +130,11 @@ class Thread extends Entity
 		if($this->status >= 2 && $this->status <= 3) {
 			return true;
 		}
+
 		if($this->status == 6 || $this->status == 7) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -132,8 +143,10 @@ class Thread extends Entity
 	 */
 	public function isLocked()
 	{
-		if($this->status >= 4)
+		if($this->status >= 4) {
 			return true;
+		}
+
 		return false;
 	}
 
@@ -145,6 +158,7 @@ class Thread extends Entity
 		if($this->poll_id > 0) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -156,6 +170,7 @@ class Thread extends Entity
 		if($this->status % 2 == 1) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -167,6 +182,7 @@ class Thread extends Entity
 		if($this->status < 4) {
 			return $this->status + 4;
 		}
+
 		return $this->status - 4;
 	}
 
@@ -177,9 +193,9 @@ class Thread extends Entity
 	{
 		if($this->status == 2 || $this->status == 3 || $this->status == 6 || $this->status == 7) {
 			return $this->status - 2;
-		} else {
-			return $this->status + 2;
 		}
+
+		return $this->status + 2;
 	}
 
 	/**
@@ -190,6 +206,7 @@ class Thread extends Entity
 		if($this->status % 2 == 1) {
 			return $this->status - 1;
 		}
+
 		return $this->status + 1;
 	}
 
@@ -199,6 +216,7 @@ class Thread extends Entity
 	public function lastPost()
 	{
 		$posts = new PostRepository(new Post);
+
 		return $posts->getById($this->last_post);
 	}
 
@@ -215,6 +233,7 @@ class Thread extends Entity
 				return false;
 			}
 		}
+
 		return true;
 	}
 
@@ -246,6 +265,7 @@ class Thread extends Entity
 				} else {
 					$can = false;
 				}
+
 				break;
 		}
 		$subforum = Subforum::find($this->subforum_id);

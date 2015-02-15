@@ -11,7 +11,11 @@ use App\RuneTime\Core\Entity;
 class Status extends Entity
 {
 	protected $table = 'statuses';
-	protected $fillable = ['author_id', 'reply_count', 'status'];
+	protected $fillable = [
+		'author_id',
+		'reply_count',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
@@ -62,6 +66,7 @@ class Status extends Entity
 		if(strlen($path) > 0) {
 			$url = '/' . $path;
 		}
+
 		return '/forums/statuses/' . \String::slugEncode($this->id, 'by-', $this->author->display_name) . $url;
 	}
 

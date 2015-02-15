@@ -12,7 +12,13 @@ use App\RuneTime\Core\Entity;
 class Ticket extends Entity
 {
 	protected $table = 'tickets';
-	protected $fillable = ['author_id', 'name', 'posts_count', 'last_post', 'status'];
+	protected $fillable = [
+		'author_id',
+		'name',
+		'posts_count',
+		'last_post',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_OPEN = 0;
@@ -68,6 +74,7 @@ class Ticket extends Entity
 				$this->status = TICKET::STATUS_OPEN;
 				break;
 		}
+
 		$this->save();
 	}
 

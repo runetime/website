@@ -2,6 +2,7 @@
 namespace App\RuneTime\Forum\Reports;
 
 use App\RuneTime\Core\Entity;
+use App\RuneTime\Forum\Threads\Post;
 
 /**
  * Class Report
@@ -11,7 +12,12 @@ class Report extends Entity
 {
 	protected $table = 'forum_reports';
 	protected $with = [];
-	protected $fillable = ['author_id', 'reported_id', 'type_id', 'status_id'];
+	protected $fillable = [
+		'author_id',
+		'reported_id',
+		'type_id',
+		'status_id'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_OPEN = 0;
@@ -39,7 +45,7 @@ class Report extends Entity
 	/**
 	 * @param Post $post
 	 */
-	public function addPost($post)
+	public function addPost(Post $post)
 	{
 		$this->posts()->attach([$post->id]);
 	}

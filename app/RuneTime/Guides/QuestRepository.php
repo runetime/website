@@ -99,12 +99,15 @@ class QuestRepository extends EloquentRepository
 		if($difficulty > 0) {
 			$query = $query->where('difficulty', '=', $difficulty);
 		}
+
 		if($length > 0) {
 			$query = $query->where('length', '=', $length);
 		}
+
 		if($membership > 0) {
 			$query = $query->where('membership', '=', $membership);
 		}
+
 		return $query->get();
 	}
 

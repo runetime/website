@@ -11,7 +11,14 @@ class News extends Entity
 {
 	protected $table = 'news';
 	protected $with = [];
-	protected $fillable = ['author_id', 'title', 'contents', 'contents_parsed', 'post_count', 'status'];
+	protected $fillable = [
+		'author_id',
+		'title',
+		'contents',
+		'contents_parsed',
+		'post_count',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;

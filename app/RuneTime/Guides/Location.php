@@ -10,7 +10,13 @@ use App\RuneTime\Core\Entity;
 class Location extends Entity
 {
 	protected $table = 'guides_locations';
-	protected $fillable = ['name', 'author_id', 'editors', 'contents', 'contents_parsed'];
+	protected $fillable = [
+		'name',
+		'author_id',
+		'editors',
+		'contents',
+		'contents_parsed'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;

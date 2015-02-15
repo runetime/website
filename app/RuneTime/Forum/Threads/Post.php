@@ -11,7 +11,14 @@ class Post extends Entity
 {
 	protected $table = 'forum_posts';
 	protected $with = [];
-	protected $fillable = ['author_id', 'rep', 'status', 'ip', 'contents', 'contents_parsed'];
+	protected $fillable = [
+		'author_id',
+		'rep',
+		'status',
+		'ip',
+		'contents',
+		'contents_parsed'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;
@@ -59,6 +66,7 @@ class Post extends Entity
 				}
 			}
 		}
+
 		return '';
 	}
 }

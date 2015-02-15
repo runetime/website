@@ -70,9 +70,11 @@ class NotificationRepository extends EloquentRepository
 		if(!empty($section)) {
 			$query = $query->where('section', '=', $section);
 		}
+
 		if(!empty($status)) {
 			$query = $query->where('status', '=', $status);
 		}
+
 		return $query->count();
 	}
 }

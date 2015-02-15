@@ -15,7 +15,18 @@ class Subforum extends Entity
 {
 	protected $table = 'forum_subforums';
 	protected $with = [];
-	protected $fillable = ['name', 'description', 'roles', 'posts_enabled', 'posts_active', 'thread_count', 'post_count', 'last_post', 'position', 'parent'];
+	protected $fillable = [
+		'name',
+		'description',
+		'roles',
+		'posts_enabled',
+		'posts_active',
+		'thread_count',
+		'post_count',
+		'last_post',
+		'position',
+		'parent'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
@@ -38,6 +49,7 @@ class Subforum extends Entity
 		if(!$this->cachePosts) {
 			$this->cachePosts = with(new PostRepository(new Post))->getByid($this->last_post);
 		}
+
 		return $this->cachePosts;
 	}
 
@@ -50,6 +62,7 @@ class Subforum extends Entity
 		if(!$this->cacheThreads) {
 			$this->cacheThreads = with(new ThreadRepository(new Thread()))->getById($post->thread[0]->id);
 		}
+
 		return $this->cacheThreads;
 	}
 
@@ -71,6 +84,7 @@ class Subforum extends Entity
 				return true;
 			}
 		}
+
 		return true;
 	}
 
@@ -90,6 +104,7 @@ class Subforum extends Entity
 		if(\Auth::check() && $this->posts_enabled === true) {
 			return true;
 		}
+
 		return false;
 	}
 

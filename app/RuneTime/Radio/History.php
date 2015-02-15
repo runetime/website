@@ -11,7 +11,11 @@ class History extends Entity
 {
 	protected $table = 'radio_history';
 	protected $with = [];
-	protected $fillable = ['user_id', 'artist', 'song'];
+	protected $fillable = [
+		'user_id',
+		'artist',
+		'song'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const DEFAULT_AMOUNT = 20;

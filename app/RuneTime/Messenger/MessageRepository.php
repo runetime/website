@@ -19,6 +19,5 @@ class MessageRepository extends EloquentRepository
 
 	public function getByUser($userId)
 	{
-
 	}
 }

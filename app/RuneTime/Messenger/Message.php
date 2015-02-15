@@ -13,7 +13,12 @@ class Message extends Entity
 {
 	protected $table = 'messages';
 	protected $with = [];
-	protected $fillable = ['author_id', 'title', 'views', 'replies'];
+	protected $fillable = [
+		'author_id',
+		'title',
+		'views',
+		'replies'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_INVISIBLE = 0;

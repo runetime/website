@@ -11,7 +11,10 @@ class Tag extends Entity
 {
 	protected $table = 'forum_tags';
 	protected $with = [];
-	protected $fillable = ['author_id', 'name'];
+	protected $fillable = [
+		'author_id',
+		'name'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const TAGS_PER_THREAD = 10;
