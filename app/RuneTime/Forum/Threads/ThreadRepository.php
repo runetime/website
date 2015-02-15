@@ -4,6 +4,10 @@ namespace App\RuneTime\Forum\Threads;
 use App\RuneTime\Forum\Subforums\Subforum;
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class ThreadRepository
+ * @package App\RuneTime\Forum\Threads
+ */
 class ThreadRepository extends EloquentRepository
 {
 	/**

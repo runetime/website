@@ -3,6 +3,10 @@ namespace App\RuneTime\Databases;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class ItemRepository
+ * @package App\RuneTime\Databases
+ */
 class ItemRepository extends EloquentRepository
 {
 	/**

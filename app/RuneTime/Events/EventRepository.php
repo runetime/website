@@ -3,6 +3,10 @@ namespace App\RuneTime\Event;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class EventRepository
+ * @package App\RuneTime\Event
+ */
 class EventRepository extends EloquentRepository
 {
 	/**

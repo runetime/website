@@ -4,6 +4,10 @@ namespace App\RuneTime\Statuses;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Status
+ * @package App\RuneTime\Statuses
+ */
 class Status extends Entity
 {
 	protected $table = 'statuses';

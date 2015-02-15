@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Threads;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class PostRepository
+ * @package App\RuneTime\Forum\Threads
+ */
 class PostRepository extends EloquentRepository
 {
 	/**

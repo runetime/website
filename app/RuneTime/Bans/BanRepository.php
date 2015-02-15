@@ -3,6 +3,10 @@ namespace App\RuneTime\Bans;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class BanRepository
+ * @package App\RuneTime\Bans
+ */
 class BanRepository extends EloquentRepository
 {
 	/**

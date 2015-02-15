@@ -3,6 +3,10 @@ namespace App\RuneTime\Awards;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Award
+ * @package App\RuneTime\Awards
+ */
 class Award extends Entity
 {
 	protected $table = 'awards';

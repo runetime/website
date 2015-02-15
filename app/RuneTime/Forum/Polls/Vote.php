@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Polls;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Vote
+ * @package App\RuneTime\Forum\Polls
+ */
 class Vote extends Entity
 {
 	protected $table = 'forum_poll_votes';

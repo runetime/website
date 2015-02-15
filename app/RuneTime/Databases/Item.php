@@ -3,6 +3,10 @@ namespace App\RuneTime\Databases;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Item
+ * @package App\RuneTime\Databases
+ */
 class Item extends Entity
 {
 	protected $table = 'database_items';

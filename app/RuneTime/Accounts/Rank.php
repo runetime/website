@@ -3,6 +3,10 @@ namespace App\RuneTime\Accounts;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Rank
+ * @package App\RuneTime\Accounts
+ */
 class Rank extends Entity
 {
 	protected $table = 'forum_ranks';

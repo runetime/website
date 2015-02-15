@@ -3,6 +3,10 @@ namespace App\RuneTime\Messenger;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class MessageRepository
+ * @package App\RuneTime\Messenger
+ */
 class MessageRepository extends EloquentRepository
 {
 	/**

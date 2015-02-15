@@ -3,6 +3,10 @@ namespace App\RuneTime\Calculators;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class CalculatorRepository
+ * @package App\RuneTime\Calculators
+ */
 class CalculatorRepository extends EloquentRepository
 {
 	public function __construct(Calculator $model)

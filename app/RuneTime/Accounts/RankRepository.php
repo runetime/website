@@ -3,6 +3,10 @@ namespace App\RuneTime\Accounts;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class RankRepository
+ * @package App\RuneTime\Accounts
+ */
 class RankRepository extends EloquentRepository
 {
 	/**

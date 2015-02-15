@@ -3,6 +3,10 @@ namespace App\RuneTime\Tickets;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class TicketRepository
+ * @package App\RuneTime\Tickets
+ */
 class TicketRepository extends EloquentRepository
 {
 	public function __construct(Ticket $model)

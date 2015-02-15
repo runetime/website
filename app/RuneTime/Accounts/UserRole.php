@@ -3,6 +3,10 @@ namespace App\RuneTime\Accounts;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class UserRole
+ * @package App\RuneTime\Accounts
+ */
 class UserRole extends Entity
 {
 	protected $table = 'role_user';

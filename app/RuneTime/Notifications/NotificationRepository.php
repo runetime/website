@@ -3,6 +3,10 @@ namespace App\RuneTime\Notifications;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class NotificationRepository
+ * @package App\RuneTime\Notifications
+ */
 class NotificationRepository extends EloquentRepository
 {
 	/**

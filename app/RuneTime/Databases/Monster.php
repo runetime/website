@@ -3,10 +3,29 @@ namespace App\RuneTime\Databases;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Monster
+ * @package App\RuneTime\Databases
+ */
 class Monster extends Entity
 {
 	protected $table = 'database_monsters';
-	protected $fillable = ['author_id', 'editors', 'name', 'examine', 'examine_parsed', 'stats', 'stats_parsed', 'location', 'location_parsed', 'drops', 'drops_parsed', 'members', 'other_information', 'other_information_parsed'];
+	protected $fillable = [
+		'author_id',
+		'editors',
+		'name',
+		'examine',
+		'examine_parsed',
+		'stats',
+		'stats_parsed',
+		'location',
+		'location_parsed',
+		'drops',
+		'drops_parsed',
+		'members',
+		'other_information',
+		'other_information_parsed'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const STATUS_HIDDEN = 0;
@@ -24,6 +43,7 @@ class Monster extends Entity
 				$editList .= \Link::name($editor) . ($x < count($editors) - 1 ? ", " : "");
 			}
 		}
+
 		return $editList;
 	}
 }

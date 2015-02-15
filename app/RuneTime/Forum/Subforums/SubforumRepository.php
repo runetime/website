@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Subforums;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class SubforumRepository
+ * @package App\RuneTime\Forum\Subforums
+ */
 class SubforumRepository extends EloquentRepository
 {
 	/**

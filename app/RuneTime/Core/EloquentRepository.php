@@ -3,6 +3,10 @@ namespace App\RuneTime\Core;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class EloquentRepository
+ * @package App\RuneTime\Core
+ */
 abstract class EloquentRepository
 {
 	/**

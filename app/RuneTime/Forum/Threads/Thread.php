@@ -4,6 +4,10 @@ namespace App\RuneTime\Forum\Threads;
 use App\RuneTime\Forum\Subforums\Subforum;
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Thread
+ * @package App\RuneTime\Forum\Threads
+ */
 class Thread extends Entity
 {
 	protected $table = 'forum_threads';

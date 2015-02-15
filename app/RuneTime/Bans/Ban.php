@@ -3,6 +3,10 @@ namespace App\RuneTime\Bans;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Ban
+ * @package App\RuneTime\Bans
+ */
 class Ban extends Entity
 {
 	protected $table = 'bans';

@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Reports;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class ReportRepository
+ * @package App\RuneTime\Forum\Reports
+ */
 class ReportRepository extends EloquentRepository
 {
 	/**

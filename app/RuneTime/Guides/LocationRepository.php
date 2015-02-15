@@ -3,6 +3,10 @@ namespace App\RuneTime\Guides;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class LocationRepository
+ * @package App\RuneTime\Guides
+ */
 class LocationRepository extends EloquentRepository
 {
 	/**

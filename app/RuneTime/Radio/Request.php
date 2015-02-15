@@ -3,6 +3,10 @@ namespace App\RuneTime\Radio;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Request
+ * @package App\RuneTime\Radio
+ */
 class Request extends Entity
 {
 	protected $table = 'radio_requests';

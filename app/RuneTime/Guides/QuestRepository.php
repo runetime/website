@@ -3,6 +3,10 @@ namespace App\RuneTime\Guides;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class QuestRepository
+ * @package App\RuneTime\Guides
+ */
 class QuestRepository extends EloquentRepository
 {
 	/**

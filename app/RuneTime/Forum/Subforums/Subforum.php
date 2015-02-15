@@ -7,6 +7,10 @@ use App\RuneTime\Core\Entity;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\Post;
 
+/**
+ * Class Subforum
+ * @package App\RuneTime\Forum\Subforums
+ */
 class Subforum extends Entity
 {
 	protected $table = 'forum_subforums';

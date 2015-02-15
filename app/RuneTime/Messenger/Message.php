@@ -5,6 +5,10 @@ use App\RuneTime\Core\Entity;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Accounts\User;
 
+/**
+ * Class Message
+ * @package App\RuneTime\Messenger
+ */
 class Message extends Entity
 {
 	protected $table = 'messages';

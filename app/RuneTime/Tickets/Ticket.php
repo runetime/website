@@ -5,6 +5,10 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Ticket
+ * @package App\RuneTime\Tickets
+ */
 class Ticket extends Entity
 {
 	protected $table = 'tickets';

@@ -3,6 +3,10 @@ namespace App\RuneTime\Checkup;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Checkup
+ * @package App\RuneTime\Checkup
+ */
 class Checkup extends Entity
 {
 	protected $table = 'staff_checkup';

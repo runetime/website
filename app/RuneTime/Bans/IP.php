@@ -3,6 +3,10 @@ namespace App\RuneTime\Bans;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class IP
+ * @package App\RuneTime\Bans
+ */
 class IP extends Entity
 {
 	protected $table = 'bans_ip';

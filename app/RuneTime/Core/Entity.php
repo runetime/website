@@ -3,6 +3,10 @@ namespace App\RuneTime\Core;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Entity
+ * @package App\RuneTime\Core
+ */
 abstract class Entity extends Model
 {
 

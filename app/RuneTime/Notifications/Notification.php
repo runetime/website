@@ -3,6 +3,10 @@ namespace App\RuneTime\Notifications;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Notification
+ * @package App\RuneTime\Notifications
+ */
 class Notification extends Entity
 {
 	protected $table = 'notifications';

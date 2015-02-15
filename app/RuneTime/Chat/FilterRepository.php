@@ -3,6 +3,10 @@ namespace App\RuneTime\Chat;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class FilterRepository
+ * @package App\RuneTime\Chat
+ */
 class FilterRepository extends EloquentRepository
 {
 	/**

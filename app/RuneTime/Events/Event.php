@@ -3,10 +3,22 @@ namespace App\RuneTime\Event;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Event
+ * @package App\RuneTime\Event
+ */
 class Event extends Entity
 {
 	protected $table = 'calendar_events';
-	protected $fillable = ['author_id', 'title', 'contents', 'contents_parsed', 'time_of', 'calendar', 'status'];
+	protected $fillable = [
+		'author_id',
+		'title',
+		'contents',
+		'contents_parsed',
+		'time_of',
+		'calendar',
+		'status'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 	const PER_PAGE = 20;

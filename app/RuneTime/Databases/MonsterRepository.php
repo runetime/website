@@ -3,6 +3,10 @@ namespace App\RuneTime\Databases;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class MonsterRepository
+ * @package App\RuneTime\Databases
+ */
 class MonsterRepository extends EloquentRepository
 {
 	/**
@@ -23,11 +27,13 @@ class MonsterRepository extends EloquentRepository
 		if($membership == 'none') {
 			$membership = '';
 		}
+
 		$query = $this->model->
 			where('id', '>=', 1);
 		if(!empty($membership)) {
 			$query = $query->where('members', '=', $membership == 'yes' ? 1 : 0);
 		}
+
 		return $query->get();
 	}
 }

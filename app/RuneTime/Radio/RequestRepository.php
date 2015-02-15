@@ -3,6 +3,10 @@ namespace App\RuneTime\Radio;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class RequestRepository
+ * @package App\RuneTime\Radio
+ */
 class RequestRepository extends EloquentRepository
 {
 	/**

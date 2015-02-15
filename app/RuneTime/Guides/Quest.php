@@ -3,6 +3,10 @@ namespace App\RuneTime\Guides;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Quest
+ * @package App\RuneTime\Guides
+ */
 class Quest extends Entity
 {
 	protected $table = 'guides_quests';

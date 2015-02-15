@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Tags;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Tag
+ * @package App\RuneTime\Forum\Tags
+ */
 class Tag extends Entity
 {
 	protected $table = 'forum_tags';

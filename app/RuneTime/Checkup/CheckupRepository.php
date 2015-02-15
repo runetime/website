@@ -3,6 +3,10 @@ namespace App\RuneTime\Checkup;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class CheckupRepository
+ * @package App\RuneTime\Checkup
+ */
 class CheckupRepository extends EloquentRepository
 {
 	/**

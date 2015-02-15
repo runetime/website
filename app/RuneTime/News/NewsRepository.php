@@ -3,6 +3,10 @@ namespace App\RuneTime\News;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class NewsRepository
+ * @package App\RuneTime\News
+ */
 class NewsRepository extends EloquentRepository
 {
 	/**

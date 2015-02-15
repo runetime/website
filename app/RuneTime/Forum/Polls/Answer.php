@@ -3,11 +3,19 @@ namespace App\RuneTime\Forum\Polls;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Answer
+ * @package App\RuneTime\Forum\Polls
+ */
 class Answer extends Entity
 {
 	protected $table = 'forum_poll_answers';
 	protected $with = [];
-	protected $fillable = ['question_id', 'contents', 'votes'];
+	protected $fillable = [
+		'question_id',
+		'contents',
+		'votes'
+	];
 	protected $dates = [];
 	protected $softDelete = true;
 

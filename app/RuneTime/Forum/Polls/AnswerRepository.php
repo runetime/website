@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Polls;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class AnswerRepository
+ * @package App\RuneTime\Forum\Polls
+ */
 class AnswerRepository extends EloquentRepository
 {
 	/**

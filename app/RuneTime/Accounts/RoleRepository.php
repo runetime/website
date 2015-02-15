@@ -3,6 +3,10 @@ namespace App\RuneTime\Accounts;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class RoleRepository
+ * @package App\RuneTime\Accounts
+ */
 class RoleRepository extends EloquentRepository
 {
 	/**

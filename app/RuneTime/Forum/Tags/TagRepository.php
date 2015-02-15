@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Tags;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class TagRepository
+ * @package App\RuneTime\Forum\Tags
+ */
 class TagRepository extends EloquentRepository
 {
 	/**

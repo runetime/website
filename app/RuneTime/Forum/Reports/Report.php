@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Reports;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Report
+ * @package App\RuneTime\Forum\Reports
+ */
 class Report extends Entity
 {
 	protected $table = 'forum_reports';

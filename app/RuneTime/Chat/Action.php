@@ -3,6 +3,10 @@ namespace App\RuneTime\Chat;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Action
+ * @package App\RuneTime\Chat
+ */
 class Action extends Entity
 {
 	protected $table = 'chat_actions';

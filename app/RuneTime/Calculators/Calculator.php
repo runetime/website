@@ -3,6 +3,10 @@ namespace App\RuneTime\Calculators;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Calculator
+ * @package App\RuneTime\Calculators
+ */
 class Calculator extends Entity
 {
 	protected $table = 'calculators';

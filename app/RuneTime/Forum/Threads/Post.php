@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Threads;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Post
+ * @package App\RuneTime\Forum\Threads
+ */
 class Post extends Entity
 {
 	protected $table = 'forum_posts';

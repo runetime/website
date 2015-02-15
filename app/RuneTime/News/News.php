@@ -3,6 +3,10 @@ namespace App\RuneTime\News;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class News
+ * @package App\RuneTime\News
+ */
 class News extends Entity
 {
 	protected $table = 'news';

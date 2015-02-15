@@ -3,6 +3,10 @@ namespace App\RuneTime\Statuses;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class StatusRepository
+ * @package App\RuneTime\Statuses
+ */
 class StatusRepository extends EloquentRepository
 {
 	/**

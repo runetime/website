@@ -3,6 +3,10 @@ namespace App\RuneTime\Accounts;
 
 use App\RuneTime\Core\Entity;
 
+/**
+ * Class Reset
+ * @package App\RuneTime\Accounts
+ */
 class Reset extends Entity
 {
 	protected $table = 'password_resets';

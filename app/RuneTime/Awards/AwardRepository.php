@@ -3,6 +3,10 @@ namespace App\RuneTime\Awards;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class AwardRepository
+ * @package App\RuneTime\Awards
+ */
 class AwardRepository extends EloquentRepository
 {
 	/**

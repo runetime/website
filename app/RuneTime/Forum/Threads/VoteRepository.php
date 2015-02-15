@@ -3,6 +3,10 @@ namespace App\RuneTime\Forum\Threads;
 
 use App\RuneTime\Core\EloquentRepository;
 
+/**
+ * Class VoteRepository
+ * @package App\RuneTime\Forum\Threads
+ */
 class VoteRepository extends EloquentRepository
 {
 	/**
