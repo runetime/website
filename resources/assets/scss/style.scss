@@ -1,8 +1,6 @@
-/*
------------
-- Vendors -
------------
-*/
+/**
+ * Vendor
+ */
 @import "vendor/bootstrap/variables";
 @import "vendor/bootstrap";
 @import "vendor/font-awesome";
@@ -10,7 +8,17 @@
 @import "vendor/normalize";
 @import "vendor/codrops";
 
-
+/**
+ * Import our own variables.
+ */
 @import "variables";
+
+/**
+ * Import modules for mixins and stuff.
+ */
 @import "modules/all";
+
+/**
+ * Import partials such as chat, forum, news, etc.
+ */
 @import "partials/all";

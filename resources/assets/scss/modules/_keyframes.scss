@@ -1,3 +1,6 @@
+/**
+ * Includes a given keyframe with vendor prefixes.
+ */
 @mixin keyframes($animation-name) {
   @-webkit-keyframes #{$animation-name} {
     @content;
@@ -16,6 +19,9 @@
   }
 }
 
+/**
+ * Includes an animation with vendor prefixes.
+ */
 @mixin animation($str) {
   -webkit-animation: #{$str};
   -moz-animation: #{$str};
@@ -23,6 +29,9 @@
   animation: #{$str};
 }
 
+/**
+ * Includes a transition with vendor prefixes.
+ */
 @mixin transition($args...) {
   -webkit-transition: $args;
   -moz-transition: $args;

@@ -1,3 +1,6 @@
+/**
+ * Global basic variables
+ */
 $textColor: #b8b8b8;
 $bcLinkColor: #33B5E5;
 $linkColor: #fff;
@@ -7,7 +10,7 @@ $linkColor2: #33B5E5 !important;
  * Badges
  */
 $badge-important: rgba(130, 0, 0, 1) !important;
-$badge-info: rgba(69, 0, 107, 1) !important;
+$badge-info:      rgba(69, 0, 107, 1) !important;
 
 
 /**
@@ -125,7 +128,7 @@ $container-silver:             rgba(133, 133, 133, 1);
 /**
  * Images
  */
-$images-photo-border:    0em;
+$images-photo-border:    0;
 $images-photo-sm-height: 3em;
 $images-photo-sm-width:  3em;
 
@@ -190,6 +193,8 @@ $progressbar-dark-bar-bg: rgba(41, 0, 48, 1);
  */
 $rank-base-prefix: '/img/forums/roles/badge/';
 $rank-base-suffix: '.png';
+
+// Specific ranks
 $rank-diamond:     $rank-base-prefix + 'diamond' + $rank-base-suffix;
 $rank-dragonstone: $rank-base-prefix + 'dragonstone' + $rank-base-suffix;
 $rank-emerald:     $rank-base-prefix + 'emerald' + $rank-base-suffix;
@@ -205,28 +210,44 @@ $rank-topaz:       $rank-base-prefix + 'topaz' + $rank-base-suffix;
 /**
  * Roles
  */
-$roles-base-prefix: '/img/forums/roles/';
-$roles-base-suffix: '.png';
+$roles-base-prefix:                 '/img/forums/roles/';
+$roles-base-suffix:                 '.png';
+
+// Administrator role
 $roles-administrator-image:         $roles-base-prefix + '1' + $roles-base-suffix;
 $roles-administrator-color:         rgba(255, 255, 0, 1);
+
+// Radio roles
 $roles-radio-team-leader-image:     $roles-base-prefix + '2' + $roles-base-suffix;
 $roles-radio-team-image:            $roles-base-prefix + '3' + $roles-base-suffix;
 $roles-radio-team-color:            rgba(128, 0, 128, 1);
+
+// Media roles
 $roles-media-team-leader-image:     $roles-base-prefix + '4' + $roles-base-suffix;
 $roles-media-team-image:            $roles-base-prefix + '5' + $roles-base-suffix;
 $roles-media-team-color:            rgba(128, 0, 128, 1);
+
+// Web Developer roles
 $roles-web-developer-leader-image:  $roles-base-prefix + '6' + $roles-base-suffix;
 $roles-web-developer-image:         $roles-base-prefix + '7' + $roles-base-suffix;
 $roles-web-developer-color:         rgba(0, 128, 0, 1);
+
+// Content roles
 $roles-content-team-leader-image:   $roles-base-prefix + '8' + $roles-base-suffix;
 $roles-content-team-image:          $roles-base-prefix + '9' + $roles-base-suffix;
 $roles-content-team-color:          rgba(0, 128, 0, 1);
+
+// Community roles
 $roles-community-team-leader-image: $roles-base-prefix + '10' + $roles-base-suffix;
 $roles-community-team-image:        $roles-base-prefix + '11' + $roles-base-suffix;
 $roles-community-team-color:        rgba(0, 128, 128, 1);
+
+// Event roles
 $roles-events-team-leader-image:    $roles-base-prefix + '12' + $roles-base-suffix;
 $roles-events-team-image:           $roles-base-prefix + '13' + $roles-base-suffix;
 $roles-events-team-color:           rgba(0, 128, 128, 1);
+
+// Donator role
 $roles-donator-image:               $roles-base-prefix + '14' + $roles-base-suffix;
 $roles-donator-color:               rgba(35, 206, 226, 1);
 
@@ -235,26 +256,6 @@ $roles-donator-color:               rgba(35, 206, 226, 1);
  * Typography
  */
 $typography-hover-pointer-cursor:     pointer;
-
-// Elements
-$typography-quote-bg:                 transparent;
-$typography-quote-border-left:        0.25em solid rgba(204, 204, 204, 1);
-$typography-quote-margin:             1.5em 0.25em;
-$typography-quote-padding:            0.1em 0.15em;
-$typography-quote-spoiler-transition: opacity 0.5s ease-in;
-$typography-quote-spoiler-content:    "(This is a spoiler.  Hover to show it.)";
-$typography-quote-spoiler-font-size:  0.5em;
-$typography-select-bg:                transparent;
-$typography-select-border:            1px solid rgba(51, 181, 229, 0.7);
-$typography-select-option-bg:         rgba(41, 41, 41, 1);
-$typography-select-scrollbar-width:   0.75em;
-$typography-select-thumb-radius:      10px;
-$typography-select-thumb-bg:          rgba(115, 11, 115, 0.8);
-$typography-select-thumb-shadow:      inset 0 0 6px rgba(0, 0, 0, 0.5);
-$typography-select-thumb-inactive-bg: rgba(115, 11, 115, 0.8);
-$typography-textarea-bg:              transparent !important;
-$typography-textarea-border:          1px solid rgba(51, 181, 229, 0.7) !important;
-$typography-textarea-color:           rgba(204, 204, 204, 1) !important;
 
 // Holo
 $typography-holo-text-color:          rgba(41, 145, 184, 1) !important;
@@ -275,22 +276,46 @@ $typography-input-range-radius:       14px;
 $typography-input-range-shadow:       inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
 $typography-input-range-highlight:    rgba(255, 255, 255, 0);
 
+// Quotes
+$typography-quote-bg:                 transparent;
+$typography-quote-border-left:        0.25em solid rgba(204, 204, 204, 1);
+$typography-quote-margin:             1.5em 0.25em;
+$typography-quote-padding:            0.1em 0.15em;
+$typography-quote-spoiler-transition: opacity 0.5s ease-in;
+$typography-quote-spoiler-content:    "(This is a spoiler.  Hover to show it.)";
+$typography-quote-spoiler-font-size:  0.5em;
+
+// Select inputs
+$typography-select-bg:                transparent;
+$typography-select-border:            1px solid rgba(51, 181, 229, 0.7);
+$typography-select-option-bg:         rgba(41, 41, 41, 1);
+$typography-select-scrollbar-width:   0.75em;
+$typography-select-thumb-radius:      10px;
+$typography-select-thumb-bg:          rgba(115, 11, 115, 0.8);
+$typography-select-thumb-shadow:      inset 0 0 6px rgba(0, 0, 0, 0.5);
+$typography-select-thumb-inactive-bg: rgba(115, 11, 115, 0.8);
+
 // Text
 $typography-text-muted-color:         rgba(119, 119, 119, 1) !important;
+
+// Textarea inputs
+$typography-textarea-bg:              transparent !important;
+$typography-textarea-border:          1px solid rgba(51, 181, 229, 0.7) !important;
+$typography-textarea-color:           rgba(204, 204, 204, 1) !important;
 
 
 /**
  * Wrappers
  */
-// Normal
-$wrapper-normal-margin:   0 auto;
-$wrapper-normal-padding:  2em 2em;
-$wrapper-normal-width:    100%;
+// Flat
+$wrapper-flat-padding:    0.1em 0 0 0;
 
 // Holo
 $wrapper-dark-background: rgba(40, 40, 40, 1);
 $wrapper-holo-shadow:     inset 0 20px 20px -20px rgba(41, 145, 184, 0.8);
 $wrapper-holo-background: rgba(33, 33, 33, 1);
 
-// Flat
-$wrapper-flat-padding: 0.1em 0 0 0;
+// Normal
+$wrapper-normal-margin:   0 auto;
+$wrapper-normal-padding:  2em 2em;
+$wrapper-normal-width:    100%;
