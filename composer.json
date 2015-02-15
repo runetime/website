@@ -8,7 +8,6 @@
 		"laravel/framework": "dev-master#846c935194a036901ba6b4397c8897fa51e19111",
 		"barryvdh/laravel-ide-helper": "~1.11@dev",
 		"doctrine/dbal": "2.4.3",
-		"erusev/parsedown": "dev-master",
 		"guzzlehttp/guzzle": "~4.0",
 		"intervention/image": "dev-master",
 		"ext-fileinfo": "*"
