@@ -3,6 +3,10 @@
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 
+/**
+ * Class StaffAdministrator
+ * @package App\Http\Middleware
+ */
 class StaffAdministrator implements Middleware
 {
 

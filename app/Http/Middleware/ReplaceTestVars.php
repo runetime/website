@@ -5,6 +5,10 @@ use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Contracts\Foundation\Application;
 
+/**
+ * Class ReplaceTestVars
+ * @package App\Http\Middleware
+ */
 class ReplaceTestVars implements Middleware
 {
 	/**
