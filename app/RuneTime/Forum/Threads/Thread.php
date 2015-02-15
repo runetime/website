@@ -74,6 +74,9 @@ class Thread extends Entity
 		return $this->author;
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function author()
 	{
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');

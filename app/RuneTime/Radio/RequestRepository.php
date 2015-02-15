@@ -41,6 +41,13 @@ class RequestRepository extends EloquentRepository
 			get();
 	}
 
+	/**
+	 * @param        $userId
+	 * @param        $time
+	 * @param string $op
+	 *
+	 * @return mixed
+	 */
 	public function getByUserAndTime($userId, $time, $op = '>=')
 	{
 		return $this->model->

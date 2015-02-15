@@ -9,6 +9,9 @@ use App\RuneTime\Core\EloquentRepository;
  */
 class TicketRepository extends EloquentRepository
 {
+	/**
+	 * @param \App\RuneTime\Tickets\Ticket $model
+	 */
 	public function __construct(Ticket $model)
 	{
 		$this->model = $model;
@@ -40,6 +43,11 @@ class TicketRepository extends EloquentRepository
 			get();
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function getByAuthor($id)
 	{
 		return $this->model->

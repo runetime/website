@@ -9,6 +9,9 @@ use App\RuneTime\Core\EloquentRepository;
  */
 class ActionRepository extends EloquentRepository
 {
+	/**
+	 * @param \App\RuneTime\Chat\Action $model
+	 */
 	public function __construct(Action $model)
 	{
 		$this->model = $model;

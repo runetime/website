@@ -17,6 +17,12 @@ class AwardRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param        $status
+	 * @param string $order
+	 *
+	 * @return mixed
+	 */
 	public function getByStatus($status, $order = 'asc')
 	{
 		return $this->model->

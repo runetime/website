@@ -33,6 +33,11 @@ class StatusRepository extends EloquentRepository
 			get();
 	}
 
+	/**
+	 * @param $amount
+	 *
+	 * @return mixed
+	 */
 	public function getXCanView($amount)
 	{
 		if(\Auth::check() && \Auth::user()->isCommunity()) {

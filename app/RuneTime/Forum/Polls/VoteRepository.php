@@ -31,6 +31,13 @@ class VoteRepository extends EloquentRepository
 			first();
 	}
 
+	/**
+	 * @param $authorId
+	 * @param $answerId
+	 * @param $questionId
+	 *
+	 * @return mixed
+	 */
 	public function getByAllData($authorId, $answerId, $questionId)
 	{
 		return $this->model->

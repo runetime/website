@@ -27,6 +27,9 @@ class Tag extends Entity
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Thread');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function news()
 	{
 		return $this->belongsToMany('App\RuneTime\News\News');
@@ -51,6 +54,11 @@ class Tag extends Entity
 		$this->threads()->attach([$this->id, $threadId]);
 	}
 
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
 	public function toSlug($path = '')
 	{
 		$url = '';
@@ -61,6 +69,9 @@ class Tag extends Entity
 		return '/forums/tag/' . \String::slugEncode($this->name) . $url;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function toNews()
 	{
 		return '/news/' . \String::slugEncode($this->name);

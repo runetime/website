@@ -33,6 +33,11 @@ class CheckupRepository extends EloquentRepository
 			get();
 	}
 
+	/**
+	 * @param $status
+	 *
+	 * @return mixed
+	 */
 	public function getByStatus($status)
 	{
 		return $this->model->

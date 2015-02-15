@@ -27,6 +27,9 @@ class Question extends Entity
 		return $this->belongsTo('App\RuneTime\Forum\Polls\Poll', 'poll_id');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function answers()
 	{
 		return $this->hasMany('App\RuneTime\Forum\Polls\Answer');

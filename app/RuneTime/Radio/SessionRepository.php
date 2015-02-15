@@ -17,6 +17,11 @@ class SessionRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param $status
+	 *
+	 * @return mixed
+	 */
 	public function getByStatus($status)
 	{
 		return $this->model->

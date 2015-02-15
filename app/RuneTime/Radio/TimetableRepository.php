@@ -17,6 +17,12 @@ class TimetableRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param $hour
+	 * @param $day
+	 *
+	 * @return mixed
+	 */
 	public function getByHourDay($hour, $day)
 	{
 		return $this->model->

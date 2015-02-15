@@ -32,6 +32,9 @@ class Post extends Entity
 		return $this->belongsToMany('App\RuneTime\Forum\Threads\Thread');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function message()
 	{
 		return $this->belongsToMany('App\RuneTime\Messenger\Message');
@@ -53,6 +56,9 @@ class Post extends Entity
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
 	}
 
+	/**
+	 * @return string
+	 */
 	public function userVote()
 	{
 		if(\Auth::user()) {

@@ -17,6 +17,9 @@ class MessageRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param $userId
+	 */
 	public function getByUser($userId)
 	{
 	}

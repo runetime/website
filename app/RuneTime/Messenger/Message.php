@@ -83,6 +83,9 @@ class Message extends Entity
 		$this->users()->attach([$user->id]);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function toSlug()
 	{
 		return '/messenger/' . \String::slugEncode($this->id, $this->title);

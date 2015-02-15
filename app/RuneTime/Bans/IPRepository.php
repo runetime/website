@@ -27,6 +27,11 @@ class IPRepository extends EloquentRepository
 			get();
 	}
 
+	/**
+	 * @param $ip
+	 *
+	 * @return mixed
+	 */
 	public function getByIP($ip)
 	{
 		return $this->model->
@@ -34,6 +39,11 @@ class IPRepository extends EloquentRepository
 			get();
 	}
 
+	/**
+	 * @param $ip
+	 *
+	 * @return mixed
+	 */
 	public function getByIPActive($ip)
 	{
 		return $this->model->

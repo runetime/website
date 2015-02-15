@@ -17,6 +17,11 @@ class VoteRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function getByPost($id)
 	{
 		return $this->model->

@@ -17,6 +17,11 @@ class BanRepository extends EloquentRepository
 		$this->model = $model;
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function getByUserId($id)
 	{
 		return $this->model->

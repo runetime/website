@@ -29,6 +29,9 @@ class Session extends Entity
 		return $this->belongsTo('App\RuneTime\Radio\Message', 'message_id');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function dj()
 	{
 		return $this->belongsTo('App\RuneTime\Accounts\User', 'dj_id');
