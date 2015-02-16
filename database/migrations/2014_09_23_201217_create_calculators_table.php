@@ -1,6 +1,10 @@
 <?php
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
+/**
+ * Class CreateCalculatorsTable
+ */
 class CreateCalculatorsTable extends Migration{
 	/**
 	 * Run the migrations.

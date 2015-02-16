@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class RadioTimetablesTableSeeder
+ */
 class RadioTimetablesTableSeeder extends Seeder
 {
 	/**

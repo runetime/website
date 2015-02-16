@@ -3,6 +3,9 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateRadioTimetablesTable
+ */
 class CreateRadioTimetablesTable extends Migration {
 
 	/**

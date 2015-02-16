@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class ForumRanksTableSeeder
+ */
 class ForumRanksTableSeeder extends Seeder
 {
 	/**
