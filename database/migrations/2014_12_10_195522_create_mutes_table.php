@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateMutesTable
  */
-class CreateMutesTable extends Migration {
-
+class CreateMutesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateMutesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('mutes', function(Blueprint $table)
-		{
+		Schema::create('mutes', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->integer('user_id');
@@ -38,5 +37,4 @@ class CreateMutesTable extends Migration {
 	{
 		Schema::drop('mutes');
 	}
-
 }

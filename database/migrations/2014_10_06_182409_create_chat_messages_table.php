@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateChatMessagesTable
  */
-class CreateChatMessagesTable extends Migration {
-
+class CreateChatMessagesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateChatMessagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('chat_messages', function(Blueprint $table)
-		{
+		Schema::create('chat_messages', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->mediumtext('contents');
@@ -36,5 +35,4 @@ class CreateChatMessagesTable extends Migration {
 	{
 		Schema::drop('chat_messages');
 	}
-
 }

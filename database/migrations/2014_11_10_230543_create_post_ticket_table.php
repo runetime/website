@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreatePostTicketTable
  */
-class CreatePostTicketTable extends Migration {
-
+class CreatePostTicketTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -32,5 +32,4 @@ class CreatePostTicketTable extends Migration {
 	{
 		Schema::drop('post_ticket');
 	}
-
 }

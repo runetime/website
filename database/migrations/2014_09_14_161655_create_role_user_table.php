@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateRoleUserTable
  */
-class CreateRoleUserTable extends Migration {
-
+class CreateRoleUserTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateRoleUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('role_user', function(Blueprint $table)
-		{
+		Schema::create('role_user', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('role_id');
 			$table->integer('user_id');
@@ -35,5 +34,4 @@ class CreateRoleUserTable extends Migration {
 	{
 		Schema::drop('role_user');
 	}
-
 }

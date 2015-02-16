@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class AddInterestsToUserTable
  */
-class AddInterestsToUserTable extends Migration {
-
+class AddInterestsToUserTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class AddInterestsToUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('users', function(Blueprint $table)
-		{
+		Schema::table('users', function(Blueprint $table) {
 			$table->string('interests');
 		});
 	}
@@ -30,8 +29,6 @@ class AddInterestsToUserTable extends Migration {
 	{
 		Schema::table('interests', function(Blueprint $table)
 		{
-			//
 		});
 	}
-
 }

@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateForumRanksTable
  */
-class CreateForumRanksTable extends Migration {
-
+class CreateForumRanksTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateForumRanksTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forum_ranks', function(Blueprint $table)
-		{
+		Schema::create('forum_ranks', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->integer('posts_required');
@@ -33,5 +32,4 @@ class CreateForumRanksTable extends Migration {
 	{
 		Schema::drop('forum_ranks');
 	}
-
 }

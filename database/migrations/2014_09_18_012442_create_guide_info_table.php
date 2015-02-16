@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateGuideInfoTable
  */
-class CreateGuideInfoTable extends Migration {
-
+class CreateGuideInfoTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,13 +15,12 @@ class CreateGuideInfoTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('guide_info', function(Blueprint $t)
-		{
-			$t->increments('id');
-			$t->string('type');
-			$t->string('name');
-			$t->timestamps();
-			$t->softDeletes();
+		Schema::create('guide_info', function(Blueprint $table) {
+			$table->increments('id');
+			$table->string('type');
+			$table->string('name');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
@@ -34,5 +33,4 @@ class CreateGuideInfoTable extends Migration {
 	{
 		Schema::drop('guide_info');
 	}
-
 }

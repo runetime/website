@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class AddLocationToUsersTable
  */
-class AddLocationToUsersTable extends Migration {
-
+class AddLocationToUsersTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class AddLocationToUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('users', function(Blueprint $table)
-		{
+		Schema::table('users', function(Blueprint $table) {
 			$table->string('location');
 		});
 	}
@@ -28,10 +27,7 @@ class AddLocationToUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('users', function(Blueprint $table)
-		{
-			//
+		Schema::table('users', function(Blueprint $table) {
 		});
 	}
-
 }

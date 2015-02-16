@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateForumPollAnswersTable
  */
-class CreateForumPollAnswersTable extends Migration {
-
+class CreateForumPollAnswersTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateForumPollAnswersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forum_poll_answers', function(Blueprint $table)
-		{
+		Schema::create('forum_poll_answers', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('question_id');
 			$table->mediumtext('contents');
@@ -35,5 +34,4 @@ class CreateForumPollAnswersTable extends Migration {
 	{
 		Schema::drop('forum_poll_answers');
 	}
-
 }

@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateRadioTimetablesTable
  */
-class CreateRadioTimetablesTable extends Migration {
-
+class CreateRadioTimetablesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateRadioTimetablesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('radio_timetables', function(Blueprint $table)
-		{
+		Schema::create('radio_timetables', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('dj_id');
 			$table->integer('year');
@@ -35,5 +34,4 @@ class CreateRadioTimetablesTable extends Migration {
 	{
 		Schema::drop('radio_timetables');
 	}
-
 }

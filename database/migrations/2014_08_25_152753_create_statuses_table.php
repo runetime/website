@@ -1,17 +1,20 @@
 <?php
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
  * Class CreateStatusesTable
  */
-class CreateStatusesTable extends Migration{
+class CreateStatusesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-	public function up(){
+	public function up()
+	{
 		Schema::create('statuses', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
@@ -21,6 +24,7 @@ class CreateStatusesTable extends Migration{
 			$table->softDeletes();
 		});
 	}
+
 	/**
 	 * Reverse the migrations.
 	 *

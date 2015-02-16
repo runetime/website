@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateForumThreadsTable
  */
-class CreateForumThreadsTable extends Migration {
-
+class CreateForumThreadsTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateForumThreadsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forum_threads', function(Blueprint $table)
-		{
+		Schema::create('forum_threads', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->integer('subforum_id');
@@ -40,5 +39,4 @@ class CreateForumThreadsTable extends Migration {
 	{
 		Schema::drop('forum_threads');
 	}
-
 }

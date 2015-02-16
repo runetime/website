@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateAwardeesTable
  */
-class CreateAwardeesTable extends Migration {
-
+class CreateAwardeesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateAwardeesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('awardees', function(Blueprint $table)
-		{
+		Schema::create('awardees', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('award_id');
 			$table->integer('user_id');
@@ -34,5 +33,4 @@ class CreateAwardeesTable extends Migration {
 	{
 		Schema::drop('awardees');
 	}
-
 }

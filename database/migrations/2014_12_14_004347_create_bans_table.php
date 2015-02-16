@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateBansTable
  */
-class CreateBansTable extends Migration {
-
+class CreateBansTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateBansTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('bans', function(Blueprint $table)
-		{
+		Schema::create('bans', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->integer('user_id');
@@ -36,5 +35,4 @@ class CreateBansTable extends Migration {
 	{
 		Schema::drop('bans');
 	}
-
 }

@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreatePostStatusTable
  */
-class CreatePostStatusTable extends Migration {
-
+class CreatePostStatusTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreatePostStatusTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('post_status', function(Blueprint $table)
-		{
+		Schema::create('post_status', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('post_id');
 			$table->integer('status_id');
@@ -32,5 +31,4 @@ class CreatePostStatusTable extends Migration {
 	{
 		Schema::drop('post_status');
 	}
-
 }

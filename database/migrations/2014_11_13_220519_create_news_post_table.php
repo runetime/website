@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateNewsPostTable
  */
-class CreateNewsPostTable extends Migration {
-
+class CreateNewsPostTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateNewsPostTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('news_post', function(Blueprint $table)
-		{
+		Schema::create('news_post', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('news_id');
 			$table->integer('post_id');
@@ -32,5 +31,4 @@ class CreateNewsPostTable extends Migration {
 	{
 		Schema::drop('news_post');
 	}
-
 }

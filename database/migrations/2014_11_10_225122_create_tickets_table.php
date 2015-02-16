@@ -6,7 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateTicketsTable
  */
-class CreateTicketsTable extends Migration {
+class CreateTicketsTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -15,8 +16,7 @@ class CreateTicketsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tickets', function(Blueprint $table)
-		{
+		Schema::create('tickets', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->string('name');
@@ -36,5 +36,4 @@ class CreateTicketsTable extends Migration {
 	{
 		Schema::drop('tickets');
 	}
-
 }

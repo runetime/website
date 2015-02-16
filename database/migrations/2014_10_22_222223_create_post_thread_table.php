@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreatePostThreadTable
  */
-class CreatePostThreadTable extends Migration {
-
+class CreatePostThreadTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreatePostThreadTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('post_thread', function(Blueprint $table)
-		{
+		Schema::create('post_thread', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('post_id');
 			$table->integer('thread_id');
@@ -32,5 +31,4 @@ class CreatePostThreadTable extends Migration {
 	{
 		Schema::drop('post_thread');
 	}
-
 }

@@ -15,8 +15,7 @@ class CreateMessagePostTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('message_post', function(Blueprint $table)
-		{
+		Schema::create('message_post', function(Blueprint $table) {
 			$table->integer('message_id');
 			$table->integer('post_id');
 		});
@@ -31,5 +30,4 @@ class CreateMessagePostTable extends Migration {
 	{
 		Schema::drop('message_post');
 	}
-
 }

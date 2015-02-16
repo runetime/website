@@ -6,8 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateForumTagsTable
  */
-class CreateForumTagsTable extends Migration {
-
+class CreateForumTagsTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -15,8 +15,7 @@ class CreateForumTagsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forum_tags', function(Blueprint $table)
-		{
+		Schema::create('forum_tags', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->string('name');
@@ -34,5 +33,4 @@ class CreateForumTagsTable extends Migration {
 	{
 		Schema::drop('forum_tags');
 	}
-
 }
