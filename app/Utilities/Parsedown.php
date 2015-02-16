@@ -270,12 +270,12 @@ class Parsedown
         return $markup;
     }
 
-    #
-    # Atx
 	/**
+	 * Atx
+	 *
 	 * @param $Line
 	 *
-	 * @return array
+	 * @return array|void
 	 */
 	protected function identifyAtx($Line)
     {
@@ -300,14 +300,16 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
-    #
-    # Code
 	/**
+	 * Code
+	 *
 	 * @param $Line
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyCodeBlock($Line)
     {
@@ -328,13 +330,15 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Line
 	 * @param $Block
 	 *
-	 * @return mixed
+	 * @return null
 	 */
 	protected function addToCodeBlock($Line, $Block)
     {
@@ -355,6 +359,8 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
@@ -373,9 +379,9 @@ class Parsedown
         return $Block;
     }
 
-    #
-    # Comment
 	/**
+	 * Comment
+	 *
 	 * @param $Line
 	 *
 	 * @return array|void
@@ -384,7 +390,7 @@ class Parsedown
     {
         if ($this->markupEscaped)
         {
-            return;
+            return null;
         }
 
         if (isset($Line['text'][3]) and $Line['text'][3] === '-' and $Line['text'][2] === '-' and $Line['text'][1] === '!')
@@ -400,6 +406,8 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
@@ -412,7 +420,7 @@ class Parsedown
     {
         if (isset($Block['closed']))
         {
-            return;
+            return null;
         }
 
         $Block['element'] .= "\n" . $Line['body'];
@@ -425,12 +433,12 @@ class Parsedown
         return $Block;
     }
 
-    #
-    # Fenced Code
 	/**
+	 * Fenced code
+	 *
 	 * @param $Line
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyFencedCode($Line)
     {
@@ -461,17 +469,21 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Line
 	 * @param $Block
+	 *
+	 * @return null
 	 */
 	protected function addToFencedCode($Line, $Block)
     {
         if (isset($Block['complete']))
         {
-            return;
+            return null;
         }
 
         if (isset($Block['interrupted']))
@@ -511,12 +523,12 @@ class Parsedown
         return $Block;
     }
 
-    #
-    # List
 	/**
+	 * List
+	 *
 	 * @param $Line
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyList($Line)
     {
@@ -545,13 +557,15 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
 	 * @param       $Line
 	 * @param array $Block
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function addToList($Line, array $Block)
     {
@@ -600,14 +614,16 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
-    #
-    # Quote
 	/**
+	 * Quote
+	 *
 	 * @param $Line
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyQuote($Line)
     {
@@ -634,13 +650,15 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
 	 * @param       $Line
 	 * @param array $Block
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function addToQuote($Line, array $Block)
     {
@@ -664,14 +682,16 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
-    #
-    # Rule
 	/**
+	 * Rule
+	 *
 	 * @param $Line
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyRule($Line)
     {
@@ -685,21 +705,23 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
-    #
-    # Setext
 	/**
+	 * Setext
+	 *
 	 * @param       $Line
 	 * @param array $Block
 	 *
-	 * @return array|void
+	 * @return array|null
 	 */
 	protected function identifySetext($Line, array $Block = null)
     {
         if ( ! isset($Block) or isset($Block['type']) or isset($Block['interrupted']))
         {
-            return;
+            return null;
         }
 
         if (chop($Line['text'], $Line['text'][0]) === '')
@@ -708,27 +730,29 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
-    #
-    # Markup
 	/**
+	 * Markup
+	 *
 	 * @param $Line
 	 *
-	 * @return array|void
+	 * @return array|null
 	 */
 	protected function identifyMarkup($Line)
     {
         if ($this->markupEscaped)
         {
-            return;
+            return null;
         }
 
         if (preg_match('/^<(\w[\w\d]*)(?:[ ][^>]*)?(\/?)[ ]*>/', $Line['text'], $matches))
         {
             if (in_array($matches[1], $this->textLevelElements))
             {
-                return;
+                return null;
             }
 
             $Block = [
@@ -747,6 +771,8 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
@@ -759,7 +785,7 @@ class Parsedown
     {
         if (isset($Block['closed']))
         {
-            return;
+            return null;
         }
 
         if (preg_match('/<'.$Block['name'].'([ ][^\/]+)?>/', $Line['text'])) # opening tag
@@ -784,19 +810,19 @@ class Parsedown
         return $Block;
     }
 
-    #
-    # Table
 	/**
+	 * Table
+	 *
 	 * @param       $Line
 	 * @param array $Block
 	 *
-	 * @return array|void
+	 * @return array|null
 	 */
 	protected function identifyTable($Line, array $Block = null)
     {
         if ( ! isset($Block) or isset($Block['type']) or isset($Block['interrupted']))
         {
-            return;
+            return null;
         }
 
         if (strpos($Block['element']['text'], '|') !== false and chop($Line['text'], ' -:|') === '')
@@ -897,6 +923,8 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
 	/**
@@ -948,15 +976,16 @@ class Parsedown
 
             return $Block;
         }
+
+	    return null;
     }
 
-    #
-    # Definitions
-    #
 	/**
+	 * Definitions
+	 *
 	 * @param $Line
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyReference($Line)
     {
@@ -976,6 +1005,8 @@ class Parsedown
 
             return $Definition;
         }
+
+	    return null;
     }
 
     #
@@ -1169,11 +1200,9 @@ class Parsedown
 
         return $markup;
     }
-
-    #
-    # ~
-    #
 	/**
+	 * ~
+	 *
 	 * @param $Excerpt
 	 *
 	 * @return array|void
@@ -1182,7 +1211,7 @@ class Parsedown
     {
         if ( ! isset($Excerpt['text'][1]) or $Excerpt['text'][1] !== '/')
         {
-            return;
+            return null;
         }
 
         if (preg_match('/\bhttps?:[\/]{2}[^\s<]+\b\/*/ui', $Excerpt['context'], $matches, PREG_OFFSET_CAPTURE))
@@ -1201,12 +1230,14 @@ class Parsedown
                 ],
             ];
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyAmpersand($Excerpt)
     {
@@ -1217,6 +1248,8 @@ class Parsedown
                 'extent' => 1,
             ];
         }
+
+	    return null;
     }
 
 	/**
@@ -1228,7 +1261,7 @@ class Parsedown
     {
         if ( ! isset($Excerpt['text'][1]))
         {
-            return;
+            return null;
         }
 
         if ($Excerpt['text'][1] === '~' and preg_match('/^~~(?=\S)(.+?)(?<=\S)~~/', $Excerpt['text'], $matches))
@@ -1242,12 +1275,14 @@ class Parsedown
                 ],
             ];
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyEscapeSequence($Excerpt)
     {
@@ -1258,6 +1293,8 @@ class Parsedown
                 'extent' => 2,
             ];
         }
+
+	    return null;
     }
 
 	/**
@@ -1274,7 +1311,7 @@ class Parsedown
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyUrlTag($Excerpt)
     {
@@ -1293,12 +1330,14 @@ class Parsedown
                 ],
             ];
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyEmailTag($Excerpt)
     {
@@ -1315,18 +1354,20 @@ class Parsedown
                 ],
             ];
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array|void
+	 * @return array|null
 	 */
 	protected function identifyTag($Excerpt)
     {
         if ($this->markupEscaped)
         {
-            return;
+            return null;
         }
 
         if (strpos($Excerpt['text'], '>') !== false and preg_match('/^<\/?\w.*?>/', $Excerpt['text'], $matches))
@@ -1336,12 +1377,14 @@ class Parsedown
                 'extent' => strlen($matches[0]),
             ];
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function identifyInlineCode($Excerpt)
     {
@@ -1360,12 +1403,14 @@ class Parsedown
                 ],
             ];
         }
+
+	    return null;
     }
 
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array|void
+	 * @return array|null
 	 */
 	protected function identifyLink($Excerpt)
     {
@@ -1391,7 +1436,7 @@ class Parsedown
                 }
                 else
                 {
-                    return;
+                    return null;
                 }
             }
             elseif (isset($this->Definitions['Reference'][$Link['label']]))
@@ -1416,12 +1461,12 @@ class Parsedown
             }
             else
             {
-                return;
+                return null;
             }
         }
         else
         {
-            return;
+            return null;
         }
 
         $url = str_replace(['&', '<'], ['&amp;', '&lt;'], $Link['url']);
@@ -1462,13 +1507,13 @@ class Parsedown
 	/**
 	 * @param $Excerpt
 	 *
-	 * @return array|void
+	 * @return array|null
 	 */
 	protected function identifyEmphasis($Excerpt)
     {
         if ( ! isset($Excerpt['text'][1]))
         {
-            return;
+            return null;
         }
 
         $marker = $Excerpt['text'][0];
@@ -1483,7 +1528,7 @@ class Parsedown
         }
         else
         {
-            return;
+            return null;
         }
 
         return [
