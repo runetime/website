@@ -145,6 +145,8 @@ class String
 	}
 
 	/**
+	 * Returns a string colorized by a given role.
+	 *
 	 * @param      $str
 	 * @param      $roleInfo
 	 * @param bool $img
@@ -181,6 +183,9 @@ class String
 	}
 
 	/**
+	 * Returns a string of the gender's name - given by
+	 * ID - with its image if $image is set to true.
+	 *
 	 * @param      $genderId
 	 * @param bool $image
 	 *
@@ -210,6 +215,9 @@ class String
 	}
 
 	/**
+	 * Retrives the given RSN's hiscores for RS3, caches
+	 * it, and returns the user's hiscores as an array.
+	 *
 	 * @param $rsn
 	 *
 	 * @return array|bool|mixed
@@ -240,6 +248,9 @@ class String
 	}
 
 	/**
+	 * Retrieves the given RSN's hiscores for OSRS, caches
+	 * it, and returns the user's hiscores as an array.
+	 *
 	 * @param $rsn
 	 *
 	 * @return array|bool|mixed
@@ -276,7 +287,7 @@ class String
 			return \Cache::get('hiscoresOld.' . $rsn);
 		}
 
-		$url = 'view-source:services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=' . $rsn;
+		$url = 'services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=' . $rsn;
 		$results = \String::CURL($url);
 
 		if(substr($results, 0, 6) == "<html>") {
@@ -296,6 +307,8 @@ class String
 	}
 
 	/**
+	 * Returns an absolute path to the `uploaded` folder with
+	 * the path of $name included in the generated string.
 	 * @param $directory
 	 * @param $name
 	 *
@@ -307,6 +320,9 @@ class String
 	}
 
 	/**
+	 * Returns an absolute path to the `generated` folder with
+	 * the path of $name included in the generated string.
+	 *
 	 * @param $directory
 	 * @param $name
 	 *
