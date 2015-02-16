@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostReportTable extends Migration {
-
+/**
+ * Class CreatePostReportTable
+ */
+class CreatePostReportTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +15,7 @@ class CreatePostReportTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('post_report', function(Blueprint $table)
-		{
+		Schema::create('post_report', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('post_id');
 			$table->integer('report_id');
@@ -29,5 +31,4 @@ class CreatePostReportTable extends Migration {
 	{
 		Schema::drop('post_report');
 	}
-
 }

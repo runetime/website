@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class SubforumsTableSeeder
+ */
 class SubforumsTableSeeder extends Seeder
 {
 	/**

@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNewsTag extends Migration {
-
+/**
+ * Class CreateNewsTag
+ */
+class CreateNewsTag extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +15,7 @@ class CreateNewsTag extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('news_tag', function(Blueprint $table)
-		{
+		Schema::create('news_tag', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('news_id');
 			$table->integer('tag_id');
@@ -29,5 +31,4 @@ class CreateNewsTag extends Migration {
 	{
 		Schema::drop('news_tag');
 	}
-
 }

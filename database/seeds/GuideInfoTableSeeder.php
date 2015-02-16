@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class GuideInfoTableSeeder
+ */
 class GuideInfoTableSeeder extends Seeder
 {
 	/**

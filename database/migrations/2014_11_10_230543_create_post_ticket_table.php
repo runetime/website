@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostTicketTable extends Migration {
-
+/**
+ * Class CreatePostTicketTable
+ */
+class CreatePostTicketTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -29,5 +32,4 @@ class CreatePostTicketTable extends Migration {
 	{
 		Schema::drop('post_ticket');
 	}
-
 }

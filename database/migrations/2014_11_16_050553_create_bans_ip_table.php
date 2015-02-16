@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBansIpTable extends Migration {
-
+/**
+ * Class CreateBansIpTable
+ */
+class CreateBansIpTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -32,5 +35,4 @@ class CreateBansIpTable extends Migration {
 	{
 		Schema::drop('bans_ip');
 	}
-
 }

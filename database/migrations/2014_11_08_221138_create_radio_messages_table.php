@@ -2,11 +2,12 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 /**
  * Class CreateRadioMessagesTable
  */
-class CreateRadioMessagesTable extends Migration {
-
+class CreateRadioMessagesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -14,8 +15,7 @@ class CreateRadioMessagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('radio_messages', function(Blueprint $table)
-		{
+		Schema::create('radio_messages', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->string('contents');
@@ -34,5 +34,4 @@ class CreateRadioMessagesTable extends Migration {
 	{
 		Schema::drop('radio_messages');
 	}
-
 }

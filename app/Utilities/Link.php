@@ -67,6 +67,7 @@ class Link
 		} else {
 			$role = $roles->getByName($roleInfo);
 		}
+
 		if($role) {
 			return "<span class='members-" . $role->class_name . ($displayImage ? "" : "-no-img") . "'>" . $str . "</a>";
 		}

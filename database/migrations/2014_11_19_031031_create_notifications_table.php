@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotificationsTable extends Migration {
-
+/**
+ * Class CreateNotificationsTable
+ */
+class CreateNotificationsTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +15,7 @@ class CreateNotificationsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('notifications', function(Blueprint $table)
-		{
+		Schema::create('notifications', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id');
 			$table->string('section');
@@ -32,5 +34,4 @@ class CreateNotificationsTable extends Migration {
 	{
 		Schema::drop('notifications');
 	}
-
 }

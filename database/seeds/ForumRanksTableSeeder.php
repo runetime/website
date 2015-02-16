@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class ForumRanksTableSeeder
+ */
 class ForumRanksTableSeeder extends Seeder
 {
 	/**
@@ -11,7 +14,7 @@ class ForumRanksTableSeeder extends Seeder
 	{
 		DB::table('forum_ranks')->delete();
 		DB::table('forum_ranks')->
-		insert([
+			insert([
 				[
 					'name'           => 'Novice Member',
 					'posts_required' => 0,

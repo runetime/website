@@ -2,11 +2,12 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 /**
  * Class CreateDatabaseMonstersTable
  */
-class CreateDatabaseMonstersTable extends Migration {
-
+class CreateDatabaseMonstersTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -14,8 +15,7 @@ class CreateDatabaseMonstersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('database_monsters', function(Blueprint $table)
-		{
+		Schema::create('database_monsters', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->mediumText('editors');
@@ -44,5 +44,4 @@ class CreateDatabaseMonstersTable extends Migration {
 	{
 		Schema::drop('database_monsters');
 	}
-
 }

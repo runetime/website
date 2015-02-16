@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChatChannelsTable extends Migration {
-
+/**
+ * Class CreateChatChannelsTable
+ */
+class CreateChatChannelsTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +15,7 @@ class CreateChatChannelsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('chat_channels', function(Blueprint $table)
-		{
+		Schema::create('chat_channels', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('name_trim');
@@ -31,5 +33,4 @@ class CreateChatChannelsTable extends Migration {
 	{
 		Schema::drop('chat_channels');
 	}
-
 }

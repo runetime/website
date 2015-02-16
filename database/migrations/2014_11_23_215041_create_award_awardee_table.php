@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAwardAwardeeTable extends Migration {
-
+/**
+ * Class CreateAwardAwardeeTable
+ */
+class CreateAwardAwardeeTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +15,7 @@ class CreateAwardAwardeeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('award_awardee', function(Blueprint $table)
-		{
+		Schema::create('award_awardee', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('award_id');
 			$table->integer('awardee_id');
@@ -29,5 +31,4 @@ class CreateAwardAwardeeTable extends Migration {
 	{
 		Schema::drop('award_awardee');
 	}
-
 }

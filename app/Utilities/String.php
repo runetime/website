@@ -14,9 +14,10 @@ class String
 	/**
 	 * Determines whether a string begins with a substring.
 	 *
-	 * @param  string $needle    The substring to search a larger string for
-	 * @param  string $haystack  The larger string to search within
-	 * @return boolean           Whether a string begins with a substring
+	 * @param string $needle
+	 * @param string $haystack
+	 *
+	 * @return bool
 	 */
 	public static function startsWith($needle = "", $haystack = "")
 	{
@@ -26,10 +27,10 @@ class String
 	/**
 	 * Determines whether a string ends with a substring.
 	 *
-	 * @param  string $needle    The substring to search a larger string for
-	 * @param  string $haystack  The larger string to search within
+	 * @param string $needle
+	 * @param string $haystack
 	 *
-	 * @return boolean           Whether a string ends with a substring
+	 * @return bool
 	 */
 	public static function endsWith($needle="",$haystack=""){
 		return(substr($haystack, -strlen($needle)) === $needle);
@@ -144,6 +145,8 @@ class String
 	}
 
 	/**
+	 * Returns a string colorized by a given role.
+	 *
 	 * @param      $str
 	 * @param      $roleInfo
 	 * @param bool $img
@@ -180,6 +183,9 @@ class String
 	}
 
 	/**
+	 * Returns a string of the gender's name - given by
+	 * ID - with its image if $image is set to true.
+	 *
 	 * @param      $genderId
 	 * @param bool $image
 	 *
@@ -209,6 +215,9 @@ class String
 	}
 
 	/**
+	 * Retrives the given RSN's hiscores for RS3, caches
+	 * it, and returns the user's hiscores as an array.
+	 *
 	 * @param $rsn
 	 *
 	 * @return array|bool|mixed
@@ -239,6 +248,9 @@ class String
 	}
 
 	/**
+	 * Retrieves the given RSN's hiscores for OSRS, caches
+	 * it, and returns the user's hiscores as an array.
+	 *
 	 * @param $rsn
 	 *
 	 * @return array|bool|mixed
@@ -275,7 +287,7 @@ class String
 			return \Cache::get('hiscoresOld.' . $rsn);
 		}
 
-		$url = 'view-source:services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=' . $rsn;
+		$url = 'services.runescape.com/m=hiscore_oldschool/index_lite.ws?player=' . $rsn;
 		$results = \String::CURL($url);
 
 		if(substr($results, 0, 6) == "<html>") {
@@ -295,6 +307,8 @@ class String
 	}
 
 	/**
+	 * Returns an absolute path to the `uploaded` folder with
+	 * the path of $name included in the generated string.
 	 * @param $directory
 	 * @param $name
 	 *
@@ -306,6 +320,9 @@ class String
 	}
 
 	/**
+	 * Returns an absolute path to the `generated` folder with
+	 * the path of $name included in the generated string.
+	 *
 	 * @param $directory
 	 * @param $name
 	 *

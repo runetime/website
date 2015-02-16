@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCheckupUserTable extends Migration {
-
+/**
+ * Class CreateCheckupUserTable
+ */
+class CreateCheckupUserTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +15,7 @@ class CreateCheckupUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('checkup_user', function(Blueprint $table)
-		{
+		Schema::create('checkup_user', function(Blueprint $table) {
 			$table->integer('checkup_id');
 			$table->integer('user_id');
 		});
@@ -28,5 +30,4 @@ class CreateCheckupUserTable extends Migration {
 	{
 		Schema::drop('checkup_user');
 	}
-
 }

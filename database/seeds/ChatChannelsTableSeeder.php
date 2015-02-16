@@ -1,5 +1,9 @@
 <?php
 use Illuminate\Database\Seeder;
+
+/**
+ * Class ChatChannelsTableSeeder
+ */
 class ChatChannelsTableSeeder extends Seeder{
 	/**
 	 *

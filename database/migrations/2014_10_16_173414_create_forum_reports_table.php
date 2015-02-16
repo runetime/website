@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateForumReportsTable extends Migration {
-
+/**
+ * Class CreateForumReportsTable
+ */
+class CreateForumReportsTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +15,7 @@ class CreateForumReportsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forum_reports', function(Blueprint $table)
-		{
+		Schema::create('forum_reports', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('author_id');
 			$table->integer('reported_id');
@@ -35,5 +37,4 @@ class CreateForumReportsTable extends Migration {
 	{
 		Schema::drop('forum_reports');
 	}
-
 }

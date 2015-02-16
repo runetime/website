@@ -3,8 +3,10 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateTagThreadTable
+ */
 class CreateTagThreadTable extends Migration {
-
 	/**
 	 * Run the migrations.
 	 *
@@ -12,8 +14,7 @@ class CreateTagThreadTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tag_thread', function(Blueprint $table)
-		{
+		Schema::create('tag_thread', function(Blueprint $table) {
 			$table->integer('tag_id');
 			$table->integer('thread_id');
 		});
@@ -28,5 +29,4 @@ class CreateTagThreadTable extends Migration {
 	{
 		Schema::drop('tag_thread');
 	}
-
 }

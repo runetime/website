@@ -1,14 +1,21 @@
 <?php
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class CreateCalculatorsTable extends Migration{
+
+/**
+ * Class CreateCalculatorsTable
+ */
+class CreateCalculatorsTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-	public function up(){
-		Schema::create('calculators', function(Blueprint $table){
+	public function up()
+	{
+		Schema::create('calculators', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('name_trim');
@@ -19,6 +26,7 @@ class CreateCalculatorsTable extends Migration{
 			$table->softDeletes();
 		});
 	}
+
 	/**
 	 * Reverse the migrations.
 	 *

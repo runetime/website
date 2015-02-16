@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRadioHistoryTable extends Migration {
-
+/**
+ * Class CreateRadioHistoryTable
+ */
+class CreateRadioHistoryTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -12,14 +15,13 @@ class CreateRadioHistoryTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('radio_history', function(Blueprint $t)
-		{
-			$t->increments('id');
-			$t->integer('user_id');
-			$t->string('artist');
-			$t->string('song');
-			$t->timestamps();
-			$t->softDeletes();
+		Schema::create('radio_history', function(Blueprint $table) {
+			$table->increments('id');
+			$table->integer('user_id');
+			$table->string('artist');
+			$table->string('song');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
@@ -32,5 +34,4 @@ class CreateRadioHistoryTable extends Migration {
 	{
 		Schema::drop('radio_history');
 	}
-
 }
