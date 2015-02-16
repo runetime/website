@@ -110,7 +110,7 @@ class StaffController extends Controller
 	 */
 	public function getCheckup()
 	{
-		$date = \Time::long(\Carbon::now());
+		$date = \Time::long(time());
 
 		$this->bc(['staff' => trans('staff.title')]);
 		$this->nav('navbar.staff.title');

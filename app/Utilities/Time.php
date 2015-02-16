@@ -77,10 +77,14 @@ class Time
 	 *
 	 * @param int $i
 	 *
-	 * @return bool|string|Carbon
+	 * @return bool|Carbon|string
 	 */
 	public static function long($i = 0)
 	{
+		if($i instanceof Carbon) {
+			$i = $i->timestamp;
+		}
+
 		return self::carbon($i)->format('jS \of F Y \- H:i:s');
 	}
 
