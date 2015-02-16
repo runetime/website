@@ -8,16 +8,18 @@ namespace App\Utilities;
 class Image
 {
 	/**
-	 * Outputs the image of a user based on their ID and any classes listed in [, array $classes]
+	 * Outputs the image of a user based on their
+	 * ID and any classes listed in $classes.
 	 *
-	 * @param   int $userId The ID of the user to display an image of
+	 * @param       $userId
 	 * @param array $classes
-	 * @returns String The img of the user along with classes specified in [, array $classes]
+	 *
+	 * @return \Illuminate\View\View
 	 */
 	public static function userPhoto($userId, array $classes = [])
 	{
 		// Add img-responsive to classes
-		$classes[] .= 'img-responsive';
+		array_push($classes, 'img-responsive');
 
 		$path = 'no_photo';
 		if(file_exists('./img/forums/photos/' . $userId . '.png')) {
@@ -27,6 +29,6 @@ class Image
 		// Implode classes into a string
 		$classList = implode(' ', $classes);
 
-		return view('image.user_photo', compact('path', 'classList'));
+		return view('image.user_photo', compact('path', 'classList'))->render();
 	}
 }

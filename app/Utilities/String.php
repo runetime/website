@@ -14,9 +14,10 @@ class String
 	/**
 	 * Determines whether a string begins with a substring.
 	 *
-	 * @param  string $needle    The substring to search a larger string for
-	 * @param  string $haystack  The larger string to search within
-	 * @return boolean           Whether a string begins with a substring
+	 * @param string $needle
+	 * @param string $haystack
+	 *
+	 * @return bool
 	 */
 	public static function startsWith($needle = "", $haystack = "")
 	{
@@ -26,10 +27,10 @@ class String
 	/**
 	 * Determines whether a string ends with a substring.
 	 *
-	 * @param  string $needle    The substring to search a larger string for
-	 * @param  string $haystack  The larger string to search within
+	 * @param string $needle
+	 * @param string $haystack
 	 *
-	 * @return boolean           Whether a string ends with a substring
+	 * @return bool
 	 */
 	public static function endsWith($needle="",$haystack=""){
 		return(substr($haystack, -strlen($needle)) === $needle);
