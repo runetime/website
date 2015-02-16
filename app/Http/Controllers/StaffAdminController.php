@@ -136,8 +136,6 @@ class StaffAdminController extends Controller
 	 */
 	public function getCheckupList()
 	{
-		return \redirect()->to('staff/administrator');
-
 		$checkups = $this->checkups->getByStatus(Checkup::STATUS_UNCOMPLETED);
 
 		$this->bc(['staff' => trans('staff.title'), 'staff/checkup' => trans('staff.checkup.title')]);
@@ -157,9 +155,8 @@ class StaffAdminController extends Controller
 	 */
 	public function getCheckupView($id)
 	{
-		return \redirect()->to('staff/administrator');
-
 		$checkup = $this->checkups->getById($id);
+
 		$displayName = $this->users->getById($checkup->author()->first()->id);
 		$displayName = $displayName->display_name;
 
