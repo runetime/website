@@ -1,5 +1,7 @@
 <?php
-# About
+/**
+ * About
+ */
 get('about', 'AboutController@getIndex');
 
 /**
@@ -114,7 +116,9 @@ Route::group(['prefix' => 'contact'], function() {
 	post('submit', 'ContactController@postSubmit');
 });
 
-# Cookies
+/**
+ * Cookies
+ */
 get('cookies', 'CookieController@getIndex');
 
 /**
@@ -155,7 +159,12 @@ Route::group(['prefix' => 'databases'], function() {
 	});
 });
 
-# Donate TODO: WIP, make this Stripe-friendly and allow subscription donations with perks
+/**
+ * Donate
+ *
+ * TODO: WIP, make this Stripe-friendly and
+ * allow subscription donations w/ perks.
+ */
 get('donate', 'DonateController@getIndex');
 
 /**
@@ -318,7 +327,9 @@ Route::group(['prefix' => 'guides'], function() {
 	});
 });
 
-# Home
+/**
+ * Home
+ */
 get('/', 'HomeController@getIndex');
 get('home', 'HomeController@getIndex');
 
@@ -369,7 +380,9 @@ Route::group(['prefix' => 'map'], function() {
 	});
 });
 
-# Media
+/**
+ * Media
+ */
 get('media', 'MediaController@getIndex');
 
 /**
@@ -487,7 +500,9 @@ Route::group(['prefix' => 'radio'], function() {
 	});
 });
 
-# Search
+/**
+ * Search
+ */
 post('search', 'SearchController@postSubmit');
 
 /**

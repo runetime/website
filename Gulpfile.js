@@ -1,10 +1,10 @@
 /**
- * Require the main Gulp package
+ * Require the main Gulp package.  Gulp is broguth in via NPM.
  */
 var gulp = require('gulp');
 
 /**
- * Gulp dependencies
+ * Gulp dependencies.
  */
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
@@ -16,6 +16,7 @@ var ts = require('gulp-typescript');
 
 /**
  * Abstracted TypeScript settings
+ *
  * @type {{declarationFiles: boolean, noExternalResolve: boolean, sortOutput: boolean}}
  */
 var tsProject = {
@@ -26,6 +27,7 @@ var tsProject = {
 
 /**
  * Directories of the various assets and public output.
+ *
  * @type {{assets: {scss: string, typescript: string}, public: {css: string, js: string}}}
  */
 var paths = {
@@ -40,7 +42,7 @@ var paths = {
 };
 
 /**
- * Sass compile task
+ * Sass compile task.
  */
 gulp.task('scss', function() {
 	return gulp.src(paths.assets.scss)
@@ -55,7 +57,7 @@ gulp.task('scss', function() {
 });
 
 /**
- * Admin TypeScript compile task
+ * Admin TypeScript compile task.
  */
 gulp.task('scripts-admin', function() {
 	var tsResult = gulp.src('./resources/assets/typescript/admin/*.ts')
@@ -73,7 +75,7 @@ gulp.task('scripts-admin', function() {
 });
 
 /**
- * Modules TypeScript compile task
+ * Modules TypeScript compile task.
  */
 gulp.task('scripts-modules', function() {
 	var tsResult = gulp.src('./resources/assets/typescript/modules/*.ts')
@@ -87,10 +89,10 @@ gulp.task('scripts-modules', function() {
 });
 
 /**
- * Vendor JavaScript minfications and concatenations
+ * Vendor JavaScript minfications and concatenations.
  */
 gulp.task('scripts-vendor', function() {
-	// It's in this order due to dependencies ;_; Please do not change this order
+	// It's in this order due to dependencies ;_; Please do not change this order.
 	var src = [
 		'./resources/assets/typescript/vendor/jquery.js',
 		'./resources/assets/typescript/vendor/jquery-ui.js',
@@ -110,7 +112,8 @@ gulp.task('scripts-vendor', function() {
 });
 
 /**
- * A task that watches directories' files for changes and runs the appropriate Gulp task
+ * A task that watches the directories' files for
+ * changes and runs the appropriate Gulp task.
  */
 gulp.task('watch', function() {
 	gulp.watch('./resources/assets/typescript/*', ['scripts-admin', 'scripts-modules', 'scripts-vendor']);
@@ -123,6 +126,6 @@ gulp.task('watch', function() {
 });
 
 /**
- * Runs all of the compilations on the default Gulp command
+ * Runs all of the compilations on the default Gulp command.
  */
 gulp.task('default', ['scss', 'scripts-admin', 'scripts-modules', 'scripts-vendor']);
