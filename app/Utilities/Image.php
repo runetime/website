@@ -29,6 +29,6 @@ class Image
 		// Implode classes into a string
 		$classList = implode(' ', $classes);
 
-		return view('image.user_photo', compact('path', 'classList'))->render();
+		return view('partials.image.user_photo', compact('path', 'classList'))->render();
 	}
 }

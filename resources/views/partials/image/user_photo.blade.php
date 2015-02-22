@@ -1,1 +1,1 @@
-<img src='/img/forums/photos/{{ $path }}.png' alt='Photo' class='{{ $classes }}' />
+<img src='/img/forums/photos/{{ $path }}.png' alt='Photo' class='{{ $classList }}' />
