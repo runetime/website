@@ -5,28 +5,27 @@ use App\RuneTime\Core\EloquentRepository;
 
 /**
  * Class VoteRepository
- * @package App\RuneTime\Forum\Threads
  */
 class VoteRepository extends EloquentRepository
 {
-	/**
-	 * @param Vote $model
-	 */
-	public function __construct(Vote $model)
-	{
-		$this->model = $model;
-	}
+    /**
+     * @param Vote $model
+     */
+    public function __construct(Vote $model)
+    {
+        $this->model = $model;
+    }
 
-	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function getByPost($id)
-	{
-		return $this->model->
-			where('author_id', '=', \Auth::user()->id)->
-			where('post_id', '=', $id)->
-			first();
-	}
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getByPost($id)
+    {
+        return $this->model->
+            where('author_id', '=', \Auth::user()->id)->
+            where('post_id', '=', $id)->
+            first();
+    }
 }

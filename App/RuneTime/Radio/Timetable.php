@@ -5,26 +5,25 @@ use App\RuneTime\Core\Entity;
 
 /**
  * Class Timetable
- * @package App\RuneTime\Radio
  */
 class Timetable extends Entity
 {
-	protected $table = 'radio_timetables';
-	protected $with = [];
-	protected $fillable = [
-		'dj_id',
-		'year',
-		'day',
-		'hour'
-	];
-	protected $dates = [];
-	protected $softDelete = true;
+    protected $table = 'radio_timetables';
+    protected $with = [];
+    protected $fillable = [
+        'dj_id',
+        'year',
+        'day',
+        'hour',
+    ];
+    protected $dates = [];
+    protected $softDelete = true;
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function dj()
-	{
-		return $this->belongsTo('App\RuneTime\Accounts\User', 'dj_id');
-	}
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function dj()
+    {
+        return $this->belongsTo('App\RuneTime\Accounts\User', 'dj_id');
+    }
 }

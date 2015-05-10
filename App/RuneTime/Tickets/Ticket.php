@@ -1,138 +1,138 @@
 <?php
 namespace App\RuneTime\Tickets;
 
+use App\RuneTime\Core\Entity;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
-use App\RuneTime\Core\Entity;
 
 /**
  * Class Ticket
- * @package App\RuneTime\Tickets
  */
 class Ticket extends Entity
 {
-	protected $table = 'tickets';
-	protected $fillable = [
-		'author_id',
-		'name',
-		'posts_count',
-		'last_post',
-		'status'
-	];
-	protected $dates = [];
-	protected $softDelete = true;
-	const STATUS_OPEN = 0;
-	const STATUS_CLOSED = 1;
-	const STATUS_ESCALATED = 2;
-	const PER_PAGE = 20;
+    protected $table = 'tickets';
+    protected $fillable = [
+        'author_id',
+        'name',
+        'posts_count',
+        'last_post',
+        'status',
+    ];
+    protected $dates = [];
+    protected $softDelete = true;
+    const STATUS_OPEN = 0;
+    const STATUS_CLOSED = 1;
+    const STATUS_ESCALATED = 2;
+    const PER_PAGE = 20;
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function author()
-	{
-		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
-	}
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
+    }
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function posts()
-	{
-		return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
-	}
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function posts()
+    {
+        return $this->belongsToMany('App\RuneTime\Forum\Threads\Post');
+    }
 
-	/**
-	 * @param Post $post
-	 */
-	public function addPost(Post $post)
-	{
-		$this->posts()->attach([$post->id]);
-	}
+    /**
+     * @param Post $post
+     */
+    public function addPost(Post $post)
+    {
+        $this->posts()->attach([$post->id]);
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function lastPost()
-	{
-		$posts = new PostRepository(new Post);
-		return $posts->getById($this->last_post);
-	}
+    /**
+     * @return mixed
+     */
+    public function lastPost()
+    {
+        $posts = new PostRepository(new Post);
 
-	/**
-	 *
-	 */
-	public function statusSwitch()
-	{
-		switch($this->status) {
-			case Ticket::STATUS_OPEN:
-			case Ticket::STATUS_ESCALATED:
-				$this->status = TICKET::STATUS_CLOSED;
-				break;
-			case Ticket::STATUS_CLOSED:
-			default:
-				$this->status = TICKET::STATUS_OPEN;
-				break;
-		}
+        return $posts->getById($this->last_post);
+    }
 
-		$this->save();
-	}
+    /**
+     *
+     */
+    public function statusSwitch()
+    {
+        switch ($this->status) {
+            case Ticket::STATUS_OPEN:
+            case Ticket::STATUS_ESCALATED:
+                $this->status = TICKET::STATUS_CLOSED;
+                break;
+            case Ticket::STATUS_CLOSED:
+            default:
+                $this->status = TICKET::STATUS_OPEN;
+                break;
+        }
 
-	/**
-	 * @return string
-	 */
-	public function readableStatus()
-	{
-		switch($this->status) {
-			case TICKET::STATUS_OPEN:
-				return 'good';
-				break;
-			case TICKET::STATUS_CLOSED:
-				return 'closed';
-				break;
-			case TICKET::STATUS_ESCALATED:
-			default:
-				return 'escalated';
-				break;
-		}
-	}
+        $this->save();
+    }
 
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public function toSlug($path = '')
-	{
-		$url = '';
-		if(strlen($path) > 0) {
-			$url = '/' . $path;
-		}
+    /**
+     * @return string
+     */
+    public function readableStatus()
+    {
+        switch ($this->status) {
+            case TICKET::STATUS_OPEN:
+                return 'good';
+                break;
+            case TICKET::STATUS_CLOSED:
+                return 'closed';
+                break;
+            case TICKET::STATUS_ESCALATED:
+            default:
+                return 'escalated';
+                break;
+        }
+    }
 
-		return '/tickets/' . \String::slugEncode($this->id, $this->name) . $url;
-	}
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    public function toSlug($path = '')
+    {
+        $url = '';
+        if (strlen($path) > 0) {
+            $url = '/' . $path;
+        }
 
-	/**
-	 * @return bool
-	 */
-	public function isClosed()
-	{
-		return $this->status === Ticket::STATUS_CLOSED;
-	}
+        return '/tickets/' . \String::slugEncode($this->id, $this->name) . $url;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isOpen()
-	{
-		return $this->status === Ticket::STATUS_OPEN;
-	}
+    /**
+     * @return bool
+     */
+    public function isClosed()
+    {
+        return $this->status === Ticket::STATUS_CLOSED;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isEscalated()
-	{
-		return $this->status === Ticket::STATUS_ESCALATED;
-	}
+    /**
+     * @return bool
+     */
+    public function isOpen()
+    {
+        return $this->status === Ticket::STATUS_OPEN;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEscalated()
+    {
+        return $this->status === Ticket::STATUS_ESCALATED;
+    }
 }

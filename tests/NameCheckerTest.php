@@ -7,27 +7,27 @@
  */
 class NameCheckerTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$response = $this->call('GET', 'name-check');
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'name-check');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPost()
-	{
-		$data = $this->form([
-			'rsn' => 'zezima',
-		]);
+    /**
+     *
+     */
+    public function testPost()
+    {
+        $data = $this->form([
+            'rsn' => 'zezima',
+        ]);
 
-		$response = $this->call('POST', 'name-check', $data);
+        $response = $this->call('POST', 'name-check', $data);
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

@@ -7,210 +7,210 @@
  */
 class SettingsTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'settings');
+        $response = $this->call('GET', 'settings');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostIndex()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostIndex()
+    {
+        $this->login();
 
-		$data = $this->form([
-			'referred_by' => 'Zezima',
-			'birthday'    => 'now',
-			'timezone'    => '14',
-			'dst'         => 1,
-			'gender'      => 2,
-			'location'    => 'RuneTime',
-			'interests'   => 'Development',
-		]);
+        $data = $this->form([
+            'referred_by' => 'Zezima',
+            'birthday'    => 'now',
+            'timezone'    => '14',
+            'dst'         => 1,
+            'gender'      => 2,
+            'location'    => 'RuneTime',
+            'interests'   => 'Development',
+        ]);
 
-		$response = $this->call('POST', 'settings', $data);
+        $response = $this->call('POST', 'settings', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPhoto()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPhoto()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'settings/photo');
+        $response = $this->call('GET', 'settings/photo');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostPhoto()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostPhoto()
+    {
+        $this->login();
 
-		$data = $this->form();
+        $data = $this->form();
 
-		$response = $this->call('POST', 'settings/photo', $data);
+        $response = $this->call('POST', 'settings/photo', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPassword()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPassword()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'settings/password');
+        $response = $this->call('GET', 'settings/password');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostPassword()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostPassword()
+    {
+        $this->login();
 
-		$data = $this->form([
-			'new' => 'test',
-		]);
+        $data = $this->form([
+            'new' => 'test',
+        ]);
 
-		$response = $this->call('POST', 'settings/password', $data);
+        $response = $this->call('POST', 'settings/password', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testAbout()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testAbout()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'settings/about-me');
+        $response = $this->call('GET', 'settings/about-me');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostAbout()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostAbout()
+    {
+        $this->login();
 
-		$data = $this->form([
-			'contents' => '**about me**',
-		]);
+        $data = $this->form([
+            'contents' => '**about me**',
+        ]);
 
-		$response = $this->call('POST', 'settings/about-me', $data);
+        $response = $this->call('POST', 'settings/about-me', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testSignature()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testSignature()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'settings/signature');
+        $response = $this->call('GET', 'settings/signature');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostSignature()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostSignature()
+    {
+        $this->login();
 
-		$data = $this->form([
-			'contents' => '_my signature_',
-		]);
+        $data = $this->form([
+            'contents' => '_my signature_',
+        ]);
 
-		$response = $this->call('POST', 'settings/signature', $data);
+        $response = $this->call('POST', 'settings/signature', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testSocial()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testSocial()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'settings/social');
+        $response = $this->call('GET', 'settings/social');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostSocial()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostSocial()
+    {
+        $this->login();
 
-		$data = $this->form([
-			'twitter'  => 'Rune_Time',
-			'facebook' => 'RuneTimeOfficial',
-			'youtube'  => 'RuneTimeOfficial',
-			'website'  => 'http://runetime.com',
-			'skype'    => 'N/A',
-		]);
+        $data = $this->form([
+            'twitter'  => 'Rune_Time',
+            'facebook' => 'RuneTimeOfficial',
+            'youtube'  => 'RuneTimeOfficial',
+            'website'  => 'http://runetime.com',
+            'skype'    => 'N/A',
+        ]);
 
-		$response = $this->call('POST', 'settings/social', $data);
+        $response = $this->call('POST', 'settings/social', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testRunescape()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testRunescape()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'settings/runescape');
+        $response = $this->call('GET', 'settings/runescape');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostRunescape()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostRunescape()
+    {
+        $this->login();
 
-		$data = $this->form([
-			'version'    => 'RuneScape 3',
-			'allegiance' => 'Zamorak',
-			'rsn'        => 'zezima',
-			'clan'       => 'urface',
-		]);
+        $data = $this->form([
+            'version'    => 'RuneScape 3',
+            'allegiance' => 'Zamorak',
+            'rsn'        => 'zezima',
+            'clan'       => 'urface',
+        ]);
 
-		$response = $this->call('POST', 'settings/runescape', $data);
+        $response = $this->call('POST', 'settings/runescape', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 }

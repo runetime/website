@@ -7,33 +7,33 @@
  */
 class MembersTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$response = $this->call('GET', 'members');
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'members');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testSearch()
-	{
-		$response = $this->call('GET', 'members/role=a/prefix=b/order=c');
+    /**
+     *
+     */
+    public function testSearch()
+    {
+        $response = $this->call('GET', 'members/role=a/prefix=b/order=c');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPage()
-	{
-		$response = $this->call('GET', 'members/role=a/prefix=b/order=c/page=1');
+    /**
+     *
+     */
+    public function testPage()
+    {
+        $response = $this->call('GET', 'members/role=a/prefix=b/order=c/page=1');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

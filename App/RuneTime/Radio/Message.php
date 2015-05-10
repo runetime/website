@@ -5,25 +5,24 @@ use App\RuneTime\Core\Entity;
 
 /**
  * Class Message
- * @package App\RuneTime\Radio
  */
 class Message extends Entity
 {
-	protected $table = 'radio_messages';
-	protected $with = [];
-	protected $fillable = [
-		'author_id',
-		'contents',
-		'contents_parsed'
-	];
-	protected $dates = [];
-	protected $softDelete = true;
+    protected $table = 'radio_messages';
+    protected $with = [];
+    protected $fillable = [
+        'author_id',
+        'contents',
+        'contents_parsed',
+    ];
+    protected $dates = [];
+    protected $softDelete = true;
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function author()
-	{
-		return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
-	}
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo('App\RuneTime\Accounts\User', 'author_id');
+    }
 }

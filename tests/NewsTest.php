@@ -8,64 +8,63 @@ use App\RuneTime\News\News;
  */
 class NewsTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$response = $this->call('GET', 'news');
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'news');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testGetCreate()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testGetCreate()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'news/create');
+        $response = $this->call('GET', 'news/create');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
+    /**
+     *
+     */
+    public function testPostCreate()
+    {
+        $this->login();
 
-	/**
-	 *
-	 */
-	public function testPostCreate()
-	{
-		$this->login();
+        $data = $this->form([
+            'contents' => 'test_contents',
+            'name'     => 'test_name',
+            'tags'     => 'test, phpunit',
+        ]);
 
-		$data = $this->form([
-			'contents' => 'test_contents',
-			'name'     => 'test_name',
-			'tags'     => 'test, phpunit',
-		]);
+        $response = $this->call('POST', 'news/create', $data);
 
-		$response = $this->call('POST', 'news/create', $data);
+        switch ($response->getStatusCode()) {
+            case 200:
+            case 302:
+                $this->assertTrue(true);
+                break;
+            default:
+                $this->assertFalse(true);
+                break;
+        }
+    }
 
-		switch($response->getStatusCode()) {
-			case 200:
-			case 302:
-				$this->assertTrue(true);
-				break;
-			default:
-				$this->assertFalse(true);
-				break;
-		}
-	}
+    /**
+     *
+     */
+    public function testView()
+    {
+        $news = News::first();
 
-	/**
-	 *
-	 */
-	public function testView()
-	{
-		$news = News::first();
+        $response = $this->call('GET', $news->toSlug());
 
-		$response = $this->call('GET', $news->toSlug());
-
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

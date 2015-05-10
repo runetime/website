@@ -7,13 +7,13 @@
  */
 class MediaTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$response = $this->call('GET', 'media');
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'media');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

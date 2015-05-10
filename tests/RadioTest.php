@@ -7,60 +7,60 @@
  */
 class RadioTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$response = $this->call('GET', 'radio');
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'radio');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testHistory()
-	{
-		$response = $this->call('GET', 'radio/history');
+    /**
+     *
+     */
+    public function testHistory()
+    {
+        $response = $this->call('GET', 'radio/history');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testTimetable()
-	{
-		$response = $this->call('GET', 'radio/timetable');
+    /**
+     *
+     */
+    public function testTimetable()
+    {
+        $response = $this->call('GET', 'radio/timetable');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostRequest()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostRequest()
+    {
+        $this->login();
 
-		$form = $this->form([
-			'artist' => 'test_artist',
-			'name' => 'test_name',
-		]);
+        $form = $this->form([
+            'artist' => 'test_artist',
+            'name'   => 'test_name',
+        ]);
 
-		$response = $this->call('POST', 'radio/request/song', $form);
+        $response = $this->call('POST', 'radio/request/song', $form);
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testUpdate()
-	{
-		$response = $this->call('GET', 'radio/update');
+    /**
+     *
+     */
+    public function testUpdate()
+    {
+        $response = $this->call('GET', 'radio/update');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

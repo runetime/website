@@ -5,37 +5,34 @@ use App\Http\Requests\Request;
 
 /**
  * Class MonsterCreateRequest
- * @package App\Http\Requests\Databases
  */
 class MonsterCreateRequest extends Request
 {
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name'              => 'required',
+            'examine'           => 'required',
+            'stats'             => 'required',
+            'location'          => 'required',
+            'drops'             => 'required',
+            'membership'        => 'required',
+            'other_information' => 'required',
+        ];
+    }
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'name'              => 'required',
-			'examine'           => 'required',
-			'stats'             => 'required',
-			'location'          => 'required',
-			'drops'             => 'required',
-			'membership'        => 'required',
-			'other_information' => 'required',
-		];
-	}
-
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
-
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 }

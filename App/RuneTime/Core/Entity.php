@@ -5,26 +5,24 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Entity
- * @package App\RuneTime\Core
  */
 abstract class Entity extends Model
 {
+    /**
+     * @param array $options
+     *
+     * @return bool
+     */
+    public function save(array $options = [])
+    {
+        return parent::save($options);
+    }
 
-	/**
-	 * @param array $options
-	 *
-	 * @return bool
-	 */
-	public function save(array $options = [])
-	{
-		return parent::save($options);
-	}
-
-	/**
-	 * @return static
-	 */
-	public function saveNew()
-	{
-		return $this->create(array_combine($this->fillable, func_get_args()));
-	}
+    /**
+     * @return static
+     */
+    public function saveNew()
+    {
+        return $this->create(array_combine($this->fillable, func_get_args()));
+    }
 }

@@ -4,19 +4,17 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 /**
  * Class EventServiceProvider
- * @package App\Providers
  */
-class EventServiceProvider extends ServiceProvider {
-
-	/**
-	 * The event handler mappings for the application.
-	 *
-	 * @var array
-	 */
-	protected $listen = [
-		'event.name' => [
-			'EventListener',
-		],
-	];
-
+class EventServiceProvider extends ServiceProvider
+{
+    /**
+     * The event handler mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        'event.name' => [
+            'EventListener',
+        ],
+    ];
 }

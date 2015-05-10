@@ -7,81 +7,81 @@
  */
 class StaffPanelTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'staff');
+        $response = $this->call('GET', 'staff');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testUserReport()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testUserReport()
+    {
+        $this->login();
 
-		$user = \App\RuneTime\Accounts\User::find(1);
-		$data = $this->form([
-			'username' => $user->display_name,
-			'reason'   => 'Staff Panel User Report Test',
-		]);
+        $user = \App\RuneTime\Accounts\User::find(1);
+        $data = $this->form([
+            'username' => $user->display_name,
+            'reason'   => 'Staff Panel User Report Test',
+        ]);
 
-		$response = $this->call('POST', 'staff/report', $data);
+        $response = $this->call('POST', 'staff/report', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testUserMute()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testUserMute()
+    {
+        $this->login();
 
-		$user = \App\RuneTime\Accounts\User::find(1);
-		$data = $this->form([
-			'username' => $user->display_name,
-			'reason'   => 'Staff Panel User Mute Test',
-		]);
+        $user = \App\RuneTime\Accounts\User::find(1);
+        $data = $this->form([
+            'username' => $user->display_name,
+            'reason'   => 'Staff Panel User Mute Test',
+        ]);
 
-		$response = $this->call('POST', 'staff/mute', $data);
+        $response = $this->call('POST', 'staff/mute', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testGetCheckup()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testGetCheckup()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'staff/checkup');
+        $response = $this->call('GET', 'staff/checkup');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPostCheckup()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testPostCheckup()
+    {
+        $this->login();
 
-		$data = $this->form([
-			'hours_active' => 7,
-			'active'       => 0,
-			'team'         => 'development',
-		]);
+        $data = $this->form([
+            'hours_active' => 7,
+            'active'       => 0,
+            'team'         => 'development',
+        ]);
 
-		$response = $this->call('POST', 'staff/checkup', $data);
+        $response = $this->call('POST', 'staff/checkup', $data);
 
-		$this->assertEquals(302, $response->getStatusCode());
-	}
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 }

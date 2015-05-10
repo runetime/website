@@ -5,31 +5,28 @@ use App\Http\Requests\Request;
 
 /**
  * Class PostVoteRequest
- * @package App\Http\Requests\Forums
  */
 class PostVoteRequest extends Request
 {
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'vote' => 'required',
+        ];
+    }
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'vote' => 'required',
-		];
-	}
-
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
-
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 }

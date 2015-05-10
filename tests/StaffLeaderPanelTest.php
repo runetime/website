@@ -2,56 +2,56 @@
 
 /**
  * Tests HTTP routes for the StaffTeamLeaderController.
- * 
+ *
  * Class StaffLeaderPanelTest
  */
 class StaffLeaderPanelTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$this->login();
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'staff/leader');
+        $response = $this->call('GET', 'staff/leader');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	public function testDemoteStaff()
-	{
-		$this->login();
+    public function testDemoteStaff()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'staff/leader');
+        $response = $this->call('GET', 'staff/leader');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	public function testTempBan()
-	{
-		$this->login();
+    public function testTempBan()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'staff/leader');
+        $response = $this->call('GET', 'staff/leader');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	public function testMuteUser()
-	{
-		$this->login();
+    public function testMuteUser()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'staff/leader');
+        $response = $this->call('GET', 'staff/leader');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	public function testClearChatbox()
-	{
-		$this->login();
+    public function testClearChatbox()
+    {
+        $this->login();
 
-		$response = $this->call('GET', 'staff/leader');
+        $response = $this->call('GET', 'staff/leader');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

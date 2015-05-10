@@ -7,13 +7,13 @@
  */
 class DonateTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$response = $this->call('GET', 'donate');
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'donate');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

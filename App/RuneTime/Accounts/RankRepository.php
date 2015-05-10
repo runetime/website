@@ -5,28 +5,27 @@ use App\RuneTime\Core\EloquentRepository;
 
 /**
  * Class RankRepository
- * @package App\RuneTime\Accounts
  */
 class RankRepository extends EloquentRepository
 {
-	/**
-	 * @param Rank $model
-	 */
-	public function __construct(Rank $model)
-	{
-		$this->model = $model;
-	}
+    /**
+     * @param Rank $model
+     */
+    public function __construct(Rank $model)
+    {
+        $this->model = $model;
+    }
 
-	/**
-	 * @param int $count
-	 *
-	 * @return mixed
-	 */
-	public function getByPostCount($count = 0)
-	{
-		return $this->model->
-			where('posts_required', '<=', $count)->
-			orderBy('posts_required', 'desc')->
-			first();
-	}
+    /**
+     * @param int $count
+     *
+     * @return mixed
+     */
+    public function getByPostCount($count = 0)
+    {
+        return $this->model->
+            where('posts_required', '<=', $count)->
+            orderBy('posts_required', 'desc')->
+            first();
+    }
 }

@@ -5,31 +5,28 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class PhotoRequest
- * @package App\Http\Requests\Settings
  */
 class PhotoRequest extends FormRequest
 {
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'photo' => 'required',
+        ];
+    }
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'photo' => 'required',
-		];
-	}
-
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
-
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 }

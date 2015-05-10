@@ -7,23 +7,23 @@
  */
 class AwardTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testAwardsIndex()
-	{
-		$response = $this->call('GET', 'awards');
+    /**
+     *
+     */
+    public function testAwardsIndex()
+    {
+        $response = $this->call('GET', 'awards');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testAwardsView()
-	{
-		$response = $this->call('GET', 'awards/1-test');
+    /**
+     *
+     */
+    public function testAwardsView()
+    {
+        $response = $this->call('GET', 'awards/1-test');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

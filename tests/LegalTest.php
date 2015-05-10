@@ -7,33 +7,33 @@
  */
 class LegalTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testLegal()
-	{
-		$response = $this->call('GET', 'legal/english');
+    /**
+     *
+     */
+    public function testLegal()
+    {
+        $response = $this->call('GET', 'legal/english');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testPrivacy()
-	{
-		$response = $this->call('GET', 'privacy');
+    /**
+     *
+     */
+    public function testPrivacy()
+    {
+        $response = $this->call('GET', 'privacy');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testTerms()
-	{
-		$response = $this->call('GET', 'terms');
+    /**
+     *
+     */
+    public function testTerms()
+    {
+        $response = $this->call('GET', 'terms');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

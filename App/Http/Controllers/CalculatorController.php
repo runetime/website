@@ -7,167 +7,172 @@ use App\RuneTime\Calculators\CalculatorRepository;
 
 /**
  * Class CalculatorController
- * @package App\Http\Controllers
  */
 class CalculatorController extends Controller
 {
-	/**
-	 * @var CalculatorRepository
-	 */
-	private $calculators;
+    /**
+     * @var CalculatorRepository
+     */
+    private $calculators;
 
-	/**
-	 * @param CalculatorRepository $calculators
-	 */
-	public function __construct(CalculatorRepository $calculators)
-	{
-		$this->calculators = $calculators;
-	}
+    /**
+     * @param CalculatorRepository $calculators
+     */
+    public function __construct(CalculatorRepository $calculators)
+    {
+        $this->calculators = $calculators;
+    }
 
-	/**
-	 * Returns the index of the calculators.
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getIndex()
-	{
-		$calculators = $this->calculators->getAll();
+    /**
+     * Returns the index of the calculators.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getIndex()
+    {
+        $calculators = $this->calculators->getAll();
 
-		$this->nav('navbar.runescape.title');
-		$this->title('calculator.title');
-		return $this->view('calculators.index', compact('calculators'));
-	}
+        $this->nav('navbar.runescape.title');
+        $this->title('calculator.title');
 
-	/**
-	 * Returns the combat calculator.
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getCombat() {
-		$this->bc(['calculators' => trans('calculator.title')]);
-		$this->nav('navbar.runescape.title');
-		$this->title('calculator.combat.title');
-		return $this->view('calculators.combat.index');
-	}
+        return $this->view('calculators.index', compact('calculators'));
+    }
 
-	/**
-	 * Returns the combat calculator for RS3.
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getCombat3()
-	{
-		$this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
-		$this->nav('navbar.runescape.title');
-		$this->title('calculator.combat.title');
-		return $this->view('calculators.combat.3');
-	}
+    /**
+     * Returns the combat calculator.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getCombat()
+    {
+        $this->bc(['calculators' => trans('calculator.title')]);
+        $this->nav('navbar.runescape.title');
+        $this->title('calculator.combat.title');
 
-	/**
-	 * Returns the combat calculator for OSRS.
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getCombatOSRS()
-	{
-		$this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
-		$this->nav('navbar.runescape.title');
-		$this->title('calculator.combat.title');
-		return $this->view('calculators.combat.osrs');
-	}
+        return $this->view('calculators.combat.index');
+    }
 
-	/**
-	 * Receives a display name and retrieves hiscores
-	 * for the combat portions of their skills.
-	 *
-	 * @param CombatLoadRequest $form
-	 *
-	 * @return string
-	 */
-	public function getCombatLoad(CombatLoadRequest $form)
-	{
-		$scores = \String::getHiscore($form->rsn);
-		$skills = (object)[
-			'attack' => $scores[1][1],
-			'defence' => $scores[2][1],
-			'strength' => $scores[3][1],
-			'constitution' => $scores[4][1],
-			'ranged' => $scores[5][1],
-			'prayer' => $scores[6][1],
-			'magic' => $scores[7][1],
-			'summoning' => $scores[24][1],
-		];
+    /**
+     * Returns the combat calculator for RS3.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getCombat3()
+    {
+        $this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
+        $this->nav('navbar.runescape.title');
+        $this->title('calculator.combat.title');
 
-		return json_encode($skills);
-	}
+        return $this->view('calculators.combat.3');
+    }
 
-	/**
-	 * Returns the page for a specific calculator, given by name.
-	 *
-	 * @param $type
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getView($type)
-	{
-		$calculator = $this->calculators->getByNameTrim($type);
-		if(empty($calculator)) {
-			return \Error::abort(404);
-		}
+    /**
+     * Returns the combat calculator for OSRS.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getCombatOSRS()
+    {
+        $this->bc(['calculators' => trans('calculator.title'), 'calculators/combat' => trans('calculator.combat.title')]);
+        $this->nav('navbar.runescape.title');
+        $this->title('calculator.combat.title');
 
-		$items = json_decode($calculator->items);
-		$levelsRequired = json_decode($calculator->levels_required);
-		$xp = json_decode($calculator->xp);
+        return $this->view('calculators.combat.osrs');
+    }
 
-		$this->bc(['calculators' => trans('calculator.title')]);
-		$this->nav('navbar.runescape.title');
-		$this->title('calculator.calculator', ['name' => $calculator->name]);
-		return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
-	}
+    /**
+     * Receives a display name and retrieves hiscores
+     * for the combat portions of their skills.
+     *
+     * @param CombatLoadRequest $form
+     *
+     * @return string
+     */
+    public function getCombatLoad(CombatLoadRequest $form)
+    {
+        $scores = \String::getHiscore($form->rsn);
+        $skills = (object) [
+            'attack'       => $scores[1][1],
+            'defence'      => $scores[2][1],
+            'strength'     => $scores[3][1],
+            'constitution' => $scores[4][1],
+            'ranged'       => $scores[5][1],
+            'prayer'       => $scores[6][1],
+            'magic'        => $scores[7][1],
+            'summoning'    => $scores[24][1],
+        ];
 
-	/**
-	 * Returns a JSON string of the given display name's skills.
-	 *
-	 * @param PostRequest $form
-	 *
-	 * @return string
-	 */
-	public function postLoad(PostRequest $form)
-	{
-		$calculator = $this->calculators->getById($form->id);
-		if(empty($calculator)) {
-			return json_encode([]);
-		}
+        return json_encode($skills);
+    }
 
-		// Setup details for all of the skills' methods of XP gains
-		$itemList = [];
-		$items = json_decode($calculator->items);
-		$levelsRequired = json_decode($calculator->levels_required);
-		$xp = json_decode($calculator->xp);
+    /**
+     * Returns the page for a specific calculator, given by name.
+     *
+     * @param $type
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getView($type)
+    {
+        $calculator = $this->calculators->getByNameTrim($type);
+        if (empty($calculator)) {
+            return \Error::abort(404);
+        }
 
-		// Cycle through and build an array of skills' data
-		foreach($levelsRequired as $x => $level) {
-			if(!isset($itemList[$level])) {
-				$itemList[$level] = [];
-			}
+        $items = json_decode($calculator->items);
+        $levelsRequired = json_decode($calculator->levels_required);
+        $xp = json_decode($calculator->xp);
 
-			$itemList[$level][count($itemList[$level])] = [
-				'name'  => $items[$x],
-				'level' => $levelsRequired[$x],
-				'xp'    => $xp[$x],
-			];
-		}
+        $this->bc(['calculators' => trans('calculator.title')]);
+        $this->nav('navbar.runescape.title');
+        $this->title('calculator.calculator', ['name' => $calculator->name]);
 
-		// Order the items by required level
-		$itemListNumbered = [];
-		for($x = 0; $x <= 99; $x++) {
-			if(!empty($itemList[$x][0])) {
-				foreach($itemList[$x] as $item) {
-					array_push($itemListNumbered, $item);
-				}
-			}
-		}
+        return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
+    }
 
-		return json_encode($itemListNumbered);
-	}
+    /**
+     * Returns a JSON string of the given display name's skills.
+     *
+     * @param PostRequest $form
+     *
+     * @return string
+     */
+    public function postLoad(PostRequest $form)
+    {
+        $calculator = $this->calculators->getById($form->id);
+        if (empty($calculator)) {
+            return json_encode([]);
+        }
+
+        // Setup details for all of the skills' methods of XP gains
+        $itemList = [];
+        $items = json_decode($calculator->items);
+        $levelsRequired = json_decode($calculator->levels_required);
+        $xp = json_decode($calculator->xp);
+
+        // Cycle through and build an array of skills' data
+        foreach ($levelsRequired as $x => $level) {
+            if (!isset($itemList[$level])) {
+                $itemList[$level] = [];
+            }
+
+            $itemList[$level][count($itemList[$level])] = [
+                'name'  => $items[$x],
+                'level' => $levelsRequired[$x],
+                'xp'    => $xp[$x],
+            ];
+        }
+
+        // Order the items by required level
+        $itemListNumbered = [];
+        for ($x = 0; $x <= 99; $x++) {
+            if (!empty($itemList[$x][0])) {
+                foreach ($itemList[$x] as $item) {
+                    array_push($itemListNumbered, $item);
+                }
+            }
+        }
+
+        return json_encode($itemListNumbered);
+    }
 }

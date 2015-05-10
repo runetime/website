@@ -7,28 +7,28 @@
  */
 class GetTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testEmail()
-	{
-		$form = $this->form([
-			'email' => 'test' . microtime(true),
-		]);
+    /**
+     *
+     */
+    public function testEmail()
+    {
+        $form = $this->form([
+            'email' => 'test' . microtime(true),
+        ]);
 
-		$response = $this->action('POST', 'GetController@postEmail', $form);
+        $response = $this->action('POST', 'GetController@postEmail', $form);
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	public function testDisplayName()
-	{
-		$form = $this->form([
-			'display_name' => 'test' . microtime(true),
-		]);
+    public function testDisplayName()
+    {
+        $form = $this->form([
+            'display_name' => 'test' . microtime(true),
+        ]);
 
-		$response = $this->action('POST', 'GetController@postDisplayName', $form);
+        $response = $this->action('POST', 'GetController@postDisplayName', $form);
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

@@ -6,121 +6,121 @@ use FilesystemIterator;
 
 /**
  * Class LanguageController
- * @package App\Http\Controllers
  */
 class LanguageController extends Controller
 {
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function getSet()
-	{
-		$languageList = $this->languages();
-		$langs = $this->languageSort($languageList);
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function getSet()
+    {
+        $languageList = $this->languages();
+        $langs = $this->languageSort($languageList);
 
-		$this->nav('navbar.runetime.title');
-		$this->title('language.set.title');
-		return $this->view('language.set', compact('langs'));
-	}
+        $this->nav('navbar.runetime.title');
+        $this->title('language.set.title');
 
-	/**
-	 * @param        $initials
-	 * @param string $redirect
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function getChange($initials, $redirect = '')
-	{
-		$languageList = $this->languages();
-		$langs = $this->languageSort($languageList);
+        return $this->view('language.set', compact('langs'));
+    }
 
-		if(in_array($initials, $langs['done'])) {
-			\Cache::forever('ip.' . \Request::getClientIp() . '.lang', $initials);
-		}
+    /**
+     * @param        $initials
+     * @param string $redirect
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getChange($initials, $redirect = '')
+    {
+        $languageList = $this->languages();
+        $langs = $this->languageSort($languageList);
 
-		return \redirect()->to('/' . $redirect);
-	}
+        if (in_array($initials, $langs['done'])) {
+            \Cache::forever('ip.' . \Request::getClientIp() . '.lang', $initials);
+        }
 
-	/**
-	 * @param array $languages
-	 *
-	 * @return array
-	 */
-	private function languageSort(Array $languages)
-	{
-		$langs = [
-			'done' => [],
-			'wip' => [],
-		];
-		$path = base_path('resources/lang');
-		$englishFiles = $this->filesInDirectory($path . '/en');
-		foreach(new DirectoryIterator($path) as $file) {
-			$iso = $file->getFilename();
-			if($file->isDot()) {
-				continue;
-			}
+        return \redirect()->to('/' . $redirect);
+    }
 
-			if($file->isDir()) {
-				$files = $this->filesInDirectory($path . '/' . $iso);
-				if($files === $englishFiles) {
-					$langs['done'][$iso] = $languages[$iso];
-				} else {
-					$langs['wip'][$iso] = $languages[$iso];
-				}
-			}
-		}
+    /**
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function languageSort(Array $languages)
+    {
+        $langs = [
+            'done' => [],
+            'wip'  => [],
+        ];
+        $path = base_path('resources/lang');
+        $englishFiles = $this->filesInDirectory($path . '/en');
+        foreach (new DirectoryIterator($path) as $file) {
+            $iso = $file->getFilename();
+            if ($file->isDot()) {
+                continue;
+            }
 
-		return $langs;
-	}
+            if ($file->isDir()) {
+                $files = $this->filesInDirectory($path . '/' . $iso);
+                if ($files === $englishFiles) {
+                    $langs['done'][$iso] = $languages[$iso];
+                } else {
+                    $langs['wip'][$iso] = $languages[$iso];
+                }
+            }
+        }
 
-	/**
-	 * @param $path
-	 *
-	 * @return int
-	 */
-	private function filesInDirectory($path)
-	{
-		$iterator = new FilesystemIterator($path, FilesystemIterator::SKIP_DOTS);
+        return $langs;
+    }
 
-		$files = iterator_count($iterator);
+    /**
+     * @param $path
+     *
+     * @return int
+     */
+    private function filesInDirectory($path)
+    {
+        $iterator = new FilesystemIterator($path, FilesystemIterator::SKIP_DOTS);
 
-		return $files;
-	}
+        $files = iterator_count($iterator);
 
-	/**
-	 * @return array|mixed
-	 */
-	private function languages()
-	{
-		$path = base_path('resources/lang/languages.md');
-		$checksum = md5_file($path);
-		$cache = \Cache::get('languages.file.iso.checksum');
-		if($cache === $checksum) {
-			return \Cache::get('languages.file.iso.cache');
-		}
+        return $files;
+    }
 
-		\Cache::forever('languages.file.iso.checksum', $checksum);
+    /**
+     * @return array|mixed
+     */
+    private function languages()
+    {
+        $path = base_path('resources/lang/languages.md');
+        $checksum = md5_file($path);
+        $cache = \Cache::get('languages.file.iso.checksum');
+        if ($cache === $checksum) {
+            return \Cache::get('languages.file.iso.cache');
+        }
 
-		$languageArray = [];
+        \Cache::forever('languages.file.iso.checksum', $checksum);
 
-		$languageFile = file_get_contents(base_path('resources/lang/languages.md'));
-		$languages = explode("\n", $languageFile);
-		foreach($languages as $language) {
-			$language = str_replace("- ", "", $language);
-			$language = explode(": ", $language);
-			$iso = $language[0];
+        $languageArray = [];
 
-			$locales = explode(" `", $language[1]);
-			$locales[1] = str_replace("`", "", $locales[1]);
+        $languageFile = file_get_contents(base_path('resources/lang/languages.md'));
+        $languages = explode("\n", $languageFile);
+        foreach ($languages as $language) {
+            $language = str_replace('- ', '', $language);
+            $language = explode(': ', $language);
+            $iso = $language[0];
 
-			$languageArray[$iso] = [
-				'english' => $locales[0],
-				'local'   => $locales[1],
-			];
-		}
+            $locales = explode(' `', $language[1]);
+            $locales[1] = str_replace('`', '', $locales[1]);
 
-		\Cache::forever('languages.file.iso.cache', $languageArray);
+            $languageArray[$iso] = [
+                'english' => $locales[0],
+                'local'   => $locales[1],
+            ];
+        }
 
-		return $languageArray;
-	}
+        \Cache::forever('languages.file.iso.cache', $languageArray);
+
+        return $languageArray;
+    }
 }

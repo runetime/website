@@ -7,13 +7,13 @@
  */
 class StaffListTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testList()
-	{
-		$response = $this->call('GET', 'staff/list');
+    /**
+     *
+     */
+    public function testList()
+    {
+        $response = $this->call('GET', 'staff/list');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

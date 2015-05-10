@@ -7,23 +7,23 @@
  */
 class TransparencyTest extends TestCase
 {
-	/**
-	 *
-	 */
-	public function testIndex()
-	{
-		$response = $this->call('GET', 'transparency');
+    /**
+     *
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'transparency');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-	/**
-	 *
-	 */
-	public function testMarkdown()
-	{
-		$response = $this->call('GET', 'transparency/markdown');
+    /**
+     *
+     */
+    public function testMarkdown()
+    {
+        $response = $this->call('GET', 'transparency/markdown');
 
-		$this->assertEquals(200, $response->getStatusCode());
-	}
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

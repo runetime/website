@@ -5,24 +5,23 @@ use App\RuneTime\Core\EloquentRepository;
 
 /**
  * Class LocationRepository
- * @package App\RuneTime\Guides
  */
 class LocationRepository extends EloquentRepository
 {
-	/**
-	 * @param Location $model
-	 */
-	public function __construct(Location $model)
-	{
-		$this->model = $model;
-	}
+    /**
+     * @param Location $model
+     */
+    public function __construct(Location $model)
+    {
+        $this->model = $model;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getAll()
-	{
-		return $this->model->
-			get();
-	}
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->model->
+            get();
+    }
 }
