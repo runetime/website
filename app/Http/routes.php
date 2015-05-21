@@ -416,6 +416,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'messenger'], function () {
  */
 Route::group(['prefix' => 'name-check'], function () {
     get('/', 'NameCheckerController@getIndex');
+    get('plain', 'NameCheckerController@getPlain');
     post('/', 'NameCheckerController@postCheck');
 });
 

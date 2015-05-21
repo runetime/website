@@ -16,7 +16,15 @@ class NameCheckerController extends Controller
         $this->nav('navbar.runescape.title');
         $this->title('namechecker.title');
 
-        return $this->view('namechecker');
+        return $this->view('namechecker.index');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function getPlain()
+    {
+        return $this->view('namechecker.plain');
     }
 
     /**
