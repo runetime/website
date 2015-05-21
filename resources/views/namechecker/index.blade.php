@@ -34,7 +34,7 @@
 			</div>
 			<script>
 				$(function() {
-                	nameChecker = new NameChecker();
-                });
+					nameChecker = new NameChecker();
+				});
 			</script>
 @stop
