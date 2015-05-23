@@ -1,5 +1,9 @@
 language: php
 
+env:
+  - DB_USERNAME: root
+  - DB_DATABASE: runetime
+
 php:
   - 5.6
 
@@ -8,6 +12,6 @@ sudo: false
 install: travis_retry composer install --no-interaction --prefer-source
 
 before_script:
-  - mysql -e 'create database runetime; grant all privileges on runetime.* to "homestead"@"localhost" identified by "secret"'
+  - mysql -e 'create database runetime;'
 
 script: vendor/bin/phpunit
