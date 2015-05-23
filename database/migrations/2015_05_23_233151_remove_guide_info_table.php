@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
@@ -23,5 +22,6 @@ class RemoveGuideInfoTable extends Migration
      *
      * @return void
      */
-    public function down() {}
+    public function down() {
+    }
 }
