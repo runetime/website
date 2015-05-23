@@ -7,4 +7,12 @@ sudo: false
 
 install: travis_retry composer install --no-interaction --prefer-source
 
+before_script:
+  - mysql -e 'create database runetime;'
+
+mysql:
+  database: runetime
+  username: homestead
+  password: secret
+
 script: vendor/bin/phpunit
