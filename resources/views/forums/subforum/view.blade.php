@@ -1,22 +1,22 @@
 @extends('layouts.forums')
 @section('forum')
-                <h1>
-                    {{ $subforum->name }}
-                </h1>
-                <p class='text-muted'>
-                    {!! $subforum->description !!}
-                </p>
-                <div class='pull-right'>
-                    <ul class='list-inline'>
-                        <li>
-                            <a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm{{ !$subforum->canPost() ? " btn-disabled" : "" }}' role='button'>
-                                @lang('forums.subforums.create_topic')
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class='clearfix'>
-                </div>
+<h1>
+    {{ $subforum->name }}
+</h1>
+<p class='text-muted'>
+    {!! $subforum->description !!}
+</p>
+<div class='pull-right'>
+    <ul class='list-inline'>
+        <li>
+            <a href='/forums/create/{{ \String::slugEncode($subforum->id,$subforum->name) }}' class='btn btn-primary btn-sm{{ !$subforum->canPost() ? " btn-disabled" : "" }}' role='button'>
+                @lang('forums.subforums.create_topic')
+            </a>
+        </li>
+    </ul>
+</div>
+<div class='clearfix'>
+</div>
 @if(count($subforums) > 0)
     @foreach($subforums as $subforumItem)
         @include('forums.subforum._subforum', ['subforum' => $subforumItem])
