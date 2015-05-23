@@ -1,7 +1,6 @@
 preset: recommended
 
 enabled:
-  - psr0
   - encoding
   - short_tag
   - braces
@@ -59,6 +58,7 @@ enabled:
   - short_array_syntax
 
 disabled:
+  - psr0
   - blankline_after_open_tag
   - namespace_no_leading_whitespace
   - new_with_braces
