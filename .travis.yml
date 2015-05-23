@@ -10,8 +10,8 @@ install: travis_retry composer install --no-interaction --prefer-source
 before_script:
   - mysql -e 'create database runetime;'
 
-env:
-  - DB_USERNAME=root
-  - DB_DATABASE=runetime
+mysql:
+  database: runetime
+  username: root
 
 script: vendor/bin/phpunit
