@@ -10,8 +10,6 @@ install: travis_retry composer install --no-interaction --prefer-source
 before_script:
   - mysql -e 'create database runetime;'
   - mysql -u root -e "GRANT ALL PRIVILEGES ON runetime.* TO 'homestead'@'%' IDENTIFIED BY 'secret';"
-  - php artisan migrate
-  - php artisan db:seed
 
 mysql:
   database: runetime
