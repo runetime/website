@@ -1,8 +1,8 @@
 <h1>
-	Message Via Contact Form <small>runetime.net</small>
+    Message Via Contact Form <small>runetime.net</small>
 </h1>
 <p>
-	Sent from email <a href='mailto:{{ $email }}'>{{ $email }}</a>
+    Sent from email <a href='mailto:{{ $email }}'>{{ $email }}</a>
 </p>
 @if(!empty($username))
 <p>
@@ -10,7 +10,7 @@
 </p>
 @endif
 <h3>
-	Message:
+    Message:
 </h3>
 <p>
     <pre>{{ $contents }}</pre>
