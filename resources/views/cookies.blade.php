@@ -1,81 +1,81 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='container container-dark'>
-				<h1>
-					@lang('cookies.title')
-				</h1>
-			</div>
-			<div class='wrapper'>
-				<h3>
-					@lang('cookies.1.title')
-				</h3>
-				<p>
-					@lang('cookies.1.1')
-				</p>
-				<p>
-					@lang('cookies.1.2')
-				</p>
-				<h3>
-					@lang('cookies.2.title')
-				</h3>
-				<p>
-					@lang('cookies.2.1')
-				</p>
-				<h3>
-					@lang('cookies.3.title')
-				</h3>
-				<p>
-					@lang('cookies.3.1')
-				</p>
-				<p>
-					@lang('cookies.3.2')
-				</p>
-				<p>
-					@lang('cookies.3.3')
-				</p>
-				<p>
-					@lang('cookies.3.4')
-				</p>
-				<h3>
-					@lang('cookies.4.title')
-				</h3>
-				<p>
-					@lang('cookies.4.1')
-				</p>
-				<p>
-					@lang('cookies.4.2')
-				</p>
-				<ul>
+            <div class='container container-dark'>
+                <h1>
+                    @lang('cookies.title')
+                </h1>
+            </div>
+            <div class='wrapper'>
+                <h3>
+                    @lang('cookies.1.title')
+                </h3>
+                <p>
+                    @lang('cookies.1.1')
+                </p>
+                <p>
+                    @lang('cookies.1.2')
+                </p>
+                <h3>
+                    @lang('cookies.2.title')
+                </h3>
+                <p>
+                    @lang('cookies.2.1')
+                </p>
+                <h3>
+                    @lang('cookies.3.title')
+                </h3>
+                <p>
+                    @lang('cookies.3.1')
+                </p>
+                <p>
+                    @lang('cookies.3.2')
+                </p>
+                <p>
+                    @lang('cookies.3.3')
+                </p>
+                <p>
+                    @lang('cookies.3.4')
+                </p>
+                <h3>
+                    @lang('cookies.4.title')
+                </h3>
+                <p>
+                    @lang('cookies.4.1')
+                </p>
+                <p>
+                    @lang('cookies.4.2')
+                </p>
+                <ul>
 @for($i = 1; $i <= 4; $i++)
-					<li>
+                    <li>
                         @lang('cookies.4.list.' . $i)
                     </li>
 @endfor
                 </ul>
-				<h3>
-					@lang('cookies.5.title')
-				</h3>
-				<p>
-					@lang('cookies.5.1')
-				</p>
-				<h3>
-					@lang('cookies.6.title')
-				</h3>
-				<p>
-					@lang('cookies.6.1')
-				</p>
-				<h3>
-					@lang('cookies.7.title')
-				</h3>
-				<p>
-					@lang('cookies.7.1')
-				</p>
-				<p>
-					@lang('cookies.7.2')
-				</p>
-				<p>
-					@lang('cookies.7.3')
-				</p>
+                <h3>
+                    @lang('cookies.5.title')
+                </h3>
+                <p>
+                    @lang('cookies.5.1')
+                </p>
+                <h3>
+                    @lang('cookies.6.title')
+                </h3>
+                <p>
+                    @lang('cookies.6.1')
+                </p>
+                <h3>
+                    @lang('cookies.7.title')
+                </h3>
+                <p>
+                    @lang('cookies.7.1')
+                </p>
+                <p>
+                    @lang('cookies.7.2')
+                </p>
+                <p>
+                    @lang('cookies.7.3')
+                </p>
                 <ul>
                     @for($i = 1; $i <= 3; $i++)
                         <li>
@@ -83,15 +83,15 @@
                         </li>
                     @endfor
                 </ul>
-				<h3>
-					@lang('cookies.8.title')
-				</h3>
-				<p>
-					@lang('cookies.8.1')
-				</p>
-				<p>
-					@lang('cookies.8.2')
-				</p>
+                <h3>
+                    @lang('cookies.8.title')
+                </h3>
+                <p>
+                    @lang('cookies.8.1')
+                </p>
+                <p>
+                    @lang('cookies.8.2')
+                </p>
                 <ul>
                     @for($i = 1; $i <= 3; $i++)
                         <li>
@@ -99,20 +99,20 @@
                         </li>
                     @endfor
                 </ul>
-				<h3>
-					@lang('cookies.9.title')
-				</h3>
-				<p>
-					@lang('cookies.9.1')
-				</p>
-				<p>
-					@lang('cookies.9.2')
-				</p>
-				<h3>
-					@lang('cookies.10.title')
-				</h3>
-				<p>
-					@lang('cookies.10.1')
-				</p>
-			</div>
+                <h3>
+                    @lang('cookies.9.title')
+                </h3>
+                <p>
+                    @lang('cookies.9.1')
+                </p>
+                <p>
+                    @lang('cookies.9.2')
+                </p>
+                <h3>
+                    @lang('cookies.10.title')
+                </h3>
+                <p>
+                    @lang('cookies.10.1')
+                </p>
+            </div>
 @stop
