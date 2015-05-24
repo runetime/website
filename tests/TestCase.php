@@ -72,7 +72,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'contents'        => 'test',
             'contents_parsed' => 'test',
             'post_count'      => 0,
-            'status'          => News::STATUS_PUBLISHED
+            'status'          => News::STATUS_PUBLISHED,
         ]);
     }
 
