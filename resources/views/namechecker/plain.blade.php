@@ -28,11 +28,11 @@
 					var el = $('.final-message'),
 						message = 'The Runescape name <b>' + username + '</b> is ',
 						className = 'unavailable',
-                        color = 'red';
+						color = 'red';
 
 					if (results.substring(0, 6) === "<!DOCT") {
 						className = 'available';
-                        color = 'green';
+						color = 'green';
 					}
 
 					message = "<p style='color: " + color + ";'>" + message + className + ".</p>";
