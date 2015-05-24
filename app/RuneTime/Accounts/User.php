@@ -241,14 +241,6 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     /**
      * @return bool
      */
-    public function isContent()
-    {
-        return $this->hasOneOfRoles(1, 8, 9);
-    }
-
-    /**
-     * @return bool
-     */
     public function isCommunity()
     {
         return $this->hasOneOfRoles(1, 10, 11);
