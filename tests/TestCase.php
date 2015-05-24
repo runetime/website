@@ -4,6 +4,7 @@ use App\RuneTime\Accounts\User;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\News\News;
+
 /**
  * The base class for HTTP tests.
  *
