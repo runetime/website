@@ -34,6 +34,6 @@ class CreateGuidesLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('guides_locations');
+        Schema::dropIfExists('guides_locations');
     }
 }

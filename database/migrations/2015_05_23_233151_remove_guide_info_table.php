@@ -14,7 +14,9 @@ class RemoveGuideInfoTable extends Migration
      */
     public function up()
     {
-        Schema::drop('guide_info');
+        if (Schema::hasTable('guide_info')) {
+            Schema::drop('guide_info');
+        }
     }
 
     /**

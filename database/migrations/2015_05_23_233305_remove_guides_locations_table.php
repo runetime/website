@@ -14,7 +14,9 @@ class RemoveGuidesLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::drop('guides_locations');
+        if (Schema::hasTable('guides_locations')) {
+            Schema::drop('guides_locations');
+        }
     }
 
     /**

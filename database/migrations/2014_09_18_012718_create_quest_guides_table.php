@@ -46,6 +46,6 @@ class CreateQuestGuidesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('guides_quests');
+        Schema::dropIfExists('guides_quests');
     }
 }

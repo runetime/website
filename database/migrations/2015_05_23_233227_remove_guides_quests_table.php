@@ -14,7 +14,9 @@ class RemoveGuidesQuestsTable extends Migration
      */
     public function up()
     {
-        Schema::drop('guides_quests');
+        if (Schema::hasTable('guides_quests')) {
+            Schema::dropIfExists('guides_quests');
+        }
     }
 
     /**

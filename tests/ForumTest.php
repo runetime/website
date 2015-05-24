@@ -1,5 +1,7 @@
 <?php
 
+use App\RuneTime\Forum\Threads\Thread;
+
 /**
  * Tests HTTP routes for the controllers: ForumController,
  * ForumPostController, and the ForumThreadController.
@@ -175,8 +177,7 @@ class ForumTest extends TestCase
     {
         $this->login();
 
-        $thread = \App\RuneTime\Forum\Threads\Thread::find(1);
-        $post = $thread->lastPost();
+        $post = $this->createPost();
         $data = $this->form([
             'contents' => 'test edit',
         ]);
