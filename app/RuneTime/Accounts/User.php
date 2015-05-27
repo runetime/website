@@ -463,7 +463,8 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function hasImage()
     {
         $path = '/img/forums/photos/' . $this->id . '.png';
-        if (file_exists('.' . $path)) {
+
+        if (file_exists($path) && filesize($path) > 50) {
             return $path;
         }
 
