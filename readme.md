@@ -1,8 +1,5 @@
 # RuneTime Website
 
-[![Build Status](https://img.shields.io/travis/runetime/website.svg?style=flat-square)](https://travis-ci.org/runetime/website)
-[![StyleCI](https://styleci.io/repos/35380320/shield)](https://styleci.io/repos/35380320)
-
 Source code for the [RuneTime website](http://runetime.com).
 
 

@@ -1,22 +1,22 @@
 <p>
-	{{ $name }},
+    {{ $name }},
 </p>
 <p>
-	This email has been sent from <a href='http://runetime.com/'>RuneTime</a>.
+    This email has been sent from <a href='http://runetime.com/'>RuneTime</a>.
 </p>
 <br />
 <p>
-	You have received this email because this email address was used during registration for our website. If you did not register at our website, please disregard this email. You do not need to unsubscribe or take any further action.
+    You have received this email because this email address was used during registration for our website. If you did not register at our website, please disregard this email. You do not need to unsubscribe or take any further action.
 </p>
 <br />
 <h2>
-	Activation Instructions
+    Activation Instructions
 </h2>
 <p>
-	Thank you for registering.
+    Thank you for registering.
 </p>
 <p>
-	Your account has already been activated and does not need to be activated via email.
+    Your account has already been activated and does not need to be activated via email.
 </p>
 <br />
 
