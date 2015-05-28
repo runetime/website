@@ -7,7 +7,8 @@ var gulp = require('gulp');
  * Gulp dependencies.
  */
 var concat = require('gulp-concat'),
-	sass = require('gulp-sass');
+	sass = require('gulp-sass'),
+	uglify = require('gulp-uglify');
 
 /**
  * Directories of the various assets and public output.
@@ -55,6 +56,7 @@ gulp.task('scripts-vendor', function() {
 
 	return gulp.src(src)
 		.pipe(concat('vendor.js'))
+		.pipe(uglify())
 		.pipe(gulp.dest(paths.public.js));
 });
 
