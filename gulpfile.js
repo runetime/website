@@ -50,7 +50,7 @@ gulp.task('scripts-vendor', function() {
 		'./resources/assets/typescript/vendor/jasny-bootstrap.js'
 	];
 
-	return gulp.src(paths.assets.javascript_vendor)
+	return gulp.src(src)
 		.pipe(concat('vendor.js'))
 		.pipe(gulp.dest(paths.public.js));
 });
