@@ -1,94 +1,94 @@
 @extends('layouts.default')
 @section('contents')
-			<div class='wrapper'>
-				<h1>
-					{{$guide->name}}
-				</h1>
-				<p>
-					<small>
-						@lang('guides.written_by',['name'=>Link::name($guide->author_id),'date'=>$guide->created_at]) 
-					</small>
-					<br />
-					<small>
-						@lang('guides.last_updated',['date'=>Time::long($guide->updated_at)]) 
-					</small>
-					<br />
-					<small>
-						@lang('guides.edited_by',['users'=>$editList]) 
-					</small>
-				</p>
-			</div>
-			<div class='wrapper-dark'>
-				<dl class='dl-horizontal'>
-					<dt>
-						@lang('guides.quests.view.description')
-					</dt>
-					<dd>
-						{!!$guide->description!!}
-					</dd>
-					<dt>
-						@lang('guides.quests.difficulty.title')
-					</dt>
-					<dd>
-						{{$difficulty->name}} 
-					</dd>
-					<dt>
-						@lang('guides.quests.length.title')
-					</dt>
-					<dd>
-						{{$length->name}} 
-					</dd>
-					<dt>
-						@lang('guides.quests.view.quest_points')
-					</dt>
-					<dd>
-						<img src='/img/guides/quests/qp.png' alt='QP' /> {{$guide->qp}} 
-					</dd>
-					<dt>
-						@lang('guides.quests.view.membership')
-					</dt>
-					<dd>
-						{{$guide->membership == 1 ? trans('utilities.yes') : trans('utilities.no')}}
-					</dd>
-					<dt>
-						@lang('guides.quests.view.quest_requirements')
-					</dt>
-					<dd>
-						{!!$guide->quest_requirements!!}
-					</dd>
-					<dt>
-						@lang('guides.quests.view.skill_requirements')
-					</dt>
-					<dd>
-						{!!$guide->skill_requirements!!}
-					</dd>
-					<dt>
-						@lang('guides.quests.view.items_required')
-					</dt>
-					<dd>
-						{!!$guide->items_required!!}
-					</dd>
-					<dt>
-						@lang('guides.quests.view.items_recommended')
-					</dt>
-					<dd>
-						{!!$guide->items_recommended!!}
-					</dd>
-					<dt>
-						@lang('guides.quests.view.reward')
-					</dt>
-					<dd>
-						{!!$guide->rewards!!}
-					</dd>
-					<dt>
-						@lang('guides.quests.view.starting_point')
-					</dt>
-					<dd>
-						{!!$guide->starting_point!!}
-					</dd>
-				</dl>
-			</div>
-			<div class='wrapper'>
-				{!!$guide->contents_parsed!!}
-			</div>
+<div class='wrapper'>
+    <h1>
+        {{$guide->name}}
+    </h1>
+    <p>
+        <small>
+            @lang('guides.written_by',['name'=>Link::name($guide->author_id),'date'=>$guide->created_at])
+        </small>
+        <br />
+        <small>
+            @lang('guides.last_updated',['date'=>Time::long($guide->updated_at)])
+        </small>
+        <br />
+        <small>
+            @lang('guides.edited_by',['users'=>$editList])
+        </small>
+    </p>
+</div>
+<div class='wrapper-dark'>
+    <dl class='dl-horizontal'>
+        <dt>
+            @lang('guides.quests.view.description')
+        </dt>
+        <dd>
+            {!!$guide->description!!}
+        </dd>
+        <dt>
+            @lang('guides.quests.difficulty.title')
+        </dt>
+        <dd>
+            {{$difficulty->name}}
+        </dd>
+        <dt>
+            @lang('guides.quests.length.title')
+        </dt>
+        <dd>
+            {{$length->name}}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.quest_points')
+        </dt>
+        <dd>
+            <img src='/img/guides/quests/qp.png' alt='QP' /> {{$guide->qp}}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.membership')
+        </dt>
+        <dd>
+            {{$guide->membership == 1 ? trans('utilities.yes') : trans('utilities.no')}}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.quest_requirements')
+        </dt>
+        <dd>
+            {!!$guide->quest_requirements!!}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.skill_requirements')
+        </dt>
+        <dd>
+            {!!$guide->skill_requirements!!}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.items_required')
+        </dt>
+        <dd>
+            {!!$guide->items_required!!}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.items_recommended')
+        </dt>
+        <dd>
+            {!!$guide->items_recommended!!}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.reward')
+        </dt>
+        <dd>
+            {!!$guide->rewards!!}
+        </dd>
+        <dt>
+            @lang('guides.quests.view.starting_point')
+        </dt>
+        <dd>
+            {!!$guide->starting_point!!}
+        </dd>
+    </dl>
+</div>
+<div class='wrapper'>
+    {!!$guide->contents_parsed!!}
+</div>
 @stop

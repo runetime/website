@@ -42,6 +42,6 @@ class CreateDatabaseMonstersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('database_monsters');
+        Schema::dropifExists('database_monsters');
     }
 }
