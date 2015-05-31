@@ -9,6 +9,13 @@
         <input id='q1' name='q1' type='text' /> <button onclick='runIt();'>Check Availability</button>
         <span class='final-message hidden'></span>
         <script>
+            // Set the enter key listener.
+            $('#q1').keydown(function (e) {
+                if (e.keyCode === 13) {
+                    runIt();
+                }
+            });
+
             // Set some initial variables.
             var availability = '#rsn-availability',
                     check = '#rsn-check-field',
