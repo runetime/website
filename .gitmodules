@@ -1,0 +1,6 @@
+[submodule "resources/lang/en"]
+	path = resources/lang/en
+	url = https://github.com/runetime/translation-english.git
+[submodule "resources/lang/no"]
+	path = resources/lang/no
+	url = https://github.com/runetime/translation-norwegian.git
