@@ -27,13 +27,15 @@
                 results.done(function (results) {
                     var el = $('.final-message'),
                         message = 'The Runescape name <b>' + username + '</b> is ',
-                        className = 'unavailable';
+                        className = 'unavailable',
+                        color = 'red';
 
                     if (results.substring(0, 6) === "<!DOCT") {
                         className = 'available';
+                        color = 'green';
                     }
 
-                    message = "<p>" + message + className + ".</p>";
+                    message = "<p style='color: " + color + ";'>" + message + className + ".</p>";
 
                     // Add the button to try again.
                     message += "<br /><a href='/name-check/plain' class='btn btn-primary'>Search Again</a>";
