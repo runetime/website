@@ -365,22 +365,6 @@ Route::group(['prefix' => 'livestream'], function () {
 });
 
 /*
- * Maps
- */
-Route::group(['prefix' => 'map'], function () {
-    get('/', 'MapController@getIndex');
-    get('members', 'MapController@getMembers');
-    /*
-     * RuneScape maps
-     */
-    Route::group(['prefix' => 'runescape'], function () {
-        get('/', 'MapController@getRunescape');
-        get('3', 'MapController@getRS3');
-        get('old-school', 'MapController@getOS');
-    });
-});
-
-/*
  * Media
  */
 get('media', 'MediaController@getIndex');

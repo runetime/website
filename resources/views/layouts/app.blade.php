@@ -25,7 +25,6 @@ $navs = [
         'guides/locations'    => trans('navbar.runescape.guides.locations'),
         'databases/items/'    => trans('navbar.runescape.databases.items'),
         'databases/monsters/' => trans('navbar.runescape.databases.monsters'),
-        'map/runescape'       => trans('navbar.runescape.world_map'),
         'calculators'         => trans('navbar.runescape.calculators'),
         'play'                => trans('navbar.runescape.play'),
         'name-check'          => trans('navbar.runescape.name_checker'),
