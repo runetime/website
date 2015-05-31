@@ -149,16 +149,22 @@ class ForumPostController extends Controller
     public function postEdit($id, PostEditRequest $form)
     {
         $post = $this->posts->getById($id);
+
         if (empty($post)) {
             return \Error::abort(404);
         }
 
-        $thread = $this->threads->getById($post->thread[0]->id);
         $post->contents = $form->contents;
         $post->contents_parsed = with(new \Parsedown)->text($form->contents);
         $post->save();
 
-        return \App::make('App\Http\Controllers\ForumThreadController')->getLastPost($thread->id);
+        if (isset($post->thread[0])) {
+            $thread = $this->threads->getById($post->thread[0]->id);
+
+            return \App::make('App\Http\Controllers\ForumThreadController')->getLastPost($thread->id);
+        }
+
+        return redirect()->to('/');
     }
 
     /**

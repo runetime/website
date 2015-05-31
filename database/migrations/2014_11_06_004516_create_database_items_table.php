@@ -36,6 +36,6 @@ class CreateDatabaseItemsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('database_items');
+        Schema::dropIfExists('database_items');
     }
 }

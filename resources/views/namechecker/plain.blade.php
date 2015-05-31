@@ -9,6 +9,13 @@
         <input id='q1' name='q1' type='text' /> <button onclick='runIt();'>Check Availability</button>
         <span class='final-message hidden'></span>
         <script>
+            // Set the enter key listener.
+            $('#q1').keydown(function (e) {
+                if (e.keyCode === 13) {
+                    runIt();
+                }
+            });
+
             // Set some initial variables.
             var availability = '#rsn-availability',
                     check = '#rsn-check-field',
@@ -27,13 +34,15 @@
                 results.done(function (results) {
                     var el = $('.final-message'),
                         message = 'The Runescape name <b>' + username + '</b> is ',
-                        className = 'unavailable';
+                        className = 'unavailable',
+                        color = 'red';
 
                     if (results.substring(0, 6) === "<!DOCT") {
                         className = 'available';
+                        color = 'green';
                     }
 
-                    message = "<p>" + message + className + ".</p>";
+                    message = "<p style='color: " + color + ";'>" + message + className + ".</p>";
 
                     // Add the button to try again.
                     message += "<br /><a href='/name-check/plain' class='btn btn-primary'>Search Again</a>";

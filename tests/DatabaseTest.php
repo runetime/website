@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Tests HTTP routes for the DatabaseController.
+ * Tests HTTP routes for the databases DO NOT EXIST
+ * and instead 404 since they were removed.
  *
  * Class DatabaseTest
  */
@@ -14,7 +15,7 @@ class DatabaseTest extends TestCase
     {
         $response = $this->call('GET', 'databases');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -24,7 +25,7 @@ class DatabaseTest extends TestCase
     {
         $response = $this->call('GET', 'databases/items');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -36,7 +37,7 @@ class DatabaseTest extends TestCase
 
         $response = $this->call('GET', 'databases/items/create');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -56,7 +57,7 @@ class DatabaseTest extends TestCase
 
         $response = $this->call('POST', 'databases/items/create', $data);
 
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -66,7 +67,7 @@ class DatabaseTest extends TestCase
     {
         $response = $this->call('GET', 'databases/items/1-test');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -76,7 +77,7 @@ class DatabaseTest extends TestCase
     {
         $response = $this->call('GET', 'databases/monsters');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -87,7 +88,7 @@ class DatabaseTest extends TestCase
         $this->login();
         $response = $this->call('GET', 'databases/monsters/create');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -108,7 +109,7 @@ class DatabaseTest extends TestCase
 
         $response = $this->call('POST', 'databases/monsters/create', $data);
 
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
@@ -118,6 +119,6 @@ class DatabaseTest extends TestCase
     {
         $response = $this->call('GET', 'databases/monsters/1-test');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 }

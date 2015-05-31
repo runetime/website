@@ -27,7 +27,8 @@ class AddInterestsToUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('interests', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('interests');
         });
     }
 }
