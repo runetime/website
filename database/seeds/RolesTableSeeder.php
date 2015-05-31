@@ -51,16 +51,6 @@ class RolesTableSeeder extends Seeder
                     'class_name' => 'web-developer',
                 ],
                 [
-                    'name'       => 'Content Team Leader',
-                    'name_trim'  => 'content_team_leader',
-                    'class_name' => 'content-team-leader',
-                ],
-                [
-                    'name'       => 'Content Team',
-                    'name_trim'  => 'content_team',
-                    'class_name' => 'content-team',
-                ],
-                [
                     'name'       => 'Community Team Leader',
                     'name_trim'  => 'community_team_leader',
                     'class_name' => 'community-team-leader',

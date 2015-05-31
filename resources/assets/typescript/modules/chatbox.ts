@@ -189,7 +189,7 @@ class Chatbox {
 			var contents = "";
 			response = $.parseJSON(response);
 			contents += "<div id='chatbox-popup-channels'>";
-			contents += "<button type='button' class='close' onclick='chatbox.panelclose();'>Close <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>";
+			contents += "<button type='button' class='close' onclick='chatbox.panelClose();'>Close <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>";
 			contents += "<h3>Channels</h3>";
 			contents += "<p class='holo-text'>Currently on <b>#" + chatbox.channel + "</b></p>";
 			$.each(response, function (index, value) {
