@@ -61,7 +61,7 @@ class NewsTest extends TestCase
      */
     public function testView()
     {
-        $news = News::first();
+        $news = $this->createNews();
 
         $response = $this->call('GET', $news->toSlug());
 

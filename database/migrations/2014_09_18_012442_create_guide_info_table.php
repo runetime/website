@@ -31,6 +31,6 @@ class CreateGuideInfoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('guide_info');
+        Schema::dropIfExists('guide_info');
     }
 }

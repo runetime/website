@@ -9,7 +9,6 @@ use App\RuneTime\Core\Entity;
 class Post extends Entity
 {
     protected $table = 'forum_posts';
-    protected $with = [];
     protected $fillable = [
         'author_id',
         'rep',
