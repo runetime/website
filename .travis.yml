@@ -7,4 +7,12 @@ sudo: false
 
 install: travis_retry composer install --no-interaction --prefer-source
 
+before_script:
+  - mysql -e 'create database runetime;'
+  - mysql -u root -e "GRANT ALL PRIVILEGES ON runetime.* TO 'homestead'@'%' IDENTIFIED BY 'secret';"
+
+mysql:
+  database: runetime
+  username: root
+
 script: vendor/bin/phpunit

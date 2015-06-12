@@ -1,6 +1,9 @@
 <?php
 
 use App\RuneTime\Accounts\User;
+use App\RuneTime\Forum\Threads\Post;
+use App\RuneTime\Forum\Threads\Thread;
+use App\RuneTime\News\News;
 
 /**
  * The base class for HTTP tests.
@@ -31,12 +34,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     }
 
     /**
+     * Logs the user in for a session and returns the auth Id.
      *
+     * @return int
      */
     public function login()
     {
         $user = User::orderBy('created_at', 'desc')->first();
         \Auth::loginUsingId($user->id);
+
+        return $user->id;
     }
 
     /**
@@ -49,5 +56,62 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $form['_token'] = \Session::token();
 
         return $form;
+    }
+
+    /**
+     * Creates a new News entity.
+     *
+     * @return News
+     */
+    public function createNews()
+    {
+        $authId = $this->login();
+
+        return News::create([
+            'author_id'       => $authId,
+            'title'           => 'title',
+            'contents'        => 'test',
+            'contents_parsed' => 'test',
+            'post_count'      => 0,
+            'status'          => News::STATUS_PUBLISHED,
+        ]);
+    }
+
+    /**
+     * Creates a new Post entity.
+     *
+     * @return Post
+     */
+    public function createPost()
+    {
+        return Post::create([
+            'author_id'       => $this->login(),
+            'rep'             => 0,
+            'status'          => Post::STATUS_VISIBLE,
+            'ip'              => \String::encodeIP(),
+            'contents'        => 'test',
+            'contents_parsed' => 'test',
+        ]);
+    }
+
+    /**
+     * Creates a new Thread entity.
+     *
+     * @return Thread
+     */
+    protected function createThread()
+    {
+        $authId = $this->login();
+
+        return Thread::create([
+            'author_id'   => $authId,
+            'subforum_id' => 1,
+            'title'       => 'test',
+            'views_count' => 0,
+            'posts_count' => 1,
+            'last_post'   => 0,
+            'poll_id'     => -1,
+            'status'      => Thread::STATUS_VISIBLE,
+        ]);
     }
 }

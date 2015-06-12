@@ -31,7 +31,7 @@ class NameChecker {
 					var el = nameChecker.form.querySelector('.final-message');
 
 					var message = 'The Runescape name <b>' + username + '</b> is ';
-					if(results.substring(0, 6) === "<html>") {
+					if(results.substring(0, 6) === "<!DOCT") {
 						message += 'available.';
 					} else {
 						message += 'unavailable.';
