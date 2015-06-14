@@ -59,9 +59,9 @@ class ProfileController extends Controller
 
         if ($profile->birthday_month) {
             if ($birthday) {
-                $birthday .= \Time::month($profile->birthday_day, true);
+                $birthday .= \Time::month($profile->birthday_month, true);
             } else {
-                $birthday .= \Time::month($profile->birthday_day);
+                $birthday .= \Time::month($profile->birthday_month);
             }
         }
 
