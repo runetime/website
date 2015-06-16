@@ -4,14 +4,17 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 
-class Inspire extends Command
+/**
+ * Class InspireCommand
+ */
+class InspireCommand extends Command
 {
     /**
-     * The name and signature of the console command.
+     * The console command name.
      *
      * @var string
      */
-    protected $signature = 'inspire';
+    protected $name = 'inspire';
 
     /**
      * The console command description.
@@ -21,11 +24,19 @@ class Inspire extends Command
     protected $description = 'Display an inspiring quote';
 
     /**
+     * Create a new command instance.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
+    public function fire()
     {
         $this->comment(PHP_EOL . Inspiring::quote() . PHP_EOL);
     }

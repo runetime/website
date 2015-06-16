@@ -1,9 +1,11 @@
-<?php
-namespace App\Console;
+<?php namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class Kernel
+ */
 class Kernel extends ConsoleKernel
 {
     /**
@@ -12,13 +14,13 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Inspire::class,
-        \App\Console\Commands\Radio\Artist::class,
-        \App\Console\Commands\Radio\DJ::class,
-        \App\Console\Commands\Radio\Song::class,
-        \App\Console\Commands\Radio\Timetable::class,
-        \App\Console\Commands\Radio\Update::class,
-        \App\Console\Commands\Signatures\UpdateAll::class,
+        'App\Console\Commands\InspireCommand',
+        'App\Console\Commands\Radio\Artist',
+        'App\Console\Commands\Radio\DJ',
+        'App\Console\Commands\Radio\Song',
+        'App\Console\Commands\Radio\Timetable',
+        'App\Console\Commands\Radio\Update',
+        'App\Console\Commands\Signatures\UpdateAll',
     ];
 
     /**
@@ -30,7 +32,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-            ->hourly();
+        $schedule->command('inspire')->
+            hourly();
     }
 }

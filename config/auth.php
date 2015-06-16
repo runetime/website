@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => App\RuneTime\Accounts\User::class,
+    'model' => 'App\RuneTime\Accounts\User',
 
     /*
     |--------------------------------------------------------------------------
@@ -59,7 +59,7 @@ return [
     */
 
     'password' => [
-        'email'  => 'emails.password',
+        'email'  => 'emails.auth.password',
         'table'  => 'password_resets',
         'expire' => 60,
     ],

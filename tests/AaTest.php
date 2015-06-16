@@ -11,9 +11,9 @@ class AaTest extends TestCase
      */
     public function testSetup()
     {
-        `php artisan migrate`;
-        `php artisan migrate:refresh`;
-        `php artisan db:seed`;
+        \Artisan::call('migrate');
+        \Artisan::call('migrate:refresh');
+        \Artisan::call('db:seed');
 
         $this->assertTrue(true);
     }
