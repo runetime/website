@@ -1,13 +1,10 @@
-<?php namespace App\Http\Middleware;
+<?php
+namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Routing\Middleware;
 
-/**
- * Class Authenticate
- */
-class Authenticate implements Middleware
+class Authenticate
 {
     /**
      * The Guard implementation.
@@ -19,7 +16,9 @@ class Authenticate implements Middleware
     /**
      * Create a new filter instance.
      *
-     * @param \Illuminate\Contracts\Auth\Guard $auth
+     * @param Guard $auth
+     *
+     * @return void
      */
     public function __construct(Guard $auth)
     {
