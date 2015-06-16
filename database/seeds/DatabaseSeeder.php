@@ -3,9 +3,6 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
-/**
- * Class DatabaseSeeder
- */
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -24,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call('RadioTimetablesTableSeeder');
         $this->call('RolesTableSeeder');
         $this->call('SubforumsTableSeeder');
+
+        Model::reguard();
     }
 }
