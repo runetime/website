@@ -5,6 +5,8 @@ use App\RuneTime\Bans\Ban;
 use App\RuneTime\Bans\BanRepository;
 use App\RuneTime\Bans\IP;
 use App\RuneTime\Bans\IPRepository;
+use Carbon\Carbon;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as RouterController;
 
 /**
@@ -12,6 +14,8 @@ use Illuminate\Routing\Controller as RouterController;
  */
 class Controller extends RouterController
 {
+    use DispatchesJobs;
+
     /**
      * @var array
      */
@@ -126,7 +130,7 @@ class Controller extends RouterController
                 $data['bc'] = false;
                 $data['displayPageHeader'] = false;
                 $data['nav'] = 'navbar.home';
-                $data['time'] = \Carbon::createFromTimestamp($ban->time_ends)->diffForHumans();
+                $data['time'] = Carbon::createFromTimestamp($ban->time_ends)->diffForHumans();
                 $data['title'] = trans('navbar.home');
 
                 return \View::make('errors.banned', $data);
@@ -185,7 +189,7 @@ class Controller extends RouterController
             $current['user'] = \Request::getClientIp();
         }
 
-        $ago = \Carbon::now()->subMinutes(30)->timestamp;
+        $ago = Carbon::now()->subMinutes(30)->timestamp;
 
         // Remove old activity
         foreach ($activity as $key => $value) {

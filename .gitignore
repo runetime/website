@@ -4,5 +4,4 @@
 /vendor
 *.log
 
-.env
 _ide_helper.php
