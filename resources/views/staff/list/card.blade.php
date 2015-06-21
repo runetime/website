@@ -27,3 +27,7 @@
                     <i class='fa fa-inbox'></i> @lang('messenger.message')
                 </a>
 @endif
+            </p>
+        </div>
+    </div>
+</div>
