@@ -1,21 +1,23 @@
-class StaffList {
-    constructor() {
+var StaffList = (function () {
+    function StaffList() {
         var members = $("[rt-hook='hook!staff.list:card']");
-        $.each(members, function(index: number, value: any) {
+        $.each(members, function (index, value) {
             var val = $(value);
             var id = $(val).attr('rt-data');
             var src = "";
-            if(id == 'no') {
+            if (id == 'no') {
                 src = $(val).attr('rt-data2');
-            } else {
+            }
+            else {
                 src = id;
             }
             $(val).find('.front').css({
                 'background-image': "url('/img/forums/photos/" + src + ".png')"
             });
-            $(val).bind('touchstart', function() {
+            $(val).bind('touchstart', function () {
                 $(this).toggleClass('hover');
             });
         });
     }
-}
+    return StaffList;
+})();
