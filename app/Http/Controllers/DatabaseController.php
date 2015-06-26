@@ -118,9 +118,9 @@ class DatabaseController extends Controller
         $editors = json_encode([]);
         $examine = $form->examine;
         $examineParsed = $parsedown->text($examine);
-        $membership = $form->membership == 1 ? true : false;
-        $tradable = $form->tradable == 1 ? true : false;
-        $questItem = $form->quest_item == 1 ? true : false;
+        $membership = $form->membership == 1;
+        $tradable = $form->tradable == 1;
+        $questItem = $form->quest_item == 1;
         $item = with(new Item)->saveNew(\Auth::user()->id, $editors, $name, $examine, $examineParsed, $membership, $tradable, $questItem);
 
         return \redirect()->to('/databases/items/' . \String::slugEncode($item->id, $item->name));

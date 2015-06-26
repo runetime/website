@@ -24,11 +24,13 @@ class TransparencyController extends Controller
     {
         $paths = \File::allFiles(\base_path('resources/views/parsedown/tutorial'));
         $files = [];
+
         foreach ($paths as $path) {
             $name = str_replace('_', ' ', $path);
             $name = str_replace('.md', '', $name);
             $name = explode('parsedown/tutorial/', $name)[1];
             $name = ucwords($name);
+
             $files[$name] = \File::get($path);
         }
 
