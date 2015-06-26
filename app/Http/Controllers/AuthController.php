@@ -83,6 +83,7 @@ class AuthController extends Controller
     public function postLoginForm(LoginRequest $form)
     {
         $user = $this->users->getByEmail($form->email);
+
         if (!empty($user)) {
             // The account exists
             $credentials = [
@@ -128,7 +129,7 @@ class AuthController extends Controller
     public function postSignupForm(SignupRequest $form)
     {
         // Check if the two given passwords match
-        if ($form->password != $form->password2) {
+        if ($form->password !== $form->password2) {
             return $this->view('errors.signup.passwords');
         }
 
@@ -228,12 +229,16 @@ class AuthController extends Controller
      */
     public function postPasswordEmail(PasswordEmailRequest $request)
     {
-        switch ($response = $this->passwords->sendResetLink($request->only('email'))) {
+        $response = $this->passwords->sendResetLink($request->get('email'));
+
+        switch ($response) {
             case PasswordBroker::INVALID_USER:
                 return redirect()->back()->with('error', trans($response));
+
                 break;
             case PasswordBroker::RESET_LINK_SENT:
                 return redirect()->back()->with('status', trans($response));
+
                 break;
         }
 
@@ -252,6 +257,7 @@ class AuthController extends Controller
     public function getPasswordReset($token)
     {
         $reset = $this->resets->getByToken($token);
+
         if (empty($reset)) {
             return \Error::abort(404);
         }
@@ -274,18 +280,21 @@ class AuthController extends Controller
     public function postPasswordReset($token, PasswordResetRequest $form)
     {
         $reset = $this->resets->getByToken($token);
+
         if (!$reset) {
             return \Error::abort(404);
         }
 
         $user = $this->users->getByEmail($reset->email);
+
         if (!empty($user)) {
             $user->password = \Hash::make($form->password);
             $user->save();
+
             \Auth::logout();
             \Auth::loginUsingId($user->id);
 
-            return \redirect()->to('/');
+            return redirect()->to('/');
         }
 
         return 1;
@@ -298,6 +307,6 @@ class AuthController extends Controller
      */
     public function getRedirect()
     {
-        return \redirect()->to('login');
+        return redirect()->to('login');
     }
 }

@@ -44,6 +44,7 @@ class TicketController extends Controller
             Ticket::STATUS_CLOSED    => [],
             Ticket::STATUS_ESCALATED => [],
         ];
+
         foreach ($tickets as $ticket) {
             if ($ticket->status === Ticket::STATUS_CLOSED) {
                 array_push($ticketList[$ticket->status], $ticket);
@@ -95,6 +96,7 @@ class TicketController extends Controller
     public function getClose($id)
     {
         $ticket = $this->tickets->getById($id);
+
         if (empty($ticket)) {
             return \Error::abort(404);
         }
