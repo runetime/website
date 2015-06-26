@@ -39,8 +39,10 @@ class APIController extends Controller
     {
         $awards = $this->awards->getByStatus(Award::STATUS_AVAILABLE);
 
+        $response = [];
+
         foreach ($awards as $award) {
-            $respons[] = (object) [
+            $response[] = (object) [
                 'id'   => $award->id,
                 'name' => $award->name,
             ];
