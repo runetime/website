@@ -18,7 +18,8 @@ class SignatureTest extends TestCase
     }
 
     /**
-     *
+     * Ensure that posting to the signature generator redirects
+     * to the page where you select a background image.
      */
     public function testPostUsername()
     {
@@ -28,7 +29,7 @@ class SignatureTest extends TestCase
 
         $response = $this->call('POST', 'signatures', $form);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(302, $response->getStatusCode());
     }
 
     /**
