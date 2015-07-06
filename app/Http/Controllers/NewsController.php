@@ -128,9 +128,9 @@ class NewsController extends Controller
         }
 
         if (!empty($tag)) {
-            return \redirect()->to($tag->toNews());
+            return redirect()->to($tag->toNews());
         } else {
-            return \redirect()->to('news');
+            return redirect()->to('news');
         }
     }
 

@@ -381,6 +381,6 @@ class StaffAdminController extends Controller
             }
         }
 
-        return \redirect()->to('/staff/administrator');
+        return redirect()->to('/staff/administrator');
     }
 }

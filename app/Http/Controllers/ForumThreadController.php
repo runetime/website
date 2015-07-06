@@ -212,7 +212,7 @@ class ForumThreadController extends Controller
         }
 
         if ($subforum->posts_enabled == false) {
-            return \redirect()->to('/forums');
+            return redirect()->to('/forums');
         }
 
         $bc = [];
@@ -291,7 +291,7 @@ class ForumThreadController extends Controller
         $this->subforums->updateLastPost($post->id, $subforum->id);
         $this->subforums->incrementThreads($subforum->id);
 
-        return \redirect()->to($thread->toSlug());
+        return redirect()->to($thread->toSlug());
     }
 
     /**
@@ -309,6 +309,6 @@ class ForumThreadController extends Controller
         $page = ceil($thread->posts_count / Thread::POSTS_PER_PAGE);
         $post = $thread->lastPost();
 
-        return \redirect()->to($thread->toSlug() . '/page=' . $page . '/#post' . $post->id);
+        return redirect()->to($thread->toSlug() . '/page=' . $page . '/#post' . $post->id);
     }
 }

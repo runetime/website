@@ -67,6 +67,6 @@ class NotificationController extends Controller
             $notification->setRead();
         }
 
-        return \redirect()->to('/notifications');
+        return redirect()->to('/notifications');
     }
 }

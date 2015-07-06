@@ -31,7 +31,7 @@ class StaffModerationController extends Controller
     {
         $thread = $this->threads->getById($id);
         if (empty($thread)) {
-            return \redirect()->to('/');
+            return redirect()->to('/');
         }
 
         $thread->status = $status;
@@ -39,6 +39,6 @@ class StaffModerationController extends Controller
 
         $subforum = $thread->subforum;
 
-        return \redirect()->to($subforum->toSlug());
+        return redirect()->to($subforum->toSlug());
     }
 }
