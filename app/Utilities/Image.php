@@ -4,7 +4,7 @@ namespace App\Utilities;
 /**
  * Class Image
  */
-class Image
+final class Image
 {
     /**
      * Outputs the image of a user based on their

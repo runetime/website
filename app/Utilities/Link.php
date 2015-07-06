@@ -7,7 +7,7 @@ use App\RuneTime\Accounts\RoleRepository;
 /**
  * Class Link
  */
-class Link
+final class Link
 {
     /**
      * Returns a link to a user's profile, with

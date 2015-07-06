@@ -8,7 +8,7 @@ use App\RuneTime\Accounts\User;
 /**
  * Class String
  */
-class String
+final class String
 {
     /**
      * Determines whether a string begins with a substring.
