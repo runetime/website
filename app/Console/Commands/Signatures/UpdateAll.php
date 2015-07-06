@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * Class UpdateAll
  */
-class UpdateAll extends Command
+final class UpdateAll extends Command
 {
     /**
      * The console command name.
