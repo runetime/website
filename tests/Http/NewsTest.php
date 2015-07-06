@@ -1,6 +1,8 @@
 <?php
+namespace tests\Http;
 
 use App\RuneTime\News\News;
+use tests\TestCase;
 
 /**
  * Tests HTTP routes for the NewsController.

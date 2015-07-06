@@ -1,16 +1,19 @@
 <?php
+namespace tests;
 
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\News\News;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Testing\TestCase as BaseTest;
 
 /**
  * The base class for HTTP tests.
  *
  * Class TestCase
  */
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+class TestCase extends BaseTest
 {
     /**
      * The base URL to use while testing the application.
@@ -35,7 +38,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         $app = require __DIR__ . '/../bootstrap/app.php';
 
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        $app->make(Kernel::class)->bootstrap();
 
         return $app;
     }

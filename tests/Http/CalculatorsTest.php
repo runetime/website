@@ -1,6 +1,8 @@
 <?php
+namespace tests\Http;
 
 use App\RuneTime\Calculators\Calculator;
+use tests\TestCase;
 
 /**
  * Tests HTTP routes for the CalculatorController.

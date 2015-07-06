@@ -1,4 +1,7 @@
 <?php
+namespace tests\Http;
+
+use tests\TestCase;
 
 /**
  * Tests HTTP routes for the PlayController.

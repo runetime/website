@@ -1,6 +1,8 @@
 <?php
+namespace tests\Http;
 
 use App\RuneTime\Statuses\Status;
+use tests\TestCase;
 
 /**
  * Tests HTTP routes for the StatusController.

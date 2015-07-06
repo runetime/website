@@ -1,4 +1,6 @@
 <?php
+namespace tests;
+
 /**
  * Tests the database setup.
  *
