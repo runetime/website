@@ -21,8 +21,6 @@ $navs = [
         'tickets'    => trans('navbar.runetime.tickets'),
     ],
     trans('navbar.runescape.title') => [
-        'databases/items/'    => trans('navbar.runescape.databases.items'),
-        'databases/monsters/' => trans('navbar.runescape.databases.monsters'),
         'calculators'         => trans('navbar.runescape.calculators'),
         'play'                => trans('navbar.runescape.play'),
         'name-check'          => trans('navbar.runescape.name_checker'),
