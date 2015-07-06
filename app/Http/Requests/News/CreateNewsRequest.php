@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class CreateNewsRequest
  */
-class CreateNewsRequest extends Request
+final class CreateNewsRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

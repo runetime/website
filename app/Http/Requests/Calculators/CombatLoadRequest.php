@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class CombatLoadRequest
  */
-class CombatLoadRequest extends Request
+final class CombatLoadRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

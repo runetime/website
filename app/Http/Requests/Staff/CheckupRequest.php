@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class CheckupRequest
  */
-class CheckupRequest extends Request
+final class CheckupRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

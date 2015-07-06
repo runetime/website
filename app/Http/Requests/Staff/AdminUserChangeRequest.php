@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class AdminUserChangeRequest
  */
-class AdminUserChangeRequest extends Request
+final class AdminUserChangeRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

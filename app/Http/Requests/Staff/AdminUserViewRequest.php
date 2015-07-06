@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class AdminUserViewRequest
  */
-class AdminUserViewRequest extends Request
+final class AdminUserViewRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

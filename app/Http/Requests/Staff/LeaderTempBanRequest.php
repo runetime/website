@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class LeaderTempBanRequest
  */
-class LeaderTempBanRequest extends Request
+final class LeaderTempBanRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

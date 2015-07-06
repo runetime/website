@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class PostVoteRequest
  */
-class PostVoteRequest extends Request
+final class PostVoteRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class UserChatboxRemoveRequest
  */
-class UserChatboxRemoveRequest extends Request
+final class UserChatboxRemoveRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

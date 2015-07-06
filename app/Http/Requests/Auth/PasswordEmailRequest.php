@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class PasswordEmailRequest
  */
-class PasswordEmailRequest extends Request
+final class PasswordEmailRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

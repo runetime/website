@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class RuneScapeRequest
  */
-class RunescapeRequest extends FormRequest
+final class RunescapeRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

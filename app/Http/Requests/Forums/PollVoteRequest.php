@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class PollVoteRequest
  */
-class PollVoteRequest extends FormRequest
+final class PollVoteRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

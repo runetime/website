@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class ThreadCreateRequest
  */
-class ThreadCreateRequest extends FormRequest
+final class ThreadCreateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

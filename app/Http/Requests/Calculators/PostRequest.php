@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class PostRequest
  */
-class PostRequest extends Request
+final class PostRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class CheckChannelRequest
  */
-class CheckChannelRequest extends FormRequest
+final class CheckChannelRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

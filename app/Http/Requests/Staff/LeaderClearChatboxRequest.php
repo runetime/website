@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class LeaderClearChatboxRequest
  */
-class LeaderClearChatboxRequest extends Request
+final class LeaderClearChatboxRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

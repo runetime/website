@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class RSNRequest
  */
-class RSNRequest extends FormRequest
+final class RSNRequest extends FormRequest
 {
     /**
      * @return array

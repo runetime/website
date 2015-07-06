@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class RequestSong
  */
-class RequestSong extends Request
+final class RequestSong extends Request
 {
     /**
      * Get the validation rules that apply to the request.

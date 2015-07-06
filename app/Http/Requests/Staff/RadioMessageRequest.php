@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class RadioMessageRequest
  */
-class RadioMessageRequest extends Request
+final class RadioMessageRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.
