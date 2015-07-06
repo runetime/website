@@ -28,15 +28,12 @@ class SignatureController extends Controller
     {
         $username = $form->username;
         $cache = \Cache::get('hiscores.' . $username);
+
         if (empty($cache)) {
             \String::getHiscore($username);
         }
 
-        $this->bc(['signatures' => trans('signature.title')]);
-        $this->nav('navbar.runetime.title');
-        $this->title('signature.type.title');
-
-        return $this->view('signatures.type', compact('username'));
+        return redirect()->to('signatures/username=' . $username . '/type=stat');
     }
 
     /**
