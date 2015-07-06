@@ -6,7 +6,7 @@ namespace tests;
  *
  * Class AaTest
  */
-class AaTest extends TestCase
+class AaTest extends Test
 {
     /**
      *

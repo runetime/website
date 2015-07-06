@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the GetController.
  *
  * Class GetTest
  */
-class GetTest extends TestCase
+class GetTest extends Test
 {
     /**
      *

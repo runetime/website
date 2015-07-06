@@ -2,7 +2,7 @@
 namespace tests\Http;
 
 use App\RuneTime\Forum\Threads\Thread;
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the controllers: ForumController,
@@ -10,7 +10,7 @@ use tests\TestCase;
  *
  * Class ForumTest
  */
-class ForumTest extends TestCase
+class ForumTest extends Test
 {
     /**
      *

@@ -1,7 +1,7 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the databases DO NOT EXIST
@@ -9,7 +9,7 @@ use tests\TestCase;
  *
  * Class DatabaseTest
  */
-class DatabaseTest extends TestCase
+class DatabaseTest extends Test
 {
     /**
      *

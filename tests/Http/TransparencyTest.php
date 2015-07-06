@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the TransparencyController.
  *
  * Class TransparencyTest
  */
-class TransparencyTest extends TestCase
+class TransparencyTest extends Test
 {
     /**
      *

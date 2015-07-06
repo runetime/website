@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the RadioController.
  *
  * Class RadioTest
  */
-class RadioTest extends TestCase
+class RadioTest extends Test
 {
     /**
      *

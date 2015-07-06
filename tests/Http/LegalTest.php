@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the LegalController.
  *
  * Class LegalTest
  */
-class LegalTest extends TestCase
+class LegalTest extends Test
 {
     /**
      *

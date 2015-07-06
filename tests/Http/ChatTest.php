@@ -3,14 +3,14 @@ namespace tests\Http;
 
 use App\RuneTime\Chat\Channel;
 use App\RuneTime\Chat\Chat;
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the ChatController.
  *
  * Class ChatTest
  */
-class ChatTest extends TestCase
+class ChatTest extends Test
 {
     /**
      *

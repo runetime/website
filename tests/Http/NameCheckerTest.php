@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the NameCheckerController.
  *
  * Class NameCheckerTest
  */
-class NameCheckerTest extends TestCase
+class NameCheckerTest extends Test
 {
     /**
      *

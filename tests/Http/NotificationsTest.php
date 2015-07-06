@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the NotificationController.
  *
  * Class NotificationsTest
  */
-class NotificationsTest extends TestCase
+class NotificationsTest extends Test
 {
     /**
      *

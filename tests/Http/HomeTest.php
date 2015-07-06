@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the HomeController.
  *
  * Class HomeTest
  */
-class HomeTest extends TestCase
+class HomeTest extends Test
 {
     /**
      *

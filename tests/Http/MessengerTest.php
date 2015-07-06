@@ -2,14 +2,14 @@
 namespace tests\Http;
 
 use \App\RuneTime\Messenger\Message;
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the MessengerController.
  *
  * Class MessengerTest
  */
-class MessengerTest extends TestCase
+class MessengerTest extends Test
 {
     /**
      *

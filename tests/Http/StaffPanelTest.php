@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the StaffController.
  *
  * Class StaffPanelTest
  */
-class StaffPanelTest extends TestCase
+class StaffPanelTest extends Test
 {
     /**
      *

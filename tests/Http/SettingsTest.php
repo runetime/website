@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the SettingsController.
  *
  * Class SettingsTest
  */
-class SettingsTest extends TestCase
+class SettingsTest extends Test
 {
     /**
      *

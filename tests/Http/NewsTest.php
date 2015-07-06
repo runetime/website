@@ -2,13 +2,13 @@
 namespace tests\Http;
 
 use App\RuneTime\News\News;
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the NewsController.
  * Class NewsTest
  */
-class NewsTest extends TestCase
+class NewsTest extends Test
 {
     /**
      *

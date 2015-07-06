@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the SignatureController.
  *
  * Class SignatureTest
  */
-class SignatureTest extends TestCase
+class SignatureTest extends Test
 {
     /**
      *

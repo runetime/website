@@ -2,14 +2,14 @@
 namespace tests\Http;
 
 use App\RuneTime\Statuses\Status;
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the StatusController.
  *
  * Class StatusTest
  */
-class StatusTest extends TestCase
+class StatusTest extends Test
 {
     /**
      *

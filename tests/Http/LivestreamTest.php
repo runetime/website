@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the LivestreamController.
  *
  * Class LivestreamTest
  */
-class LivestreamTest extends TestCase
+class LivestreamTest extends Test
 {
     /**
      *

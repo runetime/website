@@ -2,14 +2,14 @@
 namespace tests\Http;
 
 use App\RuneTime\Calculators\Calculator;
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the CalculatorController.
  *
  * Class CalculatorsTest
  */
-class CalculatorsTest extends TestCase
+class CalculatorsTest extends Test
 {
     /**
      *

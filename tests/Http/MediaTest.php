@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the MediaController.
  *
  * Class MediaTest
  */
-class MediaTest extends TestCase
+class MediaTest extends Test
 {
     /**
      *

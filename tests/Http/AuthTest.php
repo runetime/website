@@ -2,14 +2,14 @@
 namespace tests\Http;
 
 use App\RuneTime\Accounts\User;
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the AuthController.
  *
  * Class AuthTest
  */
-class AuthTest extends TestCase
+class AuthTest extends Test
 {
     /**
      *

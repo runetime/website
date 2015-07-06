@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the TicketController.
  *
  * Class TicketTest
  */
-class TicketTest extends TestCase
+class TicketTest extends Test
 {
     /**
      *

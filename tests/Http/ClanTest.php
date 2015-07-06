@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the ClanController.
  *
  * Class ClanTest
  */
-class ClanTest extends TestCase
+class ClanTest extends Test
 {
     /**
      *

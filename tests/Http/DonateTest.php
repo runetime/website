@@ -1,14 +1,14 @@
 <?php
 namespace tests\Http;
 
-use tests\TestCase;
+use tests\Test;
 
 /**
  * Tests HTTP routes for the DonateController.
  *
  * Class DonateTest
  */
-class DonateTest extends TestCase
+class DonateTest extends Test
 {
     /**
      *

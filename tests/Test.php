@@ -6,14 +6,14 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\Thread;
 use App\RuneTime\News\News;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\TestCase as BaseTest;
+use Illuminate\Foundation\Testing\TestCase;
 
 /**
  * The base class for HTTP tests.
  *
- * Class TestCase
+ * Class Test
  */
-class TestCase extends BaseTest
+abstract class Test extends TestCase
 {
     /**
      * The base URL to use while testing the application.
