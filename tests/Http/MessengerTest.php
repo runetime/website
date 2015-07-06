@@ -1,7 +1,7 @@
 <?php
 namespace tests\Http;
 
-use \App\RuneTime\Messenger\Message;
+use App\RuneTime\Messenger\Message;
 use tests\Test;
 
 /**
