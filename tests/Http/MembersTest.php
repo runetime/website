@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class MembersTest
  */
-class MembersTest extends Test
+final class MembersTest extends Test
 {
     /**
      *

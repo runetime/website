@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class SettingsTest
  */
-class SettingsTest extends Test
+final class SettingsTest extends Test
 {
     /**
      *

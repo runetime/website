@@ -9,7 +9,7 @@ use tests\Test;
  *
  * Class CalculatorsTest
  */
-class CalculatorsTest extends Test
+final class CalculatorsTest extends Test
 {
     /**
      *

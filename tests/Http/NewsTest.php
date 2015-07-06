@@ -8,7 +8,7 @@ use tests\Test;
  * Tests HTTP routes for the NewsController.
  * Class NewsTest
  */
-class NewsTest extends Test
+final class NewsTest extends Test
 {
     /**
      *

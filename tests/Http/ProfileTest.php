@@ -9,7 +9,7 @@ use tests\Test;
  *
  * Class ProfileTest
  */
-class ProfileTest extends Test
+final class ProfileTest extends Test
 {
     /**
      *

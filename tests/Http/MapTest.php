@@ -9,7 +9,7 @@ use tests\Test;
  *
  * Class MapTest
  */
-class MapTest extends Test
+final class MapTest extends Test
 {
     /**
      *

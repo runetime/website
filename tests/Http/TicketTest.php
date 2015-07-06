@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class TicketTest
  */
-class TicketTest extends Test
+final class TicketTest extends Test
 {
     /**
      *

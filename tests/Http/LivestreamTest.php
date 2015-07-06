@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class LivestreamTest
  */
-class LivestreamTest extends Test
+final class LivestreamTest extends Test
 {
     /**
      *

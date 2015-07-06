@@ -9,7 +9,7 @@ use tests\Test;
  *
  * Class AuthTest
  */
-class AuthTest extends Test
+final class AuthTest extends Test
 {
     /**
      *

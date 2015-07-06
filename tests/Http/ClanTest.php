@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class ClanTest
  */
-class ClanTest extends Test
+final class ClanTest extends Test
 {
     /**
      *

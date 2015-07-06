@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class NotificationsTest
  */
-class NotificationsTest extends Test
+final class NotificationsTest extends Test
 {
     /**
      *

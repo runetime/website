@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class NameCheckerTest
  */
-class NameCheckerTest extends Test
+final class NameCheckerTest extends Test
 {
     /**
      *

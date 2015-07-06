@@ -9,7 +9,7 @@ use tests\Test;
  *
  * Class DatabaseTest
  */
-class DatabaseTest extends Test
+final class DatabaseTest extends Test
 {
     /**
      *

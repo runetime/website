@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class SignatureTest
  */
-class SignatureTest extends Test
+final class SignatureTest extends Test
 {
     /**
      *

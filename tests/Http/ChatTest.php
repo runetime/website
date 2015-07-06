@@ -10,7 +10,7 @@ use tests\Test;
  *
  * Class ChatTest
  */
-class ChatTest extends Test
+final class ChatTest extends Test
 {
     /**
      *

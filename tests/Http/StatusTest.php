@@ -9,7 +9,7 @@ use tests\Test;
  *
  * Class StatusTest
  */
-class StatusTest extends Test
+final class StatusTest extends Test
 {
     /**
      *

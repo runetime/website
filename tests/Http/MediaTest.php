@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class MediaTest
  */
-class MediaTest extends Test
+final class MediaTest extends Test
 {
     /**
      *

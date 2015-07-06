@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class StaffAdminTest
  */
-class StaffAdminTest extends Test
+final class StaffAdminTest extends Test
 {
     /**
      *

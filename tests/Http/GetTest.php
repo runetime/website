@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class GetTest
  */
-class GetTest extends Test
+final class GetTest extends Test
 {
     /**
      *

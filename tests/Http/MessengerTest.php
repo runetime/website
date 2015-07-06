@@ -9,7 +9,7 @@ use tests\Test;
  *
  * Class MessengerTest
  */
-class MessengerTest extends Test
+final class MessengerTest extends Test
 {
     /**
      *

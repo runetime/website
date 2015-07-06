@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class TransparencyTest
  */
-class TransparencyTest extends Test
+final class TransparencyTest extends Test
 {
     /**
      *

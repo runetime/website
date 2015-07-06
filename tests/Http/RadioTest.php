@@ -8,7 +8,7 @@ use tests\Test;
  *
  * Class RadioTest
  */
-class RadioTest extends Test
+final class RadioTest extends Test
 {
     /**
      *
