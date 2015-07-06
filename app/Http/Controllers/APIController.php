@@ -37,15 +37,15 @@ class APIController extends Controller
      */
     public function getAwards()
     {
-        $response = [];
         $awards = $this->awards->getByStatus(Award::STATUS_AVAILABLE);
+
+        $response = [];
+
         foreach ($awards as $award) {
-            $set = (object) [
+            $response[] = (object) [
                 'id'   => $award->id,
                 'name' => $award->name,
             ];
-
-            array_push($response, $set);
         }
 
         return json_encode($response);
@@ -63,7 +63,7 @@ class APIController extends Controller
     {
         $user = $this->users->getById($form->id);
 
-        $userDetails = (object) [
+        return json_encode([
             'id'               => $user->id,
             'display_name'     => $user->display_name,
             'title'            => $user->title,
@@ -75,8 +75,6 @@ class APIController extends Controller
             'posts_total'      => $user->posts_total,
             'profile_views'    => $user->profile_views,
             'reputation'       => $user->reputation,
-        ];
-
-        return json_encode($userDetails);
+        ]);
     }
 }

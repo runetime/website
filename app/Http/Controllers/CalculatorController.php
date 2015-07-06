@@ -91,7 +91,8 @@ class CalculatorController extends Controller
     public function getCombatLoad(CombatLoadRequest $form)
     {
         $scores = \String::getHiscore($form->rsn);
-        $skills = (object) [
+
+        return json_encode([
             'attack'       => $scores[1][1],
             'defence'      => $scores[2][1],
             'strength'     => $scores[3][1],
@@ -100,9 +101,7 @@ class CalculatorController extends Controller
             'prayer'       => $scores[6][1],
             'magic'        => $scores[7][1],
             'summoning'    => $scores[24][1],
-        ];
-
-        return json_encode($skills);
+        ]);
     }
 
     /**
@@ -115,6 +114,7 @@ class CalculatorController extends Controller
     public function getView($type)
     {
         $calculator = $this->calculators->getByNameTrim($type);
+
         if (empty($calculator)) {
             return \Error::abort(404);
         }
@@ -122,12 +122,13 @@ class CalculatorController extends Controller
         $items = json_decode($calculator->items);
         $levelsRequired = json_decode($calculator->levels_required);
         $xp = json_decode($calculator->xp);
+        $data = compact('calculator', 'items', 'levelsRequired', 'xp');
 
         $this->bc(['calculators' => trans('calculator.title')]);
         $this->nav('navbar.runescape.title');
         $this->title('calculator.calculator', ['name' => $calculator->name]);
 
-        return $this->view('calculators.view', compact('calculator', 'items', 'levelsRequired', 'xp'));
+        return $this->view('calculators.view', $data);
     }
 
     /**
@@ -140,6 +141,7 @@ class CalculatorController extends Controller
     public function postLoad(PostRequest $form)
     {
         $calculator = $this->calculators->getById($form->id);
+
         if (empty($calculator)) {
             return json_encode([]);
         }
@@ -165,10 +167,11 @@ class CalculatorController extends Controller
 
         // Order the items by required level
         $itemListNumbered = [];
+
         for ($x = 0; $x <= 99; $x++) {
             if (!empty($itemList[$x][0])) {
                 foreach ($itemList[$x] as $item) {
-                    array_push($itemListNumbered, $item);
+                    $itemListNumbered[] = $item;
                 }
             }
         }

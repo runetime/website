@@ -33,6 +33,7 @@ class GetController extends Controller
     {
         $available = true;
         $user = $this->users->getByEmail($form->email);
+
         if (!empty($user)) {
             $available = false;
         }
@@ -51,6 +52,7 @@ class GetController extends Controller
     {
         $available = true;
         $user = $this->users->getByDisplayName($form->display_name);
+
         if (!empty($user)) {
             $available = false;
         }

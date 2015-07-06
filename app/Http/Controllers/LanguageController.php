@@ -38,7 +38,7 @@ class LanguageController extends Controller
             \Cache::forever('ip.' . \Request::getClientIp() . '.lang', $initials);
         }
 
-        return \redirect()->to('/' . $redirect);
+        return redirect()->to('/' . $redirect);
     }
 
     /**

@@ -265,6 +265,7 @@ class ForumThreadController extends Controller
         $thread = with(new Thread)->saveNew(\Auth::user()->id, $subforum->id, $form->title, 0, 1, 0, -1, Thread::STATUS_VISIBLE);
         $post = with(new Post)->saveNew(\Auth::user()->id, 1, Post::STATUS_VISIBLE, \String::encodeIP(), $form->contents, with(new \Parsedown)->text($form->contents));
         $post->author->incrementReputation();
+        $post->author->incrementPostActive();
         with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
         $thread->last_post = $post->id;
         $thread->save();

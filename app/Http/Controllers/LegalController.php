@@ -13,7 +13,7 @@ class LegalController extends Controller
      */
     public function getLegal($language)
     {
-        if ($language == 'english') {
+        if ($language === 'english') {
             $lang = 'en';
         } else {
             $lang = 'en';

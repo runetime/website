@@ -82,13 +82,12 @@ class ChatController extends Controller
         // Cycle through all of the channels and setup data for them
         foreach ($channels as $channel) {
             $message = $this->chat->getLatestByChannel($channel->id);
-            $channelCurrent = (object) [
+
+            $channelList[] = [
                 'name'         => $channel->name_trim,
                 'messages'     => $channel->messages,
                 'last_message' => strtotime($message['created_at']),
             ];
-
-            array_push($channelList, $channelCurrent);
         }
 
         return json_encode(array_reverse($channelList));
@@ -105,12 +104,13 @@ class ChatController extends Controller
     public function postCheckChannel(CheckChannelRequest $form)
     {
         $channel = $this->channels->getByNameTrim($form->channel);
-        $response = ['valid' => false];
+        $valid = false;
+
         if (!empty($channel)) {
-            $response['valid'] = true;
+            $valid = true;
         }
 
-        return json_encode($response);
+        return json_encode(['valid' => $valid]);
     }
 
     /**
@@ -126,6 +126,7 @@ class ChatController extends Controller
     public function postMessage(MessageRequest $form)
     {
         $response = ['done' => false];
+
         if (\Auth::check()) {
             $mute = $this->mutes->getByUserActive(\Auth::user()->id);
 
@@ -188,12 +189,13 @@ class ChatController extends Controller
      */
     public function getModerator()
     {
-        $response = ['mod' => false];
+        $mod = false;
+
         if (\Auth::check() && \Auth::user()->isCommunity()) {
-            $response['mod'] = true;
+            $mod = true;
         }
 
-        return json_encode($response);
+        return json_encode(['mod' => $mod]);
     }
 
     /**
@@ -289,11 +291,16 @@ class ChatController extends Controller
             return json_encode([]);
         }
 
+        $status = Chat::STATUS_VISIBLE;
+        $operator = '=';
+
         if (\Auth::check() && \Auth::user()->isStaff()) {
-            $messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_INVISIBLE, '<=');
-        } else {
-            $messages = $this->chat->getAfterIdByStatus($form->id, $form->channel, Chat::STATUS_VISIBLE);
+            $status = Chat::STATUS_INVISIBLE;
+            $operator = '<=';
         }
+
+        $messages = $this->chat
+            ->getAfterIdByStatus($form->id, $form->channel, $status);
 
         $messageList = $this->sortMessages($messages);
 
@@ -313,12 +320,14 @@ class ChatController extends Controller
     {
         $messageList = [];
         $users = [];
+
         foreach ($messages as $message) {
             if (!isset($users[$message->author_id])) {
-                $users[$message->author_id] = $this->users->getById($message->author_id);
+                $users[$message->author_id] = $this->users
+                    ->getById($message->author_id);
             }
 
-            $messageCurrent = (object) [
+            $messageList[] = (object) [
                 'id'              => $message->id,
                 'author_name'     => $users[$message->author_id]->display_name,
                 'class_name'      => $message->author->importantRole()->class_name,
@@ -327,7 +336,6 @@ class ChatController extends Controller
                 'uuid'            => uniqid(md5(microtime(true)), true),
                 'status'          => $message->status,
             ];
-            array_push($messageList, $messageCurrent);
         }
 
         return $messageList;
