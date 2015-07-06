@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 /**
  * Class GetController
  */
-class GetController extends Controller
+final class GetController extends Controller
 {
     /**
      * @var UserRepository

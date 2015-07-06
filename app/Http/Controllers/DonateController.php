@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class DonateController
  */
-class DonateController extends Controller
+final class DonateController extends Controller
 {
     /**
      * Returns the Donate page.

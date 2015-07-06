@@ -6,7 +6,7 @@ use App\RuneTime\Forum\Threads\ThreadRepository;
 /**
  * Class StaffModerationController
  */
-class StaffModerationController extends Controller
+final class StaffModerationController extends Controller
 {
     /**
      * @var ThreadRepository

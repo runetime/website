@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class ClanController
  */
-class ClanController extends Controller
+final class ClanController extends Controller
 {
     /**
      * Returns the clan page, giving it an array of translated strings.

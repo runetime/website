@@ -12,7 +12,7 @@ use App\RuneTime\Notifications\Notification;
 /**
  * Class MessengerController
  */
-class MessengerController extends Controller
+final class MessengerController extends Controller
 {
     /**
      * @var MessageRepository

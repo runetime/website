@@ -12,7 +12,7 @@ use App\RuneTime\Tickets\TicketRepository;
 /**
  * Class TicketController
  */
-class TicketController extends Controller
+final class TicketController extends Controller
 {
     /**
      * @var RoleRepository

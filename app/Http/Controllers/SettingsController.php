@@ -14,7 +14,7 @@ use App\RuneTime\Accounts\UserRepository;
 /**
  * Class SettingsController
  */
-class SettingsController extends Controller
+final class SettingsController extends Controller
 {
     /**
      * @var UserRepository

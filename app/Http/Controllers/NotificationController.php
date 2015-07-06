@@ -7,7 +7,7 @@ use App\RuneTime\Notifications\NotificationRepository;
 /**
  * Class NotificationController
  */
-class NotificationController extends Controller
+final class NotificationController extends Controller
 {
     /**
      * @var NotificationRepository

@@ -7,7 +7,7 @@ use FilesystemIterator;
 /**
  * Class LanguageController
  */
-class LanguageController extends Controller
+final class LanguageController extends Controller
 {
     /**
      * @return \Illuminate\View\View

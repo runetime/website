@@ -22,7 +22,7 @@ use App\RuneTime\Statuses\StatusRepository;
 /**
  * Class ForumThreadController
  */
-class ForumThreadController extends Controller
+final class ForumThreadController extends Controller
 {
     /**
      * @var AnswerRepository

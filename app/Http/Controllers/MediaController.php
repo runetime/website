@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class MediaController
  */
-class MediaController extends Controller
+final class MediaController extends Controller
 {
     /**
      * @return \Illuminate\View\View

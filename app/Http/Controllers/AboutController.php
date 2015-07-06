@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class AboutController
  */
-class AboutController extends Controller
+final class AboutController extends Controller
 {
     /**
      * Returns the About page.

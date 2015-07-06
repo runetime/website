@@ -15,7 +15,7 @@ use App\RuneTime\Tickets\Ticket;
 /**
  * Class StaffController
  */
-class StaffController extends Controller
+final class StaffController extends Controller
 {
     /**
      * @var CheckupRepository

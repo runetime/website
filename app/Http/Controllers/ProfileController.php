@@ -8,7 +8,7 @@ use App\RuneTime\Forum\Threads\ThreadRepository;
 /**
  * Class ProfileController
  */
-class ProfileController extends Controller
+final class ProfileController extends Controller
 {
     /**
      * @var PostRepository

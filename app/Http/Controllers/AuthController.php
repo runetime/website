@@ -15,7 +15,7 @@ use Illuminate\Contracts\Auth\PasswordBroker;
 /**
  * Class AuthController
  */
-class AuthController extends Controller
+final class AuthController extends Controller
 {
     /**
      * @var PasswordBroker

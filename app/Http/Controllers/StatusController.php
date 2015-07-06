@@ -12,7 +12,7 @@ use App\RuneTime\Statuses\StatusRepository;
 /**
  * Class StatusController
  */
-class StatusController extends Controller
+final class StatusController extends Controller
 {
     /**
      * @var StatusRepository

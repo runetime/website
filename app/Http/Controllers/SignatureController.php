@@ -6,7 +6,7 @@ use App\Http\Requests\Signatures\RSNRequest;
 /**
  * Class SignatureController
  */
-class SignatureController extends Controller
+final class SignatureController extends Controller
 {
     /**
      * @return \Illuminate\View\View

@@ -25,7 +25,7 @@ use App\RuneTime\Forum\Threads\PostRepository;
 /**
  * Class StaffAdminController
  */
-class StaffAdminController extends Controller
+final class StaffAdminController extends Controller
 {
     /**
      * @var AwardRepository

@@ -9,7 +9,7 @@ use App\RuneTime\Statuses\StatusRepository;
 /**
  * Class HomeController
  */
-class HomeController extends Controller
+final class HomeController extends Controller
 {
     /**
      * @var NewsRepository

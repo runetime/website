@@ -9,7 +9,7 @@ use App\RuneTime\Awards\AwardRepository;
 /**
  * Class APIController
  */
-class APIController extends Controller
+final class APIController extends Controller
 {
     /**
      * @var AwardRepository

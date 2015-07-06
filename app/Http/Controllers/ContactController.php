@@ -6,7 +6,7 @@ use App\Http\Requests\Contact\ContactRequest;
 /**
  * Class ContactController
  */
-class ContactController extends Controller
+final class ContactController extends Controller
 {
     /**
      * Returns the Contact page.

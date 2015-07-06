@@ -13,7 +13,7 @@ use App\RuneTime\Radio\TimetableRepository;
 /**
  * Class RadioController
  */
-class RadioController extends Controller
+final class RadioController extends Controller
 {
     /**
      * @var HistoryRepository

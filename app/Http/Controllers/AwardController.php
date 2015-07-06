@@ -7,7 +7,7 @@ use App\RuneTime\Awards\AwardRepository;
 /**
  * Class AwardController
  */
-class AwardController extends Controller
+final class AwardController extends Controller
 {
     /**
      * @var \App\RuneTime\Awards\AwardRepository
