@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 /**
  * Class DonateController
  */
@@ -9,7 +11,7 @@ final class DonateController extends Controller
     /**
      * Returns the Donate page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {

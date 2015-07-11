@@ -1,13 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+
 /**
  * Class LivestreamController
  */
 final class LivestreamController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -23,7 +26,7 @@ final class LivestreamController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getReset()
     {

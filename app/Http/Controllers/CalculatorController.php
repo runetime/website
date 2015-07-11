@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Calculators\CombatLoadRequest;
 use App\Http\Requests\Calculators\PostRequest;
 use App\RuneTime\Calculators\CalculatorRepository;
+use Illuminate\View\View;
 
 /**
  * Class CalculatorController
@@ -26,7 +27,7 @@ final class CalculatorController extends Controller
     /**
      * Returns the index of the calculators.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -41,7 +42,7 @@ final class CalculatorController extends Controller
     /**
      * Returns the combat calculator.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCombat()
     {
@@ -55,7 +56,7 @@ final class CalculatorController extends Controller
     /**
      * Returns the combat calculator for RS3.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCombat3()
     {
@@ -69,7 +70,7 @@ final class CalculatorController extends Controller
     /**
      * Returns the combat calculator for OSRS.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCombatOSRS()
     {
@@ -109,7 +110,7 @@ final class CalculatorController extends Controller
      *
      * @param $type
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getView($type)
     {

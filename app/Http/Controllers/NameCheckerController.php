@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NameCheck\CheckRequest;
+use Illuminate\View\View;
 
 /**
  * Class NameCheckerController
@@ -9,7 +10,7 @@ use App\Http\Requests\NameCheck\CheckRequest;
 final class NameCheckerController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -20,7 +21,7 @@ final class NameCheckerController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getPlain()
     {

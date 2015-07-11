@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 /**
  * Class ClanController
  */
@@ -9,7 +11,7 @@ final class ClanController extends Controller
     /**
      * Returns the clan page, giving it an array of translated strings.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {

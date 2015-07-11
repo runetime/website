@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Contact\ContactRequest;
+use Illuminate\View\View;
 
 /**
  * Class ContactController
@@ -11,7 +12,7 @@ final class ContactController extends Controller
     /**
      * Returns the Contact page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {

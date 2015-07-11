@@ -5,6 +5,7 @@ use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\News\NewsRepository;
 use App\RuneTime\Statuses\StatusRepository;
+use Illuminate\View\View;
 
 /**
  * Class HomeController
@@ -43,7 +44,7 @@ final class HomeController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {

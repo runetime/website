@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use DirectoryIterator;
 use FilesystemIterator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class LanguageController
@@ -10,7 +12,7 @@ use FilesystemIterator;
 final class LanguageController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getSet()
     {
@@ -27,7 +29,7 @@ final class LanguageController extends Controller
      * @param        $initials
      * @param string $redirect
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getChange($initials, $redirect = '')
     {

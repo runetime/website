@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Notifications\NotificationRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class NotificationController
@@ -23,7 +25,7 @@ final class NotificationController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -39,7 +41,7 @@ final class NotificationController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getView($id)
     {
@@ -58,7 +60,7 @@ final class NotificationController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getSetAllRead()
     {

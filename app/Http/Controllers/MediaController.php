@@ -1,13 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 /**
  * Class MediaController
  */
 final class MediaController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {

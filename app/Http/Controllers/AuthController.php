@@ -11,6 +11,8 @@ use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
 use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class AuthController
@@ -58,7 +60,7 @@ final class AuthController extends Controller
      * Returns the Login page, and if the user had failed to
      * login then it also displays the appropriate error.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getLoginForm()
     {
@@ -78,7 +80,7 @@ final class AuthController extends Controller
      *
      * @param LoginRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postLoginForm(LoginRequest $form)
     {
@@ -106,7 +108,7 @@ final class AuthController extends Controller
     /**
      * Returns the Signup page
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getSignupForm()
     {
@@ -124,7 +126,7 @@ final class AuthController extends Controller
      *
      * @param SignupRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postSignupForm(SignupRequest $form)
     {
@@ -198,7 +200,7 @@ final class AuthController extends Controller
      * Logs the user out of their account and
      * redirects the user to the homepage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getLogout()
     {
@@ -210,7 +212,7 @@ final class AuthController extends Controller
     /**
      * Returns the password reset page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getPasswordEmail()
     {
@@ -225,7 +227,7 @@ final class AuthController extends Controller
      *
      * @param PasswordEmailRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse|int
+     * @return RedirectResponse|int
      */
     public function postPasswordEmail(PasswordEmailRequest $request)
     {
@@ -252,7 +254,7 @@ final class AuthController extends Controller
      *
      * @param $token
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getPasswordReset($token)
     {
@@ -275,7 +277,7 @@ final class AuthController extends Controller
      * @param                      $token
      * @param PasswordResetRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse|int
+     * @return RedirectResponse|int
      */
     public function postPasswordReset($token, PasswordResetRequest $form)
     {
@@ -303,7 +305,7 @@ final class AuthController extends Controller
     /**
      * Redirects the user to the login form.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getRedirect()
     {

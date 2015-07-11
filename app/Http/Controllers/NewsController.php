@@ -9,6 +9,8 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\News\News;
 use App\RuneTime\News\NewsRepository;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class NewsController
@@ -43,7 +45,7 @@ final class NewsController extends Controller
     /**
      * @param string $tag
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getView($tag = '')
     {
@@ -64,7 +66,7 @@ final class NewsController extends Controller
      * @param      $id
      * @param bool $comments
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getArticle($id, $comments = false)
     {
@@ -83,7 +85,7 @@ final class NewsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCreate()
     {
@@ -97,7 +99,7 @@ final class NewsController extends Controller
     /**
      * @param CreateNewsRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postCreate(CreateNewsRequest $form)
     {
@@ -138,7 +140,7 @@ final class NewsController extends Controller
      * @param              $id
      * @param ReplyRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postReply($id, ReplyRequest $form)
     {

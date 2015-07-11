@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 /**
  * Class LegalController
  */
@@ -9,7 +11,7 @@ final class LegalController extends Controller
     /**
      * @param $language
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getLegal($language)
     {
@@ -27,7 +29,7 @@ final class LegalController extends Controller
         return $this->view('legal.legal');
     }
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getPrivacy()
     {
@@ -38,7 +40,7 @@ final class LegalController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getTerms()
     {

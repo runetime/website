@@ -8,6 +8,8 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Messenger\Message;
 use App\RuneTime\Messenger\MessageRepository;
 use App\RuneTime\Notifications\Notification;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View
 
 /**
  * Class MessengerController
@@ -33,7 +35,7 @@ final class MessengerController extends Controller
         $this->users = $users;
     }
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -48,7 +50,7 @@ final class MessengerController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getView($id)
     {
@@ -70,7 +72,7 @@ final class MessengerController extends Controller
      * @param              $id
      * @param ReplyRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postReply($id, ReplyRequest $form)
     {
@@ -97,7 +99,7 @@ final class MessengerController extends Controller
     /**
      * @param int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCreate($id = 0)
     {
@@ -118,7 +120,7 @@ final class MessengerController extends Controller
     /**
      * @param CreateRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postCreate(CreateRequest $form)
     {

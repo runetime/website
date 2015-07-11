@@ -18,6 +18,7 @@ use App\RuneTime\Forum\Threads\Vote;
 use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\StatusRepository;
+use Illuminate\View\View;
 
 /**
  * Class ForumPostController
@@ -29,7 +30,7 @@ final class ForumPostController extends Controller
      */
     private $answers;
     /**
-     * @var \App\RuneTime\Forum\Polls\VoteRepository
+     * @var VoteRepository
      */
     private $pollVotes;
     /**
@@ -66,20 +67,20 @@ final class ForumPostController extends Controller
     private $votes;
 
     /**
-     * @param AnswerRepository                         $answers
-     * @param \App\RuneTime\Forum\Polls\VoteRepository $pollVotes
-     * @param PostRepository                           $posts
-     * @param QuestionRepository                       $questions
-     * @param StatusRepository                         $statuses
-     * @param SubforumRepository                       $subforums
-     * @param TagRepository                            $tags
-     * @param ThreadRepository                         $threads
-     * @param UserRepository                           $users
-     * @param VoteRepository                           $votes
+     * @param AnswerRepository   $answers
+     * @param VoteRepository     $pollVotes
+     * @param PostRepository     $posts
+     * @param QuestionRepository $questions
+     * @param StatusRepository   $statuses
+     * @param SubforumRepository $subforums
+     * @param TagRepository      $tags
+     * @param ThreadRepository   $threads
+     * @param UserRepository     $users
+     * @param VoteRepository     $votes
      */
     public function __construct(
         AnswerRepository $answers,
-        \App\RuneTime\Forum\Polls\VoteRepository $pollVotes,
+        VoteRepository $pollVotes,
         PostRepository $posts,
         QuestionRepository $questions,
         StatusRepository $statuses,
@@ -123,7 +124,7 @@ final class ForumPostController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getEdit($id)
     {
@@ -206,7 +207,7 @@ final class ForumPostController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getReport($id)
     {

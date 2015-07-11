@@ -5,6 +5,7 @@ use App\Http\Requests\API\UserRequest;
 use App\RuneTime\Accounts\UserRepository;
 use App\RuneTime\Awards\Award;
 use App\RuneTime\Awards\AwardRepository;
+use Illuminate\View\View;
 
 /**
  * Class APIController
@@ -57,7 +58,7 @@ final class APIController extends Controller
      *
      * @param UserRequest $form
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function postUser(UserRequest $form)
     {

@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 /**
  * Class AboutController
  */
@@ -9,7 +11,7 @@ final class AboutController extends Controller
     /**
      * Returns the About page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {

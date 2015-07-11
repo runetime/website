@@ -8,6 +8,7 @@ use App\RuneTime\Bans\IPRepository;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as RouterController;
+use Illuminate\View\View;
 
 /**
  * Class Controller
@@ -104,7 +105,7 @@ abstract class Controller extends RouterController
      * @param       $path
      * @param array $data
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     protected function view($path, $data = [])
     {

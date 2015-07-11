@@ -12,6 +12,7 @@ use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
 use App\RuneTime\Forum\Threads\VoteRepository;
 use App\RuneTime\Statuses\StatusRepository;
+use Illuminate\View\View;
 
 /**
  * Class ForumController
@@ -23,7 +24,7 @@ final class ForumController extends Controller
      */
     private $answers;
     /**
-     * @var \App\RuneTime\Forum\Polls\VoteRepository
+     * @var VoteRepository
      */
     private $pollVotes;
     /**
@@ -60,20 +61,20 @@ final class ForumController extends Controller
     private $votes;
 
     /**
-     * @param AnswerRepository                         $answers
-     * @param \App\RuneTime\Forum\Polls\VoteRepository $pollVotes
-     * @param PostRepository                           $posts
-     * @param QuestionRepository                       $questions
-     * @param StatusRepository                         $statuses
-     * @param SubforumRepository                       $subforums
-     * @param TagRepository                            $tags
-     * @param ThreadRepository                         $threads
-     * @param UserRepository                           $users
-     * @param VoteRepository                           $votes
+     * @param AnswerRepository   $answers
+     * @param VoteRepository     $pollVotes
+     * @param PostRepository     $posts
+     * @param QuestionRepository $questions
+     * @param StatusRepository   $statuses
+     * @param SubforumRepository $subforums
+     * @param TagRepository      $tags
+     * @param ThreadRepository   $threads
+     * @param UserRepository     $users
+     * @param VoteRepository     $votes
      */
     public function __construct(
         AnswerRepository $answers,
-        \App\RuneTime\Forum\Polls\VoteRepository $pollVotes,
+        VoteRepository $pollVotes,
         PostRepository $posts,
         QuestionRepository $questions,
         StatusRepository $statuses,
@@ -96,7 +97,7 @@ final class ForumController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -129,7 +130,7 @@ final class ForumController extends Controller
      * @param     $id
      * @param int $page
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getSubforum($id, $page = 1)
     {
@@ -174,7 +175,7 @@ final class ForumController extends Controller
     /**
      * @param $name
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getTagSearch($name)
     {

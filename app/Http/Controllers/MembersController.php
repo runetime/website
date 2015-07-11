@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\RuneTime\Accounts\RoleRepository;
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
+use Illuminate\View\View;
 
 /**
  * Class MembersController
@@ -35,7 +36,7 @@ final class MembersController extends Controller
      * @param string $searchOrder
      * @param int    $page
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex($searchRole = 'none', $searchPrefix = 'none', $searchOrder = 'none', $page = 1)
     {
