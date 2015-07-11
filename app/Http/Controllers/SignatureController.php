@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Signatures\RSNRequest;
+use Illuminate\View\View;
 
 /**
  * Class SignatureController
@@ -9,7 +10,7 @@ use App\Http\Requests\Signatures\RSNRequest;
 final class SignatureController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -22,7 +23,7 @@ final class SignatureController extends Controller
     /**
      * @param RSNRequest $form
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function postUsername(RSNRequest $form)
     {
@@ -40,7 +41,7 @@ final class SignatureController extends Controller
      * @param $username
      * @param $type
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getStyle($username, $type)
     {
@@ -64,7 +65,7 @@ final class SignatureController extends Controller
      * @param $type
      * @param $style
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getFinal($username, $type, $style)
     {

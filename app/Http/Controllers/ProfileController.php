@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\RuneTime\Accounts\UserRepository;
 use App\RuneTime\Forum\Threads\PostRepository;
 use App\RuneTime\Forum\Threads\ThreadRepository;
+use Illuminate\View\View;
 
 /**
  * Class ProfileController
@@ -41,7 +42,7 @@ final class ProfileController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getProfileIndex($id)
     {
@@ -83,7 +84,7 @@ final class ProfileController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getProfileAwards($id)
     {
@@ -104,7 +105,7 @@ final class ProfileController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getProfileFeed($id)
     {

@@ -9,6 +9,7 @@ use App\RuneTime\Radio\RequestRepository;
 use App\RuneTime\Radio\Session;
 use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
+use Illuminate\View\View;
 
 /**
  * Class RadioController
@@ -53,7 +54,7 @@ final class RadioController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -81,7 +82,7 @@ final class RadioController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getOpen()
     {

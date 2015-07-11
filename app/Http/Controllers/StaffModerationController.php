@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\RuneTime\Forum\Threads\ThreadRepository;
+use Illuminate\Http\RedirectResponse;
 
 /**
  * Class StaffModerationController
@@ -25,7 +26,7 @@ final class StaffModerationController extends Controller
      * @param $id
      * @param $status
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getThreadStatusSwitch($id, $status)
     {

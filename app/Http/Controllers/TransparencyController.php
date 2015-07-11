@@ -1,13 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 /**
  * Class TransparencyController
  */
 final class TransparencyController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -18,7 +20,7 @@ final class TransparencyController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getMarkdownIndex()
     {
@@ -48,7 +50,7 @@ final class TransparencyController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getMarkdownReference()
     {

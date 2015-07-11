@@ -1,13 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 /**
  * Class PlayController
  */
 final class PlayController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -18,7 +20,7 @@ final class PlayController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function get3()
     {
@@ -30,7 +32,7 @@ final class PlayController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getOSRS()
     {

@@ -11,6 +11,7 @@ use App\RuneTime\Bans\Ban;
 use App\RuneTime\Bans\Mute;
 use App\RuneTime\Chat\Chat;
 use App\RuneTime\Chat\ChatRepository;
+use Illuminate\View\View;
 
 /**
  * Class StaffTeamLeaderController
@@ -49,7 +50,7 @@ final class StaffTeamLeaderController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {

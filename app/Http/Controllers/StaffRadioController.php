@@ -15,6 +15,8 @@ use App\RuneTime\Radio\RequestRepository;
 use App\RuneTime\Radio\Session;
 use App\RuneTime\Radio\SessionRepository;
 use App\RuneTime\Radio\TimetableRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class StaffRadioController
@@ -71,7 +73,7 @@ final class StaffRadioController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getRadioIndex()
     {
@@ -90,7 +92,7 @@ final class StaffRadioController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getRadioLive()
     {
@@ -106,7 +108,7 @@ final class StaffRadioController extends Controller
     /**
      * @param RadioLiveRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postRadioLive(RadioLiveRequest $form)
     {
@@ -179,7 +181,7 @@ final class StaffRadioController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getRadioLiveStop()
     {
@@ -194,7 +196,7 @@ final class StaffRadioController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getRadioMessages()
     {
@@ -241,7 +243,7 @@ final class StaffRadioController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getRadioTimetable()
     {

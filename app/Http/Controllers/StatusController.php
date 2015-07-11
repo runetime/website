@@ -8,6 +8,8 @@ use App\RuneTime\Forum\Threads\Vote;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Statuses\Status;
 use App\RuneTime\Statuses\StatusRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class StatusController
@@ -27,7 +29,7 @@ final class StatusController extends Controller
         $this->statuses = $statuses;
     }
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -47,7 +49,7 @@ final class StatusController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getView($id)
     {
@@ -71,7 +73,7 @@ final class StatusController extends Controller
      * @param $id
      * @param $newStatus
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getStatusSwitch($id, $newStatus)
     {
@@ -90,7 +92,7 @@ final class StatusController extends Controller
      * @param                    $id
      * @param StatusReplyRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postReply($id, StatusReplyRequest $form)
     {
@@ -114,7 +116,7 @@ final class StatusController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCreate()
     {
@@ -128,7 +130,7 @@ final class StatusController extends Controller
     /**
      * @param StatusCreateRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postCreate(StatusCreateRequest $form)
     {

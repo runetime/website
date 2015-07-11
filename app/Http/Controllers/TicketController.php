@@ -8,6 +8,8 @@ use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Notifications\Notification;
 use App\RuneTime\Tickets\Ticket;
 use App\RuneTime\Tickets\TicketRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class TicketController
@@ -34,7 +36,7 @@ final class TicketController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -62,7 +64,7 @@ final class TicketController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getView($id)
     {
@@ -91,7 +93,7 @@ final class TicketController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getClose($id)
     {
@@ -112,7 +114,7 @@ final class TicketController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCreate()
     {
@@ -126,7 +128,7 @@ final class TicketController extends Controller
     /**
      * @param CreateTicketRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postCreate(CreateTicketRequest $form)
     {
@@ -144,7 +146,7 @@ final class TicketController extends Controller
      * @param                    $id
      * @param CreateReplyRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postReply($id, CreateReplyRequest $form)
     {
@@ -165,7 +167,7 @@ final class TicketController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getManageIndex()
     {
@@ -188,7 +190,7 @@ final class TicketController extends Controller
      * @param $name
      * @param $status
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getStatusSwitch($id, $name, $status)
     {

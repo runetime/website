@@ -21,6 +21,8 @@ use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Forum\Threads\PostRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class StaffAdminController
@@ -91,7 +93,7 @@ final class StaffAdminController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -131,7 +133,7 @@ final class StaffAdminController extends Controller
      * TODO: The controller code is done I think but the view
      * needs work.  There is also no link to access this.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCheckupList()
     {
@@ -150,7 +152,7 @@ final class StaffAdminController extends Controller
      *
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCheckupView($id)
     {
@@ -287,7 +289,7 @@ final class StaffAdminController extends Controller
     /**
      * @param int $page
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getUserList($page = 1)
     {
@@ -327,7 +329,7 @@ final class StaffAdminController extends Controller
     /**
      * @param $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getUserView($id)
     {
@@ -349,7 +351,7 @@ final class StaffAdminController extends Controller
      * @param                      $id
      * @param AdminUserViewRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postUserView($id, AdminUserViewRequest $form)
     {

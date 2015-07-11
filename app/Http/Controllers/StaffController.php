@@ -11,6 +11,8 @@ use App\RuneTime\Checkup\Checkup;
 use App\RuneTime\Checkup\CheckupRepository;
 use App\RuneTime\Forum\Threads\Post;
 use App\RuneTime\Tickets\Ticket;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class StaffController
@@ -43,7 +45,7 @@ final class StaffController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -105,7 +107,7 @@ final class StaffController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getCheckup()
     {
@@ -121,7 +123,7 @@ final class StaffController extends Controller
     /**
      * @param CheckupRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postCheckup(CheckupRequest $form)
     {
@@ -133,7 +135,7 @@ final class StaffController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getList()
     {

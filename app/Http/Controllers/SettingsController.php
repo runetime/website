@@ -10,6 +10,8 @@ use App\Http\Requests\Settings\SignatureRequest;
 use App\Http\Requests\Settings\SocialRequest;
 use App\RuneTime\Accounts\User;
 use App\RuneTime\Accounts\UserRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class SettingsController
@@ -30,7 +32,7 @@ final class SettingsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getIndex()
     {
@@ -99,7 +101,7 @@ final class SettingsController extends Controller
     /**
      * @param ProfileRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postIndex(ProfileRequest $form)
     {
@@ -135,7 +137,7 @@ final class SettingsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getPhoto()
     {
@@ -151,7 +153,7 @@ final class SettingsController extends Controller
     /**
      * @param PhotoRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postPhoto(PhotoRequest $form)
     {
@@ -171,7 +173,7 @@ final class SettingsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getPassword()
     {
@@ -191,7 +193,7 @@ final class SettingsController extends Controller
     /**
      * @param PasswordRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postPassword(PasswordRequest $form)
     {
@@ -215,7 +217,7 @@ final class SettingsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getAbout()
     {
@@ -231,7 +233,7 @@ final class SettingsController extends Controller
     /**
      * @param AboutRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postAbout(AboutRequest $form)
     {
@@ -244,7 +246,7 @@ final class SettingsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getSignature()
     {
@@ -260,7 +262,7 @@ final class SettingsController extends Controller
     /**
      * @param SignatureRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postSignature(SignatureRequest $form)
     {
@@ -273,7 +275,7 @@ final class SettingsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getSocial()
     {
@@ -289,7 +291,7 @@ final class SettingsController extends Controller
     /**
      * @param SocialRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postSocial(SocialRequest $form)
     {
@@ -305,7 +307,7 @@ final class SettingsController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getRuneScape()
     {
@@ -337,7 +339,7 @@ final class SettingsController extends Controller
     /**
      * @param RuneScapeRequest $form
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function postRuneScape(RuneScapeRequest $form)
     {
