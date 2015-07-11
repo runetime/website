@@ -9,7 +9,7 @@ use App\RuneTime\Messenger\Message;
 use App\RuneTime\Messenger\MessageRepository;
 use App\RuneTime\Notifications\Notification;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View
+use Illuminate\View\View;
 
 /**
  * Class MessengerController
