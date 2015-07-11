@@ -45,12 +45,12 @@ final class ChatController extends Controller
     private $users;
 
     /**
-     * @param ActionRepository   $actions
-     * @param ChannelRepository  $channels
-     * @param ChatRepository     $chat
-     * @param FilterRepository   $filters
-     * @param MuteRepository     $mutes
-     * @param UserRepository     $users
+     * @param ActionRepository  $actions
+     * @param ChannelRepository $channels
+     * @param ChatRepository    $chat
+     * @param FilterRepository  $filters
+     * @param MuteRepository    $mutes
+     * @param UserRepository    $users
      */
     public function __construct(
         ActionRepository $actions,
