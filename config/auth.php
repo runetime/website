@@ -1,5 +1,7 @@
 <?php
 
+use App\RuneTime\Accounts\User;
+
 return [
 
     /*
@@ -28,7 +30,7 @@ return [
     |
     */
 
-    'model' => App\RuneTime\Accounts\User::class,
+    'model' => User::class,
 
     /*
     |--------------------------------------------------------------------------
