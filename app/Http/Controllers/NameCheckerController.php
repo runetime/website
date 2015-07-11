@@ -6,7 +6,7 @@ use App\Http\Requests\NameCheck\CheckRequest;
 /**
  * Class NameCheckerController
  */
-class NameCheckerController extends Controller
+final class NameCheckerController extends Controller
 {
     /**
      * @return \Illuminate\View\View

@@ -15,7 +15,7 @@ use Illuminate\Contracts\Auth\PasswordBroker;
 /**
  * Class AuthController
  */
-class AuthController extends Controller
+final class AuthController extends Controller
 {
     /**
      * @var PasswordBroker
@@ -93,14 +93,14 @@ class AuthController extends Controller
 
             // Check if the user's credentials are correct
             if (\Auth::attempt($credentials, true)) {
-                return \redirect()->to('/');
+                return redirect()->to('/');
             }
         }
 
         // Supply the user with an error message
         \Session::put('login.incorrect', true);
 
-        return \redirect()->to('login');
+        return redirect()->to('login');
     }
 
     /**
@@ -191,7 +191,7 @@ class AuthController extends Controller
             $message->subject(trans('auth.register.email.subject'));
         });
 
-        return \redirect()->to('/');
+        return redirect()->to('/');
     }
 
     /**

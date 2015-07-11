@@ -14,7 +14,7 @@ use App\RuneTime\Accounts\UserRepository;
 /**
  * Class SettingsController
  */
-class SettingsController extends Controller
+final class SettingsController extends Controller
 {
     /**
      * @var UserRepository
@@ -131,7 +131,7 @@ class SettingsController extends Controller
         $user->referred_by = !empty($referred) ? $referred->id : -1;
         $user->save();
 
-        return \redirect()->to('settings');
+        return redirect()->to('settings');
     }
 
     /**
@@ -167,7 +167,7 @@ class SettingsController extends Controller
             $img->save($uploaded);
         }
 
-        return \redirect()->to('/settings/photo');
+        return redirect()->to('/settings/photo');
     }
 
     /**
@@ -202,7 +202,7 @@ class SettingsController extends Controller
             $user->password = \Hash::make($form->new);
             $user->save();
 
-            return \redirect()->to('/settings/password');
+            return redirect()->to('/settings/password');
         } else {
             \Session::put('settings.error', trans('settings.password.error.incorrect'));
         }
@@ -211,7 +211,7 @@ class SettingsController extends Controller
         \Session::put('settings.new', $form->new);
         \Session::put('settings.new_confirm', $form->new_confirm);
 
-        return \redirect()->to('/settings/password');
+        return redirect()->to('/settings/password');
     }
 
     /**
@@ -240,7 +240,7 @@ class SettingsController extends Controller
         $user->about_parsed = with(new \Parsedown)->text($form->contents);
         $user->save();
 
-        return \redirect()->to('/settings/about-me');
+        return redirect()->to('/settings/about-me');
     }
 
     /**
@@ -269,7 +269,7 @@ class SettingsController extends Controller
         $user->signature_parsed = with(new \Parsedown)->text($form->contents);
         $user->save();
 
-        return \redirect()->to('/settings/signature');
+        return redirect()->to('/settings/signature');
     }
 
     /**
@@ -301,7 +301,7 @@ class SettingsController extends Controller
         $user->social_skype = $form->skype;
         $user->save();
 
-        return \redirect()->to('/settings/social');
+        return redirect()->to('/settings/social');
     }
 
     /**
@@ -370,6 +370,6 @@ class SettingsController extends Controller
         $user->runescape_clan = $form->clan;
         $user->save();
 
-        return \redirect()->to('/settings/runescape');
+        return redirect()->to('/settings/runescape');
     }
 }

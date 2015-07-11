@@ -4,7 +4,7 @@ namespace App\Utilities;
 /**
  * Class Parsedown
  */
-class Parsedown
+final class Parsedown
 {
     /**
      * @param $text

@@ -7,7 +7,7 @@ use App\RuneTime\Notifications\NotificationRepository;
 /**
  * Class NotificationController
  */
-class NotificationController extends Controller
+final class NotificationController extends Controller
 {
     /**
      * @var NotificationRepository
@@ -67,6 +67,6 @@ class NotificationController extends Controller
             $notification->setRead();
         }
 
-        return \redirect()->to('/notifications');
+        return redirect()->to('/notifications');
     }
 }

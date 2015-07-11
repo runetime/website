@@ -15,7 +15,7 @@ use App\RuneTime\Tickets\Ticket;
 /**
  * Class StaffController
  */
-class StaffController extends Controller
+final class StaffController extends Controller
 {
     /**
      * @var CheckupRepository
@@ -129,7 +129,7 @@ class StaffController extends Controller
         $checkup = with(new Checkup)->saveNew($form->active, $hoursActive, $form->team);
         $checkup->addAuthor(\Auth::user());
 
-        return \redirect()->to('staff');
+        return redirect()->to('staff');
     }
 
     /**

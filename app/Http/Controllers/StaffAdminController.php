@@ -25,7 +25,7 @@ use App\RuneTime\Forum\Threads\PostRepository;
 /**
  * Class StaffAdminController
  */
-class StaffAdminController extends Controller
+final class StaffAdminController extends Controller
 {
     /**
      * @var AwardRepository
@@ -381,6 +381,6 @@ class StaffAdminController extends Controller
             }
         }
 
-        return \redirect()->to('/staff/administrator');
+        return redirect()->to('/staff/administrator');
     }
 }

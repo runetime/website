@@ -12,7 +12,7 @@ use App\RuneTime\Notifications\Notification;
 /**
  * Class MessengerController
  */
-class MessengerController extends Controller
+final class MessengerController extends Controller
 {
     /**
      * @var MessageRepository
@@ -91,7 +91,7 @@ class MessengerController extends Controller
             }
         }
 
-        return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
+        return redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
     }
 
     /**
@@ -136,6 +136,6 @@ class MessengerController extends Controller
             }
         }
 
-        return \redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
+        return redirect()->to('/messenger/' . \String::slugEncode($message->id, $message->title));
     }
 }

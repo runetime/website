@@ -9,7 +9,7 @@ use App\RuneTime\News\NewsRepository;
 /**
  * Class SearchController
  */
-class SearchController extends Controller
+final class SearchController extends Controller
 {
     /**
      * @var NewsRepository

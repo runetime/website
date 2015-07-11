@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class PhotoRequest
  */
-class PhotoRequest extends FormRequest
+final class PhotoRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

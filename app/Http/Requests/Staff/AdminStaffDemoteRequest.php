@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class AdminStaffDemoteRequest
  */
-class AdminStaffDemoteRequest extends Request
+final class AdminStaffDemoteRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

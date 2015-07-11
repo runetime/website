@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class UserMuteRequest
  */
-class UserMuteRequest extends Request
+final class UserMuteRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

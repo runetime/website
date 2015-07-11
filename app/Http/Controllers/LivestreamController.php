@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class LivestreamController
  */
-class LivestreamController extends Controller
+final class LivestreamController extends Controller
 {
     /**
      * @return \Illuminate\View\View

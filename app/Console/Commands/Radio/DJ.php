@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * Class DJ
  */
-class DJ extends Command
+final class DJ extends Command
 {
     /**
      * The console command name.

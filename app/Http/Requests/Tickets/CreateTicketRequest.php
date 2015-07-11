@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class CreateTicketRequest
  */
-class CreateTicketRequest extends Request
+final class CreateTicketRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class PlayController
  */
-class PlayController extends Controller
+final class PlayController extends Controller
 {
     /**
      * @return \Illuminate\View\View

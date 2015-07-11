@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class AdminAwardAddRequest
  */
-class AdminAwardAddRequest extends Request
+final class AdminAwardAddRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

@@ -8,7 +8,7 @@ use App\RuneTime\Calculators\CalculatorRepository;
 /**
  * Class CalculatorController
  */
-class CalculatorController extends Controller
+final class CalculatorController extends Controller
 {
     /**
      * @var CalculatorRepository

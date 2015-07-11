@@ -22,7 +22,7 @@ use App\RuneTime\Statuses\StatusRepository;
 /**
  * Class ForumPostController
  */
-class ForumPostController extends Controller
+final class ForumPostController extends Controller
 {
     /**
      * @var AnswerRepository
@@ -117,7 +117,7 @@ class ForumPostController extends Controller
         $post->status = Post::STATUS_INVISIBLE;
         $post->save();
 
-        return \redirect()->to($thread->toSlug());
+        return redirect()->to($thread->toSlug());
     }
 
     /**
@@ -235,7 +235,7 @@ class ForumPostController extends Controller
         $post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
         $report->addPost($post);
 
-        return \redirect()->to('/forums');
+        return redirect()->to('/forums');
     }
 
     /**

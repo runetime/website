@@ -12,7 +12,7 @@ use App\RuneTime\Tickets\TicketRepository;
 /**
  * Class TicketController
  */
-class TicketController extends Controller
+final class TicketController extends Controller
 {
     /**
      * @var RoleRepository
@@ -108,7 +108,7 @@ class TicketController extends Controller
         $ticket->status = Ticket::STATUS_CLOSED;
         $ticket->save();
 
-        return \redirect()->to($ticket->toSlug());
+        return redirect()->to($ticket->toSlug());
     }
 
     /**
@@ -137,7 +137,7 @@ class TicketController extends Controller
         $ticket->save();
         $ticket->addPost($post);
 
-        return \redirect()->to('/tickets/' . \String::slugEncode($ticket->id, $ticket->name));
+        return redirect()->to('/tickets/' . \String::slugEncode($ticket->id, $ticket->name));
     }
 
     /**
@@ -161,7 +161,7 @@ class TicketController extends Controller
         $post = with(new Post)->saveNew(\Auth::user()->id, 0, Post::STATUS_VISIBLE, \Request::getClientIp(), $form->contents, $contentsParsed);
         $ticket->addPost($post);
 
-        return \redirect()->to('/tickets/' . \String::slugEncode($ticket->id, $ticket->name));
+        return redirect()->to('/tickets/' . \String::slugEncode($ticket->id, $ticket->name));
     }
 
     /**
@@ -220,6 +220,6 @@ class TicketController extends Controller
             }
         }
 
-        return \redirect()->to('/tickets/manage');
+        return redirect()->to('/tickets/manage');
     }
 }

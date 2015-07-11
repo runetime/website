@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class RadioTimetableRequest
  */
-class RadioTimetableRequest extends Request
+final class RadioTimetableRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

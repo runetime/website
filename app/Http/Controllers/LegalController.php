@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class LegalController
  */
-class LegalController extends Controller
+final class LegalController extends Controller
 {
     /**
      * @param $language

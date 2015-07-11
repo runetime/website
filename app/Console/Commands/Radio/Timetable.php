@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * Class Timetable
  */
-class Timetable extends Command
+final class Timetable extends Command
 {
     /**
      * The console command name.

@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class UserSearchRequest
  */
-class UserSearchRequest extends Request
+final class UserSearchRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

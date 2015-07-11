@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class AdminRadioStopRequest
  */
-class AdminRadioStopRequest extends Request
+final class AdminRadioStopRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

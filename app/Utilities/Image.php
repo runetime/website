@@ -4,7 +4,7 @@ namespace App\Utilities;
 /**
  * Class Image
  */
-class Image
+final class Image
 {
     /**
      * Outputs the image of a user based on their
@@ -21,6 +21,7 @@ class Image
         array_push($classes, 'img-responsive');
 
         $path = 'no_photo';
+
         if (file_exists('./img/forums/photos/' . $userId . '.png')) {
             $path = $userId;
         }
@@ -28,6 +29,6 @@ class Image
         // Implode classes into a string
         $classList = implode(' ', $classes);
 
-        return view('partials.image.user_photo', compact('path', 'classList'))->render();
+        return view('partials.image.user_photo', compact('classList', 'path'))->render();
     }
 }

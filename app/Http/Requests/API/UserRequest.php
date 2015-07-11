@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class UserRequest
  */
-class UserRequest extends FormRequest
+final class UserRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

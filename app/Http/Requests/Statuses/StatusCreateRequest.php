@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class StatusCreateRequest
  */
-class StatusCreateRequest extends Request
+final class StatusCreateRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

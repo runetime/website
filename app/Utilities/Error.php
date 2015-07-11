@@ -4,7 +4,7 @@ namespace App\Utilities;
 /**
  * Class Error
  */
-class Error
+final class Error
 {
     /**
      * Returns a view for an error based on the HTTP Status given.

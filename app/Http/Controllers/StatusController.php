@@ -12,7 +12,7 @@ use App\RuneTime\Statuses\StatusRepository;
 /**
  * Class StatusController
  */
-class StatusController extends Controller
+final class StatusController extends Controller
 {
     /**
      * @var StatusRepository
@@ -83,7 +83,7 @@ class StatusController extends Controller
         $status->status = $newStatus;
         $status->save();
 
-        return \redirect()->to($status->toSlug());
+        return redirect()->to($status->toSlug());
     }
 
     /**
@@ -110,7 +110,7 @@ class StatusController extends Controller
             with(new Notification)->saveNew($status->author->id, 'Statuses', $contents, Notification::STATUS_UNREAD);
         }
 
-        return \redirect()->to($status->toSlug() . '#post' . $post->id);
+        return redirect()->to($status->toSlug() . '#post' . $post->id);
     }
 
     /**
@@ -138,6 +138,6 @@ class StatusController extends Controller
         with(new Vote)->saveNew(\Auth::user()->id, $post->id, Vote::STATUS_UP);
         $status->addPost($post);
 
-        return \redirect()->to('/forums/statuses/' . \String::slugEncode($status->id, 'by', \Auth::user()->display_name));
+        return redirect()->to('/forums/statuses/' . \String::slugEncode($status->id, 'by', \Auth::user()->display_name));
     }
 }

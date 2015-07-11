@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * Class RadioUpdate
  */
-class Update extends Command
+final class Update extends Command
 {
     /**
      * The console command name.

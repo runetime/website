@@ -15,7 +15,7 @@ use App\RuneTime\Chat\ChatRepository;
 /**
  * Class StaffTeamLeaderController
  */
-class StaffTeamLeaderController extends Controller
+final class StaffTeamLeaderController extends Controller
 {
     /**
      * @var ChatRepository

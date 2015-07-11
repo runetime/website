@@ -12,7 +12,7 @@ use Illuminate\Routing\Controller as RouterController;
 /**
  * Class Controller
  */
-class Controller extends RouterController
+abstract class Controller extends RouterController
 {
     use DispatchesJobs;
 

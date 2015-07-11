@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class AdminUserPostsDeleteRequest
  */
-class AdminUserPostsDeleteRequest extends Request
+final class AdminUserPostsDeleteRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

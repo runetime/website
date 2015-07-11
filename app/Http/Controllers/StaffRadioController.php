@@ -19,7 +19,7 @@ use App\RuneTime\Radio\TimetableRepository;
 /**
  * Class StaffRadioController
  */
-class StaffRadioController extends Controller
+final class StaffRadioController extends Controller
 {
     /**
      * @var HistoryRepository
@@ -121,7 +121,7 @@ class StaffRadioController extends Controller
             with(new Session)->saveNew(\Auth::user()->id, -1, Session::STATUS_PLAYING);
         }
 
-        return \redirect()->to('/staff/radio/live');
+        return redirect()->to('/staff/radio/live');
     }
 
     /**
@@ -190,7 +190,7 @@ class StaffRadioController extends Controller
             Request::truncate();
         }
 
-        return \redirect()->to('/staff/radio');
+        return redirect()->to('/staff/radio');
     }
 
     /**
@@ -217,7 +217,7 @@ class StaffRadioController extends Controller
         $contentsParsed = with(new \Parsedown)->text($form->contents);
         with(new Message)->saveNew(\Auth::user()->id, $form->contents, $contentsParsed);
 
-        return \redirect()->to('/staff/radio/messages');
+        return redirect()->to('/staff/radio/messages');
     }
 
     /**

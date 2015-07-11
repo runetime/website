@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class TransparencyController
  */
-class TransparencyController extends Controller
+final class TransparencyController extends Controller
 {
     /**
      * @return \Illuminate\View\View

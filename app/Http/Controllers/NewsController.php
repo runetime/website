@@ -13,7 +13,7 @@ use Illuminate\Contracts\Auth\Guard;
 /**
  * Class NewsController
  */
-class NewsController extends Controller
+final class NewsController extends Controller
 {
     /**
      * @var Guard
@@ -128,9 +128,9 @@ class NewsController extends Controller
         }
 
         if (!empty($tag)) {
-            return \redirect()->to($tag->toNews());
+            return redirect()->to($tag->toNews());
         } else {
-            return \redirect()->to('news');
+            return redirect()->to('news');
         }
     }
 

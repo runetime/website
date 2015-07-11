@@ -6,7 +6,7 @@ use Carbon\Carbon;
 /**
  * Class Time
  */
-class Time
+final class Time
 {
     /**
      * Returns a Carbon class of the current time,

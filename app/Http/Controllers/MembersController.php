@@ -8,7 +8,7 @@ use App\RuneTime\Accounts\UserRepository;
 /**
  * Class MembersController
  */
-class MembersController extends Controller
+final class MembersController extends Controller
 {
     /**
      * @var RoleRepository

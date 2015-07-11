@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * Class CookieController
  */
-class CookieController extends Controller
+final class CookieController extends Controller
 {
     /**
      * Returns the Cookie page.

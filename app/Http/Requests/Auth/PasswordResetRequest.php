@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 /**
  * Class PasswordResetRequest
  */
-class PasswordResetRequest extends Request
+final class PasswordResetRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.

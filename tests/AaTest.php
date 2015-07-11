@@ -1,10 +1,12 @@
 <?php
+namespace tests;
+
 /**
  * Tests the database setup.
  *
  * Class AaTest
  */
-class AaTest extends TestCase
+final class AaTest extends Test
 {
     /**
      *

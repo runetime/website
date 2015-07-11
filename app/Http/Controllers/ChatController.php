@@ -17,7 +17,7 @@ use App\RuneTime\Chat\FilterRepository;
 /**
  * Class ChatController
  */
-class ChatController extends Controller
+final class ChatController extends Controller
 {
     /**
      * @var FilterRepository
