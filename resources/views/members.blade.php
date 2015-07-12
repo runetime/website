@@ -10,68 +10,44 @@
         <h3 class='holo-text'>
             @lang('members.search.role')
         </h3>
-        <ul class='list-inline holo-text-secondary'>
+        <select class='holo-text-secondary textarea-width' multiple>
 @foreach($roles as $role)
-            <li>
-                <a href='/members/role={{ $role->name }}/prefix={{ $searchPrefix }}/order={{ $searchOrder }}'>
-    @if($searchRole == $role->name)
-                    <b>
-                        {{ $role->name }}
-                    </b>
-    @else
-                    {{ $role->name }}
-    @endif
-                </a>
-            </li>
+            <option onclick="window.location.href='/members/role={{ $role->name }}/prefix={{ $searchPrefix }}/order={{ $searchOrder }}';" @if($searchRole == $role->name) selected @endif>
+                {{ $role->name }}
+            </option>
 @endforeach
-        </ul>
+        </select>
     </div>
     <div class='col-xs-12 col-sm-4'>
         <h3 class='holo-text'>
             @lang('members.search.prefix')
         </h3>
-        <ul class='list-inline holo-text-secondary'>
+        <select class='holo-text-secondary textarea-width' multiple>
 @foreach($prefixes as $prefix)
-            <li>
-                <a href='/members/role={{ $searchRole }}/prefix={{ $prefix }}/order={{ $searchOrder }}'>
-    @if($searchPrefix == $prefix)
-                    <b>
-                        {{ $prefix }}
-                    </b>
-    @else
-                    {{ $prefix }}
-    @endif
-                </a>
-            </li>
+            <option onclick="window.location.href='/members/role={{ $searchRole }}/prefix={{ $prefix }}/order={{ $searchOrder }}';" @if($searchPrefix == $prefix) selected @endif>
+                {{ $prefix }}
+            </option>
 @endforeach
-        </ul>
+        </select>
     </div>
     <div class='col-xs-12 col-sm-4'>
         <h3 class='holo-text'>
             @lang('members.search.order')
         </h3>
-        <ul class='list-inline holo-text-secondary'>
+        <select class='holo-text-secondary textarea-width' multiple>
 @foreach($orders as $order)
-            <li>
-                <a href='/members/role={{ $searchRole }}/prefix={{ $searchPrefix }}/order={{ $order }}'>
-    @if($searchOrder == $order)
-                    <b>
-                        {{ ucwords($order) }}
-                    </b>
-    @else
-                    {{ ucwords($order) }}
-    @endif
-                </a>
-            </li>
+            <option onclick="window.location.href='/members/role={{ $searchRole }}/prefix={{ $searchPrefix }}/order={{ $order }}';" @if($searchOrder == $order) selected @endif>
+                {{ ucwords($order) }}
+            </option>
 @endforeach
-        </ul>
+        </select>
     </div>
 </div>
 <div class='wrapper wrapper-flat'>
 @include('partials._paginator', ['url' => '/members/role=' . $searchRole . '/prefix=' . $searchPrefix . '/order=' . $searchOrder])
     <div class='row row-flat'>
 @foreach($members as $member)
-        <div class='col-xs-12 row row-flat'>
+        <div class='col-xs-12 row row-flat' style='padding-bottom: 15px !important;'>
             <div class='col-xs-3 col-md-2 col-lg-1'>
                 <a href='{{ $member->toSlug() }}'>
                     {!! \Image::userPhoto($member->id, ['center-block']) !!}
