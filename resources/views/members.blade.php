@@ -73,7 +73,9 @@
 @foreach($members as $member)
         <div class='col-xs-12 row row-flat'>
             <div class='col-xs-3 col-md-2 col-lg-1'>
-                {!! \Image::userPhoto($member->id, ['center-block']) !!}
+                <a href='{{ $member->toSlug() }}'>
+                    {!! \Image::userPhoto($member->id, ['center-block']) !!}
+                </a>
             </div>
             <div class='col-xs-9 col-md-10 col-lg-11'>
                 <div class='clearfix'>
