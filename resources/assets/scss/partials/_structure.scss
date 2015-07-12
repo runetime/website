@@ -88,7 +88,11 @@
 	}
 }
 .padding-none {
-	padding:0 !important;
+	padding: 0 !important;
+}
+
+.padding-below {
+    padding-bottom: 15px !important;
 }
 
 
@@ -200,4 +204,8 @@ pre {
 }
 .tags {
 	margin-bottom: .25em !important;
+}
+
+.textarea-width {
+    min-width: 250px;
 }
