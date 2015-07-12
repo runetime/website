@@ -91,6 +91,10 @@
 	padding: 0 !important;
 }
 
+.padding-below {
+    padding-bottom: 15px !important;
+}
+
 
 
 $cardHeight: 200px;
@@ -200,4 +204,8 @@ pre {
 }
 .tags {
 	margin-bottom: .25em !important;
+}
+
+.textarea-width {
+    min-width: 250px;
 }
