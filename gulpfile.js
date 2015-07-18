@@ -32,7 +32,7 @@ var paths = {
 gulp.task('sass', function () {
     gulp.src(paths.assets.scss)
         .pipe(sass({
-            outputStyle: 'compressed',
+            outputStyle: 'compressed'
         })
         .on('error', sass.logError))
         .pipe(gulp.dest(paths.public.css));
