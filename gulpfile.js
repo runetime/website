@@ -98,7 +98,7 @@ gulp.task('watch', function() {
       'scripts-modules',
       'scripts-vendor'
     ]);
-    gulp.watch(paths.assets.scss, ['scss']);
+    gulp.watch(paths.assets.scss, ['sass']);
 });
 
 /**
