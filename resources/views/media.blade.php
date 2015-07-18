@@ -1,8 +1,8 @@
 @extends('layouts.default')
 @section('contents')
 <div class='row text-center'>
-    <div id='media-fb' class='col-xs-12 col-md-4 container-darkblue'>
-        <h2>
+    <div id='media-fb' class='col-xs-12 col-md-4 container-royal-blue'>
+        <h2 class='color-white'>
             @lang('media.facebook.name')
         </h2>
         <iframe src='http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FRuneTimeOfficial&width=400
@@ -10,10 +10,10 @@
         </iframe>
     </div>
     <div id='media-yt' class='col-xs-12 col-md-4 container-red'>
-        <h2>
+        <h2 class='color-white'>
             @lang('media.youtube.name')
         </h2>
-        <p>
+        <p class='color-white'>
             @lang('media.youtube.promotion')
         </p>
         <div class='row'>
@@ -25,8 +25,8 @@
             </div>
         </div>
     </div>
-    <div id='media-tw' class='col-xs-12 col-md-4 container-lightgreen'>
-        <h2>
+    <div id='media-tw' class='col-xs-12 col-md-4 container-duckegg-blue'>
+        <h2 class='color-white'>
             @lang('media.twitter.name')
         </h2>
         <a href='https://twitter.com/Rune_Time' class='twitter-timeline' data-widget-id='428962763814096896'>
