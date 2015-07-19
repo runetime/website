@@ -32,7 +32,7 @@ var paths = {
 gulp.task('sass', function () {
     gulp.src(paths.assets.scss)
         .pipe(sass({
-            outputStyle: 'compressed',
+            outputStyle: 'compressed'
         })
         .on('error', sass.logError))
         .pipe(gulp.dest(paths.public.css));
@@ -98,7 +98,7 @@ gulp.task('watch', function() {
       'scripts-modules',
       'scripts-vendor'
     ]);
-    gulp.watch(paths.assets.scss, ['scss']);
+    gulp.watch(paths.assets.scss, ['sass']);
 });
 
 /**
