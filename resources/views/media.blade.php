@@ -17,9 +17,9 @@
             @lang('media.youtube.promotion')
         </p>
         <div class='row'>
-            <div class='col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3'>
+            <div class='col-xs-12'>
                 <div class='embed-responsive embed-responsive-16by9'>
-                    <iframe allowfullscreen class='embed-responsive-item' height='315' frameborder='0' src='//www.youtube.com/embed/videoseries?list=UUdQ6FGjcwwvg-67g-lGa15Q' width='560'>
+                    <iframe allowfullscreen class='embed-responsive-item' height='315px' frameborder='0' src='//www.youtube.com/embed/videoseries?list=UUdQ6FGjcwwvg-67g-lGa15Q' width='560px'>
                     </iframe>
                 </div>
             </div>
