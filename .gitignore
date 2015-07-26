@@ -1,6 +1,8 @@
 /.sass-cache
 /bower_components
 /node_modules
+/public/css/*.css
+/public/js/*.js
 /.idea
 /vendor
 *.log
