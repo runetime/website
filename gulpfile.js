@@ -72,14 +72,13 @@ gulp.task('scripts-modules', function() {
 gulp.task('scripts-vendor', function() {
     // It's in this order due to dependencies. Please do not change this order.
     var src = [
-        './resources/assets/vendor/jquery.js',
-        './resources/assets/vendor/jquery-ui.js',
-        './resources/assets/vendor/bootstrap.js',
-        './resources/assets/vendor/modernizr.custom.js',
-        './resources/assets/vendor/classie.js',
+        './bower_components/jquery/dist/jquery.min.js',
+        './bower_components/jquery-ui/jquery-ui.min.js',
+        './bower_components/bootstrap/dist/js/bootstrap.min.js',
+        './bower_components/modernizr/modernizr.js',
+        './bower_components/classie/classie.js',
         './resources/assets/vendor/dragdealer.js',
-        './resources/assets/vendor/dragslideshow.js',
-        './resources/assets/vendor/jasny-bootstrap.js'
+        './resources/assets/vendor/dragslideshow.js'
     ];
 
     return gulp.src(src)
