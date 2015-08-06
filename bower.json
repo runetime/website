@@ -1,0 +1,26 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "homepage": "http://runetime.com",
+  "authors": [
+    "Austin Hellyer <austin@runisiantech.io>"
+  ],
+  "description": "RuneTime's website",
+  "license": "Licensed",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "3.2.0",
+    "jquery-ui": "1.11.1",
+    "modernizr": "2.8.2",
+    "fontawesome": "4.2.0",
+    "normalize-css": "~3.0.3",
+    "bootstrap-sass": "3.2.0"
+  }
+}
